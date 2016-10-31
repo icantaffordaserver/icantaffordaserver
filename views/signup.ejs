@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<h2>Register Form</h2>
+<form method="post" action="/signup">
+    <% if(typeof(errorMessage) !== 'undefined') { %>
+    <span><%= errorMessage %></span>
+    <% } %>
+    <p>
+        <label for="firstName">firstName</label>
+        <input type="text" name="firstName" id="firstName"
+               placeholder="firstName" required="true"/>
+    </p>
+    <p>
+        <label for="lastName">lastName</label>
+        <input type="text" name="lastName" id="lastName"
+               placeholder="lastName" required="true"/>
+    </p>
+    <p>
+        <label for="country">country</label>
+        <input type="text" name="country" id="country"
+               placeholder="country" required="true"/>
+    </p>
+    <p>
+        <label for="email">email</label>
+        <input type="email" name="email" id="email"
+               placeholder="email" required="true"/>
+    </p>
+    <p>
+        <label for="password">password</label>
+        <input type="password" name="password" id="password"
+               placeholder="password" required="true"/>
+    </p>
+    <p>
+        <label for="verPassword">verPassword</label>
+        <input type="password" name="verPassword" id="verPassword"
+               placeholder="verPassword" required="true"/>
+    </p>
+    <p>
+        <input type="submit" name="signup" id="signup" value="register"/>
+        <a href="/login" title="sign in">sign in</a>
+    </p>
+</form>
+</body>
+</html>
