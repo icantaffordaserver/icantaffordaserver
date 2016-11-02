@@ -15,7 +15,9 @@
     }
   },
   "mail": {
-    "service": "Gmail",
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "secure": true,
     "auth": {
       "user": "shiftconnectionsinc@gmail.com",
       "pass": "shiftwith*us"
