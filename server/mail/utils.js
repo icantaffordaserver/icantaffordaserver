@@ -11,15 +11,19 @@ var _            = require('lodash').runInContext(),
 
 _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
+// generate user specific content for the respective email
+// takes an options object which specifies the template html email and the data to be replaced inside the {{ }} braces
+// In the below example below, {{url}} is replaced with 'www.example.com' in nameOfHtmlFile.html in the templates directory
+// {
+//     template: nameOfHtmlFile
+//     data: {
+//         url: 'www.example.com'
+//     }
+// }
 exports.generateContent = function generateContent(options) {
-    var defaults,
-        data;
+    var data;
 
-    defaults = {
-        siteUrl: config.get('forceAdminSSL') ? (config.get('urlSSL') || config.get('url')) : config.get('url')
-    };
-
-    data = _.defaults(defaults, options.data);
+    data = _.defaults(options.data);
 
     // read the proper email body template
     return Promise.promisify(fs.readFile)(path.join(templatesDir, options.template + '.html'), 'utf8')

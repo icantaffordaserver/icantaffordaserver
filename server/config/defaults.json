@@ -13,5 +13,12 @@
       "database": "development",
       "charset": "utf8"
     }
+  },
+  "mail": {
+    "service": "Gmail",
+    "auth": {
+      "user": "shiftconnectionsinc@gmail.com",
+      "pass": "shiftwith*us"
+    }
   }
 }

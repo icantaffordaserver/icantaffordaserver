@@ -6,18 +6,25 @@ var _          = require('lodash'),
     validator  = require('validator'),
     config     = require('../config');
 
-function ShiftMailer() {
+function ShiftMailer(stub) {
     // Ghost Version
     // TODO implement all settings with config as seen in ghost
     // var transport = config.get('mail') && config.get('mail').transport || 'direct',
     //     options   = config.get('mail') && _.clone(config.get('mail').options) || {};
-    var transport = {
 
-    };
+    // check for stub transport, for testing purposes
+    var transport;
+    if (stub) {
+        transport = stub;
+    } else {
+        transport = config.get('mail');
+    }
+
     // Ghost implementation
     // this.state             = {};
     // this.transport         = nodemailer.createTransport(transport, options);
     // this.state.usingDirect = transport === 'direct';
+
 
     // Shift implementation
     // TODO incorporate the options object referencing from config
@@ -63,6 +70,7 @@ ShiftMailer.prototype.send = function (message) {
     message = _.clone(message) || {};
     to      = message.to || false;
 
+    // check to see if message has required properties
     if (!(message && message.subject && message.html && message.to)) {
         return Promise.reject(new Error('Incomplete message error'));
     }
@@ -75,38 +83,12 @@ ShiftMailer.prototype.send = function (message) {
     });
 
     return new Promise(function (resolve, reject) {
-        self.transport.sendMail(message, function (error, response) {
-            if (error) {
-                return reject(new Error(error));
+        self.transport.sendMail(message, function (err, info) {
+            if (err) {
+                return reject(err);
             }
 
-            if (self.transport.transportType !== 'DIRECT') {
-                return resolve(response);
-            }
-
-            response.statusHandler.once('failed', function (data) {
-                var reason = i18n.t('errors.mail.failedSendingEmail.error');
-
-                if (data.error && data.error.errno === 'ENOTFOUND') {
-                    reason += i18n.t('errors.mail.noMailServerAtAddress.error', {domain: data.domain});
-                }
-                reason += '.';
-                return reject(new Error(reason));
-            });
-
-            response.statusHandler.once('requeue', function (data) {
-                var errorMessage = i18n.t('errors.mail.messageNotSent.error');
-
-                if (data.error && data.error.message) {
-                    errorMessage += i18n.t('errors.general.moreInfo', {info: data.error.message});
-                }
-
-                return reject(new Error(errorMessage));
-            });
-
-            response.statusHandler.once('sent', function () {
-                return resolve(i18n.t('notices.mail.messageSent'));
-            });
+            return resolve(info);
         });
     });
 };
