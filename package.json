@@ -5,7 +5,8 @@
   "author": "Alexander Mann",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "develop": "nodemon app.js",
     "serve": "node-inspector & nodemon --debug ./app.js"
   },
   "dependencies": {
