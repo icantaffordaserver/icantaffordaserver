@@ -81,7 +81,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 // set up the application settings
-app.set('port', config.get("server:port"));
+app.set('port', process.env.PORT || config.get("server:port"));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
