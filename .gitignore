@@ -70,3 +70,4 @@ config.*.json
 
 # Coverage reports
 coverage.html
+/cleardb_ssl/

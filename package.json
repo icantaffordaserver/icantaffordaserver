@@ -1,7 +1,10 @@
 {
-  "name": "authMysqlExpressPassport",
+  "name": "shiftwithus",
   "description": "ExpressJS + Passport.js + MySQL Authentication",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.9.1"
+  },
   "author": "Alexander Mann",
   "main": "app.js",
   "scripts": {
