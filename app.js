@@ -2,21 +2,22 @@
  * Created by AlexanderMann on 2016-09-29.
  */
 // vendor libraries
-var express       = require('express'),
-    bodyParser    = require('body-parser'),
-    cookieParser  = require('cookie-parser'),
-    logger        = require('morgan'),
-    session       = require('express-session'),
-    bcrypt        = require('bcrypt-nodejs'),
-    ejs           = require('ejs'),
-    path          = require('path'),
-    passport      = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    config        = require('./server/config'),
+var express           = require('express'),
+    bodyParser        = require('body-parser'),
+    cookieParser      = require('cookie-parser'),
+    logger            = require('morgan'),
+    session           = require('express-session'),
+    bcrypt            = require('bcrypt-nodejs'),
+    ejs               = require('ejs'),
+    path              = require('path'),
+    passport          = require('passport'),
+    LocalStrategy     = require('passport-local').Strategy,
+    config            = require('./server/config'),
 
     // custom libraries
     // routes
-    routes        = require('./server/routes'),
+    routes            = require('./server/routes'),
+    verificationEmail = require('./sendVerificationEmail');
     // model
     Model         = require('./server/models/user');
 
@@ -92,7 +93,6 @@ app.use(passport.session());
 
 // set up all the routing data
 app.use('/', routes);
-
 
 var server = app.listen(app.get('port'), function (err) {
     if (err) throw err;

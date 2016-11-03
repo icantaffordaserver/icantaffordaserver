@@ -1,10 +1,11 @@
 // # Mail
 // Handles sending email for Shift
-var _          = require('lodash'),
-    Promise    = require('bluebird'),
-    nodemailer = require('nodemailer'),
-    validator  = require('validator'),
-    config     = require('../config');
+var _                 = require('lodash'),
+    Promise           = require('bluebird'),
+    nodemailer        = require('nodemailer'),
+    mandrillTransport = require('nodemailer-mandrill-transport'),
+    validator         = require('validator'),
+    config            = require('../config');
 
 function ShiftMailer(stub) {
     // Ghost Version
@@ -20,6 +21,11 @@ function ShiftMailer(stub) {
         transport = config.get('mail');
     }
 
+    transport = mandrillTransport({
+        auth: {
+            apiKey: 'eIs4JpO2pMXJbEJNb_mroA'
+        }
+    });
     // Ghost implementation
     // this.state             = {};
     // this.transport         = nodemailer.createTransport(transport, options);

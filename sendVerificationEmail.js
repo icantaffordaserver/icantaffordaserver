@@ -1,19 +1,18 @@
 /**
  * Created by AlexanderMann on 2016-10-08.
  */
-var nodemailer = require('nodemailer');
+var nodemailer        = require('nodemailer');
 var sendgridTransport = require('nodemailer-sendgrid-transport');
+var mandrillTransport = require('nodemailer-mandrill-transport');
 // Keep this here until we decide to use it
-var sendgridApiKey = "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";
-var url = require('url');
+var sendgridApiKey    = "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";
+var url               = require('url');
 
-var smtpConfig = {
-    service: 'Gmail',
+var smtpConfig = mandrillTransport({
     auth: {
-        user: 'shiftconnectionsinc@gmail.com',
-        pass: 'shiftwith*us'
+        apiKey: 'eIs4JpO2pMXJbEJNb_mroA'
     }
-};
+});
 
 // create reusable transporter object using the default SMTP transport
 var transporter = nodemailer.createTransport(smtpConfig);
@@ -28,10 +27,10 @@ transporter.verify(function (error, success) {
 });
 
 var sendVerificationEmail = function (email, token) {
-    var verHref = 'http://localhost:3000/users/verify?email=' + email + '&emailVerToken=' + token;
+    var verHref     = 'http://localhost:3000/users/verify?email=' + email + '&emailVerToken=' + token;
     // setup e-mail data with unicode symbols
     var mailOptions = {
-        from: '"Do Not Reply" <shiftconnectionsinc@gmail.com>', // sender address
+        from: '"Do Not Reply" <info@shiftwith.us>', // sender address
         to: email, // list of receivers
         subject: 'Verify your Email', // Subject line
         text: 'Hello world 🐴', // plaintext body
@@ -43,7 +42,8 @@ var sendVerificationEmail = function (email, token) {
         if (error) {
             return console.log(error);
         }
-        console.log('Message sent: ' + info.response);
+        console.log('Message sent: ' + info);
+        console.log(info);
     });
 
 };

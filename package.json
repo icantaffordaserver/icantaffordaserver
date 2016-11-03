@@ -26,6 +26,7 @@
     "mysql": "*",
     "nconf": "^0.8.4",
     "nodemailer": "^2.6.4",
+    "nodemailer-mandrill-transport": "^1.2.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "*",
     "passport-local": "*",
