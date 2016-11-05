@@ -3,14 +3,14 @@
  */
 process.env.NODE_ENV = 'test';
 
-var chai = require('chai');
-var should = chai.should();
-var expect = chai.expect;
+var chai      = require('chai');
+var should    = chai.should();
+var expect    = chai.expect;
 var supertest = require('supertest');
-var app = require('../app');
+var app       = require('../app');
 
 var request = supertest(app);
-var knex = require('./knex');
+var knex    = require('../server/data/db/knex');
 
 describe('User Sign Up', function () {
     // make sure the database is unchanged after every test
