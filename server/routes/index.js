@@ -4,7 +4,8 @@
  * Tutorial from: http://yifeed.com/passportjs-mysql-expressjs-authentication.html
  */
 const routes = require('express').Router();
-const usersRouter = require('./users/index');
+const usersRouter = require('./users');
+const adminRouter = require('./admin');
 const login = require('./login');
 const logout = require('./logout');
 const signUp = require('./signUp');
@@ -38,8 +39,10 @@ routes.post('/signup', signUp.post);
 // logout
 routes.get('/logout', logout.get);
 
-// middleware router for the /users URL
+// middleware routers for other paths
 routes.use('/users', usersRouter);
+
+routes.use('/admin', adminRouter);
 
 // 404 not found if nothing triggers middleware
 routes.use(notFound404);

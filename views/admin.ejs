@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+    <title>Shift Admin Page</title>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Admin Email Sender</a>
+    </div>
+</nav>
+
+<div class="">
+    <!-- Page Content goes here -->
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li  class="tab col"><a name="on-boarding" href="#">On Boarding/Phone Call</a></li>
+                <li class="tab col"><a name="profile-building" href="#">Profile Building</a></li>
+                <li class="tab col"><a name="pre-connection" href="#">Pre Connection</a></li>
+                <li class="tab col"><a name="post-connection" href="#">Post Connection</a></li>
+                <li class="tab col"><a name="review" href="#">Review</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <form id="on-boarding" class="col s7" action="">
+            <h3>On-Boarding Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="profile-building" class="col s7 hide" action="">
+            <h3>Profile Building Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="pre-connection" class="col s7 hide" action="">
+            <h3>Pre-Connection Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="post-connection" class="col s7 hide" action="">
+            <h3>Post Connection Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="review" class="col s7 hide" action="">
+            <h3>Review Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <div class="col s5">
+            <h3>Emails Sent</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th data-field="date">Date</th>
+                    <th data-field="id">Name</th>
+                    <th data-field="name">Email</th>
+                    <th data-field="price">Template</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td><%= date[0] %></td>
+                    <td><%= name[0] %></td>
+                    <td><%= email[0] %></td>
+                    <td><%= template[0] %></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+
+ <!--Basic script to show and hide form for sending email for different parts of the Shift Process-->
+<script>
+    var currentlyShowing = "on-boarding";
+    $(document).ready(function() {
+        $("a").click(function(event) {
+            show(event.target.name);
+        });
+    });
+
+    function show(id) {
+        hide(currentlyShowing);
+        $("#" + id).removeClass("hide");
+        currentlyShowing = id;
+        console.log(currentlyShowing);
+    }
+    function hide(id) {
+        $("#" + id).addClass("hide");
+    }
+</script>
+</html>
