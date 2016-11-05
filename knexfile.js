@@ -12,10 +12,10 @@ module.exports = {
             charset: 'utf8'
         },
         migrations: {
-            directory: __dirname + '/db/migrations'
+            directory: __dirname + '/server/data/db/migrations'
         },
         seeds: {
-            directory: __dirname + '/db/seeds/development'
+            directory: __dirname + '/server/data/db/seeds/development'
         }
     },
 
@@ -29,10 +29,10 @@ module.exports = {
             charset: 'utf8'
         },
         migrations: {
-            directory: __dirname + '/db/migrations'
+            directory: __dirname + '/server/data/db/migrations'
         },
         seeds: {
-            directory: __dirname + '/db/seeds/test'
+            directory: __dirname + '/server/data/db/seeds/test'
         }
     },
 

@@ -18,18 +18,12 @@ function ShiftMailer(stub) {
     if (stub) {
         transport = stub;
     } else {
-        transport = config.get('mail');
+        transport = transport = mandrillTransport({
+            auth: {
+                apiKey: 'eIs4JpO2pMXJbEJNb_mroA' //TODO Put this in a config var or env var
+            }
+        });
     }
-
-    transport = mandrillTransport({
-        auth: {
-            apiKey: 'eIs4JpO2pMXJbEJNb_mroA'
-        }
-    });
-    // Ghost implementation
-    // this.state             = {};
-    // this.transport         = nodemailer.createTransport(transport, options);
-    // this.state.usingDirect = transport === 'direct';
 
 
     // Shift implementation
@@ -38,24 +32,7 @@ function ShiftMailer(stub) {
 }
 
 ShiftMailer.prototype.from = function () {
-    // Ghost implementation
-    // var from = config.get('mail') && (config.get('mail').from || config.get('mail').fromaddress),
-    //     defaultBlogTitle;
-    //
-    // // If we don't have a from address at all
-    // if (!from) {
-    //     // Default to ghost@[blog.url]
-    //     from = 'ghost@' + this.getDomain();
-    // }
-    //
-    // // If we do have a from address, and it's just an email
-    // if (validator.isEmail(from)) {
-    //     defaultBlogTitle = config.get('theme').title ? config.get('theme').title : i18n.t('common.mail.title', {domain: this.getDomain()});
-    //
-    //     from = '"' + defaultBlogTitle + '" <' + from + '>';
-    // }
-
-    var from = '"The Shift Team" <shiftconnectionsinc@gmail.com>';
+    var from = '"The Shift Team" <info@shiftwith.us>'; // TODO store in config or env var
 
     return from;
 };
