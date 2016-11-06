@@ -22,6 +22,8 @@
                 <li  class="tab col"><a name="on-boarding" href="#">On Boarding/Phone Call</a></li>
                 <li class="tab col"><a name="profile-building" href="#">Profile Building</a></li>
                 <li class="tab col"><a name="pre-connection" href="#">Pre Connection</a></li>
+                <li class="tab col"><a name="shift-scheduled" href="#">Shift Scheduled</a></li>
+                <li class="tab col"><a name="shift-today" href="#">Shift Today</a></li>
                 <li class="tab col"><a name="post-connection" href="#">Post Connection</a></li>
                 <li class="tab col"><a name="review" href="#">Review</a></li>
             </ul>
@@ -64,6 +66,38 @@
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
                 </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="shift-scheduled" class="col s7 hide" method="post" action="/admin/send/shift-scheduled">
+            <h3>Shift Scheduled Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="email" placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <div class="input-field row">
+                <input name="timeOfShift" placeholder="Time of Shift" type="text" class="validate">
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
+        </form>
+
+        <form id="shift-today" class="col s7 hide" method="post" action="/admin/send/shift-today">
+            <h3>Shift Today Email Sender</h3>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="email" placeholder="Email" type="text" class="validate">
+                </div>
+            </div>
+            <div class="input-field row">
+                <input name="timeOfShift" placeholder="Time of Shift" type="text" class="validate">
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>

@@ -52,7 +52,6 @@ ShiftMailer.prototype.send = function (message) {
     // important to clone message as we modify it
     message = _.clone(message) || {};
     to      = message.to || false;
-
     // check to see if message has required properties
     if (!(message && message.subject && message.html && message.to)) {
         return Promise.reject(new Error('Incomplete message error'));
