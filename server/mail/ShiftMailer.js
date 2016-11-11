@@ -59,9 +59,7 @@ ShiftMailer.prototype.send = function (message) {
 
     message = _.extend(message, {
         from: self.from(),
-        to: to,
-        generateTextFromHTML: true,
-        encoding: 'base64'
+        to: to
     });
 
     return new Promise(function (resolve, reject) {
