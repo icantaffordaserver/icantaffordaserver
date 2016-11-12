@@ -3,19 +3,22 @@ exports.seed = function (knex, Promise) {
     return knex('emails_sent').del()
         .then(function () { // Inserts seed entries one by one in series
             return knex('emails_sent').insert({
-                name: 'Alexander Mann',
+                first_name: 'Alexander',
+                last_name: 'Mann',
                 email: 'alexander.mann@me.com',
                 template: 'Profile Building'
             });
         }).then(function () {
             return knex('emails_sent').insert({
-                name: 'Blake Fletcher',
+                first_name: 'Blake',
+                last_name: 'Fletcher',
                 email: 'blake@shiftwith.us',
                 template: 'Pre Connection'
             });
         }).then(function () {
             return knex('emails_sent').insert({
-                name: 'Daniel Thompson',
+                first_name: 'Daniel',
+                last_name: 'Thompson',
                 email: 'daniel@shiftwith.us',
                 template: 'Post Connection'
             });

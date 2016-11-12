@@ -9,9 +9,10 @@ var emailsSent = DB.Model.extend({
         return this.fetchAll();
     },
 
-    emailSent: function (name, email, template) {
+    emailSent: function (firstName, lastName, email, template) {
         return new this({
-            name: name,
+            first_name: firstName,
+            last_name: lastName,
             email: email,
             template: template
         }).save();

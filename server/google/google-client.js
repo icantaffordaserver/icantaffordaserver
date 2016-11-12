@@ -19,6 +19,14 @@ var fs         = require('fs'),
     TOKEN_PATH = TOKEN_DIR + 'drive-nodejs-quickstart.json',
     TOKEN_CONTENT;
 
+/**
+ * Read in the client_secret.json and parse the data to a global variable.
+ * Provides an init callback as all functions need to make sure that the
+ * TOKEN_CONTENT is initialized and loaded before making any requests.
+ *
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
 function init(callback) {
     // Load client secrets from a local file, make sure this completes before any files are API services are run
     fs.readFile('/Users/alexandermann/Code/shift-webapp/server/google/client_secret.json', function processClientSecrets(err, content) {
@@ -133,7 +141,7 @@ function listFiles(name, template) {
         authorize(function (auth) {
             service.files.list({
                 auth: auth,
-                q: "name contains '" + name + " " + template+ "'",
+                q: "name contains '" + name + " " + template + "' and mimeType contains 'application/pdf'", // TODO fix this make dynamic
                 pageSize: 100,
                 orderBy: 'createdTime',
                 fields: "nextPageToken, files(id, name, createdTime)"
@@ -148,10 +156,10 @@ function listFiles(name, template) {
                     } else {
                         console.log('Files:');
                         // Hide printing to console for now
-                        // for (var i = 0; i < files.length; i++) {
-                        //     var file = files[i];
-                        //     console.log('%s (%s) - %s', file.name, file.id, file.createdTime);
-                        // }
+                        for (var i = 0; i < files.length; i++) {
+                            var file = files[i];
+                            console.log('%s (%s) - %s', file.name, file.id, file.createdTime);
+                        }
                         resolve(files);
                     }
                 }

@@ -54,32 +54,23 @@ apiMail = {
 
         // based on the email type, setup the options object to generate the content for the email
         switch (template) {
-            case 'on-boarding':
-                subject = 'Shift Phone Call Recap';
-                options = {
-                    template: template,
-                    data: {
-                        name: mailInfo.name
-                    }
-                };
-                break;
             case 'profile-building':
                 subject = 'It\'s time to build your Shift Profile';
                 options = {
                     template: template,
                     data: {
-                        name: mailInfo.name
+                        firstName: mailInfo.firstName
                     }
                 };
                 break;
             case 'pre-connection':
                 subject            = 'You have received your Shift Match!';
                 attachmentRequired = true;
-                documentName       = 'profile';
+                documentName       = 'profile'; // for searching google drive
                 options            = {
                     template: template,
                     data: {
-                        name: mailInfo.name
+                        // firstName: mailInfo.firstName
                         // connectionId: mailInfo.connectionId --- don't think I need this
                     }
                 };
@@ -89,7 +80,8 @@ apiMail = {
                 options = {
                     template: template,
                     data: {
-                        name: mailInfo.name,
+                        firstName: mailInfo.firstName,
+                        matchFirstName: mailInfo.matchFirstName,
                         timeOfShift: mailInfo.timeOfShift
                     }
                 };
@@ -97,11 +89,11 @@ apiMail = {
             case 'shift-today':
                 subject            = 'Your upcoming Shift: Today is the day!';
                 attachmentRequired = true;
-                documentName       = 'connection guide';
+                documentName       = 'connection guide'; // for searching google drive
                 options            = {
                     template: template,
                     data: {
-                        name: mailInfo.name,
+                        firstName: mailInfo.firstName,
                         timeOfShift: mailInfo.timeOfShift
                     }
                 };
@@ -111,26 +103,35 @@ apiMail = {
                 options = {
                     template: template,
                     data: {
-                        name: mailInfo.name
+                        firstName: mailInfo.firstName
                     }
                 };
                 break;
             case 'review':
                 subject            = 'Your Reflection Document is in!';
                 attachmentRequired = true;
-                documentName       = 'reflection document';
+                documentName       = 'reflection document'; // for searching google drive
                 options            = {
                     template: template,
                     data: {
-                        name: mailInfo.name
+                        firstName: mailInfo.firstName,
+                        matchFirstName: mailInfo.matchFirstName
                     }
                 };
                 break;
         }
 
         if (attachmentRequired) {
-            var fileName;
-            return getAttachmentId(mailInfo.name, documentName).then(function (file) {
+            var fileName,
+                fullName;
+            if (template === 'pre-connection') {
+                fullName = mailInfo.matchFirstName + " " + mailInfo.matchLastName;
+            } else {
+                fullName = mailInfo.firstName + " " + mailInfo.lastName;
+            }
+
+            return getAttachmentId(fullName, documentName).then(function (file) {
+                console.log('here');
                 console.log(file);
                 fileName = file.name;
                 return downloadAttachment(file.id)
@@ -161,9 +162,9 @@ apiMail = {
         } else {
 
             return mail.utils.generateContent(options).then(function (email) {
-                message.to              = mailInfo.email;
-                message.subject         = subject;
-                message.html            = email.html;
+                message.to      = mailInfo.email;
+                message.subject = subject;
+                message.html    = email.html;
 
                 // this is a promise
                 return sendMail(message);

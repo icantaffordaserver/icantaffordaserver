@@ -19,7 +19,6 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
-                <li  class="tab col"><a name="on-boarding" href="#">On Boarding/Phone Call</a></li>
                 <li class="tab col"><a name="profile-building" href="#">Profile Building</a></li>
                 <li class="tab col"><a name="pre-connection" href="#">Pre Connection</a></li>
                 <li class="tab col"><a name="shift-scheduled" href="#">Shift Scheduled</a></li>
@@ -31,24 +30,15 @@
     </div>
 
     <div class="row">
-        <form id="on-boarding" class="col s7" method="post" action="/admin/send/on-boarding">
-            <h3>On-Boarding Email Sender</h3>
-            <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
-                </div>
-                <div class="input-field col s6">
-                    <input name="email" placeholder="Email" type="text" class="validate">
-                </div>
-            </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
-        </form>
 
-        <form id="profile-building" class="col s7 hide" method="post" action="/admin/send/profile-building">
+        <form id="profile-building" class="col s5" method="post" action="/admin/send/profile-building">
             <h3>Profile Building Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
@@ -57,40 +47,65 @@
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <form id="pre-connection" class="col s7 hide" method="post" action="/admin/send/pre-connection">
+        <form id="pre-connection" class="col s5 hide" method="post" action="/admin/send/pre-connection">
             <h3>Pre-Connection Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="match_first_name" placeholder="Match's First Name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="match_last_name" placeholder="Match's Last Name" type="text" class="validate">
+                </div>
+            </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <form id="shift-scheduled" class="col s7 hide" method="post" action="/admin/send/shift-scheduled">
+        <form id="shift-scheduled" class="col s5 hide" method="post" action="/admin/send/shift-scheduled">
             <h3>Shift Scheduled Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
                 </div>
             </div>
-            <div class="input-field row">
-                <input name="timeOfShift" placeholder="Time of Shift" type="text" class="validate">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="match_first_name" placeholder="Match's First Name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="match_last_name" placeholder="Match's Last Name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="timeOfShift" placeholder="Time of Shift" type="text" class="validate">
+                </div>
             </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <form id="shift-today" class="col s7 hide" method="post" action="/admin/send/shift-today">
+        <form id="shift-today" class="col s5 hide" method="post" action="/admin/send/shift-today">
             <h3>Shift Today Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
@@ -102,11 +117,14 @@
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <form id="post-connection" class="col s7 hide" method="post" action="/admin/send/post-connection">
+        <form id="post-connection" class="col s5 hide" method="post" action="/admin/send/post-connection">
             <h3>Post Connection Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
@@ -115,36 +133,49 @@
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <form id="review" class="col s7 hide" method="post" action="/admin/send/review">
+        <form id="review" class="col s5 hide" method="post" action="/admin/send/review">
             <h3>Review Email Sender</h3>
             <div class="row">
-                <div class="input-field col s6">
-                    <input name="name" placeholder="Name" id="first_name" type="text" class="validate">
+                <div class="input-field col s3">
+                    <input name="first_name" placeholder="First Name" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s3">
+                    <input name="last_name" placeholder="Last Name" id="last_name" type="text" class="validate">
                 </div>
                 <div class="input-field col s6">
                     <input name="email" placeholder="Email" type="text" class="validate">
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input name="match_first_name" placeholder="Match's First Name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <input name="match_last_name" placeholder="Match's Last Name" type="text" class="validate">
+                </div>
+            </div>
             <button class="btn waves-effect waves-light" type="submit" name="action">Send Email</button>
         </form>
 
-        <div class="col s5">
+        <div class="col s7">
             <h3>Emails Sent</h3>
             <table>
                 <thead>
                 <tr>
                     <th data-field="date">Date</th>
-                    <th data-field="id">Name</th>
+                    <th data-field="id">First Name</th>
+                    <th data-field="id">Last Name</th>
                     <th data-field="name">Email</th>
                     <th data-field="price">Template</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <% for(var i=0; i<data.length; i++) {%>
+                <% for(var i = 0; i < data.length; i++) { %>
                 <tr>
                     <td><%= data[i].date_time_sent %></td>
-                    <td><%= data[i].name %></td>
+                    <td><%= data[i].first_name %></td>
+                    <td><%= data[i].last_name %></td>
                     <td><%= data[i].email %></td>
                     <td><%= data[i].template %></td>
                 </tr>
@@ -157,11 +188,11 @@
 </div>
 </body>
 
- <!--Basic script to show and hide form for sending email for different parts of the Shift Process-->
+<!--Basic script to show and hide form for sending email for different parts of the Shift Process-->
 <script>
-    var currentlyShowing = "on-boarding";
-    $(document).ready(function() {
-        $("a").click(function(event) {
+    var currentlyShowing = "profile-building";
+    $(document).ready(function () {
+        $("a").click(function (event) {
             show(event.target.name);
         });
     });
