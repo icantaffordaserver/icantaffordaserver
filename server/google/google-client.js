@@ -6,6 +6,7 @@ var fs         = require('fs'),
     google     = require('googleapis'),
     googleAuth = require('google-auth-library'),
     Promise    = require('bluebird'),
+    path       = require('path'),
 
     // If modifying these scopes, delete your previously saved credentials
     // at ~/.credentials/drive-nodejs-quickstart.json
@@ -29,7 +30,7 @@ var fs         = require('fs'),
  */
 function init(callback) {
     // Load client secrets from a local file, make sure this completes before any files are API services are run
-    fs.readFile('/Users/alexandermann/Code/shift-webapp/server/google/client_secret.json', function processClientSecrets(err, content) {
+    fs.readFile(__dirname + '/client_secret.json', function processClientSecrets(err, content) {
         if (err) {
             console.log('Error loading client secret file: ' + err);
             return;
