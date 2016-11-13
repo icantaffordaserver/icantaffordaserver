@@ -131,7 +131,6 @@ apiMail = {
             }
 
             return getAttachmentId(fullName, documentName).then(function (file) {
-                console.log('here');
                 console.log(file);
                 fileName = file.name;
                 return downloadAttachment(file.id)
