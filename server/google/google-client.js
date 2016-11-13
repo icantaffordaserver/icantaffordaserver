@@ -36,6 +36,7 @@ function init(callback) {
             return;
         }
         TOKEN_CONTENT = JSON.parse(content);
+        console.log(JSON.parse(process.env.some_token));
         // Get the client secret, then call the Drive API.
         // THIS MUST COMPLETE FIRST BEFORE API CALLS CAN BE MADE!!
         typeof callback === 'function' && callback(); //check if callback exists
@@ -68,14 +69,16 @@ function authorize(callback) {
         var auth         = new googleAuth();
         var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
         // Check if we have previously stored a token.
-        fs.readFile(TOKEN_PATH, function (err, token) {
-            if (err) {
-                getNewToken(oauth2Client, callback);
-            } else {
-                oauth2Client.credentials = JSON.parse(token);
-                callback(oauth2Client);
-            }
-        });
+        // fs.readFile(TOKEN_PATH, function (err, token) {
+        //     if (err) {
+        //         getNewToken(oauth2Client, callback);
+        //     } else {
+        //         oauth2Client.credentials = JSON.parse(token);
+        //         callback(oauth2Client);
+        //     }
+        // });
+        oauth2Client.credentials = JSON.parse(process.env.some_token);
+        callback(oauth2Client);
     }
 
 }
