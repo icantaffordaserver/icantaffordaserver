@@ -1,0 +1,39 @@
+{
+  "name": "shift-webapp",
+  "description": "The official Shift web application. Rediscover connection.",
+  "scripts": {
+  },
+  "env": {
+    "DB_HOST": {
+      "required": true
+    },
+    "DB_NAME": {
+      "required": true
+    },
+    "DB_PASSWORD": {
+      "required": true
+    },
+    "DB_USER": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "some_token": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "cleardb"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
