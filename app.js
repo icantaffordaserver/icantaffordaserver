@@ -1,6 +1,10 @@
 /**
  * Created by AlexanderMann on 2016-09-29.
  */
+
+// load the environment configurations
+require('dotenv').config();
+
 // vendor libraries
 var express       = require('express'),
     bodyParser    = require('body-parser'),
@@ -21,7 +25,6 @@ var express       = require('express'),
     Model         = require('./server/models/user');
 
 var app = express();
-
 if (process.env.NODE_ENV !== 'test') {
     app.use(logger('dev'));
 }
@@ -81,7 +84,7 @@ passport.deserializeUser(function (id, done) {
 
 // set up the application settings
 app.set('port', process.env.PORT || config.get("server:port"));
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'ejs');
 
 app.use(cookieParser());

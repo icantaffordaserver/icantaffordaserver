@@ -62,6 +62,7 @@ CHANGELOG.md
 
 # ignore all custom json files for config
 config.*.json
+/config.js
 
 # Built asset files
 /core/built
@@ -71,3 +72,4 @@ config.*.json
 # Coverage reports
 coverage.html
 /cleardb_ssl/
+.env

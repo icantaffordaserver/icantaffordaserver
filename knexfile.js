@@ -5,17 +5,17 @@ module.exports = {
     development: {
         client: 'mysql',
         connection: {
-            host: '127.0.0.1',
-            user: 'root',
-            password: 'password',
-            database: 'development',
+            host: process.env.HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            database: process.env.DB_NAME,
             charset: 'utf8'
         },
         migrations: {
-            directory: __dirname + '/db/migrations'
+            directory: __dirname + '/server/data/db/migrations'
         },
         seeds: {
-            directory: __dirname + '/db/seeds/development'
+            directory: __dirname + '/server/data/db/seeds/development'
         }
     },
 
@@ -29,10 +29,10 @@ module.exports = {
             charset: 'utf8'
         },
         migrations: {
-            directory: __dirname + '/db/migrations'
+            directory: __dirname + '/server/data/db/migrations'
         },
         seeds: {
-            directory: __dirname + '/db/seeds/test'
+            directory: __dirname + '/server/data/db/seeds/test'
         }
     },
 
