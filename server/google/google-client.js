@@ -15,17 +15,14 @@ var fs         = require('fs'),
         'https://www.googleapis.com/auth/drive.photos.readonly',
         'https://www.googleapis.com/auth/drive.readonly'
     ],
-    TOKEN_DIR  = (process.env.HOME || process.env.HOMEPATH ||
-        process.env.USERPROFILE) + '/.credentials/',
-    TOKEN_PATH = TOKEN_DIR + 'drive-nodejs-quickstart.json',
-    TOKEN_CONTENT;
+    client_secret,
+    oauth2Client; // Globally define the oauth2Client
 
 /**
- * Read in the client_secret.json and parse the data to a global variable.
+ * Read in the secret.json and parse the data to a global variable.
  * Provides an init callback as all functions need to make sure that the
- * TOKEN_CONTENT is initialized and loaded before making any requests.
+ * client_secret is initialized and loaded before making any requests.
  *
- * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
 function init(callback) {
@@ -35,8 +32,8 @@ function init(callback) {
             console.log('Error loading client secret file: ' + err);
             return;
         }
-        TOKEN_CONTENT = JSON.parse(content);
-        console.log(JSON.parse(process.env.some_token));
+        client_secret = JSON.parse(content);
+        console.log((JSON.parse(process.env.GDRIVE_TOKEN)));
         // Get the client secret, then call the Drive API.
         // THIS MUST COMPLETE FIRST BEFORE API CALLS CAN BE MADE!!
         typeof callback === 'function' && callback(); //check if callback exists
@@ -54,7 +51,7 @@ init();
 function authorize(callback) {
     var cb = callback;
     // make sure client secret has been read in
-    if (TOKEN_CONTENT === undefined) {
+    if (client_secret === undefined) {
         init(function () {
             authNow(cb);
         })
@@ -63,21 +60,24 @@ function authorize(callback) {
     }
 
     function authNow(callback) {
-        var clientSecret = TOKEN_CONTENT.installed.client_secret;
-        var clientId     = TOKEN_CONTENT.installed.client_id;
-        var redirectUrl  = TOKEN_CONTENT.installed.redirect_uris[0];
+        var clientSecret = client_secret.installed.client_secret;
+        var clientId     = client_secret.installed.client_id;
+        var redirectUrl  = client_secret.installed.redirect_uris[0];
         var auth         = new googleAuth();
         var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+
         // Check if we have previously stored a token.
         // fs.readFile(TOKEN_PATH, function (err, token) {
         //     if (err) {
         //         getNewToken(oauth2Client, callback);
         //     } else {
         //         oauth2Client.credentials = JSON.parse(token);
+        //
         //         callback(oauth2Client);
         //     }
         // });
-        oauth2Client.credentials = JSON.parse(process.env.some_token);
+
+        oauth2Client.credentials = JSON.parse(process.env.GDRIVE_TOKEN); // set the credentials to the token received previously
         callback(oauth2Client);
     }
 
@@ -180,8 +180,6 @@ function listFiles(name, template) {
  */
 function downloadAttachment(fileId) {
     var service  = google.drive('v3');
-    var respData = '';
-    var dest     = fs.createWriteStream('something.pdf');
 
     // wrap in a promise to conform with rest of API using promises
     return new Promise(function (resolve, reject) {

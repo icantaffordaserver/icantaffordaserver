@@ -1,8 +1,8 @@
 var mail               = require('../mail'),
     fs                 = require('fs'),
     path               = require('path'),
-    downloadAttachment = require('../google/google-client').downloadAttachment,
-    listFiles          = require('../google/google-client').listFiles,
+    downloadAttachment = require('../google/google-drive').downloadAttachment,
+    listFiles          = require('../google/google-drive').listFiles,
     mailer,
     apiMail;
 
