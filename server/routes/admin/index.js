@@ -20,7 +20,7 @@ adminRouter.post('/send/:template', function (req, res, next) {
         email: req.body.email,
         matchFirstName: req.body.match_first_name || null,
         matchLastName: req.body.match_last_name || null,
-        // connectionId: req.body.connectionId || null, ----- dont think I need this
+        connectionId: req.body.connection_id || null,
         timeOfShift: req.body.timeOfShift || null
     };
 

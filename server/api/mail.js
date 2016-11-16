@@ -103,7 +103,8 @@ apiMail = {
                 options = {
                     template: template,
                     data: {
-                        firstName: mailInfo.firstName
+                        firstName: mailInfo.firstName,
+                        connectionId: mailInfo.connectionId
                     }
                 };
                 break;
