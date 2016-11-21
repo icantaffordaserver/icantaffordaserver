@@ -194,7 +194,7 @@
 	@tip Set the background color and borders for your email's preheader area.
 	*/
 		#templatePreheader{
-			/*@editable*/background-color:#ffffff;
+			/*@editable*/background-color:#0d2350;
 			/*@editable*/background-image:none;
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
@@ -308,7 +308,7 @@
 	@tip Set the background color and borders for your email's footer area.
 	*/
 		#templateFooter{
-			/*@editable*/background-color:#FAFAFA;
+			/*@editable*/background-color:#0d2350;
 			/*@editable*/background-image:none;
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
@@ -592,22 +592,19 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <h1><span style="color:#330033"><strong>{{firstName}}, your Shift is scheduled!</strong></span></h1>
+                            <h1><span style="color:#330033"><strong>Hey {{firstName}}, your Shift is scheduled!</strong></span></h1>
 
-<p><span style="color:#330033">Hola,</span><br>
-&nbsp;</p>
-
-<p><span style="color:#330033">Thanks for filling out the Firestarter exercise. {{matchFirstName}} completed theirs as well, and we've found when you're both free to connect<br>
+<p><span style="color:#330033">Thanks for working through&nbsp;the Firestarter exercise. {{matchFirstName}} completed theirs as well, and <strong>we've found a time when you're both available to shift!&nbsp;</strong><br>
 <br>
-<span style="font-size:24px">Your Shift is scheduled for&nbsp;<span style="background-color:#FFFF00">{{timeOfShift}}.</span> Pencil us in&nbsp;on your calendar so you don't forget.</span><br>
+<span style="font-size:24px"><strong>Your Shift is scheduled for&nbsp;<span style="background-color:#FFFF00">{{timeOfShift}}.</span></strong> Pencil us in&nbsp;on your calendar so you don't forget.</span><br>
 <br>
-On the day of the Shift, you will receive an email with a&nbsp;</span><a href="https://docs.google.com/a/shiftwith.us/document/d/1kX9PFrA8_3Ft-1i6zKZmNO5uZqv6KAJBUC5StdngK9o/edit?usp=sharing" target="_blank"><span style="color:#330033">Shift Connection Guide</span></a><span style="color:#330033">. It includes some prompts and reminders from the Firestarter, and we think it will help you build a great conversation.<br>
+<span style="font-size:14px"><strong>On the day of the Shift,</strong></span> you will receive an email with a&nbsp;</span><a href="https://docs.google.com/a/shiftwith.us/document/d/1kX9PFrA8_3Ft-1i6zKZmNO5uZqv6KAJBUC5StdngK9o/edit?usp=sharing" target="_blank"><span style="color:#330033">Shift Connection Guide</span></a><span style="color:#330033">. It includes some prompts and reminders from the Firestarter. <strong>We think it will help you build a great conversation.&nbsp;</strong><br>
 <br>
 See you soon on the Shift Platform!<br>
 <br>
 The Shift Team<br>
 <br>
-PS we've included a link to the Firestarter video below, just in case you want to watch it again before you connect.</span></p>
+<span style="font-size:12px">PS we've included a link to the Firestarter video below, just in case you want to watch it again before you connect.</span></span></p>
 
                         </td>
                     </tr>
@@ -623,10 +620,7 @@ PS we've included a link to the Firestarter video below, just in case you want t
             </td>
         </tr>
     </tbody>
-</table></td>
-                            </tr>
-                            <tr>
-                                <td valign="top" id="templateFooter"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
     <tbody class="mcnButtonBlockOuter">
         <tr>
             <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
@@ -634,7 +628,7 @@ PS we've included a link to the Firestarter video below, just in case you want t
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
-                                <a class="mcnButton " title="The Time You Have" href="https://www.youtube.com/watch?v=BOksW_NabEk" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #0D2350;">The Time You Have</a>
+                                <a class="mcnButton " title="Firestarter: The Time You Have⏱" href="https://www.youtube.com/watch?v=BOksW_NabEk" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #0D2350;">Firestarter: The Time You Have⏱</a>
                             </td>
                         </tr>
                     </tbody>
@@ -642,7 +636,10 @@ PS we've included a link to the Firestarter video below, just in case you want t
             </td>
         </tr>
     </tbody>
-</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock" style="min-width:100%;">
+</table></td>
+                            </tr>
+                            <tr>
+                                <td valign="top" id="templateFooter"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock" style="min-width:100%;">
     <tbody class="mcnFollowBlockOuter">
         <tr>
             <td align="center" valign="top" style="padding:9px" class="mcnFollowBlockInner">
