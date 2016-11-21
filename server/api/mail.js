@@ -3,6 +3,7 @@ var mail               = require('../mail'),
     path               = require('path'),
     downloadAttachment = require('../google/google-drive').downloadAttachment,
     listFiles          = require('../google/google-drive').listFiles,
+    Promise            = require('bluebird'),
     mailer,
     apiMail;
 
