@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware} from 'redux';
+import {Router, browserHistory} from 'react-router';
+import promise from 'redux-promise';
 
-import ProfileBuilding from './components/profile-building';
 
-const App = () => {
-    // We must always wrap stuff in a parent tag as the first div tag below
-    return (
-        <div>
-            <div>Hi!</div>
-            <ProfileBuilding/>
-        </div>
-    );
-};
+import reducers from './reducers';
+import routes from './routes';
 
-ReactDOM.render(<App/>, document.querySelector('.container'));
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
+ReactDOM.render(
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <Router history={browserHistory} routes={routes}/>
+    </Provider>
+    , document.getElementById('body'));
