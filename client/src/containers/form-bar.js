@@ -39,7 +39,7 @@ const TABS = {
 
 class FormBar extends Component {
 
-    renderTabs(title, absoluteTitle) {
+    renderTab(title, absoluteTitle) {
 
         return (
             <li className="tab col s2"
@@ -52,30 +52,12 @@ class FormBar extends Component {
     render() {
         return (
             <ul className="tabs z-depth-1">
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.PROFILE_BUILDING.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.PROFILE_BUILDING.absoluteTitle ? 'active' : ''}>{TABS.PROFILE_BUILDING.title}</a>
-                </li>
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.PRE_CONNECTION.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.PRE_CONNECTION.absoluteTitle ? 'active' : ''}>{TABS.PRE_CONNECTION.title}</a>
-                </li>
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.SHIFT_SCHEDULED.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.SHIFT_SCHEDULED.absoluteTitle ? 'active' : ''}>{TABS.SHIFT_SCHEDULED.title}</a>
-                </li>
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.SHIFT_TODAY.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.SHIFT_TODAY.absoluteTitle ? 'active' : ''}>{TABS.SHIFT_TODAY.title}</a>
-                </li>
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.POST_CONNECTION.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.POST_CONNECTION.absoluteTitle ? 'active' : ''}>{TABS.POST_CONNECTION.title}</a>
-                </li>
-                <li className="tab col s2"
-                    onClick={() => this.props.setActiveForm(TABS.REVIEW.absoluteTitle)}>
-                    <a className={this.props.activeForm === TABS.REVIEW.absoluteTitle ? 'active' : ''}>{TABS.REVIEW.title}</a>
-                </li>
+                {this.renderTab(TABS.PROFILE_BUILDING.title, TABS.PROFILE_BUILDING.absoluteTitle)}
+                {this.renderTab(TABS.PRE_CONNECTION.title, TABS.PRE_CONNECTION.absoluteTitle)}
+                {this.renderTab(TABS.SHIFT_SCHEDULED.title, TABS.SHIFT_SCHEDULED.absoluteTitle)}
+                {this.renderTab(TABS.SHIFT_TODAY.title, TABS.SHIFT_TODAY.absoluteTitle)}
+                {this.renderTab(TABS.POST_CONNECTION.title, TABS.POST_CONNECTION.absoluteTitle)}
+                {this.renderTab(TABS.REVIEW.title, TABS.REVIEW.absoluteTitle)}
             </ul>
         );
     }
