@@ -1,13 +1,22 @@
 const adminRouter = require('express').Router();
-const emailsSent  = require('../../models/emails_sent').emailsSent;
+const emails = require('../../models/emails_sent').emails;
 const mail        = require('../../api/mail');
 
 
 adminRouter.get('/', function (req, res, next) {
-    emailsSent.getAll().then(function (emails) {
+    emails.getAll().then(function (emails) {
         res.render('admin', {
             data: emails.toJSON()
         });
+    });
+});
+
+// Returns an array of all the emails sent
+adminRouter.get('/emails', function (req, res, next) {
+    emails.getAll().then(function (emails) {
+        res.send(
+            emails.toJSON()
+        );
     });
 });
 
@@ -20,14 +29,14 @@ adminRouter.post('/send/:template', function (req, res, next) {
         email: req.body.email,
         matchFirstName: req.body.match_first_name || null,
         matchLastName: req.body.match_last_name || null,
-        // connectionId: req.body.connectionId || null, ----- dont think I need this
+        connectionId: req.body.connectionId || null,
         timeOfShift: req.body.timeOfShift || null
     };
 
     // promise chain, wait until email is sent then store to database
     mail.sendEmail(req.params.template, mailInfo).then(function () {
 
-        return emailsSent.emailSent(req.body.first_name, req.body.last_name, req.body.email, req.params.template)
+        return emails.emailSent(req.body.first_name, req.body.last_name, req.body.email, req.params.template)
 
     }).then(function (data) {
         console.log('DB store completed!');

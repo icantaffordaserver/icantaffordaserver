@@ -37,32 +37,32 @@ if (process.env.NODE_ENV !== 'test') {
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
-passport.use(new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'password'
-    },
-    // the verify callback, part of passportjs structure
-    // invoke the done() function to supply passport with the user that is authenticated
-    function (email, password, done) {
-        // call to our mysql database to get the username specified
-        new Model.User({email: email}).fetch().then(function (data) {
-            // store the returned data as user variable
-            var user = data;
-            // if the user does not exist
-            if (user === null) {
-                // return false as the second argument, with a message object
-                return done(null, false, {message: 'Invalid username or password'});
-            } else { // user data does exist
-                user = data.toJSON(); // convert the data object to JSON, check if password hashes match up
-                if (!bcrypt.compareSync(password, user.password)) {
-                    return done(null, false, {message: 'Invalid username or password'});
-                } else {
-                    // invoke done to supply Passport with the user that is authenticated
-                    return done(null, user);
-                }
-            }
-        });
-    }));
+// passport.use(new LocalStrategy({
+//         usernameField: 'email',
+//         passwordField: 'password'
+//     },
+//     // the verify callback, part of passportjs structure
+//     // invoke the done() function to supply passport with the user that is authenticated
+//     function (email, password, done) {
+//         // call to our mysql database to get the username specified
+//         new Model.User({email: email}).fetch().then(function (data) {
+//             // store the returned data as user variable
+//             var user = data;
+//             // if the user does not exist
+//             if (user === null) {
+//                 // return false as the second argument, with a message object
+//                 return done(null, false, {message: 'Invalid username or password'});
+//             } else { // user data does exist
+//                 user = data.toJSON(); // convert the data object to JSON, check if password hashes match up
+//                 if (!bcrypt.compareSync(password, user.password)) {
+//                     return done(null, false, {message: 'Invalid username or password'});
+//                 } else {
+//                     // invoke done to supply Passport with the user that is authenticated
+//                     return done(null, user);
+//                 }
+//             }
+//         });
+//     }));
 
 
 // Configure Passport authenticated session persistence.
@@ -72,15 +72,15 @@ passport.use(new LocalStrategy({
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
-passport.serializeUser(function (user, done) {
-    done(null, user.email);
-});
-
-passport.deserializeUser(function (id, done) {
-    new Model.User({email: id}).fetch().then(function (user) {
-        done(null, user);
-    });
-});
+// passport.serializeUser(function (user, done) {
+//     done(null, user.email);
+// });
+//
+// passport.deserializeUser(function (id, done) {
+//     new Model.User({email: id}).fetch().then(function (user) {
+//         done(null, user);
+//     });
+// });
 
 // set up the application settings
 app.set('port', process.env.PORT || config.get("server:port"));
@@ -89,9 +89,29 @@ app.set('view engine', 'ejs');
 
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(session({secret: 'secret strategic imabeauty code'}));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({secret: 'secret strategic imabeauty code'}));
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// Add headers
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 // set up all the routing data
 app.use('/', routes);

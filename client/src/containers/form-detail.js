@@ -164,20 +164,14 @@ class FormDetail extends Component {
         // Check if an active form has been selected
         if (!this.props.activeForm) {
             return (
-                <div className="row section">
-                    <div className="col s5 z-depth-2">
                         <div className="section">
                             <h3>Select a form to get started</h3>
                         </div>
-                    </div>
-                </div>
             )
         }
 
 
         return (
-            <div className="row section">
-                <div className="col s5 z-depth-2">
                     <div className="section">
                         <h3>{this.props.activeForm}</h3>
 
@@ -186,15 +180,13 @@ class FormDetail extends Component {
                             <button className="btn" type="submit">Submit</button>
                         </form>
                     </div>
-                </div>
-            </div>
         );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        activeForm: state.activeForm
+        activeForm: state.activeForm //state comes from reducers index.js "state.activeForm" is created there
     }
 }
 

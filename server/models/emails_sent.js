@@ -1,6 +1,6 @@
 var DB = require('../../db').DB;
 
-var emailsSent = DB.Model.extend({
+var emails = DB.Model.extend({
     tableName: 'emails_sent',
     idAttribute: 'id'
 }, {
@@ -9,6 +9,8 @@ var emailsSent = DB.Model.extend({
         return this.fetchAll();
     },
 
+    // Execute this function after an email has successfully been sent
+    // This saves it's record in the DB
     emailSent: function (firstName, lastName, email, template) {
         return new this({
             first_name: firstName,
@@ -20,5 +22,5 @@ var emailsSent = DB.Model.extend({
 });
 
 module.exports = {
-    emailsSent: emailsSent
+    emails: emails
 };

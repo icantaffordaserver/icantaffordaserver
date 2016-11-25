@@ -2,8 +2,9 @@ import axios from 'axios';
 
 export const SET_ACTIVE_FORM = 'SET_ACTIVE_FORM';
 export const SUBMIT_FORM = 'SUBMIT_FORM';
+export const FETCH_EMAILS_SENT = 'FETCH_EMAILS_SENT';
 
-const ROOT_URL = 'http://localhost:3000/admin/send';
+const ROOT_URL = 'http://localhost:3000/admin';
 
 // setActiveForm is an ActionCreator, it needs to return an action,
 // an object with a type property (this is a requirement)
@@ -38,15 +39,22 @@ export function submitForm (formData, template) {
             break;
     }
 
-    const request = axios.post(`${ROOT_URL}/${template}`, {
+    const request = axios.post(`${ROOT_URL}/send/${template}`, {
         first_name: formData.firstName,
         last_name: formData.lastName,
         email: formData.email
     });
 
-    console.log(request);
     return {
-        type: SET_ACTIVE_FORM,
+        type: SUBMIT_FORM,
         payload: request
     };
+}
+
+export function fetchEmailsSent() {
+    const request = axios.get(`${ROOT_URL}/emails`);
+    return {
+        type: FETCH_EMAILS_SENT,
+        payload: request
+    }
 }
