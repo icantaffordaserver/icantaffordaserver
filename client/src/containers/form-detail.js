@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import {Field, reduxForm} from 'redux-form';
 
 
 import {submitForm} from '../actions/index'
 
 class FormDetail extends Component {
+
     onSubmit(props) {
+        const {reset} = this.props;
+        console.log(reset);
         this.props.submitForm(props, this.props.activeForm)
+            .then(() => reset());
     }
 
 
@@ -163,22 +169,22 @@ class FormDetail extends Component {
         // Check if an active form has been selected
         if (!this.props.activeForm) {
             return (
-                        <div className="section">
-                            <h3>Select a form to get started</h3>
-                        </div>
+                <div className="section">
+                    <h3>Select a form to get started</h3>
+                </div>
             )
         }
 
 
         return (
-                    <div className="section">
-                        <h3>{this.props.activeForm}</h3>
+            <div className="section">
+                <h3>{this.props.activeForm}</h3>
 
-                        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                            {this.renderForm()}
-                            <button className="btn" type="submit">Submit</button>
-                        </form>
-                    </div>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    {this.renderForm()}
+                    <button className="btn" type="submit">Submit</button>
+                </form>
+            </div>
         );
     }
 }
@@ -190,9 +196,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        submitForm: submitForm
-    };
+    return bindActionCreators({submitForm}, dispatch);
 }
 
 // Followed tutorial here http://redux-form.com/6.2.0/examples/initializeFromState/
