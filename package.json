@@ -19,6 +19,7 @@
     "body-parser": "*",
     "bookshelf": "^0.10.2",
     "cookie-parser": "*",
+    "cors": "^2.8.1",
     "dotenv": "^2.0.0",
     "ejs": "*",
     "express": "4.x",

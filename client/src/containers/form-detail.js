@@ -8,7 +8,6 @@ import {submitForm} from '../actions/index'
 class FormDetail extends Component {
     onSubmit(props) {
         this.props.submitForm(props, this.props.activeForm)
-            .then(() => console.log('Done!'));
     }
 
 

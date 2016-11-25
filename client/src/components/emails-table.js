@@ -8,13 +8,15 @@ class EmailsTable extends Component {
 
     // On page load make a request to get all the emails
     componentWillMount() {
-        this.props.fetchEmailsSent();
+        this.props.fetchEmailsSent().then(()=> console.log('done!'));
 
     }
 
 
     refreshTableData() {
-        this.props.fetchEmailsSent();
+        this.props.fetchEmailsSent()
+            .then(()=> console.log('done!'));
+
     }
 
     renderRow() {

@@ -14,8 +14,8 @@ adminRouter.get('/', function (req, res, next) {
 // Returns an array of all the emails sent
 adminRouter.get('/emails', function (req, res, next) {
     emails.getAll().then(function (emails) {
-        res.send(
-            emails.toJSON()
+        res.json(
+            emails.toJSON().reverse() // reverse the array to return it most recent first
         );
     });
 });
@@ -42,7 +42,7 @@ adminRouter.post('/send/:template', function (req, res, next) {
         console.log('DB store completed!');
     });
 
-    res.redirect('/admin');
+    res.json({message: `${req.params.template} email sent!`});
 });
 
 module.exports = adminRouter;
