@@ -4,6 +4,6 @@ import {Route, IndexRoute} from 'react-router';
 import App from './components/app';
 
 export default (
-    <Route path="/admin" component={App}>
+    <Route path="/" component={App}>
     </Route>
 );

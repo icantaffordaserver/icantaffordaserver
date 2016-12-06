@@ -5,6 +5,11 @@
 // load the environment configurations
 require('dotenv').config();
 
+import React from 'react';
+import {renderToString} from 'react-dom/server';
+import {RoutingContext, match} from 'react-router';
+import createLocation from 'history/lib/createLocation';
+
 // vendor libraries
 var express       = require('express'),
     bodyParser    = require('body-parser'),
@@ -25,7 +30,7 @@ var express       = require('express'),
     // model
     Model         = require('./server/models/user');
 
-var app = express();
+const app = express();
 
 app.use(cors()); // allow all cross origin requests
 
@@ -101,10 +106,39 @@ app.use(bodyParser());
 // set up all the routing data
 app.use('/', routes);
 
-var server = app.listen(app.get('port'), function (err) {
-    if (err) throw err;
-    var message = 'Server is running @ http://localhost:' + server.address().port;
-    console.log(message);
+app.use((req, res) => {
+    const location = createLocation(req.url);
+
+    match({routes, location}, (err, redirectLocation, renderProps) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).end('Internal server error');
+        }
+
+        if (!renderProps) return res.status(404).end('Not found.');
+
+        const InitialComponent = (
+            <RoutingContext {...renderProps} />
+        );
+
+        const componentHTML = renderToString(InitialComponent);
+
+        const HTML = `
+            <!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset="utf-8">
+                  <title>Isomorphic Redux Demo</title>
+                </head>
+                <body>
+                  <div id="react-view">${componentHTML}</div>
+                  <script type="application/javascript" src="/bundle.js"></script>
+                </body>
+              </html>
+            `;
+        res.end(HTML);
+    });
+
 });
 
 module.exports = app;

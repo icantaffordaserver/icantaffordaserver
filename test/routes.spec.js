@@ -7,7 +7,7 @@ var chai      = require('chai');
 var should    = chai.should();
 var expect    = chai.expect;
 var supertest = require('supertest');
-var app       = require('../app');
+var app       = require('../server');
 
 var request = supertest(app);
 var knex    = require('../server/data/db/knex');
