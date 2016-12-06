@@ -7,8 +7,9 @@ require('dotenv').config();
 
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {RoutingContext, match} from 'react-router';
+import Router, {RouterContext, match} from 'react-router';
 import createLocation from 'history/lib/createLocation';
+import routes from 'routes';
 
 // vendor libraries
 var express       = require('express'),
@@ -26,7 +27,7 @@ var express       = require('express'),
 
     // custom libraries
     // routes
-    routes        = require('./server/routes'),
+    // routes        = require('./server/routes'),
     // model
     Model         = require('./server/models/user');
 
@@ -104,7 +105,7 @@ app.use(bodyParser());
 
 
 // set up all the routing data
-app.use('/', routes);
+// app.use('/', routes);
 
 app.use((req, res) => {
     const location = createLocation(req.url);
@@ -117,11 +118,7 @@ app.use((req, res) => {
 
         if (!renderProps) return res.status(404).end('Not found.');
 
-        const InitialComponent = (
-            <RoutingContext {...renderProps} />
-        );
-
-        const componentHTML = renderToString(InitialComponent);
+        const componentHTML = renderToString(<RouterContext {...renderProps} />);
 
         const HTML = `
             <!DOCTYPE html>
