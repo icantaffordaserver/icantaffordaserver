@@ -2,17 +2,19 @@
  * Created by AlexanderMann on 2016-09-29.
  */
 
-// load the environment configurations
-require('dotenv').config();
 
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Router, {RouterContext, match} from 'react-router';
+import {Provider} from 'react-redux'
 import createLocation from 'history/lib/createLocation';
-import routes from 'routes';
+import configureStore from './client/src/store/configureStore';
+import clientRoutes from './client/src/routes';
+import remoteDev from 'remotedev-server';
 
 // vendor libraries
 var express       = require('express'),
+    dotenv        = require('dotenv'),
     bodyParser    = require('body-parser'),
     cookieParser  = require('cookie-parser'),
     logger        = require('morgan'),
@@ -23,21 +25,38 @@ var express       = require('express'),
     passport      = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     cors          = require('cors'),
+
+    // webpack requirements
+    webpack       = require('webpack'),
+    webpackConfig = require('./webpack.config'),
+
     config        = require('./server/config'),
 
     // custom libraries
-    // routes
-    // routes        = require('./server/routes'),
+    // server routes
+    serverRoutes  = require('./server/routes'),
     // model
     Model         = require('./server/models/user');
 
+// load the environment configurations
+dotenv.load(); // load() is an alias for config()
+
 const app = express();
 
-app.use(cors()); // allow all cross origin requests
+var compiler = webpack(webpackConfig);
 
-if (process.env.NODE_ENV !== 'test') {
-    app.use(logger('dev'));
+// app.use(cors()); // allow all cross origin requests
+
+// Use webpack hot middleware etc when in development environment
+if (app.get('env') === 'development') {
+    app.use(require('webpack-dev-middleware')(compiler, {
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath
+    }));
+    app.use(require('webpack-hot-middleware')(compiler));
+    remoteDev({ hostname: 'localhost', port: 8000 });
 }
+
 
 // Configure the local strategy for use by Passport.
 //
@@ -94,7 +113,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 // set up the application settings
 app.set('port', process.env.PORT || config.get("server:port"));
-app.set('views', path.join(__dirname, 'client/views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(cookieParser());
@@ -105,35 +124,35 @@ app.use(bodyParser());
 
 
 // set up all the routing data
-// app.use('/', routes);
+app.use('/', serverRoutes);
 
+// React server rendering
 app.use((req, res) => {
     const location = createLocation(req.url);
 
-    match({routes, location}, (err, redirectLocation, renderProps) => {
+    let initialState = {};
+    let store        = configureStore(initialState);
+
+    match({clientRoutes, location}, (err, redirectLocation, renderProps) => {
         if (err) {
             console.log(err);
-            return res.status(500).end('Internal server error');
+            res.status(500).end('Internal server error');
+        } else if (redirectLocation) {
+            res.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
+        } else if (renderProps) {
+            const html = renderToString(
+                <Provider store={store}>
+                    <RouterContext {...renderProps} />
+                </Provider>
+            );
+            res.render('index.ejs', {
+                reactOutputHTML: html,
+                initialState: store.getState()
+            });
+        } else {
+            res.status(404).end('Not found.');
         }
 
-        if (!renderProps) return res.status(404).end('Not found.');
-
-        const componentHTML = renderToString(<RouterContext {...renderProps} />);
-
-        const HTML = `
-            <!DOCTYPE html>
-              <html>
-                <head>
-                  <meta charset="utf-8">
-                  <title>Isomorphic Redux Demo</title>
-                </head>
-                <body>
-                  <div id="react-view">${componentHTML}</div>
-                  <script type="application/javascript" src="/bundle.js"></script>
-                </body>
-              </html>
-            `;
-        res.end(HTML);
     });
 
 });

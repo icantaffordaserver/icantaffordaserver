@@ -11,7 +11,7 @@ const logout = require('./logout');
 const signUp = require('./signUp');
 const notFound404 = require('./404');
 
-// routes.get('/', authenticationMiddleware(), function (req, res, next) {
+// clientRoutes.get('/', authenticationMiddleware(), function (req, res, next) {
 //     res.redirect('/admin')
 // });
 // without authentication, useful for development
@@ -25,8 +25,8 @@ routes.post('/login', login.post);
 
 //sign up
 // --------------- Disable for now ---------------
-// routes.get('/signup', signUp.get);
-// routes.post('/signup', signUp.post);
+// clientRoutes.get('/signup', signUp.get);
+// clientRoutes.post('/signup', signUp.post);
 
 // logout
 routes.get('/logout', logout.get);
@@ -34,7 +34,7 @@ routes.get('/logout', logout.get);
 // middleware routers for other paths
 routes.use('/users', usersRouter);
 
-// routes.use('/admin', authenticationMiddleware(), adminRouter);
+// clientRoutes.use('/admin', authenticationMiddleware(), adminRouter);
 
 // without authentication, useful for development
 routes.use('/admin', adminRouter);

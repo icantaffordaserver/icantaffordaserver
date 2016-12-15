@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Isomorphic React Demo</title>
+    <script type="application/javascript" src="/bundle.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+</head>
+<body>
+<div id="react-view"><%- reactOutputHTML %></div>
+<script type="text/javascript" charset="utf-8">
+    window.__REDUX_STATE__ = '<%= initialState %>';
+</script>
+</body>
+</html>
