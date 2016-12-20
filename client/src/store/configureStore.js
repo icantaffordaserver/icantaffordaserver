@@ -1,8 +1,8 @@
 /**
  * Created by alexandermann on 2016-12-14.
  */
-import {applyMiddleware, createStore} from 'redux';
-import {composeWithDevTools} from 'remote-redux-devtools';
+import {applyMiddleware, createStore, compose} from 'redux';
+import devTools from 'remote-redux-devtools';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
@@ -10,17 +10,13 @@ import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
     const logger           = createLogger();
-    const composeEnhancers = composeWithDevTools({
-        name: 'Shift Admin Panel',
-        realtime: true,
-        port: 8000
-    });
 
     const store = createStore(
         rootReducer,
         initialState,
-        composeEnhancers(
-            applyMiddleware(thunk, promise, logger)
+        compose(
+            applyMiddleware(thunk, promise, logger),
+            devTools({realtime: true})
         )
     );
 

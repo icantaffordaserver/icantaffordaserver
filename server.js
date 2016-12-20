@@ -54,7 +54,6 @@ if (app.get('env') === 'development') {
         publicPath: webpackConfig.output.publicPath
     }));
     app.use(require('webpack-hot-middleware')(compiler));
-    remoteDev({ hostname: 'localhost', port: 8000 });
 }
 
 
