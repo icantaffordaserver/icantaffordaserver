@@ -1,48 +1,27 @@
-/**
- * Created by AlexanderMann on 2016-10-13.
- *
- * Tutorial from: http://yifeed.com/passportjs-mysql-expressjs-authentication.html
- */
 const routes = require('express').Router();
-const usersRouter = require('./users');
-const adminRouter = require('./admin');
-const login = require('./login');
-const logout = require('./logout');
-const signUp = require('./signUp');
-const notFound404 = require('./404');
 
-routes.get('/', authenticationMiddleware(), function (req, res, next) {
-    res.redirect('/admin')
-});
+// Controllers
+const userController = require('../controllers/user');
+const contactController = require('../controllers/contact');
 
-// log in
-routes.get('/login', login.get);
-routes.post('/login', login.post);
+routes.post('/contact', contactController.contactPost);
 
-//sign up
-// --------------- Disable for now ---------------
-// routes.get('/signup', signUp.get);
-// routes.post('/signup', signUp.post);
+routes.put('/account', userController.ensureAuthenticated, userController.accountPut);
+routes.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 
-// logout
-routes.get('/logout', logout.get);
+routes.get('/users/:token/verify', userController.ensureAuthenticated, userController.verifySignUp);
 
-// middleware routers for other paths
-routes.use('/users', usersRouter);
+routes.post('/signup', userController.signupPost);
 
-routes.use('/admin', authenticationMiddleware(), adminRouter);
+routes.post('/login', userController.loginPost);
 
-// 404 not found if nothing triggers middleware
-routes.use(notFound404);
+routes.post('/forgot', userController.forgotPost);
 
-// check if a user is authenticated
-function authenticationMiddleware() {
-    return function (req, res, next) {
-        if (req.isAuthenticated()) {
-            return next();
-        }
-        res.redirect('/login')
-    }
-}
+routes.post('/reset/:token', userController.resetPost);
+
+routes.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
+
+routes.post('/auth/facebook', userController.authFacebook);
+routes.get('/auth/facebook/callback', userController.authFacebookCallback);
 
 module.exports = routes;

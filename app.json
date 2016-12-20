@@ -19,7 +19,10 @@
     "NODE_ENV": {
       "required": true
     },
-    "some_token": {
+    "TOKEN_SECRET": {
+      "required": true
+    },
+    "MANDRILL_API_KEY": {
       "required": true
     }
   },
@@ -28,9 +31,6 @@
       "quantity": 1
     }
   },
-  "addons": [
-    "cleardb"
-  ],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
