@@ -41,6 +41,7 @@
 │   ├── index.js               # Main express application
 ├── test/                      # Unit tests    
 ├── views/                     # Templates in handlebars, layout.handlebars where react app is rendered
+└── index.js                   # main application wrapper, ES6 transpilation, basic server settings
 ├── .babelrc                   # Babel config
 ├── .env                       # API keys, passwords, and other sensitive information
 └── package.json               # NPM Dependencies and scripts
