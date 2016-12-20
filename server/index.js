@@ -75,7 +75,7 @@ app.use(function (req, res, next) {
     if (req.isAuthenticated()) {
         var payload = req.isAuthenticated();
         new UserAccounts({id: payload.sub})
-            .fetch()
+            .fetch({withRelated: 'profile'})
             .then(function (user) {
                 req.user = user.toJSON();
                 next();

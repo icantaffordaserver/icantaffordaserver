@@ -46,7 +46,7 @@ module.exports.loginPost = function (req, res, next) {
     }
 
     new UserAccounts({email: req.body.email})
-        .fetch()
+        .fetch({withRelated: 'profile'})
         .then(function (user) {
             if (!user) {
                 return res.status(401).send({
@@ -154,7 +154,7 @@ module.exports.accountPut = function (req, res, next) {
             city: req.body.location
         }, {patch: true});
     }
-    user.fetch().then(function (user) {
+    user.fetch({withRelated: 'profile'}).then(function (user) {
         if ('password' in req.body) {
             res.send({msg: 'Your password has been changed.'});
         } else {
