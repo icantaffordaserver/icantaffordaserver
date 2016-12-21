@@ -22,8 +22,6 @@ let UserAccounts = bookshelf.Model.extend({
         // This may be unnecessary then and rework into functions only where the password
         // is required to be saved...
         hashPassword: function (model, attrs, options) {
-            console.log('hashPassword Func');
-            console.log(attrs);
             // attrs are attributes that will be inserted or updated, if present
             var password = options.patch ? attrs.password_hash : model.get('password_hash');
             if (!password) {

@@ -12,7 +12,7 @@ class Profile extends React.Component {
             name: props.user.profile.first_name,
             gender: props.user.profile.gender,
             location: props.user.profile.city,
-            website: props.user.website,
+            website: props.user.website || '',
             gravatar: props.user.gravatar,
             password: '',
             confirm: ''

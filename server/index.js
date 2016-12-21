@@ -59,7 +59,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator()); // for asserting and checking submission data
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // attach an isAuthenticated function to the req object
 app.use(function (req, res, next) {
@@ -93,6 +92,8 @@ if (app.get('env') === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
     remoteDev({hostname: 'localhost', port: 8000});
 }
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use('/', serverRoutes);
 
