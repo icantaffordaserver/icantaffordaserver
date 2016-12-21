@@ -76,7 +76,7 @@ module.exports.signupPost = function (req, res, next) {
     let errors = req.validationErrors();
 
     if (errors) {
-        res.status(400).send(errors);
+        return res.status(400).send(errors);
     }
 
     // sign a user up
@@ -105,7 +105,7 @@ module.exports.signupPost = function (req, res, next) {
  * GET /users/:token/verify
  * Confirm sign up email address
  */
-module.exports.verifySignUp = function (req, res, next) {
+module.exports.verifySignUpGet = function (req, res, next) {
     let user = new UserAccounts({id: req.user.id});
     if (req.user.email_verified) {
         res.send({msg: 'Your account is already verified.'});
