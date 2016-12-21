@@ -1,15 +1,22 @@
 const routes = require('express').Router();
 
 // Controllers
-const userController = require('../controllers/user');
+const userController    = require('../controllers/user');
 const contactController = require('../controllers/contact');
+import {
+    acceptInviteGet,
+    allInvitesGet,
+    newInvitePost,
+    inviteDelete,
+    updateInvitePut
+} from '../controllers/invites';
 
 routes.post('/contact', contactController.contactPost);
 
 routes.put('/account', userController.ensureAuthenticated, userController.accountPut);
 routes.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 
-routes.get('/users/:token/verify', userController.ensureAuthenticated, userController.verifySignUp);
+routes.get('/users/:token/verify', userController.ensureAuthenticated, userController.verifySignUpGet);
 
 routes.post('/signup', userController.signupPost);
 
@@ -23,5 +30,15 @@ routes.get('/unlink/:provider', userController.ensureAuthenticated, userControll
 
 routes.post('/auth/facebook', userController.authFacebook);
 routes.get('/auth/facebook/callback', userController.authFacebookCallback);
+
+/**
+ * Invite Routes
+ */
+
+routes.get('/invites', allInvitesGet); // get all invites
+routes.post('/invites', newInvitePost); // create an invite
+// routes.get('/invites/:id/accept', acceptInviteGet); // TODO: accept an invite and then be able to sign up
+// routes.put('/invites/:id', updateInvitePut); // TODO: update an invite (resend, change email, etc)
+routes.delete('/invites/:id', inviteDelete); // delete an invite
 
 module.exports = routes;
