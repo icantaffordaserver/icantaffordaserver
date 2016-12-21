@@ -115,5 +115,14 @@ let UserProfiles = bookshelf.Model.extend({
     }
 });
 
+let Invites = bookshelf.Model.extend({
+    tableName: 'invites',
+    idAttribute: 'id',
+    hasTimestamps: true,
+
+
+});
+
 module.exports.UserAccounts = UserAccounts;
 module.exports.UserProfiles = UserProfiles;
+module.exports.Invites      = Invites;
