@@ -6,7 +6,7 @@
     "build": "webpack --display-error-details",
     "deploy": "npm test && git push heroku master",
     "postinstall": "npm run build",
-    "start": "node index.js",
+    "start": "babel-node index.js",
     "test": "npm run test:client && npm run test:server",
     "test:client": "mocha test/client --recursive --compilers js:babel-register",
     "test:server": "mocha test/server --recursive --compilers js:babel-register"
@@ -56,6 +56,7 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-plugin-rewire": "1.0.0-rc-3",
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",

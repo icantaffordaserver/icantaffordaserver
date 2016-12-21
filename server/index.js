@@ -54,7 +54,6 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(compression());
 app.use(sass({src: path.join(__dirname, '..', 'public'), dest: path.join(__dirname, '..', 'public')}));
-app.use(logger('dev')); // use the 'dev' morgan configuration for logging HTTP requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator()); // for asserting and checking submission data
@@ -84,7 +83,9 @@ app.use(function (req, res, next) {
     }
 });
 
+// Configure middleware for development environment
 if (app.get('env') === 'development') {
+    app.use(logger('dev')); // use the 'dev' morgan configuration for logging HTTP requests
     app.use(require('webpack-dev-middleware')(compiler, {
         noInfo: true,
         publicPath: config.output.publicPath
