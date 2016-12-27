@@ -2,8 +2,6 @@
  * Created by alexandermann on 2016-12-15.
  */
 
-process.env.NODE_ENV = 'test';
-
 const chai           = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const knex           = require('knex')(require('../../knexfile'));
