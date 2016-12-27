@@ -49,6 +49,10 @@ function sendEmail(template, mergeObj) {
                     {
                         name: 'RESET_URL',
                         content: mergeObj.url
+                    },
+                    {
+                        name: 'INVITE_URL',
+                        content: mergeObj.url
                     }
                 ]
             }]
