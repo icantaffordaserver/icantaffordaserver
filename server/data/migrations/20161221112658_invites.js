@@ -5,10 +5,12 @@ exports.up = function (knex, Promise) {
             table.string('email').unique();
             table.string('first_name', 100);
             table.string('last_name', 100);
-            table.string('sent_by', 100); // TODO: this should be a foreign key pointing to admin's id
             table.string('invite_token');
+            table.uuid('sent_by_user_account_id');
+            table.foreign('sent_by_user_account_id').references('user_accounts.id');
             table.boolean('accepted').defaultTo(false);
-            table.timestamps();
+            table.timestamp('created_at').defaultTo(knex.fn.now());
+            table.timestamp('updated_at').defaultTo(knex.fn.now());
         })
     ]);
 };

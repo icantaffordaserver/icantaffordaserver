@@ -10,7 +10,8 @@ exports.up = function (knex, Promise) {
             table.string('state_province', 100);
             table.string('country', 100);
             table.boolean('typeform_profile_complete');
-            table.timestamps();
+            table.timestamp('created_at').defaultTo(knex.fn.now());
+            table.timestamp('updated_at').defaultTo(knex.fn.now());
         })
     ]);
 };

@@ -15,7 +15,8 @@ exports.up = function (knex, Promise) {
             table.string('twitter');
             table.string('google');
             table.string('vk');
-            table.timestamps();
+            table.timestamp('created_at').defaultTo(knex.fn.now());
+            table.timestamp('updated_at').defaultTo(knex.fn.now());
         })
     ]);
 };
