@@ -17,7 +17,7 @@ import request from 'request';
 import sass from 'node-sass-middleware';
 import webpack from 'webpack';
 import remoteDev from 'remotedev-server';
-import config from '../webpack.config';
+import config from '../webpack.config.babel';
 
 // Load environment variables from .env file
 dotenv.load();
