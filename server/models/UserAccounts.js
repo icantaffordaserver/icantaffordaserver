@@ -13,7 +13,19 @@ let UserAccounts = bookshelf.Model.extend({
 
         // for all relations, make sure to RETURN
         profile: function () {
-            return this.hasOne(UserProfiles, 'user_account_id')
+            return this.hasOne(UserProfiles, 'user_account_id');
+        },
+
+        invites: function () {
+            return this.hasMany(Invites, 'sent_by_user_account_id');
+        },
+
+        connections: function () {
+            return this.belongsToMany(Connections, 'users_connections', 'user_account_id', 'connection_id');
+        },
+
+        connection_progress: function () {
+            return this.hasMany(ConnectionProgress, 'user_account_id');
         },
 
         // this function is called when the object fires the event 'saving' and it checks if an attribute
@@ -23,7 +35,7 @@ let UserAccounts = bookshelf.Model.extend({
         // is required to be saved...
         hashPassword: function (model, attrs, options) {
             // attrs are attributes that will be inserted or updated, if present
-            var password = options.patch ? attrs.password_hash : model.get('password_hash');
+            let password = options.patch ? attrs.password_hash : model.get('password_hash');
             if (!password) {
                 return;
             }
@@ -111,7 +123,7 @@ let UserProfiles = bookshelf.Model.extend({
     hasTimestamps: true,
 
     account: function () {
-        return this.belongsTo(UserAccounts, 'id');
+        return this.belongsTo(UserAccounts, 'user_account_id');
     }
 });
 
@@ -120,9 +132,45 @@ let Invites = bookshelf.Model.extend({
     idAttribute: 'id',
     hasTimestamps: true,
 
+    account: function () {
+        return this.belongsTo(UserAccounts, 'sent_by_user_account_id'); // second argument, column of the foreign key, in this model
+    }
 
 });
 
-module.exports.UserAccounts = UserAccounts;
-module.exports.UserProfiles = UserProfiles;
-module.exports.Invites      = Invites;
+let Connections = bookshelf.Model.extend({
+    tableName: 'connections',
+    idAttribute: 'id',
+    hasTimestamps: true,
+
+    accounts: function () {
+        return this.belongsToMany(UserAccounts, 'users_connections', 'connection_id', 'user_account_id')
+    },
+
+    progress: function () {
+        return this.hasMany(ConnectionProgress, 'connection_id')
+    }
+
+
+});
+
+let ConnectionProgress = bookshelf.Model.extend({
+    tableName: 'connection_progress',
+    idAttribute: 'id',
+
+    account: function () {
+        return this.belongsTo(UserAccounts, 'user_account_id')
+    },
+
+    connection: function () {
+        return this.belongsTo(Connections, 'connection_id');
+    }
+
+
+});
+
+module.exports.UserAccounts       = UserAccounts;
+module.exports.UserProfiles       = UserProfiles;
+module.exports.Invites            = Invites;
+module.exports.Connections        = Connections;
+module.exports.ConnectionProgress = ConnectionProgress;
