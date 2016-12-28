@@ -116,7 +116,17 @@ module.exports.verifySignUpGet = function (req, res, next) {
     } else {
         res.send({msg: 'We could not verify your account at this time, please make sure you are logged in and try again.'});
     }
+};
 
+/**
+ * GET /users
+ * Get all signed up users
+ */
+module.exports.allUsersGet = function (req, res, next) {
+    UserAccounts.fetchAll({withRelated: 'profile'})
+        .then(users => {
+            res.send(users.toJSON());
+        });
 };
 
 /**

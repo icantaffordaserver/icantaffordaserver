@@ -23,6 +23,7 @@ routes.post('/contact', contactController.contactPost);
 routes.put('/account', userController.ensureAuthenticated, userController.accountPut);
 routes.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 
+routes.get('/users', userController.allUsersGet);
 routes.get('/users/:token/verify', userController.ensureAuthenticated, userController.verifySignUpGet);
 
 routes.post('/signup', userController.signupPost);
