@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink, Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth';
 
@@ -7,6 +7,10 @@ class Header extends React.Component {
   handleLogout(event) {
     event.preventDefault();
     this.props.dispatch(logout());
+  }
+
+  handlePanelChange(event) {
+    browserHistory.push(event.target.value);
   }
 
   render() {
@@ -46,6 +50,15 @@ class Header extends React.Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
+              <li>
+                <div className="navbar-form">
+                  <div className="form-group">
+                    <select className="form-control" style={{height: '35px', padding: '0'}} onChange={this.handlePanelChange.bind(this)}>
+                      <option value="/dashboard">Dashboard</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
               <li><Link to="/contact" activeStyle={active}>Contact</Link></li>
             </ul>

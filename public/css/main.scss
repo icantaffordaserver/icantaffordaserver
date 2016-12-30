@@ -250,3 +250,34 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+
+// Custom
+// -------------------------
+
+.brand-success {
+  color: $brand-success;
+}
+
+.brand-danger {
+  color: $brand-danger;
+}
+
+.valign {
+  vertical-align: middle;
+}
+
+.panel {
+  > .panel-heading {
+    text-align: center;
+  }
+
+  table {
+    > tbody {
+      > tr {
+        > td {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

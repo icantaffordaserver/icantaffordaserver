@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
+import Dashboard from './components/Dashboard/Dashboard';
 import Contact from './components/Contact';
 import NotFound from './components/NotFound';
 import Login from './components/Account/Login';
@@ -29,6 +30,7 @@ export default function getRoutes(store) {
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Home} onLeave={clearMessages}/>
+      <Route path="/dashboard" component={Dashboard} onLeave={clearMessages}/>
       <Route path="/contact" component={Contact} onLeave={clearMessages}/>
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>

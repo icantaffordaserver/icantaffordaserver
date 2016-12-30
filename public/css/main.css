@@ -5973,3 +5973,18 @@ textarea {
   border-radius: 2px;
   letter-spacing: 0.2em;
   text-transform: uppercase; }
+
+.brand-success {
+  color: #29b35b; }
+
+.brand-danger {
+  color: #b61b17; }
+
+.valign {
+  vertical-align: middle; }
+
+.panel > .panel-heading {
+  text-align: center; }
+
+.panel table > tbody > tr > td {
+  vertical-align: middle; }
