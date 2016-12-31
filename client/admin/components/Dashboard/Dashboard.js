@@ -1,5 +1,6 @@
 import React from 'react';
 import InvitesSent from './InvitesSent';
+import SendInvite from './SendInvite';
 
 class Dashboard extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class Dashboard extends React.Component {
         </div>
         <div className="col-sm-6">
           <div>
+            <SendInvite />
           </div>
           <div>
             <InvitesSent />
