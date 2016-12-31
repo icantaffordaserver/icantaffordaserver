@@ -12,8 +12,6 @@ class InvitesSent extends React.Component {
   }
 
   render() {
-    let invites = Array.isArray(this.props.invites) ? this.props.invites : [this.props.invites];
-
     return (
       <div className="panel panel-default">
         <div className="panel-heading"><h3>Invites Sent</h3></div>
@@ -26,7 +24,7 @@ class InvitesSent extends React.Component {
               <th>Accepted?</th>
               <th>Resend</th>
             </tr>
-            {invites.map((invite) => {
+            {this.props.invites.map((invite) => {
               return (
                 <tr key={invite.id}>
                   <td>{invite.created_at}</td>
