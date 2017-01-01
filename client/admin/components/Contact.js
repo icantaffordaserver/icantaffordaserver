@@ -6,7 +6,7 @@ import Messages from './Messages';
 class Contact extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', message: '' };
+    this.state = { firstName: '', lastName: '', email: '', message: '' };
   }
 
   handleChange(event) {
@@ -15,7 +15,7 @@ class Contact extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(submitContactForm(this.state.name, this.state.email, this.state.message));
+    this.props.dispatch(submitContactForm(this.state.firstName, this.state.lastName, this.state.email, this.state.message));
   }
 
   render() {
@@ -29,9 +29,15 @@ class Contact extends React.Component {
             <Messages messages={this.props.messages}/>
             <form onSubmit={this.handleSubmit.bind(this)} className="form-horizontal">
               <div className="form-group">
-                <label htmlFor="name" className="col-sm-2">Name</label>
+                <label htmlFor="firstName" className="col-sm-2">First Name</label>
                 <div className="col-sm-8">
-                  <input type="text" name="name" id="name" className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)} autoFocus/>
+                  <input type="text" name="firstName" id="firstName" className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)} autoFocus/>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName" className="col-sm-2">Last Name</label>
+                <div className="col-sm-8">
+                  <input type="text" name="lastName" id="lastName" className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)} autoFocus/>
                 </div>
               </div>
               <div className="form-group">
