@@ -20,7 +20,8 @@ exports.contactGet = function(req, res) {
  * POST /contact
  */
 exports.contactPost = function(req, res) {
-  req.assert('name', 'Name cannot be blank').notEmpty();
+  req.assert('first_name', 'First name cannot be blank').notEmpty();
+  req.assert('last_name', 'Last name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('message', 'Message cannot be blank').notEmpty();
@@ -33,7 +34,7 @@ exports.contactPost = function(req, res) {
   }
 
   var mailOptions = {
-    from: req.body.name + ' ' + '<'+ req.body.email + '>',
+    from: req.body.first_name + ' ' + req.body.last_name + ' ' + '<'+ req.body.email + '>',
     to: 'your@email.com',
     subject: '✔ Contact Form | Mega Boilerplate',
     text: req.body.message

@@ -1,4 +1,4 @@
-export function submitContactForm(name, email, message) {
+export function submitContactForm(firstName, lastName, email, message) {
   return (dispatch) => {
     dispatch({
       type: 'CLEAR_MESSAGES'
@@ -7,7 +7,8 @@ export function submitContactForm(name, email, message) {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: name,
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         message: message
       })
