@@ -1,11 +1,11 @@
 exports.seed = function (knex, Promise) {
-    let table = 'user_profiles';
+    const tableName = 'user_profiles';
     return Promise.join(
         // Deletes ALL existing entries
-        knex(table).del(),
+        knex(tableName).del(),
 
         // Inserts seed entries
-        knex(table).insert({
+        knex(tableName).insert({
             user_account_id: '48244142-7761-4982-A808-4B27E8BD1BD7',
             first_name: 'Alexander',
             last_name: 'Mann',
@@ -14,7 +14,7 @@ exports.seed = function (knex, Promise) {
             state_province: 'Ontario',
             country: 'Canada'
         }),
-        knex(table).insert({
+        knex(tableName).insert({
             user_account_id: '682FDEE0-78D4-42FC-9E56-B865E519912A',
             first_name: 'Blake',
             last_name: 'Fletcher',
@@ -23,7 +23,7 @@ exports.seed = function (knex, Promise) {
             state_province: 'British Columbia',
             country: 'Canada'
         }),
-        knex(table).insert({
+        knex(tableName).insert({
             user_account_id: 'ACB91CC4-BC20-4DA0-ADCC-626A3AEE64FB',
             first_name: 'Daniel',
             last_name: 'Thompson',
