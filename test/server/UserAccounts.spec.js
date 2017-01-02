@@ -21,15 +21,20 @@ describe('UserAccounts model testing...', () => {
             .then(function () {
                 return knex.migrate.latest();
             });
+            // .then( ()=> {
+            //     return knex.seed.run();
+            // })
     });
 
     // return database to empty at the end of the testing
-    // after(function () {
-    //     return knex.migrate.rollback();
-    // });
+    after(function () {
+        return knex.migrate.rollback();
+    });
 
-    it('should not have any models', () => {
-        return UserAccounts.forge().fetch().should.eventually.equal(null); //using chai-as-promised
+    it('should not have any models', async () => {
+        // return UserAccounts.forge().fetch().should.eventually.equal(null); //using chai-as-promised
+        let getAccounts = await UserAccounts.forge().fetch();
+        expect(getAccounts).to.equal(null);
     });
 
     it('should save a model to the database', () => {
