@@ -4,7 +4,7 @@ const routes = require('express').Router();
 const userController    = require('../controllers/user');
 const contactController = require('../controllers/contact');
 import {
-    acceptInviteGet,
+    resendInviteGet,
     allInvitesGet,
     newInvitePost,
     inviteDelete,
@@ -28,6 +28,9 @@ routes.get('/users/:token/verify', userController.ensureAuthenticated, userContr
 
 routes.post('/signup', userController.signupPost);
 
+// Accept an invite sent
+routes.post('/signup/invite/:inviteId', userController.inviteSignUpPost);
+
 routes.post('/login', userController.loginPost);
 
 routes.post('/forgot', userController.forgotPost);
@@ -44,9 +47,9 @@ routes.get('/auth/facebook/callback', userController.authFacebookCallback);
  */
 
 routes.get('/invites', allInvitesGet); // get all invites
+routes.get('/invites/:inviteId/resend', resendInviteGet); // resend an invite
 routes.post('/invites', newInvitePost); // create an invite
-// routes.get('/invites/:id/accept', acceptInviteGet); // TODO: accept an invite and then be able to sign up
-routes.put('/invites/:id', updateInvitePut); // TODO: update an invite (resend, change email, etc)
+routes.put('/invites/:id', updateInvitePut); // update an email, first name, last name, or sent by user id column, can also resend the invite
 routes.delete('/invites/:id', inviteDelete); // delete an invite
 
 /**

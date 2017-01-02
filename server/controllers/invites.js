@@ -4,6 +4,17 @@
 const Invites = require('../models/UserAccounts').Invites;
 const Mailer  = require('../mail/Mailer');
 
+// helpers
+async function resendInvite(inviteId, host) {
+    // get the id in the params and resend the email
+        let invite = await new Invites({id: inviteId}).fetch();
+        return await Mailer.sendTemplate('invite-user', {
+            name: invite.toJSON().first_name,
+            email: invite.toJSON().email,
+            url: `http://${host}/signup/invite/${invite.toJSON().id}` // TODO: design the signup url
+        });
+}
+
 /**
  * POST /invites
  */
@@ -25,19 +36,24 @@ export function newInvitePost(req, res, next) {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         sent_by_user_account_id: req.body.sent_by_user_account_id
-    }).save(null, {method: 'insert'}).then(invite => {
-        res.status(201).send({msg: 'Invitation sent successfully.'});
-        Mailer.sendTemplate('invite-user', {
-            name: req.body.first_name,
-            email: req.body.email,
-            url: 'www.google.com' // TODO: design the signup url
+    }).save(null, {method: 'insert'})
+        .then(invite => {
+            res.status(201).send({msg: 'Invitation sent successfully.'});
+            return Mailer.sendTemplate('invite-user', {
+                name: req.body.first_name,
+                email: req.body.email,
+                url: `http://${req.headers.host}/signup/invite/${invite.toJSON().id}` // TODO: design the signup url
+            });
+        })
+        .then(email => {
+            console.log(email);
+        })
+        .catch(function (err) {
+            console.log(err);
+            if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
+                res.status(400).send({msg: 'The email address you have entered has already been sent an invite.'});
+            }
         });
-    }).catch(function (err) {
-        console.log(err);
-        if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
-            res.status(400).send({msg: 'The email address you have entered has already been sent an invite.'});
-        }
-    });
 }
 
 /**
@@ -53,66 +69,44 @@ export function allInvitesGet(req, res, next) {
 }
 
 /**
- * GET /invites/:id/accept
- * TODO: See below
- * ^ Potentially change this:
- * GET /invites/:id/signUp check to make sure the request is authorized
- * POST /invites/:id/signUp send the data to sign up
- * OR
- * POST /signup/:id and we check the email to make sure that it matches up with the invitation id,
- * and that it has not been accepted yet
- */
-export function acceptInviteGet(req, res, next) {
-    // should sign a user up
-}
-
-/**
  * PUT /invites/:id
  *
  */
-export function updateInvitePut(req, res, next) {
+export async function updateInvitePut(req, res, next) {
     // update email, first_name, last_name, sent_by, or resend email if resend: true
     // check here if resend === true so that we regenerate a new token? If using UUID
     // this doesn't matter
-    new Invites({id: req.params.id}).save({
-        email: req.body.email,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        sent_by_user_account_id: req.body.sent_by_user_account_id
-    }, {patch: true})
-        .then(invite => {
+    try {
+        await new Invites({id: req.params.id}).save({
+            email: req.body.email,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            sent_by_user_account_id: req.body.sent_by_user_account_id
+        }, {patch: true});
+        if (req.body.resend) {
+            await resendInvite(req.params.id, req.headers.host);
             res.status(200).send({msg: 'Invitation sent successfully.'});
-            if (req.body.resend) {
-                Mailer.sendTemplate('invite-user', {
-                    name: invite.toJSON().first_name,
-                    email: invite.toJSON().email,
-                    url: 'www.google.com' // TODO: design the signup url
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.status(400).send({msg: 'Error occurred while sending the invitation.'});
-        });
+        } else {
+            res.status(200).send({msg: 'Invitation info updated successfully'});
+        }
+    } catch(err) {
+        console.log(err);
+        res.status(400).send({msg: 'Error occurred while sending the invitation.'});
+    }
 }
 
 /**
  * GET /invites/:id/resend
  *
  */
-export function resendInviteGet(req, res, next) {
-    // get the id in the params and resend the email
-    new Invites({id: req.params.id}).fetch().then(invite => {
+export async function resendInviteGet(req, res, next) {
+    try {
+        await resendInvite(req.params.inviteId, req.headers.host);
         res.status(200).send({msg: 'Invitation sent successfully.'});
-        Mailer.sendTemplate('invite-user', {
-            name: invite.toJSON().first_name,
-            email: invite.toJSON().email,
-            url: 'www.google.com' // TODO: design the signup url
-        });
-    }).catch(function (err) {
+    } catch (err) {
         console.log(err);
         res.status(400).send({msg: 'Error occurred while sending the invitation.'});
-    });
+    }
 }
 
 /**
