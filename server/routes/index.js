@@ -71,4 +71,4 @@ routes.post('/connections/progress');
 routes.put('/connections/progress');
 routes.delete('/connections/progress');
 
-module.exports = routes;
+export default routes;
