@@ -138,9 +138,10 @@ export async function inviteSignUpPost(req, res, next) {
     // sign user up
     try {
         let userAccount = await UserAccounts.signUpUser(req.body.name, req.body.email, req.body.password);
-        // set the invite to accepted
-        await invite.save({accepted: true}, {patch: true});
         let user = userAccount.toJSON();
+
+        // set the invite to accepted, and store the new user account id
+        await invite.save({user_account_id: user.id, accepted: true}, {patch: true});
         res.send({token: generateToken(user), user: user});
         // send verification email
         const mergeObj = {

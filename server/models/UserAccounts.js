@@ -149,8 +149,11 @@ let Connections = bookshelf.Model.extend({
 
     progress: function () {
         return this.hasMany(ConnectionProgress, 'connection_id')
-    }
+    },
 
+    matchedBy: function () {
+        return this.belongsTo(UserAccounts, 'matched_by')
+    }
 
 });
 

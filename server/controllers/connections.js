@@ -9,7 +9,7 @@ import {Connections} from '../models/UserAccounts'
  */
 export async function allConnectionsGet(req, res, next) {
     try {
-        let allConnections = await Connections.fetchAll({withRelated: 'accounts.profile1'});
+        let allConnections = await Connections.fetchAll({withRelated: ['accounts.profile', 'matchedBy.profile']});
         res.send(allConnections.toJSON());
     } catch (err) {
         console.log(err);
