@@ -61,7 +61,7 @@ export function newInvitePost(req, res, next) {
  */
 export function allInvitesGet(req, res, next) {
 
-    Invites.forge().fetch({withRelated: 'account.profile'}).then(invites => {
+    Invites.forge().fetchAll({withRelated: 'account.profile'}).then(invites => {
         res.send(invites.toJSON());
     }).catch(err => {
         console.log(err);
