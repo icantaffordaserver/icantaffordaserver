@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 
 // Require this here for the case that we just run the migration scripts
-dotenv.load();
+dotenv.config();
 
 module.exports = {
     client: 'pg',

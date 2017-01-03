@@ -7,15 +7,14 @@ import {Connections} from '../models/UserAccounts'
  * GET /connections
  *
  */
-export function allConnectionsGet(req, res, next) {
-    Connections.fetchAll({withRelated: 'accounts.profile'})
-        .then(result => {
-            res.send(result.toJSON());
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).send({msg: 'An error occurred while fetching all connections'});
-        });
+export async function allConnectionsGet(req, res, next) {
+    try {
+        let allConnections = await Connections.fetchAll({withRelated: ['accounts.profile', 'matchedBy.profile']});
+        res.send(allConnections.toJSON());
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({msg: 'An error occurred while fetching all connections'});
+    }
 }
 
 /**
@@ -59,6 +58,7 @@ export function newConnectionPost(req, res, next) {
  *
  * Could be changing a user, updating connection status
  */
+// TODO: finish update connection PUT request
 export function updateConnectionPut(req, res, next) {
     res.send({msg: 'This is not done yet..'});
 }
@@ -67,7 +67,7 @@ export function updateConnectionPut(req, res, next) {
  * DELETE /connections/:id
  *
  */
-export function connectionDelete(req, res, next) {
+export async function connectionDelete(req, res, next) {
     new Connections({id: req.params.id}).destroy({require: true})
         .then((connection) => {
             // console.log(connection);

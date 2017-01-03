@@ -1,12 +1,14 @@
-const async        = require('async');
-const crypto       = require('crypto');
-const nodemailer   = require('nodemailer');
-const jwt          = require('jsonwebtoken');
-const moment       = require('moment');
-const request      = require('request');
-const qs           = require('querystring');
-const UserAccounts = require('../models/UserAccounts').UserAccounts;
-const Mailer       = require('../mail/Mailer');
+const async      = require('async');
+const crypto     = require('crypto');
+const nodemailer = require('nodemailer');
+const jwt        = require('jsonwebtoken');
+const moment     = require('moment');
+const request    = require('request');
+const qs         = require('querystring');
+const Mailer     = require('../mail/Mailer');
+
+// DB Models
+import {UserAccounts, Invites} from '../models/UserAccounts';
 
 // if unfamiliar about JWT please read here: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-08#section-4
 function generateToken(user) {
@@ -102,6 +104,62 @@ module.exports.signupPost = function (req, res, next) {
 };
 
 /**
+ * POST /signup/invite/:inviteId
+ *
+ * User sign up based on an invite sent from the admin panel
+ */
+export async function inviteSignUpPost(req, res, next) {
+    req.assert('name', 'Name cannot be blank').notEmpty();
+    req.assert('email', 'Email is not valid').isEmail();
+    req.assert('email', 'Email cannot be blank').notEmpty();
+    req.assert('password', 'Password must be at least 4 characters long').len(4);
+    req.sanitize('email').normalizeEmail({remove_dots: false});
+
+    let errors = req.validationErrors();
+
+    if (errors) {
+        return res.status(400).send(errors);
+    }
+
+    // check invite exists and has not been accepted
+    let invite = await new Invites({id: req.params.inviteId}).fetch();
+    if (!invite) {
+        return res.status(400).send({msg: `Your sign up cannot be accepted at this time.`})
+    } else if (invite.toJSON().accepted) {
+        return res.status(400).send({msg: `This invite has already been accepted.`});
+    }
+
+    // check invite email matches user email
+    let userEmail = req.body.email;
+    if (invite.toJSON().email !== userEmail) {
+        return res.status(400).send({msg: `Invite code does not match the email specified.`})
+    }
+
+    // sign user up
+    try {
+        let userAccount = await UserAccounts.signUpUser(req.body.name, req.body.email, req.body.password);
+        let user = userAccount.toJSON();
+
+        // set the invite to accepted, and store the new user account id
+        await invite.save({user_account_id: user.id, accepted: true}, {patch: true});
+        res.send({token: generateToken(user), user: user});
+        // send verification email
+        const mergeObj = {
+            name: user.profile.first_name,
+            email: user.email,
+            url: `http://${req.headers.host}/users/${user.email_verified_token}/verify`
+        };
+        let sentEmail = await Mailer.sendTemplate('confirm-email', mergeObj);
+        console.log(sentEmail);
+    } catch (err) {
+        console.log(err);
+        if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
+            res.status(400).send({msg: 'The email address you have entered is already associated with another account.'});
+        }
+    }
+}
+
+/**
  * GET /users/:token/verify
  * Confirm sign up email address
  */
@@ -143,13 +201,13 @@ module.exports.accountPut = function (req, res, next) {
         req.sanitize('email').normalizeEmail({remove_dots: false});
     }
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
 
     if (errors) {
         return res.status(400).send(errors);
     }
 
-    var user = new UserAccounts({id: req.user.id});
+    let user = new UserAccounts({id: req.user.id});
     if ('password' in req.body) {
         user.save({password_hash: req.body.password}, {patch: true});
     } else {
@@ -253,10 +311,10 @@ module.exports.forgotPost = function (req, res, next) {
                 });
         },
         function (token, user, done) {
-            let name = user.toJSON().profile.first_name;
-            let email = user.toJSON().email;
+            let name     = user.toJSON().profile.first_name;
+            let email    = user.toJSON().email;
             let resetUrl = `http://${req.headers.host}/reset/${token}`;
-            Mailer.sendTemplate('forgot-password', {name: name, email: email, url: resetUrl}).then(result=>{
+            Mailer.sendTemplate('forgot-password', {name: name, email: email, url: resetUrl}).then(result => {
                 res.send({msg: 'An email has been sent to ' + email + ' with further instructions.'});
                 done();
             });
@@ -295,7 +353,10 @@ module.exports.resetPost = function (req, res, next) {
                 });
         },
         function (user, done) {
-            Mailer.sendTemplate('password-changed', {name: user.toJSON().profile.first_name, email: user.toJSON().email}).then(result=>{
+            Mailer.sendTemplate('password-changed', {
+                name: user.toJSON().profile.first_name,
+                email: user.toJSON().email
+            }).then(result => {
                 res.send({msg: 'Your password has been changed successfully.'});
                 done();
             });

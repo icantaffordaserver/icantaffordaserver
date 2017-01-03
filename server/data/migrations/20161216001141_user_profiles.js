@@ -2,7 +2,7 @@ exports.up = function (knex, Promise) {
     return Promise.all([
         knex.schema.createTable('user_profiles', function (table) {
             table.uuid('user_account_id').primary();
-            table.foreign('user_account_id').references('user_accounts.id');
+            table.foreign('user_account_id').references('user_accounts.id').onDelete('CASCADE');
             table.string('first_name', 100);
             table.string('last_name', 100);
             table.string('gender', 50);

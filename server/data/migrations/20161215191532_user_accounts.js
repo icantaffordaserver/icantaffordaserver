@@ -12,9 +12,6 @@ exports.up = function (knex, Promise) {
             table.string('phone_number_verified');
             table.boolean('admin').defaultTo(false);
             table.string('facebook');
-            table.string('twitter');
-            table.string('google');
-            table.string('vk');
             table.timestamp('created_at').defaultTo(knex.fn.now());
             table.timestamp('updated_at').defaultTo(knex.fn.now());
         })
