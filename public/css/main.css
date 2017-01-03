@@ -5988,3 +5988,8 @@ textarea {
 
 .panel table > tbody > tr > td {
   vertical-align: middle; }
+
+.connection-pipeline {
+  font-size: 10px; }
+  .connection-pipeline .btn {
+    font-size: 10px; }

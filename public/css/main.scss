@@ -254,6 +254,8 @@ textarea {
 // Custom
 // -------------------------
 
+$font-size-xs: 10px;
+
 .brand-success {
   color: $brand-success;
 }
@@ -279,5 +281,13 @@ textarea {
         }
       }
     }
+  }
+}
+
+.connection-pipeline {
+  font-size: $font-size-xs;
+
+  .btn {
+    font-size: $font-size-xs;
   }
 }
