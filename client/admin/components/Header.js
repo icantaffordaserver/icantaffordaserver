@@ -55,6 +55,7 @@ class Header extends React.Component {
                   <div className="form-group">
                     <select className="form-control" style={{height: '35px', padding: '0'}} onChange={this.handlePanelChange.bind(this)}>
                       <option value="/dashboard">Dashboard</option>
+                      <option value="/pipeline">Connection Pipeline</option>
                     </select>
                   </div>
                 </div>
