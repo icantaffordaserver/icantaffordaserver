@@ -1,5 +1,6 @@
 exports.up = function (knex, Promise) {
     return Promise.all([
+        knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'),
         knex.schema.createTable('user_accounts', function (table) {
             table.uuid('id').defaultTo(knex.raw('uuid_generate_v4()')).primary();
             table.string('email').unique();

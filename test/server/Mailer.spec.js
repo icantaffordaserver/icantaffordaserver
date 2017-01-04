@@ -1,6 +1,8 @@
 /**
  * Created by alexandermann on 2016-12-17.
  */
+process.env.NODE_ENV = 'test';
+
 require('dotenv').load(); // load the mandrill api key
 
 const getTemplates = require('../../server/mail/Mailer').getTemplates;
