@@ -3,6 +3,7 @@ import { IndexRoute, Route } from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard/Dashboard';
+import UserMatching from './components/UserMatching/UserMatching';
 import ConnectionPipeline from './components/ConnectionPipeline/ConnectionPipeline';
 import Contact from './components/Contact';
 import NotFound from './components/NotFound';
@@ -32,6 +33,7 @@ export default function getRoutes(store) {
     <Route path="/" component={App}>
       <IndexRoute component={Home} onLeave={clearMessages}/>
       <Route path="/dashboard" component={Dashboard} onLeave={clearMessages}/>
+      <Route path="/matching" component={UserMatching} onLeave={clearMessages}/>
       <Route path="/pipeline" component={ConnectionPipeline} onLeave={clearMessages}/>
       <Route path="/contact" component={Contact} onLeave={clearMessages}/>
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>

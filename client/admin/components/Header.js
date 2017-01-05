@@ -1,6 +1,6 @@
 import React from 'react';
 import { IndexLink, Link, browserHistory } from 'react-router';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 
 class Header extends React.Component {
@@ -50,16 +50,20 @@ class Header extends React.Component {
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li>
-                <div className="navbar-form">
-                  <div className="form-group">
-                    <select className="form-control" style={{height: '35px', padding: '0'}} onChange={this.handlePanelChange.bind(this)}>
-                      <option value="/dashboard">Dashboard</option>
-                      <option value="/pipeline">Connection Pipeline</option>
-                    </select>
+              {this.props.token &&
+                <li>
+                  <div className="navbar-form">
+                    <div className="form-group">
+                      <select className="form-control" style={{height: '35px', padding: '0'}} onChange={this.handlePanelChange.bind(this)} selected="selected">
+                        <option value="">Select a Panel</option>
+                        <option value="/dashboard">Dashboard</option>
+                        <option value="/matching">User Matching</option>
+                        <option value="/pipeline">Connection Pipeline</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              }
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
               <li><Link to="/contact" activeStyle={active}>Contact</Link></li>
             </ul>
