@@ -7,7 +7,7 @@ class MatchedUsersRow extends React.Component {
       <tr>
         <td>
           <div>Matched on: {moment(this.props.data.created_at).format('MMM Do, YYYY')}</div>
-          <div>Matched by: N/A</div>
+          <div>Matched by: {this.props.data.matchedBy.profile.first_name}</div>
         </td>
         <td>
           <div>
