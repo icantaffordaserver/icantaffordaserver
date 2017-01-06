@@ -7,18 +7,18 @@ import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
     const logger = createLogger();
-
     const store = createStore(
         rootReducer,
         initialState,
         compose(
             applyMiddleware(thunk, promise, logger),
+            (process.env.NODE_ENV === 'development') ?
             devTools({
                 name: 'Shift Web Application',
                 hostname: 'localhost',
                 port: '8000',
                 realtime: true
-            })
+            }) : null
         )
     );
 
