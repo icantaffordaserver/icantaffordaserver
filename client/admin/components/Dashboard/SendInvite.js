@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { submitInviteForm } from '../../actions/invites';
-import Messages from '../Messages';
 
 class SendInvite extends React.Component {
   constructor(props) {
@@ -16,10 +15,16 @@ class SendInvite extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.dispatch(submitInviteForm(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.email)
-    );
+      {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email
+      },
+      this.props.auth.user.id,
+      {
+        resend: false
+      }
+    ));
   }
 
   render() {
@@ -30,8 +35,6 @@ class SendInvite extends React.Component {
         </div>
         <div className="panel-body">
           <div style={{paddingTop: '20px'}}>
-            <Messages messages={this.props.messages} />
-
             <form onSubmit={this.handleSubmit.bind(this)}>
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
@@ -59,7 +62,7 @@ class SendInvite extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages
+    auth: state.auth
   };
 }
 

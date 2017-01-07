@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchInvites } from '../../actions/invites';
+import { submitInviteForm } from '../../actions/invites';
+import moment from 'moment';
 
 class InvitesSent extends React.Component {
   constructor(props) {
@@ -9,6 +11,22 @@ class InvitesSent extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchInvites());
+  }
+
+  handleSubmit(invite, event) {
+    event.preventDefault();
+    this.props.dispatch(submitInviteForm(
+      {
+        firstName: invite.first_name,
+        lastName: invite.last_name,
+        email: invite.email
+      },
+      this.props.auth.user.id,
+      {
+        resend: true,
+        inviteId: invite.id
+      }
+    ));
   }
 
   render() {
@@ -27,14 +45,14 @@ class InvitesSent extends React.Component {
             {this.props.invites.map((invite) => {
               return (
                 <tr key={invite.id}>
-                  <td>{invite.created_at}</td>
-                  <td>{invite.sent_by_user_account_id}</td>
+                  <td>{moment(invite.created_at).format('MMM Do, YYYY')}</td>
+                  <td>{invite.account.profile.first_name}</td>
                   <td>{invite.email}</td>
                   <td>{invite.accepted ?
                     <i className="material-icons brand-success valign">done</i> :
                     <i className="material-icons brand-danger valign">clear</i>}
                   </td>
-                  <td><button className="btn btn-default">Send</button></td>
+                  <td><button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite)}>Send</button></td>
                 </tr>
               );
             })}
@@ -47,6 +65,7 @@ class InvitesSent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    auth: state.auth,
     invites: state.invites
   };
 };

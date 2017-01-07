@@ -1,15 +1,17 @@
-export function submitInviteForm(firstName, lastName, email) {
+export function submitInviteForm(user, accountId, options) {
   return (dispatch) => {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    return fetch('/invites', {
-      method: 'post',
+    return fetch(options.resend ? '/invites/' + options.inviteId : '/invites', {
+      method: options.resend ? 'put' : 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email
+        first_name: user.firstName,
+        last_name: user.lastName,
+        email: user.email,
+        sent_by_user_account_id: accountId,
+        resend: options.resend
       })
     }).then((response) => {
       if (response.ok) {
