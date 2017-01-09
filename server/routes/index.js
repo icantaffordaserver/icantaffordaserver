@@ -6,6 +6,7 @@ const contactController = require('../controllers/contact');
 import {
     resendInviteGet,
     allInvitesGet,
+    inviteGet,
     newInvitePost,
     inviteDelete,
     updateInvitePut
@@ -24,6 +25,7 @@ routes.put('/account', userController.ensureAuthenticated, userController.accoun
 routes.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 
 routes.get('/users', userController.allUsersGet);
+routes.get('/users/:userId', userController.singleUserGet);
 routes.get('/users/:token/verify', userController.ensureAuthenticated, userController.verifySignUpGet);
 
 routes.post('/signup', userController.signupPost);
@@ -47,6 +49,7 @@ routes.get('/auth/facebook/callback', userController.authFacebookCallback);
  */
 
 routes.get('/invites', allInvitesGet); // get all invites
+routes.get('/invites/:inviteId', inviteGet); // get all invites
 routes.get('/invites/:inviteId/resend', resendInviteGet); // resend an invite
 routes.post('/invites', newInvitePost); // create an invite
 routes.put('/invites/:id', updateInvitePut); // update an email, first name, last name, or sent by user id column, can also resend the invite

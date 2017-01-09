@@ -7,18 +7,65 @@ const Mailer  = require('../mail/Mailer');
 // helpers
 async function resendInvite(inviteId, host) {
     // get the id in the params and resend the email
-        let invite = await new Invites({id: inviteId}).fetch();
-        return await Mailer.sendTemplate('invite-user', {
-            name: invite.toJSON().first_name,
-            email: invite.toJSON().email,
-            url: `http://${host}/signup/invite/${invite.toJSON().id}` // TODO: design the signup url
+    let invite = await new Invites({id: inviteId}).fetch();
+    return await Mailer.sendTemplate('invite-user', {
+        name: invite.toJSON().first_name,
+        email: invite.toJSON().email,
+        url: `http://${host}/signup/invite/${invite.toJSON().id}`
+    });
+}
+
+/**
+ * GET /invites
+ */
+export async function allInvitesGet(req, res, next) {
+    try {
+        let invites = await new Invites().fetchAll({withRelated: 'account.profile'});
+        res.status(200).send({
+            status: 'success',
+            data: invites.toJSON()
         });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+/**
+ * GET /invites/:inviteId
+ */
+export async function inviteGet(req, res, next) {
+    try {
+        let invite = await new Invites({id: req.params.inviteId}).fetch({withRelated: 'account.profile'});
+        res.status(200).send({
+            status: 'success',
+            data: invite.toJSON()
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+/**
+ * GET /invites/:id/resend
+ *
+ */
+export async function resendInviteGet(req, res, next) {
+    try {
+        await resendInvite(req.params.inviteId, req.headers.host);
+        res.status(200).send({
+            status: 'success',
+            msg: 'Invitation sent successfully.'
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({msg: 'Error occurred while sending the invitation.'});
+    }
 }
 
 /**
  * POST /invites
  */
-export function newInvitePost(req, res, next) {
+export async function newInvitePost(req, res, next) {
     req.assert('first_name', 'First name cannot be blank').notEmpty();
     req.assert('last_name', 'Last name cannot be blank').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
@@ -31,41 +78,33 @@ export function newInvitePost(req, res, next) {
         return res.status(400).send(errors);
     }
 
-    new Invites({
-        email: req.body.email,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        sent_by_user_account_id: req.body.sent_by_user_account_id
-    }).save(null, {method: 'insert'})
-        .then(invite => {
-            res.status(201).send({msg: 'Invitation sent successfully.'});
-            return Mailer.sendTemplate('invite-user', {
-                name: req.body.first_name,
-                email: req.body.email,
-                url: `http://${req.headers.host}/signup/invite/${invite.toJSON().id}` // TODO: design the signup url
-            });
-        })
-        .then(email => {
-            console.log(email);
-        })
-        .catch(function (err) {
-            console.log(err);
-            if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
-                res.status(400).send({msg: 'The email address you have entered has already been sent an invite.'});
-            }
+    try {
+        let newInvite = await new Invites({
+            email: req.body.email,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            sent_by_user_account_id: req.body.sent_by_user_account_id
+        }).save(null, {method: 'insert'});
+
+        newInvite = await newInvite.fetch();
+        res.status(201).send({
+            status: 'success',
+            msg: 'Invitation sent successfully.',
+            data: newInvite.toJSON()
         });
-}
+        let email = await Mailer.sendTemplate('invite-user', {
+            name: req.body.first_name,
+            email: req.body.email,
+            url: `http://${req.headers.host}/signup/invite/${newInvite.toJSON().id}`
+        });
+        // console.log(email);
 
-/**
- * GET /invites
- */
-export function allInvitesGet(req, res, next) {
-
-    Invites.forge().fetchAll({withRelated: 'account.profile'}).then(invites => {
-        res.send(invites.toJSON());
-    }).catch(err => {
+    } catch (err) {
         console.log(err);
-    })
+        if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
+            res.status(400).send({msg: 'The email address you have entered has already been sent an invite.'});
+        }
+    }
 }
 
 /**
@@ -77,35 +116,33 @@ export async function updateInvitePut(req, res, next) {
     // check here if resend === true so that we regenerate a new token? If using UUID
     // this doesn't matter
     try {
-        await new Invites({id: req.params.id}).save({
+        let invite = await new Invites({id: req.params.id}).save({
             email: req.body.email,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             sent_by_user_account_id: req.body.sent_by_user_account_id
         }, {patch: true});
+        invite     = await invite.fetch(); // re-fetch from the db to get updated data
         if (req.body.resend) {
             await resendInvite(req.params.id, req.headers.host);
-            res.status(200).send({msg: 'Invitation sent successfully.'});
+            res.status(200).send({
+                status: 'success',
+                msg: 'Invitation sent successfully.',
+                data: invite.toJSON()
+            });
         } else {
-            res.status(200).send({msg: 'Invitation info updated successfully'});
+            res.status(200).send({
+                status: 'success',
+                msg: 'Invitation info updated successfully.',
+                data: invite.toJSON()
+            });
         }
-    } catch(err) {
-        console.log(err);
-        res.status(400).send({msg: 'Error occurred while sending the invitation.'});
-    }
-}
-
-/**
- * GET /invites/:id/resend
- *
- */
-export async function resendInviteGet(req, res, next) {
-    try {
-        await resendInvite(req.params.inviteId, req.headers.host);
-        res.status(200).send({msg: 'Invitation sent successfully.'});
     } catch (err) {
         console.log(err);
-        res.status(400).send({msg: 'Error occurred while sending the invitation.'});
+        res.status(400).send({
+            status: 'error',
+            msg: 'Error occurred while sending the invitation.'
+        });
     }
 }
 
@@ -114,6 +151,9 @@ export async function resendInviteGet(req, res, next) {
  */
 export function inviteDelete(req, res, next) {
     new Invites({id: req.params.id}).destroy().then(function (invite) {
-        res.send({msg: 'Invite deleted successfully.'});
+        res.send({
+            status: 'success',
+            msg: 'Invite deleted successfully.'
+        });
     });
 }

@@ -138,7 +138,7 @@ export async function inviteSignUpPost(req, res, next) {
     // sign user up
     try {
         let userAccount = await UserAccounts.signUpUser(req.body.name, req.body.email, req.body.password);
-        let user = userAccount.toJSON();
+        let user        = userAccount.toJSON();
 
         // set the invite to accepted, and store the new user account id
         await invite.save({user_account_id: user.id, accepted: true}, {patch: true});
@@ -149,7 +149,7 @@ export async function inviteSignUpPost(req, res, next) {
             email: user.email,
             url: `http://${req.headers.host}/users/${user.email_verified_token}/verify`
         };
-        let sentEmail = await Mailer.sendTemplate('confirm-email', mergeObj);
+        let sentEmail  = await Mailer.sendTemplate('confirm-email', mergeObj);
         console.log(sentEmail);
     } catch (err) {
         console.log(err);
@@ -180,11 +180,27 @@ module.exports.verifySignUpGet = function (req, res, next) {
  * GET /users
  * Get all signed up users
  */
-module.exports.allUsersGet = function (req, res, next) {
-    UserAccounts.fetchAll({withRelated: 'profile'})
-        .then(users => {
-            res.send(users.toJSON());
-        });
+module.exports.allUsersGet = async function (req, res, next) {
+    let allUserAccounts = await UserAccounts.fetchAll({withRelated: 'profile'});
+    res.status(200).send({
+        status: 'success',
+        data: allUserAccounts.toJSON()
+    });
+};
+
+/**
+ * GET /users/:userId
+ * Get a user by their uuid
+ * @param req
+ * @param res
+ * @param next
+ */
+module.exports.singleUserGet = async function (req, res, next) {
+    let userAccount = await new UserAccounts({id: req.params.userId}).fetch({withRelated: 'profile'});
+    res.status(200).send({
+        status: 'success',
+        data: userAccount.toJSON()
+    });
 };
 
 /**
