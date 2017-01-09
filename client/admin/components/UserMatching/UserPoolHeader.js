@@ -15,7 +15,7 @@ class UsersPoolHeader extends React.Component {
           <div className="collapse navbar-collapse">
             <form className="navbar-form navbar-right">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
+                <input type="text" className="form-control" placeholder="Search" onChange={this.props.filterUsers}/>
               </div>
             </form>
             <ul className="nav navbar-nav navbar-right">

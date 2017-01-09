@@ -19,7 +19,7 @@ class UserPool extends React.Component {
         <div>
           <UserPoolHeader {...this.props} />
           <ul className="list-group" style={{columnCount: '2'}}>
-            {this.props.users.map((user) => {
+            {this.props.filteredUsers.map((user) => {
               return (
                 <li key={user.id} className="list-group-item clearfix" style={listItemStyle}>
                   <div className="row">
