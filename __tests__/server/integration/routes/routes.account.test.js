@@ -8,6 +8,7 @@ const request  = require('supertest');
 const knexfile = require('../../../../knexfile')[process.env.NODE_ENV];
 const knex     = require('knex')(knexfile);
 
+// TODO: define all account related tests
 describe('Routes: account related functions', () => {
     beforeAll(async() => {
         await knex.migrate.rollback(); // clear db
@@ -32,8 +33,6 @@ describe('Routes: account related functions', () => {
         beforeAll(async() => {
             //make sure seed data, aka invite is there
             response = await request(server).get('/invites'); // make the GET request
-            console.log('Hello');
-            // console.log(response.body);
         });
 
         it('response should have status 200', () => {
@@ -45,15 +44,13 @@ describe('Routes: account related functions', () => {
         });
 
         it('response body should not be empty (ie. it should contain invites)', () => {
-            expect(response.body).not.toHaveLength(0);
+            expect(response.body.data).not.toHaveLength(0);
         });
 
         it('should have properties: id, email, first_name, last_name, accepted', () => {
-            console.log('test last');
-            expect(response.body[0]).toBeDefined();
-            expect(response.body[0].id).toBeDefined();
-            expect(response.body[0].email).toBeDefined();
-            expect(response.body[0].email).toBe('alex@me.com');
+            expect(response.body.data[0]).toBeDefined();
+            expect(response.body.data[0].id).toBeDefined();
+            expect(response.body.data[0].email).toBeDefined();
             // TODO: define all props here
         });
 

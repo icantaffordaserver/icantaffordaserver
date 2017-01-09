@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 // Require this here for the case that we just run the migration scripts
 dotenv.config();
 
+// TODO: include process.env.NODE_ENV on export rather than in files using this module
 module.exports = {
     development: {
         client: 'pg',
