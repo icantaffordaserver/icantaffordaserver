@@ -6,6 +6,7 @@ import { submitMatchedUsers } from '../../actions/connections';
 import UserPool from './UserPool';
 import UserProfile from './UserProfile';
 import Messages from '../Messages';
+import _ from 'lodash';
 
 const MAX_USERS = 2;
 
@@ -13,6 +14,7 @@ class UserMatching extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      filteredUsers: [],
       selectedUsers: [],
       userIndex: 0,
     };
@@ -20,6 +22,21 @@ class UserMatching extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchUsers());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      filteredUsers: nextProps.users
+    });
+  }
+
+  filterUsers(event) {
+    this.setState({
+      filteredUsers: _.filter(this.props.users, (user) => {
+        const re = new RegExp(_.escapeRegExp(event.target.value), 'i');
+        return re.test(user.profile.first_name + ' ' + user.profile.last_name);
+      })
+    });
   }
 
   selectUser(user) {
@@ -62,6 +79,7 @@ class UserMatching extends React.Component {
             <UserPool
               {...this.state}
               users={this.props.users}
+              filterUsers={this.filterUsers.bind(this)}
               setUserIndex={this.setUserIndex.bind(this)}
               selectUser={this.selectUser.bind(this)}
             />
