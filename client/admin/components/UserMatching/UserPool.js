@@ -1,13 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchUsers } from '../../actions/users';
-import classnames from 'classnames';
 import UserPoolHeader from './UserPoolHeader';
-
-const listItemStyle = {
-  display: 'inline-block',
-  width: '100%'
-};
+import UserPoolItem from './UserPoolItem';
 
 class UserPool extends React.Component {
   render() {
@@ -20,29 +13,7 @@ class UserPool extends React.Component {
           <UserPoolHeader {...this.props} />
           <ul className="list-group" style={{columnCount: '2'}}>
             {this.props.filteredUsers.map((user) => {
-              return (
-                <li key={user.id} className="list-group-item clearfix" style={listItemStyle}>
-                  <div className="row">
-                    <div className="media col-sm-12">
-                      <div className="media-left">
-                        <img src={user.gravatar} width="50px" />
-                      </div>
-                      <div className="media-body">
-                        <div>{user.profile.first_name + ' ' + user.profile.last_name}</div>
-                        <span>{user.profile.city + ', ' + user.profile.state_province}</span>
-                      </div>
-                      <div className="media-right">
-                        <button className="btn btn-success"
-                          style={{whiteSpace: 'normal'}}
-                          onClick={this.props.selectUser.bind(null, user)}
-                          disabled={this.props.selectedUsers.filter((o) => user.id === o.id).length !== 0}>
-                          Select User
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
+              return <UserPoolItem key={user.id} {...this.props} user={user} />
             })}
           </ul>
         </div>

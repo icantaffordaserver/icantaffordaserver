@@ -3,6 +3,9 @@ import update from 'immutability-helper';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/users';
 import { submitMatchedUsers } from '../../actions/connections';
+import { setSearchText } from '../../actions/userMatching';
+import { setSelectedUser } from '../../actions/userMatching';
+import { setUserIndex } from '../../actions/userMatching';
 import UserPool from './UserPool';
 import UserProfile from './UserProfile';
 import Messages from '../Messages';
@@ -13,52 +16,31 @@ const MAX_USERS = 2;
 class UserMatching extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      filteredUsers: [],
-      selectedUsers: [],
-      userIndex: 0,
-    };
   }
 
   componentDidMount() {
     this.props.dispatch(fetchUsers());
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      filteredUsers: nextProps.users
-    });
-  }
-
-  filterUsers(event) {
-    this.setState({
-      filteredUsers: _.filter(this.props.users, (user) => {
-        const re = new RegExp(_.escapeRegExp(event.target.value), 'i');
-        return re.test(user.profile.first_name + ' ' + user.profile.last_name);
-      })
-    });
-  }
-
-  selectUser(user) {
-    if (this.state.selectedUsers.length < MAX_USERS) {
-      this.setState({
-        selectedUsers: this.state.selectedUsers.concat(user)
-      });
-    } else {
-      this.setState({
-        selectedUsers: update(this.state.selectedUsers, { [this.state.userIndex]: { $set: user } })
-      });
-    }
-
-    this.setState({
-      userIndex: (this.state.userIndex + 1) % 2
-    });
+  setSearchText(event) {
+    this.props.dispatch(setSearchText(_.escapeRegExp(event.target.value)));
   }
 
   setUserIndex(userIndex) {
-    this.setState({
-      userIndex: userIndex
-    });
+    this.props.dispatch(setUserIndex(userIndex));
+  }
+
+  setSelectedUser(user) {
+    if (this.props.selectedUsers.length < MAX_USERS) {
+      this.props.dispatch(setSelectedUser(this.props.selectedUsers.concat(user)));
+    } else {
+      this.props.dispatch(setSelectedUser(update(this.props.selectedUsers,
+        { [this.props.userIndex]: { $set: user } }
+      )));
+    }
+
+    const userIndex = (this.props.userIndex + 1) % 2;
+    this.props.dispatch(setUserIndex(userIndex));
   }
 
   handleSubmit(event) {
@@ -77,17 +59,16 @@ class UserMatching extends React.Component {
         <div className="row">
           <div className="col-sm-7">
             <UserPool
-              {...this.state}
-              users={this.props.users}
-              filterUsers={this.filterUsers.bind(this)}
+              {...this.props}
+              setSearchText={this.setSearchText.bind(this)}
               setUserIndex={this.setUserIndex.bind(this)}
-              selectUser={this.selectUser.bind(this)}
+              setSelectedUser={this.setSelectedUser.bind(this)}
             />
           </div>
           <div className="col-sm-5">
-            {this.state.selectedUsers.length > 0 &&
+            {this.props.selectedUsers.length > 0 &&
               <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.state.selectedUsers.map((user) => {
+                {this.props.selectedUsers.map((user) => {
                   return <UserProfile key={user.id} user={user} />
                 })}
                 <button className="btn btn-success">Match Users</button>
@@ -100,11 +81,21 @@ class UserMatching extends React.Component {
   }
 }
 
+const filterUsers = (users, searchText) => {
+  return _.filter(users, (user) => {
+    const re = new RegExp(searchText, 'i');
+    return re.test(user.profile.first_name + ' ' + user.profile.last_name);
+  })
+}
+
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
     messages: state.messages,
-    users: state.users
+    users: state.users,
+    filteredUsers: filterUsers(state.users, state.userMatching.searchText),
+    userIndex: state.userMatching.userIndex,
+    selectedUsers: state.userMatching.selectedUsers
   }
 };
 
