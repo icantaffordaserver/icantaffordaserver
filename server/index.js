@@ -31,11 +31,11 @@ import serverRoutes from './routes';
 import routes from '../client/admin/routes';
 import configureStore from '../client/admin/store/configureStore';
 
-var app = express();
+const app = express();
 
-var compiler = webpack(config);
+const compiler = webpack(config);
 
-var hbs = exphbs.create({
+let hbs = exphbs.create({
     defaultLayout: 'main',
     helpers: {
         ifeq: function (a, b, options) {
@@ -56,13 +56,14 @@ app.use(compression());
 app.use(sass({src: path.join(__dirname, '..', 'public'), dest: path.join(__dirname, '..', 'public')}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(expressValidator()); // for asserting and checking submission data
+app.use(expressValidator()); // for asserting and checking submission data, must be after bodyParser middleware
 app.use(cookieParser());
 
-// attach an isAuthenticated function to the req object
-app.use(function (req, res, next) {
+// authentication middleware
+app.use(async function (req, res, next) {
+    // attach an isAuthenticated function to the req object
     req.isAuthenticated = function () {
-        var token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
+        let token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
         try {
             return jwt.verify(token, process.env.TOKEN_SECRET);
         } catch (err) {
@@ -70,14 +71,12 @@ app.use(function (req, res, next) {
         }
     };
 
+    // if user is authenticated, attach user account to the req object
     if (req.isAuthenticated()) {
-        var payload = req.isAuthenticated();
-        new UserAccounts({id: payload.sub})
-            .fetch({withRelated: 'profile'})
-            .then(function (user) {
-                req.user = user.toJSON();
-                next();
-            });
+        let payload = req.isAuthenticated();
+        let user    = await new UserAccounts({id: payload.sub}).fetch({withRelated: 'profile'});
+        req.user    = user.toJSON(); // attach user object to the request
+        next();
     } else {
         next();
     }
@@ -100,12 +99,12 @@ app.use('/', serverRoutes);
 
 // React server rendering
 app.use(function (req, res) {
-    var initialState = {
+    let initialState = {
         auth: {token: req.cookies.token, user: req.user},
         messages: {}
     };
 
-    var store = configureStore(initialState);
+    let store = configureStore(initialState);
 
     match({routes: routes(store), location: req.url}, function (err, redirectLocation, renderProps) {
         if (err) {
@@ -113,7 +112,7 @@ app.use(function (req, res) {
         } else if (redirectLocation) {
             res.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
-            var html = renderToString(
+            let html = renderToString(
                 <Provider store={store}>
                     <RouterContext {...renderProps} />
                 </Provider>
