@@ -9,9 +9,10 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             email: props.user.email,
-            name: props.user.profile.first_name,
+            firstName: props.user.profile.first_name,
+            lastName: props.user.profile.last_name,
             gender: props.user.profile.gender,
-            location: props.user.profile.city,
+            location: props.user.profile.city || '',
             website: props.user.website || '',
             gravatar: props.user.gravatar,
             password: '',
@@ -68,10 +69,17 @@ class Profile extends React.Component {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="name" className="col-sm-3">Name</label>
+                                <label htmlFor="firstName" className="col-sm-3">First Name</label>
                                 <div className="col-sm-7">
-                                    <input type="text" name="name" id="name" className="form-control"
-                                           value={this.state.name} onChange={this.handleChange.bind(this)}/>
+                                    <input type="text" name="firstName" id="firstName" className="form-control"
+                                           value={this.state.firstName} onChange={this.handleChange.bind(this)}/>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="lastName" className="col-sm-3">Last Name</label>
+                                <div className="col-sm-7">
+                                    <input type="text" name="lastName" id="lastName" className="form-control"
+                                           value={this.state.lastName} onChange={this.handleChange.bind(this)}/>
                                 </div>
                             </div>
                             <div className="form-group">

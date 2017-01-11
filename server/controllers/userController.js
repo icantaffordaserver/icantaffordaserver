@@ -44,7 +44,7 @@ export function loginPost(req, res, next) {
         .then(function (user) {
             if (!user) {
                 return res.status(401).send({
-                    msg: `The email address ${req.body.email} is not associated with any account. Double-check your 
+                    msg: `The email address ${req.body.email} is not associated with any account. Double-check your
                     email address and try again.`
                 });
             }
@@ -190,7 +190,8 @@ export function accountPut(req, res, next) {
         }, {patch: true});
         // update user profile properties
         user.related('profile').save({
-            first_name: req.body.name,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
             gender: req.body.gender,
             city: req.body.location
         }, {patch: true});
