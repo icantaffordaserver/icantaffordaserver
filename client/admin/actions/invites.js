@@ -39,7 +39,7 @@ export function fetchInvites() {
       .then((response) => {
         if (response.ok) {
           return response.json().then((json) => {
-            dispatch(setInvites(Array.isArray(json) ? json : [json]));
+            dispatch(setInvites(Array.isArray(json.data) ? json.data : [json.data]));
           });
         }
       })

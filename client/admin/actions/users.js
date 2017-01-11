@@ -4,7 +4,7 @@ export function fetchUsers() {
       .then((response) => {
         if (response.ok) {
           return response.json().then((json) => {
-            dispatch({ type: 'SET_USERS', users: json });
+            dispatch({ type: 'SET_USERS', users: json.data });
           });
         }
       });
