@@ -9,6 +9,8 @@ const Mailer     = require('../mail/Mailer');
 
 // DB Models
 import {UserAccounts, Invites} from '../models/UserAccounts';
+import {createUser} from '../models/helpers';
+
 
 // if unfamiliar about JWT please read here: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-08#section-4
 function generateToken(user) {
@@ -24,28 +26,18 @@ function generateToken(user) {
 /**
  * Login required middleware
  */
-module.exports.ensureAuthenticated = function (req, res, next) {
+export function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
         res.status(401).send({msg: 'Unauthorized'});
     }
-};
+}
 /**
  * POST /login
  * Sign in with email and password
  */
-module.exports.loginPost = function (req, res, next) {
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    var errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send(errors);
-    }
+export function loginPost(req, res, next) {
 
     new UserAccounts({email: req.body.email})
         .fetch({withRelated: 'profile'})
@@ -63,45 +55,36 @@ module.exports.loginPost = function (req, res, next) {
                 res.send({token: generateToken(user.toJSON()), user: user.toJSON()});
             });
         });
-};
+}
 
 /**
  * POST /signup
  */
-module.exports.signupPost = function (req, res, next) {
-    req.assert('name', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password must be at least 4 characters long').len(4);
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send(errors);
-    }
+export async function signUpPost(req, res, next) {
 
     // sign a user up
-    UserAccounts.signUpUser(req.body.name, req.body.email, req.body.password)
-        .then(function (user) {
-            user = user.toJSON();
-            res.send({token: generateToken(user), user: user});
+    try {
+        let newUser = await createUser(req.body.first_name, req.body.last_name, req.body.email, req.body.password);
+        newUser     = newUser.toJSON();
+        res.send({token: generateToken(newUser), user: newUser});
 
-            // send verification email
-            const mergeObj = {
-                name: user.profile.first_name,
-                email: user.email,
-                url: `http://${req.headers.host}/users/${user.email_verified_token}/verify`
-            };
-            Mailer.sendTemplate('confirm-email', mergeObj).then(result => {
-                // console.log(result);
-            });
-        }).catch(function (err) {
+        // send verification email
+        const mergeObj = {
+            name: newUser.profile.first_name,
+            email: newUser.email,
+            url: `http://${req.headers.host}/users/${newUser.email_verified_token}/verify`
+        };
+        let sentEmail  = await Mailer.sendTemplate('confirm-email', mergeObj);
+        // console.log(sentEmail);
+
+    } catch (err) {
+        console.log(err);
         if (err.code === 'ER_DUP_ENTRY' || err.code === '23505') {
-            res.status(400).send({msg: 'The email address you have entered is already associated with another account.'});
+            return res.status(400).send({msg: 'The email address you have entered is already associated with another account.'});
         }
-    });
-};
+        res.status(400).send({msg: 'Some error occurred.'});
+    }
+}
 
 /**
  * POST /signup/invite/:inviteId
@@ -109,17 +92,6 @@ module.exports.signupPost = function (req, res, next) {
  * User sign up based on an invite sent from the admin panel
  */
 export async function inviteSignUpPost(req, res, next) {
-    req.assert('name', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password must be at least 4 characters long').len(4);
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send(errors);
-    }
 
     // check invite exists and has not been accepted
     let invite = await new Invites({id: req.params.inviteId}).fetch();
@@ -137,7 +109,7 @@ export async function inviteSignUpPost(req, res, next) {
 
     // sign user up
     try {
-        let userAccount = await UserAccounts.signUpUser(req.body.name, req.body.email, req.body.password);
+        let userAccount = await createUser(req.body.name, req.body.email, req.body.password);
         let user        = userAccount.toJSON();
 
         // set the invite to accepted, and store the new user account id
@@ -163,14 +135,13 @@ export async function inviteSignUpPost(req, res, next) {
  * GET /users/:token/verify
  * Confirm sign up email address
  */
-module.exports.verifySignUpGet = function (req, res, next) {
-    let user = new UserAccounts({id: req.user.id});
+export async function verifySignUpGet(req, res, next) {
+    let user = await new UserAccounts({id: req.user.id}).fetch();
     if (req.user.email_verified) {
         res.send({msg: 'Your account is already verified.'});
     } else if (req.user.email_verified_token === req.params.token) {
-        user.save({email_verified: true}, {patch: true}).then(user => {
-            res.send({msg: 'Your account is now verified.'});
-        });
+        await user.save({email_verified: true}, {patch: true});
+        res.send({msg: 'Your account is now verified.'});
     } else {
         res.send({msg: 'We could not verify your account at this time, please make sure you are logged in and try again.'});
     }
@@ -180,13 +151,13 @@ module.exports.verifySignUpGet = function (req, res, next) {
  * GET /users
  * Get all signed up users
  */
-module.exports.allUsersGet = async function (req, res, next) {
+export async function allUsersGet(req, res, next) {
     let allUserAccounts = await UserAccounts.fetchAll({withRelated: 'profile'});
     res.status(200).send({
         status: 'success',
         data: allUserAccounts.toJSON()
     });
-};
+}
 
 /**
  * GET /users/:userId
@@ -195,33 +166,19 @@ module.exports.allUsersGet = async function (req, res, next) {
  * @param res
  * @param next
  */
-module.exports.singleUserGet = async function (req, res, next) {
+export async function singleUserGet(req, res, next) {
     let userAccount = await new UserAccounts({id: req.params.userId}).fetch({withRelated: 'profile'});
     res.status(200).send({
         status: 'success',
         data: userAccount.toJSON()
     });
-};
+}
 
 /**
  * PUT /account
  * Update profile information OR change password.
  */
-module.exports.accountPut = function (req, res, next) {
-    if ('password' in req.body) {
-        req.assert('password', 'Password must be at least 4 characters long').len(4);
-        req.assert('confirm', 'Passwords must match').equals(req.body.password);
-    } else {
-        req.assert('email', 'Email is not valid').isEmail();
-        req.assert('email', 'Email cannot be blank').notEmpty();
-        req.sanitize('email').normalizeEmail({remove_dots: false});
-    }
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send(errors);
-    }
+export function accountPut(req, res, next) {
 
     let user = new UserAccounts({id: req.user.id});
     if ('password' in req.body) {
@@ -250,21 +207,26 @@ module.exports.accountPut = function (req, res, next) {
             res.status(409).send({msg: 'The email address you have entered is already associated with another account.'});
         }
     });
-};
+}
 
 /**
  * DELETE /account
  */
-module.exports.accountDelete = function (req, res, next) {
-    new UserAccounts({id: req.user.id}).destroy().then(function (user) {
+export async function accountDelete(req, res, next) {
+    try {
+        await new UserAccounts({id: req.user.id}).destroy();
         res.send({msg: 'Your account has been permanently deleted.'});
-    });
-};
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({msg: 'An error occurred while trying to delete your account.'});
+    }
+}
 
 /**
  * GET /unlink/:provider
  */
-module.exports.unlink = function (req, res, next) {
+export function unlink(req, res, next) {
     new UserAccounts({id: req.user.id})
         .fetch()
         .then(function (user) {
@@ -288,64 +250,57 @@ module.exports.unlink = function (req, res, next) {
                 res.send({msg: 'Your account has been unlinked.'});
             });
         });
-};
+}
 
 /**
  * POST /forgot
- * CONVERT TO MAILCHIMP FORGOT PASSWORD!
  */
-module.exports.forgotPost = function (req, res, next) {
+export async function forgotPost(req, res, next) {
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('email', 'Email cannot be blank').notEmpty();
     req.sanitize('email').normalizeEmail({remove_dots: false});
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
 
     if (errors) {
         return res.status(400).send(errors);
     }
 
-    async.waterfall([
-        function (done) {
+    try {
+        let token = await new Promise((resolve, reject) => {
             crypto.randomBytes(16, function (err, buf) {
-                var token = buf.toString('hex');
-                done(err, token);
+                if (err) reject(err);
+                let token = buf.toString('hex');
+                resolve(token);
             });
-        },
-        function (token, done) {
-            new UserAccounts({email: req.body.email})
-                .fetch({withRelated: 'profile'})
-                .then(function (user) {
-                    if (!user) {
-                        return res.status(400).send({msg: `The email address ${req.body.email} is not associated with any account.`});
-                    }
-                    user.set('passwordResetToken', token);
-                    user.set('passwordResetExpires', new Date(Date.now() + 3600000)); // expire in 1 hour
-                    user.save(user.changed, {patch: true}).then(function () {
-                        done(null, token, user);
-                    });
-                });
-        },
-        function (token, user, done) {
-            let name     = user.toJSON().profile.first_name;
-            let email    = user.toJSON().email;
-            let resetUrl = `http://${req.headers.host}/reset/${token}`;
-            Mailer.sendTemplate('forgot-password', {name: name, email: email, url: resetUrl}).then(result => {
-                res.send({msg: 'An email has been sent to ' + email + ' with further instructions.'});
-                done();
-            });
+        });
+        let user  = await new UserAccounts({email: req.body.email}).fetch({withRelated: 'profile'});
+        if (!user) {
+            return res.status(400).send({msg: `The email address ${req.body.email} is not associated with any account.`});
         }
-    ]);
-};
+        user.set('passwordResetToken', token);
+        user.set('passwordResetExpires', new Date(Date.now() + 3600000)); // expire in 1 hour
+        await user.save(user.changed, {patch: true});
+        let firstName = user.toJSON().profile.first_name;
+        let email     = user.toJSON().email;
+        let resetUrl  = `http://${req.headers.host}/reset/${token}`;
+
+        let sentEmail = await Mailer.sendTemplate('forgot-password', {name: firstName, email: email, url: resetUrl});
+        res.send({msg: 'An email has been sent to ' + email + ' with further instructions.'});
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({msg: 'An error occurred while trying to reset the password.'})
+    }
+}
 
 /**
  * POST /reset
  */
-module.exports.resetPost = function (req, res, next) {
+export function resetPost(req, res, next) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
     req.assert('confirm', 'Passwords must match').equals(req.body.password);
 
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
 
     if (errors) {
         return res.status(400).send(errors);
@@ -378,18 +333,18 @@ module.exports.resetPost = function (req, res, next) {
             });
         }
     ]);
-};
+}
 
 /**
  * POST /auth/facebook
  * Sign in with Facebook
  */
-module.exports.authFacebook = function (req, res) {
-    var profileFields  = ['id', 'name', 'email', 'gender', 'location'];
-    var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
-    var graphApiUrl    = 'https://graph.facebook.com/v2.5/me?fields=' + profileFields.join(',');
+export function authFacebook(req, res) {
+    let profileFields  = ['id', 'name', 'email', 'gender', 'location'];
+    let accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
+    let graphApiUrl    = 'https://graph.facebook.com/v2.5/me?fields=' + profileFields.join(',');
 
-    var params = {
+    let params = {
         code: req.body.code,
         client_id: req.body.clientId,
         client_secret: process.env.FACEBOOK_SECRET,
@@ -454,8 +409,8 @@ module.exports.authFacebook = function (req, res) {
             }
         });
     });
-};
+}
 
-module.exports.authFacebookCallback = function (req, res) {
+export function authFacebookCallback(req, res) {
     res.render('loading', {layout: false});
-};
+}

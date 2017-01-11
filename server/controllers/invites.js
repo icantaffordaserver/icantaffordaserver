@@ -66,17 +66,6 @@ export async function resendInviteGet(req, res, next) {
  * POST /invites
  */
 export async function newInvitePost(req, res, next) {
-    req.assert('first_name', 'First name cannot be blank').notEmpty();
-    req.assert('last_name', 'Last name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({remove_dots: false});
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send(errors);
-    }
 
     try {
         let newInvite = await new Invites({
