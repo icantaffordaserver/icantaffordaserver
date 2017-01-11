@@ -10,6 +10,8 @@ exports.up = function (knex, Promise) {
             table.dateTime('firestarter_complete_date');
             table.boolean('reflection_complete');
             table.dateTime('reflection_complete_date');
+            table.boolean('connection_complete');
+            table.dateTime('connection_complete_date');
         })
     ]);
 };
