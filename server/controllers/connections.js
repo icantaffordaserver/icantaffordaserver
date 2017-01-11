@@ -21,7 +21,7 @@ export async function allConnectionsGet(req, res, next) {
  * GET /connections/:id
  *
  */
-export function connectionGet(req, res, next) {
+export function singleConnectionGet(req, res, next) {
     new Connections({id: req.body.connection_id}).fetch({withRelated: 'accounts.profile'})
         .then(connection => {
             if (connection === null) {
