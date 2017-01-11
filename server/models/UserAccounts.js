@@ -77,43 +77,6 @@ let UserAccounts = bookshelf.Model.extend({
     {
         dependents: ['profile'], // specify the dependent relations for cascade-delete plugin
 
-        // Use a transaction wrapper and sign a user up. Returns a Promise
-        // Take a name, email and password, store in DB then return a promise to
-        // the user account and related profile
-        signUpUser: function (name, email, password) {
-            //wrap the user sign up in a transaction
-            return bookshelf.transaction(t => {
-                // Step 1: generate a token to verify email
-                return new Promise((resolve, reject) => {
-                    crypto.randomBytes(16, function (err, buf) {
-                        if (err) {
-                            reject(err);
-                        } else
-                            resolve(buf.toString('hex'));
-                    })
-                }).then((token) => {
-                    // Step 2: insert the email, password, and generated token into user_accounts DB table
-                    return new UserAccounts({
-                        email: email,
-                        password_hash: password,
-                        email_verified_token: token
-                    }).save(null, {
-                        transacting: t,
-                        method: 'insert'
-                    });
-                }).then(account => {
-                    // Step 3: insert name into user_profiles DB Table
-                    return new UserProfiles({user_account_id: account.toJSON().id, first_name: name}).save(null, {
-                        transacting: t,
-                        method: 'insert'
-                    });
-                })
-            }).then(profile => {
-                // Step 4: return the user as a promise
-                // lookup the account and return the promise
-                return UserAccounts.forge({id: profile.toJSON().user_account_id}).fetch({withRelated: 'profile'});
-            });
-        }
     }
 );
 
