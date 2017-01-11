@@ -37,7 +37,7 @@ describe('UserAccounts model testing...', () => {
         expect(newUserAccount.toJSON().email).toBeDefined();
     });
 
-    it('UserAccounts.signUpUser() should sign a user up and return user account and profile data', async() => {
+    it('UserAccounts.createUser() should sign a user up and return user account and profile data', async() => {
         let newUser = await UserAccounts.signUpUser('Alexander', 'alexander.mann@me.com', 'somepassword');
         expect(newUser.toJSON().id).toBeDefined(); // should have same uuid for profile and account table
         expect(newUser.toJSON().email).toBe('alexander.mann@me.com');
@@ -46,7 +46,7 @@ describe('UserAccounts model testing...', () => {
         expect(newUser.toJSON().password).toBeUndefined();
     });
 
-    it('UserAccounts.signUpUser() should return error if duplicate email is submitted', () => {
+    it('UserAccounts.createUser() should return error if duplicate email is submitted', () => {
 
     });
 
