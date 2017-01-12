@@ -13,7 +13,6 @@ class Profile extends React.Component {
             lastName: props.user.profile.last_name,
             gender: props.user.profile.gender,
             location: props.user.profile.city || '',
-            website: props.user.website || '',
             gravatar: props.user.gravatar,
             password: '',
             confirm: ''
@@ -102,13 +101,6 @@ class Profile extends React.Component {
                                 <div className="col-sm-7">
                                     <input type="text" name="location" id="location" className="form-control"
                                            value={this.state.location} onChange={this.handleChange.bind(this)}/>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="website" className="col-sm-3">Website</label>
-                                <div className="col-sm-7">
-                                    <input type="text" name="website" id="website" className="form-control"
-                                           value={this.state.website} onChange={this.handleChange.bind(this)}/>
                                 </div>
                             </div>
                             <div className="form-group">
