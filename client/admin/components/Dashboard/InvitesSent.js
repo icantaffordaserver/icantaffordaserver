@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchInvites } from '../../actions/invites';
-import { submitInviteForm } from '../../actions/invites';
+import { fetchInvites, cancelInvite, submitInviteForm } from '../../actions/invites';
 import moment from 'moment';
 
 class InvitesSent extends React.Component {
@@ -11,6 +10,10 @@ class InvitesSent extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchInvites());
+  }
+
+  handleCancelInvite(inviteId) {
+    this.props.dispatch(cancelInvite(inviteId));
   }
 
   handleSubmit(invite, event) {
@@ -40,6 +43,7 @@ class InvitesSent extends React.Component {
               <th>Sent By</th>
               <th>To</th>
               <th>Accepted?</th>
+              <th>Cancel</th>
               <th>Resend</th>
             </tr>
             {this.props.invites.map((invite) => {
@@ -52,7 +56,12 @@ class InvitesSent extends React.Component {
                     <i className="material-icons brand-success valign">done</i> :
                     <i className="material-icons brand-danger valign">clear</i>}
                   </td>
-                  <td><button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite)}>Send</button></td>
+                  <td>
+                    <button disabled={invite.accepted} className="btn btn-danger" onClick={this.handleCancelInvite.bind(this, invite.id)}>Cancel</button>
+                  </td>
+                  <td>
+                    <button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite)}>Send</button>
+                  </td>
                 </tr>
               );
             })}

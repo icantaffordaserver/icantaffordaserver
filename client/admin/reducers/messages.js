@@ -20,6 +20,7 @@ export default function messages(state = {}, action) {
     case 'RESET_PASSWORD_SUCCESS':
     case 'CONTACT_FORM_SUCCESS':
     case 'SEND_INVITE_SUCCESS':
+    case 'CANCEL_INVITE_SUCCESS':
     case 'MATCH_USERS_SUCCESS':
       return {
         success: action.messages

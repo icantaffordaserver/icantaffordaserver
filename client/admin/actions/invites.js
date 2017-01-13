@@ -30,7 +30,7 @@ export function submitInviteForm(user, accountId, options) {
         });
       }
     });
-  }
+  };
 }
 
 export function fetchInvites() {
@@ -42,8 +42,30 @@ export function fetchInvites() {
             dispatch(setInvites(Array.isArray(json.data) ? json.data : [json.data]));
           });
         }
-      })
-  }
+      });
+  };
+}
+
+export function cancelInvite(inviteId) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+    return fetch('/invites/' + inviteId, {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'CANCEL_INVITE_SUCCESS',
+            messages: [json]
+          });
+        });
+      }
+    });
+  };
 }
 
 function setInvites(invites) {
