@@ -37,12 +37,12 @@ export function login(email, password) {
     };
 }
 
-export function signup(firstName, lastName, email, password) {
+export function signup(firstName, lastName, email, password, inviteId) {
     return (dispatch) => {
         dispatch({
             type: 'CLEAR_MESSAGES'
         });
-        return fetch('/signup', {
+        return fetch('/signup/invite/' + inviteId, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({first_name: firstName, last_name: lastName, email: email, password: password})

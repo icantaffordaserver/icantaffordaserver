@@ -109,7 +109,7 @@ export async function inviteSignUpPost(req, res, next) {
 
     // sign user up
     try {
-        let userAccount = await createUser(req.body.name, req.body.email, req.body.password);
+        let userAccount = await createUser(req.body.first_name, req.body.last_name, req.body.email, req.body.password);
         let user        = userAccount.toJSON();
 
         // set the invite to accepted, and store the new user account id
