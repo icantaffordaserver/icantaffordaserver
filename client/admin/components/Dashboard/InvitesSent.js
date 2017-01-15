@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchInvites, cancelInvite, submitInviteForm } from '../../actions/invites';
+import { fetchInvites, cancelInvite, resendInvite } from '../../actions/invites';
 import moment from 'moment';
 
 class InvitesSent extends React.Component {
@@ -16,20 +16,9 @@ class InvitesSent extends React.Component {
     this.props.dispatch(cancelInvite(inviteId));
   }
 
-  handleSubmit(invite, event) {
+  handleSubmit(inviteId, event) {
     event.preventDefault();
-    this.props.dispatch(submitInviteForm(
-      {
-        firstName: invite.first_name,
-        lastName: invite.last_name,
-        email: invite.email
-      },
-      this.props.auth.user.id,
-      {
-        resend: true,
-        inviteId: invite.id
-      }
-    ));
+    this.props.dispatch(resendInvite(inviteId));
   }
 
   render() {
@@ -60,7 +49,7 @@ class InvitesSent extends React.Component {
                     <button disabled={invite.accepted} className="btn btn-danger" onClick={this.handleCancelInvite.bind(this, invite.id)}>Cancel</button>
                   </td>
                   <td>
-                    <button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite)}>Send</button>
+                    <button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite.id)}>Send</button>
                   </td>
                 </tr>
               );

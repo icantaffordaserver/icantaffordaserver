@@ -11,6 +11,7 @@ export default function messages(state = {}, action) {
     case 'UNLINK_FAILURE':
     case 'LINK_FAILURE':
     case 'SEND_INVITE_FAILURE':
+    case 'RESEND_INVITE_FAILURE':
     case 'MATCH_USERS_FAILURE':
       return {
         error: action.messages
@@ -20,6 +21,7 @@ export default function messages(state = {}, action) {
     case 'RESET_PASSWORD_SUCCESS':
     case 'CONTACT_FORM_SUCCESS':
     case 'SEND_INVITE_SUCCESS':
+    case 'RESEND_INVITE_SUCCESS':
     case 'CANCEL_INVITE_SUCCESS':
     case 'MATCH_USERS_SUCCESS':
       return {
