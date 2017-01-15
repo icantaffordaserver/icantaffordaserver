@@ -14,20 +14,22 @@ export function submitInviteForm(user, accountId, options) {
         resend: options.resend
       })
     }).then((response) => {
-      handleResponse(dispatch, response, 'SEND_INVITE_SUCCESS', 'SEND_INVITE_FAILURE');
+      if (response.ok) {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'SEND_INVITE_SUCCESS',
+            messages: [json]
+          });
+        });
+      } else {
+        return response.json().then((json) => {
+          dispatch({
+            type: 'SEND_INVITE_FAILURE',
+            messages: Array.isArray(json) ? json : [json]
+          });
+        });
+      }
     });
-  };
-}
-
-export function resendInvite(inviteId) {
-  return (dispatch) => {
-    dispatch({
-      type: 'CLEAR_MESSAGES'
-    });
-    return fetch('/invites/' + inviteId + '/resend')
-      .then((response) => {
-        handleResponse(dispatch, response, 'RESEND_INVITE_SUCCESS', 'RESEND_INVITE_FAILURE');
-      });
   };
 }
 
@@ -64,24 +66,6 @@ export function cancelInvite(inviteId) {
       }
     });
   };
-}
-
-function handleResponse(dispatch, response, successType, failureType) {
-  if (response.ok) {
-    return response.json().then((json) => {
-      dispatch({
-        type: successType,
-        messages: [json]
-      });
-    });
-  } else {
-    return response.json().then((json) => {
-      dispatch({
-        type: failureType,
-        messages: Array.isArray(json) ? json : [json]
-      });
-    });
-  }
 }
 
 function setInvites(invites) {

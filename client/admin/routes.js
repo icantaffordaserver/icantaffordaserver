@@ -14,34 +14,41 @@ import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
 
 export default function getRoutes(store) {
-  const ensureAuthenticated = (nextState, replace) => {
-    if (!store.getState().auth.token) {
-      replace('/login');
-    }
-  };
-  const skipIfAuthenticated = (nextState, replace) => {
-    if (store.getState().auth.token) {
-      replace('/');
-    }
-  };
-  const clearMessages = () => {
-    store.dispatch({
-      type: 'CLEAR_MESSAGES'
-    });
-  };
-  return (
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} onLeave={clearMessages}/>
-      <Route path="/dashboard" component={Dashboard} onLeave={clearMessages}/>
-      <Route path="/matching" component={UserMatching} onLeave={clearMessages}/>
-      <Route path="/pipeline" component={ConnectionPipeline} onLeave={clearMessages}/>
-      <Route path="/contact" component={Contact} onLeave={clearMessages}/>
-      <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
-      <Route path="/signup/invite/:inviteId" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
-      <Route path="/account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
-      <Route path="/forgot" component={Forgot} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
-      <Route path='/reset/:token' component={Reset} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
-      <Route path="*" component={NotFound} onLeave={clearMessages}/>
-    </Route>
-  );
+    const ensureAuthenticated = (nextState, replace) => {
+        if (!store.getState().auth.token) {
+            replace('/login');
+        }
+    };
+    const skipIfAuthenticated = (nextState, replace) => {
+        if (store.getState().auth.token) {
+            if (store.getState().auth.user.admin) {
+                replace('/admin');
+            } else {
+                replace('/');
+            }
+        }
+    };
+    const clearMessages       = () => {
+        store.dispatch({
+            type: 'CLEAR_MESSAGES'
+        });
+    };
+    return (
+        <Route path="/" component={App}>
+            <IndexRoute component={Home} onLeave={clearMessages}/>
+            <Route path="admin" onEnter={ensureAuthenticated}>
+                <IndexRoute component={Dashboard} onLeave={clearMessages}/>
+                <Route path="dashboard" component={Dashboard} onLeave={clearMessages}/>
+                <Route path="matching" component={UserMatching} onLeave={clearMessages}/>
+                <Route path="pipeline" component={ConnectionPipeline} onLeave={clearMessages}/>
+            </Route>
+            <Route path="contact" component={Contact} onLeave={clearMessages}/>
+            <Route path="login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+            <Route path="signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+            <Route path="account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
+            <Route path="forgot" component={Forgot} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+            <Route path='reset/:token' component={Reset} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
+            <Route path="*" component={NotFound} onLeave={clearMessages}/>
+        </Route>
+    );
 }

@@ -4,7 +4,7 @@ import path from 'path';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var config = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client',
         './client/admin/main'
