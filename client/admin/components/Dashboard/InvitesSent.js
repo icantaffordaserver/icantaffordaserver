@@ -1,19 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ReactModal from 'react-modal'
-import {fetchInvites, cancelInvite, selectInvite, deselectInvite, submitInviteForm, editInviteForm, resendInvite} from '../../actions/invites';
+import {
+    fetchInvites,
+    cancelInvite,
+    selectInvite,
+    deselectInvite,
+    resendInvite
+} from '../../actions/invites';
 import {closeModal, showModal} from '../../actions/modal';
 import moment from 'moment';
+import EditInviteModal from './EditInviteModal';
 
 class InvitesSent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {firstName: '', lastName: '', email: '', resend: false};
 
-    }
-
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
     }
 
     componentDidMount() {
@@ -27,33 +28,10 @@ class InvitesSent extends React.Component {
     handleOpenEditInvite(inviteIndex) {
         this.props.dispatch(selectInvite(inviteIndex));
         this.props.dispatch(showModal());
-        this.setState({
-            firstName: this.props.invites.all[inviteIndex].first_name,
-            lastName: this.props.invites.all[inviteIndex].last_name,
-            email: this.props.invites.all[inviteIndex].email
-        });
 
     }
 
     handleCloseEditInvite() {
-        this.props.dispatch(deselectInvite());
-        this.props.dispatch(closeModal());
-    }
-
-    handleEditInviteSubmit(invite){
-        event.preventDefault();
-        this.props.dispatch(editInviteForm(
-            {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email
-            },
-            this.props.auth.user.id,
-            {
-                resend: this.state.resend,
-                inviteId: invite.id
-            }
-        ));
         this.props.dispatch(deselectInvite());
         this.props.dispatch(closeModal());
     }
@@ -63,62 +41,8 @@ class InvitesSent extends React.Component {
         this.props.dispatch(resendInvite(invite.id));
     }
 
-    renderEditInviteModal(props) {
-        if (typeof props.invites.selected.first_name === "undefined") { // Check selected invite is loaded
-            return (
-                <div className="modal-content">
-                </div>
-            );
-        }
-        return (
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h3>Edit Invite</h3>
-                </div>
-                <div className="modal-body">
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="firstName">First Name</label>
-                            <input type="text" name="firstName" className="form-control"
-                                   value={this.state.firstName} onChange={this.handleChange.bind(this)}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="lastName">Last Name</label>
-                            <input type="text" name="lastName" className="form-control"
-                                   value={this.state.lastName} onChange={this.handleChange.bind(this)}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" className="form-control"
-                                   value={this.state.email} onChange={this.handleChange.bind(this)}/>
-                        </div>
-                        <div className="form-group">
-                            <label className="form-check-label">
-                                Check to resend
-                            </label>
-                            <input type="checkbox" name="resend" className="form-check-input"
-                                   value={this.state.resend} onChange={this.handleChange.bind(this)}/>
-                        </div>
-                    </form>
-                    <h4>Sent By: </h4>
-                    <p>{props.invites.selected.account.profile.first_name} {props.invites.selected.account.profile.last_name}</p>
-                    <h4>On Date: </h4>
-                    <p>{moment(props.invites.selected.created_at).format('MMM Do, YYYY')}</p>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn btn-success" onClick={this.handleEditInviteSubmit.bind(this, props.invites.selected)}>
-                        Edit
-                    </button>
-                    <button className="btn btn-danger" onClick={this.handleCloseEditInvite.bind(this)}>
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     render() {
-        // console.log(this.props);
         return (
             <div className="panel panel-default">
                 <div className="panel-heading"><h3>Invites Sent</h3></div>
@@ -150,7 +74,8 @@ class InvitesSent extends React.Component {
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary" onClick={this.handleResendInvite.bind(this, invite)}>
+                                    <button className="btn btn-primary"
+                                            onClick={this.handleResendInvite.bind(this, invite)}>
                                         Send
                                     </button>
                                 </td>
@@ -165,17 +90,7 @@ class InvitesSent extends React.Component {
                     })}
                     </tbody>
                 </table>
-                <ReactModal
-                    className="modal-dialog"
-                    style={{
-                        overlay: {zIndex: 1000},
-                    }}
-                    isOpen={this.props.modal.modalProps.isOpen}
-                    onRequestClose={this.handleCloseEditInvite.bind(this)}
-                    contentLabel="Edit Invite"
-                >
-                    {this.renderEditInviteModal(this.props)}
-                </ReactModal>
+                <EditInviteModal invite={this.props.invites.selected}/>
             </div>
         );
     }
@@ -183,9 +98,7 @@ class InvitesSent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth,
         invites: state.invites,
-        modal: state.modal
     };
 };
 
