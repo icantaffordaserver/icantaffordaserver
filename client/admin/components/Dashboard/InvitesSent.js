@@ -49,7 +49,7 @@ class InvitesSent extends React.Component {
                     <button disabled={invite.accepted} className="btn btn-danger" onClick={this.handleCancelInvite.bind(this, invite.id)}>Cancel</button>
                   </td>
                   <td>
-                    <button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite.id)}>Send</button>
+                    <button disabled={invite.accepted} className="btn btn-default" onClick={this.handleSubmit.bind(this, invite.id)}>Send</button>
                   </td>
                 </tr>
               );
