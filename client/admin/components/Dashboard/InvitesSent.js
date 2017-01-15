@@ -1,28 +1,37 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchInvites, cancelInvite, submitInviteForm } from '../../actions/invites';
+import {connect} from 'react-redux';
+import ReactModal from 'react-modal'
+import {fetchInvites, cancelInvite, selectInvite, deselectInvite, submitInviteForm, editInviteForm, resendInvite} from '../../actions/invites';
+import {closeModal, showModal} from '../../actions/modal';
 import moment from 'moment';
 
 class InvitesSent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {firstName: '', lastName: '', email: '', resend: false};
 
-  componentDidMount() {
-    this.props.dispatch(fetchInvites());
-  }
-
-  handleCancelInvite(inviteId) {
-    this.props.dispatch(cancelInvite(inviteId));
-  }
+    }
 
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({[event.target.name]: event.target.value});
+    }
+
+    componentDidMount() {
+        this.props.dispatch(fetchInvites());
+    }
+
+    handleCancelInvite(inviteId) {
+        this.props.dispatch(cancelInvite(inviteId));
     }
 
     handleOpenEditInvite(inviteIndex) {
         this.props.dispatch(selectInvite(inviteIndex));
         this.props.dispatch(showModal());
+        this.setState({
+            firstName: this.props.invites.all[inviteIndex].first_name,
+            lastName: this.props.invites.all[inviteIndex].last_name,
+            email: this.props.invites.all[inviteIndex].email
+        });
 
     }
 
@@ -31,20 +40,27 @@ class InvitesSent extends React.Component {
         this.props.dispatch(closeModal());
     }
 
-    handleSubmit(invite, event) {
+    handleEditInviteSubmit(invite){
         event.preventDefault();
-        this.props.dispatch(submitInviteForm(
+        this.props.dispatch(editInviteForm(
             {
-                firstName: invite.first_name,
-                lastName: invite.last_name,
-                email: invite.email
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email
             },
             this.props.auth.user.id,
             {
-                resend: true,
+                resend: this.state.resend,
                 inviteId: invite.id
             }
         ));
+        this.props.dispatch(deselectInvite());
+        this.props.dispatch(closeModal());
+    }
+
+    handleResendInvite(invite, event) {
+        event.preventDefault();
+        this.props.dispatch(resendInvite(invite.id));
     }
 
     renderEditInviteModal(props) {
@@ -60,35 +76,41 @@ class InvitesSent extends React.Component {
                     <h3>Edit Invite</h3>
                 </div>
                 <div className="modal-body">
-                    <form onSubmit={}>
+                    <form>
                         <div className="form-group">
                             <label htmlFor="firstName">First Name</label>
                             <input type="text" name="firstName" className="form-control"
-                                   value={props.invites.selected.first_name} onChange={this.handleChange.bind(this)} />
+                                   value={this.state.firstName} onChange={this.handleChange.bind(this)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="lastName">Last Name</label>
                             <input type="text" name="lastName" className="form-control"
-                                   value={props.invites.selected.last_name} onChange={this.handleChange.bind(this)} />
+                                   value={this.state.lastName} onChange={this.handleChange.bind(this)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input type="email" name="email" className="form-control"
-                                   value={props.invites.selected.email} onChange={this.handleChange.bind(this)} />
+                                   value={this.state.email} onChange={this.handleChange.bind(this)}/>
                         </div>
-                        <button className="btn btn-default">Send</button>
+                        <div className="form-group">
+                            <label className="form-check-label">
+                                Check to resend
+                            </label>
+                            <input type="checkbox" name="resend" className="form-check-input"
+                                   value={this.state.resend} onChange={this.handleChange.bind(this)}/>
+                        </div>
                     </form>
-                    <h4>To: </h4>
-                    <p>{props.invites.selected.first_name} {props.invites.selected.last_name}</p>
-                    <h4>Email: </h4>
-                    <p>{props.invites.selected.email}</p>
                     <h4>Sent By: </h4>
                     <p>{props.invites.selected.account.profile.first_name} {props.invites.selected.account.profile.last_name}</p>
                     <h4>On Date: </h4>
                     <p>{moment(props.invites.selected.created_at).format('MMM Do, YYYY')}</p>
                 </div>
                 <div className="modal-footer">
-                    <button className="btn btn-default" onClick={this.handleCloseEditInvite.bind(this)}>Close me
+                    <button className="btn btn-success" onClick={this.handleEditInviteSubmit.bind(this, props.invites.selected)}>
+                        Edit
+                    </button>
+                    <button className="btn btn-danger" onClick={this.handleCloseEditInvite.bind(this)}>
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -109,6 +131,7 @@ class InvitesSent extends React.Component {
                         <th>Accepted?</th>
                         <th>Cancel</th>
                         <th>Resend</th>
+                        <th>Edit</th>
                     </tr>
                     {this.props.invites.all.map((invite, inviteIndex) => {
                         return (
@@ -122,16 +145,17 @@ class InvitesSent extends React.Component {
                                 </td>
                                 <td>
                                     <button disabled={invite.accepted} className="btn btn-danger"
-                                            onClick={this.handleCancelInvite.bind(this, invite.id)}>Cancel
+                                            onClick={this.handleCancelInvite.bind(this, invite.id)}>
+                                        Cancel
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-default" onClick={this.handleSubmit.bind(this, invite)}>
+                                    <button className="btn btn-primary" onClick={this.handleResendInvite.bind(this, invite)}>
                                         Send
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-default"
+                                    <button className="btn btn-warning"
                                             onClick={this.handleOpenEditInvite.bind(this, inviteIndex)}>
                                         Edit
                                     </button>

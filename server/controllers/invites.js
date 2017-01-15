@@ -116,7 +116,7 @@ export async function updateInvitePut(req, res, next) {
             await resendInvite(req.params.id, req.headers.host);
             res.status(200).send({
                 status: 'success',
-                msg: 'Invitation sent successfully.',
+                msg: 'Invitation edited and sent successfully.',
                 data: invite.toJSON()
             });
         } else {
@@ -128,6 +128,12 @@ export async function updateInvitePut(req, res, next) {
         }
     } catch (err) {
         console.log(err);
+        if (err.code === '23505') {
+            res.status(400).send({
+                status: 'error',
+                msg: 'Email address already has a pending invitation.'
+            })
+        }
         res.status(400).send({
             status: 'error',
             msg: 'Error occurred while sending the invitation.'

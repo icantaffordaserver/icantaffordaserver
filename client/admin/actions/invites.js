@@ -14,22 +14,54 @@ export function submitInviteForm(user, accountId, options) {
         resend: options.resend
       })
     }).then((response) => {
-      if (response.ok) {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'SEND_INVITE_SUCCESS',
-            messages: [json]
-          });
-        });
-      } else {
-        return response.json().then((json) => {
-          dispatch({
-            type: 'SEND_INVITE_FAILURE',
-            messages: Array.isArray(json) ? json : [json]
-          });
-        });
-      }
+      handleResponse(dispatch, response, 'SEND_INVITE_SUCCESS', 'SEND_INVITE_FAILURE');
     });
+  };
+}
+
+export function editInviteForm(user, accountId, options) {
+    return (dispatch) => {
+        dispatch({
+            type: 'CLEAR_MESSAGES'
+        });
+        return fetch('/invites/' + options.inviteId, {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                first_name: user.firstName,
+                last_name: user.lastName,
+                email: user.email,
+                sent_by_user_account_id: accountId,
+                resend: options.resend
+            })
+        }).then((response) => {
+            if (response.ok) {
+                return response.json().then((json) => {
+                    dispatch({
+                        type: 'SEND_INVITE_SUCCESS',
+                        messages: [json]
+                    });
+                });
+            } else {
+                return response.json().then((json) => {
+                    dispatch({
+                        type: 'SEND_INVITE_FAILURE',
+                        messages: Array.isArray(json) ? json : [json]
+                    });
+                });
+            }
+        });
+    };
+}
+export function resendInvite(inviteId) {
+  return (dispatch) => {
+    dispatch({
+      type: 'CLEAR_MESSAGES'
+    });
+    return fetch('/invites/' + inviteId + '/resend')
+      .then((response) => {
+        handleResponse(dispatch, response, 'RESEND_INVITE_SUCCESS', 'RESEND_INVITE_FAILURE');
+      });
   };
 }
 
@@ -67,7 +99,33 @@ export function cancelInvite(inviteId) {
     });
   };
 }
+function handleResponse(dispatch, response, successType, failureType) {
+  if (response.ok) {
+    return response.json().then((json) => {
+      dispatch({
+        type: successType,
+        messages: [json]
+      });
+    });
+  } else {
+    return response.json().then((json) => {
+      dispatch({
+        type: failureType,
+        messages: Array.isArray(json) ? json : [json]
+      });
+    });
+  }
+}
+export function selectInvite(inviteIndex) {
+    return {type: 'SELECT_INVITE', inviteIndex: inviteIndex};
+}
+
+export function deselectInvite() {
+    return {type: 'DESELECT_INVITE'};
+}
 
 function setInvites(invites) {
   return { type: 'SET_INVITES', invites: invites };
 }
+
+
