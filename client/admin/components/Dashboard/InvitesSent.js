@@ -11,24 +11,40 @@ import {closeModal, showModal} from '../../actions/modal';
 import moment from 'moment';
 import EditInviteModal from './EditInviteModal';
 
+const POLL_INTERVAL = 500;
+
 class InvitesSent extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     componentDidMount() {
         this.props.dispatch(fetchInvites());
     }
 
-    handleCancelInvite(inviteId) {
+    componentWillReceiveProps(nextProps) {
+        if (this.props.invites.all != nextProps.invites.all) {
+            clearTimeout(this.timeout);
+            if (!nextProps.invites.isPolling) this.startPoll();
+        }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timeout);
+    }
+
+    startPoll() {
+        this.timeout = setTimeout(() => this.props.dispatch(fetchInvites()), POLL_INTERVAL);
+    }
+
+    handleCancelInvite(inviteId, event) {
+        event.preventDefault();
         this.props.dispatch(cancelInvite(inviteId));
     }
 
     handleOpenEditInvite(inviteIndex) {
         this.props.dispatch(selectInvite(inviteIndex));
         this.props.dispatch(showModal());
-
     }
 
     handleCloseEditInvite() {
@@ -40,7 +56,6 @@ class InvitesSent extends React.Component {
         event.preventDefault();
         this.props.dispatch(resendInvite(invite.id));
     }
-
 
     render() {
         return (
@@ -98,7 +113,7 @@ class InvitesSent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        invites: state.invites,
+        invites: state.invites
     };
 };
 

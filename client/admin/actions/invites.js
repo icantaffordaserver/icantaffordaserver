@@ -72,12 +72,15 @@ export function resendInvite(inviteId) {
 
 export function fetchInvites() {
     return (dispatch) => {
+        dispatch(beginFetchInvites());
         return fetch('/invites')
             .then((response) => {
                 if (response.ok) {
                     return response.json().then((json) => {
-                        dispatch(setInvites(Array.isArray(json.data) ? json.data : [json.data]));
+                        dispatch(fetchInvitesSuccess(Array.isArray(json.data) ? json.data : [json.data]));
                     });
+                } else {
+                    dispatch(fetchInvitesFailure());
                 }
             });
     };
@@ -113,8 +116,14 @@ export function deselectInvite() {
     return {type: 'DESELECT_INVITE'};
 }
 
-function setInvites(invites) {
-    return {type: 'SET_INVITES', invites: invites};
+function beginFetchInvites() {
+    return {type: 'BEGIN_FETCH_INVITES'}
 }
 
+function fetchInvitesSuccess(invites) {
+    return {type: 'FETCH_INVITES_SUCCESS', invites}
+}
 
+function fetchInvitesFailure() {
+    return {type: 'FETCH_INVITES_FAILURE'}
+}

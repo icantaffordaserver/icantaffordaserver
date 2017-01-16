@@ -28,7 +28,7 @@ export default function getRoutes(store) {
             }
         }
     };
-    const clearMessages       = () => {
+    const clearMessages = () => {
         store.dispatch({
             type: 'CLEAR_MESSAGES'
         });
