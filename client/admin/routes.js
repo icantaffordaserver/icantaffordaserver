@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
+import { IndexRedirect, IndexRoute, Route } from 'react-router';
 import App from './components/App';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -37,7 +37,7 @@ export default function getRoutes(store) {
         <Route path="/" component={App}>
             <IndexRoute component={Home} onLeave={clearMessages}/>
             <Route path="admin" onEnter={ensureAuthenticated}>
-                <IndexRoute component={Dashboard} onLeave={clearMessages}/>
+                <IndexRedirect to="dashboard"/>
                 <Route path="dashboard" component={Dashboard} onLeave={clearMessages}/>
                 <Route path="matching" component={UserMatching} onLeave={clearMessages}/>
                 <Route path="pipeline" component={ConnectionPipeline} onLeave={clearMessages}/>

@@ -13,7 +13,6 @@ import moment from 'moment';
 class EditInviteModal extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             firstName: '',
             lastName: '',
@@ -60,10 +59,7 @@ class EditInviteModal extends React.Component {
 
     renderEditInviteModal(props) {
         if (typeof props.invite.first_name === "undefined") { // Check selected invite is loaded
-            return (
-                <div className="modal-content">
-                </div>
-            );
+            return null;
         }
         return (
             <div className="modal-content">
