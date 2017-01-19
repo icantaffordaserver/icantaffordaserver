@@ -24,7 +24,6 @@ class ConnectionPipelineModal extends React.Component {
     }
 
     handleAfterModalOpened(props) {
-        console.log(props.selectedMatch.connection_time);
         this.setState({
             dateTime: props.selectedMatch.connection_time ? new Date(props.selectedMatch.connection_time) : null
         });
@@ -43,7 +42,6 @@ class ConnectionPipelineModal extends React.Component {
 
     renderSetDateTimePicker(props) {
         let onChange = (dateTime, dateTimeStr) => {
-            console.log('dateTime: ', dateTime);
             this.setState({
                 dateTime: dateTime
             });
