@@ -59,8 +59,15 @@ export function newConnectionPost(req, res, next) {
  * Could be changing a user, updating connection status
  */
 // TODO: finish update connection PUT request
-export function updateConnectionPut(req, res, next) {
-    res.send({msg: 'This is not done yet..'});
+export async function updateConnectionPut(req, res, next) {
+    let connectionId = req.params.connectionId;
+    try {
+        let connection = await new Connections({id: connectionId}).save({...req.body});
+        res.send({msg: `Connection time successfully set to ${connection.toJSON().connection_time}`});
+    } catch (err) {
+        res.status(400).send({msg: 'An error occurred.'});
+    }
+
 }
 
 /**

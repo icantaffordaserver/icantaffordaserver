@@ -46,8 +46,8 @@ class UserMatching extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.dispatch(submitMatchedUsers(
-      this.state.selectedUsers[0].id,
-      this.state.selectedUsers[1].id,
+      this.props.selectedUsers[0].id,
+      this.props.selectedUsers[1].id,
       this.props.auth.user.id
     ));
   }

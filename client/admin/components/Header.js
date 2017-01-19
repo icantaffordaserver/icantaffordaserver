@@ -1,13 +1,13 @@
 import React from 'react';
-import {IndexLink, Link, browserHistory} from 'react-router';
+import {IndexLink, Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logout} from '../actions/auth';
 
 class Header extends React.Component {
     constructor(props){
         super(props);
-        console.log(props);
     }
+
     handleLogout(event) {
         event.preventDefault();
         this.props.dispatch(logout());

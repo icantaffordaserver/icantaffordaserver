@@ -6,3 +6,12 @@ export function matchedUsers(state = [], action) {
       return state;
   }
 }
+
+export function selectedMatch(state = null, action) {
+    switch (action.type){
+        case 'SELECT_MATCH':
+            return action.matchIndex;
+        default:
+          return state
+    }
+}

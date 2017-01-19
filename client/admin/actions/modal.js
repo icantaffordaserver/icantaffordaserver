@@ -1,10 +1,12 @@
 /**
  * Created by alexandermann on 2017-01-13.
  */
-export function showModal() {
+
+export function showModal(modalType) {
     return {
         type: 'SHOW_MODAL',
-        modalProps: {isOpen: true}
+        modalProps: {isOpen: true},
+        modalType: modalType
     };
 }
 

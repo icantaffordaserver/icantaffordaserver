@@ -13,6 +13,8 @@ export default function messages(state = {}, action) {
     case 'SEND_INVITE_FAILURE':
     case 'RESEND_INVITE_FAILURE':
     case 'MATCH_USERS_FAILURE':
+    case 'SET_CONNECTION_TIME_FAILURE':
+    case 'DELETE_CONNECTION_FAILURE':
       return {
         error: action.messages
       };
@@ -24,6 +26,8 @@ export default function messages(state = {}, action) {
     case 'RESEND_INVITE_SUCCESS':
     case 'CANCEL_INVITE_SUCCESS':
     case 'MATCH_USERS_SUCCESS':
+    case 'SET_CONNECTION_TIME_SUCCESS':
+    case 'DELETE_CONNECTION_SUCCESS':
       return {
         success: action.messages
       };

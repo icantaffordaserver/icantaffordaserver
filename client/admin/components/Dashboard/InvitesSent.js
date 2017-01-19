@@ -11,7 +11,7 @@ import {closeModal, showModal} from '../../actions/modal';
 import moment from 'moment';
 import EditInviteModal from './EditInviteModal';
 
-const POLL_INTERVAL = 500;
+const POLL_INTERVAL = 10000;
 
 class InvitesSent extends React.Component {
     constructor(props) {
