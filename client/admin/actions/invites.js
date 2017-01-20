@@ -35,7 +35,7 @@ export function submitInviteForm(user, accountId, options) {
         dispatch({
             type: CLEAR_MESSAGES
         });
-        return fetch(options.resend ? '/invites/' + options.inviteId : '/invites', {
+        return fetch(options.resend ? `/invites/${options.inviteId}` : '/invites', {
             method: options.resend ? 'put' : 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -56,7 +56,7 @@ export function editInviteForm(user, accountId, options) {
         dispatch({
             type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + options.inviteId, {
+        return fetch(`/invites/${options.inviteId}`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -76,7 +76,7 @@ export function resendInvite(inviteId) {
         dispatch({
             type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + inviteId + '/resend')
+        return fetch(`/invites/${inviteId}/resend`)
             .then((response) => {
                 handleResponse(dispatch, response, RESEND_INVITE_SUCCESS, RESEND_INVITE_FAILURE);
             });
@@ -104,7 +104,7 @@ export function cancelInvite(inviteId) {
         dispatch({
             type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + inviteId, {
+        return fetch(`/invites/${inviteId}`, {
             method: 'delete',
             headers: {'Content-Type': 'application/json'}
         })
