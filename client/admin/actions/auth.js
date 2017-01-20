@@ -37,15 +37,15 @@ export function login(email, password) {
     };
 }
 
-export function signup(name, email, password) {
+export function signup(firstName, lastName, email, password, inviteId) {
     return (dispatch) => {
         dispatch({
             type: 'CLEAR_MESSAGES'
         });
-        return fetch('/signup', {
+        return fetch('/signup/invite/' + inviteId, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({name: name, email: email, password: password})
+            body: JSON.stringify({first_name: firstName, last_name: lastName, email: email, password: password})
         }).then((response) => {
             return response.json().then((json) => {
                 if (response.ok) {
@@ -150,7 +150,8 @@ export function updateProfile(state, token) {
             },
             body: JSON.stringify({
                 email: state.email,
-                name: state.name,
+                first_name: state.firstName,
+                last_name: state.lastName,
                 gender: state.gender,
                 location: state.location,
                 website: state.website

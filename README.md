@@ -8,10 +8,11 @@
 - **CSS Preprocessor**: sass
 - **JavaScript Framework**: react
 - **Build Tool**: webpack
-- **Unit Testing**: mocha
+- **Unit Testing**: jest
 - **Database**: postgresql
 - **Authentication**: facebook,email
 - **Deployment**: heroku
+- **Admin User**: admin@shiftwith.us, hello
 
 ### Project Structure
 ```

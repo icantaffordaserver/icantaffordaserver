@@ -8,7 +8,7 @@ import Messages from '../Messages';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', password: '' };
+    this.state = { firstName: '', lastName: '', email: '', password: '' };
   }
 
   handleChange(event) {
@@ -17,7 +17,13 @@ class Signup extends React.Component {
 
   handleSignup(event) {
     event.preventDefault();
-    this.props.dispatch(signup(this.state.name, this.state.email, this.state.password));
+    this.props.dispatch(signup(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.email,
+      this.state.password,
+      this.props.routeParams.inviteId
+    ));
   }
 
   handleFacebook() {
@@ -49,8 +55,12 @@ class Signup extends React.Component {
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="Name" autoFocus className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)}/>
+                <label htmlFor="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" autoFocus className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)}/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoFocus className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>

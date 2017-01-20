@@ -84,7 +84,7 @@ routes.delete('/invites/:id', inviteDelete); // delete an invite
 routes.get('/connections', allConnectionsGet);
 routes.get('/connections/:id', singleConnectionGet);
 routes.post('/connections', newConnectionPost);
-routes.put('/connections/:id', updateConnectionPut);
+routes.put('/connections/:connectionId', updateConnectionPut);
 routes.delete('/connections/:id', connectionDelete);
 
 /**
