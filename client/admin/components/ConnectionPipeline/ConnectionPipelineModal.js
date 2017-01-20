@@ -9,6 +9,7 @@ import {setConnectionTime} from '../../actions/connections';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import moment from 'moment';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
+import ConnectionDetails from './ConnectionDetails';
 
 export const SET_CONNECTION_TIME           = 'SET_CONNECTION_TIME';
 export const MATCHED_USERS_DETAILS         = 'MATCHED_USERS_DETAILS';
@@ -74,45 +75,21 @@ class ConnectionPipelineModal extends React.Component {
 
     renderMatchedUsersDetails() {
         return (
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h3>[User 1] and [User 2] Matched Connection Details</h3>
-                </div>
-                <div className="modal-body">
-                    <div>
-                        <h4>hellloooooo houston!</h4>
-
-                    </div>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn btn-success">Save</button>
-                    <button onClick={this.handleCloseConnectionPipelineModal.bind(this)}
-                            className="btn btn-danger">Cancel
-                    </button>
-                </div>
-            </div>
+            <ConnectionDetails
+                {...this.props}
+                handleCloseModal={this.handleCloseConnectionPipelineModal.bind(this)}
+                titleEnding={'Matched Connection Details'}
+            />
         );
     }
 
     renderCompletedConnectionsDetails() {
         return (
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h3>[User 1] and [User 2] Completed Connection Details</h3>
-                </div>
-                <div className="modal-body">
-                    <div>
-                        <h4>hellloooooo DALLLLLLASSSS!</h4>
-
-                    </div>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn btn-success">Save</button>
-                    <button onClick={this.handleCloseConnectionPipelineModal.bind(this)}
-                            className="btn btn-danger">Cancel
-                    </button>
-                </div>
-            </div>
+            <ConnectionDetails
+                {...this.props}
+                handleCloseModal={this.handleCloseConnectionPipelineModal.bind(this)}
+                titleEnding={'Completed Connection Details'}
+            />
         );
     }
 

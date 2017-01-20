@@ -6623,6 +6623,9 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase; }
 
+.capitalize {
+  text-transform: capitalize; }
+
 .brand-success {
   color: #29b35b; }
 

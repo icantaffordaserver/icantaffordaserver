@@ -258,6 +258,10 @@ textarea {
 
 $font-size-xs: 10px;
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .brand-success {
   color: $brand-success;
 }
