@@ -22,7 +22,7 @@ class Signup extends React.Component {
       this.state.lastName,
       this.state.email,
       this.state.password,
-      this.props.routeParams.inviteId
+      this.props.params.inviteId
     ));
   }
 

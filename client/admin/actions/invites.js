@@ -1,3 +1,16 @@
+export const CLEAR_MESSAGES        = 'CLEAR_MESSAGES';
+export const SEND_INVITE_SUCCESS   = 'SEND_INVITE_SUCCESS';
+export const SEND_INVITE_FAILURE   = 'SEND_INVITE_FAILURE';
+export const RESEND_INVITE_SUCCESS = 'RESEND_INVITE_SUCCESS';
+export const RESEND_INVITE_FAILURE = 'RESEND_INVITE_FAILURE';
+export const CANCEL_INVITE_SUCCESS = 'CANCEL_INVITE_SUCCESS';
+export const SELECT_INVITE         = 'SELECT_INVITE';
+export const DESELECT_INVITE       = 'DESELECT_INVITE';
+export const BEGIN_FETCH_INVITES   = 'BEGIN_FETCH_INVITES';
+export const FETCH_INVITES_SUCCESS = 'FETCH_INVITES_SUCCESS';
+export const FETCH_INVITES_FAILURE = 'FETCH_INVITES_FAILURE';
+
+
 // Helper Functions
 function handleResponse(dispatch, response, successType, failureType) {
     if (response.ok) {
@@ -20,9 +33,9 @@ function handleResponse(dispatch, response, successType, failureType) {
 export function submitInviteForm(user, accountId, options) {
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_MESSAGES'
+            type: CLEAR_MESSAGES
         });
-        return fetch(options.resend ? '/invites/' + options.inviteId : '/invites', {
+        return fetch(options.resend ? `/invites/${options.inviteId}` : '/invites', {
             method: options.resend ? 'put' : 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -33,7 +46,7 @@ export function submitInviteForm(user, accountId, options) {
                 resend: options.resend
             })
         }).then((response) => {
-            handleResponse(dispatch, response, 'SEND_INVITE_SUCCESS', 'SEND_INVITE_FAILURE');
+            handleResponse(dispatch, response, SEND_INVITE_SUCCESS, SEND_INVITE_FAILURE);
         });
     };
 }
@@ -41,9 +54,9 @@ export function submitInviteForm(user, accountId, options) {
 export function editInviteForm(user, accountId, options) {
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_MESSAGES'
+            type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + options.inviteId, {
+        return fetch(`/invites/${options.inviteId}`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -54,18 +67,18 @@ export function editInviteForm(user, accountId, options) {
                 resend: options.resend
             })
         }).then((response) => {
-            handleResponse(dispatch, response, 'SEND_INVITE_SUCCESS', 'SEND_INVITE_FAILURE');
+            handleResponse(dispatch, response, SEND_INVITE_SUCCESS, SEND_INVITE_FAILURE);
         });
     };
 }
 export function resendInvite(inviteId) {
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_MESSAGES'
+            type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + inviteId + '/resend')
+        return fetch(`/invites/${inviteId}/resend`)
             .then((response) => {
-                handleResponse(dispatch, response, 'RESEND_INVITE_SUCCESS', 'RESEND_INVITE_FAILURE');
+                handleResponse(dispatch, response, RESEND_INVITE_SUCCESS, RESEND_INVITE_FAILURE);
             });
     };
 }
@@ -89,9 +102,9 @@ export function fetchInvites() {
 export function cancelInvite(inviteId) {
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_MESSAGES'
+            type: CLEAR_MESSAGES
         });
-        return fetch('/invites/' + inviteId, {
+        return fetch(`/invites/${inviteId}`, {
             method: 'delete',
             headers: {'Content-Type': 'application/json'}
         })
@@ -99,7 +112,7 @@ export function cancelInvite(inviteId) {
                 if (response.ok) {
                     return response.json().then((json) => {
                         dispatch({
-                            type: 'CANCEL_INVITE_SUCCESS',
+                            type: CANCEL_INVITE_SUCCESS,
                             messages: [json]
                         });
                     });
@@ -109,21 +122,21 @@ export function cancelInvite(inviteId) {
 }
 
 export function selectInvite(inviteIndex) {
-    return {type: 'SELECT_INVITE', inviteIndex: inviteIndex};
+    return {type: SELECT_INVITE, inviteIndex: inviteIndex};
 }
 
 export function deselectInvite() {
-    return {type: 'DESELECT_INVITE'};
+    return {type: DESELECT_INVITE};
 }
 
 function beginFetchInvites() {
-    return {type: 'BEGIN_FETCH_INVITES'}
+    return {type: BEGIN_FETCH_INVITES}
 }
 
 function fetchInvitesSuccess(invites) {
-    return {type: 'FETCH_INVITES_SUCCESS', invites}
+    return {type: FETCH_INVITES_SUCCESS, invites}
 }
 
 function fetchInvitesFailure() {
-    return {type: 'FETCH_INVITES_FAILURE'}
+    return {type: FETCH_INVITES_FAILURE}
 }
