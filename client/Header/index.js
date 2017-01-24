@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexLink, Link} from 'react-router';
 import {connect} from 'react-redux';
-import {logout} from '../admin/actions/auth';
+import {logout} from './actions';
 
 class Header extends React.Component {
     constructor(props){
@@ -50,6 +50,7 @@ class Header extends React.Component {
                     <li><Link to="/signup" activeStyle={active}>Sign up</Link></li>
                 </ul>
             );
+
         return (
             <nav className="navbar navbar-default navbar-static-top">
                 <div className="container">
