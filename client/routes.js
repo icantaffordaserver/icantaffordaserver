@@ -1,17 +1,17 @@
 import React from 'react';
 import { IndexRedirect, IndexRoute, Route } from 'react-router';
-import App from '../components/App';
-import Home from '../components/Home';
-import Dashboard from './Dashboard/index';
-import UserMatching from './UserMatching/index';
-import ConnectionPipeline from './ConnectionPipeline/index';
-import Contact from '../Contact/index';
-import NotFound from '../components/NotFound';
-import Login from '../Login/index';
-import Signup from '../Signup/index';
-import Profile from '../Profile/index';
-import Forgot from '../Forgot/index';
-import Reset from '../Reset/index';
+import App from './components/App';
+import Home from './components/Home';
+import Dashboard from './admin/Dashboard';
+import UserMatching from './admin/UserMatching';
+import ConnectionPipeline from './admin/ConnectionPipeline';
+import Contact from './shared/Contact';
+import NotFound from './components/NotFound';
+import Login from './shared/Login';
+import Signup from './shared/Signup';
+import Profile from './shared/Profile';
+import Forgot from './shared/Forgot';
+import Reset from './shared/Reset';
 
 export default function getRoutes(store) {
     const ensureAuthenticated = (nextState, replace) => {

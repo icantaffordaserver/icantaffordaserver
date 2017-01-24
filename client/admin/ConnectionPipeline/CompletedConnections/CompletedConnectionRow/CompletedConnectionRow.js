@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import moment from 'moment';
-import {showModal} from '../../../../Modal/actions';
+import {showModal} from '../../../../shared/Modal/actions';
 import {selectMatch} from '../../actions';
 import {connect} from 'react-redux';
 

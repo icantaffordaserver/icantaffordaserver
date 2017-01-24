@@ -3,11 +3,11 @@ import path from 'path';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var config = {
+let config = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client',
-        './client/admin/main'
+        './client/main'
     ],
     output: {
         path: path.join(__dirname, 'public', 'js'),

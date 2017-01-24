@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { fetchUsers, submitMatchedUsers, setSearchText, setSelectedUser, setUserIndex } from './actions';
 import UserPool from './UserPool';
 import UserProfile from './UserProfile';
-import Messages from '../../Messages';
+import Messages from '../../shared/Messages';
 
 const MAX_USERS = 2;
 

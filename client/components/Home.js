@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Messages from '../Messages';
+import Messages from '../shared/Messages';
 
 class Home extends React.Component {
   render() {

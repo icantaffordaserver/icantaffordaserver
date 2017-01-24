@@ -28,8 +28,8 @@ var UserAccounts = require('./models/UserAccounts').UserAccounts;
 import serverRoutes from './routes';
 
 // React and Server-Side Rendering
-import routes from '../client/admin/routes';
-import configureStore from '../client/admin/store/configureStore';
+import routes from '../client/routes';
+import configureStore from '../client/store/configureStore';
 
 const app = express();
 

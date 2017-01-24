@@ -2,7 +2,7 @@
  * Created by alexandermann on 2017-01-21.
  */
 import {handleResponse} from '../helpers';
-import {CLEAR_MESSAGES} from '../../../Messages/constants';
+import {CLEAR_MESSAGES} from '../../../shared/Messages/constants';
 import {
     SEND_INVITE_FAILURE,
     SEND_INVITE_SUCCESS

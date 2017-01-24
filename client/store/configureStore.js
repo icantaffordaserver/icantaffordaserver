@@ -3,7 +3,7 @@ import devTools from 'remote-redux-devtools';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
-import rootReducer from '../adminReducer';
+import rootReducer from '../admin/adminReducer';
 
 export default function configureStore(initialState) {
     const logger = createLogger();
@@ -24,8 +24,8 @@ export default function configureStore(initialState) {
 
     if (module.hot) {
         // Enable hot module replacement for reducers
-        module.hot.accept('../adminReducer', () => {
-            const nextRootReducer = require('../adminReducer');
+        module.hot.accept('../admin/adminReducer', () => {
+            const nextRootReducer = require('../admin/adminReducer');
             store.replaceReducer(nextRootReducer);
         });
     }

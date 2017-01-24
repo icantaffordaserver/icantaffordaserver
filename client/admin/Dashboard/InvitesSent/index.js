@@ -9,7 +9,7 @@ import {
     deselectInvite,
     resendInvite
 } from './actions';
-import {closeModal, showModal} from '../../../Modal/actions';
+import {closeModal, showModal} from '../../../shared/Modal/actions';
 import EditInviteModal from '../EditInviteModal';
 
 const POLL_INTERVAL = 10000;

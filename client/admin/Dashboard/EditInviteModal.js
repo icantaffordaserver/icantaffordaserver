@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ReactModal from 'react-modal';
 import {deselectInvite, editInviteForm,} from './InvitesSent/actions';
-import {closeModal} from '../../Modal/actions';
+import {closeModal} from '../../shared/Modal/actions';
 
 import moment from 'moment';
 

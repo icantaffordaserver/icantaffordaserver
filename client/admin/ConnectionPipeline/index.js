@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Messages from '../../Messages';
+import Messages from '../../shared/Messages';
 import MatchedUsers from './MatchedUsers/MatchedUsers';
 import CompletedConnections from './CompletedConnections/CompletedConnections';
 import ConnectionPipelineModal from './ConnectionPipelineModal';
