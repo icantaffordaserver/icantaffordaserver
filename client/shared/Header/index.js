@@ -15,7 +15,7 @@ class Header extends React.Component {
 
     render() {
         const active   = {borderBottomColor: '#3f51b5'};
-        const adminNav = this.props.token ? (
+        const adminNav = (this.props.user && this.props.user.admin) ? (
                 <ul className="nav navbar-nav">
                     <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
                     <li><Link to="/admin/dashboard" activeStyle={active}>Dashboard</Link></li>
