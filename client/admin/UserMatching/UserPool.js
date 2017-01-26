@@ -11,10 +11,8 @@ class UserPool extends React.Component {
         </div>
         <div>
           <UserPoolHeader {...this.props} />
-          <ul className="list-group" style={{columnCount: '2'}}>
-            {this.props.filteredUsers.map((user) => {
-              return <UserPoolItem key={user.id} {...this.props} user={user} />
-            })}
+          <ul className="list-group" style={{ columnCount: '2' }}>
+            {this.props.filteredUsers.map(user => <UserPoolItem key={user.id} {...this.props} user={user} />)}
           </ul>
         </div>
       </div>

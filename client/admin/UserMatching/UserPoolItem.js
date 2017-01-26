@@ -2,7 +2,7 @@ import React from 'react';
 
 const listItemStyle = {
   display: 'inline-block',
-  width: '100%'
+  width: '100%',
 };
 
 class UserPoolItem extends React.Component {
@@ -16,14 +16,16 @@ class UserPoolItem extends React.Component {
               <img src={user.gravatar} width="50px" />
             </div>
             <div className="media-body">
-              <div>{user.profile.first_name + ' ' + user.profile.last_name}</div>
-              <span>{user.profile.city + ', ' + user.profile.state_province}</span>
+              <div>{`${user.profile.first_name} ${user.profile.last_name}`}</div>
+              <span>{`${user.profile.city}, ${user.profile.state_province}`}</span>
             </div>
             <div className="media-right">
-              <button className="btn btn-success"
-                style={{whiteSpace: 'normal'}}
+              <button
+                className="btn btn-success"
+                style={{ whiteSpace: 'normal' }}
                 onClick={this.props.setSelectedUser.bind(null, user)}
-                disabled={this.props.selectedUsers.filter((o) => user.id === o.id).length !== 0}>
+                disabled={this.props.selectedUsers.filter(o => user.id === o.id).length !== 0}
+              >
                 Select User
               </button>
             </div>

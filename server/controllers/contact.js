@@ -1,25 +1,25 @@
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
   service: 'Mailgun',
   auth: {
     user: process.env.MAILGUN_USERNAME,
-    pass: process.env.MAILGUN_PASSWORD
-  }
+    pass: process.env.MAILGUN_PASSWORD,
+  },
 });
 
 /**
  * GET /contact
  */
-exports.contactGet = function(req, res) {
+exports.contactGet = function (req, res) {
   res.render('contact', {
-    title: 'Contact'
+    title: 'Contact',
   });
 };
 
 /**
  * POST /contact
  */
-exports.contactPost = function(req, res) {
+exports.contactPost = function (req, res) {
   req.assert('first_name', 'First name cannot be blank').notEmpty();
   req.assert('last_name', 'Last name cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
@@ -27,20 +27,20 @@ exports.contactPost = function(req, res) {
   req.assert('message', 'Message cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  var errors = req.validationErrors();
+  const errors = req.validationErrors();
 
   if (errors) {
     return res.status(400).send(errors);
   }
 
-  var mailOptions = {
-    from: req.body.first_name + ' ' + req.body.last_name + ' ' + '<'+ req.body.email + '>',
+  const mailOptions = {
+    from: `${req.body.first_name} ${req.body.last_name} ` + `<${req.body.email}>`,
     to: 'your@email.com',
     subject: '✔ Contact Form | Mega Boilerplate',
-    text: req.body.message
+    text: req.body.message,
   };
 
-  transporter.sendMail(mailOptions, function(err) {
+  transporter.sendMail(mailOptions, (err) => {
     res.send({ msg: 'Thank you! Your feedback has been submitted.' });
   });
 };

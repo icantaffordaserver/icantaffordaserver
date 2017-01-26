@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { forgotPassword } from './actions';
 import Messages from '../Messages';
 
@@ -29,7 +29,7 @@ class Forgot extends React.Component {
               <div className="form-group">
                 <p>Enter your email address below and we'll send you password reset instructions.</p>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" className="form-control" autoFocus value={this.state.email} onChange={this.handleChange.bind(this)}/>
+                <input type="email" name="email" id="email" placeholder="Email" className="form-control" autoFocus value={this.state.email} onChange={this.handleChange.bind(this)} />
               </div>
               <button type="submit" className="btn btn-success">Reset Password</button>
             </form>
@@ -40,10 +40,8 @@ class Forgot extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.messages
-  };
-};
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
 
 export default connect(mapStateToProps)(Forgot);

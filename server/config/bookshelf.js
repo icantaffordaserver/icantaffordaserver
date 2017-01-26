@@ -1,7 +1,7 @@
-const environment   = process.env.NODE_ENV;
-const config        = require('../../knexfile')[environment];
-const knex          = require('knex')(config);
-const bookshelf     = require('bookshelf')(knex);
+const environment = process.env.NODE_ENV;
+const config = require('../../knexfile')[environment];
+const knex = require('knex')(config);
+const bookshelf = require('bookshelf')(knex);
 const cascadeDelete = require('bookshelf-cascade-delete');
 
 bookshelf.plugin('virtuals');

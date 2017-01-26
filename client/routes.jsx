@@ -1,12 +1,12 @@
 import React from 'react';
 import { IndexRedirect, IndexRoute, Route } from 'react-router';
-import App from './components/App';
-import Home from './components/Home';
+import App from './App';
+import Home from './shared/Home';
 import Dashboard from './admin/Dashboard';
 import UserMatching from './admin/UserMatching';
 import ConnectionPipeline from './admin/ConnectionPipeline';
 import Contact from './shared/Contact';
-import NotFound from './components/NotFound';
+import NotFound from './shared/NotFound';
 import Login from './shared/Login';
 import Signup from './shared/Signup';
 import Profile from './shared/Profile';

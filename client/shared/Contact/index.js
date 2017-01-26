@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { submitContactForm } from './actions';
 import Messages from '../Messages';
 
@@ -26,30 +26,30 @@ class Contact extends React.Component {
             <h3 className="panel-title">Contact Form</h3>
           </div>
           <div className="panel-body">
-            <Messages messages={this.props.messages}/>
+            <Messages messages={this.props.messages} />
             <form onSubmit={this.handleSubmit.bind(this)} className="form-horizontal">
               <div className="form-group">
                 <label htmlFor="firstName" className="col-sm-2">First Name</label>
                 <div className="col-sm-8">
-                  <input type="text" name="firstName" id="firstName" className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)} autoFocus/>
+                  <input type="text" name="firstName" id="firstName" className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)} autoFocus />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="lastName" className="col-sm-2">Last Name</label>
                 <div className="col-sm-8">
-                  <input type="text" name="lastName" id="lastName" className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)} autoFocus/>
+                  <input type="text" name="lastName" id="lastName" className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)} autoFocus />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="col-sm-2">Email</label>
                 <div className="col-sm-8">
-                  <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>
+                  <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="message" className="col-sm-2">Body</label>
                 <div className="col-sm-8">
-                  <textarea name="message" id="message" rows="7" className="form-control" value={this.state.message} onChange={this.handleChange.bind(this)}></textarea>
+                  <textarea name="message" id="message" rows="7" className="form-control" value={this.state.message} onChange={this.handleChange.bind(this)} />
                 </div>
               </div>
               <div className="form-group">
@@ -65,10 +65,8 @@ class Contact extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.messages
-  };
-};
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
 
 export default connect(mapStateToProps)(Contact);

@@ -16,7 +16,7 @@ import {
     resetPost,
     unlink,
     authFacebook,
-    authFacebookCallback
+    authFacebookCallback,
 } from '../controllers/userController';
 import {
     resendInviteGet,
@@ -24,7 +24,7 @@ import {
     inviteGet,
     newInvitePost,
     inviteDelete,
-    updateInvitePut
+    updateInvitePut,
 } from '../controllers/invites';
 
 import {
@@ -32,7 +32,7 @@ import {
     newConnectionPost,
     singleConnectionGet,
     updateConnectionPut,
-    connectionDelete
+    connectionDelete,
 } from '../controllers/connections';
 
 // Validation Helpers
@@ -41,7 +41,7 @@ import {
     validateUserLogin,
     validateUpdateAccount,
     validateForgotPassword,
-    validateNewInvite
+    validateNewInvite,
 } from './validationMiddleware';
 
 routes.post('/contact', contactController.contactPost);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { signup } from './actions';
 import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../OAuth/actions';
 import Messages from '../Messages';
@@ -22,28 +22,28 @@ class Signup extends React.Component {
       this.state.lastName,
       this.state.email,
       this.state.password,
-      this.props.params.inviteId
+      this.props.params.inviteId,
     ));
   }
 
   handleFacebook() {
-    this.props.dispatch(facebookLogin())
+    this.props.dispatch(facebookLogin());
   }
 
   handleTwitter() {
-    this.props.dispatch(twitterLogin())
+    this.props.dispatch(twitterLogin());
   }
 
   handleGoogle() {
-    this.props.dispatch(googleLogin())
+    this.props.dispatch(googleLogin());
   }
 
   handleVk() {
-    this.props.dispatch(vkLogin())
+    this.props.dispatch(vkLogin());
   }
 
   handleGithub() {
-    this.props.dispatch(githubLogin())
+    this.props.dispatch(githubLogin());
   }
 
   render() {
@@ -51,24 +51,24 @@ class Signup extends React.Component {
       <div className="login-container container">
         <div className="panel">
           <div className="panel-body">
-            <Messages messages={this.props.messages}/>
+            <Messages messages={this.props.messages} />
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" placeholder="First Name" autoFocus className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)}/>
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" autoFocus className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoFocus className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)}/>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoFocus className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>
+                <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)}/>
+                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)} />
               </div>
               <div className="form-group">
                 <small className="text-muted">By signing up, you agree to the <Link to="/">Terms of Service</Link>.</small>
@@ -77,7 +77,7 @@ class Signup extends React.Component {
             </form>
             <div className="hr-title"><span>or</span></div>
             <div className="btn-toolbar text-center">
-        <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
+              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
             </div>
           </div>
         </div>
@@ -89,10 +89,8 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    messages: state.messages
-  };
-};
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
 
 export default connect(mapStateToProps)(Signup);

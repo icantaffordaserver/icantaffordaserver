@@ -32,7 +32,7 @@ class UserMatching extends React.Component {
       this.props.dispatch(setSelectedUser(this.props.selectedUsers.concat(user)));
     } else {
       this.props.dispatch(setSelectedUser(update(this.props.selectedUsers,
-        { [this.props.userIndex]: { $set: user } }
+        { [this.props.userIndex]: { $set: user } },
       )));
     }
 
@@ -45,7 +45,7 @@ class UserMatching extends React.Component {
     this.props.dispatch(submitMatchedUsers(
       this.props.selectedUsers[0].id,
       this.props.selectedUsers[1].id,
-      this.props.auth.user.id
+      this.props.auth.user.id,
     ));
   }
 
@@ -65,9 +65,7 @@ class UserMatching extends React.Component {
           <div className="col-sm-5">
             {this.props.selectedUsers.length > 0 &&
               <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.props.selectedUsers.map((user) => {
-                  return <UserProfile key={user.id} user={user} />
-                })}
+                {this.props.selectedUsers.map(user => <UserProfile key={user.id} user={user} />)}
                 <button className="btn btn-success">Match Users</button>
               </form>
             }
@@ -78,22 +76,18 @@ class UserMatching extends React.Component {
   }
 }
 
-const filterUsers = (users, searchText) => {
-  return _.filter(users, (user) => {
-    const re = new RegExp(searchText, 'i');
-    return re.test(user.profile.first_name + ' ' + user.profile.last_name);
-  })
-}
+const filterUsers = (users, searchText) => _.filter(users, (user) => {
+  const re = new RegExp(searchText, 'i');
+  return re.test(`${user.profile.first_name} ${user.profile.last_name}`);
+});
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-    messages: state.messages,
-    users: state.users,
-    filteredUsers: filterUsers(state.users, state.userMatching.searchText),
-    userIndex: state.userMatching.userIndex,
-    selectedUsers: state.userMatching.selectedUsers
-  }
-};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  messages: state.messages,
+  users: state.users,
+  filteredUsers: filterUsers(state.users, state.userMatching.searchText),
+  userIndex: state.userMatching.userIndex,
+  selectedUsers: state.userMatching.selectedUsers,
+});
 
 export default connect(mapStateToProps)(UserMatching);

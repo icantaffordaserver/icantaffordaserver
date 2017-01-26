@@ -3,57 +3,53 @@
  */
 process.env.NODE_ENV = 'test';
 jest.disableAutomock();
-const server   = require('../../../../server');
-const request  = require('supertest');
+const server = require('../../../../server');
+const request = require('supertest');
 const knexfile = require('../../../../knexfile')[process.env.NODE_ENV];
-const knex     = require('knex')(knexfile);
+const knex = require('knex')(knexfile);
 
 // TODO: define all account related tests
 describe('Routes: account related functions', () => {
-    beforeAll(async() => {
-        await knex.migrate.rollback(); // clear db
-        await knex.migrate.latest(); // set up tables
-        await knex.seed.run(); // populate DB with seed data
+  beforeAll(async () => {
+    await knex.migrate.rollback(); // clear db
+    await knex.migrate.latest(); // set up tables
+    await knex.seed.run(); // populate DB with seed data
+  });
+
+  afterAll(async () => await knex.migrate.rollback(), // return db to empty state
+    );
+
+  describe('POST /signup - sign a user up', () => {
+    it('should not allow any signups because signups are *INVITE ONLY*', () => {
+
+    });
+  });
+
+  describe('POST /signup/invite/:inviteId - sign a user up with an invite code', () => {
+    let response; // globally define the response so we do not make the same request multiple times
+
+    beforeAll(async () => {
+            // make sure seed data, aka invite is there
+      response = await request(server).get('/invites'); // make the GET request
     });
 
-    afterAll(async() => {
-        return await knex.migrate.rollback(); // return db to empty state
+    it('response should have status 200', () => {
+      expect(response.status).toBe(200);
     });
 
-    describe('POST /signup - sign a user up', () => {
-        it('should not allow any signups because signups are *INVITE ONLY*', () => {
-
-        })
+    it('response should have type application/json', () => {
+      expect(response.type).toBe('application/json');
     });
 
-    describe('POST /signup/invite/:inviteId - sign a user up with an invite code', () => {
+    it('response body should not be empty (ie. it should contain invites)', () => {
+      expect(response.body.data).not.toHaveLength(0);
+    });
 
-        let response; // globally define the response so we do not make the same request multiple times
-
-        beforeAll(async() => {
-            //make sure seed data, aka invite is there
-            response = await request(server).get('/invites'); // make the GET request
-        });
-
-        it('response should have status 200', () => {
-            expect(response.status).toBe(200);
-        });
-
-        it('response should have type application/json', () => {
-            expect(response.type).toBe('application/json');
-        });
-
-        it('response body should not be empty (ie. it should contain invites)', () => {
-            expect(response.body.data).not.toHaveLength(0);
-        });
-
-        it('should have properties: id, email, first_name, last_name, accepted', () => {
-            expect(response.body.data[0]).toBeDefined();
-            expect(response.body.data[0].id).toBeDefined();
-            expect(response.body.data[0].email).toBeDefined();
+    it('should have properties: id, email, first_name, last_name, accepted', () => {
+      expect(response.body.data[0]).toBeDefined();
+      expect(response.body.data[0].id).toBeDefined();
+      expect(response.body.data[0].email).toBeDefined();
             // TODO: define all props here
-        });
-
     });
-
+  });
 });
