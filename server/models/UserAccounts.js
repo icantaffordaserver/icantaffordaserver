@@ -11,7 +11,7 @@ const UserAccounts = bookshelf.Model.extend({
     this.on('saving', this.hashPassword, this);
   },
 
-        // for all relations, make sure to RETURN
+    // for all relations, make sure to RETURN
   profile() {
     return this.hasOne(UserProfiles, 'user_account_id');
   },
@@ -28,13 +28,13 @@ const UserAccounts = bookshelf.Model.extend({
     return this.hasMany(ConnectionProgress, 'user_account_id');
   },
 
-        // this function is called when the object fires the event 'saving' and it checks if an attribute
-        // password was passed.
-        // seems like this is run every time the UserAccounts fires the 'saving' event.
-        // This may be unnecessary then and rework into functions only where the password
-        // is required to be saved...
+    // this function is called when the object fires the event 'saving' and it checks if an attribute
+    // password was passed.
+    // seems like this is run every time the UserAccounts fires the 'saving' event.
+    // This may be unnecessary then and rework into functions only where the password
+    // is required to be saved...
   hashPassword(model, attrs, options) {
-            // attrs are attributes that will be inserted or updated, if present
+      // attrs are attributes that will be inserted or updated, if present
     const password = options.patch ? attrs.password_hash : model.get('password_hash');
     if (!password) {
       return;
@@ -59,7 +59,7 @@ const UserAccounts = bookshelf.Model.extend({
     });
   },
 
-        // use the visibility plugin to hide these fields
+    // use the visibility plugin to hide these fields
   hidden: ['password_hash', 'passwordResetToken', 'passwordResetExpires'],
 
   virtuals: {
@@ -73,7 +73,7 @@ const UserAccounts = bookshelf.Model.extend({
   },
 },
 
-    // Class/Static functions and properties attached to the constructor
+  // Class/Static functions and properties attached to the constructor
   {
     dependents: ['profile'], // specify the dependent relations for cascade-delete plugin
 
@@ -97,6 +97,17 @@ let Invites = bookshelf.Model.extend({
 
   account() {
     return this.belongsTo(UserAccounts, 'sent_by_user_account_id'); // second argument, column of the foreign key, in this model
+  },
+
+});
+
+const InviteRequests = bookshelf.Model.extend({
+  tableName: 'invite_requests',
+  idAttribute: 'id',
+  hasTimestamps: true,
+
+  invite() {
+    return this.belongsTo(Invites, 'invite_id'); // second argument, column of the foreign key, in this model
   },
 
 });
@@ -138,5 +149,6 @@ let ConnectionProgress = bookshelf.Model.extend({
 module.exports.UserAccounts = UserAccounts;
 module.exports.UserProfiles = UserProfiles;
 module.exports.Invites = Invites;
+module.exports.InviteRequests = InviteRequests;
 module.exports.Connections = Connections;
 module.exports.ConnectionProgress = ConnectionProgress;

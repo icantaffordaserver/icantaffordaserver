@@ -24,7 +24,7 @@ class InvitesSent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.invites.all != nextProps.invites.all) {
+    if (this.props.invites.all !== nextProps.invites.all) {
       clearTimeout(this.timeout);
       if (!nextProps.invites.isPolling) this.startPoll();
     }
@@ -116,7 +116,7 @@ class InvitesSent extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   invites: state.invites,
 });
 

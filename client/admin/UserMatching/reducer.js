@@ -18,7 +18,7 @@ const initialState = {
   selectedUsers: [],
 };
 
-export default function userMatching(state = initialState, action) {
+export function userMatching(state = initialState, action) {
   switch (action.type) {
     case SET_SEARCH_TEXT:
       return Object.assign({}, state, {

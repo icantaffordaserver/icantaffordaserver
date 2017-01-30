@@ -1,35 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Header } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
+
 import InvitesSent from './InvitesSent/index';
 import SendInvite from './SendInvite/index';
+import InviteRequests from './InviteRequests';
 import Messages from '../../shared/Messages';
 
-class Dashboard extends React.Component {
-  render() {
-    return (
-      <div className="container-fluid">
-        <Messages messages={this.props.messages} />
-        <div className="col-sm-6">
-          <Container text>
-            <Header as="h2">Requests</Header>
-            <p>Here is some example text inside of this container</p>
-          </Container>
-        </div>
-        <div className="col-sm-6">
-          <div>
+function Dashboard(props) {
+  return (
+    <div className="container-fluid">
+      <Messages messages={props.messages} />
+      <Grid>
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            <InviteRequests />
+          </Grid.Column>
+          <Grid.Column>
             <SendInvite />
-          </div>
-          <div>
             <InvitesSent />
-          </div>
-        </div>
-      </div>
-    );
-  }
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </div>
+  );
 }
 
-const mapStateToProps = state => ({
+Dashboard.propTypes = {
+  messages: React.PropTypes.object,
+};
+
+Dashboard.defaultProps = {
+  messages: {},
+};
+
+const mapStateToProps = (state) => ({
   messages: state.messages,
 });
 
