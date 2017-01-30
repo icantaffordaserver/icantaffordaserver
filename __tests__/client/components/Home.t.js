@@ -11,7 +11,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('Home component', () => {
-  const component = shallow(<Home store={mockStore({ messages: {} })}/>).shallow();
+  const component = shallow(<Home store={mockStore({ messages: {} })} />).shallow();
 
   it('contains View details link', () => {
     expect(component.containsMatchingElement(<a>View details</a>)).to.equal(true);

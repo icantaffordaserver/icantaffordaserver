@@ -1,4 +1,4 @@
-import 'isomorphic-fetch'
+import 'isomorphic-fetch';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
@@ -14,7 +14,7 @@ describe('auth actions', () => {
     id: '01234567890',
     name: 'John Doe',
     email: 'john@gmail.com',
-    location: 'San Francisco'
+    location: 'San Francisco',
   };
 
   afterEach(() => {
@@ -28,7 +28,7 @@ describe('auth actions', () => {
 
     const expectedActions = [
       { type: 'CLEAR_MESSAGES' },
-      { type: 'LOGIN_SUCCESS', token: token, user: user }];
+      { type: 'LOGIN_SUCCESS', token, user }];
 
     const store = mockStore({});
 

@@ -1,4 +1,4 @@
-import 'isomorphic-fetch'
+import 'isomorphic-fetch';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
@@ -15,12 +15,12 @@ describe('contact actions', () => {
 
   it('creates CONTACT_FORM_SUCCESS action when form is submitted', () => {
     fetchMock.mock('/contact', 'POST', {
-      body: { msg: 'Thank you! Your feedback has been submitted.' }
+      body: { msg: 'Thank you! Your feedback has been submitted.' },
     });
 
     const expectedActions = [
       { type: 'CLEAR_MESSAGES' },
-      { type: 'CONTACT_FORM_SUCCESS', messages: [{ msg: 'Thank you! Your feedback has been submitted.' }] }
+      { type: 'CONTACT_FORM_SUCCESS', messages: [{ msg: 'Thank you! Your feedback has been submitted.' }] },
     ];
 
     const store = mockStore({});

@@ -3,45 +3,50 @@ const routes = require('express').Router();
 // Controllers
 const contactController = require('../controllers/contact');
 import {
-    ensureAuthenticated,
-    accountPut,
-    accountDelete,
-    allUsersGet,
-    singleUserGet,
-    verifySignUpGet,
-    signUpPost,
-    inviteSignUpPost,
-    loginPost,
-    forgotPost,
-    resetPost,
-    unlink,
-    authFacebook,
-    authFacebookCallback
+  ensureAuthenticated,
+  accountPut,
+  accountDelete,
+  allUsersGet,
+  singleUserGet,
+  verifySignUpGet,
+  signUpPost,
+  inviteSignUpPost,
+  loginPost,
+  forgotPost,
+  resetPost,
+  unlink,
+  authFacebook,
+  authFacebookCallback,
 } from '../controllers/userController';
 import {
-    resendInviteGet,
-    allInvitesGet,
-    inviteGet,
-    newInvitePost,
-    inviteDelete,
-    updateInvitePut
+  resendInviteGet,
+  allInvitesGet,
+  inviteGet,
+  newInvitePost,
+  inviteDelete,
+  updateInvitePut,
 } from '../controllers/invites';
-
 import {
-    allConnectionsGet,
-    newConnectionPost,
-    singleConnectionGet,
-    updateConnectionPut,
-    connectionDelete
+  allInviteRequestsGet,
+  newInviteRequestPost,
+  approveInviteRequestPost,
+  inviteRequestDelete,
+} from '../controllers/inviteRequestsController';
+import {
+  allConnectionsGet,
+  newConnectionPost,
+  singleConnectionGet,
+  updateConnectionPut,
+  connectionDelete,
 } from '../controllers/connections';
 
 // Validation Helpers
 import {
-    validateUserSignUp,
-    validateUserLogin,
-    validateUpdateAccount,
-    validateForgotPassword,
-    validateNewInvite
+  validateUserSignUp,
+  validateUserLogin,
+  validateUpdateAccount,
+  validateForgotPassword,
+  validateNewInvite,
 } from './validationMiddleware';
 
 routes.post('/contact', contactController.contactPost);
@@ -96,5 +101,13 @@ routes.get('/connections/progress');
 routes.post('/connections/progress');
 routes.put('/connections/progress');
 routes.delete('/connections/progress');
+
+/**
+ * Request Invite Routes
+ */
+routes.get('/request', allInviteRequestsGet);
+routes.post('/request', newInviteRequestPost);
+routes.post('/request/approve', approveInviteRequestPost);
+routes.delete('/request/:inviteRequestId', inviteRequestDelete);
 
 export default routes;
