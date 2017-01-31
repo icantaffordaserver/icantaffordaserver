@@ -11,6 +11,7 @@ import {
 } from './actions';
 import { closeModal, showModal } from '../../../shared/Modal/actions';
 import EditInviteModal from '../EditInviteModal';
+import { Table, Button, Icon, Segment, Header } from 'semantic-ui-react';
 
 const POLL_INTERVAL = 10000;
 
@@ -60,56 +61,52 @@ class InvitesSent extends React.Component {
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading"><h3>Invites Sent</h3></div>
-        <table className="table table-condensed">
-          <tbody>
-            <tr>
-              <th>Date Sent</th>
-              <th>Sent By</th>
-              <th>To</th>
-              <th>Accepted?</th>
-              <th>Cancel</th>
-              <th>Resend</th>
-              <th>Edit</th>
-            </tr>
-            {this.props.invites.all.map((invite, inviteIndex) => (
-              <tr key={invite.id}>
-                <td>{moment(invite.created_at).format('MMM Do, YYYY')}</td>
-                <td>{invite.account.profile.first_name}</td>
-                <td>{invite.email}</td>
-                <td>{invite.accepted ?
-                  <i className="material-icons brand-success valign">done</i> :
-                  <i className="material-icons brand-danger valign">clear</i>}
-                </td>
-                <td>
-                  <button
-                    disabled={invite.accepted} className="btn btn-danger"
-                    onClick={this.handleCancelInvite.bind(this, invite.id)}
-                  >
-                                        Cancel
-                                    </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-primary"
-                    onClick={this.handleResendInvite.bind(this, invite)}
-                  >
-                                        Send
-                                    </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-warning"
-                    onClick={this.handleOpenEditInvite.bind(this, inviteIndex)}
-                  >
-                                        Edit
-                                    </button>
-                </td>
-              </tr>
-                        ))}
-          </tbody>
-        </table>
+      <div style={{paddingTop: '30px'}}>
+        <Header as="h2" attached="top">
+          Invites Sent
+        </Header>
+        <Segment attached>
+          <Table compact size="small" basic="very">
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Date Sent</Table.HeaderCell>
+                <Table.HeaderCell>Sent By</Table.HeaderCell>
+                <Table.HeaderCell>To</Table.HeaderCell>
+                <Table.HeaderCell>Accepted?</Table.HeaderCell>
+                <Table.HeaderCell>Cancel/Resend/Edit</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+
+            <Table.Body>
+              {this.props.invites.all.map((invite, inviteIndex) => (
+                <Table.Row key={invite.id} negative={!invite.accepted}>
+                  <Table.Cell>{moment(invite.created_at).format('MMM Do, YYYY')}</Table.Cell>
+                  <Table.Cell>{invite.account.profile.first_name}</Table.Cell>
+                  <Table.Cell>{invite.email}</Table.Cell>
+                  <Table.Cell>{invite.accepted ? <Icon name="checkmark" /> : <Icon name="close" />}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button size="mini"
+                      disabled={invite.accepted} negative
+                      onClick={this.handleCancelInvite.bind(this, invite.id)}>
+                      Cancel
+                    </Button>
+                    <Button size="mini"
+                      className="btn btn-primary" color="green"
+                      onClick={this.handleResendInvite.bind(this, invite)}>
+                      Resend
+                    </Button>
+                    <Button size="mini"
+                      className="btn btn-warning" color="blue"
+                      onClick={this.handleOpenEditInvite.bind(this, inviteIndex)}>
+                      Edit
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Segment>
         <EditInviteModal invite={this.props.invites.selected} />
       </div>
     );
