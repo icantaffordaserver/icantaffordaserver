@@ -1,66 +1,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { submitInviteForm } from './actions';
+import { Form, Header, Segment, Button, Icon } from 'semantic-ui-react';
 
 class SendInvite extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { firstName: '', lastName: '', email: '' };
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSubmit(event) {
+  handleSubmit(event, { formData }) {
     event.preventDefault();
-    this.props.dispatch(submitInviteForm(
-      {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-      },
-      this.props.auth.user.id,
-      {
-        resend: false,
-      },
-    ));
+    const options = { resend: false };
+    this.props.dispatch(submitInviteForm(formData, this.props.auth.user.id, options));
   }
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3>Send Invite</h3>
-        </div>
-        <div className="panel-body">
-          <div style={{ paddingTop: '20px' }}>
-            <form onSubmit={this.handleSubmit.bind(this)}>
-              <div className="form-group">
-                <label htmlFor="firstName">First Name</label>
-                <input
-                  type="text" name="firstName" className="form-control"
-                  value={this.state.firstName} onChange={this.handleChange.bind(this)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                  type="text" name="lastName" className="form-control"
-                  value={this.state.lastName} onChange={this.handleChange.bind(this)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email" name="email" className="form-control"
-                  value={this.state.email} onChange={this.handleChange.bind(this)}
-                />
-              </div>
-              <button className="btn btn-default">Send</button>
-            </form>
-          </div>
-        </div>
+      <div>
+        <Header as="h2" attached="top">
+          Send Invite
+        </Header>
+        <Segment attached>
+          <Form onSubmit={this.handleSubmit.bind(this)}>
+            <Form.Group widths="equal">
+              <Form.Input label="First Name" name="firstName" placeholder="First Name" />
+              <Form.Input label="Last Name" name="lastName" placeholder="Last Name" />
+            </Form.Group>
+            <Form.Input label="Email" name="email" placeholder="Email" />
+            <Button color="green"><Icon name="mail" />Send</Button>
+          </Form>
+        </Segment>
       </div>
     );
   }

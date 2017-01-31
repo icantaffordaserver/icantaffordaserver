@@ -11,7 +11,7 @@ function Dashboard(props) {
   return (
     <div className="container-fluid">
       <Messages messages={props.messages} />
-      <Grid>
+      <Grid padded>
         <Grid.Row columns={2}>
           <Grid.Column>
             <InviteRequests />
