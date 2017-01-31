@@ -16,7 +16,7 @@ class Header extends React.Component {
 
   render() {
     const active = { borderBottomColor: '#3f51b5' };
-    const trigger = (
+    const trigger = this.props.user && (
       <div>
         <Image avatar src={this.props.user.picture || this.props.user.gravatar} />
         {this.props.user.email}
@@ -24,9 +24,9 @@ class Header extends React.Component {
     );
     return (
       <Menu pointing secondary size="large">
-        <Menu.Item header to="/">{this.props.user.admin ? 'Shift Admin' : 'Shift'}</Menu.Item>
+        <Menu.Item header to="/">{this.props.user && this.props.user.admin ? 'Shift Admin' : 'Shift'}</Menu.Item>
         <Menu.Item as={IndexLink} name="Home" to="/" activeStyle={active} />
-        {this.props.user.admin ? (
+        {this.props.user && this.props.user.admin && (
           <Menu.Menu>
             <Menu.Item as={Link} name="Dashboard" to="/admin/dashboard" activeStyle={active} />
             <Menu.Item
@@ -37,7 +37,7 @@ class Header extends React.Component {
             />
             <Menu.Item as={Link} name="Pipeline" to="/admin/pipeline" activeStyle={active} />
           </Menu.Menu>
-          ) : (null)}
+          )}
 
         <Menu.Item as={Link} name="Contact" to="/contact" activeStyle={active} />
 
