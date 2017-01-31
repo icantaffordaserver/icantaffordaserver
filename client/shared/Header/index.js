@@ -24,8 +24,8 @@ class Header extends React.Component {
     );
     return (
       <Menu pointing secondary size="large">
-        <Menu.Item header to="/">{this.props.user && this.props.user.admin ? 'Shift Admin' : 'Shift'}</Menu.Item>
-        <Menu.Item as={IndexLink} name="Home" to="/" activeStyle={active} />
+        <Menu.Item header>{this.props.user && this.props.user.admin ? 'Shift Admin' : 'Shift'}</Menu.Item>
+        <Menu.Item as={IndexLink} to="/" activeStyle={active}>Home</Menu.Item>
         {this.props.user && this.props.user.admin && (
           <Menu.Menu>
             <Menu.Item as={Link} name="Dashboard" to="/admin/dashboard" activeStyle={active} />
@@ -37,7 +37,16 @@ class Header extends React.Component {
             />
             <Menu.Item as={Link} name="Pipeline" to="/admin/pipeline" activeStyle={active} />
           </Menu.Menu>
-          )}
+          )
+        }
+        {
+          this.props.user && !this.props.user.admin && (
+            <Menu.Menu>
+              <Menu.Item as={Link} name="Dashboard" to="/dashboard" activeStyle={active} />
+              <Menu.Item as={Link} name="Connection Panel" to="/connection" activeStyle={active} />
+            </Menu.Menu>
+          )
+        }
 
         <Menu.Item as={Link} name="Contact" to="/contact" activeStyle={active} />
 

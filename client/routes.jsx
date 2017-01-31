@@ -3,6 +3,8 @@ import { IndexRedirect, IndexRoute, Route } from 'react-router';
 import App from './App';
 import Home from './shared/Home';
 import Dashboard from './admin/Dashboard';
+import UserDashboard from './socialUser/Dashboard';
+import ConnectionPanel from './socialUser/ConnectionPanel';
 import UserMatching from './admin/UserMatching';
 import ConnectionPipeline from './admin/ConnectionPipeline';
 import Contact from './shared/Contact';
@@ -28,7 +30,7 @@ export default function getRoutes(store) {
       }
     }
   };
-  const clearMessages = () => {
+  const clearMessages       = () => {
     store.dispatch({
       type: 'CLEAR_MESSAGES',
     });
@@ -42,6 +44,8 @@ export default function getRoutes(store) {
         <Route path="matching" component={UserMatching} onLeave={clearMessages} />
         <Route path="pipeline" component={ConnectionPipeline} onLeave={clearMessages} />
       </Route>
+      <Route path="dashboard" onEnter={ensureAuthenticated} component={UserDashboard} />
+      <Route path="connection" onEnter={ensureAuthenticated} component={ConnectionPanel} />
       <Route path="contact" component={Contact} onLeave={clearMessages} />
       <Route path="login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages} />
       <Route

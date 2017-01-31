@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "antd": "^2.6.4",
+    "appearin-sdk": "0.0.4",
     "async": "^1.5.2",
     "axios": "^0.15.3",
     "babel-core": "^6.7.2",
