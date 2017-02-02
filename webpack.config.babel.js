@@ -6,6 +6,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const config = {
   devtool: 'eval-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
     './client/main',
   ],
