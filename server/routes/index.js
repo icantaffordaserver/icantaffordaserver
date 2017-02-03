@@ -57,6 +57,7 @@ routes.delete('/account', ensureAuthenticated, accountDelete);
 routes.get('/users', allUsersGet);
 routes.get('/users/:userId', singleUserGet);
 routes.get('/users/:token/verify', ensureAuthenticated, verifySignUpGet);
+routes.get('/users/:userId/resendVerificationEmail', ensureAuthenticated, );
 
 routes.post('/signup', validateUserSignUp, signUpPost); // Will be disabled during beta
 routes.post('/signup/invite/:inviteId', validateUserSignUp, inviteSignUpPost); // Accept an invite sent
