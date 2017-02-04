@@ -10,8 +10,12 @@ import Messages from '../../shared/Messages';
 function Dashboard(props) {
   return (
     <div className="container-fluid">
-      <Messages messages={props.messages} />
       <Grid padded>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Messages messages={props.messages} />
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row columns={2}>
           <Grid.Column>
             <InviteRequests />
