@@ -1,19 +1,14 @@
 import React from 'react';
+import { Message } from 'semantic-ui-react';
 
 class Messages extends React.Component {
   render() {
     return this.props.messages.success ? (
-      <div role="alert" className="alert alert-success">
-        {this.props.messages.success.map((message, index) => <div key={index}>{message.msg}</div>)}
-      </div>
+      <Message success list={this.props.messages.success.map((message) => message.msg)} />
     ) : this.props.messages.error ? (
-      <div role="alert" className="alert alert-danger">
-        {this.props.messages.error.map((message, index) => <div key={index}>{message.msg}</div>)}
-      </div>
+      <Message error list={this.props.messages.error.map((message) => message.msg)} />
     ) : this.props.messages.info ? (
-      <div role="alert" className="alert alert-info">
-        {this.props.messages.info.map((message, index) => <div key={index}>{message.msg}</div>)}
-      </div>
+      <Message warning list={this.props.messages.info.map((message) => message.msg)} />
     ) : null;
   }
 }
