@@ -4,7 +4,7 @@ import { updateProfile, changePassword, deleteAccount } from './actions';
 import { link, unlink } from '../OAuth/actions';
 import Messages from '../Messages';
 
-class Profile extends React.Component {
+class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +59,7 @@ class Profile extends React.Component {
           <div className="panel-body">
             <Messages messages={this.props.messages} />
             <form onSubmit={this.handleProfileUpdate.bind(this)} className="form-horizontal">
-              <legend>Profile Information</legend>
+              <legend>Account Information</legend>
               <div className="form-group">
                 <label htmlFor="email" className="col-sm-3">Email</label>
                 <div className="col-sm-7">
@@ -196,4 +196,4 @@ const mapStateToProps = state => ({
   messages: state.messages,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(Account);

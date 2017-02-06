@@ -1,8 +1,8 @@
 /**
  * Created by alexandermann on 2016-12-21.
  */
-const Invites = require('../models/UserAccounts').Invites;
-const Mailer  = require('../mail/Mailer');
+const Invites = require('../../models/UserAccounts').Invites;
+const Mailer  = require('../../mail/Mailer');
 
 // helpers
 async function resendInvite(inviteId, host) {

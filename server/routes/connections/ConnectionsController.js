@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2016-12-23.
  */
-import { Connections } from '../models/UserAccounts';
+import { Connections } from '../../models/UserAccounts';
 
 /**
  * GET /connections
@@ -41,7 +41,7 @@ export function singleConnectionGet(req, res, next) {
  */
 export function newConnectionPost(req, res, next) {
   new Connections({ status: 'matched', matched_by: req.body.admin_user_id }).save()
-        .then(connection => connection.accounts().attach([req.body.user1_id, req.body.user2_id]))
+        .then((connection) => connection.accounts().attach([req.body.user1_id, req.body.user2_id]))
         .then((result) => {
           res.send({ msg: 'Users have been matched.' });
         })

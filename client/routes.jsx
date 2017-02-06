@@ -3,15 +3,15 @@ import { IndexRedirect, IndexRoute, Route } from 'react-router';
 import App from './App';
 import Home from './shared/Home';
 import Dashboard from './admin/Dashboard';
-import UserDashboard from './socialUser/Dashboard';
-import ConnectionPanel from './socialUser/ConnectionPanel';
+import UserDashboard from './user/Dashboard';
+import ConnectionPanel from './user/ConnectionPanel';
 import UserMatching from './admin/UserMatching';
 import ConnectionPipeline from './admin/ConnectionPipeline';
 import Contact from './shared/Contact';
 import NotFound from './shared/NotFound';
 import Login from './shared/Login';
 import Signup from './shared/Signup';
-import Profile from './shared/Profile';
+import Account from './shared/Account';
 import Forgot from './shared/Forgot';
 import Reset from './shared/Reset';
 
@@ -56,7 +56,7 @@ export default function getRoutes(store) {
       />
       <Route
         path="account"
-        component={Profile}
+        component={Account}
         onEnter={ensureAuthenticated}
         onLeave={clearMessages}
       />

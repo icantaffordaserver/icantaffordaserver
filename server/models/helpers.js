@@ -14,7 +14,7 @@ const UserProfiles = require('./UserAccounts').UserProfiles;
  * Generate a unique token
  * @returns {Promise.<void>}
  */
-export async function generateUniqueToken() {
+export function generateUniqueToken() {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(16, (err, buf) => {
       if (err) {
@@ -40,7 +40,7 @@ export async function createUser(firstName, lastName, email, password) {
   return bookshelf.transaction(async (t) => {
     try {
       // Step 1: generate a token to verify email
-      const token = generateUniqueToken();
+      const token = await generateUniqueToken();
       // Step 2: insert the email, password, and generated token into user_accounts DB table
       const newUser = await new UserAccounts({
         email,

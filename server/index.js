@@ -29,7 +29,7 @@ import serverRoutes from './routes';
 
 // React and Server-Side Rendering
 import routes from '../client/routes';
-import configureStore from '../client/store/configureStore';
+import configureStore from '../client/configureStore';
 
 const app = express();
 

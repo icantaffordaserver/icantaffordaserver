@@ -1,9 +1,9 @@
 /**
  * Created by alexandermann on 2017-01-26.
  */
-const InviteRequests = require('../models/UserAccounts').InviteRequests;
-const Mailer = require('../mail/Mailer');
-import { createNewInvite } from '../controllers/invites';
+const InviteRequests = require('../../models/UserAccounts').InviteRequests;
+const Mailer = require('../../mail/Mailer');
+import { createNewInvite } from '../invites/InvitesController';
 
 /**
  * GET /request
