@@ -3,7 +3,8 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Segment, Header, Message, Button, Form, TextArea, Divider } from 'semantic-ui-react';
+import { Grid, Segment, Message } from 'semantic-ui-react';
+import RequestConnection from './components/RequestConnection';
 import UpcomingConnectionsTable from './components/UpcomingConnectionsTable';
 import { resendVerificationEmail, getMyConnections, requestConnection } from './actions';
 
@@ -12,10 +13,6 @@ class UserDashboard extends React.Component {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleRequestConnection = this.handleRequestConnection.bind(this);
-    this.handleOnCommentChange = this.handleOnCommentChange.bind(this);
-    this.state = {
-      requestConnectionComment: '',
-    };
   }
 
   componentDidMount() {
@@ -26,14 +23,8 @@ class UserDashboard extends React.Component {
     this.props.dispatch(resendVerificationEmail());
   }
 
-  handleRequestConnection() {
-    this.props.dispatch(requestConnection(this.state.requestConnectionComment));
-  }
-
-  handleOnCommentChange(e) {
-    this.setState({
-      requestConnectionComment: e.target.value,
-    });
+  handleRequestConnection(comment) {
+    this.props.dispatch(requestConnection(comment));
   }
 
   render() {
@@ -53,27 +44,12 @@ class UserDashboard extends React.Component {
             </Grid.Column>
           )}
           <Grid.Column width={8}>
-            <Segment>
-              <Header as="h1" textAlign="center">Request Connection</Header>
-              <Form>
-                <TextArea
-                  placeholder="Give our matching experts more info on who you want to talk with or about"
-                  onChange={this.handleOnCommentChange}
-                />
-              </Form>
-              <Divider />
-              <Button
-                disabled={!this.props.auth.user.email_verified}
-                onClick={this.handleRequestConnection}
-                size="massive"
-                positive
-                fluid
-              >
-                Match me with someone!
-              </Button>
-            </Segment>
+            <RequestConnection
+              requestConnection={this.handleRequestConnection}
+              isAllowed={!this.props.myConnections.isQueued && this.props.auth.user.email_verified}
+            />
             <UpcomingConnectionsTable
-              upcomingConnections={this.props.myConnections}
+              upcomingConnections={this.props.myConnections.allConnections}
               currentUserId={this.props.auth.user.id}
             />
           </Grid.Column>

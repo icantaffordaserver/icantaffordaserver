@@ -6,10 +6,12 @@ import ConnectionQueue from '../../models/ConnectionQueue';
 
 export async function myConnectionsGet(req, res, next) {
   try {
-    const myConnections = await new UserAccounts({ id: req.user.id }).connections().fetch({ withRelated: 'accounts.profile' });
+    const myQueue = await new ConnectionQueue({ user_account_id: req.user.id }).fetchAll();
+    const allConnections = await new UserAccounts({ id: req.user.id }).connections().fetch({ withRelated: 'accounts.profile' });
     res.status(200).send({
       status: 'success',
-      myConnections: myConnections.toJSON(),
+      allConnections: allConnections.toJSON(),
+      isQueued: myQueue.toJSON().length > 0,
     });
   } catch (err) {
     console.log(err);

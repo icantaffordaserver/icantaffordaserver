@@ -6,12 +6,18 @@
  */
 import { FETCH_UPCOMING_CONNECTIONS_SUCCESS } from './constants';
 
-const initialState = [];
+const initialState = {
+  allConnections: [],
+  isQueued: true,
+};
 
 export default function myConnections(state = initialState, action) {
   switch (action.type) {
     case FETCH_UPCOMING_CONNECTIONS_SUCCESS:
-      return [...action.myConnections];
+      return {
+        allConnections: [...action.allConnections],
+        isQueued: action.isQueued,
+      };
     default:
       return state;
   }

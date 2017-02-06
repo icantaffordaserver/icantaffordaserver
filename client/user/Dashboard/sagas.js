@@ -13,10 +13,11 @@ import {
 function* fetchUpcomingConnections(action) {
   try {
     yield put({ type: 'FETCHING_UPCOMING_CONNECTIONS' });
-    const upcomingConnections = yield call(axios.get, 'dashboard/myconnections');
+    const myConnectionInfo = yield call(axios.get, 'dashboard/myconnections');
     yield put({
       type: FETCH_UPCOMING_CONNECTIONS_SUCCESS,
-      myConnections: upcomingConnections.data.myConnections,
+      allConnections: myConnectionInfo.data.allConnections,
+      isQueued: myConnectionInfo.data.isQueued,
     });
   } catch (err) {
     console.log(err);
