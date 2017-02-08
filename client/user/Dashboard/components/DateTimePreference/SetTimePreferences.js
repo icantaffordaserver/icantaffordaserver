@@ -12,17 +12,20 @@ class SetTimePreferences extends React.Component {
     super(props);
     this.state = {
       currentDay: null,
+      timesAvailable: {
+        Monday: [],
+        Tuesday: [],
+        Wednesday: [],
+        Thursday: [],
+        Friday: [],
+        Saturday: [],
+        Sunday: [],
+      },
     };
     this.chooseDay = this.chooseDay.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
     this.handleSelectDay = this.handleSelectDay.bind(this);
-    this.setTimePreferences = this.setTimePreferences.bind(this);
-  }
-
-  chooseDay(e, data) {
-    this.setState({
-      currentDay: data.content,
-    });
+    this.saveTimePreferences = this.saveTimePreferences.bind(this);
   }
 
   handleBackButton() {
@@ -37,10 +40,21 @@ class SetTimePreferences extends React.Component {
     });
   }
 
-  setTimePreferences(data) {
-    console.log(data);
+  saveTimePreferences(timesAvailableArray) {
+    this.setState({
+      timesAvailable: {
+        ...this.state.timesAvailable,
+        [this.state.currentDay]: timesAvailableArray,
+      },
+      currentDay: null,
+    });
   }
 
+  chooseDay(e, data) {
+    this.setState({
+      currentDay: data.content,
+    });
+  }
 
   render() {
     return (
@@ -49,13 +63,15 @@ class SetTimePreferences extends React.Component {
         <Divider />
         {this.state.currentDay ?
           <TimePicker
+            currentAvailability={this.state.timesAvailable[this.state.currentDay]}
             goBack={this.handleBackButton}
-            handleSelectedTimes={this.setTimePreferences}
+            handleSelectedTimes={this.saveTimePreferences}
           />
           :
           <DayPicker
             goBack={this.handleBackButton}
             selectDay={this.handleSelectDay}
+            currentAvailability={this.state.timesAvailable}
           />
         }
       </Segment>

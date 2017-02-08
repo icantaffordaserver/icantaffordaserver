@@ -8,31 +8,49 @@ class TimePicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      morningTimeChoices: [
-        { time: '9-10', period: 'am', selected: false },
-        { time: '10-11', period: 'am', selected: false },
-        { time: '11-12', period: 'pm', selected: false },
-      ],
-      afternoonTimeChoices: [
-        { time: '12-1', period: 'pm', selected: false },
-        { time: '1-2', period: 'pm', selected: false },
-        { time: '2-3', period: 'pm', selected: false },
-        { time: '3-4', period: 'pm', selected: false },
-        { time: '4-5', period: 'pm', selected: false },
-      ],
-      eveningTimeChoices: [
-        { time: '5-6', period: 'pm', selected: false },
-        { time: '6-7', period: 'pm', selected: false },
-        { time: '7-8', period: 'pm', selected: false },
-        { time: '8-9', period: 'pm', selected: false },
-        { time: '9-10', period: 'pm', selected: false },
+      selectAllToggle: {
+        morning: false,
+        afternoon: false,
+        evening: false,
+      },
+      timeChoices: [
+        { time: '9-10', period: 'am', timeOfDay: 'morning', selected: false },
+        { time: '10-11', period: 'am', timeOfDay: 'morning', selected: false },
+        { time: '11-12', period: 'pm', timeOfDay: 'morning', selected: false },
+        { time: '12-1', period: 'pm', timeOfDay: 'afternoon', selected: false },
+        { time: '1-2', period: 'pm', timeOfDay: 'afternoon', selected: false },
+        { time: '2-3', period: 'pm', timeOfDay: 'afternoon', selected: false },
+        { time: '3-4', period: 'pm', timeOfDay: 'afternoon', selected: false },
+        { time: '4-5', period: 'pm', timeOfDay: 'afternoon', selected: false },
+        { time: '5-6', period: 'pm', timeOfDay: 'evening', selected: false },
+        { time: '6-7', period: 'pm', timeOfDay: 'evening', selected: false },
+        { time: '7-8', period: 'pm', timeOfDay: 'evening', selected: false },
+        { time: '8-9', period: 'pm', timeOfDay: 'evening', selected: false },
+        { time: '9-10', period: 'pm', timeOfDay: 'evening', selected: false },
       ],
     };
   }
 
-  toggle(timeOfDay, index) {
+  componentWillMount() {
+    if (this.props.currentAvailability.length > 0) {
+      let selectAllToggle = {
+        ...this.state.selectAllToggle,
+      };
+      this.props.currentAvailability.map((timeSlot) => {
+        if (timeSlot.selected) {
+          selectAllToggle[timeSlot.timeOfDay] = true;
+        }
+      });
+      this.setState({
+        timeChoices: [...this.props.currentAvailability],
+        selectAllToggle: { ...selectAllToggle },
+      });
+    }
+  }
+
+  toggle(index) {
     const newState = { ...this.state };
-    newState[timeOfDay][index].selected = !newState[timeOfDay][index].selected;
+    newState.timeChoices[index].selected = !newState.timeChoices[index].selected;
     this.setState({
       ...newState,
     });
@@ -40,80 +58,50 @@ class TimePicker extends React.Component {
 
   toggleAll(timeOfDay) {
     const newState = { ...this.state };
-    const savedFirstState = newState[timeOfDay][0].selected;
-    newState[timeOfDay].map((timeSlot, index) => {
-      newState[timeOfDay][index].selected = !savedFirstState;
+    newState.timeChoices.map((timeSlot, index) => {
+      if (newState.timeChoices[index].timeOfDay === timeOfDay) {
+        newState.timeChoices[index].selected = !this.state.selectAllToggle[timeOfDay];
+      }
     });
+    newState.selectAllToggle[timeOfDay] = !newState.selectAllToggle[timeOfDay];
     this.setState({
       ...newState,
     });
   }
 
+  renderTimeChoices(timeOfDay) {
+    return (
+      <div>
+        <Button.Group>
+          {this.state.timeChoices.map(
+            (timeSlot, index) => timeSlot.timeOfDay === timeOfDay && (
+              <Button
+                key={index}
+                content={timeSlot.time + timeSlot.period}
+                primary={timeSlot.selected}
+                onClick={() => this.toggle(index)}
+              />
+            )
+          )
+          }
+        </Button.Group>
+        <Button
+          floated="right"
+          content={this.state.selectAllToggle[timeOfDay] ? 'Select None' : 'Select All'}
+          onClick={() => this.toggleAll(timeOfDay)}
+        />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        <div>
-          <Button.Group>
-            {this.state.morningTimeChoices.map(
-              (timeSlot, index) => (
-                <Button
-                  key={index}
-                  content={timeSlot.time + timeSlot.period}
-                  primary={timeSlot.selected}
-                  onClick={() => this.toggle('morningTimeChoices', index)}
-                />
-              )
-            )
-            }
-          </Button.Group>
-          <Button
-            floated="right"
-            content="Toggle All"
-            onClick={() => this.toggleAll('morningTimeChoices')}
-          />
-        </div>
+        {this.renderTimeChoices('morning')}
         <Divider />
-        <div>
-          <Button.Group>
-            {this.state.afternoonTimeChoices.map(
-              (timeSlot, index) => (
-                <Button
-                  key={index}
-                  content={timeSlot.time + timeSlot.period}
-                  primary={timeSlot.selected}
-                  onClick={() => this.toggle('afternoonTimeChoices', index)}
-                />
-              )
-            )
-            }
-          </Button.Group>
-          <Button
-            floated="right"
-            content="Toggle All"
-            onClick={() => this.toggleAll('afternoonTimeChoices')}
-          />
-        </div>
+        {this.renderTimeChoices('afternoon')}
         <Divider />
-        <div>
-          <Button.Group>
-            {this.state.eveningTimeChoices.map(
-              (timeSlot, index) => (
-                <Button
-                  key={index}
-                  content={timeSlot.time + timeSlot.period}
-                  primary={timeSlot.selected}
-                  onClick={() => this.toggle('eveningTimeChoices', index)}
-                />
-              )
-            )
-            }
-          </Button.Group>
-          <Button
-            floated="right"
-            content="Toggle All"
-            onClick={() => this.toggleAll('eveningTimeChoices')}
-          />
-        </div>
+        {this.renderTimeChoices('evening')}
         <Divider />
         <Button
           content="Back"
@@ -126,14 +114,7 @@ class TimePicker extends React.Component {
           content="Save"
           icon="save"
           floated="right"
-          onClick={() => {
-            const timesAvailable = [
-              ...this.state.morningTimeChoices.filter((value) => (value.selected)),
-              ...this.state.afternoonTimeChoices.filter((value) => (value.selected)),
-              ...this.state.eveningTimeChoices.filter((value) => (value.selected)),
-            ];
-            this.props.handleSelectedTimes(timesAvailable);
-          }}
+          onClick={() => this.props.handleSelectedTimes(this.state.timeChoices)}
         />
       </div>
     );
