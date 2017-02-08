@@ -5,7 +5,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Segment, Message } from 'semantic-ui-react';
 import RequestConnection from './components/RequestConnection';
+import SetTimePreferences from './components/DateTimePreference/SetTimePreferences';
 import UpcomingConnectionsTable from './components/UpcomingConnectionsTable';
+import ConnectionProfile from './ConnectionProfile';
 import { resendVerificationEmail, getMyConnections, requestConnection } from './actions';
 
 class UserDashboard extends React.Component {
@@ -47,14 +49,16 @@ class UserDashboard extends React.Component {
             <RequestConnection
               requestConnection={this.handleRequestConnection}
               isAllowed={!this.props.myConnections.isQueued && this.props.auth.user.email_verified}
+              connectionStatus={'allowed'}
             />
+            <SetTimePreferences />
             <UpcomingConnectionsTable
               upcomingConnections={this.props.myConnections.allConnections}
               currentUserId={this.props.auth.user.id}
             />
           </Grid.Column>
           <Grid.Column width={8}>
-            <Segment>My profile and interests go here!</Segment>
+            <Segment><ConnectionProfile /></Segment>
           </Grid.Column>
         </Grid>
       </div>
