@@ -2,7 +2,7 @@
  * Created by alexandermann on 2017-02-07.
  */
 import React from 'react';
-import { Segment, Button, Breadcrumb, Divider } from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 import TimePicker from './TimePicker';
 import DayPicker from './DayPicker';
 import DateTimeBreadcrumb from './DateTimeBreadcrumb';
@@ -58,7 +58,7 @@ class SetTimePreferences extends React.Component {
 
   render() {
     return (
-      <Segment>
+      <div>
         <DateTimeBreadcrumb currentDay={this.state.currentDay} chooseDay={this.handleBackButton} />
         <Divider />
         {this.state.currentDay ?
@@ -74,7 +74,7 @@ class SetTimePreferences extends React.Component {
             currentAvailability={this.state.timesAvailable}
           />
         }
-      </Segment>
+      </div>
     );
   }
 }

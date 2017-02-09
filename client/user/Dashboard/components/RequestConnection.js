@@ -2,7 +2,7 @@
  * Created by alexandermann on 2017-02-06.
  */
 import React from 'react';
-import { Segment, Header, Button, Form, TextArea, Divider } from 'semantic-ui-react';
+import { Header, Button, Form, TextArea, Divider } from 'semantic-ui-react';
 
 class RequestConnection extends React.Component {
   constructor(props) {
@@ -54,11 +54,10 @@ class RequestConnection extends React.Component {
 
   render() {
     return (
-      <Segment>
+      <div>
         <Header as="h1" textAlign="center">Request Connection</Header>
         {this.props.isAllowed ? this.requestConnectionForm() : this.requestPending()}
-
-      </Segment>
+      </div>
     );
   }
 }

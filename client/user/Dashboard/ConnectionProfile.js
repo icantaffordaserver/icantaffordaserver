@@ -9,7 +9,6 @@ class ConnectionProfile extends React.Component {
   render() {
     return (
       <Embed
-        active
         url="https://shiftwithus.typeform.com/to/aHq8UA"
       />
     );

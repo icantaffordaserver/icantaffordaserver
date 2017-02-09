@@ -107,7 +107,6 @@ class TimePicker extends React.Component {
           content="Back"
           icon="left arrow"
           labelPosition="left"
-          floated="left"
           onClick={this.props.goBack}
         />
         <Button

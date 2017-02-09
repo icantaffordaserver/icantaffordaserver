@@ -4,17 +4,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Segment, Message } from 'semantic-ui-react';
-import RequestConnection from './components/RequestConnection';
-import SetTimePreferences from './components/DateTimePreference/SetTimePreferences';
+import ConnectionContext from './components/ConnectionContext';
 import UpcomingConnectionsTable from './components/UpcomingConnectionsTable';
 import ConnectionProfile from './ConnectionProfile';
-import { resendVerificationEmail, getMyConnections, requestConnection } from './actions';
+import { resendVerificationEmail, getMyConnections } from './actions';
 
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
-    this.handleRequestConnection = this.handleRequestConnection.bind(this);
   }
 
   componentDidMount() {
@@ -23,10 +21,6 @@ class UserDashboard extends React.Component {
 
   handleOnClick() {
     this.props.dispatch(resendVerificationEmail());
-  }
-
-  handleRequestConnection(comment) {
-    this.props.dispatch(requestConnection(comment));
   }
 
   render() {
@@ -46,19 +40,18 @@ class UserDashboard extends React.Component {
             </Grid.Column>
           )}
           <Grid.Column width={8}>
-            <RequestConnection
-              requestConnection={this.handleRequestConnection}
-              isAllowed={!this.props.myConnections.isQueued && this.props.auth.user.email_verified}
-              connectionStatus={'allowed'}
+            <ConnectionContext
+              myConnections={this.props.myConnections}
             />
-            <SetTimePreferences />
             <UpcomingConnectionsTable
               upcomingConnections={this.props.myConnections.allConnections}
               currentUserId={this.props.auth.user.id}
             />
           </Grid.Column>
           <Grid.Column width={8}>
-            <Segment><ConnectionProfile /></Segment>
+            <Segment>
+              <ConnectionProfile />
+            </Segment>
           </Grid.Column>
         </Grid>
       </div>
