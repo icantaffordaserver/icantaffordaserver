@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Item, Label } from 'semantic-ui-react';
 
 class UserProfile extends React.Component {
   formatLocation(profile) {
@@ -8,22 +9,20 @@ class UserProfile extends React.Component {
   render() {
     const user = this.props.user;
     return (
-      <div className="panel">
-        <div className="panel-body">
-          <div className="media row">
-            <div className="media-left">
-              <img src={user.gravatar} width="65px" />
-            </div>
-            <div className="media-body">
-              <h3>{`${user.profile.first_name} ${user.profile.last_name}`}</h3>
-              <div style={{ textTransform: 'capitalize' }}>{user.profile.gender}</div>
-              <div>Location: {this.formatLocation(user.profile)}</div>
+      <Item.Group>
+        <Item>
+          <Item.Image src={user.gravatar} size="small" />
+          <Item.Content>
+            <Item.Header>{`${user.profile.first_name} ${user.profile.last_name}`}</Item.Header>
+            <Item.Meta>{this.formatLocation(user.profile)}</Item.Meta>
+            <Item.Description>
+              <div style={{ textTransform: 'capitalize' }}>Gender: {user.profile.gender}</div>
               <div>Phone Number: {user.phone_number}</div>
               <div>Email: {user.email}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Item.Description>
+          </Item.Content>
+        </Item>
+      </Item.Group>
     );
   }
 }
