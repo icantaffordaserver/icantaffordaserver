@@ -6645,3 +6645,7 @@ textarea {
   font-size: 10px; }
   .connection-pipeline .btn {
     font-size: 10px; }
+
+.column-break {
+  page-break-inside: avoid;
+  break-inside: avoid; }

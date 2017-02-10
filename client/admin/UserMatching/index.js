@@ -1,4 +1,5 @@
 import React from 'react';
+import { Grid, Form, Button, Segment, Header } from 'semantic-ui-react';
 import update from 'immutability-helper';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -51,27 +52,38 @@ class UserMatching extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <Grid padded>
         <Messages messages={this.props.messages} />
-        <div className="row">
-          <div className="col-sm-7">
+        <Grid.Row>
+          <Grid.Column width={10}>
             <UserPool
               {...this.props}
               setSearchText={this.setSearchText.bind(this)}
               setUserIndex={this.setUserIndex.bind(this)}
               setSelectedUser={this.setSelectedUser.bind(this)}
             />
-          </div>
-          <div className="col-sm-5">
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Header as="h3" attached="top">
+              Selected Users
+            </Header>
+            <Segment attached>
             {this.props.selectedUsers.length > 0 &&
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                {this.props.selectedUsers.map(user => <UserProfile key={user.id} user={user} />)}
-                <button className="btn btn-success">Match Users</button>
-              </form>
+              <Form onSubmit={this.handleSubmit.bind(this)}>
+                {this.props.selectedUsers.map(user => (
+                  <Segment vertical key={user.id}>
+                    <UserProfile user={user} />
+                  </Segment>
+                ))}
+                <Segment vertical>
+                  <Button color="green">Match Users</Button>
+                </Segment>
+              </Form>
             }
-          </div>
-        </div>
-      </div>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
