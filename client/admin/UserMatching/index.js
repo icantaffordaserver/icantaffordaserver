@@ -53,7 +53,11 @@ class UserMatching extends React.Component {
   render() {
     return (
       <Grid padded>
-        <Messages messages={this.props.messages} />
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Messages messages={this.props.messages} />
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column width={10}>
             <UserPool

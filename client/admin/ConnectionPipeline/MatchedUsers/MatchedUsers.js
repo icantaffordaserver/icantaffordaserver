@@ -1,5 +1,6 @@
 import React from 'react';
 import MatchedUsersRow from './MatchedUserRow/MatchedUsersRow';
+import { Table, Segment, Header } from 'semantic-ui-react';
 
 class MatchedUsers extends React.Component {
   constructor(props) {
@@ -8,17 +9,19 @@ class MatchedUsers extends React.Component {
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading" style={{ textAlign: 'center' }}><h3>Matched Users</h3></div>
-        <table className="table table-condensed">
-          <tbody>
-            {this.props.matchedUsers.map((data, index) => {
-              if (data.status === 'matched' || data.status === 'scheduled') {
-                return <MatchedUsersRow key={data.id} data={data} index={index} />;
-              }
-            })}
-          </tbody>
-        </table>
+      <div>
+        <Header as="h3" attached="top">Matched Users</Header>
+        <Segment attached>
+          <Table compact size="small" basic="very">
+            <Table.Body>
+              {this.props.matchedUsers.map((data, index) => {
+                if (data.status === 'matched' || data.status === 'scheduled') {
+                  return <MatchedUsersRow key={data.id} data={data} index={index} />;
+                }
+              })}
+            </Table.Body>
+          </Table>
+        </Segment>
       </div>
     );
   }
