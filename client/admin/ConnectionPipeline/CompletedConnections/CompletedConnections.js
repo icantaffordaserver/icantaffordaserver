@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import CompletedConnectionRow from './CompletedConnectionRow/CompletedConnectionRow';
+import { Table, Segment, Header } from 'semantic-ui-react';
 
 class CompletedConnections extends React.Component {
   constructor(props) {
@@ -11,17 +12,19 @@ class CompletedConnections extends React.Component {
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading" style={{ textAlign: 'center' }}><h3>Completed Connections</h3></div>
-        <table className="table table-condensed">
-          <tbody>
-            {this.props.matchedUsers.map((data, index) => {
-              if (data.status === 'completed') {
-                return <CompletedConnectionRow key={data.id} index={index} data={data} />;
-              }
-            })}
-          </tbody>
-        </table>
+      <div>
+        <Header as="h3" attached="top">Completed Connections</Header>
+        <Segment attached>
+          <Table compact size="small" basic="very">
+            <Table.Body>
+              {this.props.matchedUsers.map((data, index) => {
+                if (data.status === 'completed') {
+                  return <CompletedConnectionRow key={data.id} index={index} data={data} />;
+                }
+              })}
+            </Table.Body>
+          </Table>
+        </Segment>
       </div>
     );
   }

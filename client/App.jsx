@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './shared/Header';
 import Footer from './shared/Footer';
+import { Grid } from 'semantic-ui-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class App extends React.Component {
       <div>
         <Header />
         {this.props.children}
-        <Footer />
+        <Grid padded>
+          <Footer />
+        </Grid>
       </div>
     );
   }

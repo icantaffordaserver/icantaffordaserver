@@ -7,6 +7,7 @@ import ReactModal from 'react-modal';
 import { closeModal } from '../../shared/Modal/actions';
 import { setConnectionTime } from './actions';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import { Modal, Header, Input, Button, Icon } from 'semantic-ui-react';
 import moment from 'moment';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
 import ConnectionDetails from './ConnectionDetails';
@@ -41,6 +42,11 @@ class ConnectionPipelineModal extends React.Component {
     this.props.dispatch(closeModal());
   }
 
+  formatTitle(accounts, ending) {
+    return `${accounts[0].profile.first_name} ${accounts[0].profile.last_name}
+                     and ${accounts[1].profile.first_name} ${accounts[1].profile.last_name} ${ending}`;
+  }
+
   renderSetDateTimePicker(props) {
     const onChange = (dateTime, dateTimeStr) => {
       this.setState({
@@ -48,83 +54,101 @@ class ConnectionPipelineModal extends React.Component {
       });
     };
     return (
-      <div className="modal-content">
-        <div className="modal-header">
-          <h3>Set Date and Time</h3>
-        </div>
-        <div className="modal-body">
-          <div>
-            <DateTimePicker
-              min={new Date()}
-              value={this.state.dateTime}
-              onChange={onChange.bind(this)}
-            />
-
-          </div>
-        </div>
-        <div className="modal-footer">
-          <button
-            onClick={this.handleSetConnectionTime.bind(this)}
-            className="btn btn-success"
-          >Save
-                    </button>
-          <button
-            onClick={this.handleCloseConnectionPipelineModal.bind(this)}
-            className="btn btn-danger"
-          >Cancel
-                    </button>
-        </div>
-      </div>
+      <Modal.Content>
+        <DateTimePicker
+          min={new Date()}
+          value={this.state.dateTime}
+          onChange={onChange.bind(this)}
+        />
+      </Modal.Content>
     );
   }
 
-  renderMatchedUsersDetails() {
+  renderSetDateTimeBtns() {
     return (
-      <ConnectionDetails
-        {...this.props}
-        handleCloseModal={this.handleCloseConnectionPipelineModal.bind(this)}
-        titleEnding={'Matched Connection Details'}
-      />
+      <Modal.Actions>
+        <Button
+          onClick={this.handleSetConnectionTime.bind(this)}
+          positive>
+          Save
+        </Button>
+        <Button
+          onClick={this.handleCloseConnectionPipelineModal.bind(this)}
+          negative>
+          Cancel
+        </Button>
+      </Modal.Actions>
     );
   }
 
-  renderCompletedConnectionsDetails() {
+  renderActionBtns() {
     return (
-      <ConnectionDetails
-        {...this.props}
-        handleCloseModal={this.handleCloseConnectionPipelineModal.bind(this)}
-        titleEnding={'Completed Connection Details'}
-      />
-    );
+      <Modal.Actions>
+        <Button
+          positive>
+          <Icon name="checkmark"></Icon>Save
+        </Button>
+        <Button
+          onClick={this.handleCloseConnectionPipelineModal.bind(this)}
+          negative>
+          <Icon name="remove"></Icon>Cancel
+        </Button>
+      </Modal.Actions>
+    )
   }
 
-  renderModal(modalType) {
-    switch (modalType) {
-      case SET_CONNECTION_TIME:
-        return this.renderSetDateTimePicker();
-      case MATCHED_USERS_DETAILS:
-        return this.renderMatchedUsersDetails();
-      case COMPLETED_CONNECTIONS_DETAILS:
-        return this.renderCompletedConnectionsDetails();
-      default:
-        return null;
+  getModalElements() {
+    const { selectedMatch } = this.props;
+
+    return {
+      SET_CONNECTION_TIME: {
+        header: (
+          <Header as="h3">
+            <Icon name="add to calendar"></Icon>
+            <Header.Content>Set Date and Time</Header.Content>
+          </Header>
+        ),
+        content: this.renderSetDateTimePicker.bind(this),
+        action: this.renderSetDateTimeBtns.bind(this)
+      },
+      MATCHED_USERS_DETAILS: {
+        header: (
+          <Header as="h3">
+            {this.formatTitle(selectedMatch.accounts, 'Matched Connection Details')}
+          </Header>
+        ),
+        content: () => (<ConnectionDetails {...this.props} />),
+        action: this.renderActionBtns.bind(this)
+      },
+      COMPLETED_CONNECTIONS_DETAILS: {
+        header: (
+          <Header as="h3">
+            {this.formatTitle(selectedMatch.accounts, 'Completed Connection Details')}
+          </Header>
+        ),
+        content: () => (<ConnectionDetails {...this.props} />),
+        action: this.renderActionBtns.bind(this)
+      }
     }
   }
 
   render() {
+    const { modalType, modalProps } = this.props.modal;
+    if (!modalType) return null;
+    const modalElement = this.getModalElements.bind(this)()[modalType];
+
     return (
-      <ReactModal
+      <Modal size="small"
         className="modal-dialog"
-        style={{
-          overlay: { zIndex: 1000 },
-        }}
-        isOpen={this.props.modal.modalProps.isOpen}
-        onAfterOpen={this.handleAfterModalOpened.bind(this, this.props)}
-        onRequestClose={this.handleCloseConnectionPipelineModal.bind(this)}
-        contentLabel="Connection Pipeline Modal"
+        closeIcon="close"
+        open={modalProps.isOpen}
+        onOpen={this.handleAfterModalOpened.bind(this, this.props)}
+        onClose={this.handleCloseConnectionPipelineModal.bind(this)}
       >
-        {this.renderModal(this.props.modal.modalType)}
-      </ReactModal>
+        {modalElement.header}
+        {modalElement.content()}
+        {modalElement.action && modalElement.action()}
+      </Modal>
     );
   }
 }

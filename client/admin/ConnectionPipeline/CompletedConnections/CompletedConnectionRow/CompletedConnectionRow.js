@@ -6,11 +6,10 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { showModal } from '../../../../shared/Modal/actions';
 import { selectMatch } from '../../actions';
-
+import { Table, Button } from 'semantic-ui-react';
 
 // import modal types
 import { COMPLETED_CONNECTIONS_DETAILS } from '../../ConnectionPipelineModal';
-
 
 class CompletedConnectionRow extends React.Component {
   constructor(props) {
@@ -23,34 +22,36 @@ class CompletedConnectionRow extends React.Component {
   }
 
   render() {
+    const { matchedBy, accounts } = this.props.data;
+
     return (
-      <tr>
-        <td>
-          <div>Connection Completed on: Insert Time here</div>
-          <div>Matched by: {this.props.data.matchedBy.profile.first_name}</div>
-        </td>
-        <td>
+      <Table.Row>
+        <Table.Cell>
+          <div>Completed on: Insert Time here</div>
+          <div>Matched by: {matchedBy.profile.first_name}</div>
+        </Table.Cell>
+        <Table.Cell>
           <div>
-            {this.props.data.accounts.map(account => (
+            {accounts.map(account => (
               <div key={account.id}>
                 {`${account.profile.first_name} ${account.profile.last_name}`}
               </div>
             ))}
           </div>
-        </td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>
           <div>Reflection Complete - User 1</div>
           <div>Reflection Complete - User 2</div>
-        </td>
-        <td>
-          <button
+        </Table.Cell>
+        <Table.Cell>
+          <Button
             onClick={this.handleCompletedConnectionsDetails.bind(this, this.props.index)}
-            className="btn btn-default"
-          >
+            color="blue"
+            size="mini">
             Details
-          </button>
-        </td>
-      </tr>
+          </Button>
+        </Table.Cell>
+      </Table.Row>
     );
   }
 }

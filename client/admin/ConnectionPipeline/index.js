@@ -6,7 +6,7 @@ import MatchedUsers from './MatchedUsers/MatchedUsers';
 import CompletedConnections from './CompletedConnections/CompletedConnections';
 import ConnectionPipelineModal from './ConnectionPipelineModal';
 import { fetchMatchedUsers } from './actions';
-
+import { Grid } from 'semantic-ui-react';
 
 class ConnectionPipeline extends React.Component {
   componentDidMount() {
@@ -15,18 +15,22 @@ class ConnectionPipeline extends React.Component {
 
   render() {
     return (
-      <div className="connection-pipeline container-fluid">
-        <Messages messages={this.props.messages} />
-        <div className="row">
-          <div className="col-md-6">
+      <Grid padded>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Messages messages={this.props.messages} />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column>
             <MatchedUsers matchedUsers={this.props.matchedUsers} />
-          </div>
-          <div className="col-md-6">
+          </Grid.Column>
+          <Grid.Column>
             <CompletedConnections matchedUsers={this.props.matchedUsers} />
-          </div>
-        </div>
+          </Grid.Column>
+        </Grid.Row>
         <ConnectionPipelineModal selectedMatch={this.props.matchedUsers[this.props.selectedMatch]} />
-      </div>
+      </Grid>
     );
   }
 }
