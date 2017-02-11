@@ -10,9 +10,11 @@ import { generateUniqueToken } from '../models/helpers';
  * Sign in with email and password
  */
 export function loginPost(req, res, next) {
+  console.log(req.body);
   new UserAccounts({ email: req.body.email })
     .fetch({ withRelated: 'profile' })
     .then((user) => {
+      console.log(user);
       if (!user) {
         return res.status(401).send({
           msg: `The email address ${req.body.email} is not associated with any account. Double-check your

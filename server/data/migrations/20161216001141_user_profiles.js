@@ -9,6 +9,7 @@ exports.up = function (knex, Promise) {
       table.string('city', 100);
       table.string('state_province', 100);
       table.string('country', 100);
+      table.json('typeform_profile');
       table.boolean('typeform_profile_complete');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());

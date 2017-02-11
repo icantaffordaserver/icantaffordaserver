@@ -10,6 +10,7 @@ import connectionsRoutes from './connections';
 import socialAuthRoutes from './socialauth';
 import verifyRoutes from './verify';
 import dashboardRoutes from './dashboard';
+import typeformRoutes from './typeform';
 
 import { ensureAuthenticated } from './authenticationMiddleware';
 import { loginPost, forgotPost, resetPost } from './IndexController';
@@ -39,5 +40,6 @@ routes.post('/forgot', validateForgotPassword, forgotPost);
 routes.post('/reset/:token', resetPost);
 
 routes.post('/contact', contactController.contactPost);
+routes.post('/typeform', typeformRoutes);
 
 export default routes;
