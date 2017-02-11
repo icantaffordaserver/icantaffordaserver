@@ -6645,3 +6645,7 @@ textarea {
   font-size: 10px; }
   .connection-pipeline .btn {
     font-size: 10px; }
+
+.connection-profile {
+  width: 100%;
+  height: 75vh; }

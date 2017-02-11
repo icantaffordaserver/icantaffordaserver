@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Grid, Segment, Message } from 'semantic-ui-react';
 import ConnectionContext from './components/ConnectionContext';
 import UpcomingConnectionsTable from './components/UpcomingConnectionsTable';
-import ConnectionProfile from './ConnectionProfile';
+import ConnectionProfile from './MatchingProfile/ConnectionProfile';
 import { resendVerificationEmail, getMyConnections } from './actions';
 
 class UserDashboard extends React.Component {
@@ -48,7 +48,7 @@ class UserDashboard extends React.Component {
               currentUserId={this.props.auth.user.id}
             />
           </Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column width={8} stretched={true}>
             <Segment>
               <ConnectionProfile />
             </Segment>
