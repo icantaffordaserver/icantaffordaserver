@@ -4,6 +4,7 @@
 import React from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import moment from 'moment';
+import SeeProfileModal from './SeeProfileModal';
 
 function UpcomingConnectionsTable(props) {
   return (
@@ -18,24 +19,27 @@ function UpcomingConnectionsTable(props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.upcomingConnections.map((connection) =>
-          (
+        {props.upcomingConnections.map((connection) => {
+          let matchDetails;
+          if (props.currentUserId === connection.accounts[0].id) {
+            matchDetails = connection.accounts[1];
+          } else {
+            matchDetails = connection.accounts[0];
+          }
+          return (
             <Table.Row key={connection.id}>
               <Table.Cell>{connection.connection_time ? moment(connection.connection_time).format('MMM Do, YYYY') : 'Not Scheduled Yet'}</Table.Cell>
               <Table.Cell>{connection.connection_time ? moment(connection.connection_time).format('h:mm a') : 'Not Scheduled Yet'}</Table.Cell>
-              <Table.Cell>{props.currentUserId === connection.accounts[0].id ?
-                connection.accounts[1].profile.first_name
-                :
-                connection.accounts[0].profile.first_name}
+              <Table.Cell>
+                {matchDetails.profile.first_name}
               </Table.Cell>
               <Table.Cell>
-                <Button>
-                  See Profile
-                </Button>
+                <SeeProfileModal matchDetails={matchDetails} />
               </Table.Cell>
               <Table.Cell>{moment(connection.created_at).format('MMM Do, YYYY')}</Table.Cell>
             </Table.Row>
-          )
+          );
+        }
         )}
       </Table.Body>
     </Table>

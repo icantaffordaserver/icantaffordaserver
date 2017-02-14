@@ -36,7 +36,7 @@ class ConnectionContext extends React.Component {
       if (allConnections[0].status !== 'matched' && allConnections[0].status !== 'scheduled') {
         if (isQueued) {
           return (
-            <RequestPending/>
+            <RequestPending />
           );
         }
         return (
