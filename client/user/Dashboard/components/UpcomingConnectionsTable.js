@@ -22,7 +22,7 @@ function UpcomingConnectionsTable(props) {
           (
             <Table.Row key={connection.id}>
               <Table.Cell>{connection.connection_time ? moment(connection.connection_time).format('MMM Do, YYYY') : 'Not Scheduled Yet'}</Table.Cell>
-              <Table.Cell>{connection.connection_time ? moment(connection.connection_time).format('MMM Do, YYYY') : 'Not Scheduled Yet'}</Table.Cell>
+              <Table.Cell>{connection.connection_time ? moment(connection.connection_time).format('h:mm a') : 'Not Scheduled Yet'}</Table.Cell>
               <Table.Cell>{props.currentUserId === connection.accounts[0].id ?
                 connection.accounts[1].profile.first_name
                 :

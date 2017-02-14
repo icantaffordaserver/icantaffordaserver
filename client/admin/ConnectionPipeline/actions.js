@@ -33,6 +33,7 @@ export function setConnectionTime(connectionId, connectionTime) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         connection_time: connectionTime,
+        status: 'scheduled',
       }),
     }).then((response) => {
       if (response.ok) {

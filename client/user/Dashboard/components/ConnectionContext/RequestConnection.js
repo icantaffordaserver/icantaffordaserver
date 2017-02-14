@@ -42,21 +42,11 @@ class RequestConnection extends React.Component {
     );
   }
 
-  requestPending() {
-    return (
-      <div>
-        <Header as="h1" textAlign="center">
-          We have a conversation headed your way. Stay tuned..
-        </Header>
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
-        <Header as="h1" textAlign="center">Request Connection</Header>
-        {this.props.isAllowed ? this.requestConnectionForm() : this.requestPending()}
+        <Header as="h1" textAlign="center">Connection Request</Header>
+        {this.requestConnectionForm()}
       </div>
     );
   }

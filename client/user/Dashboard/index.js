@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Segment, Message } from 'semantic-ui-react';
-import ConnectionContext from './components/ConnectionContext';
+import ConnectionContext from './components/ConnectionContext/ConnectionContext';
 import UpcomingConnectionsTable from './components/UpcomingConnectionsTable';
 import ConnectionProfile from './MatchingProfile/ConnectionProfile';
 import { resendVerificationEmail, getMyConnections } from './actions';
