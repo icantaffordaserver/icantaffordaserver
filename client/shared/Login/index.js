@@ -9,13 +9,11 @@ import {
   Header,
   Image,
   Form,
-  Message,
   Divider,
-  Container,
 } from 'semantic-ui-react';
+import Messages from '../Messages';
 import { login } from './actions';
 import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../OAuth/actions';
-import Messages from '../Messages';
 
 class Login extends React.Component {
   constructor(props) {
@@ -62,6 +60,7 @@ class Login extends React.Component {
             <Image src="http://semantic-ui.com/examples/assets/images/logo.png" />
             Log-in to your account
           </Header>
+          <Messages messages={this.props.messages} />
           <Form onSubmit={this.handleLogin} size="large">
             <Segment padded>
               <Form.Field>
