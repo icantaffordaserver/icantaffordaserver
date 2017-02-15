@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid, Header, Form, Segment, Input, Button } from 'semantic-ui-react';
 import { forgotPassword } from './actions';
 import Messages from '../Messages';
 
 class Forgot extends React.Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleForgot = this.handleForgot.bind(this);
     this.state = { email: '' };
   }
 
@@ -20,27 +23,35 @@ class Forgot extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel">
-          <div className="panel-body">
-            <Messages messages={this.props.messages} />
-            <form onSubmit={this.handleForgot.bind(this)}>
-              <legend>Forgot Password</legend>
-              <div className="form-group">
-                <p>Enter your email address below and we'll send you password reset instructions.</p>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" className="form-control" autoFocus value={this.state.email} onChange={this.handleChange.bind(this)} />
-              </div>
-              <button type="submit" className="btn btn-success">Reset Password</button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Grid centered verticalAlign="middle">
+        <Grid.Column width={6} textAlign="center">
+          <Header as="h2" color="teal">
+            Forgot Password
+          </Header>
+          <Messages messages={this.props.messages} />
+          <Form onSubmit={this.handleForgot} size="large">
+            <Segment padded>
+              <Header as="h3">Enter your email address below and we'll send you password reset instructions.</Header>
+              <Form.Field>
+                <Input
+                  name="email"
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Button fluid color="teal" size="large">Reset Password</Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   messages: state.messages,
 });
 
