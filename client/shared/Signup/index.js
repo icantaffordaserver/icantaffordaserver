@@ -10,7 +10,7 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.handleSignup = this.handleSignup.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
     this.state = { firstName: '', lastName: '', email: '', password: '' };
   }
 
