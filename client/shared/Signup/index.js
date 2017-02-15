@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { Form, Header, Segment, Grid, Button, Divider } from 'semantic-ui-react';
 import { signup } from './actions';
 import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../OAuth/actions';
 import Messages from '../Messages';
@@ -8,6 +9,8 @@ import Messages from '../Messages';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSignup = this.handleSignup.bind(this);
+    this.handleChange = this.handleChange.bind(this)
     this.state = { firstName: '', lastName: '', email: '', password: '' };
   }
 
@@ -48,48 +51,68 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="login-container container">
-        <div className="panel">
-          <div className="panel-body">
-            <Messages messages={this.props.messages} />
-            <form onSubmit={this.handleSignup.bind(this)}>
-              <legend>Create an account</legend>
-              <div className="form-group">
-                <label htmlFor="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" placeholder="First Name" autoFocus className="form-control" value={this.state.firstName} onChange={this.handleChange.bind(this)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoFocus className="form-control" value={this.state.lastName} onChange={this.handleChange.bind(this)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)} />
-              </div>
-              <div className="form-group">
-                <small className="text-muted">By signing up, you agree to the <Link to="/">Terms of Service</Link>.</small>
-              </div>
-              <button type="submit" className="btn btn-success">Create an account</button>
-            </form>
-            <div className="hr-title"><span>or</span></div>
-            <div className="btn-toolbar text-center">
-              <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
-            </div>
-          </div>
-        </div>
-        <p className="text-center">
-          Already have an account? <Link to="/login"><strong>Log in</strong></Link>
-        </p>
-      </div>
+      <Grid centered verticalAlign="middle">
+        <Grid.Column width={6} textAlign="left">
+          <Messages messages={this.props.messages} />
+          <Form onSubmit={this.handleSignup} size="large">
+            <Header textAlign="center" as="h2" color="teal">Create an account</Header>
+            <Segment padded>
+              <Form.Field>
+                <Form.Input
+                  label="First Name"
+                  name="firstName"
+                  icon="quote left"
+                  iconPosition="left"
+                  placeholder="First Name"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Last Name"
+                  name="lastName"
+                  icon="quote left"
+                  iconPosition="left"
+                  placeholder="Last Name"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Email"
+                  name="email"
+                  icon="mail"
+                  iconPosition="left"
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
+                  label="Password"
+                  name="password"
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Button fluid color="teal" size="large">Create Account</Button>
+              <Divider horizontal>Or</Divider>
+              <Button fluid color="blue" size="large">Create Account with Facebook</Button>
+            </Segment>
+          </Form>
+          <Header textAlign="center" size="tiny">
+            By signing up, you agree to the <Link to="/">Terms of Service</Link>.
+          </Header>
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   messages: state.messages,
 });
 
