@@ -11,18 +11,9 @@ class ProfileComponent extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleProfileUpdate}>
+      <Form onSubmit={this.props.handleProfileUpdate}>
         <Segment clearing padded="very">
           <Image src={this.props.gravatar} size="small" shape="circular" centered />
-          <Form.Field>
-            <Form.Input
-              label="Email"
-              type="email"
-              name="email"
-              value={this.props.email}
-              onChange={this.props.handleChange}
-            />
-          </Form.Field>
           <Form.Field>
             <Form.Input
               label="First Name"

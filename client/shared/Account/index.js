@@ -1,13 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid, Header } from 'semantic-ui-react';
 import { updateProfile, changePassword, deleteAccount } from './actions';
 import { link, unlink } from '../OAuth/actions';
 import Messages from '../Messages';
+import AccountMenuTabs from './AccountMenuTabs';
+import ProfileComponent from './ProfileComponent';
+import AccountComponent from './AccountComponent';
+import ChangePasswordComponent from './ChangePasswordComponent';
+import DeleteAccountComponent from './DeleteAccountComponent';
+import SocialComponent from './SocialComponent';
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeItem: 'account',
       email: props.user.email,
       firstName: props.user.profile.first_name,
       lastName: props.user.profile.last_name,
@@ -17,10 +25,17 @@ class Account extends React.Component {
       password: '',
       confirm: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleProfileUpdate = this.handleProfileUpdate.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleItemClick(e, { name }) {
+    this.setState({ activeItem: name });
+  }
+
+  handleChange(event, data) {
+    this.setState({ [data.name]: data.value });
   }
 
   handleProfileUpdate(event) {
@@ -46,151 +61,64 @@ class Account extends React.Component {
     this.props.dispatch(unlink(provider));
   }
 
+  renderPanel() {
+    switch (this.state.activeItem) {
+      case 'account':
+        return (<AccountComponent
+          {...this.state}
+          handleChange={this.handleChange}
+          handleProfileUpdate={this.handleProfileUpdate}
+        />);
+      case 'profile':
+        return (<ProfileComponent
+          {...this.state}
+          handleChange={this.handleChange}
+          handleProfileUpdate={this.handleProfileUpdate}
+        />);
+      case 'change password':
+        return (<ChangePasswordComponent
+          {...this.state}
+          handleChange={this.handleChange}
+          handleChangePassword={this.handleChangePassword}
+        />);
+      case 'social':
+        return (<SocialComponent
+          {...this.state}
+          handleChange={this.handleChange}
+        />);
+      case 'delete account':
+        return (<DeleteAccountComponent
+          {...this.state}
+          handleDeleteAccount={this.handleDeleteAccount}
+        />);
+      default:
+        return null;
+    }
+  }
+
   render() {
-    const facebookLinkedAccount = this.props.user.facebook ? (
-      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'facebook')}>Unlink your
-                    Facebook account</a>
-            ) : (
-              <a role="button" onClick={this.handleLink.bind(this, 'facebook')}>Link your Facebook account</a>
-            );
+    const { activeItem } = this.state;
     return (
-      <div className="container">
-        <div className="panel">
-          <div className="panel-body">
-            <Messages messages={this.props.messages} />
-            <form onSubmit={this.handleProfileUpdate.bind(this)} className="form-horizontal">
-              <legend>Account Information</legend>
-              <div className="form-group">
-                <label htmlFor="email" className="col-sm-3">Email</label>
-                <div className="col-sm-7">
-                  <input
-                    type="email" name="email" id="email" className="form-control"
-                    value={this.state.email} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="firstName" className="col-sm-3">First Name</label>
-                <div className="col-sm-7">
-                  <input
-                    type="text" name="firstName" id="firstName" className="form-control"
-                    value={this.state.firstName} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="lastName" className="col-sm-3">Last Name</label>
-                <div className="col-sm-7">
-                  <input
-                    type="text" name="lastName" id="lastName" className="form-control"
-                    value={this.state.lastName} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-3">Gender</label>
-                <div className="col-sm-4">
-                  <label className="radio-inline radio col-sm-4">
-                    <input
-                        type="radio" name="gender" value="male"
-                        checked={this.state.gender === 'male'}
-                        onChange={this.handleChange.bind(this)}
-                      /><span>Male</span>
-                  </label>
-                  <label className="radio-inline col-sm-4">
-                    <input
-                        type="radio" name="gender" value="female"
-                        checked={this.state.gender === 'female'}
-                        onChange={this.handleChange.bind(this)}
-                      /><span>Female</span>
-                  </label>
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="location" className="col-sm-3">Location</label>
-                <div className="col-sm-7">
-                  <input
-                    type="text" name="location" id="location" className="form-control"
-                    value={this.state.location} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-3">Gravatar</label>
-                <div className="col-sm-4">
-                  <img src={this.state.gravatar} width="100" height="100" className="profile" />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <button type="submit" className="btn btn-success">Update Profile</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form onSubmit={this.handleChangePassword.bind(this)} className="form-horizontal">
-              <legend>Change Password</legend>
-              <div className="form-group">
-                <label htmlFor="password" className="col-sm-3">New Password</label>
-                <div className="col-sm-7">
-                  <input
-                    type="password" name="password" id="password" className="form-control"
-                    value={this.state.password} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="confirm" className="col-sm-3">Confirm Password</label>
-                <div className="col-sm-7">
-                  <input
-                    type="password" name="confirm" id="confirm" className="form-control"
-                    value={this.state.confirm} onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-4 col-sm-offset-3">
-                  <button type="submit" className="btn btn-success">Change Password</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <div className="form-horizontal">
-              <legend>Linked Accounts</legend>
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <p>{facebookLinkedAccount}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form onSubmit={this.handleDeleteAccount.bind(this)} className="form-horizontal">
-              <legend>Delete Account</legend>
-              <div className="form-group">
-                <p className="col-sm-offset-3 col-sm-9">You can delete your account, but keep in mind
-                                    this action is irreversible.</p>
-                <div className="col-sm-offset-3 col-sm-9">
-                  <button type="submit" className="btn btn-danger">Delete my account</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Grid centered>
+        <Grid.Column width={16}>
+          <Header as="h1" color="teal">Account Information</Header>
+        </Grid.Column>
+        <Grid.Column stretched width={4}>
+          <AccountMenuTabs
+            activeItem={activeItem}
+            handleItemClick={this.handleItemClick}
+          />
+        </Grid.Column>
+        <Grid.Column width={8} textAlign="left">
+          <Messages messages={this.props.messages} />
+          {this.renderPanel()}
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   token: state.auth.token,
   user: state.auth.user,
   messages: state.messages,
