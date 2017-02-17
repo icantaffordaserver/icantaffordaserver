@@ -10,6 +10,7 @@
 import { browserHistory } from 'react-router';
 import { take, call, put, takeEvery, race } from 'redux-saga/effects';
 import { signup, login, logout as logger } from './api';
+import { saveSession, clearSession } from './services';
 
 import * as types from './constants';
 
@@ -88,14 +89,15 @@ export function* loginFlow(action) {
   // If `authorize` was the winner...
   if (winner.auth) {
     // ...we send Redux the appropriate actions
-    yield put({ type: types.SET_AUTH, newAuthState: true }); // User is logged in
+    yield put({ type: types.SET_AUTH, newAuthState: true, user: winner.auth.user }); // User is logged in
     yield put({ type: types.CHANGE_FORM, newFormState: { email: '', password: '' } }); // Clear form
+    yield call(saveSession, winner.auth.token); // save the authentication token to localStorage
     forwardTo('/dashboard'); // Go to dashboard page
 
     // If `logout` won...
   } else if (winner.logout) {
     // ...we send Redux appropriate action
-    yield put({ type: types.SET_AUTH, newAuthState: false }); // User is not logged in (not authorized)
+    yield put({ type: types.SET_AUTH, newAuthState: false, user: null }); // User is not logged in (not authorized)
     yield call(logout); // Call `logout` effect
     forwardTo('/'); // Go to root page
   }
@@ -107,8 +109,8 @@ export function* loginFlow(action) {
  * as a saga that is always listening to `LOGOUT` actions
  */
 export function* logoutFlow() {
-  yield put({ type: types.SET_AUTH, newAuthState: false });
-
+  yield put({ type: types.SET_AUTH, newAuthState: false, user: null });
+  yield call(clearSession);
   yield call(logout);
   forwardTo('/');
 }

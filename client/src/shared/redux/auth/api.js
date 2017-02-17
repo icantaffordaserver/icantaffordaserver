@@ -9,8 +9,8 @@ export function signup(firstName, lastName, email, password, inviteId) {
   });
 }
 
-export function login(email, password) {
-  return fetch('/login', {
+export async function login(email, password) {
+  const loginResponse = await fetch('/login', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -18,6 +18,10 @@ export function login(email, password) {
       password,
     }),
   });
+  if (loginResponse.ok) {
+    return loginResponse.json();
+  }
+  throw Error;
 }
 
 export function logout() {

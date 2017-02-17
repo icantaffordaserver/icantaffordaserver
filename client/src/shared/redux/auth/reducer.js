@@ -24,6 +24,7 @@ const initialState = {
   error: '',
   currentlySending: false,
   loggedIn: loggedIn(),
+  user: null,
 };
 
 // Takes care of changing the application state
@@ -32,7 +33,7 @@ function auth(state = initialState, action) {
     case CHANGE_FORM:
       return { ...state, formState: action.newFormState };
     case SET_AUTH:
-      return { ...state, loggedIn: action.newAuthState };
+      return { ...state, loggedIn: action.newAuthState, user: action.user };
     case SENDING_REQUEST:
       return { ...state, currentlySending: action.sending };
     case REQUEST_ERROR:

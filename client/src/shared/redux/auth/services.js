@@ -9,3 +9,11 @@
 export function loggedIn() {
   return !!localStorage.token;
 }
+
+export function saveSession(token) {
+  localStorage.token = token;
+}
+
+export function clearSession() {
+  localStorage.token = null;
+}
