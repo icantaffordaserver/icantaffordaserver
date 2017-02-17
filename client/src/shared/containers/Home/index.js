@@ -1,17 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Messages from '../Messages';
+import LaunchPad from '../../components/LaunchPad';
+import Messages from '../../Messages';
 
 function Home(props) {
   return (
-    <div className="container-fluid">
-      <Messages messages={props.messages} />
-      Hello World
-    </div>
+    <LaunchPad />
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   messages: state.messages,
 });
 

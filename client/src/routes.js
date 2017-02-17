@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexRedirect, IndexRoute, Route } from 'react-router';
 import App from './App';
-import Home from './shared/Home';
+import Home from './shared/containers/Home';
 import Dashboard from './admin/Dashboard';
 import UserDashboard from './user/Dashboard';
 import ConnectionPanel from './user/ConnectionPanel';
