@@ -9,7 +9,7 @@ import {
   CHANGE_PASSWORD_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
 } from '../Messages/constants';
-import { logout } from '../Header/actions';
+import { logout } from '../redux/auth/actions';
 
 export function updateProfile(state, token) {
   return (dispatch) => {
