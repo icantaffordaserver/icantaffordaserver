@@ -2,11 +2,12 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Dropdown, Image } from 'semantic-ui-react';
-import { logout } from './actions';
+import { logout } from '../redux/auth/actions';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogout(event) {
@@ -59,7 +60,7 @@ class Header extends React.Component {
                   <Dropdown.Divider />
                   <Dropdown.Item
                     as={Link}
-                    onClick={this.handleLogout.bind(this)}
+                    onClick={this.handleLogout}
                   >
                     Logout
                   </Dropdown.Item>
