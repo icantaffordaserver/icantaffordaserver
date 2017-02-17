@@ -6,18 +6,21 @@ import createLogger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import adminReducer from './admin/adminReducer';
 import userReducer from './user/userReducer';
+import sharedReducer from './shared/redux/sharedReducer';
 import mySaga from './user/Dashboard/sagas';
+import root from './shared/redux/auth/sagas';
 
 const allReducers = {
   ...userReducer,
   ...adminReducer,
+  ...sharedReducer,
 };
 const rootReducer = combineReducers(allReducers);
 
 export default function configureStore(initialState) {
-  const logger         = createLogger();
+  const logger = createLogger();
   const sagaMiddleware = createSagaMiddleware();
-  const store          = createStore(
+  const store = createStore(
     rootReducer,
     initialState,
     compose(
@@ -40,7 +43,7 @@ export default function configureStore(initialState) {
     });
   }
 
-  store.runSaga = sagaMiddleware.run(mySaga);
+  store.runSaga = sagaMiddleware.run(root);
 
   return store;
 }

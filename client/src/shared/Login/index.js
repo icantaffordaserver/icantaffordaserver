@@ -12,8 +12,7 @@ import {
   Divider,
 } from 'semantic-ui-react';
 import Messages from '../Messages';
-import { login } from './actions';
-import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../OAuth/actions';
+import { loginRequest } from '../redux/auth/actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -29,28 +28,9 @@ class Login extends React.Component {
 
   handleLogin(event) {
     event.preventDefault();
-    this.props.dispatch(login(this.state.email, this.state.password));
+    this.props.dispatch(loginRequest({ email: this.state.email, password: this.state.password }));
   }
 
-  handleFacebook() {
-    this.props.dispatch(facebookLogin());
-  }
-
-  handleTwitter() {
-    this.props.dispatch(twitterLogin());
-  }
-
-  handleGoogle() {
-    this.props.dispatch(googleLogin());
-  }
-
-  handleVk() {
-    this.props.dispatch(vkLogin());
-  }
-
-  handleGithub() {
-    this.props.dispatch(githubLogin());
-  }
 
   render() {
     return (

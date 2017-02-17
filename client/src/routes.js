@@ -17,7 +17,7 @@ import Reset from './shared/Reset';
 
 export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
-    if (!store.getState().auth.token) {
+    if (!store.getState().auth.loggedIn) {
       replace('/login');
     }
   };
