@@ -1,0 +1,9 @@
+{
+  "presets": ["latest"],
+
+  "env": {
+    "development": {
+      "plugins": ["rewire", "transform-object-rest-spread"]
+    }
+  }
+}
