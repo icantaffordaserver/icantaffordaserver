@@ -18,7 +18,7 @@ class LaunchPad extends React.Component {
     return (
       <div>
         <Header as="h1" color="teal" textAlign="center" className="LaunchPadHeader">
-          My LaunchPad
+          My Launch Pad
         </Header>
         <Container className="LaunchPad">
           <Grid verticalAlign="middle" columns={3}>

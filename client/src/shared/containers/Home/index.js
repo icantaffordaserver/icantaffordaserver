@@ -1,16 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import LaunchPad from '../../components/LaunchPad';
 import Messages from '../../Messages';
 
 function Home(props) {
   return (
-    <LaunchPad />
+    <div>
+      <Messages />
+      <LaunchPad />
+    </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  messages: state.messages,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;
