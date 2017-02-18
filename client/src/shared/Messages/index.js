@@ -1,5 +1,6 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class Messages extends React.Component {
   render() {
@@ -13,4 +14,8 @@ class Messages extends React.Component {
   }
 }
 
-export default Messages;
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+});
+
+export default connect(mapStateToProps)(Messages);
