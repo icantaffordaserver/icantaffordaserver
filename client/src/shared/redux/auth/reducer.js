@@ -13,7 +13,7 @@ import {
   REQUEST_ERROR,
   CLEAR_ERROR,
 } from './constants';
-import { loggedIn } from './services';
+import { loggedIn, getUserSession } from './services';
 
 // The initial application state
 const initialState = {
@@ -24,7 +24,7 @@ const initialState = {
   error: '',
   currentlySending: false,
   loggedIn: loggedIn(),
-  user: null,
+  user: getUserSession() || {},
 };
 
 // Takes care of changing the application state

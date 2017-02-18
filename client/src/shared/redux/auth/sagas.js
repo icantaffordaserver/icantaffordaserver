@@ -16,7 +16,7 @@ import * as types from './constants';
 
 /**
  * Effect to handle authorization
- * @param  {string} username               The username of the user
+ * @param  {string} email               The username of the user
  * @param  {string} password               The password of the user
  * @param  {object} options                Options
  * @param  {boolean} options.isRegistering Is this a register request?
@@ -91,8 +91,8 @@ export function* loginFlow(action) {
     // ...we send Redux the appropriate actions
     yield put({ type: types.SET_AUTH, newAuthState: true, user: winner.auth.user }); // User is logged in
     yield put({ type: types.CHANGE_FORM, newFormState: { email: '', password: '' } }); // Clear form
-    yield call(saveSession, winner.auth.token); // save the authentication token to localStorage
-    forwardTo('/dashboard'); // Go to dashboard page
+    yield call(saveSession, winner.auth.token, winner.auth.user); // save the authentication token to localStorage
+    forwardTo('/'); // Go to dashboard page
 
     // If `logout` won...
   } else if (winner.logout) {

@@ -9,11 +9,15 @@
 export function loggedIn() {
   return !!localStorage.token;
 }
-
-export function saveSession(token) {
+export function getUserSession() {
+  return JSON.parse(localStorage.getItem('user')) || false;
+}
+export function saveSession(token, user) {
   localStorage.token = token;
+  localStorage.user = JSON.stringify(user);
 }
 
 export function clearSession() {
-  localStorage.token = null;
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
 }
