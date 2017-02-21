@@ -8,7 +8,7 @@ import {
     SET_CONNECTION_TIME_SUCCESS,
     DELETE_CONNECTION_FAILURE,
     DELETE_CONNECTION_SUCCESS,
-} from '../../shared/Messages/constants';
+} from '../../shared/components/Messages/constants';
 
 export function fetchMatchedUsers() {
   return (dispatch) => {

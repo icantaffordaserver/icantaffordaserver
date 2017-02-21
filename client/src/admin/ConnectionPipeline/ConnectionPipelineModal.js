@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
-import { closeModal } from '../../shared/Modal/actions';
+import { closeModal } from '../../shared/components/Modal/actions';
 import { setConnectionTime } from './actions';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import { Modal, Header, Input, Button, Icon } from 'semantic-ui-react';

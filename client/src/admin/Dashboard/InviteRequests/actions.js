@@ -12,7 +12,7 @@ import {
   CLEAR_MESSAGES,
   APPROVE_INVITE_SUCCESS,
   APPROVE_INVITE_FAILURE,
-} from '../../../shared/Messages/constants';
+} from '../../../shared/components/Messages/constants';
 import { handleResponse } from '../helpers';
 
 export function fetchInviteRequests() {

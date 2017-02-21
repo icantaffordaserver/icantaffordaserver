@@ -5,23 +5,19 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
-function UnauthenticatedSubMenu() {
+function UserSubMenu() {
   const active = { borderBottomColor: '#3f51b5' };
 
   return (
-    <Menu.Menu position="right">
+    <Menu.Menu>
       <Menu.Item>
-        <NavLink to="/login" activeStyle={active}>
-          Log in
-        </NavLink>
+        <NavLink to="/dashboard" activeStyle={active}>Dashboard</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <NavLink to="/signup" activeStyle={active}>
-          Sign up
-        </NavLink>
+        <NavLink to="/connection" activeStyle={active}>Connection Panel</NavLink>
       </Menu.Item>
     </Menu.Menu>
   );
 }
 
-export default UnauthenticatedSubMenu;
+export default UserSubMenu;

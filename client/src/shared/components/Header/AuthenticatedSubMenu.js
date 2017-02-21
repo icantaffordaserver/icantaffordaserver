@@ -2,7 +2,7 @@
  * Created by alexandermann on 2017-02-17.
  */
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Menu, Dropdown, Image } from 'semantic-ui-react';
 
 const propTypes = {
@@ -28,10 +28,13 @@ function AuthenticatedSubMenu(props) {
     <Menu.Menu position="right">
       <Dropdown item trigger={trigger} pointing="top left">
         <Dropdown.Menu>
-          <Dropdown.Item as={Link} to="/account">My Account</Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/account">
+              My Account
+            </Link>
+          </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item
-            as={Link}
             onClick={props.handleLogout}
           >
             Logout

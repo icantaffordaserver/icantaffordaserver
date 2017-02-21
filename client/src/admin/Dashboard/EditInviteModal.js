@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { deselectInvite, editInviteForm } from './InvitesSent/actions';
-import { closeModal } from '../../shared/Modal/actions';
+import { closeModal } from '../../shared/components/Modal/actions';
 import moment from 'moment';
 
 class EditInviteModal extends React.Component {

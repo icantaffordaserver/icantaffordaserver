@@ -1,22 +1,36 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import {
+  Router,
+  Route,
+} from 'react-router-dom';
+import history from './history';
 import Header from './shared/containers/Header';
+import Dashboard from './user/pages/Dashboard';
+import ConnectionPanel from './user/pages/ConnectionPanel';
+import Login from './shared/components/Login';
+import Signup from './shared/components/Signup';
+import Forgot from './shared/components/Forgot';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
+function App() {
+  return (
+    <Router history={history}>
       <div>
         <Header />
-        {this.props.children}
-        <Grid padded>
-        </Grid>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <h1>Nothing! This is a empty fucking home screen. So fuck off!</h1>
+          )}
+        />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/chat" component={ConnectionPanel} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/forgot" component={Forgot} />
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;

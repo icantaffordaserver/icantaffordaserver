@@ -5,7 +5,7 @@ import {
   CLEAR_MESSAGES,
   MATCH_USERS_FAILURE,
   MATCH_USERS_SUCCESS,
-} from '../../shared/Messages/constants';
+} from '../../shared/components/Messages/constants';
 import { SET_USERS, SET_SEARCH_TEXT, SET_SELECTED_USER, SET_USER_INDEX } from './constants';
 
 export function fetchUsers() {

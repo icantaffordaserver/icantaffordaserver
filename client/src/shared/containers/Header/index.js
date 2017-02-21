@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Menu, Image } from 'semantic-ui-react';
 import { logout } from '../../redux/auth/actions';
 import AuthenticatedSubMenu from '../../components/Header/AuthenticatedSubMenu';
 import UnauthenticatedSubMenu from '../../components/Header/UnauthenticatedSubMenu';
 import AdminSubMenu from '../../../admin/Header/AdminSubMenu';
-import UserSubMenu from '../../../user/Header/UserSubMenu';
+import UserSubMenu from '../../../user/components/Header/UserSubMenu';
 import logo from './logo.png';
 
 const propTypes = {
@@ -32,7 +33,7 @@ class Header extends React.Component {
   }
 
   renderNav() {
-    if (this.props.loggedIn && this.props.admin) {
+    if (this.props.loggedIn && this.props.user.admin) {
       return <AdminSubMenu />;
     } else if (this.props.loggedIn) {
       return <UserSubMenu />;
@@ -46,7 +47,9 @@ class Header extends React.Component {
     return (
       <Menu pointing secondary size="large">
         <Menu.Item>
-          <img alt="Shift" src={logo} />
+          <Link to="/">
+            <Image alt="Shift" src={logo} />
+          </Link>
         </Menu.Item>
         {this.renderNav()}
         {loggedIn ?

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { showModal } from '../../../../shared/Modal/actions';
+import { showModal } from '../../../../shared/components/Modal/actions';
 import { selectMatch, deleteConnection } from '../../actions';
 import { connect } from 'react-redux';
 import { Table, Button } from 'semantic-ui-react';

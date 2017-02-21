@@ -7,8 +7,8 @@
 
 // Sagas help us gather all our side effects (network requests in this case) in one place
 
-import { browserHistory } from 'react-router';
 import { take, call, put, takeEvery, race } from 'redux-saga/effects';
+import history from '../../../history';
 import { signup, login, logout as logger } from './api';
 import { saveSession, clearSession } from './services';
 
@@ -92,7 +92,7 @@ export function* loginFlow(action) {
     yield put({ type: types.SET_AUTH, newAuthState: true, user: winner.auth.user }); // User is logged in
     yield put({ type: types.CHANGE_FORM, newFormState: { email: '', password: '' } }); // Clear form
     yield call(saveSession, winner.auth.token, winner.auth.user); // save the authentication token to localStorage
-    forwardTo('/'); // Go to dashboard page
+    forwardTo('/dashboard'); // Go to dashboard page
 
     // If `logout` won...
   } else if (winner.logout) {
@@ -130,7 +130,7 @@ export function* registerFlow(action) {
   if (wasSuccessful) {
     yield put({ type: types.SET_AUTH, newAuthState: true }); // User is logged in (authorized) after being registered
     yield put({ type: types.CHANGE_FORM, newFormState: { email: '', password: '' } }); // Clear form
-    forwardTo('/'); // Go to dashboard page
+    yield call(forwardTo, '/'); // Go to dashboard page
   }
 }
 
@@ -139,7 +139,6 @@ export function* registerFlow(action) {
 // Sagas are fired once at the start of an app and can be thought of as processes running
 // in the background, watching actions dispatched to the store.
 export default function* root() {
-
   // And we're listening for various actions
   yield takeEvery(types.LOGIN_REQUEST, loginFlow);
   yield takeEvery(types.LOGOUT, logoutFlow);
@@ -148,5 +147,5 @@ export default function* root() {
 
 // Little helper function to abstract going to different pages
 function forwardTo(location) {
-  browserHistory.push(location);
+  history.push(location);
 }

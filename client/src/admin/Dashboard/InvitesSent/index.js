@@ -9,7 +9,7 @@ import {
     deselectInvite,
     resendInvite,
 } from './actions';
-import { closeModal, showModal } from '../../../shared/Modal/actions';
+import { closeModal, showModal } from '../../../shared/components/Modal/actions';
 import EditInviteModal from '../EditInviteModal';
 import { Table, Button, Icon, Segment, Header } from 'semantic-ui-react';
 

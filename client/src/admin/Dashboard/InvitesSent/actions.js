@@ -10,7 +10,7 @@ import {
     RESEND_INVITE_SUCCESS,
     RESEND_INVITE_FAILURE,
     CANCEL_INVITE_SUCCESS,
-} from '../../../shared/Messages/constants';
+} from '../../../shared/components/Messages/constants';
 import {
     BEGIN_FETCH_INVITES,
     SELECT_INVITE,

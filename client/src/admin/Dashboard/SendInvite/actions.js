@@ -6,7 +6,7 @@ import {
   CLEAR_MESSAGES,
   SEND_INVITE_FAILURE,
   SEND_INVITE_SUCCESS,
-} from '../../../shared/Messages/constants';
+} from '../../../shared/components/Messages/constants';
 
 export function submitInviteForm(user, accountId, options) {
   return (dispatch) => {

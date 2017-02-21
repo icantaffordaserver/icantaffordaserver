@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import adminReducer from './admin/adminReducer';
 import userReducer from './user/userReducer';
 import sharedReducer from './shared/redux/sharedReducer';
-import mySaga from './user/Dashboard/sagas';
+import mySaga from './user/components/Dashboard/sagas';
 import root from './shared/redux/auth/sagas';
 
 const allReducers = {

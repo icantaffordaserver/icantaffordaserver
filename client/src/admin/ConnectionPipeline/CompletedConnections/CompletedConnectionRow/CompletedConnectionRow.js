@@ -4,7 +4,7 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { showModal } from '../../../../shared/Modal/actions';
+import { showModal } from '../../../../shared/components/Modal/actions';
 import { selectMatch } from '../../actions';
 import { Table, Button } from 'semantic-ui-react';
 
