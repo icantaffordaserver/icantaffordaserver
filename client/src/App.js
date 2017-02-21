@@ -20,7 +20,7 @@ function App() {
           exact
           path="/"
           render={() => (
-            <h1>Nothing! This is a empty fucking home screen. So fuck off!</h1>
+            <h1>Nothing!</h1>
           )}
         />
         <Route path="/dashboard" component={Dashboard} />
