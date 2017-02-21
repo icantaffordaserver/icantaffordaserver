@@ -13,7 +13,7 @@ const propTypes = {};
 
 const defaultProps = {};
 
-class ConnectionQues extends React.Component {
+class ConnectionCues extends React.Component {
 
   constructor(props) {
     super(props);
@@ -101,7 +101,7 @@ class ConnectionQues extends React.Component {
 
 }
 
-ConnectionQues.propTypes = propTypes;
-ConnectionQues.defaultProps = defaultProps;
+ConnectionCues.propTypes = propTypes;
+ConnectionCues.defaultProps = defaultProps;
 
-export default ConnectionQues;
+export default ConnectionCues;

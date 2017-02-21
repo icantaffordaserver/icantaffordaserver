@@ -5,7 +5,7 @@ import React from 'react';
 import keydown from 'react-keydown';
 import { Grid, Segment } from 'semantic-ui-react';
 import VideoEmbedContainer from '../containers/VideoEmbedContainer';
-import ConnectionQues from '../components/ConnectionQues';
+import ConnectionCues from '../components/ConnectionCues';
 
 function ConnectionPanel(props) {
   return (
@@ -17,7 +17,7 @@ function ConnectionPanel(props) {
       </Grid.Column>
       <Grid.Column width={6}>
         <Segment>
-          <ConnectionQues {...props} />
+          <ConnectionCues {...props} />
         </Segment>
       </Grid.Column>
     </Grid>
