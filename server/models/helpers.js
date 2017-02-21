@@ -11,6 +11,22 @@ const UserProfiles = require('./UserAccounts').UserProfiles;
 // Helpers
 
 /**
+ * Generate a unique token
+ * @returns {Promise.<void>}
+ */
+export function generateUniqueToken() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(16, (err, buf) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(buf.toString('hex'));
+      }
+    });
+  });
+}
+
+/**
  * Create a user in the database
  *
  * @param firstName
@@ -20,18 +36,12 @@ const UserProfiles = require('./UserAccounts').UserProfiles;
  * @returns {Promise.<*>}
  */
 export async function createUser(firstName, lastName, email, password) {
-    // wrap the user sign up in a transaction
+  // wrap the user sign up in a transaction
   return bookshelf.transaction(async (t) => {
     try {
-            // Step 1: generate a token to verify email
-      const token = await new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-          if (err) {
-            reject(err);
-          } else { resolve(buf.toString('hex')); }
-        });
-      });
-            // Step 2: insert the email, password, and generated token into user_accounts DB table
+      // Step 1: generate a token to verify email
+      const token = await generateUniqueToken();
+      // Step 2: insert the email, password, and generated token into user_accounts DB table
       const newUser = await new UserAccounts({
         email,
         password_hash: password,
@@ -40,7 +50,7 @@ export async function createUser(firstName, lastName, email, password) {
         transacting: t,
         method: 'insert',
       });
-            // Step 3: insert name into user_profiles DB Table
+      // Step 3: insert name into user_profiles DB Table
       await new UserProfiles({
         user_account_id: newUser.toJSON().id,
         first_name: firstName,
@@ -49,8 +59,8 @@ export async function createUser(firstName, lastName, email, password) {
         transacting: t,
         method: 'insert',
       });
-            // Step 4: return the user as a promise
-            // lookup the account and return the promise
+      // Step 4: return the user as a promise
+      // lookup the account and return the promise
       return newUser.fetch({ transacting: t, withRelated: 'profile' });
     } catch (err) {
       throw err;
