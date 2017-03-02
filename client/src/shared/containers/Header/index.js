@@ -1,25 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Menu, Image } from 'semantic-ui-react';
-import { logout } from '../../redux/auth/actions';
+import { graphql, withApollo } from 'react-apollo';
 import AuthenticatedSubMenu from '../../components/Header/AuthenticatedSubMenu';
 import UnauthenticatedSubMenu from '../../components/Header/UnauthenticatedSubMenu';
 import AdminSubMenu from '../../../admin/Header/AdminSubMenu';
 import UserSubMenu from '../../../user/components/Header/UserSubMenu';
 import logo from './logo.png';
 
-const propTypes = {
-  loggedIn: React.PropTypes.bool,
-  user: React.PropTypes.object,
-  dispatch: React.PropTypes.func.isRequired,
-};
+import CurrentUserQuery from '../../../graphql/auth/CurrentUserQuery';
 
-const defaultProps = {
-  loggedIn: false,
-  user: {},
-};
-
+const propTypes = {};
 
 class Header extends React.Component {
   constructor(props) {
@@ -29,21 +20,47 @@ class Header extends React.Component {
 
   handleLogout(event) {
     event.preventDefault();
-    this.props.dispatch(logout());
+
+    // remove token from local storage and reset apollo client to refetch all queries
+    window.localStorage.removeItem('graphcoolToken');
+    this.props.client.resetStore();
   }
 
   renderNav() {
-    if (this.props.loggedIn && this.props.user.admin) {
+    const { user, admin } = this.props.data;
+    if (user && admin) { // TODO case where user is an admin
       return <AdminSubMenu />;
-    } else if (this.props.loggedIn) {
+    } else if (user) {
       return <UserSubMenu />;
     }
     return null;
   }
 
   render() {
-    const { loggedIn } = this.props;
+    const { user, loading } = this.props.data;
 
+    if (loading) {
+      return null;
+    }
+
+    if (user) { // if a user is logged in
+      const { email } = this.props.data.user;
+      return (
+        <Menu pointing secondary size="large">
+          <Menu.Item>
+            <Link to="/">
+              <Image alt="Shift" src={logo} />
+            </Link>
+          </Menu.Item>
+          {this.renderNav()}
+          <AuthenticatedSubMenu
+            handleLogout={this.handleLogout}
+            email={email}
+            gravatar="205e460b479e2e5b48aec07710c08d50"
+          />
+        </Menu>
+      );
+    }
     return (
       <Menu pointing secondary size="large">
         <Menu.Item>
@@ -52,25 +69,15 @@ class Header extends React.Component {
           </Link>
         </Menu.Item>
         {this.renderNav()}
-        {loggedIn ?
-          <AuthenticatedSubMenu
-            handleLogout={this.handleLogout}
-            email={this.props.user.email}
-            gravatar={this.props.user.gravatar}
-          /> :
-          <UnauthenticatedSubMenu />
-        }
+        <UnauthenticatedSubMenu />
       </Menu>
     );
   }
 }
 
 Header.propTypes = propTypes;
-Header.defaultProps = defaultProps;
 
-const mapStateToProps = (state) => ({
-  loggedIn: state.auth.loggedIn,
-  user: state.auth.user,
-});
-
-export default connect(mapStateToProps)(Header);
+// wrap the component with withApollo so we can expose the client prop
+export default withApollo(
+  graphql(CurrentUserQuery)(Header)
+);

@@ -4,6 +4,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Dropdown, Image } from 'semantic-ui-react';
+import crypto from 'crypto';
 
 const propTypes = {
   handleLogout: React.PropTypes.func.isRequired,
@@ -17,9 +18,11 @@ const defaultProps = {
 };
 
 function AuthenticatedSubMenu(props) {
+  const md5 = crypto.createHash('md5').update(props.email).digest('hex');
+  const gravatarUrl = `https://gravatar.com/avatar/${md5}?s=200&d=monsterid`;
   const trigger = (
     <div>
-      <Image avatar src={props.picture || props.gravatar} />
+      <Image avatar src={props.picture || gravatarUrl} />
       {props.email}
     </div>
   );

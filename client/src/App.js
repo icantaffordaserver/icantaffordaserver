@@ -7,30 +7,36 @@ import history from './history';
 import Header from './shared/containers/Header';
 import Dashboard from './user/pages/Dashboard';
 import ConnectionPanel from './user/pages/ConnectionPanel';
-import Login from './shared/components/Login';
-import Signup from './shared/components/Signup';
+import LoginContainer from './shared/containers/LoginContainer';
+import SignupContainer from './shared/containers/SignupContainer';
 import Forgot from './shared/components/Forgot';
 
-function App() {
-  return (
-    <Router history={history}>
-      <div>
-        <Header />
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <h1>Nothing!</h1>
-          )}
-        />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/chat" component={ConnectionPanel} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/forgot" component={Forgot} />
-      </div>
-    </Router>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Router history={history}>
+        <div>
+          <Header />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <h1>Hey Current User</h1>
+            )}
+          />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/chat" component={ConnectionPanel} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/signup" component={SignupContainer} />
+          <Route path="/forgot" component={Forgot} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

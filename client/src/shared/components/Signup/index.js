@@ -1,60 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Form, Header, Segment, Grid, Button, Divider } from 'semantic-ui-react';
-import { signup } from './actions';
-import { facebookLogin, twitterLogin, googleLogin, vkLogin, githubLogin } from '../OAuth/actions';
-import Messages from '../Messages';
+
+const propTypes = {
+  handleSubmit: React.PropTypes.func.isRequired,
+  handleChange: React.PropTypes.func.isRequired,
+  firstName: React.PropTypes.string.isRequired,
+  lastName: React.PropTypes.string.isRequired,
+  email: React.PropTypes.string.isRequired,
+  password: React.PropTypes.string.isRequired,
+};
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSignup = this.handleSignup.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = { firstName: '', lastName: '', email: '', password: '' };
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSignup(event) {
-    event.preventDefault();
-    this.props.dispatch(signup(
-      this.state.firstName,
-      this.state.lastName,
-      this.state.email,
-      this.state.password,
-      this.props.params.inviteId,
-    ));
-  }
-
-  handleFacebook() {
-    this.props.dispatch(facebookLogin());
-  }
-
-  handleTwitter() {
-    this.props.dispatch(twitterLogin());
-  }
-
-  handleGoogle() {
-    this.props.dispatch(googleLogin());
-  }
-
-  handleVk() {
-    this.props.dispatch(vkLogin());
-  }
-
-  handleGithub() {
-    this.props.dispatch(githubLogin());
   }
 
   render() {
     return (
       <Grid centered verticalAlign="middle">
         <Grid.Column width={6} textAlign="left">
-          <Messages messages={this.props.messages} />
-          <Form onSubmit={this.handleSignup} size="large">
+          <Form onSubmit={this.props.handleSubmit} size="large">
             <Header textAlign="center" as="h2" color="teal">Create an account</Header>
             <Segment padded>
               <Form.Field>
@@ -64,7 +30,8 @@ class Signup extends React.Component {
                   icon="quote left"
                   iconPosition="left"
                   placeholder="First Name"
-                  onChange={this.handleChange}
+                  onChange={this.props.handleChange}
+                  value={this.props.firstName}
                 />
               </Form.Field>
               <Form.Field>
@@ -74,7 +41,8 @@ class Signup extends React.Component {
                   icon="quote left"
                   iconPosition="left"
                   placeholder="Last Name"
-                  onChange={this.handleChange}
+                  onChange={this.props.handleChange}
+                  value={this.props.lastName}
                 />
               </Form.Field>
               <Form.Field>
@@ -84,7 +52,8 @@ class Signup extends React.Component {
                   icon="mail"
                   iconPosition="left"
                   placeholder="Email"
-                  onChange={this.handleChange}
+                  onChange={this.props.handleChange}
+                  value={this.props.email}
                 />
               </Form.Field>
               <Form.Field>
@@ -95,7 +64,8 @@ class Signup extends React.Component {
                   iconPosition="left"
                   placeholder="Password"
                   type="password"
-                  onChange={this.handleChange}
+                  onChange={this.props.handleChange}
+                  value={this.props.password}
                 />
               </Form.Field>
               <Button fluid color="teal" size="large">Create Account</Button>
@@ -112,8 +82,6 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  messages: state.messages,
-});
+Signup.propTypes = propTypes;
 
-export default connect(mapStateToProps)(Signup);
+export default Signup;
