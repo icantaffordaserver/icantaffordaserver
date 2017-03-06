@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { graphql, compose, withApollo } from 'react-apollo';
-import LoginComponent from '../components/Login';
+import LoginComponent from '../components/LoginComponent';
 import CurrentUserQuery from '../../graphql/auth/CurrentUserQuery';
 import SignInMutation from '../../graphql/auth/SignInMutation';
 
@@ -60,7 +60,8 @@ class LoginContainer extends React.Component {
         password,
       },
     });
-    window.localStorage.setItem('graphcoolToken', response.data.signinUser.token); // save token
+    console.log(response);
+    window.localStorage.setItem('scaphold_user_token', response.data.loginUser.token); // save token
 
     // reset the store after the user has been authenticated, then direct to dashboard
     this.props.client.resetStore();

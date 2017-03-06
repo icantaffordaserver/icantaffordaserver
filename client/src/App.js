@@ -2,25 +2,25 @@ import React from 'react';
 import {
   Router,
   Route,
+  Switch,
 } from 'react-router-dom';
 import history from './history';
-import Header from './shared/containers/Header';
+import HeaderContainer from './shared/containers/HeaderContainer';
 import Dashboard from './user/pages/Dashboard';
+import MyAccountContainer from './shared/containers/MyAccountContainer';
 import ConnectionPanel from './user/pages/ConnectionPanel';
 import LoginContainer from './shared/containers/LoginContainer';
 import SignupContainer from './shared/containers/SignupContainer';
-import Forgot from './shared/components/Forgot';
+import ForgotPasswordContainer from './shared/containers/ForgotPasswordContainer';
+import ResetPasswordContainer from './shared/containers/ResetPasswordContainer';
+import NotFound404 from './shared/components/NotFound404';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Router history={history}>
-        <div>
-          <Header />
+function App() {
+  return (
+    <Router history={history}>
+      <div>
+        <HeaderContainer />
+        <Switch>
           <Route
             exact
             path="/"
@@ -29,14 +29,17 @@ class App extends React.Component {
             )}
           />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/account" component={MyAccountContainer} />
           <Route path="/chat" component={ConnectionPanel} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/signup" component={SignupContainer} />
-          <Route path="/forgot" component={Forgot} />
-        </div>
-      </Router>
-    );
-  }
+          <Route path="/forgot" component={ForgotPasswordContainer} />
+          <Route path="/reset/:id/:token" component={ResetPasswordContainer} />
+          <Route component={NotFound404} />
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

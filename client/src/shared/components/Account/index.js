@@ -1,8 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Grid, Header } from 'semantic-ui-react';
-import { updateProfile, changePassword, deleteAccount } from './actions';
-import { link, unlink } from '../components/OAuth/actions';
 import Messages from '../Messages';
 import AccountMenuTabs from './AccountMenuTabs';
 import ProfileComponent from './ProfileComponent';
@@ -11,7 +8,7 @@ import ChangePasswordComponent from './ChangePasswordComponent';
 import DeleteAccountComponent from './DeleteAccountComponent';
 import SocialComponent from './SocialComponent';
 
-class Account extends React.Component {
+class MyAccount extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,25 +37,17 @@ class Account extends React.Component {
 
   handleProfileUpdate(event) {
     event.preventDefault();
-    this.props.dispatch(updateProfile(this.state, this.props.token));
+
   }
 
   handleChangePassword(event) {
     event.preventDefault();
-    this.props.dispatch(changePassword(this.state.password, this.state.confirm, this.props.token));
+
   }
 
   handleDeleteAccount(event) {
     event.preventDefault();
-    this.props.dispatch(deleteAccount(this.props.token));
-  }
 
-  handleLink(provider) {
-    this.props.dispatch(link(provider));
-  }
-
-  handleUnlink(provider) {
-    this.props.dispatch(unlink(provider));
   }
 
   renderPanel() {
@@ -118,10 +107,4 @@ class Account extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  token: state.auth.token,
-  user: state.auth.user,
-  messages: state.messages,
-});
-
-export default connect(mapStateToProps)(Account);
+export default MyAccount;

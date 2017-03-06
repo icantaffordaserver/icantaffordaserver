@@ -2,7 +2,7 @@
   "README_schema": "Specifies how to load the GraphQL schema that completion, error highlighting, and documentation is based on in the IDE",
   "schema": {
     "request": {
-      "url": "https://api.graph.cool/simple/v1/cizpv0k3u6kcq0127mxlb8urr",
+      "url": "https://us-west-2.api.scaphold.io/graphql/shift-beta",
       "method": "POST",
       "README_postIntrospectionQuery": "Whether to POST an introspectionQuery to the url. If the url always returns the schema JSON, set to false and consider using GET",
       "postIntrospectionQuery": true,

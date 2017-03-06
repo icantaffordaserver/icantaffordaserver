@@ -5,9 +5,19 @@ import gql from 'graphql-tag';
 
 export default gql`
   {
-    user {
-      id
-      email
+    viewer {
+      user {
+        id
+        firstName
+        lastName
+        email
+        phoneNumber
+        gender
+        city
+        stateProvince
+        country
+        bio
+      }
     }
   }
 `;

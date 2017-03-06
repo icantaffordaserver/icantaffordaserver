@@ -3,11 +3,13 @@
  */
 import React from 'react';
 import { graphql, withApollo, compose } from 'react-apollo';
-import SignupComponent from '../components/Signup';
+import SignupComponent from '../components/SignupComponent';
 import SignupMutation from '../../graphql/auth/SignupMutation';
 import SignInMutation from '../../graphql/auth/SignInMutation';
 
-const propTypes = {};
+const propTypes = {
+  replace: React.PropTypes.func.isRequired,
+};
 
 const defaultProps = {};
 
@@ -35,6 +37,7 @@ class SignupContainer extends React.Component {
         lastName,
       },
     });
+
     const signInResponse = await this.props.signInMutation({
       variables: {
         email,
@@ -43,10 +46,9 @@ class SignupContainer extends React.Component {
     });
 
     // save the token in local storage, reset the store to requery user data, and redirect to dashboard
-    window.localStorage.setItem('graphcoolToken', signInResponse.data.signinUser.token); // save token
+    window.localStorage.setItem('scaphold_user_token', signInResponse.data.loginUser.token); // save token
     this.props.client.resetStore();
     this.props.replace('/');
-
   }
 
   render() {

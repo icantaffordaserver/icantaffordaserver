@@ -51,7 +51,7 @@ class ConnectionCues extends React.Component {
     } else {
       this.setState({
         ...this.state,
-        currentIndex: this.state.currentIndex += 1,
+        currentIndex: this.state.currentIndex + 1,
       });
     }
   }
@@ -68,7 +68,7 @@ class ConnectionCues extends React.Component {
     } else {
       this.setState({
         ...this.state,
-        currentIndex: this.state.currentIndex -= 1,
+        currentIndex: this.state.currentIndex - 1,
       });
     }
   }
