@@ -41,12 +41,18 @@ class SetConnectionTimeModal extends React.Component {
         <Modal.Content>
           <Grid textAlign="center">
             <Grid.Row>
-              <Header>User 1 and User 2, set time for {this.state.m ? moment(this.state.m).format('dddd, MMMM Do @ h:mm a') : null}</Header>
+              <Header>
+                User 1 and User 2, set time for
+                {' '}
+                {this.state.m ? moment(this.state.m).format('dddd, MMMM Do @ h:mm a') : null}
+              </Header>
             </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column>
                 <Header content="Availability" />
-                <UserAvailabilityListContainer id1={user1} id2={user2} />
+                {(!user1 || !user2) &&
+                  'Somehow you managed to select no users... this is a bug add a conditional below to display something to say that "you need to select some users before you can match them"'}
+                {(!user1 || !user2) && <UserAvailabilityListContainer id1={user1} id2={user2} />}
               </Grid.Column>
               <Grid.Column>
                 <InputMoment

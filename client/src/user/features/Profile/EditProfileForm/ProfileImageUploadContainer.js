@@ -8,13 +8,11 @@ import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
 import ProfileImage from './components/ProfileImageUpload';
 import { uploadProfileImg } from '../../../utils';
 
-const propTypes = {
-  data: React.PropTypes.object.isRequired,
-};
-
-const defaultProps = {};
-
 class ProfileImageUploadContainer extends React.Component {
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,14 +34,11 @@ class ProfileImageUploadContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
-    console.log(this.props.data);
+
     const { loading } = this.state;
     const { profilePhoto } = this.props.data.viewer.user;
     return <ProfileImage photo={profilePhoto} loading={loading} uploadPhoto={this.handleUpload} />;
   }
 }
-
-ProfileImageUploadContainer.propTypes = propTypes;
-ProfileImageUploadContainer.defaultProps = defaultProps;
 
 export default graphql(CurrentUserQuery)(ProfileImageUploadContainer);
