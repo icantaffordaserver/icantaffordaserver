@@ -11,7 +11,11 @@ const CenterStoriesWrapper = styled.div`
 const req = require.context('../src', true, /.stories.js$/);
 
 // give stories some padding
-addDecorator(story => <CenterStoriesWrapper>{story()}</CenterStoriesWrapper>);
+addDecorator(story => (
+  <CenterStoriesWrapper>
+    {story()}
+  </CenterStoriesWrapper>
+));
 
 function loadStories() {
   req.keys().forEach(filename => req(filename));
