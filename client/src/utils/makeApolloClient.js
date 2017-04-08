@@ -9,8 +9,8 @@ import addGraphQLSubscriptions from './addGraphQLSubscriptions';
 // Note that scapholdUrl expects the url without the http:// or wss://
 function makeApolloClient(scapholdUrl) {
   const graphqlUrl = `https://${scapholdUrl}`;
-  const websocketUrl = `wss://${scapholdUrl}`;
-  const networkInterface = createNetworkInterface({ uri: graphqlUrl });
+  const webSocketUrl = `wss://${scapholdUrl}`;
+  const networkInterface = createNetworkInterface({ uri: graphqlUrl});
   networkInterface.use([{
     applyMiddleware(req, next) {
       // Easy way to add authorization headers for every request
@@ -24,14 +24,14 @@ function makeApolloClient(scapholdUrl) {
       next();
     },
   }]);
-  const wsClient = new SubscriptionClient(websocketUrl);
+  const wsClient = new SubscriptionClient(webSocketUrl);
   const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(networkInterface, wsClient);
 
-  const clientGraphql = new ApolloClient({
+  return new ApolloClient({
     networkInterface: networkInterfaceWithSubscriptions,
+    queryDeduplication: true, // use so that we do not fetch the same query multiple times
     initialState: {},
   });
-  return clientGraphql;
 }
 
 export default makeApolloClient;

@@ -1,16 +1,12 @@
 /**
  * Created by alexandermann on 2017-01-24.
  */
+
 //{
-//  "extends": "airbnb",
-//  "rules": {
-//    "func-names": [
-//      "error",
-//      "never"
-//    ]
-//  }
+//  "extends": "airbnb"
 //}
 
+// v2
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
@@ -21,7 +17,6 @@
     "es6": true
   },
   "plugins": [
-    "redux-saga",
     "react",
     "jsx-a11y"
   ],
@@ -33,10 +28,7 @@
     }
   },
   "rules": {
-    "arrow-parens": [
-      "error",
-      "always"
-    ],
+    "arrow-parens": 0,
     "arrow-body-style": [
       2,
       "as-needed"
@@ -74,16 +66,17 @@
     "prefer-template": 2,
     "class-methods-use-this": 0,
     "react/forbid-prop-types": 0,
+    "react/jsx-closing-bracket-location": 0,
     "react/jsx-first-prop-new-line": [
       2,
       "multiline"
     ],
     "react/jsx-filename-extension": 0,
+    "react/jsx-indent-props": 0,
     "react/jsx-no-target-blank": 0,
+    "react/jsx-no-bind": 2,
     "react/require-extension": 0,
     "react/self-closing-comp": 0,
-    "redux-saga/no-yield-in-race": 2,
-    "redux-saga/yield-effects": 2,
     "require-yield": 0,
     "import/no-webpack-loader-syntax": 0
   }

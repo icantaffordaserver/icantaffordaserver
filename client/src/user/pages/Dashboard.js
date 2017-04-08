@@ -2,12 +2,11 @@
  * Created by alexandermann on 2017-02-18.
  */
 import React from 'react';
-import { Route } from 'react-router-dom';
-import LaunchPad from '../../user/components/LaunchPad';
-import SetAvailability from './SetAvailability';
-import Firestarter from './Firestarter';
-import MyProfile from './MyProfile';
-import RequestConversation from './RequestConversation';
+import { Route, Switch } from 'react-router-dom';
+import LaunchPad from './LaunchPad';
+import FireStarter from './Firestarter';
+import MyProfile from './profile/index';
+import AvailabilityContainer from '../features/Availability/AvailabilityGridContainer';
 
 const propTypes = {
   match: React.PropTypes.object.isRequired,
@@ -16,14 +15,12 @@ const propTypes = {
 function Dashboard(props) {
   const { match } = props;
   return (
-    <div>
+    <Switch>
       <Route exact path={match.url} component={LaunchPad} />
-      <Route exact path={`${match.url}/availability`} component={SetAvailability} />
-      <Route exact path={`${match.url}/watch`} component={Firestarter} />
-      <Route exact path={`${match.url}/reflect`} component={Firestarter} />
-      <Route exact path={`${match.url}/profile`} component={MyProfile} />
-      <Route exact path={`${match.url}/request`} component={RequestConversation} />
-    </div>
+      <Route exact path={`${match.url}/availability`} component={AvailabilityContainer} />
+      <Route exact path={`${match.url}/watch`} component={FireStarter} />
+      <Route path={`${match.url}/profile`} component={MyProfile} />
+    </Switch>
   );
 }
 

@@ -8,7 +8,7 @@ const UserAccounts = bookshelf.Model.extend({
   hasTimestamps: true,
 
   initialize() {
-    this.on('saving', this.hashPassword, this);
+    this.on('loading', this.hashPassword, this);
   },
 
     // for all relations, make sure to RETURN
@@ -28,9 +28,9 @@ const UserAccounts = bookshelf.Model.extend({
     return this.hasMany(ConnectionProgress, 'user_account_id');
   },
 
-    // this function is called when the object fires the event 'saving' and it checks if an attribute
+    // this function is called when the object fires the event 'loading' and it checks if an attribute
     // password was passed.
-    // seems like this is run every time the UserAccounts fires the 'saving' event.
+    // seems like this is run every time the UserAccounts fires the 'loading' event.
     // This may be unnecessary then and rework into functions only where the password
     // is required to be saved...
   hashPassword(model, attrs, options) {

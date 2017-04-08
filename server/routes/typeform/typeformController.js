@@ -15,10 +15,14 @@ const formId = 'aHq8UA';
  * @param typeformDataApiResponses
  * @returns Response
  */
-function findResponse({ user_id: webhookUserId, response_id: webhookResponseId }, typeformDataApiResponses) {
+function findResponse(
+  { user_id: webhookUserId, response_id: webhookResponseId },
+  typeformDataApiResponses,
+) {
   for (let i = 0; i < typeformDataApiResponses.length; i += 1) {
     const {
-      user_id: typeformUserId, response_id: typeformResponseId,
+      user_id: typeformUserId,
+      response_id: typeformResponseId,
     } = typeformDataApiResponses[i].hidden;
     if (webhookUserId === typeformUserId && webhookResponseId === typeformResponseId) {
       return typeformDataApiResponses[i];
@@ -47,7 +51,7 @@ function parseProfileResponse(response, typeformDataApiQuestions) {
   // loop through the answers object on the response body
   _.forOwn(response.answers, (value, key) => {
     // find the index of the corresponding answer id to the question id
-    const questionIndex = _.findIndex(typeformDataApiQuestions, (question) => {
+    const questionIndex = _.findIndex(typeformDataApiQuestions, question => {
       return key === question.id;
     });
     // build the parsed profile question and answer object
@@ -90,10 +94,13 @@ export async function handleWebhook(req, res, next) {
   // store the profile json to the database
   try {
     const user = new UserAccounts({ id: response.hidden.user_id });
-    await user.related('profile').save({
-      typeform_profile: profileDataStore,
-      typeform_profile_complete: true,
-    }, { patch: true });
+    await user.related('profile').save(
+      {
+        typeform_profile: profileDataStore,
+        typeform_profile_complete: true,
+      },
+      { patch: true },
+    );
     res.sendStatus(201);
   } catch (err) {
     console.log(err);

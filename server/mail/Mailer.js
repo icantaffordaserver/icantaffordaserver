@@ -63,6 +63,7 @@ function sendEmail(template, mergeObj) {
     mandrill_client.messages.sendTemplate(mandrillMailObject, (result) => {
       resolve(result);
     }, (error) => {
+      console.log(error);
       reject(error);
     });
   });
