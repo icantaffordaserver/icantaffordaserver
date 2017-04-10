@@ -27,7 +27,7 @@ export default gql`
           id
           emailToVerify
         }
-        connectionQueue {
+        connectionsRequested {
           id
           comment
           modifiedAt
@@ -36,7 +36,7 @@ export default gql`
         connections {
           edges {
             node {
-              connectionStatus
+              status
               connectionTime
               createdAt
               id
@@ -52,7 +52,7 @@ export default gql`
               connection {
                 id
                 connectionTime
-                connectionStatus
+                status
                 participants {
                   edges {
                     node {
