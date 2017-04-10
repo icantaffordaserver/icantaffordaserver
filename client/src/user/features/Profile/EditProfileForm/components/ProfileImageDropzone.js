@@ -15,6 +15,7 @@ const DropzoneStyled = styled(Dropzone)`
 `;
 
 const SegmentStyled = styled(Segment)`
+  margin: 15px auto 15px auto !important;
   padding: 0 !important;
   width: 250px !important;
   height: 250px !important;
@@ -24,14 +25,18 @@ const HeaderPadded = styled(Header)`
   padding: 10px !important;
 `;
 
-class ProfileImage extends React.Component {
+class ProfileImageDropzone extends React.Component {
   static propTypes = {
-    uploadPhoto: React.PropTypes.func.isRequired,
+    onDrop: React.PropTypes.func.isRequired,
+    src: React.PropTypes.string,
+  };
+  static defaultProps = {
+    src: '',
   };
   state = {
     error: false,
     message: 'Drop or click to upload a photo',
-    blobUrl: '',
+    blobUrl: this.props.src ? this.props.src : '',
   };
 
   handleDrop = (acceptedFiles, rejectedFiles) => {
@@ -44,7 +49,7 @@ class ProfileImage extends React.Component {
       return;
     }
     this.setState({ blobUrl: acceptedFiles[0].preview });
-    this.props.uploadPhoto(acceptedFiles[0]);
+    this.props.onDrop(acceptedFiles[0]);
   };
 
   render() {
@@ -61,4 +66,4 @@ class ProfileImage extends React.Component {
   }
 }
 
-export default ProfileImage;
+export default ProfileImageDropzone;

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import DashboardViewDetail from '../../Dashboard/DashboardViewDetail';
 import ViewProfileContainer from '../containers/ViewProfileContainer';
-import EditProfileContainer from '../EditProfileForm/EditProfileFormContainer';
+import EditProfileContainer from '../EditProfileForm/containers/EditProfileFormContainer';
 
 const propTypes = {
   history: React.PropTypes.object.isRequired,
@@ -22,7 +22,6 @@ class CurrentProfile extends React.Component {
   }
 
   setEditing = () => {
-    console.log(this.state);
     const { isEditing } = this.state;
     if (isEditing) {
       this.setState({ editButtonText: 'Edit', isEditing: false });

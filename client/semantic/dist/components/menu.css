@@ -187,7 +187,7 @@
 }
 
 /*--------------
-     Header
+     UserHeader
 ---------------*/
 
 .ui.menu .header.item,
@@ -806,7 +806,7 @@ Floated Menu / Item
   display: none !important;
 }
 
-/* Header */
+/* UserHeader */
 .ui.secondary.menu .header.item {
   border-radius: 0em;
   border-right: none;
@@ -1049,7 +1049,7 @@ Floated Menu / Item
   display: none !important;
 }
 
-/* Header */
+/* UserHeader */
 .ui.text.menu .header.item {
   background-color: transparent;
   opacity: 1;
@@ -1371,7 +1371,7 @@ Floated Menu / Item
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Header */
+/* UserHeader */
 .ui.inverted.menu .header.item {
   margin: 0em;
   background: transparent;

@@ -5,7 +5,7 @@ import React from 'react';
 import { Container, Form } from 'semantic-ui-react';
 import PlacesAutocomplete from 'react-places-autocomplete';
 
-import ProfileImageUploadContainer from '../ProfileImageUploadContainer';
+import ProfileImageDropzone from './ProfileImageDropzone';
 
 class EditProfileForm extends React.Component {
   static propTypes = {
@@ -16,6 +16,7 @@ class EditProfileForm extends React.Component {
       gender: React.PropTypes.string,
       location: React.PropTypes.string,
       bio: React.PropTypes.string,
+      profilePhoto: React.PropTypes.object,
     }).isRequired,
   };
   state = {
@@ -24,6 +25,8 @@ class EditProfileForm extends React.Component {
     gender: this.props.user.gender,
     location: this.props.user.location,
     bio: this.props.user.bio,
+    droppedPhoto: null,
+    existingProfilePhoto: this.props.user.profilePhoto && this.props.user.profilePhoto.blobUrl
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
@@ -34,15 +37,20 @@ class EditProfileForm extends React.Component {
 
   handleSubmit = (event, { formData }) => {
     event.preventDefault();
-    console.log(formData);
-    this.props.onSubmit(formData);
+    this.props.onSubmit(formData, this.state.droppedPhoto);
+  };
+
+  handleDrop = (photo) => {
+    this.setState({ droppedPhoto: photo });
   };
 
   render() {
     const { firstName, lastName, gender, location, bio } = this.state;
+    const { profilePhoto } = this.props.user;
+
     return (
       <Container text>
-        <ProfileImageUploadContainer />
+        <ProfileImageDropzone onDrop={this.handleDrop} src={profilePhoto && profilePhoto.blobUrl} />
         <Form onSubmit={this.handleSubmit} loading={this.props.loading}>
           <Form.Group widths="equal">
             <Form.Input
@@ -82,7 +90,7 @@ class EditProfileForm extends React.Component {
             <PlacesAutocomplete
               inputName="location"
               onChange={this.handleAddressChange}
-              value={location}
+              value={location || ''}
               placeholder="Where are you from?"
             />
           </Form.Field>
@@ -91,7 +99,7 @@ class EditProfileForm extends React.Component {
             label="Bio"
             placeholder="Tell us more about you..."
             onChange={this.handleChange}
-            value={bio}
+            value={bio || ''}
           />
           <Form.Button positive>Save Profile</Form.Button>
         </Form>

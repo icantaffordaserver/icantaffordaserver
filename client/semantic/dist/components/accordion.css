@@ -89,7 +89,7 @@
           transform: rotate(180deg);
 }
 
-/* Header */
+/* UserHeader */
 .ui.accordion .ui.header .dropdown.icon {
   font-size: 1em;
   margin: 0em 0.25rem 0em 0rem;

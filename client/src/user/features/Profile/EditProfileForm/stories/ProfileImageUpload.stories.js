@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import ProfileImageUpload from '../components/ProfileImageUpload';
+import ProfileImageUpload from '../components/ProfileImageDropzone';
 
 storiesOf('user.ProfileImageUpload', module).add('Open', () => (
-  <ProfileImageUpload uploadPhoto={action('uploadPhoto')} />
+  <ProfileImageDropzone uploadPhoto={action('uploadPhoto')} />
 ));

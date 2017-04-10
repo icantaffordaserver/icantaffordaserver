@@ -143,7 +143,7 @@
   color: rgba(0, 0, 0, 0.85);
 }
 
-/* Default Header Size */
+/* Default UserHeader Size */
 .ui.items > .item > .content > .header:not(.ui) {
   font-size: 1.28571429em;
 }
@@ -235,7 +235,7 @@
   color: '';
 }
 
-/* Header */
+/* UserHeader */
 .ui.items > .item > .content > a.header {
   color: rgba(0, 0, 0, 0.85);
 }

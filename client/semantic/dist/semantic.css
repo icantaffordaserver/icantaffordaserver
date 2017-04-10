@@ -6314,7 +6314,7 @@ i.flag.zimbabwe:before {
          Site Overrides
 *******************************/
 /*!
- * # Semantic UI 2.2.7 - Header
+ * # Semantic UI 2.2.7 - UserHeader
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -6324,7 +6324,7 @@ i.flag.zimbabwe:before {
  */
 
 /*******************************
-            Header
+            UserHeader
 *******************************/
 
 /* Standard */
@@ -6349,7 +6349,7 @@ i.flag.zimbabwe:before {
 }
 
 /*--------------
-   Sub Header
+   Sub UserHeader
 ---------------*/
 
 .ui.header .sub.header {
@@ -6469,7 +6469,7 @@ h5.ui.header {
   font-size: 1rem;
 }
 
-/* Sub Header */
+/* Sub UserHeader */
 
 h1.ui.header .sub.header {
   font-size: 1.14285714rem;
@@ -6516,7 +6516,7 @@ h5.ui.header .sub.header {
   font-size: 1em;
 }
 
-/* Sub Header */
+/* Sub UserHeader */
 
 .ui.huge.header .sub.header {
   font-size: 1.14285714rem;
@@ -13660,7 +13660,7 @@ ol.ui.list ol li,
   padding-left: 0em;
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.list .list > .item .header,
 .ui.list > .item .header {
@@ -13706,7 +13706,7 @@ ol.ui.list ol li,
   color: rgba(0, 0, 0, 0.4);
 }
 
-/* Header Link */
+/* UserHeader Link */
 
 .ui.list .list > .item a.header,
 .ui.list > .item a.header {
@@ -15464,7 +15464,7 @@ ol.ui.horizontal.list li:before,
     Loose Coupling
 --------------------*/
 
-/* Header */
+/* UserHeader */
 
 .ui.inverted.segment > .ui.header {
   color: #FFFFFF;
@@ -20738,7 +20738,7 @@ ol.ui.horizontal.list li:before,
 }
 
 /*--------------
-     Header
+     UserHeader
 ---------------*/
 
 .ui.menu .header.item,
@@ -21415,7 +21415,7 @@ Floated Menu / Item
   display: none !important;
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.secondary.menu .header.item {
   border-radius: 0em;
@@ -21694,7 +21694,7 @@ Floated Menu / Item
   display: none !important;
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.text.menu .header.item {
   background-color: transparent;
@@ -22054,7 +22054,7 @@ Floated Menu / Item
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.inverted.menu .header.item {
   margin: 0em;
@@ -22823,7 +22823,7 @@ Floated Menu / Item
      Content
 ---------------*/
 
-/* Header */
+/* UserHeader */
 
 .ui.message .header {
   display: block;
@@ -25061,7 +25061,7 @@ Floated Menu / Item
   color: rgba(0, 0, 0, 0.85);
 }
 
-/* Default Header Size */
+/* Default UserHeader Size */
 
 .ui.cards > .card > .content > .header:not(.ui),
 .ui.card > .content > .header:not(.ui) {
@@ -25199,7 +25199,7 @@ Floated Menu / Item
   color: '';
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.cards > .card > .content > a.header,
 .ui.card > .content > a.header {
@@ -26703,7 +26703,7 @@ a.ui.card:hover,
   color: rgba(0, 0, 0, 0.85);
 }
 
-/* Default Header Size */
+/* Default UserHeader Size */
 
 .ui.items > .item > .content > .header:not(.ui) {
   font-size: 1.28571429em;
@@ -26803,7 +26803,7 @@ a.ui.card:hover,
   color: '';
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.items > .item > .content > a.header {
   color: rgba(0, 0, 0, 0.85);
@@ -27793,7 +27793,7 @@ a.ui.card:hover,
   transform: rotate(180deg);
 }
 
-/* Header */
+/* UserHeader */
 
 .ui.accordion .ui.header .dropdown.icon {
   font-size: 1em;
@@ -30617,7 +30617,7 @@ select.ui.dropdown {
 }
 
 /*--------------
-     Header
+     UserHeader
 ---------------*/
 
 .ui.modal > .header {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose, graphql, withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import HeaderComponent from './components/Header';
+import UserHeader from './components/UserHeader';
 import currentUserQuery from '../../../graphql/auth/currentUserQuery';
 
 const propTypes = {
@@ -29,7 +29,7 @@ class HeaderContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
-    return <HeaderComponent user={this.props.data.viewer.user} handleLogout={this.handleLogout} />;
+    return <UserHeader user={this.props.data.viewer.user} handleLogout={this.handleLogout} />;
   }
 }
 

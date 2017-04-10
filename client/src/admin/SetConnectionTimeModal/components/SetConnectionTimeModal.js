@@ -52,7 +52,7 @@ class SetConnectionTimeModal extends React.Component {
                 <Header content="Availability" />
                 {(!user1 || !user2) &&
                   'Somehow you managed to select no users... this is a bug add a conditional below to display something to say that "you need to select some users before you can match them"'}
-                {(!user1 || !user2) && <UserAvailabilityListContainer id1={user1} id2={user2} />}
+                {(user1 || user2) && <UserAvailabilityListContainer id1={user1} id2={user2} />}
               </Grid.Column>
               <Grid.Column>
                 <InputMoment

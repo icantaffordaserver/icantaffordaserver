@@ -28,7 +28,7 @@ class CurrentUserMenuItem extends React.Component {
     return (
       <MenuItemStyled position="right">
         <Link to="/account">
-          <Image avatar src={this.props.picture || gravatarUrl} />
+          <Image avatar src={this.props.photoSrc || gravatarUrl} />
           {this.props.email}
         </Link>
       </MenuItemStyled>
