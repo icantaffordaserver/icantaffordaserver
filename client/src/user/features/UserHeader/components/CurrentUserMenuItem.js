@@ -13,16 +13,15 @@ const MenuItemStyled = styled(MenuItem)`
   margin-bottom: auto !important;
 `;
 
-const propTypes = {
-  email: React.PropTypes.string.isRequired,
-  photoSrc: React.PropTypes.string,
-};
-
-const defaultProps = {
-  photoSrc: null,
-};
-
 class CurrentUserMenuItem extends React.Component {
+  static propTypes = {
+    email: React.PropTypes.string.isRequired,
+    photoSrc: React.PropTypes.string,
+  };
+  static defaultProps = {
+    photoSrc: null,
+  };
+
   render() {
     const { photoSrc, email } = this.props;
     const gravatarUrl = generateGravatarUrl(email);
@@ -36,8 +35,5 @@ class CurrentUserMenuItem extends React.Component {
     );
   }
 }
-
-CurrentUserMenuItem.propTypes = propTypes;
-CurrentUserMenuItem.defaultProps = defaultProps;
 
 export default CurrentUserMenuItem;
