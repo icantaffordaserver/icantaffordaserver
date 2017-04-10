@@ -5,7 +5,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image, MenuItem } from 'semantic-ui-react';
 import styled from 'styled-components';
-import crypto from 'crypto';
+
+import { generateGravatarUrl } from '../helpers';
 
 const MenuItemStyled = styled(MenuItem)`
   margin-top: auto !important;
@@ -23,13 +24,13 @@ const defaultProps = {
 
 class CurrentUserMenuItem extends React.Component {
   render() {
-    const md5 = crypto.createHash('md5').update(this.props.email).digest('hex');
-    const gravatarUrl = `https://gravatar.com/avatar/${md5}?s=200&d=monsterid`;
+    const { photoSrc, email } = this.props;
+    const gravatarUrl = generateGravatarUrl(email);
     return (
       <MenuItemStyled position="right">
         <Link to="/account">
-          <Image avatar src={this.props.photoSrc || gravatarUrl} />
-          {this.props.email}
+          <Image avatar src={photoSrc || gravatarUrl} />
+          {email}
         </Link>
       </MenuItemStyled>
     );
