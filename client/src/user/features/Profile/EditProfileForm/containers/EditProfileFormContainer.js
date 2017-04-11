@@ -5,7 +5,7 @@ import React from 'react';
 import { compose, graphql } from 'react-apollo';
 
 import EditProfileForm from '../components/EditProfileForm';
-import currentUserQuery from '../../../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../../../graphql/user/currentUserQuery';
 import updateUserMutation from '../../../../../graphql/account/updateUserMutation';
 import { uploadProfileImg } from '../../../../utils';
 

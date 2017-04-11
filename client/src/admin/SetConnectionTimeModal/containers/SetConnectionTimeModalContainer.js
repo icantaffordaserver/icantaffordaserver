@@ -6,7 +6,7 @@ import { compose, graphql } from 'react-apollo';
 import SetConnectionTimeModal from '../components/SetConnectionTimeModal';
 import addUserToConnectionMutation from '../graphql/addUserToConnectionMutation';
 import createConnectionMutation from '../graphql/createConnectionMutation';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 class SetConnectionTimeModalContainer extends React.Component {
   static propTypes = {

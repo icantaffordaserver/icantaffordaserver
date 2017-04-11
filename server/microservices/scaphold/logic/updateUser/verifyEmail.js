@@ -29,6 +29,7 @@ export default (async function(req, res) {
   `;
 
   try {
+    console.log(req.body);
     // if requestVars don't contain a checkToken, then user is not trying to verify email
     if (!req.body.input.requestVars || !req.body.input.requestVars.checkToken) {
       return res.send({ ...req.body }); // pass the request body down to any other logic functions
@@ -39,9 +40,10 @@ export default (async function(req, res) {
 
     // query the server to compare input token vs token in db
     const response = await graphqlFetch(checkEmailVerifiedTokenQuery, { userId: id });
-    console.log(response);
+
     // check that a response exists
     if (!response.data.getUser) {
+      console.log('error: getUser doesnt exist');
       return res
         .status(400)
         .send(new Error('An error occurred while processing this request. Please try again.'));
@@ -56,11 +58,13 @@ export default (async function(req, res) {
 
     // convert date to milliseconds and compare to make sure token not expired
     if (new Date(tokenExpiry).valueOf() < Date.now()) {
+      console.log('error: token is expired');
       return res.status(400).send(new Error('Token is expired, please request a new one.'));
     }
 
     // check if the token in the db matches the token provided
     if (checkToken !== storedUserToken) {
+      console.log('error: token doesnt match stored token');
       return res
         .status(400)
         .send(new Error('An error occurred while processing this request. Please try again.'));

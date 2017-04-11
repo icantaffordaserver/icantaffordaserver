@@ -4,7 +4,7 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import AvailabilityComponent from './components/AvailabilityGrid';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 import updateUserMutation from '../../../graphql/account/updateUserMutation';
 
 const propTypes = {

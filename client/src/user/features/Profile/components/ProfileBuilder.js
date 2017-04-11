@@ -8,7 +8,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import DashboardViewDetail from '../../Dashboard/DashboardViewDetail';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 import generateToken from '../../../../utils/generateToken';
 
 const IFrameStyled = styled.iframe`

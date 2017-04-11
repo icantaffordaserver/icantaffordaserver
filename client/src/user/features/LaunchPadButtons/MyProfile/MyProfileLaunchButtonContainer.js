@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 
 import LaunchPadItem from '../LaunchPadItem';
 import notes from './045_Notes.png';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 
 const propTypes = {
   data: React.PropTypes.object.isRequired,

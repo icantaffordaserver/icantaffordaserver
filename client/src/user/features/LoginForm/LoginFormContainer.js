@@ -4,7 +4,7 @@
 import React from 'react';
 import { graphql, compose, withApollo } from 'react-apollo';
 import LoginComponent from './LoginForm';
-import CurrentUserQuery from '../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../graphql/user/currentUserQuery';
 import SignInMutation from './graphql/loginMutation';
 
 class LoginContainer extends React.Component {

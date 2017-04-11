@@ -5,7 +5,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { Header } from 'semantic-ui-react';
 
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 import ProfileHeader from '../components/ProfileHeader';
 import AllCards from '../components/AllCards';
 

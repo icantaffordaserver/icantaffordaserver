@@ -44,7 +44,7 @@ const propTypes = {
   handleLogout: React.PropTypes.func.isRequired,
 };
 
-const UserHeader = ({user, handleLogout}) => {
+const UserHeader = ({ user, handleLogout }) => {
   return (
     <Menu pointing secondary size="small">
       <MenuItemContainer>
@@ -54,7 +54,11 @@ const UserHeader = ({user, handleLogout}) => {
           </Link>
         </MenuLogo>
         {user && <NavLinkStyled to="/dashboard">Dashboard</NavLinkStyled>}
-        {user && <CurrentUserMenuItem email={user.email} photoSrc={user.profilePhoto.blobUrl} />}
+        {user &&
+          <CurrentUserMenuItem
+            email={user.email}
+            photoSrc={user.profilePhoto && user.profilePhoto.blobUrl}
+          />}
         {user && <MenuItemStyled link content="Logout" onClick={handleLogout} />}
         {!user && <UnauthenticatedSubMenu />}
       </MenuItemContainer>

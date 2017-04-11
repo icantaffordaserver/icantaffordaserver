@@ -5,7 +5,7 @@ import React from 'react';
 import { compose, graphql } from 'react-apollo';
 import RequestConnectionModal from './RequestConnectionModal';
 import userRequestConnectionMutation from '../../../graphql/userRequestConnectionMutation';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const propTypes = {
   isOpen: React.PropTypes.bool.isRequired,

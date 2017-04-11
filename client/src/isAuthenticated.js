@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { graphql } from 'react-apollo';
-import CurrentUserQuery from './graphql/auth/currentUserQuery';
+import CurrentUserQuery from './graphql/user/currentUserQuery';
 
 export default WrappedComponent => {
   class isAuthenticated extends React.Component {
@@ -14,7 +14,10 @@ export default WrappedComponent => {
 
     componentWillReceiveProps(nextProps) {
       const { data } = nextProps;
-      if (!data.loading && data.viewer.user && !data.viewer.user.emailVerified) {
+
+      if (!data.loading && !data.viewer.user) {
+        this.props.history.push('/notloggedin');
+      } else if (!data.loading && data.viewer.user && !data.viewer.user.emailVerified) {
         this.props.history.push('/notverified');
       }
     }

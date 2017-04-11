@@ -5,7 +5,7 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import FireStarterModal from './FireStarterModal';
 import createFireStarterSuggestionMutation from '../../graphql/createFireStarterSuggestionMutation';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const propTypes = {
   modalOpen: React.PropTypes.bool.isRequired,

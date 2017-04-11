@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { graphql } from 'react-apollo';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 import LaunchPadItem from '../LaunchPadItem';
 import diamond from './049_Diamond.png';
 import FireStarterModalContainer from '../../FireStarterModal/FireStarterModalContainer';

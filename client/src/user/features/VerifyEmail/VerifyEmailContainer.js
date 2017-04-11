@@ -5,7 +5,7 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import VerifyEmailComponent from './VerifyEmail';
 import verifyEmailMutation from './graphql/verifyEmailMutation';
-import CurrentUserQuery from '../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../graphql/user/currentUserQuery';
 
 class VerifyEmailContainer extends React.Component {
   state = {
@@ -18,6 +18,8 @@ class VerifyEmailContainer extends React.Component {
   async componentWillReceiveProps(nextProps) {
     // perform request on page load, viewer data will first not exist and then exist, so check
     // for that condition
+    console.log(nextProps.data.viewer);
+
     if (
       !this.props.data.viewer && nextProps.data.viewer && nextProps.data.viewer.user.verifyEmail
     ) {

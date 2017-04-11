@@ -8,7 +8,7 @@ import { Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import DashboardViewDetail from '../../Dashboard/DashboardViewDetail';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 
 const TextContainer = styled.div`
   padding: 100px

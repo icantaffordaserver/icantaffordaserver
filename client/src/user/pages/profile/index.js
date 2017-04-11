@@ -8,7 +8,7 @@ import { Container, Segment, Menu, MenuItem, Loader, Dimmer } from 'semantic-ui-
 import GettingStarted from '../../features/Profile/containers/GettingStartedContainer';
 import CurrentProfileContainer from '../../features/Profile/containers/CurrentProfileContainer';
 import ProfileBuilder from '../../features/Profile/components/ProfileBuilder';
-import CurrentUserQuery from '../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const Loading = (props) => {
   if (props.data.loading) {

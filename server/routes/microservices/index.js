@@ -30,9 +30,9 @@ routes.post('/sendVerificationEmailAfterCreateUser', sendVerificationEmail);
 // createInvites Logic
 routes.post('/createInvites', validateInviteAndCreateInviteToken);
 routes.post('/sendInviteEmail', sendInviteEmail);
+
 // accept webflow form webhook for invite request
 routes.post('/inviterequest', webflowInviteRequest);
-
 
 routes.post('/generateToken', generateToken);
 routes.post('/createVerifyEmailSendEmail', createVerifyEmailSendEmail);

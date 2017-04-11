@@ -5,7 +5,7 @@ import React from 'react';
 import { graphql, compose } from 'react-apollo';
 
 import UserMatching from './components/index';
-import CurrentUserQuery from '../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../graphql/user/currentUserQuery';
 import allConnectionQueuesQuery from '../graphql/allConnectionQueuesQuery';
 
 class UserMatchingContainer extends React.Component {

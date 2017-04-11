@@ -5,7 +5,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import LaunchPadItem from '../LaunchPadItem';
 import pencil from './009_Pencil.png';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 import ReflectionModal from '../../ReflectionModal/components/ReflectionModal';
 
 const propTypes = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { compose, graphql, withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 import UserHeader from './components/UserHeader';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const propTypes = {
   match: React.PropTypes.object.isRequired,

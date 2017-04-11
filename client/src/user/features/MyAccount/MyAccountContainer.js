@@ -8,7 +8,7 @@ import MyAccount from './MyAccount';
 import changeEmailMutation from '../../../graphql/changeEmailMutation';
 import updateUserMutation from '../../../graphql/account/updateUserMutation';
 import deleteUserMutation from '../../../graphql/account/deleteUserMutation';
-import currentUserQuery from '../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const propTypes = {
   data: React.PropTypes.object.isRequired,

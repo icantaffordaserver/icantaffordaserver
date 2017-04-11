@@ -14,6 +14,7 @@ import ResetPasswordContainer from './user/features/ResetPasswordForm/ResetPassw
 import NotFound404 from './user/features/NotFound404/NotFound404';
 import VerifyEmailContainer from './user/features/VerifyEmail/VerifyEmailContainer';
 import NotVerified from './user/pages/NotVerified';
+import NotLoggedIn from './user/pages/NotLoggedIn';
 import isAuthenticated from './isAuthenticated';
 
 function App() {
@@ -31,8 +32,9 @@ function App() {
           <Route path="/signUp/:id/:token" component={SignUpContainer} />
           <Route path="/forgot" component={ForgotPasswordContainer} />
           <Route path="/reset/:id/:token" component={ResetPasswordContainer} />
-          <Route path="/verify/:token" component={VerifyEmailContainer} />
+          <Route path="/verify/:token" component={isAuthenticated(VerifyEmailContainer)} />
           <Route path="/notVerified" component={NotVerified} />
+          <Route path="/notLoggedIn" component={NotLoggedIn} />
           <Route component={NotFound404} />
         </Switch>
       </FullHeightContainer>

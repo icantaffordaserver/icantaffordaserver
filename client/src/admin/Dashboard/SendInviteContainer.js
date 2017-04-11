@@ -6,25 +6,19 @@ import { graphql, compose } from 'react-apollo';
 import { isEmpty, isEmail } from 'validator';
 import SendInviteComponent from './SendInviteComponent';
 import sendInviteMutation from '../graphql/sendInviteMutation';
-import allInvitesQuery from '../InviteRequests/graphql/allInvitesQuery';
-import currentUserQuery from '../../graphql/auth/currentUserQuery';
-
-const propTypes = {
-  mutate: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object.isRequired,
-};
-
-const defaultProps = {};
+import invitesSentQuery from './InvitesSent/invitesSentQuery';
+import currentUserQuery from '../../graphql/user/currentUserQuery';
 
 class SendInviteContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      labelMessage: '',
-      labelColor: '',
-      loading: false,
-    };
-  }
+  static propTypes = {
+    mutate: React.PropTypes.func.isRequired,
+    data: React.PropTypes.object.isRequired,
+  };
+  state = {
+    labelMessage: '',
+    labelColor: '',
+    loading: false,
+  };
 
   hasFormErrors = (email, firstName, lastName) => {
     if (isEmpty(firstName) || isEmpty(lastName)) {
@@ -52,7 +46,7 @@ class SendInviteContainer extends React.Component {
             sentById: this.props.data.viewer.user.id,
           },
         },
-        refetchQueries: [{ query: allInvitesQuery }],
+        refetchQueries: [{ query: invitesSentQuery }],
       });
       this.setState({
         loading: false,
@@ -85,8 +79,5 @@ class SendInviteContainer extends React.Component {
     );
   }
 }
-
-SendInviteContainer.propTypes = propTypes;
-SendInviteContainer.defaultProps = defaultProps;
 
 export default compose(graphql(currentUserQuery), graphql(sendInviteMutation))(SendInviteContainer);

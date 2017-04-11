@@ -8,7 +8,7 @@ import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import ResendVerificationEmailButtonContainer
   from '../features/ResendVerificationEmail/ResendVerificationEmailButtonContainer';
-import currentUserQuery from '../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../graphql/user/currentUserQuery';
 
 const MessageContainer = styled.div`
   max-width: 400px;

@@ -4,8 +4,8 @@
 import 'isomorphic-fetch';
 import assert from 'assert';
 
-const ADMIN_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5kIjoic2NhcGhvbGQuc3VwZXJ1c2VyIiwiZXhwIjo4NjQwMDAwMDAwMDAwMDAwLCJpYXQiOjE0ODg1NzgzNDYsImF1ZCI6Ikp0Z2Z5WklRMnBKajlySThFOWU2MTdoUWNrMFJueEFuIiwiaXNzIjoiaHR0cHM6Ly9zY2FwaG9sZC5hdXRoMC5jb20vIiwic3ViIjoiMjdlZmU5MDAtMzNkOS00ZjQ3LThlMmQtZGJlZGY4NTA0ZjZmIn0.Rt8sUyF4vF8_Ya21fbzDC22RU8NJ5cLrWjI6KAtaPbg';
-const SCAPHOLD_URL = 'https://us-west-2.api.scaphold.io/graphql/shift-beta';
+const ADMIN_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5kIjoic2NhcGhvbGQuc3VwZXJ1c2VyIiwiZXhwIjo4NjQwMDAwMDAwMDAwMDAwLCJpYXQiOjE0OTE4NDI3NTMsImF1ZCI6Ikp0Z2Z5WklRMnBKajlySThFOWU2MTdoUWNrMFJueEFuIiwiaXNzIjoiaHR0cHM6Ly9zY2FwaG9sZC5hdXRoMC5jb20vIiwic3ViIjoiMjdlZmU5MDAtMzNkOS00ZjQ3LThlMmQtZGJlZGY4NTA0ZjZmIn0.d3u0P0qTyd4LhSnETR3guDGLKPMhV7cpjTmGHe_hCyI';
+const SCAPHOLD_URL = 'https://us-west-2.api.scaphold.io/graphql/toktumi';
 
 /**
  * create a graphql-fetch bound to a specific graphql url

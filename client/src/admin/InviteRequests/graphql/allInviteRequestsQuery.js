@@ -6,20 +6,14 @@ import gql from 'graphql-tag';
 export default gql`
   {
     viewer {
-      allInvites {
+      allInviteRequests(where: {isApproved: {eq: false}}) {
         edges {
           node {
             id
             email
-            firstName
-            lastName
-            status
-            sentBy {
-              firstName
-              lastName
-            }
+            name
+            referredFrom
             createdAt
-            modifiedAt
           }
         }
       }

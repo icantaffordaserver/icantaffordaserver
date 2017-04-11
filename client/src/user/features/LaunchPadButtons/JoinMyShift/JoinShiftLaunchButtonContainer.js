@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import LaunchPadItem from '../LaunchPadItem';
 import computer from './105_Reading.png';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 
 class JoinShiftLaunchButtonContainer extends React.Component {
   static propTypes = {

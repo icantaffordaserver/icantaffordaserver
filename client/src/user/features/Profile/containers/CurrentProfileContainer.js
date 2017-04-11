@@ -4,7 +4,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import CurrentProfile from '../components/CurrentProfile';
-import CurrentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 
 const propTypes = {};
 

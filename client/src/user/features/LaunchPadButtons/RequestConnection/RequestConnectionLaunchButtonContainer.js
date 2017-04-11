@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
-import currentUserQuery from '../../../../graphql/auth/currentUserQuery';
+import currentUserQuery from '../../../../graphql/user/currentUserQuery';
 import LaunchPadItem from '../LaunchPadItem';
 import tap from './129_Tap.png';
 import RequestConnectionModalContainer from '../../RequestConnectionModal/RequestConnectionModalContainer';

@@ -4,7 +4,7 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { Button } from 'semantic-ui-react';
-import CurrentUserQuery from '../../../graphql/auth/currentUserQuery';
+import CurrentUserQuery from '../../../graphql/user/currentUserQuery';
 import resendVerificationEmailMutation from './graphql/resendVerificationEmailMutation';
 
 const propTypes = {
