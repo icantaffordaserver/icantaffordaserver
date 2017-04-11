@@ -88,9 +88,10 @@ class InvitesSentContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
-    console.log(this.props.data);
+
     const invites = this.props.data.viewer.allInvites.edges;
     const { loading, labelMessage, labelColor } = this.state;
+
     return (
       <InvitesSentList
         labelMessage={labelMessage}
