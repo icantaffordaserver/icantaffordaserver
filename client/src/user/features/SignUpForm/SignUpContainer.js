@@ -7,7 +7,7 @@ import SignUpComponent from './SignUpForm';
 import SignUpMutation from './graphql/signUpMutation';
 import SignInMutation from '../LoginForm/graphql/loginMutation';
 
-class SignUpContainer extends React.Component {
+class SignUpWithInviteContainer extends React.Component {
   static propTypes = {
     history: React.PropTypes.object.isRequired,
     client: React.PropTypes.object.isRequired,
@@ -18,14 +18,21 @@ class SignUpContainer extends React.Component {
   };
 
   handleSignUp = async (firstName, lastName, email, password) => {
+    const { id: inviteId, token } = this.props.match.params;
+    console.log(String(inviteId));
     try {
       this.setState({ loading: true });
       await this.props.signUpMutation({
         variables: {
-          email,
-          password,
-          firstName,
-          lastName,
+          createUser: {
+            username: email,
+            email,
+            password,
+            firstName,
+            lastName,
+            inviteId, // include the inviteid to look up
+            requestVars: { token, inviteId },
+          },
         },
       });
 
@@ -64,4 +71,4 @@ class SignUpContainer extends React.Component {
 export default compose(
   graphql(SignUpMutation, { name: 'signUpMutation' }), // name the mutation
   graphql(SignInMutation, { name: 'signInMutation' }),
-)(withApollo(SignUpContainer));
+)(withApollo(SignUpWithInviteContainer));

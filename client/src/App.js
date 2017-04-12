@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import FullHeightContainer from './user/features/Dashboard/FullHeightContainer';
-import HeaderContainer from './user/features/UserHeader/UserHeaderContainer';
+import HeaderContainer from './admin/Header/HeaderContainer';
 import Admin from './admin/Admin';
 import Dashboard from './user/pages/Dashboard';
 import MyAccountContainer from './user/features/MyAccount/MyAccountContainer';

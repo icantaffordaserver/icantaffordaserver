@@ -4,10 +4,10 @@
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
 import { isEmpty, isEmail } from 'validator';
-import SendInviteComponent from './SendInviteComponent';
-import sendInviteMutation from '../graphql/sendInviteMutation';
-import invitesSentQuery from './InvitesSent/invitesSentQuery';
-import currentUserQuery from '../../graphql/user/currentUserQuery';
+import SendInviteComponent from './SendInvite';
+import sendInviteMutation from '../../graphql/sendInviteMutation';
+import invitesSentQuery from '../InvitesSent/invitesSentQuery';
+import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 class SendInviteContainer extends React.Component {
   static propTypes = {

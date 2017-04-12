@@ -7,11 +7,11 @@ import graphqlFetch from '../../../graphqlFetch';
 import { generateUniqueToken } from '../../../helpers';
 import getUserByEmailQuery from '../../../graphql/getUserByEmailQuery';
 
-export default (async function (req, res) {
+export default async (req, res) => {
   try {
     // pull input data off the request
     console.log(req.body.input);
-    const { email, firstName, lastName, status, sentById } = req.body.input;
+    const { email } = req.body.input;
 
     // check if email is valid format
     if (!isEmail(email)) return res.status(400).send('Please enter a valid email.');
@@ -31,11 +31,8 @@ export default (async function (req, res) {
     // send the data along the "logic" flow in the expected format to update the store
     return res.send({
       input: {
+        ...req.body.input,
         email: normalizedEmail,
-        firstName,
-        lastName,
-        status,
-        sentById,
         token,
       },
     });
@@ -43,4 +40,4 @@ export default (async function (req, res) {
     console.log(err);
     return res.status(400).send(err);
   }
-});
+};

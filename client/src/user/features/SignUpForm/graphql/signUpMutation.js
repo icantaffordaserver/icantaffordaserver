@@ -4,9 +4,9 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation Signup($email: String!, $password: Secret!, $firstName: String!, $lastName: String!) {
-    createUser(input: {username: $email, email:$email, password: $password, firstName:$firstName, lastName:$lastName}) {
-      token
+  mutation Signup($createUser: CreateUserInput!) {
+    createUser(input: $createUser) {
+      clientMutationId
     }
   }
 `;

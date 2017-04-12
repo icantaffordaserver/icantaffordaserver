@@ -6,6 +6,9 @@ import gql from 'graphql-tag';
 export default gql`
   {
     viewer {
+      user {
+        id
+      }
       allInviteRequests(where: {isApproved: {eq: false}}) {
         edges {
           node {

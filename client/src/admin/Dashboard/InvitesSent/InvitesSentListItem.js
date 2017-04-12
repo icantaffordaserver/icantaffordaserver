@@ -21,8 +21,8 @@ class InvitesSentListItem extends React.Component {
   };
 
   resendInvite = () => {
-    const { id, email, firstName, lastName } = this.props.invite;
-    this.props.resendInvite(id, email, firstName, lastName);
+    const { id, email } = this.props.invite;
+    this.props.resendInvite(id, email);
   };
 
   render() {
@@ -45,16 +45,17 @@ class InvitesSentListItem extends React.Component {
         <Table.Cell>
           <Button
             size="mini"
-            disabled={false}
             negative
             onClick={this.deleteInvite}
             content="Cancel"
+            disabled={isAccepted}
           />
           <Button
             size="mini"
             color="green"
             onClick={this.resendInvite}
             content="Resend"
+            disabled={isAccepted}
           />
         </Table.Cell>
       </Table.Row>

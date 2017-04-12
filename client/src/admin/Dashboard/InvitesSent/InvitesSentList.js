@@ -25,7 +25,7 @@ class InvitesSentList extends React.Component {
         <Segment attached>
           {loading &&
             <Dimmer active>
-              <Loader>Deleting Invite</Loader>
+              <Loader>Performing action...</Loader>
             </Dimmer>}
           <Table compact size="small" basic="very">
             <Table.Header>

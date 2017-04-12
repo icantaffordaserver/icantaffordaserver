@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 
 import InvitesSentContainer from './InvitesSent/InvitesSentContainer';
-import SendInviteContainer from './SendInviteContainer';
+import SendInviteContainer from './SendInvite/SendInviteContainer';
 import InviteRequestsContainer from '../InviteRequests/InviteRequestsContainer';
 
 const propTypes = {};

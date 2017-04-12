@@ -16,6 +16,8 @@ import verifyEmail from '../../microservices/scaphold/logic/updateUser/verifyEma
 import validateInviteAndCreateInviteToken from '../../microservices/scaphold/logic/createInvites/pre/validateInviteAndCreateInviteToken';
 import sendInviteEmail from '../../microservices/scaphold/logic/createInvites/async/sendInviteEmail';
 import webflowInviteRequest from '../../microservices/webhooks/webflowInviteRequest';
+import isInviteApproved from '../../microservices/scaphold/logic/createUser/post/isInviteApproved';
+import isResendingInvite from '../../microservices/scaphold/logic/updateInvites/pre/isResendingInvite';
 
 const routes = Router();
 
@@ -26,10 +28,14 @@ const routes = Router();
 // createUser Logic
 routes.post('/createUser', createUser);
 routes.post('/sendVerificationEmailAfterCreateUser', sendVerificationEmail);
+routes.post('/isInviteApproved', isInviteApproved);
 
 // createInvites Logic
 routes.post('/createInvites', validateInviteAndCreateInviteToken);
 routes.post('/sendInviteEmail', sendInviteEmail);
+
+// updateInvites Logic
+routes.post('/isResendingInvite', isResendingInvite);
 
 // accept webflow form webhook for invite request
 routes.post('/inviterequest', webflowInviteRequest);

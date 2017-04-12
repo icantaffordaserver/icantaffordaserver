@@ -9,12 +9,13 @@ import sendInviteMutation from '../../graphql/sendInviteMutation';
 import deleteInvite from '../../graphql/deleteInviteMutation';
 
 import InvitesSentList from './InvitesSentList';
+import updateInviteMutation from './updateInviteMutation';
 
 class InvitesSentContainer extends React.Component {
   static propTypes = {
     data: React.PropTypes.object.isRequired,
     deleteInviteMutation: React.PropTypes.func.isRequired,
-    sendInviteMutation: React.PropTypes.func.isRequired,
+    updateInviteMutation: React.PropTypes.func.isRequired,
   };
   state = {
     loading: false,
@@ -52,19 +53,18 @@ class InvitesSentContainer extends React.Component {
     }
   };
 
-  resendInvite = async (existingInviteId, email, firstName, lastName) => {
+  resendInvite = async (existingInviteId, email) => {
     try {
       this.setState({ loading: true });
-      await this.deleteInvite(existingInviteId);
 
-      await this.props.sendInviteMutation({
+      await this.props.updateInviteMutation({
         variables: {
           invite: {
-            email,
-            firstName,
-            lastName,
-            status: 'sent',
+            id: existingInviteId,
             sentById: this.props.data.viewer.user.id,
+            requestVars: {
+              resendInvite: true,
+            },
           },
         },
         refetchQueries: [{ query: invitesSentQuery }],
@@ -106,7 +106,7 @@ class InvitesSentContainer extends React.Component {
 }
 
 export default compose(
-  graphql(sendInviteMutation, { name: 'sendInviteMutation' }),
+  graphql(updateInviteMutation, { name: 'updateInviteMutation' }),
   graphql(deleteInvite, { name: 'deleteInviteMutation' }),
-  graphql(invitesSentQuery),
+  graphql(invitesSentQuery, { options: { pollInterval: 10000 } }),
 )(InvitesSentContainer);
