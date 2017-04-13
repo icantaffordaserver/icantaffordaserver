@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose, graphql, withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 import currentUserQuery from '../../graphql/user/currentUserQuery';
 import Header from './index';
 
@@ -33,7 +34,9 @@ class HeaderContainer extends React.Component {
     // check for various properties
     const profilePhoto = user && user.profilePhoto ? user.profilePhoto.blobUrl : null;
     const email = user ? user.email : null;
-    const isAdmin = !!user.isAdmin;
+    const isAdmin = user && user.roles
+      ? _.findIndex(user.roles.edges, ({ node }) => node.name === 'admin') !== -1
+      : false;
     return (
       <Header
         isAdmin={isAdmin}

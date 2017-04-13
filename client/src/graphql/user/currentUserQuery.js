@@ -23,6 +23,13 @@ export default gql`
           blobUrl
           name
         }
+        roles {
+          edges {
+            node {
+              name
+            }
+          }
+        }
         verifyEmail {
           id
           emailToVerify

@@ -6,7 +6,7 @@ import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Header from './Header';
 
 storiesOf('ADMIN.Header', module)
-  .add('Unauthenticated', () => (
+  .add('Not Logged In', () => (
     <Header
       isAdmin={false}
       email={null}
@@ -20,7 +20,7 @@ storiesOf('ADMIN.Header', module)
       navigateTo={action('navigateTo')}
     />
   ))
-  .add('Authenticated', () => (
+  .add('Regular User', () => (
     <Header
       isAdmin={false}
       email={'alexander.mann@me.com'}
@@ -34,7 +34,7 @@ storiesOf('ADMIN.Header', module)
       navigateTo={action('navigateTo')}
     />
   ))
-  .add('Admin', () => (
+  .add('Admin User', () => (
     <Header
       isAdmin={true}
       email={'alexander.mann@me.com'}
