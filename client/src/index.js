@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 import config from './config';
 import makeApolloClient from './utils/makeApolloClient';
@@ -13,12 +15,26 @@ import '../semantic/dist/semantic.min.css';
 const { scapholdUrl } = config;
 const client = makeApolloClient(scapholdUrl);
 
-const AppWithApollo = (
+ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+    <LocaleProvider locale={enUS}>
+      <App />
+    </LocaleProvider>
+  </ApolloProvider>,
+  document.getElementById('root'),
 );
 
-ReactDOM.render(AppWithApollo, document.getElementById('root'));
-
-export default AppWithApollo;
+// include hot reloading
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default;
+    ReactDOM.render(
+      <ApolloProvider client={client}>
+        <LocaleProvider locale={enUS}>
+          <NextApp />
+        </LocaleProvider>
+      </ApolloProvider>,
+      document.getElementById('root'),
+    );
+  });
+}

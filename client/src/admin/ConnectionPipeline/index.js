@@ -1,30 +1,31 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
-import MatchedUsersList from './MatchedUsers/MatchedUsersList';
 import CompletedConnections from './CompletedConnections/CompletedConnectionsList';
 import allConnectionsQuery from '../graphql/allConnectionsQuery';
+import UpcomingConnectionsTable from './UpcomingConnectionsV2/UpcomingConnectionsTable';
 
 
 class ConnectionPipeline extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
-    console.log(this.props.data.viewer.allconnections);
-    const { edges: connections } = this.props.data.viewer.allConnections;
+    let { edges: connections } = this.props.data.viewer.allConnections;
+    connections = connections.map(({ node }) => node); // filter out the node object
+    console.log(connections);
 
     return (
       <Grid padded>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <MatchedUsersList
+            <UpcomingConnectionsTable
               allConnections={connections}
             />
           </Grid.Column>
           <Grid.Column>
-            <CompletedConnections
-              allConnections={connections}
-            />
+            {/*<CompletedConnections*/}
+              {/*allConnections={connections}*/}
+            {/*/>*/}
           </Grid.Column>
         </Grid.Row>
       </Grid>

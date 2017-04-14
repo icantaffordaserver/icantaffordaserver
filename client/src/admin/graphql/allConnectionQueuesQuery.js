@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 export default gql`
   {
     viewer {
-      allConnectionQueues {
+      allConnectionQueues(where: {isDequeued: {eq: false}}) {
         edges {
           node {
             id
@@ -33,4 +33,5 @@ export default gql`
       }
     }
   }
+
 `;

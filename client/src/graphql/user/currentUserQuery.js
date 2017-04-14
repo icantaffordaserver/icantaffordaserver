@@ -45,6 +45,7 @@ export default gql`
             node {
               status
               connectionTime
+              fireStarterSuggestion
               createdAt
               id
             }

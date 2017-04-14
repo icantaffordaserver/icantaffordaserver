@@ -2,6 +2,9 @@ import React from 'react';
 import { configure, addDecorator } from '@kadira/storybook';
 import { ApolloProvider } from 'react-apollo';
 import styled from 'styled-components';
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
+
 import '../semantic/dist/semantic.min.css';
 
 const CenterStoriesWrapper = styled.div`
@@ -19,11 +22,13 @@ const client = makeApolloClient(scapholdUrl);
 // give stories some padding, wrap in apollo for anything that makes a request to the graphql
 // server
 addDecorator(story => (
-  <ApolloProvider client={client}>
-    <CenterStoriesWrapper>
-      {story()}
-    </CenterStoriesWrapper>
-  </ApolloProvider>
+  <LocaleProvider locale={enUS}>
+    <ApolloProvider client={client}>
+      <CenterStoriesWrapper>
+        {story()}
+      </CenterStoriesWrapper>
+    </ApolloProvider>
+  </LocaleProvider>
 ));
 
 function loadStories() {

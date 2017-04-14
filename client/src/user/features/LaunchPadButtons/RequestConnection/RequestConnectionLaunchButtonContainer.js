@@ -6,20 +6,17 @@ import { graphql, compose } from 'react-apollo';
 import currentUserQuery from '../../../../graphql/user/currentUserQuery';
 import LaunchPadItem from '../LaunchPadItem';
 import tap from './129_Tap.png';
-import RequestConnectionModalContainer from '../../RequestConnectionModal/RequestConnectionModalContainer';
-
-const propTypes = {
-  data: React.PropTypes.object.isRequired,
-};
+import RequestConnectionModalContainer
+  from '../../RequestConnectionModal/RequestConnectionModalContainer';
 
 class RequestConnectionLaunchButtonContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      modalOpen: false,
-    };
-  }
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+  };
+  state = {
+    loading: false,
+    modalOpen: false,
+  };
 
   openModal = () => {
     if (this.isDisabled()) return; // if a request is pending, cannot request another
@@ -35,13 +32,14 @@ class RequestConnectionLaunchButtonContainer extends React.Component {
   };
 
   hasRequestPending = () => {
-    if (this.props.data.viewer.user.connectionQueue !== null) {
+    if (this.props.data.viewer.user.connectionsRequested !== null) {
       return true;
     }
     return false;
   };
 
   hasSetAvailability = () => {
+    if (!this.props.data.viewer.user.availability) return false;
     return Object.keys(this.props.data.viewer.user.availability).length > 0; // return true if availability has 1 slot or more selected
   };
 
@@ -69,7 +67,5 @@ class RequestConnectionLaunchButtonContainer extends React.Component {
     );
   }
 }
-
-RequestConnectionLaunchButtonContainer.propTypes = propTypes;
 
 export default compose(graphql(currentUserQuery))(RequestConnectionLaunchButtonContainer);

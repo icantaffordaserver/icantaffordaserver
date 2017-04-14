@@ -3,16 +3,13 @@ import classnames from 'classnames';
 import { Button, Input, Menu } from 'semantic-ui-react';
 
 class UsersPoolHeader extends React.Component {
-  getBtnClasses(index) {
-    return classnames({ active: this.props.userIndex === index });
-  }
 
   selectUser1 = () => {
-    this.props.chooseActiveUser('user1')
+    this.props.chooseActiveUser('user1');
   };
 
   selectUser2 = () => {
-    this.props.chooseActiveUser('user2')
+    this.props.chooseActiveUser('user2');
   };
 
   render() {
@@ -22,10 +19,14 @@ class UsersPoolHeader extends React.Component {
           <h3>User Pool</h3>
         </Menu.Item>
         <Menu.Item>
-          <Input type="text"
-                 placeholder="Search"
-                 icon="search"
-                 onChange={() => console.log('search changed')} />
+          <Input
+            error
+            type="text"
+            disabled
+            placeholder="Coming soon"
+            icon="search"
+            onChange={() => console.log('search changed')}
+          />
         </Menu.Item>
         <Menu.Item position="right">
           Selecting:

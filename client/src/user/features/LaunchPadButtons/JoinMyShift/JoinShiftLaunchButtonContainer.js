@@ -8,20 +8,12 @@ import moment from 'moment';
 import LaunchPadItem from '../LaunchPadItem';
 import computer from './105_Reading.png';
 import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
+import isConnectionSet from '../../../isConnectionSet';
 
 class JoinShiftLaunchButtonContainer extends React.Component {
   static propTypes = {
     history: React.PropTypes.object.isRequired,
-  };
-
-  renderLabelMessage = () => {
-    if (this.props.data.viewer.user.connections.edges.length === 0) return null;
-    const latestConnection = this.props.data.viewer.user.connections.edges[0].node;
-    if (latestConnection.connectionStatus === 'matched') return 'You have been matched!';
-    if (latestConnection.connectionStatus === 'scheduled') {
-      return `Your Shift is scheduled for ${moment(latestConnection.connectionTime).format('MMM DD h:mm A')}`;
-    }
-    return null;
+    data: React.PropTypes.object.isRequired,
   };
 
   handleClick = () => {
@@ -33,16 +25,26 @@ class JoinShiftLaunchButtonContainer extends React.Component {
     return true;
   };
 
+  renderLabel = () => {
+    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node;
+    if (isConnectionSet(connectionTime)) {
+      return {
+        labelMessage: `Your Shift is scheduled for ${moment(connectionTime).format('MMM DD h:mm A')}`,
+        labelPosition: 'top left',
+        labelColor: 'blue',
+      };
+    }
+  };
+
   render() {
     if (this.props.data.loading) return null;
 
+    console.log(this.props.data.viewer.user.connections);
     return (
       <LaunchPadItem
+        {...this.renderLabel()}
         imgSrc={computer}
         header="Join my Shift"
-        labelMessage={this.renderLabelMessage()}
-        labelPosition="top left"
-        labelColor="blue"
         onClick={this.handleClick}
         disabled={this.isDisabled()}
       />
@@ -50,7 +52,4 @@ class JoinShiftLaunchButtonContainer extends React.Component {
   }
 }
 
-export default compose(
-  withRouter,
-  graphql(CurrentUserQuery)
-)(JoinShiftLaunchButtonContainer);
+export default compose(withRouter, graphql(CurrentUserQuery))(JoinShiftLaunchButtonContainer);

@@ -3,15 +3,19 @@
  */
 import React from 'react';
 import { compose, graphql } from 'react-apollo';
+
 import SetConnectionTimeModal from '../components/SetConnectionTimeModal';
 import addUserToConnectionMutation from '../graphql/addUserToConnectionMutation';
 import createConnectionMutation from '../graphql/createConnectionMutation';
 import currentUserQuery from '../../../graphql/user/currentUserQuery';
+import updateConnectionQueueMutation from '../graphql/updateConnectionQueueMutation';
 
 class SetConnectionTimeModalContainer extends React.Component {
   static propTypes = {
     user1: React.PropTypes.string,
     user2: React.PropTypes.string,
+    connectionQueueIdUser1: React.PropTypes.string,
+    connectionQueueIdUser2: React.PropTypes.string,
     open: React.PropTypes.bool.isRequired,
     onClose: React.PropTypes.func,
   };
@@ -19,20 +23,30 @@ class SetConnectionTimeModalContainer extends React.Component {
     onClose: null,
     user1: null,
     user2: null,
+    connectionQueueIdUser1: '',
+    connectionQueueIdUser2: '',
   };
   state = {
     loading: false,
   };
 
-  createConnection = async (userId1, userId2, matchedById, connectionTime) => {
+  createConnection = async (
+    userId1,
+    userId2,
+    matchedById,
+    connectionTime,
+    fireStarterSuggestion,
+  ) => {
+    const { connectionQueueIdUser1, connectionQueueIdUser2 } = this.props;
     try {
       this.setState({ loading: true });
       const createConnectionResponse = await this.props.createConnectionMutation({
         variables: {
           connection: {
             matchedById,
-            connectionStatus: 'matched',
+            status: 'matched',
             connectionTime,
+            fireStarterSuggestion,
           },
         },
       });
@@ -56,6 +70,26 @@ class SetConnectionTimeModalContainer extends React.Component {
           },
         }),
       ]);
+      await Promise.all([
+        this.props.updateConnectionQueueMutation({
+          variables: {
+            input: {
+              id: connectionQueueIdUser1,
+              isDequeued: true,
+              connectionId: connectionsId,
+            },
+          },
+        }),
+        this.props.updateConnectionQueueMutation({
+          variables: {
+            input: {
+              id: connectionQueueIdUser2,
+              isDequeued: true,
+              connectionId: connectionsId,
+            },
+          },
+        }),
+      ]);
       this.setState({ loading: false });
     } catch (err) {
       this.setState({ loading: false });
@@ -63,16 +97,21 @@ class SetConnectionTimeModalContainer extends React.Component {
     }
   };
 
-  handleSave = async time => {
+  handleSave = async (time, fireStarterSuggestion) => {
     const { user1, user2 } = this.props;
     const adminId = this.props.data.viewer.user.id;
-    this.createConnection(user1, user2, adminId, time);
+    await this.createConnection(user1, user2, adminId, time, fireStarterSuggestion);
+    this.props.onClose();
   };
 
   render() {
     const { user1, user2, open, onClose } = this.props;
+    const { loading } = this.state;
+
+    console.log(this.props);
     return (
       <SetConnectionTimeModal
+        loading={loading}
         user1={user1}
         user2={user2}
         open={open}
@@ -85,6 +124,7 @@ class SetConnectionTimeModalContainer extends React.Component {
 
 export default compose(
   graphql(currentUserQuery),
+  graphql(updateConnectionQueueMutation, { name: 'updateConnectionQueueMutation' }),
   graphql(createConnectionMutation, { name: 'createConnectionMutation' }),
   graphql(addUserToConnectionMutation, { name: 'addUserToConnectionMutation' }),
 )(SetConnectionTimeModalContainer);

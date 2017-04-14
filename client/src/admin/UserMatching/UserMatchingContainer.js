@@ -17,16 +17,10 @@ class UserMatchingContainer extends React.Component {
     if (this.props.data.loading) return null;
 
     const connectionQueueUsers = this.props.data.viewer.allConnectionQueues.edges;
-    return (
-      <UserMatching
-        connectionQueueUsers={connectionQueueUsers}
-        matchUsers={this.createConnection}
-      />
-    );
+    return <UserMatching connectionQueueUsers={connectionQueueUsers} />;
   }
 }
 
-export default compose(
-  graphql(CurrentUserQuery),
-  graphql(allConnectionQueuesQuery),
-)(UserMatchingContainer);
+export default compose(graphql(CurrentUserQuery), graphql(allConnectionQueuesQuery))(
+  UserMatchingContainer,
+);

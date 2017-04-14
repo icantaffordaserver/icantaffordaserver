@@ -12,6 +12,9 @@ import {
   HeaderRightMenu,
   Avatar,
   Email,
+  MenuItem,
+  DropMenu,
+  DropMenuItem,
 } from './styles';
 
 class Header extends React.Component {
@@ -36,7 +39,7 @@ class Header extends React.Component {
     <HeaderRightMenu>
       <HeaderItem avatar onClick={() => this.props.navigateTo(this.props.accountUrl)}>
         <Avatar src={this.props.profileImgSrc || generateGravatarUrl(this.props.email)} />
-        <Email>alexander.mann@me.com</Email>
+        <Email>{this.props.email}</Email>
       </HeaderItem>
       <HeaderItem onClick={this.props.logout}><h4>Logout</h4></HeaderItem>
     </HeaderRightMenu>
@@ -51,9 +54,20 @@ class Header extends React.Component {
   );
 
   adminNav = () => (
-    <HeaderItem onClick={() => this.props.navigateTo(this.props.adminUrl)}>
-      <h4>Admin Dashboard</h4>
-    </HeaderItem>
+    <MenuItem>
+      <h4>Admin</h4>
+      <DropMenu>
+        <DropMenuItem onClick={() => this.props.navigateTo('/admin/dashboard')}>
+          <h4>Dashboard</h4>
+        </DropMenuItem>
+        <DropMenuItem onClick={() => this.props.navigateTo('/admin/matching')}>
+          <h4>Matching</h4>
+        </DropMenuItem>
+        <DropMenuItem onClick={() => this.props.navigateTo('/admin/pipeline')}>
+          <h4>Pipeline</h4>
+        </DropMenuItem>
+      </DropMenu>
+    </MenuItem>
   );
 
   userNav = () => (

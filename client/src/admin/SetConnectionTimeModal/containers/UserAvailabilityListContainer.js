@@ -12,6 +12,7 @@ class UserAvailabilityListContainer extends React.Component {
   };
   render() {
     if (this.props.data.loading) return null;
+
     const { user1, user2 } = this.props.data;
     return (
       <UserAvailabilityList

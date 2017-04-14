@@ -3,26 +3,23 @@
  */
 import React from 'react';
 import { graphql, compose } from 'react-apollo';
+
+import extractYouTubeId from './extractYouTubeId';
 import FireStarterModal from './FireStarterModal';
 import createFireStarterSuggestionMutation from '../../graphql/createFireStarterSuggestionMutation';
 import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
-const propTypes = {
-  modalOpen: React.PropTypes.bool.isRequired,
-  onClose: React.PropTypes.func.isRequired,
-  mutate: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object.isRequired,
-};
-
-const defaultProps = {};
-
 class FireStarterModalContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
-  }
+  static propTypes = {
+    modalOpen: React.PropTypes.bool.isRequired,
+    onClose: React.PropTypes.func.isRequired,
+    mutate: React.PropTypes.func.isRequired,
+    data: React.PropTypes.object.isRequired,
+  };
+
+  state = {
+    loading: false,
+  };
 
   handleSubmit = async suggestion => {
     const { id } = this.props.data.viewer.user;
@@ -37,9 +34,11 @@ class FireStarterModalContainer extends React.Component {
 
   render() {
     const { modalOpen, onClose } = this.props;
+    const fireStarterSrc = extractYouTubeId(this.props.data.viewer.user.connections.edges[0].node.fireStarterSuggestion);
     return (
       <FireStarterModal
         modalOpen={modalOpen}
+        fireStarterSrc={fireStarterSrc}
         onClose={onClose}
         onSubmit={this.handleSubmit}
         loading={this.state.loading}
@@ -47,9 +46,6 @@ class FireStarterModalContainer extends React.Component {
     );
   }
 }
-
-FireStarterModalContainer.propTypes = propTypes;
-FireStarterModalContainer.defaultProps = defaultProps;
 
 export default compose(graphql(currentUserQuery), graphql(createFireStarterSuggestionMutation))(
   FireStarterModalContainer,

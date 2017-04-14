@@ -3,13 +3,12 @@
  */
 import axios from 'axios';
 import _ from 'lodash';
-import client from '../scaphold/lokkaClient';
+import graphqlFetch from '../scaphold/graphqlFetch';
 
 const typeformAPIKey = '133cd26567475cc5be624aa3db0a81b4b4536509';
-console.log(typeformAPIKey);
 const formId = 'aHq8UA';
 const createTypeformProfileMutation = `
- ($id: ID!, $typeformProfile: JSON!) {
+ mutation addTypeformProfile($id: ID!, $typeformProfile: JSON!) {
   updateUser(input: {id: $id, typeformProfile: $typeformProfile, typeformProfileComplete: true}) {
     clientMutationId
   }
@@ -103,7 +102,7 @@ export default (async function handleWebhook(req, res, next) {
       profileResponses,
     };
     // store the profile json to the database
-    await client.mutate(createTypeformProfileMutation, {
+    await graphqlFetch(createTypeformProfileMutation, {
       id: response.hidden.user_id,
       typeformProfile: { ...profileDataStore },
     });

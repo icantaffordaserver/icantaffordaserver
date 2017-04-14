@@ -3,24 +3,20 @@
  */
 import React from 'react';
 import { graphql } from 'react-apollo';
-import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
+import currentUserQuery from '../../../../graphql/user/currentUserQuery';
 import LaunchPadItem from '../LaunchPadItem';
 import diamond from './049_Diamond.png';
 import FireStarterModalContainer from '../../FireStarterModal/FireStarterModalContainer';
-
-const propTypes = {
-  data: React.PropTypes.object.isRequired,
-};
-
-const defaultProps = {};
+import isConnectionSet from '../../../isConnectionSet';
 
 class FireStarterLaunchButtonContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalOpen: false,
-    };
-  }
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+  };
+
+  state = {
+    modalOpen: false,
+  };
 
   handleClick = () => {
     if (!this.props.data.viewer.user.typeformProfileComplete) return;
@@ -31,6 +27,18 @@ class FireStarterLaunchButtonContainer extends React.Component {
     this.setState({ modalOpen: false });
   };
 
+  renderLabelProps = () => {
+    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node;
+
+    if (isConnectionSet(connectionTime)) {
+      return {
+        labelMessage: 'FireStarter Available',
+        labelColor: 'green',
+        labelPosition: 'top right',
+      };
+    }
+  };
+
   render() {
     if (this.props.data.loading) return null;
 
@@ -39,8 +47,9 @@ class FireStarterLaunchButtonContainer extends React.Component {
     return (
       <div>
         <LaunchPadItem
+          {...this.renderLabelProps()}
           imgSrc={diamond}
-          header="Firestarter"
+          header="FireStarter"
           onClick={this.handleClick}
           disabled={!typeformProfileComplete}
         />
@@ -50,7 +59,4 @@ class FireStarterLaunchButtonContainer extends React.Component {
   }
 }
 
-FireStarterLaunchButtonContainer.propTypes = propTypes;
-FireStarterLaunchButtonContainer.defaultProps = defaultProps;
-
-export default graphql(CurrentUserQuery)(FireStarterLaunchButtonContainer);
+export default graphql(currentUserQuery)(FireStarterLaunchButtonContainer);

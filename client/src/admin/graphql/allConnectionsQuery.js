@@ -12,7 +12,7 @@ export default gql`
             id
             createdAt
             modifiedAt
-            connectionStatus
+            status
             connectionTime
             matchedBy {
               firstName

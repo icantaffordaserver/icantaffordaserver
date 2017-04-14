@@ -14,8 +14,8 @@ class UserMatching extends React.Component {
   };
 
   state = {
-    user1: { index: null, id: '' },
-    user2: { index: null, id: '' },
+    user1: { index: null, id: '', connectionQueueId: '' },
+    user2: { index: null, id: '', connectionQueueId: '' },
     selectingUser: 'user1',
     loading: false,
     modalOpen: false,
@@ -23,15 +23,16 @@ class UserMatching extends React.Component {
 
   // chooses a user from the connection queue pool
   selectUser = (index, id) => {
+    const connectionQueueId = this.props.connectionQueueUsers[index].node.id; // set the connection queue id
     const { user1, user2, selectingUser } = this.state;
     // if user is being deselected
     if ([user1.id, user2.id].includes(id)) {
       this.setState({
-        [selectingUser === 'user1' ? 'user2' : 'user1']: { index: null, id: '' },
+        [selectingUser === 'user1' ? 'user2' : 'user1']: { index: null, id: '', connectionQueueId: '' },
       });
     } else {
       this.setState({
-        [selectingUser]: { index, id },
+        [selectingUser]: { index, id, connectionQueueId },
         selectingUser: selectingUser === 'user1' ? 'user2' : 'user1',
       });
     }
@@ -102,6 +103,8 @@ class UserMatching extends React.Component {
           </Grid.Column>
         </Grid.Row>
         <SetConnectionTimeModalContainer
+          connectionQueueIdUser1={user1.connectionQueueId}
+          connectionQueueIdUser2={user2.connectionQueueId}
           user1={user1.id ? users[user1.index].node.user.id : null}
           user2={user2.id ? users[user2.index].node.user.id : null}
           open={this.state.modalOpen}

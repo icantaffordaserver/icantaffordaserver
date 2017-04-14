@@ -30,26 +30,19 @@ const EmbedStyled = styled.iframe`
   border-width: 0;
 `;
 
-const propTypes = {
-  modalOpen: React.PropTypes.bool.isRequired,
-  fireStarterSrc: React.PropTypes.string,
-  onSubmit: React.PropTypes.func.isRequired,
-  loading: React.PropTypes.bool.isRequired,
-};
-
-const defaultProps = {
-  fireStarterSrc: null,
-};
-
 class FireStarterModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      suggestion: '',
-      error: false,
-      submitted: false,
-    };
-  }
+  static propTypes = {
+    modalOpen: React.PropTypes.bool.isRequired,
+    fireStarterSrc: React.PropTypes.string.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+  };
+
+  state = {
+    suggestion: '',
+    error: false,
+    submitted: false,
+  };
 
   handleChange = event => {
     this.setState({ suggestion: event.target.value });
@@ -67,8 +60,9 @@ class FireStarterModal extends React.Component {
   };
 
   render() {
-    const { modalOpen, fireStarterSrc, loading } = this.props;
+    const { modalOpen, loading } = this.props;
     const { error, submitted, suggestion } = this.state;
+    const fireStarterSrc = `https://www.youtube.com/embed/${this.props.fireStarterSrc}`;
     return (
       <Modal open={modalOpen}>
         {error && <Label color="red" attached="bottom left">Please enter a valid url</Label>}
@@ -101,8 +95,5 @@ class FireStarterModal extends React.Component {
     );
   }
 }
-
-FireStarterModal.propTypes = propTypes;
-FireStarterModal.defaultProps = defaultProps;
 
 export default FireStarterModal;
