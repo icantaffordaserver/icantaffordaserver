@@ -5,9 +5,9 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Segment, Menu, MenuItem, Loader, Dimmer } from 'semantic-ui-react';
-import GettingStarted from '../../features/Profile/containers/GettingStartedContainer';
-import CurrentProfileContainer from '../../features/Profile/containers/CurrentProfileContainer';
-import ProfileBuilder from '../../features/Profile/components/ProfileBuilder';
+import GettingStarted from '../../components/Profile/containers/GettingStartedContainer';
+import CurrentProfileContainer from '../../components/Profile/containers/CurrentProfileContainer';
+import ProfileBuilder from '../../components/Profile/components/ProfileBuilder';
 import CurrentUserQuery from '../../../graphql/user/currentUserQuery';
 
 const Loading = (props) => {

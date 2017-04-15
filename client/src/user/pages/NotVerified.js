@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import ResendVerificationEmailButtonContainer
-  from '../features/ResendVerificationEmail/ResendVerificationEmailButtonContainer';
+  from '../components/ResendVerificationEmail/ResendVerificationEmailButtonContainer';
 import currentUserQuery from '../../graphql/user/currentUserQuery';
 
 const MessageContainer = styled.div`

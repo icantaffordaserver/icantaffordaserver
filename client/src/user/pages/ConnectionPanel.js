@@ -4,15 +4,13 @@
 import React from 'react';
 import keydown from 'react-keydown';
 import { Grid, Segment } from 'semantic-ui-react';
-import VideoEmbedContainer from '../features/VideoChat/VideoChatContainer';
+import AppearInEmbedContainer from '../containers/AppearInEmbedContainer';
 
 function ConnectionPanel(props) {
   return (
     <Grid padded columns={2} stretched>
       <Grid.Column width={10}>
-        <Segment>
-          <VideoEmbedContainer />
-        </Segment>
+        <AppearInEmbedContainer />
       </Grid.Column>
       <Grid.Column width={6}>
         <Segment>

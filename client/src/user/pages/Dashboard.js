@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import LaunchPad from './LaunchPad';
 import FireStarter from './Firestarter';
 import MyProfile from './profile/index';
-import AvailabilityContainer from '../features/Availability/AvailabilityGridContainer';
+import AvailabilityContainer from '../components/Availability/AvailabilityGridContainer';
 
 const propTypes = {
   match: React.PropTypes.object.isRequired,

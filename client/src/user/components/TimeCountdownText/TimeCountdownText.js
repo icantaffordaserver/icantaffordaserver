@@ -4,19 +4,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { timeRemainingString } from './helpers'
+import { timeRemainingString, isTimeRemaining } from './helpers'
 
 class TimeCountdownText extends React.Component {
   static propTypes = {
-    timeToCountdownTo: PropTypes.string.isRequired,
+    timeToCountdownTo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }
   state = {
     timeRemaining: '',
+    isTimeRemaining: true,
   }
 
   componentWillMount() {
-    const { timeToCountdownTo } = this.props;
-    this.setState({ timeRemaining: timeRemainingString(timeToCountdownTo) })
+    const { timeToCountdownTo } = this.props
+    this.setState({
+      timeRemaining: timeRemainingString(timeToCountdownTo),
+      isTimeRemaining: isTimeRemaining(timeToCountdownTo),
+    })
   }
 
   componentDidMount() {
@@ -31,15 +35,14 @@ class TimeCountdownText extends React.Component {
     const { timeToCountdownTo } = this.props
     this.setState({
       timeRemaining: timeRemainingString(timeToCountdownTo),
+      isTimeRemaining: isTimeRemaining(timeToCountdownTo),
     })
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state)
+    const { timeRemaining, isTimeRemaining } = this.state
 
-    const { timeRemaining } = this.state;
-
+    if (!isTimeRemaining) return <h1>Room opening shortly..</h1> // this shouldn't be visible but we include it as a backup
     return <h1>{timeRemaining}</h1>
   }
 }

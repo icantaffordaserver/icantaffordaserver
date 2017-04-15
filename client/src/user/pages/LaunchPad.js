@@ -3,13 +3,13 @@
  */
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import JoinShiftLaunchButtonContainer from '../features/LaunchPadButtons/JoinMyShift/JoinShiftLaunchButtonContainer';
-import FirestarterLaunchButtonContainer from '../features/LaunchPadButtons/FireStarter/FireStarterLaunchButtonContainer';
-import RequestConnectionButtonContainer from '../features/LaunchPadButtons/RequestConnection/RequestConnectionLaunchButtonContainer';
-import ReflectionLaunchButtonContainer from '../features/LaunchPadButtons/Reflect/ReflectionLaunchButtonContainer';
-import MyProfileLaunchButtonContainer from '../features/LaunchPadButtons/MyProfile/MyProfileLaunchButtonContainer';
-import AvailabilityLaunchButtonContainer from '../features/LaunchPadButtons/AvailabilityLaunchButtonContainer';
-import CountdownToConversation from '../features/CountdownToConversation/CountdownToConversation';
+import JoinShiftLaunchButtonContainer from '../components/LaunchPadButtons/JoinMyShift/JoinShiftLaunchButtonContainer';
+import FirestarterLaunchButtonContainer from '../components/LaunchPadButtons/FireStarter/FireStarterLaunchButtonContainer';
+import RequestConnectionButtonContainer from '../components/LaunchPadButtons/RequestConnection/RequestConnectionLaunchButtonContainer';
+import ReflectionLaunchButtonContainer from '../components/LaunchPadButtons/Reflect/ReflectionLaunchButtonContainer';
+import MyProfileLaunchButtonContainer from '../components/LaunchPadButtons/MyProfile/MyProfileLaunchButtonContainer';
+import AvailabilityLaunchButtonContainer from '../components/LaunchPadButtons/AvailabilityLaunchButtonContainer';
+import CountdownToConversation from '../components/CountdownToConversation/CountdownToConversation';
 
 
 class LaunchPad extends React.Component {

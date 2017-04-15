@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 
-import { isTimeRemaining, timeRemainingString } from './helpers/index';
+import { isTimeRemaining, timeRemainingString } from './helpers';
 
 const SegmentStyled = styled(Segment)`
   height: 100%;
