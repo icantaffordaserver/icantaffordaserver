@@ -21,6 +21,7 @@ class UserMatchingContainer extends React.Component {
   }
 }
 
-export default compose(graphql(CurrentUserQuery), graphql(allConnectionQueuesQuery))(
-  UserMatchingContainer,
-);
+export default compose(
+  graphql(CurrentUserQuery),
+  graphql(allConnectionQueuesQuery, { options: { pollInterval: 10000 } }),
+)(UserMatchingContainer);

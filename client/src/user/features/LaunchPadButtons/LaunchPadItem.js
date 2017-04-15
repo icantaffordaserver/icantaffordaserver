@@ -3,17 +3,18 @@
  */
 import React from 'react';
 import { Segment, Header, Image, Label, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const propTypes = {
-  imgSrc: React.PropTypes.string.isRequired,
-  header: React.PropTypes.string.isRequired,
-  labelPosition: React.PropTypes.string,
-  labelColor: React.PropTypes.string,
-  labelMessage: React.PropTypes.string,
-  labelIcon: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  loading: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
+  imgSrc: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
+  labelPosition: PropTypes.string,
+  labelColor: PropTypes.string,
+  labelMessage: PropTypes.string,
+  labelIcon: PropTypes.string,
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {

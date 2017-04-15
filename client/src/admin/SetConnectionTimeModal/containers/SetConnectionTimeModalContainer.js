@@ -18,6 +18,7 @@ class SetConnectionTimeModalContainer extends React.Component {
     connectionQueueIdUser2: React.PropTypes.string,
     open: React.PropTypes.bool.isRequired,
     onClose: React.PropTypes.func,
+    clearState: React.PropTypes.func,
   };
   static defaultProps = {
     onClose: null,
@@ -90,6 +91,7 @@ class SetConnectionTimeModalContainer extends React.Component {
           },
         }),
       ]);
+      this.props.clearState();
       this.setState({ loading: false });
     } catch (err) {
       this.setState({ loading: false });

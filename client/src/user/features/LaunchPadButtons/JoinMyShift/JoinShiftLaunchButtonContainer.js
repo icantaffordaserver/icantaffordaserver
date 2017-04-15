@@ -9,6 +9,7 @@ import LaunchPadItem from '../LaunchPadItem';
 import computer from './105_Reading.png';
 import CurrentUserQuery from '../../../../graphql/user/currentUserQuery';
 import isConnectionSet from '../../../isConnectionSet';
+import CountdownToConversation from '../../CountdownToConversation/CountdownToConversation';
 
 class JoinShiftLaunchButtonContainer extends React.Component {
   static propTypes = {
@@ -39,15 +40,18 @@ class JoinShiftLaunchButtonContainer extends React.Component {
   render() {
     if (this.props.data.loading) return null;
 
-    console.log(this.props.data.viewer.user.connections);
+    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node;
+    console.log(connectionTime);
     return (
-      <LaunchPadItem
-        {...this.renderLabel()}
-        imgSrc={computer}
-        header="Join my Shift"
-        onClick={this.handleClick}
-        disabled={this.isDisabled()}
-      />
+      <CountdownToConversation timeToCountdownTo={connectionTime}>
+        <LaunchPadItem
+          {...this.renderLabel()}
+          imgSrc={computer}
+          header="Join my Shift"
+          onClick={this.handleClick}
+          disabled={this.isDisabled()}
+        />
+      </CountdownToConversation>
     );
   }
 }

@@ -4,7 +4,7 @@
 import React from 'react';
 import { Embed, Header } from 'semantic-ui-react';
 import moment from 'moment';
-import TimeCountdownText from './TimeCountdownText';
+import TimeCountdownText from '../CountdownToConversation/TimeCountdownText';
 
 const propTypes = {
   conversationId: React.PropTypes.string.isRequired,

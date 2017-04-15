@@ -28,7 +28,11 @@ class UserMatching extends React.Component {
     // if user is being deselected
     if ([user1.id, user2.id].includes(id)) {
       this.setState({
-        [selectingUser === 'user1' ? 'user2' : 'user1']: { index: null, id: '', connectionQueueId: '' },
+        [selectingUser === 'user1' ? 'user2' : 'user1']: {
+          index: null,
+          id: '',
+          connectionQueueId: '',
+        },
       });
     } else {
       this.setState({
@@ -54,6 +58,14 @@ class UserMatching extends React.Component {
 
   closeModal = () => {
     this.setState({ modalOpen: false });
+  };
+
+  clearState = () => {
+    this.setState({
+      selectingUser: 'user1',
+      user1: { index: null, id: '', connectionQueueId: '' },
+      user2: { index: null, id: '', connectionQueueId: '' },
+    });
   };
 
   render() {
@@ -109,6 +121,7 @@ class UserMatching extends React.Component {
           user2={user2.id ? users[user2.index].node.user.id : null}
           open={this.state.modalOpen}
           onClose={this.closeModal}
+          clearState={this.clearState}
         />
       </Grid>
     );
