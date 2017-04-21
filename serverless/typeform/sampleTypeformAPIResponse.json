@@ -1,0 +1,176 @@
+// sample request to: https://api.typeform
+.com/v1/form/FORM_ID?key=API_KEY&completed=true&order_by[]=date_submit,desc
+{
+  "http_status": 200,
+  "stats": {
+    "responses": {
+      "showing": 38,
+      "total": 224,
+      "completed": 38
+    }
+  },
+  "questions": [
+    {
+      "id": "listimage_42481899_choice",
+      "question": "Which adjective describes your favourite type of conversation?",
+      "field_id": 42481899
+    },
+    {
+      "id": "listimage_42483105_choice_53890486",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890487",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890488",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890489",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890490",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890491",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890492",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890493",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890494",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890495",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890496",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890497",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890498",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890499",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "listimage_42483105_choice_53890500",
+      "question": "What are you interested in?",
+      "field_id": 42483105
+    },
+    {
+      "id": "list_42487351_choice_53896250",
+      "question": "What positive shifts do you hope will occur from your conversations?",
+      "field_id": 42487351
+    },
+    {
+      "id": "list_42487351_choice_53896251",
+      "question": "What positive shifts do you hope will occur from your conversations?",
+      "field_id": 42487351
+    },
+    {
+      "id": "list_42487351_choice_53896252",
+      "question": "What positive shifts do you hope will occur from your conversations?",
+      "field_id": 42487351
+    },
+    {
+      "id": "list_42487351_choice_53896253",
+      "question": "What positive shifts do you hope will occur from your conversations?",
+      "field_id": 42487351
+    },
+    {
+      "id": "list_42487351_choice_53896254",
+      "question": "What positive shifts do you hope will occur from your conversations?",
+      "field_id": 42487351
+    },
+    {
+      "id": "textarea_42487449",
+      "question": "What would you talk about if you could talk about anything?",
+      "field_id": 42487449
+    },
+    {
+      "id": "textarea_42487463",
+      "question": "What makes you curious? What makes you wonder?",
+      "field_id": 42487463
+    },
+    {
+      "id": "hidden_first_name",
+      "question": "first_name",
+      "field_id": 244414
+    },
+    {
+      "id": "hidden_user_id",
+      "question": "user_id",
+      "field_id": 244431
+    },
+    {
+      "id": "hidden_response_id",
+      "question": "response_id",
+      "field_id": 244899
+    }
+  ],
+  "responses": [
+    {
+      "completed": "1",
+      "token": "778241e8fe8770e510b7c63628821c46",
+      "metadata": {
+        "browser": "default",
+        "platform": "other",
+        "date_land": "2017-03-16 17:13:35",
+        "date_submit": "2017-03-16 17:14:08",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36",
+        "referer": "https://shiftwithus.typeform.com/to/aHq8UA?first_name=Peter&user_id=VXNlcjoyNw==&response_id=a4f090028578a61b0048b7dcabe71d41",
+        "network_id": "f54a7ce373"
+      },
+      "hidden": {
+        "first_name": "Peter",
+        "user_id": "VXNlcjoyNw==",
+        "response_id": "a4f090028578a61b0048b7dcabe71d41"
+      },
+      "answers": {
+        "listimage_42481899_choice": "Meaningful",
+        "listimage_42483105_choice_53890486": "Human nature",
+        "listimage_42483105_choice_53890487": "Books",
+        "listimage_42483105_choice_53890488": "Health and well-being",
+        "listimage_42483105_choice_53890489": "Music",
+        "list_42487351_choice_53896250": "An increase in energy",
+        "list_42487351_choice_53896251": "An increase in mindfulness",
+        "list_42487351_choice_53896253": "A new approach to a roadblock",
+        "textarea_42487449": "Elon musk and how he is such a beaut.",
+        "textarea_42487463": "Everything that elon musk ever does"
+      }
+    }
+  ]
+}

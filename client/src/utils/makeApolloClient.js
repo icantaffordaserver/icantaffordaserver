@@ -29,6 +29,7 @@ function makeApolloClient(scapholdUrl) {
 
   return new ApolloClient({
     networkInterface: networkInterfaceWithSubscriptions,
+    dataIdFromObject: o => o.id,
     queryDeduplication: true, // use so that we do not fetch the same query multiple times
     initialState: {},
   });

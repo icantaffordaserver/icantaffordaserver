@@ -1,18 +1,34 @@
 /**
  * Created by alexandermann on 2017-04-10.
  */
-const sendConversationScheduledEmail = require('./mailer/emails/sendConversationScheduledEmail');
-const moment = require('moment');
 
-exports.helloWorld = (req, res) => {
-  const {
-    user: { email },
-    connections: { connectionTime },
-  } = req.body.payload.changedUsersConnections;
+// After an admin "creates a connection" within scaphold, we need to add both users to the
+// connection. This is when we will send them emails to inform them that hey have a connection
+// scheduled and what time it is at
+exports.addUserToConnection = require('./scaphold/logic/addToUsersConnectionsConnection/async/addUserToConnection')
 
-  // convert the ISO8601 string a human readable date, ex - "Sunday, February 14th @ 3:25 pm"
-  const conversationTime = moment(connectionTime).format('dddd, MMMM Do @ h:mm a');
+exports.validateAndCreateInviteToken = require('./scaphold/logic/createInvites/pre/validateInviteAndCreateInviteToken')
 
-  sendConversationScheduledEmail(email, conversationTime);
-  res.sendStatus(200);
-};
+// ******createUser Logic
+// routes.post('/createUser', createUser);
+// routes.post('/sendVerificationEmailAfterCreateUser', sendVerificationEmail);
+// routes.post('/isInviteApproved', isInviteApproved);
+//
+// ******createInvites Logic
+// routes.post('/createInvites', validateInviteAndCreateInviteToken); *** DONE
+// routes.post('/sendInviteEmail', sendInviteEmail);
+//
+// ******updateInvites Logic
+// routes.post('/isResendingInvite', isResendingInvite);
+//
+// ******accept webflow form webhook for invite request
+// routes.post('/inviterequest', webflowInviteRequest);
+//
+// routes.post('/generateToken', generateToken);
+// routes.post('/createVerifyEmailSendEmail', createVerifyEmailSendEmail);
+// routes.post('/createPasswordReset', createPasswordReset);
+// routes.post('/updatePasswordReset', updatePasswordReset);
+// routes.post('/deletePasswordReset', deletePasswordReset);
+// routes.post('/createTypeformProfile', createTypeformProfile);
+// routes.post('/sendPasswordResetEmail', sendPasswordResetEmail);
+// routes.post('/verifyEmail', verifyEmail);

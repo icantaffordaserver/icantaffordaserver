@@ -65,7 +65,7 @@ class CountdownToConversation extends React.Component {
   render() {
     const { timeRemaining, hasTimeRemaining } = this.state;
     // if no time remaining render the child components
-    if (!hasTimeRemaining) return <SegmentStyled>{this.props.children}</SegmentStyled>;
+    if (!hasTimeRemaining) return this.props.children;
 
     return (
       <SegmentStyled textAlign="center">

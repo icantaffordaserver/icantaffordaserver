@@ -48,6 +48,16 @@ export default gql`
               fireStarterSuggestion
               createdAt
               id
+              reviews {
+                edges {
+                  node {
+                    comment
+                    id
+                    rating
+                    createdAt
+                  }
+                }
+              }
             }
           }
         }

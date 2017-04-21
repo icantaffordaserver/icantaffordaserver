@@ -1,20 +1,12 @@
 /**
  * Created by alexandermann on 2017-03-23.
  */
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Icon } from 'semantic-ui-react'
+import moment from 'moment'
+import styled from 'styled-components'
 
-const propTypes = {
-  id: React.PropTypes.string.isRequired,
-  completed: React.PropTypes.bool.isRequired,
-  onClick: React.PropTypes.func.isRequired,
-  firstName: React.PropTypes.string,
-  date: React.PropTypes.string,
-  rating: React.PropTypes.number,
-};
-
-const defaultProps = {};
 const ReviewPreviewItem = styled.div`
   position: relative;
   height: 70px;
@@ -25,60 +17,76 @@ const ReviewPreviewItem = styled.div`
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     cursor: pointer;
   }
-`;
+`
 const MatchName = styled.h3`
   position: absolute;
   top: 10px;
   left: 10px;
   font-size: 20px;
   margin: 0px;
-`;
+`
 const Date = styled.h3`
   position: absolute;
   top: 10px;
   right: 10px;
   font-size: 13px;
   margin: 0px;
-`;
+`
 const Subtitle = styled.div`
   position: absolute;
   bottom: 10px;
   right: 10px;
-`;
+`
 const IconStyled = styled(Icon)`
   &&& {
     font-size: 20px;
     margin: 0;
   }
-`;
+`
 
 class ReviewPreview extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    firstName: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    rating: PropTypes.number,
+  }
+  static defaultProps = {
+    rating: 0,
+  }
+
   handleClick = () => {
-    this.props.onClick(this.props.id);
-  };
+    this.props.onClick(this.props.id)
+  }
 
   renderRatings = () => {
-    const ratings = [];
+    const ratings = []
     for (let i = 0; i < this.props.rating; i++) {
-      ratings.push(<IconStyled key={i} name="thumbs outline up" />);
+      ratings.push(<IconStyled key={i} name="thumbs outline up" />)
     }
-    return ratings;
-  };
+    return ratings
+  }
+
+  renderStatus = () => {
+    const { status } = this.props
+    if (status === 'completed') return 'Leave your review'
+    if (status === 'reviewed') return this.renderRatings()
+    return 'Not completed'
+  }
 
   render() {
     return (
       <ReviewPreviewItem onClick={this.handleClick}>
         <MatchName>{this.props.firstName}</MatchName>
-        <Date>{this.props.date}</Date>
+        <Date>{moment(this.props.date).format('MMM Do, h:mm a')}</Date>
         <Subtitle>
-          {this.props.completed ? this.renderRatings() : 'Not yet completed'}
+          {this.renderStatus()}
         </Subtitle>
       </ReviewPreviewItem>
-    );
+    )
   }
 }
 
-ReviewPreview.propTypes = propTypes;
-ReviewPreview.defaultProps = defaultProps;
-
-export default ReviewPreview;
+export default ReviewPreview

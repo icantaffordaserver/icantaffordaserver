@@ -1,60 +1,57 @@
 /**
  * Created by alexandermann on 2017-03-23.
  */
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
-import styled from 'styled-components';
-
-const propTypes = {
-  rating: React.PropTypes.number.isRequired,
-  viewOnly: React.PropTypes.bool,
-  onRatingClick: React.PropTypes.func,
-};
-
-const defaultProps = {
-  viewOnly: false,
-  onRatingClick: null,
-};
+import React from 'react'
+import { Icon } from 'semantic-ui-react'
+import styled from 'styled-components'
 
 const ReviewContainer = styled.div`
   text-align: center;
-`;
-const IconStyled = styled(Icon)`
+`
+// pull off viewOnly and highlight so we do not get unknown props error
+const IconStyled = styled(({ viewOnly, highlight, ...rest }) => <Icon {...rest} />)`
   margin: 0;
   color: ${props => props.highlight && '#ffd117'}
-  cursor: ${props => props.viewOnly ? 'default' : 'pointer'};
-`;
+  cursor: ${props => (props.viewOnly ? 'default' : 'pointer')};
+`
 
 class ThumbsRating extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      highlightItems: this.props.rating,
-      savedRating: this.props.rating,
-    };
+  static propTypes = {
+    rating: React.PropTypes.number.isRequired,
+    viewOnly: React.PropTypes.bool,
+    onRatingClick: React.PropTypes.func,
+  }
+  static defaultProps = {
+    viewOnly: false,
+    onRatingClick: null,
+  }
+  state = {
+    highlightItems: this.props.rating,
+    savedRating: this.props.rating,
   }
 
   // use a viewOnly prop to disable clicking and selection
   handleMouseEnter = event => {
-    if (!this.props.viewOnly) this.setState({ highlightItems: event.target.id });
-  };
+    if (!this.props.viewOnly) this.setState({ highlightItems: event.target.id })
+  }
 
   handleMouseLeave = () => {
-    if (!this.props.viewOnly) this.setState({ highlightItems: this.state.savedRating });
-  };
+    if (!this.props.viewOnly) this.setState({ highlightItems: this.state.savedRating })
+  }
 
   handleClick = event => {
-    if (this.props.viewOnly) return;
-    const rating = event.target.id * 1;
-    this.setState({ savedRating: rating });
-    this.props.onRatingClick(rating); // make sure rating is number
-  };
+    if (this.props.viewOnly) return
+    const rating = event.target.id * 1
+    this.setState({ savedRating: rating })
+    this.props.onRatingClick(rating) // make sure rating is number
+  }
 
   render() {
+    const { viewOnly } = this.props
     return (
       <ReviewContainer>
         <IconStyled
-          viewOnly={this.props.viewOnly}
+          viewOnly={viewOnly}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
@@ -64,7 +61,7 @@ class ThumbsRating extends React.Component {
           size="huge"
         />
         <IconStyled
-          viewOnly={this.props.viewOnly}
+          viewOnly={viewOnly}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
@@ -74,7 +71,7 @@ class ThumbsRating extends React.Component {
           size="huge"
         />
         <IconStyled
-          viewOnly={this.props.viewOnly}
+          viewOnly={viewOnly}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
@@ -84,7 +81,7 @@ class ThumbsRating extends React.Component {
           size="huge"
         />
         <IconStyled
-          viewOnly={this.props.viewOnly}
+          viewOnly={viewOnly}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
@@ -94,7 +91,7 @@ class ThumbsRating extends React.Component {
           size="huge"
         />
         <IconStyled
-          viewOnly={this.props.viewOnly}
+          viewOnly={viewOnly}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
@@ -104,11 +101,8 @@ class ThumbsRating extends React.Component {
           size="huge"
         />
       </ReviewContainer>
-    );
+    )
   }
 }
 
-ThumbsRating.propTypes = propTypes;
-ThumbsRating.defaultProps = defaultProps;
-
-export default ThumbsRating;
+export default ThumbsRating
