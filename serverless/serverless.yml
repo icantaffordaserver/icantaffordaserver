@@ -44,14 +44,14 @@ functions:
           method: post
           cors: true
 
-#  validateAndCreateInviteToken:
-#    handler: scaphold/logic/createInvites/pre/validateInviteAndCreateInviteToken.handler
-#    description: Async scaphold logic hook to send email to both users after a user has been added to a connection
-#    events:
-#      - http:
-#          path: validateAndCreateInviteToken
-#          method: post
-#          cors: true
+  validateAndCreateInviteToken:
+    handler: scaphold/logic/createInvites/pre/validateInviteAndCreateInviteToken.handler
+    description: Async scaphold logic hook to send email to both users after a user has been added to a connection
+    events:
+      - http:
+          path: validateAndCreateInviteToken
+          method: post
+          cors: true
 
   sendInviteEmail:
       handler: scaphold/logic/createInvites/async/sendInviteEmail.handler

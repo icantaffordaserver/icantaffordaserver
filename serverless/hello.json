@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "hello-executor",
+    "name": "hello",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "b9mn0br80h"
+  }
+}
