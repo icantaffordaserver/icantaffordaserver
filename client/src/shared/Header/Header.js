@@ -3,6 +3,8 @@
  */
 import React from 'react';
 
+import ListIem from '../../ListItem/Item';
+
 import { generateGravatarUrl } from './helpers';
 import {
   HeaderMenu,
