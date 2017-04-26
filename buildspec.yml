@@ -7,7 +7,7 @@ phases:
       - cd serverless/src/scapholdLogicExpressApi && npm run build
   build:
     commands:
-      - cd serverless/src/scapholdLogicExpressApi && npm run deploy
+      - cd serverless && serverless deploy
   post_build:
     commands:
       - echo Done building!
