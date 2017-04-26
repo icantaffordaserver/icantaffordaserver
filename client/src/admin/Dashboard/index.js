@@ -4,7 +4,6 @@ import { Grid } from 'semantic-ui-react';
 import InvitesSentContainer from './InvitesSent/InvitesSentContainer';
 import SendInviteContainer from './SendInvite/SendInviteContainer';
 import InviteRequestsContainer from '../InviteRequests/InviteRequestsContainer';
-import Header from '../../shared/Header';
 
 const propTypes = {};
 const defaultProps = {};
@@ -13,7 +12,6 @@ function Dashboard(props) {
   return (
     <div className="container-fluid">
       <Grid padded>
-        <Header />
         <Grid.Row columns={2}>
           <Grid.Column>
             <InviteRequestsContainer />

@@ -11,7 +11,7 @@ const routes = Router()
 
 routes.post('/pre/generateToken', generateToken)
 routes.post(
-  '/pre/sendVerificationEmailAfterCreateVerifyEmail',
+  '/async/sendVerificationEmailAfterCreateVerifyEmail',
   sendVerificationEmailAfterCreateVerifyEmail,
 )
 

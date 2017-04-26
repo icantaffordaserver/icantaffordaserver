@@ -14,17 +14,12 @@ import addToUsersConnectionsConnection from './logic/addToUsersConnectionsConnec
 
 const routes = Router()
 
-routes.get('/hello', (req, res) => {
-  console.log(req)
-  res.send('world')
-})
-
 // All microservice functions related to users type
 routes.post('/createUser', createUser)
 routes.post('/updateUser', updateUser)
 
 // All microservice functions related to invites type
-routes.post('/createInvites', createInvites)
+routes.use('/createInvites', createInvites)
 routes.post('/updateInvites', updateInvites)
 
 // All microservice functions related to PasswordReset type

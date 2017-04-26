@@ -23,6 +23,7 @@
   "dependencies": {
     "aws-serverless-express": "^2.2.0",
     "babel-polyfill": "^6.23.0",
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "lokka": "^1.7.0",

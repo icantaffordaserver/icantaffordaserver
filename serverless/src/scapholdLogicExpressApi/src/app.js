@@ -5,9 +5,13 @@
 // the global object/scope
 import 'babel-polyfill'
 import express from 'express'
+import bodyParser from 'body-parser';
 import routes from './routes'
 
 const app = express()
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // set base url to 'scaphold' here as this is the base route we use in the serverless.yml config
 app.use('/scaphold', routes)
@@ -33,5 +37,10 @@ app.use((err, req, res, next) => {
     error: {},
   })
 })
+
+app.listen(8111)
+
+process.on('uncaughtException', err => console.error('uncaught exception:', err));
+process.on('unhandledRejection', error => console.error('unhandled rejection:', error));
 
 export default app

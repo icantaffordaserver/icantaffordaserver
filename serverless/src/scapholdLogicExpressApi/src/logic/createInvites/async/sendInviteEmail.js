@@ -5,7 +5,6 @@ import { sendInviteEmail } from 'mailer'
 import { generateInviteEmailUrl } from '../../../helpers/generateInviteEmailUrl'
 
 export default async (req, res) => {
-  console.log(req.body)
   const { id: inviteId, firstName, email, token } = req.body.payload.changedInvites
 
   const actionUrl = generateInviteEmailUrl(inviteId, token)
@@ -16,5 +15,5 @@ export default async (req, res) => {
     emailVerifiedToken: token,
     actionUrl,
   })
-  res.sendStatus(200).send('Message sent successfully')
+  res.status(200).send('Message sent successfully')
 }

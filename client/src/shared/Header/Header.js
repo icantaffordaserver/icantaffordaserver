@@ -3,8 +3,6 @@
  */
 import React from 'react';
 
-import ListIem from '../../ListItem/Item';
-
 import { generateGravatarUrl } from './helpers';
 import {
   HeaderMenu,
@@ -28,7 +26,6 @@ class Header extends React.Component {
     dashboardUrl: React.PropTypes.string.isRequired,
     accountUrl: React.PropTypes.string.isRequired,
     loginUrl: React.PropTypes.string.isRequired,
-    adminUrl: React.PropTypes.string.isRequired,
     logout: React.PropTypes.func.isRequired,
     navigateTo: React.PropTypes.func.isRequired,
   };

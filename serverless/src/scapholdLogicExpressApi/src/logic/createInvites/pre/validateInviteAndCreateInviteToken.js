@@ -7,7 +7,7 @@ import { generateUniqueToken } from '../../../helpers/generateUniqueToken'
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 
 export default async (req, res, next) => {
-  const { email } = req.body
+  const { email } = req.body.input
   // check if email is valid format
   if (!isEmail(email)) {
     return next(new Error('Please enter a valid email'))
