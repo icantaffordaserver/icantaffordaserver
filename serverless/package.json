@@ -7,6 +7,7 @@
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
+    "build:scapholdApi": "cd src/scapholdLogicExpressApi && yarn install && yarn run build",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
     "create": "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
     "update": "npm run transpile && claudia update",
@@ -19,6 +20,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-stage-0": "^6.24.1",
     "babili-webpack-plugin": "^0.0.11",
+    "serverless": "^1.12.0",
     "webpack": "^2.4.1",
     "webpack-node-externals": "^1.5.4"
   },

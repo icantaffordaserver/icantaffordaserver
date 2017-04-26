@@ -1,0 +1,13 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      - npm install
+      - cd src/scapholdLogicExpressApi && npm install
+      - cd src/scapholdLogicExpressApi && npm run build
+  build:
+    commands:
+      - npm run deploy
+  post_build:
+    commands:
+      - echo Done building!
