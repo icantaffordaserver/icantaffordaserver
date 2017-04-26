@@ -2,12 +2,12 @@ version: 0.1
 phases:
   install:
     commands:
-      - npm install
-      - cd src/scapholdLogicExpressApi && npm install
-      - cd src/scapholdLogicExpressApi && npm run build
+      - cd serverless && npm install
+      - cd serverless/src/scapholdLogicExpressApi && npm install
+      - cd serverless/src/scapholdLogicExpressApi && npm run build
   build:
     commands:
-      - npm run deploy
+      - cd serverless/src/scapholdLogicExpressApi && npm run deploy
   post_build:
     commands:
       - echo Done building!
