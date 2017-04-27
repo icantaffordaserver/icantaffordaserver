@@ -5,9 +5,11 @@ phases:
       - cd serverless && npm install
       - cd serverless/src/scapholdLogicExpressApi && npm install
       - cd serverless/src/scapholdLogicExpressApi && npm run build
+      - cd client && npm run build
   build:
     commands:
       - cd serverless && node_modules/.bin/serverless deploy
+      - cd client && aws s3 sync build/ s3://toktumi-dev-client
   post_build:
     commands:
       - echo Done building!
