@@ -2,10 +2,17 @@ version: 0.1
 phases:
   install:
     commands:
-      - cd serverless && npm install
-      - cd serverless/src/scapholdLogicExpressApi && npm install
-      - cd serverless/src/scapholdLogicExpressApi && npm run build
-      - cd client && npm run build
+      # Install yarn natively https://yarnpkg.com/en/docs/install#linux-tab
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt-get update
+      - apt-get install -y yarn
+  pre_build:
+    commands:
+      - cd serverless && yarn install
+      - cd serverless/src/scapholdLogicExpressApi && yarn install
+      - cd serverless/src/scapholdLogicExpressApi && yarn run build
+      - cd client && yarn run build
   build:
     commands:
       - cd serverless && node_modules/.bin/serverless deploy
