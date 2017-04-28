@@ -37,7 +37,6 @@ class HeaderContainer extends React.Component {
     const isAdmin = user && user.roles
       ? _.findIndex(user.roles.edges, ({ node }) => node.name === 'admin') !== -1
       : false;
-    console.log(isAdmin)
     return (
       <Header
         isAdmin={isAdmin}

@@ -16,4 +16,5 @@ phases:
       - cd client && aws s3 sync build/ s3://toktumi-dev-client
   post_build:
     commands:
+      # Need to invalidate cloudfront cache http://serverless-stack.com/chapters/deploy-again.html
       - echo Done building!
