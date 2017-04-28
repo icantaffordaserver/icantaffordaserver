@@ -11,13 +11,14 @@ import FullHeightContainer from '../components/Dashboard/FullHeightContainer'
 import logo from '../../assets/logo.png'
 
 const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  height: 400px;
-  width: 600px;
+  padding: 20px;
+  max-width: 600px;
 `
 const Logo = styled.img`
-  height: 150px;
-  width: auto;
+  width: 100%;
 `
 const H1 = styled.h1``
 const H2 = styled.h2``
