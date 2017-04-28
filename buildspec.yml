@@ -9,7 +9,7 @@ phases:
       - cd serverless && yarn install
       - cd serverless/src/scapholdLogicExpressApi && yarn install
       - cd serverless/src/scapholdLogicExpressApi && yarn run build
-      - cd client && yarn run build
+      - cd client && yarn install && yarn run build
   build:
     commands:
       - cd serverless && node_modules/.bin/serverless deploy
