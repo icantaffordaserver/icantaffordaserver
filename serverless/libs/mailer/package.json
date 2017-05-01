@@ -2,7 +2,7 @@
   "name": "mailer",
   "version": "1.0.0",
   "description": "A mail client using postmark to send toktumi related emails",
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "build": "npm run clean && babel src --out-dir lib",

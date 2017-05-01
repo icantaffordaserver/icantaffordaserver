@@ -1,0 +1,24 @@
+{
+  "name": "webflowInviteRequest",
+  "version": "0.0.1",
+  "description": "A lambda function to handle a form submission containing invite information for a user and post it to a graphql backend",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "transpile": "babel src -d lib",
+    "build": "npm run clean && npm run transpile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Mann",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-babili": "^0.0.12",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0"
+  }
+}

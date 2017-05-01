@@ -15,21 +15,21 @@ import addToUsersConnectionsConnection from './logic/addToUsersConnectionsConnec
 const routes = Router()
 
 // All microservice functions related to users type
-routes.post('/createUser', createUser)
-routes.post('/updateUser', updateUser)
+routes.use('/createUser', createUser)
+routes.use('/updateUser', updateUser)
 
 // All microservice functions related to invites type
 routes.use('/createInvites', createInvites)
-routes.post('/updateInvites', updateInvites)
+routes.use('/updateInvites', updateInvites)
 
 // All microservice functions related to PasswordReset type
-routes.post('/createPasswordReset', createPasswordReset)
-routes.post('/updatePasswordReset', updatePasswordReset)
+routes.use('/createPasswordReset', createPasswordReset)
+routes.use('/updatePasswordReset', updatePasswordReset)
 
 // All microservice functions related to VerifyEmail type
-routes.post('/createVerifyEmail', createVerifyEmail)
+routes.use('/createVerifyEmail', createVerifyEmail)
 
 // All microservice functions related to Connection type
-routes.post('/addToUsersConnectionsConnection', addToUsersConnectionsConnection)
+routes.use('/addToUsersConnectionsConnection', addToUsersConnectionsConnection)
 
 export default routes

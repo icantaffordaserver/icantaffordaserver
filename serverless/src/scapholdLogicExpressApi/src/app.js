@@ -18,7 +18,7 @@ app.use('/scaphold', routes)
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get('env') === 'development' || app.get('env') === 'dev') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500)
     res.send({
@@ -37,8 +37,6 @@ app.use((err, req, res, next) => {
     error: {},
   })
 })
-
-app.listen(8111)
 
 process.on('uncaughtException', err => console.error('uncaught exception:', err));
 process.on('unhandledRejection', error => console.error('unhandled rejection:', error));
