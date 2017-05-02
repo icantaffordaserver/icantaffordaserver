@@ -74,6 +74,7 @@ export default gql`
                 participants {
                   edges {
                     node {
+                      id
                       firstName
                     }
                   }

@@ -10,9 +10,9 @@ class ConnectionPipeline extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
+    console.log(this.props)
     let { edges: connections } = this.props.data.viewer.allConnections;
     connections = connections.map(({ node }) => node); // filter out the node object
-    console.log(connections);
 
     return (
       <Grid padded>

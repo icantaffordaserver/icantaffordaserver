@@ -15,6 +15,7 @@ export default gql`
             status
             connectionTime
             matchedBy {
+              id
               firstName
               lastName
             }
@@ -33,6 +34,7 @@ export default gql`
             reviews {
               edges {
                 node {
+                  id
                   comment
                   user {
                     id

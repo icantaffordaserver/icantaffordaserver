@@ -15,6 +15,7 @@ function sortByDate(a, b) {
 
 class UpcomingConnectionsTable extends React.Component {
   render() {
+
     return (
       <Table dataSource={this.props.allConnections} rowKey={record => record.id}>
         <Column
