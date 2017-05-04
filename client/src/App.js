@@ -19,15 +19,6 @@ import NotLoggedIn from './user/pages/NotLoggedIn'
 import isAuthenticated from './utils/isAuthenticated'
 import ComingSoon from './user/pages/ComingSoon'
 
-const Root = () => (
-  <Router history={history}>
-    <Switch>
-      <Route exact path="/" component={ComingSoon} />
-      <Route component={App} />
-    </Switch>
-  </Router>
-)
-
 function App() {
   return (
     <FullHeightContainer>
@@ -49,5 +40,14 @@ function App() {
     </FullHeightContainer>
   )
 }
+
+const Root = () => (
+  <Router history={history}>
+    <Switch>
+      <Route exact path="/" component={ComingSoon} />
+      <Route component={App} />
+    </Switch>
+  </Router>
+)
 
 export default Root
