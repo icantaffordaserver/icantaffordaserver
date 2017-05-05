@@ -1,13 +1,14 @@
 /**
  * Created by alexandermann on 2017-05-05.
  */
-import webpack from 'webpack'
+const shell = require('shelljs')
+const entryPoints = require('./lambdaEntryPoints')
 
-import config from '../config/webpack.config.babel'
+const lambdas = entryPoints() // get all lambda paths
 
-webpack(config, (err, stats) => {
-  if (err || stats.hasErrors()) {
-    console.log('Errors occurred: ', err)
-  }
-  console.log('Done.')
+lambdas.forEach(lambdaDir => { // execute webpack on every lambda function
+  const lambdaName = lambdaDir.split('/').pop()
+  shell.echo(`Bundling ${lambdaName}`)
+  shell.cd(lambdaDir)
+  shell.exec('../../node_modules/.bin/babel-node ../../scripts/runWebpack.js')
 })

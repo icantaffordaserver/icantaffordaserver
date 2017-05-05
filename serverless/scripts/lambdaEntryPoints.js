@@ -1,32 +1,23 @@
 /**
  * Created by alexandermann on 2017-05-05.
  */
-import fs from 'fs'
-import path from 'path'
+const fs = require('fs')
+const path = require('path')
 
-export function entryPoints() {
+// build an array of the function entry points given the project structure:
+// - projectName/
+// ---- src/
+// ------ lambdaFolderName/
+// ------ lambdaFolderName/
+// ------ lambdaFolderName/
+module.exports = function entryPoints() {
+  // expect this script to be executed at the root dir (serverless/)
+  console.log('entryPoints(): ', process.cwd())
   const cwd = process.cwd() + '/src'
-  const entries = {}
-  const sourceMapsAndUnhandledErrors = process.cwd() + '/config/webpackInclude' // add sourcemaps and unhandledException/Promise catchers to all lambdas
-  const lambdaNames = fs
+
+  // return an array of the absolute paths to all lambda functions
+  return fs
     .readdirSync(cwd)
     .filter(file => fs.statSync(path.join(cwd, file)).isDirectory())
-
-  for (let lambda of lambdaNames) {
-    entries[lambda] = [sourceMapsAndUnhandledErrors, `${cwd}/${lambda}/src/index.js`]
-  }
-  return entries
-}
-
-export function outputDirs() {
-  const cwd = process.cwd() + '/src'
-  const outputs = {}
-  const lambdaNames = fs
-    .readdirSync(cwd)
-    .filter(file => fs.statSync(path.join(cwd, file)).isDirectory())
-
-  for (let lambda of lambdaNames) {
-    outputs[lambda] = `${cwd}/${lambda}/lib`
-  }
-  return outputs
+    .map(dir => `${cwd}/${dir}`)
 }
