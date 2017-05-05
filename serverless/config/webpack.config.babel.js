@@ -4,14 +4,14 @@
 import path from 'path'
 import nodeExternals from 'webpack-node-externals'
 
-const sourceMapsUnhandledErrors = process.cwd() + '/config/webpackInclude'
+const sourceMapsAndUnhandledErrors = process.cwd() + '/config/webpackInclude'
 
 export default {
-  entry: [sourceMapsUnhandledErrors, process.cwd() + '/src/scapholdLogicExpressApi/src/index.js'],
+  entry: [sourceMapsAndUnhandledErrors, process.cwd() + '/src/scapholdLogicExpressApi/src/app.js'],
   target: 'node',
   devtool: 'source-map',
   output: {
-    path: path.join(process.cwd() + 'src', 'scapholdLogicExpressApi', 'lib'),
+    path: path.join(process.cwd() + '/src/scapholdLogicExpressApi/lib'),
     filename: 'scapholdApi.js',
     libraryTarget: 'commonjs2',
   },
@@ -21,10 +21,6 @@ export default {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        options: {
-          // presets: ['babili'],
-          // cacheDirectory: true,
-        },
         exclude: /node_modules/,
       },
     ],
