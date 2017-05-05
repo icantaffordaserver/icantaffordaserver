@@ -17,11 +17,5 @@
     "graphql-fetch": "file:../../libs/graphql-fetch",
     "lodash": "^4.17.4"
   },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-babili": "^0.0.12",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "rimraf": "^2.6.1"
-  }
+  "devDependencies": {}
 }

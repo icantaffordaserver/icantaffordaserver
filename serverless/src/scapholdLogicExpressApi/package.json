@@ -12,14 +12,7 @@
   },
   "author": "Alexander Mann",
   "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-babili": "^0.0.12",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "rimraf": "^2.6.1",
-    "webpack": "^2.5.0"
-  },
+  "devDependencies": {},
   "dependencies": {
     "aws-serverless-express": "^2.2.0",
     "babel-polyfill": "^6.23.0",
