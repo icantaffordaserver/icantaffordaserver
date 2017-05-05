@@ -4,10 +4,15 @@
 import path from 'path'
 import nodeExternals from 'webpack-node-externals'
 
-const sourceMapsAndUnhandledErrors = process.cwd() + '/config/webpackInclude'
+import {entryPoints, outputDirs} from '../scripts/lambdaEntryPoints';
+const entryPoints = getEntryPoints()
+const outputs = outputDirs()
 
+// NOTE: current approach does not work - write a custom build script that calls
+// webpack in every lambda root dir and do what apex does - loop webpack and call
+// relative to function dir
 export default {
-  entry: [sourceMapsAndUnhandledErrors, process.cwd() + '/src/scapholdLogicExpressApi/src/app.js'],
+  entry: entryPoints,
   target: 'node',
   devtool: 'source-map',
   output: {
