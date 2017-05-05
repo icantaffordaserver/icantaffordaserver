@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rimraf lib",
     "transpile": "babel src -d lib",
-    "build": "npm run clean && npm run transpile",
+    "build:babel": "npm run clean && npm run transpile",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alexander Mann",
@@ -17,7 +18,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-stage-0": "^6.24.1",
     "rimraf": "^2.6.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.5.0"
   },
   "dependencies": {
     "aws-serverless-express": "^2.2.0",
