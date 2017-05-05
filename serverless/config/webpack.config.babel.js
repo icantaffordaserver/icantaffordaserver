@@ -2,19 +2,20 @@
  * Created by alexandermann on 2017-04-21.
  */
 import path from 'path'
-import Webpack from 'webpack'
+import nodeExternals from 'webpack-node-externals'
 
-// NOTE: paths are relative to each functions folder
+const sourceMapsUnhandledErrors = process.cwd() + '/config/webpackInclude'
+
 export default {
-  entry: './src/index.js',
+  entry: [sourceMapsUnhandledErrors, process.cwd() + '/src/scapholdLogicExpressApi/src/index.js'],
   target: 'node',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   output: {
-    path: path.join(process.cwd(), 'lib'),
-    filename: 'index.js',
+    path: path.join(process.cwd() + 'src', 'scapholdLogicExpressApi', 'lib'),
+    filename: 'scapholdApi.js',
     libraryTarget: 'commonjs2',
   },
-  externals: ['aws-sdk'],
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
