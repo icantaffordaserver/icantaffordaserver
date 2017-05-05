@@ -12,7 +12,6 @@ const path = require('path')
 // ------ lambdaFolderName/
 module.exports = function entryPoints() {
   // expect this script to be executed at the root dir (serverless/)
-  console.log('entryPoints(): ', process.cwd())
   const cwd = process.cwd() + '/src'
 
   // return an array of the absolute paths to all lambda functions
