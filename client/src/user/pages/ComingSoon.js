@@ -3,12 +3,14 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { gql, graphql } from 'react-apollo'
+import { Redirect } from 'react-router-dom'
+import { gql, graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
 import { Form, Input, Label } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 import FullHeightContainer from '../components/Dashboard/FullHeightContainer'
 import logo from '../../assets/logo.png'
+import currentUserQuery from '../../graphql/user/currentUserQuery'
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -26,6 +28,7 @@ const H2 = styled.h2``
 class ComingSoon extends React.Component {
   static propTypes = {
     mutate: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
   }
   static defaultProps = {}
   state = {
@@ -63,7 +66,10 @@ class ComingSoon extends React.Component {
   }
 
   render() {
+    if (this.props.data.loading) return null
+    if (this.props.data.viewer && this.props.data.viewer.user) return <Redirect to="/dashboard" />
     const { loading, error, message } = this.state
+
     return (
       <FullHeightContainer>
         <SignUpContainer>
@@ -96,8 +102,10 @@ class ComingSoon extends React.Component {
   }
 }
 
-export default graphql(
-  gql`
+export default compose(
+  graphql(currentUserQuery),
+  graphql(
+    gql`
   mutation ($input: CreateInviteRequestsInput!) {
     createInviteRequests(input: $input) {
       changedInviteRequests {
@@ -106,4 +114,5 @@ export default graphql(
     }
   }
 `,
+  ),
 )(ComingSoon)
