@@ -7,12 +7,11 @@ export default function sendInviteEmail({ firstName, recipientEmail, actionUrl }
   return new Promise((resolve, reject) => {
     postmarkClient.sendEmailWithTemplate(
       {
-        From: 'info@shiftwith.us',
+        From: 'hello@toktumi.io',
         To: recipientEmail,
-        TemplateId: 1473601,
+        TemplateId: 1497643,
         TemplateModel: {
           name: firstName,
-          support_email: 'info@shiftwith.us',
           action_url: actionUrl,
         },
       },
