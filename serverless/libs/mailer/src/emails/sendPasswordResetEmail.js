@@ -9,7 +9,7 @@ export default function sendPasswordResetEmail(
   return new Promise((resolve, reject) => {
     postmarkClient.sendEmailWithTemplate(
       {
-        From: 'info@shiftwith.us',
+        From: 'hello@toktumi.io',
         To: recipientEmail,
         TemplateId: 1448201,
         TemplateModel: {
@@ -17,7 +17,7 @@ export default function sendPasswordResetEmail(
           action_url: actionUrl,
           operating_system: operatingSystem,
           browser_name: browserName,
-          support_url: 'mailto:info@shiftwith.us',
+          support_url: 'hello@toktumi.io',
         },
       },
       (error, result) => {

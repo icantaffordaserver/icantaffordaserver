@@ -8,7 +8,7 @@ export default (email, conversationTime) => {
   // should include some checks here to determine what form the time is in, but the job of this
   // function should only be to send the email and nothing more
   PostmarkClient.sendEmailWithTemplate({
-    From: 'info@shiftwith.us',
+    From: 'hello@toktumi.io',
     To: email,
     TemplateId: 1501821,
     TemplateModel: {

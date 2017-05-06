@@ -7,13 +7,13 @@ export default function sendVerificationEmail({ firstName, recipientEmail, actio
   return new Promise((resolve, reject) => {
     postmarkClient.sendEmailWithTemplate(
       {
-        From: 'info@shiftwith.us',
+        From: 'hello@toktumi.io',
         To: recipientEmail,
         TemplateId: 1446421,
         TemplateModel: {
           name: firstName,
           action_url: actionUrl,
-          login_url: 'https://www.shiftwith.us/login',
+          login_url: 'https://beta.toktumi.io/login',
           username: recipientEmail,
         },
       },
