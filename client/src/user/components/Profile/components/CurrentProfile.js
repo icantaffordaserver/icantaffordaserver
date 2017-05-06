@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-02-11.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import DashboardViewDetail from '../../Dashboard/DashboardViewDetail';
@@ -9,17 +10,14 @@ import ViewProfileContainer from '../containers/ViewProfileContainer';
 import EditProfileContainer from '../EditProfileForm/containers/EditProfileFormContainer';
 
 const propTypes = {
-  history: React.PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 class CurrentProfile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editButtonText: 'Edit',
-      isEditing: false,
-    };
-  }
+  state = {
+    editButtonText: 'Edit',
+    isEditing: false,
+  };
 
   setEditing = () => {
     const { isEditing } = this.state;
