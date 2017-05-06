@@ -11,7 +11,7 @@ const sourceMapsAndUnhandledErrors = path.join(__dirname, './webpackInclude.js')
 export default {
   entry: [sourceMapsAndUnhandledErrors, path.join(process.cwd(), 'src/index.js')],
   target: 'node',
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     path: path.join(process.cwd(), 'lib'),
     filename: 'index.js',
