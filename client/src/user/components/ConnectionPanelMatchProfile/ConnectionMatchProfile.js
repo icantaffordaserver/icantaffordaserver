@@ -23,9 +23,9 @@ class ConnectionMatchProfile extends React.Component {
     name: PropTypes.string.isRequired,
     profileImg: PropTypes.string,
     location: PropTypes.string,
+    bio: PropTypes.string,
     firstConversationDate: PropTypes.string,
     mostRecentConversationDate: PropTypes.string,
-    bio: PropTypes.string,
   }
   static defaultProps = {
     profileImg: 'http://react.semantic-ui.com/assets/images/wireframe/image-text.png',
@@ -46,7 +46,7 @@ class ConnectionMatchProfile extends React.Component {
     } = this.props
 
     const nameMessage = `Hi, I'm ${name}`
-    const locationMessage = location === ''
+    const locationMessage = location === '' || !location
       ? "Ask me where I'm from, then remind me to update my location"
       : `I'm from ${location}`
     const factMessage1 = mostRecentConversationDate === ''
@@ -55,13 +55,18 @@ class ConnectionMatchProfile extends React.Component {
     const factMessage2 = firstConversationDate !== ''
       ? `My first Toktumi conversation was ${moment(firstConversationDate).calendar()}`
       : false
-    const bioMessage = bio === ''
+    const bioMessage = bio === '' || !bio
       ? "I haven't completed my bio yet, please remind me to do that. In the meantime, this is a bio of an individual that Toktumi has lot of respect for, try and guess who it is: I was a South African politician and philanthropist, served 27 years in prison and was awarded the Nobel Peace Prize."
       : bio
-    console.log(bioMessage)
     return (
       <MatchProfileContainer>
-        <ImgWrapper><ProfileImg src={profileImg} /></ImgWrapper>
+        <ImgWrapper>
+          <ProfileImg
+            src={
+              profileImg || 'http://react.semantic-ui.com/assets/images/wireframe/image-text.png'
+            }
+          />
+        </ImgWrapper>
         <ProfileHeader>
           <ProfileHeaderText>
             <Name>{nameMessage}</Name>
