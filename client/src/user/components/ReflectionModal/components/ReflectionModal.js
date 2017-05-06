@@ -97,7 +97,7 @@ class ReflectionModal extends React.Component {
     const { connections, loading, modalOpen, onClose } = this.props
     const { rating } = this.state
     return (
-      <Modal open={modalOpen} size="small">
+      <Modal open={modalOpen} size="small" onClose={onClose}>
         <ModalHeader content="Reflection" />
         <ModalContentStyled>
           {this.renderReflectionView()}
