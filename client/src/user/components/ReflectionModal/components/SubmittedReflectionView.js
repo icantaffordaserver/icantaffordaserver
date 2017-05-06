@@ -29,7 +29,7 @@ class SubmittedReflectionView extends React.Component {
         <Header textAlign="center" content="You rated your conversation:" />
         <ThumbsRating rating={rating} viewOnly />
         <Header textAlign="center" content="Your Comment" />
-        <Header textAlign="center" content={comment} color="grey" />
+        <Header textAlign="center" content={comment || 'No comment left'} color="grey" />
       </View>
     )
   }
