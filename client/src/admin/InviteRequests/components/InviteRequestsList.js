@@ -1,41 +1,43 @@
 /**
  * Created by alexandermann on 2017-01-25.
  */
-import React from 'react';
-import { Header, Button, Table, Segment } from 'semantic-ui-react';
-import InviteRequestsListItem from './InviteRequestsListItem';
+import React from 'react'
+import PropTypes from 'prop-types';
+import { Header, Button, Table, Segment } from 'semantic-ui-react'
+import InviteRequestsListItem from './InviteRequestsListItem'
 
 class InviteRequests extends React.Component {
   static propTypes = {
-    invites: React.PropTypes.array.isRequired,
-    sendInvites: React.PropTypes.func.isRequired,
-    loading: React.PropTypes.bool.isRequired,
-  };
+    invites: PropTypes.array.isRequired,
+    sendInvites: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+  }
   state = {
     selectedInviteRequests: [],
-  };
+  }
 
   toggleSelectInviteRequest = id => {
-    const { selectedInviteRequests } = this.state;
+    const { selectedInviteRequests } = this.state
     if (selectedInviteRequests.includes(id)) {
-      selectedInviteRequests.splice(selectedInviteRequests.indexOf(id), 1); // remove the id from the array
+      // remove the id from the array
       this.setState({
-        selectedInviteRequests: [...selectedInviteRequests],
-      });
+        selectedInviteRequests: selectedInviteRequests.filter(idInArray => id !== idInArray),
+      })
     } else {
+      // add the id to the array
       this.setState({
-        selectedInviteRequests: [...selectedInviteRequests, id], // add the id to the array
-      });
+        selectedInviteRequests: [...selectedInviteRequests, id],
+      })
     }
-  };
+  }
 
   approveInviteRequests = () => {
-    this.props.sendInvites(this.state.selectedInviteRequests);
-  };
+    this.props.sendInvites(this.state.selectedInviteRequests)
+  }
 
   render() {
-    const { invites, loading } = this.props;
-    const { selectedInviteRequests } = this.state;
+    const { invites, loading } = this.props
+    const { selectedInviteRequests } = this.state
     return (
       <div>
         <Header as="h2" attached="top">
@@ -89,8 +91,8 @@ class InviteRequests extends React.Component {
           </Table>
         </Segment>
       </div>
-    );
+    )
   }
 }
 
-export default InviteRequests;
+export default InviteRequests
