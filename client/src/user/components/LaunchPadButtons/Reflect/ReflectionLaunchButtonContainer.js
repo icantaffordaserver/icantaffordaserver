@@ -46,9 +46,9 @@ class ReflectionLaunchButtonContainer extends React.Component {
     if (numConnectionsCompleted === 0) return 'Complete your first connection!'
     const numReviewsLeft = reviews.edges.length
     const outstanding = numConnectionsCompleted - numReviewsLeft
-    return outstanding > 1
-      ? `${outstanding} Outstanding Reflections`
-      : `${outstanding} Outstanding Reflection`
+    if (outstanding > 1) return `${outstanding} Outstanding Reflections`
+    if (outstanding === 1) return `${outstanding} Outstanding Reflection`
+    return null
   }
 
   labelColor = () => {
