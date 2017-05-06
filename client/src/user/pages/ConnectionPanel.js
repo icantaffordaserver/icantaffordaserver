@@ -2,15 +2,15 @@
  * Created by alexandermann on 2017-01-31.
  */
 import React from 'react'
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo'
 import { Grid } from 'semantic-ui-react'
 
 import AppearInEmbedContainer from '../containers/AppearInEmbedContainer'
 import AllSurveyCardsContainer from '../containers/AllSurveyCardsContainer'
 import InspoCardHeaderContainer from '../containers/InspoCardHeaderContainer'
-import ConnectionMatchProfileContainer from '../containers/ConnectionMatchProfileContainer';
+import ConnectionMatchProfileContainer from '../containers/ConnectionMatchProfileContainer'
 
-import currentUserQuery from '../../graphql/user/currentUserQuery';
+import currentUserQuery from '../../graphql/user/currentUserQuery'
 
 // TODO: need to devise a better way to fetch the current connection data without repeatably passing in the current user Id
 function ConnectionPanel(props) {
