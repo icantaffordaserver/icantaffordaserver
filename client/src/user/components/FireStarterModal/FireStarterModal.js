@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-03-24.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, ModalHeader, ModalActions, Header, Input, Button, Label } from 'semantic-ui-react';
 import styled from 'styled-components';
 import isURL from 'validator/lib/isURL';
@@ -32,10 +33,11 @@ const EmbedStyled = styled.iframe`
 
 class FireStarterModal extends React.Component {
   static propTypes = {
-    modalOpen: React.PropTypes.bool.isRequired,
-    fireStarterSrc: React.PropTypes.string.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
-    loading: React.PropTypes.bool.isRequired,
+    modalOpen: PropTypes.bool.isRequired,
+    fireStarterSrc: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
   };
 
   state = {
@@ -60,11 +62,11 @@ class FireStarterModal extends React.Component {
   };
 
   render() {
-    const { modalOpen, loading } = this.props;
+    const { modalOpen, onClose, loading } = this.props;
     const { error, submitted, suggestion } = this.state;
     const fireStarterSrc = `https://www.youtube.com/embed/${this.props.fireStarterSrc}`;
     return (
-      <Modal open={modalOpen}>
+      <Modal open={modalOpen} onClose={onClose}>
         {error && <Label color="red" attached="bottom left">Please enter a valid url</Label>}
         <ModalHeader content="Fire Starter" />
         <VideoContainer>
