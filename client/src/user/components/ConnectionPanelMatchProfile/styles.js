@@ -25,10 +25,16 @@ export const ProfileHeader = styled.div`
   margin-bottom: 20px;
 `;
 
+export const ImgWrapper = styled.div`
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+`
+
 export const ProfileImg = styled.img`
-  max-width: 200px;
-  max-height: 200px;
-  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  border-radius: 100%
 `;
 
 export const ProfileHeaderText = styled.div`

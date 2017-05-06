@@ -15,6 +15,7 @@ import {
   ProfileContent,
   ContentTitle,
   ContentText,
+  ImgWrapper,
 } from './styles'
 
 class ConnectionMatchProfile extends React.Component {
@@ -28,10 +29,10 @@ class ConnectionMatchProfile extends React.Component {
   }
   static defaultProps = {
     profileImg: 'http://react.semantic-ui.com/assets/images/wireframe/image-text.png',
-    location: 'Not set',
-    firstConversationDate: 'About to have it',
-    mostRecentConversationDate: 'About to have it',
-    bio: 'I still need to complete this..',
+    location: '',
+    firstConversationDate: '',
+    mostRecentConversationDate: '',
+    bio: '',
   }
 
   render() {
@@ -44,22 +45,37 @@ class ConnectionMatchProfile extends React.Component {
       bio,
     } = this.props
 
+    const nameMessage = `Hi, I'm ${name}`
+    const locationMessage = location === ''
+      ? "Ask me where I'm from, then remind me to update my location"
+      : `I'm from ${location}`
+    const factMessage1 = mostRecentConversationDate === ''
+      ? 'This is my first time having a conversation on Toktumi'
+      : `My last conversation was ${moment(mostRecentConversationDate).calendar()}`
+    const factMessage2 = firstConversationDate !== ''
+      ? `My first Toktumi conversation was ${moment(firstConversationDate).calendar()}`
+      : false
+    const bioMessage = bio === ''
+      ? "I haven't completed my bio yet, please remind me to do that. In the meantime, this is a bio of an individual that Toktumi has lot of respect for, try and guess who it is: I was a South African politician and philanthropist, served 27 years in prison and was awarded the Nobel Peace Prize."
+      : bio
+    console.log(bioMessage)
     return (
       <MatchProfileContainer>
+        <ImgWrapper><ProfileImg src={profileImg} /></ImgWrapper>
         <ProfileHeader>
-          <ProfileImg src={profileImg} />
           <ProfileHeaderText>
-            <Name>{name}</Name>
-            <Location>{location} is my home</Location>
-            <Fact>My last conversation was {moment(mostRecentConversationDate).calendar()}</Fact>
-            <Fact>
-              My first Toktumi conversation was {moment(firstConversationDate).calendar()}
-            </Fact>
+            <Name>{nameMessage}</Name>
+            <Location>{locationMessage}</Location>
+            <Fact>{factMessage1}</Fact>
+            {factMessage2 !== '' &&
+              <Fact>
+                {factMessage2}
+              </Fact>}
           </ProfileHeaderText>
         </ProfileHeader>
         <ProfileContent>
-          <ContentTitle>Heres a little more about me..</ContentTitle>
-          <ContentText>{bio}</ContentText>
+          <ContentTitle>Bio</ContentTitle>
+          <ContentText>{bioMessage}</ContentText>
         </ProfileContent>
       </MatchProfileContainer>
     )
