@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-03-30.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 
 import EditProfileForm from '../components/EditProfileForm';
@@ -9,18 +10,15 @@ import currentUserQuery from '../../../../../graphql/user/currentUserQuery';
 import updateUserMutation from '../../../../../graphql/account/updateUserMutation';
 import { uploadProfileImg } from '../../../../utils';
 
-const propTypes = {
-  mutate: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object.isRequired,
-};
-
 class EditProfileFormContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-    };
+  static propTypes = {
+    mutate: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    doneEditing: PropTypes.func.isRequired,
   }
+  state = {
+    loading: false,
+  };
 
   handleSubmit = async ({ firstName, lastName, gender, location, bio }, droppedPhoto) => {
     try {
@@ -34,11 +32,13 @@ class EditProfileFormContainer extends React.Component {
           }),
           uploadProfileImg(droppedPhoto, id, firstName, lastName),
         ]);
+        this.props.doneEditing()
       } else {
         await this.props.mutate({
           variables: { input: { id, firstName, lastName, gender, location, bio } },
           refetchQueries: [{ query: currentUserQuery }],
         });
+        this.props.doneEditing()
       }
       this.setState({ loading: false });
     } catch (error) {
@@ -49,6 +49,7 @@ class EditProfileFormContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null;
+
     const { loading } = this.state;
     return (
       <EditProfileForm
@@ -59,8 +60,6 @@ class EditProfileFormContainer extends React.Component {
     );
   }
 }
-
-EditProfileFormContainer.propTypes = propTypes;
 
 export default compose(graphql(currentUserQuery), graphql(updateUserMutation))(
   EditProfileFormContainer,
