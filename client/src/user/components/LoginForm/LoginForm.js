@@ -94,7 +94,7 @@ class Login extends React.Component {
               <Button fluid color="teal" size="large">Login</Button>
             </Form>
             <Divider horizontal>Or</Divider>
-            <Link to="/signup">
+            <Link to="/">
               <Button fluid color="blue" size="large" content=" Sign Up " />
             </Link>
             <Header as="h4" textAlign="center">
