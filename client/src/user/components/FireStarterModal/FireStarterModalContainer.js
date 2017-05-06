@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-04-03.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 
 import extractYouTubeId from './extractYouTubeId';
@@ -11,10 +12,10 @@ import currentUserQuery from '../../../graphql/user/currentUserQuery';
 
 class FireStarterModalContainer extends React.Component {
   static propTypes = {
-    modalOpen: React.PropTypes.bool.isRequired,
-    onClose: React.PropTypes.func.isRequired,
-    mutate: React.PropTypes.func.isRequired,
-    data: React.PropTypes.object.isRequired,
+    modalOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    mutate: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
   };
 
   state = {
@@ -22,10 +23,9 @@ class FireStarterModalContainer extends React.Component {
   };
 
   handleSubmit = async suggestion => {
-    const { id } = this.props.data.viewer.user;
     try {
       this.setState({ loading: true });
-      await this.props.mutate({ variables: { input: { userId: id, url: suggestion } } });
+      await this.props.mutate({ variables: { input: { url: suggestion } } });
       this.setState({ loading: false });
     } catch (error) {
       console.log(error);

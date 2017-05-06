@@ -4,8 +4,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation submitFireStarterSuggestionMutation($input: CreateFirestarterSuggestionsInput!) {
-    createFirestarterSuggestions(input: $input) {
+  mutation submitFireStarterSuggestionMutation($input: CreateFireStarterSuggestionsInput!) {
+    createFireStarterSuggestions(input: $input) {
       clientMutationId
     }
   }
