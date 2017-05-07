@@ -7,7 +7,7 @@ phases:
       - npm install yarn --global && yarn cache clean
   pre_build:
     commands:
-      - cd serverless && yarn run prepareLibs && yarn install && yarn run build
+      - cd serverless && yarn install && yarn run prepareLibs && yarn run build
       - cd client && yarn install && yarn run build
   build:
     commands:
