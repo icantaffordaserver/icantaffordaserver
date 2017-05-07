@@ -12,7 +12,6 @@ export default async (req, res) => {
   await sendInviteEmail({
     firstName,
     recipientEmail: email,
-    emailVerifiedToken: token,
     actionUrl,
   })
   res.status(200).send('Message sent successfully')

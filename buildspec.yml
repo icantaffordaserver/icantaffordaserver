@@ -3,10 +3,11 @@ phases:
   install:
     commands:
       # Install yarn natively https://yarnpkg.com/en/docs/install#linux-tab
-      - npm install yarn --global
+      # then install local libraries (ie. mailer, graphql fetch)
+      - npm install yarn --global && yarn cache clean
   pre_build:
     commands:
-      - cd serverless && yarn install && yarn run build
+      - cd serverless && yarn run prepareLibs && yarn install && yarn run build
       - cd client && yarn install && yarn run build
   build:
     commands:
