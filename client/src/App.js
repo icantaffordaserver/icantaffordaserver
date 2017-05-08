@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import history from './history'
 import FullHeightContainer from './user/components/Dashboard/FullHeightContainer'
 import HeaderContainer from './shared/Header/HeaderContainer'
@@ -29,6 +29,7 @@ function App() {
         <Route path="/dashboard" component={isAuthenticated(Dashboard)} />
         <Route path="/chat" component={ConnectionPanel} />
         <Route path="/login" component={LoginContainer} />
+        <Route exact path="/signUp" render={() => <Redirect to="/" />} />
         <Route path="/signUp/:id/:token" component={SignUpContainer} />
         <Route path="/forgot" component={ForgotPasswordContainer} />
         <Route path="/reset/:id/:token" component={ResetPasswordContainer} />
