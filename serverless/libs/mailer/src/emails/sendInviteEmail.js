@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-26.
  */
-import postmarkClient from '../PostmarkClient';
+import postmarkClient from '../PostmarkClient'
 
 export default function sendInviteEmail({ firstName, recipientEmail, actionUrl }) {
   return new Promise((resolve, reject) => {
@@ -16,9 +16,9 @@ export default function sendInviteEmail({ firstName, recipientEmail, actionUrl }
         },
       },
       (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
+        if (error) reject(error)
+        else resolve(result)
       },
-    );
-  });
+    )
+  })
 }
