@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import { gql, graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
-import { Form, Input, Label } from 'semantic-ui-react'
+import { Button, Form, Label } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 import FullHeightContainer from '../components/Dashboard/FullHeightContainer'
 import logo from '../../assets/logo.png'
@@ -22,8 +22,6 @@ const SignUpContainer = styled.div`
 const Logo = styled.img`
   width: 100%;
 `
-const H1 = styled.h1``
-const H2 = styled.h2``
 
 class ComingSoon extends React.Component {
   static propTypes = {
@@ -32,6 +30,7 @@ class ComingSoon extends React.Component {
   }
   static defaultProps = {}
   state = {
+    name: '',
     email: '',
     loading: false,
     message: '',
@@ -45,7 +44,8 @@ class ComingSoon extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
 
-    const { email } = this.state
+    const { name, email } = this.state
+    console.log(name, email)
     this.setState({ error: false, message: '' }) // clear the current message
     if (!isEmail(email)) {
       this.setState({ message: 'Please enter a valid email' })
@@ -53,7 +53,7 @@ class ComingSoon extends React.Component {
     }
     try {
       this.setState({ loading: true })
-      await this.props.mutate({ variables: { input: { email, referredFrom: 'webapp' } } })
+      await this.props.mutate({ variables: { input: { name, email, referredFrom: 'webapp' } } })
       this.setState({ loading: false, message: 'Request Sent Successfully' })
     } catch (error) {
       console.log(error)
@@ -74,27 +74,36 @@ class ComingSoon extends React.Component {
       <FullHeightContainer>
         <SignUpContainer>
           <Logo alt="logo" src={logo} />
-          <H1>Welcome to the community.</H1>
-          <H2>
+          <h1>Welcome to the community.</h1>
+          <h2>
             We are currently in closed beta, to request access send us your email and we'll be sure to get in touch
-          </H2>
+          </h2>
           <br />
           <Form onSubmit={this.handleSubmit}>
-            <Input
+            <Form.Input
+              fluid
+              name="name"
+              size="big"
+              placeholder="Enter your name"
+              onChange={this.handleChange}
+            />
+            <Form.Input
               fluid
               name="email"
               size="big"
               placeholder="Enter your email"
-              action={{
-                color: 'teal',
-                labelPosition: 'right',
-                icon: 'send',
-                content: 'Request',
-                loading,
-              }}
               onChange={this.handleChange}
             />
-            {message && <Label basic color={error ? 'red' : 'green'} pointing>{message}</Label>}
+            <Button
+              size="big"
+              color="teal"
+              labelPosition="right"
+              icon="send"
+              content="Request"
+              loading={loading}
+            />
+            {message &&
+              <Label basic color={error ? 'red' : 'green'} pointing="left">{message}</Label>}
           </Form>
         </SignUpContainer>
       </FullHeightContainer>
