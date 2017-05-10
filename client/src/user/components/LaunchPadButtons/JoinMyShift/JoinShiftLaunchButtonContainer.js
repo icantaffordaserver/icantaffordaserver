@@ -23,12 +23,23 @@ class JoinShiftLaunchButtonContainer extends React.Component {
   }
 
   isDisabled = () => {
+    const { connections } = this.props.data.viewer.user
+    if (connections.edges.length === 0) return true
     const { connectionTime, status } = this.props.data.viewer.user.connections.edges[0].node
     if (status === 'matched' || status === 'scheduled') return false
     return true
   }
 
   renderLabel = () => {
+    const { connections } = this.props.data.viewer.user
+    if (connections.edges.length === 0) {
+      return {
+        labelMessage: 'Request a conversation first',
+        labelPosition: 'top left',
+        labelColor: 'blue',
+      }
+    }
+
     // get the most recent connection
     const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node
     if (isConnectionSet(connectionTime)) {
@@ -42,7 +53,22 @@ class JoinShiftLaunchButtonContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null
+    const { connections } = this.props.data.viewer.user
 
+    // check if user is new user, ie. having any existing connections
+    if (connections.edges.length === 0) {
+      return (
+        <LaunchPadItem
+          {...this.renderLabel()}
+          imgSrc={computer}
+          header="Join my Shift"
+          onClick={this.handleClick}
+          disabled={this.isDisabled()}
+        />
+      )
+    }
+
+    // get most recent connection time
     const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node
     return (
       <CountdownToConversation timeToCountdownTo={connectionTime}>
