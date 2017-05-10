@@ -9,7 +9,7 @@ export default function sendInviteEmail({ firstName, recipientEmail, actionUrl }
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
-        TemplateId: 1735761,
+        TemplateId: 1497643,
         TemplateModel: {
           name: firstName,
           action_url: actionUrl,
