@@ -1,9 +1,10 @@
 /**
  * Created by alexandermann on 2017-04-12.
  */
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { generateGravatarUrl } from './helpers';
+import { generateGravatarUrl } from './helpers'
 import {
   HeaderMenu,
   HeaderItemContainer,
@@ -15,24 +16,26 @@ import {
   MenuItem,
   DropMenu,
   DropMenuItem,
-} from './styles';
+} from './styles'
+
+import ToktumiH1 from '../ToktumiH1'
 
 class Header extends React.Component {
   static propTypes = {
-    email: React.PropTypes.string,
-    profileImgSrc: React.PropTypes.string,
-    isAdmin: React.PropTypes.bool.isRequired,
-    homeUrl: React.PropTypes.string.isRequired,
-    dashboardUrl: React.PropTypes.string.isRequired,
-    accountUrl: React.PropTypes.string.isRequired,
-    loginUrl: React.PropTypes.string.isRequired,
-    logout: React.PropTypes.func.isRequired,
-    navigateTo: React.PropTypes.func.isRequired,
-  };
+    email: PropTypes.string,
+    profileImgSrc: PropTypes.string,
+    isAdmin: PropTypes.bool.isRequired,
+    homeUrl: PropTypes.string.isRequired,
+    dashboardUrl: PropTypes.string.isRequired,
+    accountUrl: PropTypes.string.isRequired,
+    loginUrl: PropTypes.string.isRequired,
+    logout: PropTypes.func.isRequired,
+    navigateTo: PropTypes.func.isRequired,
+  }
   static defaultProps = {
     email: null,
     profileImgSrc: '',
-  };
+  }
 
   loggedInNav = () => (
     <HeaderRightMenu>
@@ -42,7 +45,7 @@ class Header extends React.Component {
       </HeaderItem>
       <HeaderItem onClick={this.props.logout}><h4>Logout</h4></HeaderItem>
     </HeaderRightMenu>
-  );
+  )
 
   loggedOutNav = () => (
     <HeaderRightMenu>
@@ -50,7 +53,7 @@ class Header extends React.Component {
         <h4>Login</h4>
       </HeaderItem>
     </HeaderRightMenu>
-  );
+  )
 
   adminNav = () => (
     <MenuItem>
@@ -67,29 +70,29 @@ class Header extends React.Component {
         </DropMenuItem>
       </DropMenu>
     </MenuItem>
-  );
+  )
 
   userNav = () => (
     <HeaderItem onClick={() => this.props.navigateTo(this.props.dashboardUrl)}>
       <h4>Dashboard</h4>
     </HeaderItem>
-  );
+  )
 
   render() {
-    const { email, isAdmin, navigateTo } = this.props;
+    const { email, isAdmin, navigateTo } = this.props
     return (
       <HeaderMenu>
         <HeaderItemContainer>
           <Logo onClick={() => navigateTo(this.props.homeUrl)}>
-            <HeaderItem><h1>Toktumi</h1></HeaderItem>
+            <HeaderItem><ToktumiH1>Toktumi</ToktumiH1></HeaderItem>
           </Logo>
           {email ? this.userNav() : null}
           {isAdmin ? this.adminNav() : null}
           {email ? this.loggedInNav() : this.loggedOutNav()}
         </HeaderItemContainer>
       </HeaderMenu>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

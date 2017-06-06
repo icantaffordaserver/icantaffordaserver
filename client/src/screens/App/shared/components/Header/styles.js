@@ -19,7 +19,7 @@ export const HeaderMenu = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #05ffb0;
+  background-color: #FF7F50;
   height: 70px;
   margin-bottom: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -46,7 +46,7 @@ export const HeaderItem = styled.li`
     transition-duration: 0.2s;
     transition-timing-function: ease;
     cursor: pointer;
-    box-shadow: 0px 5px 0 #98004a;
+    box-shadow: 0px 5px 0 white;
   }
 `;
 
@@ -111,7 +111,7 @@ export const DropMenu = styled.ul`
 `;
 
 export const DropMenuItem = styled.li`
-  background-color: #05ffb0;
+  background-color: #FF7C58;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -123,7 +123,7 @@ export const DropMenuItem = styled.li`
   z-index: 999;
   &:hover {
     cursor: pointer;
-    box-shadow: 5px 0px 0 #98004a;
+    box-shadow: 5px 0px 0 white;
   }
   > h4 {
     margin: 0;
