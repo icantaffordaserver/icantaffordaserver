@@ -4,6 +4,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql, compose } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 import AvailabilityTable from '../components/AvailabilityTable'
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
@@ -34,6 +35,7 @@ class AvailabilityContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.props.data.loading) return null
     const { availability } = this.props.data.viewer.user
 
@@ -47,6 +49,8 @@ class AvailabilityContainer extends React.Component {
   }
 }
 
-export default compose(graphql(currentUserQuery), graphql(updateUserMutation))(
-  AvailabilityContainer,
-)
+export default compose(
+  withRouter,
+  graphql(currentUserQuery),
+  graphql(updateUserMutation),
+)(AvailabilityContainer)

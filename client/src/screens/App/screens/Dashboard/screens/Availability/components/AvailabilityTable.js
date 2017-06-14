@@ -46,7 +46,9 @@ class AvailabilityTable extends React.Component {
     const timeSlotsChosen = {}
     const days = Object.keys(this.state.timeSlots) // get array of days
     days.map(day => {
-      timeSlotsChosen[day] = this.state.timeSlots[day].filter(timeSlot => timeSlot.selected) // return array of selected time slots
+      timeSlotsChosen[day] = this.state.timeSlots[day].filter(
+        timeSlot => timeSlot.selected,
+      ) // return array of selected time slots
       if (timeSlotsChosen[day].length === 0) delete timeSlotsChosen[day] // delete if empty
     })
     if (timeSlotsChosen === {}) {
