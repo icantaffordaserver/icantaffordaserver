@@ -13,7 +13,7 @@ import MyProfileLaunchButtonContainer from './containers/MyProfileLaunchButtonCo
 import ContextView from '../../../../shared/components/ContextView'
 
 const LaunchPad = () =>
-  <ContextView>
+  <ContextView title="🚀 My Launchpad">
     <Grid container verticalAlign="middle" columns={3}>
       <Grid.Row>
         <Grid.Column>
