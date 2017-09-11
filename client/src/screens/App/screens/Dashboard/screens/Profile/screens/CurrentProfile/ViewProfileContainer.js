@@ -16,13 +16,13 @@ class ViewProfileContainer extends React.Component {
 
     const {
       profilePhoto,
-      typeformProfile: { profileResponses, dateSubmit },
-    } = this.props.data.viewer.user
+      typeformProfile,
+    } = this.props.data.user
     return (
       <div>
-        <ProfileHeader user={this.props.data.viewer.user} />
+        <ProfileHeader user={this.props.data.user} />
         <Header as="h2" content="My Cards" textAlign="center" />
-        <AllCards profileResponses={profileResponses} />
+        <AllCards profileResponses={typeformProfile ? typeformProfile.profileResponses : {}} />
       </div>
     )
   }

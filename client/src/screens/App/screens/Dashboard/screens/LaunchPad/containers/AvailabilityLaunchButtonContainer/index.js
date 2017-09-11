@@ -23,12 +23,12 @@ class AvailabilityLaunchButtonContainer extends React.Component {
   }
 
   hasSetAvailability = () => {
-    if (!this.props.data.viewer.user.availability) return false // check if availability has been set
-    return Object.keys(this.props.data.viewer.user.availability).length > 0 // return true if availability has 1 slot or more selected
+    if (!this.props.data.user.availability) return false // check if availability has been set
+    return Object.keys(this.props.data.user.availability).length > 0 // return true if availability has 1 slot or more selected
   }
 
   isDisabled = () => {
-    const { typeformProfileComplete } = this.props.data.viewer.user
+    const { typeformProfileComplete } = this.props.data.user
     return !typeformProfileComplete
   }
 

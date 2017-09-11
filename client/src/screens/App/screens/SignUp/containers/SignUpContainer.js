@@ -2,40 +2,35 @@
  * Created by alexandermann on 2017-03-01.
  */
 import React from 'react'
-import { graphql, withApollo, compose } from 'react-apollo'
 import PropTypes from 'prop-types'
+import { graphql, withApollo, compose } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 import SignUpForm from '../components/SignUpForm'
 
-import SignUpMutation from '../graphql/signUpMutation'
-import SignInMutation from '../../../shared/graphql/mutations/loginMutation'
+import signUpMutation from '../graphql/signUpMutation'
+import signInMutation from '../../../shared/graphql/mutations/signInMutation'
 
-class SignUpWithInviteContainer extends React.Component {
+class SignUpContainer extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     client: PropTypes.object.isRequired,
   }
+
   state = {
     loading: false,
     error: '',
   }
 
   handleSignUp = async (firstName, lastName, email, password) => {
-    const { id: inviteId, token } = this.props.match.params
-
     try {
       this.setState({ loading: true })
       await this.props.signUpMutation({
         variables: {
-          createUser: {
-            username: email,
-            email,
-            password,
-            firstName,
-            lastName,
-            inviteId, // include the inviteid to look up
-            requestVars: { token, inviteId },
-          },
+          email,
+          password,
+          firstName,
+          lastName,
         },
       })
 
@@ -47,20 +42,22 @@ class SignUpWithInviteContainer extends React.Component {
       })
 
       // save the token in local storage, reset the store to requery user data, and redirect to dashboard
-      window.localStorage.setItem('scaphold_user_token', signInResponse.data.loginUser.token) // save token
+      localStorage.setItem('auth_token', signInResponse.data.signinUser.token) // save token
       this.props.client.resetStore()
       this.props.history.push('/dashboard')
     } catch (error) {
       if (error.message.includes("Field 'username' must be unique")) {
         // check email is not taken
         console.dir(error)
-        this.setState({ loading: false, error: 'Email is already associated with an account' })
+        this.setState({
+          loading: false,
+          error: 'Email is already associated with an account',
+        })
       }
     }
   }
 
   render() {
-    console.log(this.props)
     return (
       <SignUpForm
         onSubmit={this.handleSignUp}
@@ -72,6 +69,8 @@ class SignUpWithInviteContainer extends React.Component {
 }
 
 export default compose(
-  graphql(SignUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(SignInMutation, { name: 'signInMutation' }),
-)(withApollo(SignUpWithInviteContainer))
+  withRouter,
+  withApollo,
+  graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
+  graphql(signInMutation, { name: 'signInMutation' }),
+)(SignUpContainer)

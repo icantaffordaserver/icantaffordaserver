@@ -3,19 +3,21 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import LoginForm from '../components/LoginForm'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-import signInMutation from '../../../shared/graphql/mutations/loginMutation'
+import signInMutation from '../../../shared/graphql/mutations/signInMutation'
 
 class LoginContainer extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    mutate: PropTypes.func.isRequired,
   }
+
   state = {
     loading: false,
     error: '',
@@ -30,7 +32,7 @@ class LoginContainer extends React.Component {
           password,
         },
       })
-      window.localStorage.setItem('scaphold_user_token', response.data.loginUser.token) // save token
+      window.localStorage.setItem('auth_token', response.data.signinUser.token) // save token
 
       // reset the store after the user has been authenticated, then direct to dashboard
       this.props.client.resetStore()
@@ -48,14 +50,20 @@ class LoginContainer extends React.Component {
     if (this.props.data.loading) return null
 
     // if the user is already logged in, redirect to dashboard
-    if (this.props.data.viewer && this.props.data.viewer.user) return <Redirect to="/dashboard" />
+    if (this.props.data.viewer && this.props.data.viewer.user)
+      return <Redirect to="/dashboard" />
 
     const { loading, error } = this.state
-    return <LoginForm onSubmit={this.handleLogin} loading={loading} error={error} />
+    return (
+      <LoginForm onSubmit={this.handleLogin} loading={loading} error={error} />
+    )
   }
 }
 
+export default compose(
+  withApollo,
+  withRouter,
+  graphql(currentUserQuery),
+  graphql(signInMutation),
+)(LoginContainer)
 // wrap the component with withApollo so we can expose the client prop
-export default withApollo(
-  compose(graphql(currentUserQuery), graphql(signInMutation))(LoginContainer),
-)

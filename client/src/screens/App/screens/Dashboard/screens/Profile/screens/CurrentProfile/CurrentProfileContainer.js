@@ -8,11 +8,11 @@ import CurrentProfile from '../../components/CurrentProfile'
 
 import currentUserQuery from '../../../../../../shared/graphql/queries/currentUserQuery'
 
-
 class CurrentProfileContainer extends React.Component {
   render() {
     if (this.props.data.loading) return null
-    return <CurrentProfile user={this.props.data.viewer.user} />
+
+    return <CurrentProfile user={this.props.data.user} />
   }
 }
 

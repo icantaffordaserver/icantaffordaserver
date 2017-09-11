@@ -22,6 +22,7 @@ class ContextView extends React.Component {
       title: PropTypes.string,
       handler: PropTypes.func,
     }),
+    children: PropTypes.element.isRequired,
   }
   static defaultProps = {
     leftButton: {},
@@ -52,21 +53,28 @@ class ContextView extends React.Component {
               <div style={{ flex: 1, marginLeft: '10px' }}>
                 <div style={{ display: 'flex' }}>
                   {leftButton.title &&
-                    <ContextButton left>{leftButton.title}</ContextButton>}
+                    <ContextButton left onClick={leftButton.handler}>
+                      {leftButton.title}
+                    </ContextButton>}
                 </div>
               </div>
               <div style={{ flex: 1 }}>
-                <h1 style={{ textAlign: 'center' }}>{title}</h1>
+                <h1 style={{ textAlign: 'center' }}>
+                  {title}
+                </h1>
               </div>
               <div style={{ flex: 1, marginRight: '10px' }}>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {rightButton.title &&
-                    <ContextButton right>{rightButton.title}</ContextButton>}
+                    <ContextButton right onClick={rightButton.handler}>
+                      {rightButton.title}
+                    </ContextButton>}
                 </div>
               </div>
             </div>
             <div
               style={{
+                display: 'flex',
                 padding: '10px',
                 backgroundColor: lighten(0.2, '#FF7F50'),
               }}

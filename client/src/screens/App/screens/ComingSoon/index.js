@@ -19,16 +19,14 @@ const SignUpContainer = styled.div`
   padding: 20px;
   max-width: 600px;
 `
-const Logo = styled.img`
-  width: 100%;
-`
+const Logo = styled.img`width: 100%;`
 
 class ComingSoon extends React.Component {
   static propTypes = {
     mutate: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
   }
-  static defaultProps = {}
+
   state = {
     name: '',
     email: '',
@@ -53,7 +51,9 @@ class ComingSoon extends React.Component {
     }
     try {
       this.setState({ loading: true })
-      await this.props.mutate({ variables: { input: { name, email, referredFrom: 'webapp' } } })
+      await this.props.mutate({
+        variables: { input: { name, email, referredFrom: 'webapp' } },
+      })
       this.setState({ loading: false, message: 'Request Sent Successfully' })
     } catch (error) {
       console.log(error)
@@ -67,7 +67,8 @@ class ComingSoon extends React.Component {
 
   render() {
     if (this.props.data.loading) return null
-    if (this.props.data.viewer && this.props.data.viewer.user) return <Redirect to="/dashboard" />
+    if (this.props.data && this.props.data.user)
+      return <Redirect to="/dashboard" />
     const { loading, error, message } = this.state
 
     return (
@@ -75,8 +76,8 @@ class ComingSoon extends React.Component {
         <Logo alt="logo" src={logo} />
         <h1>Welcome to the community.</h1>
         <h2>
-          We are currently in closed beta, to request access send us your email and we'll be sure
-          to get in touch
+          We are currently in closed beta, to request access send us your email
+          and we'll be sure to get in touch
         </h2>
         <br />
         <Form onSubmit={this.handleSubmit}>
@@ -103,7 +104,9 @@ class ComingSoon extends React.Component {
             loading={loading}
           />
           {message &&
-            <Label basic color={error ? 'red' : 'green'} pointing="left">{message}</Label>}
+            <Label basic color={error ? 'red' : 'green'} pointing="left">
+              {message}
+            </Label>}
         </Form>
       </SignUpContainer>
     )
@@ -114,7 +117,7 @@ export default compose(
   graphql(currentUserQuery),
   graphql(
     gql`
-      mutation ($input: CreateInviteRequestsInput!) {
+      mutation($input: CreateInviteRequestsInput!) {
         createInviteRequests(input: $input) {
           changedInviteRequests {
             email

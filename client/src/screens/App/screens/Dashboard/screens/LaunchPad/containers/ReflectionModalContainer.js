@@ -53,11 +53,11 @@ class ReflectionModalContainer extends React.Component {
 
   render() {
     if (this.props.data.loading) return null
-    console.log(this.props.data.viewer)
+
     const { modalOpen, onClose } = this.props
     const { loading } = this.state
     // pass all the connections as an array which have review data to render the review modal
-    const connections = [...this.props.data.viewer.allConnections.edges].sort(sortByDate)
+    const connections = [...this.props.data.allConnections].sort(sortByDate)
 
     return (
       <ReflectionModal

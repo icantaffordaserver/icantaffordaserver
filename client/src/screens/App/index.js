@@ -14,8 +14,9 @@ import NotFound404 from './screens/NotFound404'
 import VerifyAccount from './screens/VerifyAccount'
 import NotVerified from './screens/NotVerified'
 import NotLoggedIn from './screens/NotLoggedIn'
-import isAuthenticated from './helpers/isAuthenticated'
 import ComingSoon from './screens/ComingSoon'
+
+import isAuthenticated from './shared/HoCs/isAuthenticated'
 
 import BackgroundWrapper from './styles/BackgroundWrapper'
 
@@ -29,8 +30,8 @@ function App() {
         <Route path="/dashboard" component={isAuthenticated(Dashboard)} />
         <Route path="/chat" component={ConnectionPanel} />
         <Route path="/login" component={LoginScreen} />
-        <Route exact path="/signUp" render={() => <Redirect to="/" />} />
-        <Route path="/signUp/:id/:token" component={SignUpScreen} />
+        <Route exact path="/signUp" render={SignUpScreen} />
+        {/*<Route path="/signUp/:id/:token" component={SignUpScreen} />*/}
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
         <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)} />

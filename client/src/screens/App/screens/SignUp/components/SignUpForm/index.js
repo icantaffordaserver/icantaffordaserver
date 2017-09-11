@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import {
   Form,
   Header,
@@ -9,7 +10,6 @@ import {
   Container,
   Message,
 } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 
 import { validateSignUp } from './helpers'
 
@@ -36,7 +36,8 @@ class SignUp extends React.Component {
     this.setState({ error: '' }) // clear any old errors
     const { firstName, lastName, email, password } = data.formData
     const signUpErrors = validateSignUp(firstName, lastName, email, password)
-    if (typeof signUpErrors === 'string') { // if validate sign up returns string we have an error
+    if (typeof signUpErrors === 'string') {
+      // if validate sign up returns string we have an error
       this.setState({ error: signUpErrors })
       return
     }
@@ -48,8 +49,10 @@ class SignUp extends React.Component {
   }
 
   renderErrors = () => {
-    if (this.state.error !== '') return <Message error header={this.state.error} />
-    if (this.props.error !== '') return <Message error header={this.props.error} />
+    if (this.state.error !== '')
+      return <Message error header={this.state.error} />
+    if (this.props.error !== '')
+      return <Message error header={this.props.error} />
     return null
   }
 
@@ -59,8 +62,10 @@ class SignUp extends React.Component {
       <Grid centered verticalAlign="middle">
         <Grid.Column width={6} textAlign="left">
           <Form onSubmit={this.onSubmit} size="large" error={error}>
-            <Header textAlign="center" as="h2" color="teal">Create an account</Header>
             <Segment padded>
+              <Header textAlign="center" as="h2" color="teal">
+                Create an account
+              </Header>
               {this.renderErrors()}
               <Form.Field>
                 <Form.Input
@@ -107,20 +112,26 @@ class SignUp extends React.Component {
                   value={this.state.password}
                 />
               </Form.Field>
-              <Button fluid color="teal" size="large" loading={this.props.loading}>
+              <Button
+                fluid
+                color="teal"
+                size="large"
+                loading={this.props.loading}
+              >
                 Create Account
               </Button>
               {/* TODO: facebook auth */}
               {/*<Divider horizontal>Or</Divider>*/}
               {/*<Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
+              <Header textAlign="center" size="tiny">
+                By signing up, you agree to the{' '}
+                <Link to="/termsofservice">Terms of Service</Link>.
+              </Header>
+              <p style={{ textAlign: 'center' }}>
+                Already have an account? <Link to="/login">Log in</Link>.
+              </p>
             </Segment>
           </Form>
-          <Header textAlign="center" size="tiny">
-            By signing up, you agree to the <Link to="/termsofservice">Terms of Service</Link>.
-          </Header>
-          <Container textAlign="center">
-            Already have an account? <Link to="/login">Log in</Link>.
-          </Container>
         </Grid.Column>
       </Grid>
     )

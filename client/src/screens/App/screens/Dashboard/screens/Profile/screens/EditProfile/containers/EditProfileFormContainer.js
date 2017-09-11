@@ -5,12 +5,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { compose, graphql } from 'react-apollo'
 
+import ContextView from '../../../../../../../shared/components/ContextView/index'
 import EditProfileForm from '../components/EditProfileForm'
 
 import uploadProfileImg from '../helpers/uploadProfileImg'
 import currentUserQuery from '../../../../../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../../../../../shared/graphql/mutations/updateUserMutation'
-
 
 class EditProfileFormContainer extends React.Component {
   static propTypes = {
@@ -22,14 +22,19 @@ class EditProfileFormContainer extends React.Component {
     loading: false,
   }
 
-  handleSubmit = async ({ firstName, lastName, gender, location, bio }, droppedPhoto) => {
+  handleSubmit = async (
+    { firstName, lastName, gender, location, bio },
+    droppedPhoto,
+  ) => {
     try {
-      const { id } = this.props.data.viewer.user
+      const { id } = this.props.data.user
       this.setState({ loading: true })
       if (droppedPhoto) {
         await Promise.all([
           this.props.mutate({
-            variables: { input: { id, firstName, lastName, gender, location, bio } },
+            variables: {
+              input: { id, firstName, lastName, gender, location, bio },
+            },
             refetchQueries: [{ query: currentUserQuery }],
           }),
           uploadProfileImg(droppedPhoto, id, firstName, lastName),
@@ -37,7 +42,9 @@ class EditProfileFormContainer extends React.Component {
         this.props.doneEditing()
       } else {
         await this.props.mutate({
-          variables: { input: { id, firstName, lastName, gender, location, bio } },
+          variables: {
+            input: { id, firstName, lastName, gender, location, bio },
+          },
           refetchQueries: [{ query: currentUserQuery }],
         })
         this.props.doneEditing()
@@ -55,7 +62,7 @@ class EditProfileFormContainer extends React.Component {
     const { loading } = this.state
     return (
       <EditProfileForm
-        user={this.props.data.viewer.user}
+        user={this.props.data.user}
         loading={loading}
         onSubmit={this.handleSubmit}
       />

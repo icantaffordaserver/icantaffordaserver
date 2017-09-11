@@ -1464,6 +1464,10 @@ chalk@^0.5.0:
     strip-ansi "^0.3.0"
     supports-color "^0.2.0"
 
+change-emitter@^0.1.2:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
+
 chokidar@^1.4.3, chokidar@^1.6.0, chokidar@^1.6.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
@@ -2876,7 +2880,7 @@ fbjs@^0.3.1:
     ua-parser-js "^0.7.9"
     whatwg-fetch "^0.9.0"
 
-fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.7, fbjs@^0.8.9:
+fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.7, fbjs@^0.8.9:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
@@ -3792,7 +3796,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@1.x, hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
+hoist-non-react-statics@1.x, hoist-non-react-statics@^1.0.0, hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
@@ -6832,15 +6836,7 @@ rc-time-picker@~2.4.1:
     prop-types "^15.5.8"
     rc-trigger "1.x"
 
-rc-tooltip@^3.4.2:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.4.5.tgz#04b17d1e6d821475db36c68b9b5b41c5ad3ff16a"
-  dependencies:
-    babel-runtime "^6.23.0"
-    prop-types "^15.5.8"
-    rc-trigger "1.x"
-
-rc-tooltip@~3.4.6:
+rc-tooltip@^3.4.2, rc-tooltip@~3.4.6:
   version "3.4.6"
   resolved "https://registry.yarnpkg.com/rc-tooltip/-/rc-tooltip-3.4.6.tgz#ed98de2a7b412e527c6bd8a2a97dddf0babd2f21"
   dependencies:
@@ -6962,18 +6958,9 @@ react-dev-utils@^3.0.0:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-"react-dom@0.14.x || 15.* || ^15.0.0 || ^16.0.0-alpha", react-dom@^15.6.0:
+"react-dom@0.14.x || 15.* || ^15.0.0 || ^16.0.0-alpha", "react-dom@^15.3.0 || ^16.0.0", react-dom@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.0.tgz#8bc23cb0c80e706355b76ca9f8ce47cf7bdfb6d1"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "~15.5.7"
-
-"react-dom@^15.3.0 || ^16.0.0":
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
@@ -7108,20 +7095,11 @@ react-slick@~0.14.2:
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
 
-react@^15.0.0, react@^15.6.0:
+react@^15.0.0, "react@^15.3.0 || ^16.0.0", react@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.0.tgz#c23299b48e30ed302508ce89e1a02c919f826bce"
   dependencies:
     create-react-class "^15.5.2"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.7"
-
-"react@^15.3.0 || ^16.0.0":
-  version "15.5.4"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
-  dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
@@ -7201,6 +7179,15 @@ rechoir@^0.6.2:
   resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
   dependencies:
     resolve "^1.1.6"
+
+recompose@^0.23.5:
+  version "0.23.5"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.23.5.tgz#72ac8261246bec378235d187467d02a721e8b1de"
+  dependencies:
+    change-emitter "^0.1.2"
+    fbjs "^0.8.1"
+    hoist-non-react-statics "^1.0.0"
+    symbol-observable "^1.0.4"
 
 recursive-iterator@^2.0.3:
   version "2.0.3"
@@ -8196,7 +8183,7 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
-symbol-observable@^1.0.2:
+symbol-observable@^1.0.2, symbol-observable@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 

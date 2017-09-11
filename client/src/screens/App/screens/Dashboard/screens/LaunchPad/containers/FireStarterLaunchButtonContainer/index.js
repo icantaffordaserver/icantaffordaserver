@@ -21,7 +21,7 @@ class FireStarterLaunchButtonContainer extends React.Component {
   }
 
   handleClick = () => {
-    if (!this.props.data.viewer.user.typeformProfileComplete) return
+    if (!this.props.data.user.typeformProfileComplete) return
     this.setState({ modalOpen: true })
   }
 
@@ -30,10 +30,10 @@ class FireStarterLaunchButtonContainer extends React.Component {
   }
 
   renderLabelProps = () => {
-    const { connections } = this.props.data.viewer.user
-    if (connections.edges.length === 0) return
+    const { connections } = this.props.data.user
+    if (connections.length === 0) return
 
-    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node
+    const { connectionTime } = this.props.data.user.connections[0].node
 
     if (isConnectionSet(connectionTime)) {
       return {
@@ -47,7 +47,7 @@ class FireStarterLaunchButtonContainer extends React.Component {
   render() {
     if (this.props.data.loading) return null
 
-    const { typeformProfileComplete } = this.props.data.viewer.user
+    const { typeformProfileComplete } = this.props.data.user
     // TODO: similar onClick refactor for launchpad item
     return (
       <div>

@@ -5,6 +5,6 @@ import React from 'react'
 
 import LoginFormContainer from './containers/LoginFormContainer'
 
-const LoginScreen = () => (<LoginFormContainer />)
+const LoginScreen = () => <LoginFormContainer />
 
 export default LoginScreen

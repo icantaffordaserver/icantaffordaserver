@@ -37,15 +37,15 @@ class ReflectionLaunchButtonContainer extends React.Component {
   }
 
   numConnectionsCompleted = () => {
-    const { connections } = this.props.data.viewer.user
-    return connections.edges.filter(({ node }) => node.status === 'completed').length
+    const { connections } = this.props.data.user
+    return connections.filter(({ node }) => node.status === 'completed').length
   }
 
   numberReviewsOutstanding = () => {
-    const { reviews } = this.props.data.viewer.user
+    const { reviews } = this.props.data.user
     const numConnectionsCompleted = this.numConnectionsCompleted()
     if (numConnectionsCompleted === 0) return 'Complete your first connection!'
-    const numReviewsLeft = reviews.edges.length
+    const numReviewsLeft = reviews.length
     const outstanding = numConnectionsCompleted - numReviewsLeft
     if (outstanding > 1) return `${outstanding} Outstanding Reflections`
     if (outstanding === 1) return `${outstanding} Outstanding Reflection`
@@ -62,8 +62,8 @@ class ReflectionLaunchButtonContainer extends React.Component {
   render() {
     if (this.props.data.loading) return null
 
-    const { id } = this.props.data.viewer.user
-    console.log(this.props.data.viewer)
+    const { id } = this.props.data.user
+
     return (
       <div>
         <LaunchPadItem

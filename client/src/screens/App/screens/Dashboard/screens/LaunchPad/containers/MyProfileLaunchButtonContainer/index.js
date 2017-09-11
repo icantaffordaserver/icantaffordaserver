@@ -24,10 +24,10 @@ class MyProfileLaunchButtonContainer extends React.Component {
 
   renderMyProfileLabel = () => {
     if (this.props.data.loading) return null
-    if (!this.props.data.viewer.user.typeformProfileComplete) {
+    if (!this.props.data.user.typeformProfileComplete) {
       return 'Click to get started'
     }
-    if (this.props.data.viewer.user.typeformProfileComplete) {
+    if (this.props.data.user.typeformProfileComplete) {
       return 'Click to edit'
     }
     return null

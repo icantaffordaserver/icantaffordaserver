@@ -1,22 +1,31 @@
 /**
  * Created by alexandermann on 2017-02-28.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
-  mutation Signup($createUser: CreateUserInput!) {
-    createUser(input: $createUser) {
-      clientMutationId
+  mutation signUp(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+    $mutationVariables: Json
+  ) {
+    createUser(
+      authProvider: { email: { email: $email, password: $password } }
+      firstName: $firstName
+      lastName: $lastName
+      mutationVariables: $mutationVariables
+    ) {
+      id
     }
   }
-`;
+`
 
-// Graph.cool implementation
 // export default gql`
-//   mutation Signup($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
-//     createUser(firstName: $firstName, lastName: $lastName, authProvider: {email: {email: $email, password: $password}}) {
-//       id
-//       email
+//   mutation Signup($createUser: CreateUserInput!) {
+//     createUser(input: $createUser) {
+//       clientMutationId
 //     }
 //   }
 // `;

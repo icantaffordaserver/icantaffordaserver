@@ -5,6 +5,6 @@ import React from 'react'
 
 import CurrentProfileContainer from './CurrentProfileContainer'
 
-const CurrentProfileScreen = () => (<CurrentProfileContainer />)
+const CurrentProfileScreen = () => <CurrentProfileContainer />
 
 export default CurrentProfileScreen

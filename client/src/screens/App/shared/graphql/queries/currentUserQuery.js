@@ -1,89 +1,67 @@
 /**
  * Created by alexandermann on 2017-02-28.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   {
-    viewer {
-      user {
+    user {
+      id
+      firstName
+      lastName
+      email
+      emailVerified
+      phoneNumber
+      gender
+      location
+      bio
+      typeformProfileComplete
+      typeformProfile
+      availability
+      profilePhoto {
+        url
+        name
+      }
+      roles {
+        name
+      }
+      verifyEmail {
         id
-        firstName
-        lastName
-        email
-        emailVerified
-        phoneNumber
-        gender
-        location
-        bio
-        typeformProfileComplete
-        typeformProfile
-        availability
-        profilePhoto {
-          blobUrl
-          name
-        }
-        roles {
-          edges {
-            node {
-              name
-            }
-          }
-        }
-        verifyEmail {
-          id
-          emailToVerify
-        }
-        connectionsRequested {
-          id
+        emailToVerify
+      }
+      connectionsRequested {
+        id
+        comment
+        updatedAt
+        createdAt
+      }
+      connections {
+        status
+        connectionTime
+        fireStarterSuggestion
+        createdAt
+        id
+        reviews {
           comment
-          modifiedAt
+          id
+          rating
           createdAt
         }
-        connections {
-          edges {
-            node {
-              status
-              connectionTime
-              fireStarterSuggestion
-              createdAt
-              id
-              reviews {
-                edges {
-                  node {
-                    comment
-                    id
-                    rating
-                    createdAt
-                  }
-                }
-              }
-            }
-          }
-        }
-        reviews {
-          edges {
-            node {
-              id
-              createdAt
-              comment
-              connection {
-                id
-                connectionTime
-                status
-                participants {
-                  edges {
-                    node {
-                      id
-                      firstName
-                    }
-                  }
-                }
-              }
-            }
+      }
+      connectionReviews {
+        id
+        createdAt
+        comment
+        connection {
+          id
+          connectionTime
+          status
+          participants {
+            id
+            firstName
           }
         }
       }
     }
   }
-`;
+`

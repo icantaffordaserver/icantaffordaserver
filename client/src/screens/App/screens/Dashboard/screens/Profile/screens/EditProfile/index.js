@@ -3,8 +3,12 @@
  */
 import React from 'react'
 
+import ContextView from '../../../../../../shared/components/ContextView'
 import EditProfileFormContainer from './containers/EditProfileFormContainer'
 
-const EditProfileScreen = () => (<EditProfileFormContainer />)
+const EditProfileScreen = () =>
+  <ContextView title="Edit Profile">
+    <EditProfileFormContainer />
+  </ContextView>
 
 export default EditProfileScreen

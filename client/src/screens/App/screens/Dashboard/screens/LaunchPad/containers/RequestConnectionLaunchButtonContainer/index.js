@@ -39,19 +39,19 @@ class RequestConnectionLaunchButtonContainer extends React.Component {
   }
 
   hasRequestPending = () => {
-    if (this.props.data.viewer.user.connectionsRequested !== null) {
+    if (this.props.data.user.connectionsRequested !== null) {
       return true
     }
     return false
   }
 
   hasSetAvailability = () => {
-    if (!this.props.data.viewer.user.availability) return false
-    return Object.keys(this.props.data.viewer.user.availability).length > 0 // return true if availability has 1 slot or more selected
+    if (!this.props.data.user.availability) return false
+    return Object.keys(this.props.data.user.availability).length > 0 // return true if availability has 1 slot or more selected
   }
 
   isDisabled = () => {
-    const { typeformProfile, availability } = this.props.data.viewer.user
+    const { typeformProfile, availability } = this.props.data.user
     return this.hasRequestPending() || !typeformProfile || !this.hasSetAvailability()
   }
 

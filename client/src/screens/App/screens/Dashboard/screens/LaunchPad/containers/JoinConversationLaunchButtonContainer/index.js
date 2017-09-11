@@ -26,16 +26,16 @@ class JoinConversationLaunchButtonContainer extends React.Component {
   }
 
   isDisabled = () => {
-    const { connections } = this.props.data.viewer.user
-    if (connections.edges.length === 0) return true
-    const { connectionTime, status } = this.props.data.viewer.user.connections.edges[0].node
+    const { connections } = this.props.data.user
+    if (connections.length === 0) return true
+    const { connectionTime, status } = this.props.data.user.connections[0].node
     if (status === 'matched' || status === 'scheduled') return false
     return true
   }
 
   renderLabel = () => {
-    const { connections } = this.props.data.viewer.user
-    if (connections.edges.length === 0) {
+    const { connections } = this.props.data.user
+    if (connections.length === 0) {
       return {
         labelMessage: 'Request a conversation first',
         labelPosition: 'top left',
@@ -44,7 +44,7 @@ class JoinConversationLaunchButtonContainer extends React.Component {
     }
 
     // get the most recent connection
-    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node
+    const { connectionTime } = this.props.data.user.connections[0].node
     if (isConnectionSet(connectionTime)) {
       return {
         labelMessage: `Your Conversation is scheduled for ${moment(connectionTime).format('MMM DD h:mm A')}`,
@@ -55,11 +55,12 @@ class JoinConversationLaunchButtonContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.props.data.loading) return null
-    const { connections } = this.props.data.viewer.user
+    const { connections } = this.props.data.user
 
     // check if user is new user, ie. having any existing connections
-    if (connections.edges.length === 0) {
+    if (connections.length === 0) {
       return (
         <LaunchPadButton
           {...this.renderLabel()}
@@ -72,7 +73,7 @@ class JoinConversationLaunchButtonContainer extends React.Component {
     }
 
     // get most recent connection time
-    const { connectionTime } = this.props.data.viewer.user.connections.edges[0].node
+    const { connectionTime } = this.props.data.user.connections[0].node
     return (
       <CountdownToConversation timeToCountdownTo={connectionTime}>
         <LaunchPadButton

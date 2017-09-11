@@ -37,12 +37,12 @@ class FireStarterModalContainer extends React.Component {
 
   render() {
     const { modalOpen, onClose } = this.props
-    const { connections } = this.props.data.viewer.user
+    const { connections } = this.props.data.user
     let fireStarterSrc = false
 
-    if (connections.edges.length !== 0) {
+    if (connections.length !== 0) {
       fireStarterSrc = extractYouTubeId(
-        this.props.data.viewer.user.connections.edges[0].node.fireStarterSuggestion,
+        this.props.data.user.connections[0].fireStarterSuggestion,
       )
     }
 
