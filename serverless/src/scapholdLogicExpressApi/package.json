@@ -6,20 +6,13 @@
   "scripts": {
     "clean": "rimraf lib",
     "transpile": "babel src -d lib",
-    "build": "npm run clean && npm run transpile",
-    "update": "npm run transpile && claudia update",
+    "build:babel": "npm run clean && npm run transpile",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alexander Mann",
   "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-babili": "^0.0.12",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "rimraf": "^2.6.1",
-    "webpack": "^2.4.1"
-  },
+  "devDependencies": {},
   "dependencies": {
     "aws-serverless-express": "^2.2.0",
     "babel-polyfill": "^6.23.0",
@@ -28,6 +21,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
+    "mailer": "file:../../libs/mailer",
     "moment": "^2.18.1",
     "validator": "^7.0.0"
   }

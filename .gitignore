@@ -22,6 +22,10 @@ coverage
 node_modules
 bower_components
 
+# Serverless Build Info
+.serverless/**
+lib
+
 # Editors
 .idea
 *.iml

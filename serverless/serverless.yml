@@ -5,27 +5,73 @@ frameworkVersion: ">=1.0.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: ${env:NODE_ENV}
+  # if ${opt:stage} is not specified will default to the value of dev see: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy#deployment-without-stage-and-region-options
+  stage: dev
   region: us-east-1
-  profile: toktumi
-
+  profile: toktumi # the profile in .aws/credentials
 # you can add packaging information here
 package:
   individually: true
   exclude:
+    - .babelrc
     - .gitignore
     - package.json
+    - yarn.lock
     - node_modules/**
+    - src/**
   include:
+    - libs/**
 
 functions:
   scapholdLogicExpressApi:
-    handler: src/scapholdLogicExpressApi/lib.default
+    name: ${self:provider.stage}-scapholdLogicExpressApi
+    description: An express app to handle and receive all the of the scaphold api logic functions
+    package:
+      include:
+        - src/scapholdLogicExpressApi/lib/**
+        - src/scapholdLogicExpressApi/node_modules/**
+    handler: src/scapholdLogicExpressApi/lib.default # use default since we are taking advantage of ES6 import/export syntax
     environment:
+      # these should be separated by file per environment
       POSTMARK_API_KEY: 39f2eefa-fc15-491e-be83-64a3ec84a4cc
       TYPEFORM_API_KEY: 133cd26567475cc5be624aa3db0a81b4b4536509
+      #SCAPHOLD_ID probably needed
     events: # The Events that trigger this Function
       - http: # This creates an API Gateway HTTP endpoint which can be used to trigger this function.  Learn more in "events/apigateway"
           path: scaphold/{proxy+} # Path for this endpoint
           method: any # HTTP method for this endpoint
           cors: true # Turn on CORS for this endpoint, but don't forget to return the right header in your response
+
+  webflowInviteRequest:
+    name: ${self:provider.stage}-webflowInviteRequest
+    description: A function to handle a form submission containing invite information for a user and post it to a graphql backend
+    package:
+      include:
+        - src/webflowInviteRequest/lib/**
+        - src/webflowInviteRequest/node_modules/**
+    handler: src/webflowInviteRequest/lib.default
+    events:
+      - http:
+          path: webflow/inviterequest
+          method: post
+    environment:
+      SCAPHOLD_URL: https://us-west-2.api.scaphold.io/graphql/toktumi
+      ADMIN_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5kIjoic2NhcGhvbGQuc3VwZXJ1c2VyIiwiZXhwIjo4NjQwMDAwMDAwMDAwMDAwLCJpYXQiOjE0OTE4NDI3NTMsImF1ZCI6Ikp0Z2Z5WklRMnBKajlySThFOWU2MTdoUWNrMFJueEFuIiwiaXNzIjoiaHR0cHM6Ly9zY2FwaG9sZC5hdXRoMC5jb20vIiwic3ViIjoiMjdlZmU5MDAtMzNkOS00ZjQ3LThlMmQtZGJlZGY4NTA0ZjZmIn0.d3u0P0qTyd4LhSnETR3guDGLKPMhV7cpjTmGHe_hCyI
+
+  saveTypeformProfile:
+    name: ${self:provider.stage}-saveTypeformProfile
+    description: A function to handle the typeform profile submission and save it to the scaphold database
+    package:
+      include:
+        - src/saveTypeformProfile/lib/**
+        - src/saveTypeformProfile/node_modules/**
+    handler: src/saveTypeformProfile/lib.default
+    events:
+      - http:
+          path: typeform/saveprofile
+          method: post
+    environment:
+      SCAPHOLD_URL: https://us-west-2.api.scaphold.io/graphql/toktumi
+      ADMIN_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5kIjoic2NhcGhvbGQuc3VwZXJ1c2VyIiwiZXhwIjo4NjQwMDAwMDAwMDAwMDAwLCJpYXQiOjE0OTE4NDI3NTMsImF1ZCI6Ikp0Z2Z5WklRMnBKajlySThFOWU2MTdoUWNrMFJueEFuIiwiaXNzIjoiaHR0cHM6Ly9zY2FwaG9sZC5hdXRoMC5jb20vIiwic3ViIjoiMjdlZmU5MDAtMzNkOS00ZjQ3LThlMmQtZGJlZGY4NTA0ZjZmIn0.d3u0P0qTyd4LhSnETR3guDGLKPMhV7cpjTmGHe_hCyI
+      TYPEFORM_API_KEY: 133cd26567475cc5be624aa3db0a81b4b4536509
+      PROFILE_FORM_ID: aHq8UA

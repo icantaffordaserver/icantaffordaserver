@@ -2,9 +2,8 @@
  * Created by alexandermann on 2017-02-23.
  */
 const config = {
-  scapholdUrl: 'us-west-2.api.scaphold.io/graphql/toktumi',
-  auth0ClientId: 'eZvDADFsQULPBAIbvCXNBq3G8aaNENZH',
-  auth0Domain: 'shiftwith.auth0.com',
+  graphqlUrl: 'api.graph.cool/simple/v1/cj3l0oa9r1uab0130s8nti73k',
+  subscriptionUrl: 'subscriptions.graph.cool/v1/cj3l0oa9r1uab0130s8nti73k',
 };
 
 export default config;

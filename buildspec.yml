@@ -1,0 +1,23 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      # Install yarn natively https://yarnpkg.com/en/docs/install#linux-tab
+      # then install local libraries (ie. mailer, graphql fetch)
+      - npm install yarn --global && yarn cache clean
+  pre_build:
+    commands:
+      - cd serverless && yarn install && yarn run prepareLibs && yarn run build
+      - cd client && yarn install && yarn run build
+  build:
+    commands:
+      - cd serverless && node_modules/.bin/serverless deploy
+      - cd client && aws s3 sync build/ s3://toktumi-dev-client
+  post_build:
+    commands:
+      # We only have to run the first command once but in the current setup we have to run this
+      # somehow on the environment for the first time - reconfigure this when building a custom
+      # docker container
+      # Invalidate the cache to ensure we are serving the updated version of our app
+      - aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E25OLZW9NJ6NQX --paths "/*"
+      - echo Done building!
