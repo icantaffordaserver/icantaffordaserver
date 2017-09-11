@@ -50,8 +50,9 @@ class LoginContainer extends React.Component {
     if (this.props.data.loading) return null
 
     // if the user is already logged in, redirect to dashboard
-    if (this.props.data.viewer && this.props.data.viewer.user)
+    if (this.props.data.viewer && this.props.data.viewer.user) {
       return <Redirect to="/dashboard" />
+    }
 
     const { loading, error } = this.state
     return (
@@ -64,6 +65,6 @@ export default compose(
   withApollo,
   withRouter,
   graphql(currentUserQuery),
-  graphql(signInMutation),
+  graphql(signInMutation)
 )(LoginContainer)
 // wrap the component with withApollo so we can expose the client prop
