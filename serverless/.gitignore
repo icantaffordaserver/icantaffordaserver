@@ -2,6 +2,11 @@
 node_modules
 jspm_packages
 
-# Serverless directories
+### Repo Specific
+.happypack
+dist/*
+build/*
+.vscode
 .serverless
-lib
+.webpack
+env.yml

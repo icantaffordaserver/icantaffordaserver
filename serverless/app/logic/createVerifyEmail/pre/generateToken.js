@@ -18,23 +18,31 @@ export default async (req, res) => {
     const { emailToVerify, userId } = req.body.input
 
     // check if email is valid format
-    if (!isEmail(emailToVerify)) return res.status(400).send('Please enter a valid email.')
+    if (!isEmail(emailToVerify))
+      return res.status(400).send('Please enter a valid email.')
 
     // Normalize email
     const normalizedEmail = normalizeEmail(emailToVerify)
 
     // query the submitted email
-    const response = await graphqlFetch(getUserByEmailQuery, { email: normalizedEmail })
+    const response = await graphqlFetch(getUserByEmailQuery, {
+      email: normalizedEmail,
+    })
 
     const emailExists = response.data.viewer.allUsers.edges.length !== 0
-    const { emailVerified } = emailExists ? response.data.viewer.allUsers.edges[0].node : false
+    const { emailVerified } = emailExists
+      ? response.data.viewer.allUsers.edges[0].node
+      : false
 
     if (emailExists && emailVerified) {
       return res.status(400).send('Email is taken, please choose another.')
     }
 
     // if user has a verifyEmail node existing, delete it before creating a new one
-    if (emailExists && response.data.viewer.allUsers.edges[0].node.verifyEmail) {
+    if (
+      emailExists &&
+      response.data.viewer.allUsers.edges[0].node.verifyEmail
+    ) {
       const { id } = response.data.viewer.allUsers.edges[0].node.verifyEmail
       await graphqlFetch(deleteVerifyEmailMutation, { id })
     }
