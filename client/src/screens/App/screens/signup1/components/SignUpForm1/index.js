@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FormH1 from '../../../../styles/formStyles';
+import FormH1 from './styles' 
 // C:\Users\gpsar\node\toktumi\client\src\screens\App\screens\signup1\components\SignUpForm1\index.js
 
 import {
