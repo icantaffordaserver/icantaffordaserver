@@ -1,11 +1,15 @@
 /**
  * Created by alexandermann on 2017-03-26.
  */
-import postmarkClient from '../PostmarkClient';
+import PostmarkMailer from '../config/PostmarkMailer'
 
-export default function sendVerificationEmail({ firstName, recipientEmail, actionUrl }) {
+export default function sendVerificationEmail({
+  firstName,
+  recipientEmail,
+  actionUrl,
+}) {
   return new Promise((resolve, reject) => {
-    postmarkClient.sendEmailWithTemplate(
+    PostmarkMailer.sendEmailWithTemplate(
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
@@ -18,9 +22,9 @@ export default function sendVerificationEmail({ firstName, recipientEmail, actio
         },
       },
       (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
+        if (error) reject(error)
+        else resolve(result)
       },
-    );
-  });
+    )
+  })
 }

@@ -1,15 +1,19 @@
 /**
  * Created by alexandermann on 2017-03-26.
  */
-import postmarkClient from '../PostmarkClient'
+import PostmarkMailer from '../config/PostmarkMailer'
 
-export default function sendInviteEmail({ firstName, recipientEmail, actionUrl }) {
+export default function sendInviteEmail({
+  firstName,
+  recipientEmail,
+  actionUrl,
+}) {
   return new Promise((resolve, reject) => {
-    postmarkClient.sendEmailWithTemplate(
+    PostmarkMailer.sendEmailWithTemplate(
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
-        TemplateId: 1735761,
+        TemplateId: 1497643,
         TemplateModel: {
           name: firstName,
           action_url: actionUrl,
