@@ -15,6 +15,7 @@ import VerifyAccount from './screens/VerifyAccount'
 import NotVerified from './screens/NotVerified'
 import NotLoggedIn from './screens/NotLoggedIn'
 import ComingSoon from './screens/ComingSoon'
+import SignUpScreen1 from './screens/signup1'
 
 import isAuthenticated from './shared/HoCs/isAuthenticated'
 
@@ -31,6 +32,8 @@ function App() {
         <Route path="/chat" component={ConnectionPanel} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
+        
+        <Route exact path="/signUp1" render={SignUpScreen1} />
         {/*<Route path="/signUp/:id/:token" component={SignUpScreen} />*/}
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
