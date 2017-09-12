@@ -55,7 +55,7 @@ class LoginContainer extends React.Component {
     if (this.props.data.loading) return null;
 
     // if the user is already logged in, redirect to dashboard
-    if (this.props.data.viewer && this.props.data.viewer.user) {
+    if (this.props.data && this.props.data.user) {
       return <Redirect to="/dashboard" />;
     }
 
