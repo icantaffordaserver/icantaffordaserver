@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+
 import{
  Form,
  Header,
@@ -23,7 +24,7 @@ class SignUp1 extends React.Component{
       static defaultProps = {
         error: '',
       }
-    
+
       state = {
         firstName: '',
         lastName: '',
@@ -31,7 +32,18 @@ class SignUp1 extends React.Component{
         password: '',
         dob: '', 
         error: '',
-        showPassword: false
+        showPassword: false,
+
+        userData: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          birthday: '',
+          bio: '',
+          location: {},
+        },
+        
       }
     
       onSubmit = (event, data) => {
@@ -44,7 +56,7 @@ class SignUp1 extends React.Component{
           this.setState({ error: signUpErrors })
           return
         }
-        this.props.onSubmit(firstName, lastName, email, password, dob)
+        this.props.onSubmit(this.state.userData)
       }
     
       handleChange = event => {
@@ -65,8 +77,9 @@ class SignUp1 extends React.Component{
     render(){
         const error = this.state.error !== '' || this.props.error !== ''
         return(
+
             <Grid centered verticalAlign="middle">
-            <Grid.Column width={6} textAlign="left">
+             <Grid.Column width={6} textAlign="left">
               <Form onSubmit={this.onSubmit} size="large" error={error}>
                 <Segment padded>
                   <Header textAlign="center" as="h2" color="teal">
@@ -126,10 +139,10 @@ class SignUp1 extends React.Component{
                         name="dob"
                         icon="calendar outline"
                         iconPosition="left"
-                        placeholder="MM/DD/YYYY"
-                        type="date"
+                        placeholder="DD/MM/YYYY"
+                        type="text"
                         onChange={this.handleChange}
-                        value={this.dob}
+                        value={this.birthday}
                     />
                  </Form.Field>
                   <Button
@@ -152,8 +165,9 @@ class SignUp1 extends React.Component{
                   </p>
                 </Segment>
               </Form>
-            </Grid.Column>
-          </Grid>
+              </Grid.Column>
+              </Grid>
+        
         )
     }
 }

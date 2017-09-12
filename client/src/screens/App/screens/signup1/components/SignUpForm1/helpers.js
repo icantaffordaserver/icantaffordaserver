@@ -13,7 +13,7 @@ export function validateSignUp(firstName, lastName, email, password, dob) {
   let mm = todayMinus18.getMonth()+1
   let yyyy = todayMinus18.getFullYear()-18
 
-  todayMinus18 = mm + '/' + dd + '/' + yyyy
+  todayMinus18 = dd + '/' + mm + '/' + yyyy
 
   const oldEnough = isBefore(dob.toString(),todayMinus18.toString())
   if (!oldEnough) return 'Must be over the age of 18'

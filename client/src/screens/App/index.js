@@ -20,6 +20,7 @@ import SignUpScreen1 from './screens/signup1'
 import isAuthenticated from './shared/HoCs/isAuthenticated'
 
 import BackgroundWrapper from './styles/BackgroundWrapper'
+import './styles/styles.css'
 
 function App() {
   return (
