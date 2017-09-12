@@ -37,14 +37,14 @@ class SignUp1 extends React.Component{
       onSubmit = (event, data) => {
         event.preventDefault() // prevent page reload
         this.setState({ error: '' }) // clear any old errors
-        const { firstName, lastName, email, password } = data.formData
-        const signUpErrors = validateSignUp(firstName, lastName, email, password)
+        const { firstName, lastName, email, password, dob } = data.formData
+        const signUpErrors = validateSignUp(firstName, lastName, email, password, dob)
         if (typeof signUpErrors === 'string') {
           // if validate sign up returns string we have an error
           this.setState({ error: signUpErrors })
           return
         }
-        this.props.onSubmit(firstName, lastName, email, password)
+        this.props.onSubmit(firstName, lastName, email, password, dob)
       }
     
       handleChange = event => {
@@ -123,11 +123,12 @@ class SignUp1 extends React.Component{
                   <Form.Field>
                       <Form.Input
                         label="Date Of Birth"
-                        name="dateOfBirth"
+                        name="dob"
                         icon="calendar outline"
                         iconPosition="left"
                         placeholder="MM/DD/YYYY"
                         type="date"
+                        onChange={this.handleChange}
                         value={this.dob}
                     />
                  </Form.Field>
