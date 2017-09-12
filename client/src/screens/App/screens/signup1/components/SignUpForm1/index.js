@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import FormH1 from '../../../../styles/formStyles';
+// C:\Users\gpsar\node\toktumi\client\src\screens\App\screens\signup1\components\SignUpForm1\index.js
 
 import {
   Form,
@@ -74,18 +76,17 @@ class SignUp1 extends React.Component {
       <div className="columns">
         <div className="column is-half">Image will go here</div>
         <div className="column is-half">
-          <Grid centered verticalAlign="middle">
-            <Grid.Column width={6} textAlign="left">
+
               <Form onSubmit={this.onSubmit} size="large" error={error}>
                 <Segment padded>
-                  <Header textAlign="center" as="h1" color="teal">
+                  <FormH1>
                     Sign Up
-                  </Header>
+                  </FormH1>
                   {this.renderErrors()}
                   <div className="columns">
                     <div className="column is-half">
                       <Form.Field>
-                        <label className="label">First Name</label>
+                        
                         <div className="control">
                           <input
                             className="input"
@@ -100,7 +101,7 @@ class SignUp1 extends React.Component {
                     </div>
                     <div className="column is-half">
                       <Form.Field>
-                        <label className="label">Last Name</label>
+                      
                         <div className="control">
                           <input
                             className="input"
@@ -115,7 +116,7 @@ class SignUp1 extends React.Component {
                     </div>
                   </div>
                   <Form.Field>
-                    <label className="label">Email</label>
+                    
                     <div className="control">
                       <input
                         className="input"
@@ -129,7 +130,7 @@ class SignUp1 extends React.Component {
                   </Form.Field>
 
                   <div className="field">
-                    <label className="label">Password</label>
+                    
                     <div className="control has-icons-right">
                       <input
                         className="input"
@@ -151,7 +152,7 @@ class SignUp1 extends React.Component {
                     />
                   </div>
                   <Form.Field>
-                    <label className="label">Date Of Birth</label>
+                    
                     <div className="control">
                       <input
                         className="input"
@@ -171,6 +172,7 @@ class SignUp1 extends React.Component {
                   >
                     Create Account
                   </Button>
+                  <a className="button">Select Your Interests!</a>
                   {/* TODO: facebook auth */}
                   {/* <Divider horizontal>Or</Divider>*/}
                   {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
@@ -183,8 +185,7 @@ class SignUp1 extends React.Component {
                   </p>
                 </Segment>
               </Form>
-            </Grid.Column>
-          </Grid>
+
         </div>
       </div>
     );
