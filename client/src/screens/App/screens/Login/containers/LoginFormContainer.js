@@ -1,26 +1,26 @@
 /**
  * Created by alexandermann on 2017-03-01.
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Redirect, withRouter } from 'react-router-dom';
-import { graphql, compose, withApollo } from 'react-apollo';
+import React from "react";
+import PropTypes from "prop-types";
+import { Redirect, withRouter } from "react-router-dom";
+import { graphql, compose, withApollo } from "react-apollo";
 
-import LoginForm from '../components/LoginForm';
+import LoginForm from "../components/LoginForm";
 
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery';
-import signInMutation from '../../../shared/graphql/mutations/signInMutation';
+import currentUserQuery from "../../../shared/graphql/queries/currentUserQuery";
+import signInMutation from "../../../shared/graphql/mutations/signInMutation";
 
 class LoginContainer extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    mutate: PropTypes.func.isRequired,
+    mutate: PropTypes.func.isRequired
   };
 
   state = {
     loading: false,
-    error: '',
+    error: ""
   };
 
   handleLogin = async (email, password) => {
@@ -29,24 +29,24 @@ class LoginContainer extends React.Component {
       .mutate({
         variables: {
           email,
-          password,
-        },
+          password
+        }
       })
       .then(res => {
-        window.localStorage.setItem('auth_token', res.data.signinUser.token); // save token
+        window.localStorage.setItem("auth_token", res.data.signinUser.token); // save token
       })
       .then(() => {
         // reset the store after the user has been authenticated, then direct to dashboard
         this.props.client.resetStore();
-        this.props.history.push('/dashboard');
+        this.props.history.push("/dashboard");
       })
       .catch(error => {
         if (
-          error.message.includes('Could not find a user with that username')
+          error.message.includes("Could not find a user with that username")
         ) {
-          this.setState({ loading: false, error: 'User does not exist' });
-        } else if (error.message.includes('Invalid password')) {
-          this.setState({ loading: false, error: 'Invalid password' });
+          this.setState({ loading: false, error: "User does not exist" });
+        } else if (error.message.includes("Invalid password")) {
+          this.setState({ loading: false, error: "Invalid password" });
         }
       });
   };
@@ -55,13 +55,8 @@ class LoginContainer extends React.Component {
     if (this.props.data.loading) return null;
 
     // if the user is already logged in, redirect to dashboard
-<<<<<<< HEAD
     if (this.props.data && this.props.data.user) {
       return <Redirect to="/dashboard" />;
-=======
-    if (this.props.data.viewer && this.props.data.viewer.user) {
-      return <Redirect to="/dashboard" />
->>>>>>> 3af6602
     }
 
     const { loading, error } = this.state;
@@ -76,9 +71,5 @@ export default compose(
   withRouter,
   graphql(currentUserQuery),
   graphql(signInMutation)
-<<<<<<< HEAD
 )(LoginContainer);
-=======
-)(LoginContainer)
->>>>>>> 3af6602
 // wrap the component with withApollo so we can expose the client prop
