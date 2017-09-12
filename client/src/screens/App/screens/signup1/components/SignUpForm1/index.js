@@ -26,23 +26,8 @@ class SignUp1 extends React.Component {
   };
 
   state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    birthday: "",
     error: "",
-    showPassword: false,
-
-    userData: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      birthday: "",
-      bio: "",
-      location: {}
-    }
+    showPassword: false
   };
 
   onSubmit = (event, data) => {
@@ -58,11 +43,12 @@ class SignUp1 extends React.Component {
     );
     if (typeof signUpErrors === "string") {
       // if validate sign up returns string we have an error
-      this.setState({ error: signUpErrors, 
-        userData: {firstName, lastName, email, password, birthday: birthday} });
+      this.setState({
+        error: signUpErrors
+      });
       return;
     }
-    this.props.onSubmit(this.state.userData);
+    this.props.onSubmit({ firstName, lastName, email, password, birthday });
   };
 
   handleChange = event => {
@@ -70,10 +56,12 @@ class SignUp1 extends React.Component {
   };
 
   renderErrors = () => {
-    if (this.state.error !== "")
+    if (this.state.error !== "") {
       return <Message error header={this.state.error} />;
-    if (this.props.error !== "")
+    }
+    if (this.props.error !== "") {
       return <Message error header={this.props.error} />;
+    }
     return null;
   };
 
@@ -96,19 +84,19 @@ class SignUp1 extends React.Component {
                   {this.renderErrors()}
                   <div className="columns">
                     <div className="column is-half">
-                    <Form.Field>
-                      <label className="label">First Name</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="text"
-                          name="firstName"
-                          placeholder="First Name"
-                          onChange={this.handleChange}
-                          value={this.state.firstName}
-                        />
-                      </div>
-                    </Form.Field>
+                      <Form.Field>
+                        <label className="label">First Name</label>
+                        <div className="control">
+                          <input
+                            className="input"
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name"
+                            onChange={this.handleChange}
+                            value={this.state.firstName}
+                          />
+                        </div>
+                      </Form.Field>
                     </div>
                     <div className="column is-half">
                       <Form.Field>
@@ -184,8 +172,8 @@ class SignUp1 extends React.Component {
                     Create Account
                   </Button>
                   {/* TODO: facebook auth */}
-                  {/*<Divider horizontal>Or</Divider>*/}
-                  {/*<Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
+                  {/* <Divider horizontal>Or</Divider>*/}
+                  {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
                   <Header textAlign="center" size="tiny">
                     By signing up, you agree to the{" "}
                     <Link to="/termsofservice">Terms of Service</Link>.

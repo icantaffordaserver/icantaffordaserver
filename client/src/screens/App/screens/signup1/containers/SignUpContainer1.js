@@ -7,76 +7,47 @@ import SignUpForm1 from '../components/SignUpForm1';
 
 import signUpMutation from '../graphql/signUpMutation';
 import signInMutation from '../../../shared/graphql/mutations/signInMutation';
+import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery';
 
 class SignUpContainer1 extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     client: PropTypes.object.isRequired,
-    mutate: PropTypes.func.isRequired,
+    signUpMutation: PropTypes.func.isRequired,
+    signInMutation: PropTypes.func.isRequired,
   };
 
   state = {
     loading: false,
     error: '',
-    userData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      birthday: '',
-      bio: '',
-      location: {},
-    },
   };
 
-  handleSignUp(userData) {
+  handleSignUp = userData => {
     this.setState({
       loading: true,
-      userData,
     });
-
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      birthday,
-      bio,
-      location,
-    } = userData;
 
     // SignUp mutation
     this.props
-      .mutate({
+      .signUpMutation({
         variables: {
-          firstName,
-          lastName,
-          email,
-          password,
-          birthday,
-          bio,
-          location,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          password: userData.password,
+          birthday: userData.birthday,
         },
       })
-      .catch(error => {
-        if (error.message.includes("Field 'username' must be unique")) {
-          // check email is not taken
-          this.setState({
-            loading: false,
-            error: 'Email is already associated with an account',
-          });
-        }
-      });
-
-    // Sign user in after account creation
-    this.props
-      .mutate({
-        variables: {
-          email,
-          password,
-        },
-      })
+      .then(() =>
+        // Sign user in after account creation
+        this.props.signInMutation({
+          variables: {
+            email: userData.email,
+            password: userData.password,
+          },
+        })
+      )
       .then(res => {
         window.localStorage.setItem('auth_token', res.data.signinUser.token);
       })
@@ -85,8 +56,11 @@ class SignUpContainer1 extends Component {
         // reset the store after the user has been authenticated, then direct to dashboard
         this.props.client.resetStore();
         this.props.history.push('/dashboard');
+      })
+      .catch(error => {
+        console.error(error);
       });
-  }
+  };
 
   render() {
     return (
@@ -103,5 +77,6 @@ export default compose(
   withRouter,
   withApollo,
   graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(signInMutation, { name: 'signInMutation' })
+  graphql(signInMutation, { name: 'signInMutation' }),
+  graphql(currentUserQuery)
 )(SignUpContainer1);
