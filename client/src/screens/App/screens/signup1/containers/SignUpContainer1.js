@@ -58,7 +58,15 @@ class SignUpContainer1 extends Component {
         this.props.history.push('/dashboard');
       })
       .catch(error => {
-        console.error(error);
+        if (
+          error.message.includes('User already exists with that information')
+        ) {
+          // check email is not taken
+          this.setState({
+            loading: false,
+            error: 'Email is already associated with an account',
+          });
+        }
       });
   };
 
