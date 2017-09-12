@@ -22,6 +22,7 @@ import isAuthenticated from './shared/HoCs/isAuthenticated'
 import BackgroundWrapper from './styles/BackgroundWrapper'
 import './styles/styles.css'
 
+<<<<<<< HEAD
 function App() {
   return (
     <BackgroundWrapper>
@@ -46,6 +47,28 @@ function App() {
     </BackgroundWrapper>
   )
 }
+=======
+const App = () => (
+  <BackgroundWrapper>
+    <HeaderContainer />
+    <Switch>
+      {/* <Route path="/admin" component={Admin} />*/}
+      {/* <Route path="/account" component={MyAccountContainer} />*/}
+      <Route path="/dashboard" component={isAuthenticated(Dashboard)} />
+      <Route path="/chat" component={ConnectionPanel} />
+      <Route path="/login" component={LoginScreen} />
+      <Route exact path="/signUp" render={SignUpScreen} />
+      {/* <Route path="/signUp/:id/:token" component={SignUpScreen} />*/}
+      <Route path="/forgot" component={ForgotPassword} />
+      <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
+      <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)} />
+      <Route path="/notVerified" component={NotVerified} />
+      <Route path="/notLoggedIn" component={NotLoggedIn} />
+      <Route component={NotFound404} />
+    </Switch>
+  </BackgroundWrapper>
+)
+>>>>>>> 3af6602
 
 const Root = () => (
   <BrowserRouter>
