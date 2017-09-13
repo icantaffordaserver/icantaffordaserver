@@ -1,11 +1,14 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import React from 'react'
-import { graphql, compose } from 'react-apollo'
-import VerifyEmailComponent from '../components/VerifyEmail'
-import verifyEmailMutation from '../graphql/verifyEmailMutation'
-import CurrentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+import React from "react";
+import { graphql, compose, withApollo } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import moment from "moment";
+import VerifyEmailComponent from "../components/VerifyEmail";
+import verifyEmailQuery from "../graphql/verifyEmailQuery";
+import setVerifiedMutation from "../graphql/setVerifiedMutation";
+import currentUserQuery from "../../../shared/graphql/queries/currentUserQuery";
 
 class VerifyEmailContainer extends React.Component {
   state = {
@@ -13,38 +16,27 @@ class VerifyEmailContainer extends React.Component {
     success: false,
     error: false,
     alreadyVerified: false,
-  }
+    token: ""
+  };
 
-  async componentWillReceiveProps(nextProps) {
-    // perform request on page load, viewer data will first not exist and then exist, so check
-    // for that condition
-    console.log(nextProps.data.viewer)
+  componentWillMount = () => {
+    // Remove the confirmation token from the URL
+    window.history.pushState(null, null, "/verify");
+  };
 
-    if (
-      !this.props.data.viewer && nextProps.data.viewer && nextProps.data.viewer.user.verifyEmail
-    ) {
-      try {
-        await this.props.mutate({
-          variables: {
-            id: nextProps.data.viewer.user.id,
-            requestVars: {
-              checkToken: this.props.match.params.token,
-            },
-          },
-          refetchQueries: [{ query: CurrentUserQuery }],
-        })
-        this.setState({ success: true })
-      } catch (error) {
-        this.setState({ error: true })
-        console.log(error)
-      }
-    } else {
-      this.setState({ alreadyVerified: true })
-    }
-  }
+  componentDidMount = () => {
+    // Check if verifyEmail object with given token exists and check expiry
+    console.log(this.props.data.verification);
+  };
+
+  handleVerification = () => {};
+
+  onSuccess = () => {
+    this.setState({ loading: false, success: true, token: "" });
+  };
 
   render() {
-    const { loading, success, error, alreadyVerified } = this.state
+    const { loading, success, error, alreadyVerified } = this.state;
     return (
       <VerifyEmailComponent
         loading={loading}
@@ -52,10 +44,19 @@ class VerifyEmailContainer extends React.Component {
         error={error}
         alreadyVerified={alreadyVerified}
       />
-    )
+    );
   }
 }
 
-export default compose(graphql(verifyEmailMutation), graphql(CurrentUserQuery))(
-  VerifyEmailContainer,
-)
+export default compose(
+  withApollo,
+  withRouter,
+  graphql(currentUserQuery),
+  graphql(verifyEmailQuery, {
+    options: props => ({
+      variables: {
+        token: props.match.token
+      }
+    })
+  })
+)(VerifyEmailContainer);

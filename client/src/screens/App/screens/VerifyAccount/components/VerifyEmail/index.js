@@ -1,10 +1,10 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { Segment, Loader, Dimmer, Icon, Button } from 'semantic-ui-react';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Segment, Loader, Dimmer, Icon, Button } from "semantic-ui-react";
+import styled from "styled-components";
 
 const LoadingSegment = styled(Segment)`
   height: 300px;
@@ -17,13 +17,9 @@ const MessageContainer = styled.div`
   text-align: center;
 `;
 
-const Message = styled.h1`
-  text-align: center;
-`;
+const Message = styled.h1`text-align: center;`;
 
-const IconContainer = styled.div`
-  text-align: center;
-`;
+const IconContainer = styled.div`text-align: center;`;
 const propTypes = {};
 
 const defaultProps = {};
@@ -33,7 +29,8 @@ class VerifyEmailComponent extends React.Component {
     return (
       <LoadingSegment>
         <Dimmer active inverted>
-          <Loader size="large">Verifying your email</Loader>
+          <h1>Verifying your email address.</h1>
+          <Loader size="large" />
         </Dimmer>
       </LoadingSegment>
     );
@@ -42,9 +39,13 @@ class VerifyEmailComponent extends React.Component {
   renderVerified() {
     return (
       <MessageContainer>
-        <IconContainer><Icon name="mail outline" size="massive" /></IconContainer>
+        <IconContainer>
+          <Icon name="mail outline" size="massive" />
+        </IconContainer>
         <Message>Your email address is verified.</Message>
-        <Link to="/dashboard"><Button positive content="Take me to my dashboard"/></Link>
+        <Link to="/dashboard">
+          <Button positive content="Take me to my dashboard" />
+        </Link>
       </MessageContainer>
     );
   }
@@ -52,9 +53,12 @@ class VerifyEmailComponent extends React.Component {
   renderError() {
     return (
       <MessageContainer>
-        <IconContainer><Icon name="warning sign" size="massive" /></IconContainer>
+        <IconContainer>
+          <Icon name="warning sign" size="massive" />
+        </IconContainer>
         <Message>
-          An error occurred while trying to validate your email address, please try again.
+          An error occurred while trying to validate your email address, please
+          try again.
         </Message>
       </MessageContainer>
     );
