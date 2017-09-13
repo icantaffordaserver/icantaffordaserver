@@ -36,3 +36,4 @@ Thumbs.db
 
 public/js/bundle.js
 .vscode/settings.json
+client/yarn.lock
