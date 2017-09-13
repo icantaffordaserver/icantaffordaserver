@@ -56,10 +56,7 @@ class VerifyEmailComponent extends React.Component {
         <IconContainer>
           <Icon name="warning sign" size="massive" />
         </IconContainer>
-        <Message>
-          An error occurred while trying to validate your email address, please
-          try again.
-        </Message>
+        <Message>{this.props.error}</Message>
       </MessageContainer>
     );
   }

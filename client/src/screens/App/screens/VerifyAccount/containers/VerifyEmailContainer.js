@@ -7,16 +7,15 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import VerifyEmailComponent from "../components/VerifyEmail";
 import verifyEmailQuery from "../graphql/verifyEmailQuery";
-import setVerifiedMutation from "../graphql/setVerifiedMutation";
 import currentUserQuery from "../../../shared/graphql/queries/currentUserQuery";
 
 class VerifyEmailContainer extends React.Component {
   state = {
     loading: true,
     success: false,
-    error: false,
+    error: "",
     alreadyVerified: false,
-    token: ""
+    verification: null
   };
 
   componentWillMount = () => {
@@ -24,18 +23,41 @@ class VerifyEmailContainer extends React.Component {
     window.history.pushState(null, null, "/verify");
   };
 
-  componentDidMount = () => {
-    // Check if verifyEmail object with given token exists and check expiry
-    console.log(this.props.data.verification);
+  componentWillReceiveProps = nextProps => {
+    if (!nextProps.data.loading && nextProps.data.verification) {
+      this.handleVerification(nextProps.data.verification);
+    }
+
+    // Token does not exist
+    if (!nextProps.data.loading && !nextProps.data.verification) {
+      this.setState({
+        loding: false,
+        error: "Token is invalid. Redirecting..."
+      });
+      setTimeout(() => this.props.history.push("/notverified"), 2000);
+    }
   };
 
-  handleVerification = () => {};
+  handleVerification = verification => {
+    const { id, expiry } = verification;
+    if (moment().isBefore(moment(expiry))) {
+      console.log("valid", id);
+    } else {
+      this.setState({
+        loding: false,
+        error: "Token has expired. Redirecting..."
+      });
+      setTimeout(() => this.props.history.push("/notverified"), 2000);
+    }
+  };
 
   onSuccess = () => {
     this.setState({ loading: false, success: true, token: "" });
   };
 
   render() {
+    if (this.props.data.loading) return null;
+
     const { loading, success, error, alreadyVerified } = this.state;
     return (
       <VerifyEmailComponent
@@ -55,7 +77,7 @@ export default compose(
   graphql(verifyEmailQuery, {
     options: props => ({
       variables: {
-        token: props.match.token
+        token: props.match.params.token
       }
     })
   })
