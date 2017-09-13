@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import {FormH1, SignUpImg, Div} from './styles';
-// C:\Users\gpsar\node\toktumi\client\src\screens\App\screens\signup1\components\SignUpForm1\index.js
+import {FormH1, SignUpImg, Div, OverLayText, FormDiv} from './styles';
 
 import {
   Form,
@@ -77,7 +76,9 @@ class SignUp1 extends React.Component {
     return (
       <Div className="columns">
         <Div className="column is-two-thirds">
+          
           <SignUpImg src={productShot} alt="coffee shop"></SignUpImg>
+          
         </Div>
         <Div className="column">
 
