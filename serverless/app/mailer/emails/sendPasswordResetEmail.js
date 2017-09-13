@@ -1,13 +1,17 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import postmarkClient from '../PostmarkClient';
+import PostmarkMailer from '../config/PostmarkMailer'
 
-export default function sendPasswordResetEmail(
-  { firstName, recipientEmail, actionUrl, operatingSystem, browserName },
-) {
+export default function sendPasswordResetEmail({
+  firstName,
+  recipientEmail,
+  actionUrl,
+  operatingSystem,
+  browserName,
+}) {
   return new Promise((resolve, reject) => {
-    postmarkClient.sendEmailWithTemplate(
+    PostmarkMailer.sendEmailWithTemplate(
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
@@ -21,9 +25,9 @@ export default function sendPasswordResetEmail(
         },
       },
       (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
+        if (error) reject(error)
+        else resolve(result)
       },
-    );
-  });
+    )
+  })
 }

@@ -3,8 +3,8 @@
  */
 import { Router } from 'express'
 
-import createUser from './logic/createUser/index'
-import updateUser from './logic/updateUser/index'
+import userRoutes from './userRoutes'
+
 import createInvites from './logic/createInvites/index'
 import updateInvites from './logic/updateInvites/index'
 import createPasswordReset from './logic/createPasswordReset/index'
@@ -14,9 +14,8 @@ import addToUsersConnectionsConnection from './logic/addToUsersConnectionsConnec
 
 const routes = Router()
 
-// All microservice functions related to users type
-routes.use('/createUser', createUser)
-routes.use('/updateUser', updateUser)
+// All microservice functions related to user type
+routes.use('/user', userRoutes)
 
 // All microservice functions related to invites type
 routes.use('/createInvites', createInvites)
