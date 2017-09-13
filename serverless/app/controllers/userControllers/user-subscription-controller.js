@@ -1,7 +1,7 @@
 import { sendVerificationEmail } from 'mailer'
 import { generateEmailVerificationUrl } from '../../../helpers/generateEmailVerificationUrl'
 
-const sendVerificationEmail = async (req, res) => {
+const sendVerificationEmailHandler = async (req, res) => {
   try {
     const {
       emailToVerify,
@@ -21,3 +21,5 @@ const sendVerificationEmail = async (req, res) => {
     return res.status(400).send(err)
   }
 }
+
+export { sendVerificationEmailHandler }
