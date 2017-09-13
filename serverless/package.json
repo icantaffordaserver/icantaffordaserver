@@ -7,6 +7,7 @@
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
+    "start:dev": "concurrently --kill-others 'serverless offline --stage dev' 'ngrok http -subdomain=toktumi-api 3000'",
     "prepareLibs": "node scripts/prepareLibs.js",
     "build": "node scripts/bundleLambdas.js",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
@@ -30,6 +31,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "babili-webpack-plugin": "^0.0.11",
+    "concurrently": "^3.5.0",
     "eslint": "^4.6.1",
     "eslint-config-prettier": "^2.4.0",
     "eslint-plugin-prettier": "^2.2.0",
@@ -50,10 +52,12 @@
     "babel-preset-babili": "^0.0.12",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.0",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
     "morgan": "^1.8.2",
+    "postmark": "^1.4.1",
     "source-map-support": "^0.4.15",
     "validator": "^8.2.0"
   }
