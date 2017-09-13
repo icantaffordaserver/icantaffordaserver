@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FormH1 from './styles' 
+import {FormH1, SignUpImg, Div} from './styles';
 // C:\Users\gpsar\node\toktumi\client\src\screens\App\screens\signup1\components\SignUpForm1\index.js
 
 import {
@@ -14,6 +14,8 @@ import {
   Checkbox,
   Message
 } from "semantic-ui-react";
+
+import productShot from "../../assets/images/signup-shot1.jpg"
 
 import { validateSignUp } from "./helpers";
 
@@ -73,21 +75,23 @@ class SignUp1 extends React.Component {
   render() {
     const error = this.state.error !== "" || this.props.error !== "";
     return (
-      <div className="columns">
-        <div className="column is-half">Image will go here</div>
-        <div className="column is-half">
+      <Div className="columns">
+        <Div className="column is-two-thirds">
+          <SignUpImg src={productShot} alt="coffee shop"></SignUpImg>
+        </Div>
+        <Div className="column">
 
               <Form onSubmit={this.onSubmit} size="large" error={error}>
                 <Segment padded>
                   <FormH1>
-                    Sign Up
+                    SIGN UP
                   </FormH1>
                   {this.renderErrors()}
-                  <div className="columns">
-                    <div className="column is-half">
+                  <Div className="columns">
+                    <Div className="column is-half">
                       <Form.Field>
                         
-                        <div className="control">
+                        <Div className="control">
                           <input
                             className="input"
                             type="text"
@@ -96,13 +100,13 @@ class SignUp1 extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.firstName}
                           />
-                        </div>
+                        </Div>
                       </Form.Field>
-                    </div>
-                    <div className="column is-half">
+                    </Div>
+                    <Div className="column is-half">
                       <Form.Field>
                       
-                        <div className="control">
+                        <Div className="control">
                           <input
                             className="input"
                             type="text"
@@ -111,13 +115,13 @@ class SignUp1 extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.lastName}
                           />
-                        </div>
+                        </Div>
                       </Form.Field>
-                    </div>
-                  </div>
+                    </Div>
+                  </Div>
                   <Form.Field>
                     
-                    <div className="control">
+                    <Div className="control">
                       <input
                         className="input"
                         type="text"
@@ -126,12 +130,12 @@ class SignUp1 extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.email}
                       />
-                    </div>
+                    </Div>
                   </Form.Field>
 
-                  <div className="field">
+                  <Div className="field">
                     
-                    <div className="control has-icons-right">
+                    <Div className="control has-icons-right">
                       <input
                         className="input"
                         type="password"
@@ -145,15 +149,16 @@ class SignUp1 extends React.Component {
                       <span className="icon is-small is-right">
                         <i className="fa fa-eye" />
                       </span>
-                    </div>
+                    </Div>
+                    <span>&nbsp;&nbsp;</span>
                     <Checkbox
                       onClick={this.showHidePass}
                       label="Show password"
                     />
-                  </div>
+                  </Div>
                   <Form.Field>
                     
-                    <div className="control">
+                    <Div className="control">
                       <input
                         className="input"
                         type="text"
@@ -162,7 +167,7 @@ class SignUp1 extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.birthday}
                       />
-                    </div>
+                    </Div>
                   </Form.Field>
                   <Button
                     fluid
@@ -172,7 +177,6 @@ class SignUp1 extends React.Component {
                   >
                     Create Account
                   </Button>
-                  <a className="button">Select Your Interests!</a>
                   {/* TODO: facebook auth */}
                   {/* <Divider horizontal>Or</Divider>*/}
                   {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
@@ -186,8 +190,8 @@ class SignUp1 extends React.Component {
                 </Segment>
               </Form>
 
-        </div>
-      </div>
+        </Div>
+      </Div>
     );
   }
 }
