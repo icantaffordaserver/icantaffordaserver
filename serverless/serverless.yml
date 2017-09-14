@@ -19,8 +19,8 @@ provider:
   profile: toktumi # the profile in .aws/credentials
   timeout: 60
 
-# you can define service wide environment variables here
-environment: ${file(env.yml):${self:provider.stage}}
+  # you can define service wide environment variables here
+  environment: ${file(env.yml):${self:provider.stage}}
 
 package:
   include:

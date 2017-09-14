@@ -4,7 +4,6 @@
 import { Router } from 'express'
 
 import userRoutes from './userRoutes'
-import create from './create'
 
 // import createInvites from './logic/createInvites/index'
 // import updateInvites from './logic/updateInvites/index'
@@ -17,7 +16,6 @@ const routes = Router()
 
 // All microservice functions related to user type
 routes.use('/user', userRoutes)
-routes.use('/create', create)
 
 // All microservice functions related to invites type
 // routes.use('/createInvites', createInvites)
