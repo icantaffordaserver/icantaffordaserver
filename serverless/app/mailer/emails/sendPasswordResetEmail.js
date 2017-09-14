@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import PostmarkMailer from '../config/PostmarkMailer'
+import PostmarkMailer from '../../../config/PostmarkMailer'
 
 export default function sendPasswordResetEmail({
   firstName,

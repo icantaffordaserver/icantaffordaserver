@@ -4,8 +4,8 @@
 
 export default `
   mutation deleteVerifyEmail($id: ID!) {
-    deleteVerifyEmail(input: {id: $id}) {
-      clientMutationId
+    deleteVerifyEmail(id: $id) {
+      id
     }
   }
-`;
+`

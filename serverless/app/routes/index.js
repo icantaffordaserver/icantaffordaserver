@@ -9,7 +9,7 @@ import userRoutes from './userRoutes'
 // import updateInvites from './logic/updateInvites/index'
 // import createPasswordReset from './logic/createPasswordReset/index'
 // import updatePasswordReset from './logic/updatePasswordReset/index'
-// import createVerifyEmail from './logic/createVerifyEmail/index'
+import createVerifyEmail from '../logic/createVerifyEmail/index'
 // import addToUsersConnectionsConnection from './logic/addToUsersConnectionsConnection/index'
 
 const routes = Router()
@@ -26,7 +26,7 @@ routes.use('/user', userRoutes)
 // routes.use('/updatePasswordReset', updatePasswordReset)
 
 // All microservice functions related to VerifyEmail type
-// routes.use('/createVerifyEmail', createVerifyEmail)
+routes.use('/createVerifyEmail', createVerifyEmail)
 
 // All microservice functions related to Connection type
 // routes.use('/addToUsersConnectionsConnection', addToUsersConnectionsConnection)

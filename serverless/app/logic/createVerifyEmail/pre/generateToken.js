@@ -7,15 +7,17 @@
 
 // import isEmail from 'validator/lib/isEmail';
 import { isEmail, normalizeEmail } from 'validator'
-import graphqlFetch from '../../../graphql/graphqlFetch'
+import { createClient } from '../../../../config/GraphQLClient'
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 import deleteVerifyEmailMutation from '../../../graphql/mutations/deleteVerifyEmailMutation'
 import { generateUniqueToken } from '../../../helpers/generateUniqueToken'
+import { generateEmailVerificationUrl } from '../../../helpers/generateEmailVerificationUrl'
+import { sendVerificationEmail } from '../../../mailer/emails/sendVerificationEmail.js'
 
 export default async (req, res) => {
   try {
     // pull off relevant data from the incoming request
-    const { emailToVerify, userId } = req.body.input
+    const { emailToVerify, token } = req.body.data
 
     // check if email is valid format
     if (!isEmail(emailToVerify))
@@ -24,42 +26,35 @@ export default async (req, res) => {
     // Normalize email
     const normalizedEmail = normalizeEmail(emailToVerify)
 
-    // query the submitted email
-    const response = await graphqlFetch(getUserByEmailQuery, {
+    // Graphcool client
+    const client = createClient()
+
+    const response = await client.request(getUserByEmailQuery, {
       email: normalizedEmail,
     })
 
-    const emailExists = response.data.viewer.allUsers.edges.length !== 0
-    const { emailVerified } = emailExists
-      ? response.data.viewer.allUsers.edges[0].node
-      : false
+    const user = response.data.User
 
-    if (emailExists && emailVerified) {
+    const { emailVerified } = user ? user : false
+
+    if (user && emailVerified) {
       return res.status(400).send('Email is taken, please choose another.')
     }
 
     // if user has a verifyEmail node existing, delete it before creating a new one
-    if (
-      emailExists &&
-      response.data.viewer.allUsers.edges[0].node.verifyEmail
-    ) {
-      const { id } = response.data.viewer.allUsers.edges[0].node.verifyEmail
-      await graphqlFetch(deleteVerifyEmailMutation, { id })
+    if (user && user.verifyEmail) {
+      const { id } = user.verifyEmail
+      await client.request(deleteVerifyEmailMutation, { id })
     }
 
-    // generate token and expiry
-    const token = await generateUniqueToken()
-    const tokenExpiry = Date.now() + 86400000 // time now in milliseconds, UTC plus 1 day
-
-    // send the data along the "logic" flow in the expected format to update the store
-    return res.send({
-      input: {
-        emailToVerify: normalizedEmail,
-        token,
-        tokenExpiry,
-        userId,
-      },
+    const actionUrl = generateEmailVerificationUrl(token)
+    await sendVerificationEmail({
+      firstName: user.firstName,
+      recipientEmail: emailToVerify,
+      emailVerifiedToken: token,
+      actionUrl,
     })
+    return res.sendStatus(200)
   } catch (err) {
     console.log(err)
     return res.status(400).send(err)
