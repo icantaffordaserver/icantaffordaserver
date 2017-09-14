@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-26.
  */
-import PostmarkMailer from '../config/PostmarkMailer'
+import PostmarkMailer from '../../../config/PostmarkMailer'
 
 export default function sendInviteEmail({
   firstName,

@@ -4,23 +4,17 @@
 
 export default `
   query getUser($email: String){
-    viewer {
-      allUsers(where: {username: {eq: $email}}) {
-        edges {
-          node {
+    User(email: $email){
             id
             firstName
-            username
             emailVerified
             verifyEmail {
               id
               emailToVerify
               token
-              tokenExpiry
+              expiry
             }
           }
         }
-      }
-    }
-  }
-`;
+
+`

@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-26.
  */
-import PostmarkMailer from '../config/PostmarkMailer'
+import PostmarkMailer from '../../../config/PostmarkMailer'
 
 export default function sendVerificationEmail({
   firstName,
@@ -13,12 +13,10 @@ export default function sendVerificationEmail({
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
-        TemplateId: 1446421,
+        TemplateId: 1497643,
         TemplateModel: {
           name: firstName,
           action_url: actionUrl,
-          login_url: 'https://beta.toktumi.io/login',
-          username: recipientEmail,
         },
       },
       (error, result) => {

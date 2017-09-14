@@ -1,7 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { FormH1, SignUpImg, Div, OverLay, FormDiv, ImageDiv,FormSegment, FormHeaderP } from "./styles";
+=======
+import {
+  FormH1,
+  SignUpImg,
+  Div,
+  OverLay,
+  FormDiv,
+  ImageDiv,
+  FormSegment
+} from "./styles";
+>>>>>>> 21c886ae43489403fb6301868308895e432a335c
 
 import {
   Form,
@@ -17,7 +29,11 @@ import {
 import productShot from "../../assets/images/signup-shot1.jpg";
 
 import { validateSignUp } from "./helpers";
+<<<<<<< HEAD
 import SignUpStepTwo  from "./signUpStepTwo"
+=======
+import { SignUpStepTwo } from "./signUpStepTwo";
+>>>>>>> 21c886ae43489403fb6301868308895e432a335c
 
 class SignUp1 extends React.Component {
   static propTypes = {
@@ -72,7 +88,7 @@ class SignUp1 extends React.Component {
   };
 
   getNextStep = () => {
-    this.setState({nextStep: this.state.nextStep += 1})
+    this.setState({ nextStep: (this.state.nextStep += 1) });
   };
 
   goBack = ()=>{
@@ -82,6 +98,7 @@ class SignUp1 extends React.Component {
   showHidePass = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
+<<<<<<< HEAD
 
   FormSection1(){
     const error = this.state.error !== "" || this.props.error !== "";    
@@ -135,6 +152,117 @@ class SignUp1 extends React.Component {
             onChange={this.handleChange}
             value={this.state.email}
           />
+=======
+  render() {
+    const error = this.state.error !== "" || this.props.error !== "";
+    return (
+      <Div className="columns">
+        <ImageDiv className="column is-two-thirds">
+          <OverLay>
+            <SignUpImg src={productShot} alt="coffee shop" />
+          </OverLay>
+        </ImageDiv>
+        <Div className="column">
+          <Form onSubmit={this.onSubmit} size="large" error={error}>
+            <FormSegment padded>
+              <FormH1>SIGN UP</FormH1>
+              {this.renderErrors()}
+              <Div className="columns">
+                <Div className="column is-half">
+                  <Form.Field>
+                    <Div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="firstName"
+                        placeholder="First Name"
+                        onChange={this.handleChange}
+                        value={this.state.firstName}
+                      />
+                    </Div>
+                  </Form.Field>
+                </Div>
+                <Div className="column is-half">
+                  <Form.Field>
+                    <Div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="lastName"
+                        placeholder="Last Name"
+                        onChange={this.handleChange}
+                        value={this.state.lastName}
+                      />
+                    </Div>
+                  </Form.Field>
+                </Div>
+              </Div>
+              <Form.Field>
+                <Div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                  />
+                </Div>
+              </Form.Field>
+
+              <Div className="field">
+                <Div className="control has-icons-right">
+                  <input
+                    className="input"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    type={this.state.showPassword ? "text" : "password"}
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                  />
+
+                  <span className="icon is-small is-right">
+                    <i className="fa fa-eye" />
+                  </span>
+                </Div>
+                <span>&nbsp;&nbsp;</span>
+                <Checkbox onClick={this.showHidePass} label="Show password" />
+              </Div>
+              <Form.Field>
+                <Div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="birthday"
+                    placeholder="DD/MM/YYYY"
+                    onChange={this.handleChange}
+                    value={this.state.birthday}
+                  />
+                </Div>
+              </Form.Field>
+
+              <Button
+                fluid
+                color="teal"
+                size="large"
+                loading={this.props.loading}
+              >
+                Create Account
+              </Button>
+              {/* TODO: facebook auth */}
+              {/* <Divider horizontal>Or</Divider>*/}
+              {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
+              <Header textAlign="center" size="tiny">
+                By signing up, you agree to the{" "}
+                <Link to="/termsofservice">Terms of Service</Link>.
+              </Header>
+              <p style={{ textAlign: "center" }}>
+                Already have an account? <Link to="/login">Log in</Link>.
+              </p>
+            </FormSegment>
+          </Form>
+>>>>>>> 21c886ae43489403fb6301868308895e432a335c
         </Div>
       </Form.Field>
 
@@ -157,6 +285,7 @@ class SignUp1 extends React.Component {
         <span>&nbsp;&nbsp;</span>
         <Checkbox onClick={this.showHidePass} label="Show password" />
       </Div>
+<<<<<<< HEAD
       <Form.Field>
         <Div className="control">
           <input
@@ -297,6 +426,8 @@ class SignUp1 extends React.Component {
             </p>
           </FormSegment>
         </Form>
+=======
+>>>>>>> 21c886ae43489403fb6301868308895e432a335c
     );
   }
   renderStep3(){
