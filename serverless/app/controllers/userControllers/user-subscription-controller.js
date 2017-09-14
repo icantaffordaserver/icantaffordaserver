@@ -4,7 +4,9 @@ import { sendVerificationEmail } from '../../mailer'
 import { generateEmailVerificationUrl } from '../../helpers/generateEmailVerificationUrl'
 
 const client = new GraphQLClient(process.env.GRAPHCOOL_SIMPLE_ENDPOINT, {
-  headers: {},
+  headers: {
+    authorization: process.env.GRAPHCOOL_AUTH_TOKEN,
+  },
 })
 
 const sendVerificationEmailHandler = async (req, res) => {
