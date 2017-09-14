@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import productShot from "../../assets/images/signup-shot1.jpg";
+import {Segment} from "semantic-ui-react";
 
 export const FormH1 = styled.h1`
   &&& {
@@ -12,13 +13,20 @@ export const FormH1 = styled.h1`
 export const SignUpImg = styled.img`
   &&& {
     position: relative;
+    filter: blur(2px);
+    opacity: 0.7;
     width: 100%;
     height: 100%;
-    
   }
 `;
 
 export const Div = styled.div`
+  &&& {
+    overflow-y: hidden;
+  }
+`;
+
+export const ImageDiv = styled.div`
   &&& {
     padding: 0;
     overflow-y: hidden;
@@ -26,17 +34,21 @@ export const Div = styled.div`
 `;
 
 export const FormDiv = styled.div`
-  &&&{
-      padding: 1%;
-      overflow-y: hidden;
+  &&& {
+    padding: 1%;
+    overflow-y: hidden;
   }
 `;
 
-export const OverLayText = styled.h2`
+export const OverLay = styled.div`
   &&& {
-      position: absolute;
-      left: 25%;
-      top: 25%;
-      transform: translate(-25%, -25%);
+    background: rgb(6, 81, 119);
+  }
+`;
+
+export const FormSegment = styled(Segment)`
+  &&&{
+    box-shadow: none !important;
+    border: none !important;
   }
 `;
