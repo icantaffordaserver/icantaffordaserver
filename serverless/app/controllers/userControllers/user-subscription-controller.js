@@ -1,5 +1,5 @@
-import { sendVerificationEmail } from 'mailer'
-import { generateEmailVerificationUrl } from '../../../helpers/generateEmailVerificationUrl'
+import { sendVerificationEmail } from '../../mailer'
+import { generateEmailVerificationUrl } from '../../helpers/generateEmailVerificationUrl'
 
 const sendVerificationEmailHandler = async (req, res) => {
   try {
