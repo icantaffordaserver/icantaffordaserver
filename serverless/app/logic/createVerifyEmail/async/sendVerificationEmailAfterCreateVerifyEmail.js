@@ -10,52 +10,49 @@ import { isEmail, normalizeEmail } from 'validator'
 import { createClient } from '../../../../config/GraphQLClient'
 
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
-import deleteVerifyEmailMutation from '../../../graphql/mutations/deleteVerifyEmailMutation'
 
 import sendVerificationEmail from '../../../mailer/emails/sendVerificationEmail.js'
 
-export default async (req, res) => {
-  try {
-    // pull off relevant data from the incoming request
-    const { emailToVerify, token, actionUrl } = req.body.data
+export default (req, res) => {
+  // pull off relevant data from the incoming request
+  const { emailToVerify, token, actionUrl } = req.body.data
 
-    // check if email is valid format
-    if (!isEmail(emailToVerify))
-      return res.status(400).send('Please enter a valid email.')
+  // check if email is valid format
+  if (!isEmail(emailToVerify))
+    return res.status(400).send('Please enter a valid email.')
 
-    // Normalize email
-    const normalizedEmail = normalizeEmail(emailToVerify)
+  // Normalize email
+  const normalizedEmail = normalizeEmail(emailToVerify, {
+    lowercase: true,
+    remove_dots: false,
+    remove_extension: false,
+  })
 
-    // Graphcool client
-    const client = createClient()
+  // Graphcool client
+  const client = createClient()
 
-    const response = await client.request(getUserByEmailQuery, {
+  client
+    .request(getUserByEmailQuery, {
       email: normalizedEmail,
     })
+    .then(response => {
+      const user = response.User
+      const { emailVerified } = user ? user : false
 
-    const user = response.User
+      if (user && emailVerified) {
+        return res.status(400).send('Email is taken, please choose another.')
+      }
 
-    const { emailVerified } = user ? user : false
-
-    if (user && emailVerified) {
-      return res.status(400).send('Email is taken, please choose another.')
-    }
-
-    // if user has a verifyEmail node existing, delete it before creating a new one
-    if (user && user.verifyEmail) {
-      const { id } = user.verifyEmail
-      await client.request(deleteVerifyEmailMutation, { id })
-    }
-
-    await sendVerificationEmail({
-      firstName: user.firstName,
-      recipientEmail: 'liban.s.hassan@gmail.com',
-      emailVerifiedToken: token,
-      actionUrl,
+      return sendVerificationEmail({
+        firstName: user.firstName,
+        recipientEmail: emailToVerify,
+        emailVerifiedToken: token,
+        actionUrl,
+      })
     })
-    return res.sendStatus(200)
-  } catch (err) {
-    console.log(err)
-    return res.status(400).send(err)
-  }
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log(err)
+      return res.status(400).send(err)
+    })
 }

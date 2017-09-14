@@ -21,7 +21,6 @@ const sendVerificationEmailHandler = async (req, res) => {
     .request(createVerifyEmailMutation, variables)
     .then(() => generateEmailVerificationUrl(variables.token))
     .then(actionUrl => {
-      console.log(actionUrl)
       return axios.post(process.env.API_SEND_VERIFICATION_EMAIL_ENDPOINT, {
         data: {
           emailToVerify: variables.emailToVerify,
