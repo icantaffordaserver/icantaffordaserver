@@ -53,3 +53,10 @@ export const FormSegment = styled(Segment)`
     border: none !important;
   }
 `;
+
+export const FormHeaderP = styled.p`
+&&&{
+  text-align: center;
+}
+
+`;
