@@ -3,13 +3,10 @@
  */
 import { Router } from 'express'
 
-import generateToken from './pre/generateToken'
-import sendVerificationEmailAfterCreateVerifyEmail
-  from './async/sendVerificationEmailAfterCreateVerifyEmail'
+import sendVerificationEmailAfterCreateVerifyEmail from './async/sendVerificationEmailAfterCreateVerifyEmail'
 
 const routes = Router()
 
-routes.post('/pre/generateToken', generateToken)
 routes.post(
   '/async/sendVerificationEmailAfterCreateVerifyEmail',
   sendVerificationEmailAfterCreateVerifyEmail,

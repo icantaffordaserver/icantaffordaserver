@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { FormH1, SignUpImg, Div, OverLay, FormDiv, ImageDiv,FormSegment } from "./styles";
+import {
+  FormH1,
+  SignUpImg,
+  Div,
+  OverLay,
+  FormDiv,
+  ImageDiv,
+  FormSegment
+} from "./styles";
 
 import {
   Form,
@@ -17,7 +25,7 @@ import {
 import productShot from "../../assets/images/signup-shot1.jpg";
 
 import { validateSignUp } from "./helpers";
-import { SignUpStepTwo } from "./signUpStepTwo"
+import { SignUpStepTwo } from "./signUpStepTwo";
 
 class SignUp1 extends React.Component {
   static propTypes = {
@@ -71,7 +79,7 @@ class SignUp1 extends React.Component {
   };
 
   getNextStep = () => {
-    this.setState({nextStep: this.state.nextStep += 1})
+    this.setState({ nextStep: (this.state.nextStep += 1) });
   };
 
   showHidePass = () => {
@@ -80,7 +88,6 @@ class SignUp1 extends React.Component {
   render() {
     const error = this.state.error !== "" || this.props.error !== "";
     return (
-      
       <Div className="columns">
         <ImageDiv className="column is-two-thirds">
           <OverLay>
@@ -166,7 +173,7 @@ class SignUp1 extends React.Component {
                   />
                 </Div>
               </Form.Field>
-              
+
               <Button
                 fluid
                 color="teal"
@@ -189,7 +196,6 @@ class SignUp1 extends React.Component {
           </Form>
         </Div>
       </Div>
-      
     );
   }
 }

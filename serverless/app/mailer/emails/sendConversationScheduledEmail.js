@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-04-14.
  */
-import PostmarkMailer from '../config/PostmarkMailer'
+import PostmarkMailer from '../../../config/PostmarkMailer'
 
 export default (email, conversationTime) => {
   // TODO:
