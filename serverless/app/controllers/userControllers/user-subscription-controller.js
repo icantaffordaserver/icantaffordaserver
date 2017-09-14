@@ -5,7 +5,7 @@ import { generateEmailVerificationUrl } from '../../helpers/generateEmailVerific
 
 const client = new GraphQLClient(process.env.GRAPHCOOL_SIMPLE_ENDPOINT, {
   headers: {
-    authorization: process.env.GRAPHCOOL_AUTH_TOKEN,
+    Authorization: process.env.GRAPHCOOL_AUTH_TOKEN,
   },
 })
 
