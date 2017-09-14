@@ -48,7 +48,7 @@ export const OverLay = styled.div`
 
 export const FormSegment = styled(Segment)`
   &&&{
-    padding-top: 20vh;
+    padding-top: 20vh !important;
     box-shadow: none !important;
     border: none !important;
   }

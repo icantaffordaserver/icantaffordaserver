@@ -1,0 +1,6 @@
+dev:
+  GRAPHCOOL_SIMPLE_ENDPOINT: https://api.graph.cool/simple/v1/toktumi-dev
+  GRAPHCOOL_SUBSCRIPTION_ENDPOINT: wss://subscriptions.graph.cool/v1/toktumi-dev
+  GRAPHCOOL_FILE_ENDPOINT: https://api.graph.cool/file/v1/toktumi-dev
+  GRAPHCOOL_AUTH_TOKEN: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDQzOTUwOTIsImNsaWVudElkIjoiY2l6aDRvYWlnYjl4ZTAxNjlob3dtdmdlaiIsInByb2plY3RJZCI6ImNqM2wwb2E5cjF1YWIwMTMwczhudGk3M2siLCJwZXJtYW5lbnRBdXRoVG9rZW5JZCI6ImNqNzN4enVyOTAzMngwMTAwaGFoZWRmb3YifQ.GP19fBm8bzInd-J63rvPkP6ubtYDEBHvDXQZzpv294A
+  POSTMARK_API_KEY: 39f2eefa-fc15-491e-be83-64a3ec84a4cc

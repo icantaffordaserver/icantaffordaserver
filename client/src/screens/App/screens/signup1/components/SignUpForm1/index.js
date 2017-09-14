@@ -17,6 +17,7 @@ import {
 import productShot from "../../assets/images/signup-shot1.jpg";
 
 import { validateSignUp } from "./helpers";
+import { SignUpStepTwo } from "./signUpStepTwo"
 
 class SignUp1 extends React.Component {
   static propTypes = {
@@ -30,7 +31,8 @@ class SignUp1 extends React.Component {
 
   state = {
     error: "",
-    showPassword: false
+    showPassword: false,
+    nextStep: 0
   };
 
   onSubmit = (event, data) => {
@@ -68,12 +70,17 @@ class SignUp1 extends React.Component {
     return null;
   };
 
+  getNextStep = () => {
+    this.setState({nextStep: this.state.nextStep += 1})
+  };
+
   showHidePass = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
   render() {
     const error = this.state.error !== "" || this.props.error !== "";
     return (
+      
       <Div className="columns">
         <ImageDiv className="column is-two-thirds">
           <OverLay>
@@ -159,6 +166,7 @@ class SignUp1 extends React.Component {
                   />
                 </Div>
               </Form.Field>
+              
               <Button
                 fluid
                 color="teal"
@@ -181,6 +189,7 @@ class SignUp1 extends React.Component {
           </Form>
         </Div>
       </Div>
+      
     );
   }
 }
