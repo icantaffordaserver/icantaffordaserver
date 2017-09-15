@@ -13,7 +13,6 @@ export const FormH1 = styled.h1`
 export const SignUpImg = styled.img`
   &&& {
     position: relative;
-    filter: blur(2px);
     opacity: 0.7;
     width: 100%;
     height: 100%;

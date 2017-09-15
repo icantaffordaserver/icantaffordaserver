@@ -284,7 +284,7 @@ class SignUp1 extends React.Component {
             >
               Create Account
             </Button>
-            <a onClick={this.goBack}>Good Bye</a>
+            <a className="button is-primary" onClick={this.goBack}>Good Bye</a>
             {/* TODO: facebook auth */}
             {/* <Divider horizontal>Or</Divider>*/}
             {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
@@ -313,6 +313,8 @@ class SignUp1 extends React.Component {
     if(this.state.nextStep == 2){
 
     }
+  
+
     return(<Div className="columns">
     <ImageDiv className="column is-two-thirds">
       <OverLay>
