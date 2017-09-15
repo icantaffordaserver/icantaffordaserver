@@ -12,7 +12,7 @@ import {
   FormHeaderP,
   FormNextButton,
   FormSubmitButton,
-  FormInterests
+  ImageH1
 } from "./styles";
 
 import {
@@ -466,6 +466,7 @@ class SignUp1 extends React.Component {
         <ImageDiv className="column is-two-thirds">
           <OverLay>
             <SignUpImg src={productShot} alt="coffee shop" />
+            <ImageH1 style={{fontFamily: "fabfeltscriptbold"}}>Toktumi</ImageH1>
           </OverLay>
         </ImageDiv>
         <Div className="column">{form}</Div>

@@ -92,4 +92,16 @@ export const FormSubmitButton = styled.button`
     background: rgba(6, 81, 119, 0.7);
   }
 }
-`
+`;
+
+export const ImageH1 = styled.h1`
+  &&&{
+    left: 0;
+    color: white; 
+    font-size: 6em;
+    position:absolute;
+    text-align:center;
+    top: 40%;
+    width: 66%
+  }
+`;
