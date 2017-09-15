@@ -56,6 +56,8 @@ class VerifyEmailContainer extends React.Component {
 
   onSuccess = () => {
     this.setState({ loading: false, success: true, token: "" });
+    this.props.client.resetStore();
+    setTimeout(() => this.props.history.push("/dashboard"), 2000);
   };
 
   onFailure = error => {

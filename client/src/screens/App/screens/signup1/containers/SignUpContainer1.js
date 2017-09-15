@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { graphql, withApollo, compose } from "react-apollo";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 import SignUpForm1 from "../components/SignUpForm1";
 

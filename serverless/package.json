@@ -1,17 +1,17 @@
 {
   "name": "serverless",
   "version": "0.0.1",
-  "files": [
-    "bin"
-  ],
+  "files": ["bin"],
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
-    "start:dev": "concurrently --kill-others 'serverless offline --stage dev' 'ngrok http -subdomain=toktumi-api 3000'",
+    "start:dev":
+      "concurrently --kill-others 'serverless offline -P 4000 --stage dev' 'ngrok http -subdomain=toktumi-api 4000'",
     "prepareLibs": "node scripts/prepareLibs.js",
     "build": "node scripts/bundleLambdas.js",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
-    "create": "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
+    "create":
+      "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
     "update": "npm run transpile && claudia update",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

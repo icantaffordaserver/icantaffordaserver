@@ -33,7 +33,7 @@ export default (req, res) => {
 
   client
     .request(getUserByEmailQuery, {
-      email: normalizedEmail,
+      email: emailToVerify,
     })
     .then(response => {
       const user = response.User
