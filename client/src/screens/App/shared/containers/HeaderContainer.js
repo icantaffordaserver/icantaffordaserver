@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { compose, graphql, withApollo } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
-import _ from 'lodash';
+import React from "react";
+import PropTypes from "prop-types";
+import { compose, graphql, withApollo } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import _ from "lodash";
 
-import Header from '../components/Header';
+import Header from "../components/Header";
 
-import currentUserQuery from '../graphql/queries/currentUserQuery';
+import currentUserQuery from "../graphql/queries/currentUserQuery";
 
 class HeaderContainer extends React.Component {
   static propTypes = {
@@ -14,16 +14,16 @@ class HeaderContainer extends React.Component {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     client: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired
   };
 
   handleLogout = event => {
     event.preventDefault();
 
     // remove token from local storage and reset apollo client to refetch all queries
-    window.localStorage.removeItem('auth_token');
+    window.localStorage.removeItem("auth_token");
     this.props.client.resetStore();
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   };
 
   render() {
@@ -35,24 +35,25 @@ class HeaderContainer extends React.Component {
 
     // check for various properties
     const profilePhoto =
-      user && user.profilePhoto ? user.profilePhoto.blobUrl : null;
-    const email = user ? user.email : null;
+      user && user.profilePhoto ? user.profilePhoto.url : null;
     const isAdmin =
       user && user.roles
-        ? _.findIndex(user.roles.edges, ({ node }) => node.name === 'admin') !==
+        ? _.findIndex(user.roles.edges, ({ node }) => node.name === "admin") !==
           -1
         : false;
     return (
       <Header
         isAdmin={isAdmin}
-        email={email}
+        firstName={user.firstName}
+        lastName={user.lastName}
         profileImgSrc={profilePhoto}
-        dashboardUrl={'/dashboard'}
-        homeUrl={'/'}
-        loginUrl={'/login'}
-        accountUrl={'/account'}
+        dashboardUrl={"/dashboard"}
+        homeUrl={"/"}
+        loginUrl={"/login"}
+        accountUrl={"/account"}
         logout={this.handleLogout}
         navigateTo={this.props.history.push}
+        location={this.props.location}
       />
     );
   }

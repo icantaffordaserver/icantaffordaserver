@@ -55,7 +55,7 @@ class SignUpContainer1 extends Component {
         this.setState({ loading: false });
         // reset the store after the user has been authenticated, then direct to dashboard
         this.props.client.resetStore();
-        this.props.history.push("/dashboard");
+        this.props.history.push("/profile");
       })
       .catch(error => {
         if (

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "concurrently": "^3.5.0",
     "eslint": "^4.6.1",
     "prettier": "^1.6.1",
     "react-scripts": "1.0.13"
@@ -47,7 +48,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dev": "react-scripts start && ngrok http -subdomain=toktumi-client 3000",
+    "start:dev": "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

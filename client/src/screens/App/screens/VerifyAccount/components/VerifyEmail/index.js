@@ -43,7 +43,7 @@ class VerifyEmailComponent extends React.Component {
           <Icon name="mail outline" size="massive" />
         </IconContainer>
         <Message>Your email address is verified.</Message>
-        <Link to="/dashboard">
+        <Link to="/profile">
           <Button positive content="Take me to my dashboard" />
         </Link>
       </MessageContainer>

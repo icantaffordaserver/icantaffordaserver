@@ -38,7 +38,7 @@ class LoginContainer extends React.Component {
       .then(() => {
         // reset the store after the user has been authenticated, then direct to dashboard
         this.props.client.resetStore();
-        this.props.history.push("/dashboard");
+        this.props.history.push("/profile");
       })
       .catch(error => {
         if (
@@ -56,7 +56,7 @@ class LoginContainer extends React.Component {
 
     // if the user is already logged in, redirect to dashboard
     if (this.props.data && this.props.data.user) {
-      return <Redirect to="/dashboard" />;
+      return <Redirect to="/profile" />;
     }
 
     const { loading, error } = this.state;

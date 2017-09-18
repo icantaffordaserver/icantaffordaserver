@@ -1,131 +1,102 @@
 /**
  * Created by alexandermann on 2017-04-12.
  */
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from "styled-components";
 
-const animateDropdown = keyframes`
-  from {
-    opacity: 0;
-    transform: rotateY(-90deg) translateY(-30px);
-  }
-  
-  to {
-    opacity: 1;
-    transform: rotateY(0deg) translateY(0px);
-  }
-`;
-
-export const HeaderMenu = styled.nav`
+export const SideNav = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #FF7F50;
-  height: 70px;
-  margin-bottom: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  z-index: 999;
-`;
-
-export const HeaderItemContainer = styled.ul`
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  position: relative;
+  flex-direction: column;
   height: 100%;
-  max-width: 1000px;
-  //border: 1px black solid;
+  position: fixed;
+  min-width: 250px;
+  padding-top: 2em;
+  background: #ff7f50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ff7f50,
+    #ff9839
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ff7f50,
+    #ff9839
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  box-shadow: 3px 0px 2px #555;
+  z-index: 1;
+  font-family: Lato;
 `;
 
-export const HeaderItem = styled.li`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  //border: 1px red solid;
-  padding: ${props => props.avatar ? '0px' : '5px 15px 5px 15px'};
-  &:hover {
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
-    cursor: pointer;
-    box-shadow: 0px 5px 0 white;
-  }
-`;
-
-export const Logo = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-`;
-
-export const HeaderRightMenu = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 0px;
-`;
-
-export const Avatar = styled.img`
-  height: 70%;
-  border-radius: 50%;
-`;
-
-export const Email = styled.h3`
-  margin: 0;
-  padding: 10px;
-`;
-
-export const MenuItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100%;
-  width: 110px;
-  z-index: 999;
-  > h4 {
-    margin: 0;
-  }
-  &:hover {
-    // transition-duration: 0.2s;
-    // transition-timing-function: ease;
-    // cursor: pointer;
-    // box-shadow: 0px 5px 0 #98004a;
-    > ul li {
-      animation: ${animateDropdown} 0.3s ease-in-out;
-      display: flex;
-    }
-  }
-`;
-
-export const DropMenu = styled.ul`
+export const SideNavMenu = styled.div`
+  margin-top: 25%;
+  height: 30%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 100%;
-  left: 0%;
+  padding-left: 0%;
+`;
+export const SideNavMenuItem = styled.h4`
+  color: #000;
+  font-size: 1.5vw;
+  font-family: Lato;
+  font-weight: 300;
   width: 100%;
-  padding: 0;
-  z-index: 999;
+  padding: 5% 0;
+  padding-left: 20%;
+  ${props =>
+    props.active &&
+    css`
+      background-color: rgba(0, 0, 0, 0.1);
+      border-left: solid 3px #fff;
+      color: #fff;
+      padding-left: 19%;
+      cursor: pointer;
+    `} &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left: solid 3px #fff;
+    color: #fff;
+    padding-left: 19%;
+    cursor: pointer;
+  }
 `;
 
-export const DropMenuItem = styled.li`
-  background-color: #FF7C58;
-  width: 100%;
+export const UserDetails = styled.div`
+  position: fixed;
+  bottom: 25px;
+  display: flex;
+  width: 250px;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 60px;
-  line-height: 60px;
-  //border: 1px red solid;
-  display: none;
-  opacity: 1;
-  z-index: 999;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 5px 0px 0 white;
-  }
-  > h4 {
-    margin: 0;
-  }
+`;
+export const Logo = styled.div`
+  height: 5em;
+  display: flex;
+  align-items: center;
+`;
+
+export const Avatar = styled.img`
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+`;
+
+export const Feedback = styled.button`
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 2vw;
+  width: 100%;
+  padding: 5% 0;
+  margin: 4% 0;
+`;
+
+export const UserButton = styled.button`
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0 5px;
+  background: transparent;
+  font-size: 1vw;
+  color: #333;
 `;

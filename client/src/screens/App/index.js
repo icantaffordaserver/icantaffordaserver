@@ -16,8 +16,10 @@ import NotVerified from "./screens/NotVerified";
 import NotLoggedIn from "./screens/NotLoggedIn";
 import ComingSoon from "./screens/ComingSoon";
 import SignUpScreen1 from "./screens/signup1";
+import Profile from "./screens/Profile";
 
 import isAuthenticated from "./shared/HoCs/isAuthenticated";
+import withSideNav from "./shared/HoCs/withSideNav";
 
 import BackgroundWrapper from "./styles/BackgroundWrapper";
 import "./styles/styles.css";
@@ -25,11 +27,10 @@ import "./styles/styles.css";
 function App() {
   return (
     <BackgroundWrapper>
-      <HeaderContainer />
       <Switch>
         {/*<Route path="/admin" component={Admin} />*/}
         {/*<Route path="/account" component={MyAccountContainer} />*/}
-        <Route path="/dashboard" component={isAuthenticated(Dashboard)} />
+        <Route path="/profile" component={withSideNav(Profile)} />
         <Route path="/chat" component={ConnectionPanel} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
