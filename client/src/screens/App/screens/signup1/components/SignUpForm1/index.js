@@ -35,19 +35,27 @@ class SignUp1 extends React.Component {
     onSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
-    SignUpStepTwo: PropTypes.element
   };
   static defaultProps = {
     error: ""
   };
 
   state = {
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    birthday:'',
+    bio: '',
+    timeZone: '', 
+    interests: [''],
     error: "",
     showPassword: false,
     formStep: 0
   };
 
   onSubmit = (event, data) => {
+    
     event.preventDefault(); // prevent page reload
     this.setState({ error: "" }); // clear any old errors
     const {
@@ -56,18 +64,11 @@ class SignUp1 extends React.Component {
       email,
       password,
       birthday,
-      bio,
-      timeZone,
-      interests = []
-    } = data.formData;
+    } = this.state;
+
+    console.log(data.formData)
     const signUpErrors = validateSignUp(
-      firstName,
-      lastName,
-      email,
-      password,
-      birthday,
-      bio,
-      timeZone
+      this.state
     );
     if (typeof signUpErrors === "string") {
       // if validate sign up returns string we have an error
@@ -82,8 +83,6 @@ class SignUp1 extends React.Component {
       email,
       password,
       birthday,
-      bio,
-      timeZone
     });
   };
 
@@ -114,9 +113,7 @@ class SignUp1 extends React.Component {
   };
 
   FormSection1() {
-    const error = this.state.error !== "" || this.props.error !== "";
-    return (
-      <Form onSubmit={this.onSubmit} size="large" error={error}>
+    return(
         <FormSegment padded>
           <FormH1>SIGN UP</FormH1>
           <Div className="columns">
@@ -220,6 +217,7 @@ class SignUp1 extends React.Component {
           >
             Select your interests!
           </FormNextButton>
+
           {/* TODO: facebook auth */}
           {/* <Divider horizontal>Or</Divider>*/}
           {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
@@ -231,14 +229,14 @@ class SignUp1 extends React.Component {
             Already have an account? <Link to="/login">Log in</Link>.
           </p>
         </FormSegment>
-      </Form>
+      
     );
   }
 
   FormSection2() {
-    const error = this.state.error !== "" || this.props.error !== "";
+
     return (
-      <Form onSubmit={this.onSubmit} size="large" error={error}>
+
         <FormSegment padded>
           <FormH1>SIGN UP</FormH1>
           <Div className="columns">
@@ -365,13 +363,13 @@ class SignUp1 extends React.Component {
             Already have an account? <Link to="/login">Log in</Link>.
           </p>
         </FormSegment>
-      </Form>
+    
     );
   }
   FormSection3() {
-    const error = this.state.error !== "" || this.props.error !== "";
+
     return (
-      <Form onSubmit={this.onSubmit} size="large" error={error}>
+
         <FormSegment padded>
           <FormH1>SIGN UP</FormH1>
           <Div className="columns">
@@ -396,6 +394,7 @@ class SignUp1 extends React.Component {
                 <textarea
                   style={{ resize: "none" }}
                   className="textarea"
+                  type="text"
                   name="bio"
                   onChange={this.handleChange}
                   value={this.state.bio}
@@ -446,7 +445,7 @@ class SignUp1 extends React.Component {
             Already have an account? <Link to="/login">Log in</Link>.
           </p>
         </FormSegment>
-      </Form>
+
     );
   }
   render() {
@@ -460,7 +459,8 @@ class SignUp1 extends React.Component {
     if (this.state.formStep === 2) {
       form = this.FormSection3();
     }
-
+    const error = this.state.error !== "" || this.props.error !== "";
+   
     return (
       <Div className="columns">
         <ImageDiv className="column is-two-thirds">
@@ -469,7 +469,12 @@ class SignUp1 extends React.Component {
             <ImageH1 style={{fontFamily: "fabfeltscriptbold"}}>Toktumi</ImageH1>
           </OverLay>
         </ImageDiv>
-        <Div className="column">{form}</Div>
+        <Div className="column">
+
+      <Form onSubmit={this.onSubmit} size="large" error={error}>
+          {form}
+      </Form>
+        </Div>
       </Div>
     );
   }

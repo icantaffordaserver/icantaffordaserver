@@ -97,7 +97,7 @@ export const FormSubmitButton = styled.button`
 export const ImageH1 = styled.h1`
   &&&{
     left: 0;
-    color: white; 
+    color: #ff7f50; 
     font-size: 6em;
     position:absolute;
     text-align:center;
