@@ -23,7 +23,7 @@ class SignUpContainer1 extends Component {
     error: ""
   };
 
-  handleSignUp = userData => {
+  handleSignUp = userData => {    
     this.setState({
       loading: true
     });

@@ -35,13 +35,17 @@ class SignUp1 extends React.Component {
     onSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
-    SignUpStepTwo: PropTypes.element
   };
   static defaultProps = {
     error: ""
   };
 
   state = {
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    birthday:'',
     bio: '',
     timeZone: '', 
     interests: [''],
@@ -51,6 +55,7 @@ class SignUp1 extends React.Component {
   };
 
   onSubmit = (event, data) => {
+    
     event.preventDefault(); // prevent page reload
     this.setState({ error: "" }); // clear any old errors
     const {
@@ -59,13 +64,11 @@ class SignUp1 extends React.Component {
       email,
       password,
       birthday,
-    } = data.formData;
+    } = this.state;
+
+    console.log(data.formData)
     const signUpErrors = validateSignUp(
-      firstName,
-      lastName,
-      email,
-      password,
-      birthday,
+      this.state
     );
     if (typeof signUpErrors === "string") {
       // if validate sign up returns string we have an error
@@ -214,6 +217,7 @@ class SignUp1 extends React.Component {
           >
             Select your interests!
           </FormNextButton>
+
           {/* TODO: facebook auth */}
           {/* <Divider horizontal>Or</Divider>*/}
           {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
