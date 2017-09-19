@@ -10,6 +10,10 @@
   "parser": "babylon",
   "overrides": [
     {
+      "files": "*.json",
+      "options": { "parser": "json" }
+    },
+    {
       "files": ".prettierrc",
       "options": { "parser": "json" }
     },
