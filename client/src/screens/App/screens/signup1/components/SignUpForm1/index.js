@@ -88,6 +88,7 @@ class SignUp1 extends React.Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state)
   };
 
   renderErrors = () => {
@@ -172,7 +173,7 @@ class SignUp1 extends React.Component {
           </Form.Field>
 
           <Div className="field">
-            <Div className="control has-icons-right">
+            <Div className="control">
               <input
                 className="input"
                 type="password"
@@ -183,9 +184,6 @@ class SignUp1 extends React.Component {
                 value={this.state.password}
               />
 
-              <span className="icon is-small is-right">
-                <i className="fa fa-eye" />
-              </span>
             </Div>
             <span>&nbsp;&nbsp;</span>
             <Checkbox onClick={this.showHidePass} label="Show password" />
@@ -462,7 +460,7 @@ class SignUp1 extends React.Component {
     const error = this.state.error !== "" || this.props.error !== "";
    
     return (
-      <Div className="columns">
+      <Div style={{margin: "0", padding: "0"}} className="columns">
         <ImageDiv className="column is-two-thirds">
           <OverLay>
             <SignUpImg src={productShot} alt="coffee shop" />

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import {
   Grid,
@@ -9,28 +9,44 @@ import {
   Image,
   Form,
   Divider,
-  Message,
-} from 'semantic-ui-react';
+  Message
+} from "semantic-ui-react";
 
-import logo from '../../../../shared/assets/logo.png';
-import { LoginButton, FormLabel, FormLink } from './styles';
-import { validateLogin } from './helpers';
+import logo from "../../../../shared/assets/logo.png";
+import productShot from "../../../../shared/assets/signup-shot1.jpg";
+import {
+  LoginButton,
+  FormLabel,
+  FormLink,
+  FormH1,
+  SignUpImg,
+  Div,
+  OverLay,
+  FormDiv,
+  ImageDiv,
+  FormSegment,
+  FormHeaderP,
+  FormNextButton,
+  FormSubmitButton,
+  ImageH1
+} from "./styles";
+import { validateLogin } from "./helpers";
 
 class LoginForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    error: PropTypes.string,
+    error: PropTypes.string
   };
 
   static defaultProps = {
-    error: '',
+    error: ""
   };
 
   state = {
-    email: '',
-    password: '',
-    error: '',
+    email: "",
+    password: "",
+    error: ""
   };
 
   handleChange = event => {
@@ -39,10 +55,10 @@ class LoginForm extends Component {
 
   handleSubmit = (event, data) => {
     event.preventDefault(); // prevent page reload
-    this.setState({ error: '' }); // clear any old errors
+    this.setState({ error: "" }); // clear any old errors
     const { email, password } = data.formData;
     const loginErrors = validateLogin(email, password);
-    if (typeof loginErrors === 'string') {
+    if (typeof loginErrors === "string") {
       // if validate login returns string we have an error
       this.setState({ error: loginErrors });
       return;
@@ -51,65 +67,81 @@ class LoginForm extends Component {
   };
 
   renderErrors = () => {
-    if (this.state.error !== '') {
+    if (this.state.error !== "") {
       return <Message error header={this.state.error} />;
     }
-    if (this.props.error !== '') {
+    if (this.props.error !== "") {
       return <Message error header={this.props.error} />;
     }
     return null;
   };
 
   render() {
-    const error = this.state.error !== '' || this.props.error !== '';
+    const error = this.state.error !== "" || this.props.error !== "";
 
     return (
-      <Grid textAlign="center" verticalAlign="middle">
-        <Grid.Column width={9}>
-          <Segment padded loading={this.props.loading}>
-            <Image src={logo} alt="Shift" size="medium" centered />
+      <Div style={{ margin: "0", padding: "0" }} className="columns">
+        <ImageDiv className="column is-two-thirds">
+          <OverLay>
+            <SignUpImg src={productShot} alt="coffee shop" />
+            <ImageH1 style={{ fontFamily: "fabfeltscriptbold" }}>
+              Toktumi
+            </ImageH1>
+          </OverLay>
+        </ImageDiv>
+        <Div className="column">
+          <Form onSubmit={this.onSubmit} size="large" error={error}>
+            <FormSegment padded loading={this.props.loading}>
+              <FormH1>Login</FormH1>
 
-            <Form onSubmit={this.handleSubmit} size="large" error={error}>
-              {this.renderErrors()}
-              <Form.Group inline widths={9}>
-                <Form.Field width={16}>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <Input
-                    fluid
-                    name="email"
-                    placeholder="your@email.com"
-                    onChange={this.handleChange}
-                    value={this.state.email}
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Group inline widths={9}>
-                <Form.Field width={16}>
-                  <FormLabel htmlFor="passowrd">Password</FormLabel>
-                  <Input
-                    fluid
-                    name="password"
-                    placeholder="*********"
-                    type="password"
-                    onChange={this.handleChange}
-                    value={this.state.password}
-                  />
-                </Form.Field>
-              </Form.Group>
-              <LoginButton size="large" width={6}>
-                Login
-              </LoginButton>
-              <Divider />
-            </Form>
-            <Link to="/">
-              <FormLink href="/"> Forgot Passowrd? </FormLink>
-            </Link>
-            <Link to="/">
-              <FormLink href="/"> Don't have an account? </FormLink>
-            </Link>
-          </Segment>
-        </Grid.Column>
-      </Grid>
+              <Form onSubmit={this.handleSubmit} size="large" error={error}>
+                {this.renderErrors()}
+                <Form.Group inline widths={9}>
+                  <Form.Field width={16}>
+                    <FormLabel htmlFor="email">Email</FormLabel>
+                    <input
+                      className="input"
+                      name="email"
+                      placeholder="your@email.com"
+                      onChange={this.handleChange}
+                      value={this.state.email}
+                    />
+                  </Form.Field>
+                </Form.Group>
+                <Form.Group inline widths={9}>
+                  <Form.Field width={16}>
+                    <FormLabel htmlFor="passowrd">Password</FormLabel>
+                    <input
+                      className="input"
+                      name="password"
+                      placeholder="*********"
+                      type="password"
+                      onChange={this.handleChange}
+                      value={this.state.password}
+                    />
+                  </Form.Field>
+                </Form.Group>
+                <FormSubmitButton className="button is-primary is-fullwidth">
+                  Login
+                </FormSubmitButton>
+                <Divider />
+              </Form>
+              <Div className="columns">
+                <Div className="column">
+                  <Link to="/">
+                    <FormLink href="/"> Forgot Passowrd? </FormLink>
+                  </Link>
+                </Div>
+                <Div className="column">
+                  <Link to="/">
+                    <FormLink href="/"> Don't have an account? </FormLink>
+                  </Link>
+                </Div>
+              </Div>
+            </FormSegment>
+          </Form>
+        </Div>
+      </Div>
     );
   }
 }

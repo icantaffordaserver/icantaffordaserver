@@ -21,6 +21,8 @@ export const SignUpImg = styled.img`
 
 export const Div = styled.div`
   &&& {
+    padding: 1%;
+    height: 100%;
     overflow-y: hidden;
   }
 `;
@@ -28,6 +30,7 @@ export const Div = styled.div`
 export const ImageDiv = styled.div`
   &&& {
     padding: 0;
+    height: 100%;
     overflow-y: hidden;
   }
 `;
@@ -50,6 +53,7 @@ export const FormInterests = styled.div`
 export const OverLay = styled.div`
   &&& {
     background: rgb(6, 81, 119);
+    height: 100%;
   }
 `;
 
