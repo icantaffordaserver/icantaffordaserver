@@ -1,10 +1,11 @@
 /**
  * Created by alexandermann on 2017-04-12.
  */
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-import { generateGravatarUrl } from "./helpers";
+import generateGravatarUrl from '../../helpers/generateGravatarUrl'
 import {
   Logo,
   UserButton,
@@ -13,10 +14,10 @@ import {
   SideNav,
   SideNavMenu,
   SideNavMenuItem,
-  UserDetails
-} from "./styles";
+  UserDetails,
+} from './styles'
 
-import ToktumiH1 from "../ToktumiH1";
+import ToktumiH1 from '../ToktumiH1'
 
 class Header extends React.Component {
   static propTypes = {
@@ -28,15 +29,15 @@ class Header extends React.Component {
     accountUrl: PropTypes.string.isRequired,
     loginUrl: PropTypes.string.isRequired,
     logout: PropTypes.func.isRequired,
-    navigateTo: PropTypes.func.isRequired
-  };
+    navigateTo: PropTypes.func.isRequired,
+  }
   static defaultProps = {
     email: null,
-    profileImgSrc: ""
-  };
+    profileImgSrc: '',
+  }
 
   render() {
-    const { firstName, lastName, isAdmin, navigateTo } = this.props;
+    const { firstName, lastName, isAdmin, navigateTo } = this.props
     return (
       <SideNav>
         <Logo>
@@ -44,38 +45,46 @@ class Header extends React.Component {
         </Logo>
 
         <SideNavMenu>
-          <SideNavMenuItem active={this.props.location.pathname === "/profile"}>
-            Profile
-          </SideNavMenuItem>
+          <Link to="/profile" style={{ width: '100%' }}>
+            <SideNavMenuItem
+              active={this.props.location.pathname === '/profile'}
+            >
+              Profile
+            </SideNavMenuItem>
+          </Link>
 
-          <SideNavMenuItem active={this.props.location === "inbox"}>
-            Inbox
-          </SideNavMenuItem>
+          <Link to="/inbox" style={{ width: '100%' }}>
+            <SideNavMenuItem active={this.props.location.pathname === '/inbox'}>
+              Inbox
+            </SideNavMenuItem>
+          </Link>
 
-          <SideNavMenuItem active={this.props.location === "talk"}>
-            Talk
-          </SideNavMenuItem>
+          <Link to="/talk" style={{ width: '100%' }}>
+            <SideNavMenuItem active={this.props.location.pathname === '/talk'}>
+              Talk
+            </SideNavMenuItem>
+          </Link>
         </SideNavMenu>
-
         <UserDetails>
           <Avatar
             src={
-              this.props.profileImgSrc || generateGravatarUrl("temp@temp.com")
+              this.props.profileImgSrc ||
+              generateGravatarUrl(this.props.user.email)
             }
           />
-          <h4>{firstName + " " + lastName}</h4>
+          <h4>{firstName + ' ' + lastName}</h4>
           <p>50 minutes until your next talk.</p>
 
           <Feedback>Feedback</Feedback>
           <div>
             <UserButton>Help</UserButton>
             |
-            <UserButton>Logout</UserButton>
+            <UserButton onClick={this.props.logout}>Logout</UserButton>
           </div>
         </UserDetails>
       </SideNav>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

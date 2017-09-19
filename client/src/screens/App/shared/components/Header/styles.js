@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-04-12.
  */
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes, css } from 'styled-components'
 
 export const SideNav = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const SideNav = styled.div`
   box-shadow: 3px 0px 2px #555;
   z-index: 1;
   font-family: Lato;
-`;
+`
 
 export const SideNavMenu = styled.div`
   margin-top: 25%;
@@ -35,8 +35,9 @@ export const SideNavMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   padding-left: 0%;
-`;
+`
 export const SideNavMenuItem = styled.h4`
   color: #000;
   font-size: 1.5vw;
@@ -60,7 +61,7 @@ export const SideNavMenuItem = styled.h4`
     padding-left: 19%;
     cursor: pointer;
   }
-`;
+`
 
 export const UserDetails = styled.div`
   position: fixed;
@@ -69,18 +70,18 @@ export const UserDetails = styled.div`
   width: 250px;
   flex-direction: column;
   align-items: center;
-`;
+`
 export const Logo = styled.div`
   height: 5em;
   display: flex;
   align-items: center;
-`;
+`
 
 export const Avatar = styled.img`
   height: 150px;
   width: 150px;
   border-radius: 50%;
-`;
+`
 
 export const Feedback = styled.button`
   border: none;
@@ -89,7 +90,7 @@ export const Feedback = styled.button`
   width: 100%;
   padding: 5% 0;
   margin: 4% 0;
-`;
+`
 
 export const UserButton = styled.button`
   border: none;
@@ -99,4 +100,4 @@ export const UserButton = styled.button`
   background: transparent;
   font-size: 1vw;
   color: #333;
-`;
+`
