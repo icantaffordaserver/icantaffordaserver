@@ -9,6 +9,8 @@ import AboutComponent from './AboutComponent'
 import AvailabilityComponent from './AvailabilityComponent'
 import SettingsComponent from './SettingsComponent'
 
+import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
+
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
 class ProfileComponent extends Component {
@@ -24,6 +26,7 @@ class ProfileComponent extends Component {
   }
 
   render() {
+    const user = this.props.user
     return (
       <Profile>
         <ProfileSection>
@@ -31,9 +34,14 @@ class ProfileComponent extends Component {
             active={this.state.currentTab}
             changeTab={this.changeTab.bind(this)}
           />
-          <ProfileAvatar src={this.props.user.profilePhoto.url} />
+          <ProfileAvatar
+            src={
+              (user.profilePhoto ? user.profilePhoto.url : null) ||
+              generateGravatarUrl(user.email)
+            }
+          />
           {this.state.currentTab === 'about' ? (
-            <AboutComponent user={this.props.user} />
+            <AboutComponent user={user} />
           ) : this.state.currentTab === 'availability' ? (
             <AvailabilityComponent />
           ) : this.state.currentTab === 'settings' ? (

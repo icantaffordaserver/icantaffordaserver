@@ -37,7 +37,8 @@ class Header extends React.Component {
   }
 
   render() {
-    const { firstName, lastName, isAdmin, navigateTo } = this.props
+    if (this.props.loading) return null
+    const { firstName, lastName, email, isAdmin, navigateTo } = this.props
     return (
       <SideNav>
         <Logo>
@@ -67,10 +68,7 @@ class Header extends React.Component {
         </SideNavMenu>
         <UserDetails>
           <Avatar
-            src={
-              this.props.profileImgSrc ||
-              generateGravatarUrl(this.props.user.email)
-            }
+            src={this.props.profileImgSrc || generateGravatarUrl(email)}
           />
           <h4>{firstName + ' ' + lastName}</h4>
           <p>50 minutes until your next talk.</p>

@@ -27,11 +27,13 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    if (this.props.data.loading) return null
+    if (this.props.data.loading && !this.props.data.user) return null
 
     // check if user is logged in
     const user =
       this.props.data && this.props.data.user ? this.props.data.user : null
+
+    console.log(user)
 
     // check for various properties
     const profilePhoto =
@@ -43,6 +45,7 @@ class HeaderContainer extends React.Component {
         : false
     return (
       <Header
+        loading={this.props.data.loading}
         isAdmin={isAdmin}
         firstName={user.firstName}
         lastName={user.lastName}
