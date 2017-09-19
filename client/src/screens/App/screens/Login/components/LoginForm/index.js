@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+
+
+
 import {
   Grid,
   Segment,
@@ -14,6 +17,7 @@ import {
 
 import logo from "../../../../shared/assets/logo.png";
 import productShot from "../../../../shared/assets/signup-shot1.jpg";
+
 import {
   LoginButton,
   FormLabel,
@@ -28,7 +32,8 @@ import {
   FormHeaderP,
   FormNextButton,
   FormSubmitButton,
-  ImageH1
+  ImageH1,
+  ImageP
 } from "./styles";
 import { validateLogin } from "./helpers";
 
@@ -87,6 +92,7 @@ class LoginForm extends Component {
             <ImageH1 style={{ fontFamily: "fabfeltscriptbold" }}>
               Toktumi
             </ImageH1>
+            <ImageP>Join The Community</ImageP>
           </OverLay>
         </ImageDiv>
         <Div className="column">

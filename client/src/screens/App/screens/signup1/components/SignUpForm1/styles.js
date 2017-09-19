@@ -109,3 +109,16 @@ export const ImageH1 = styled.h1`
     width: 66%
   }
 `;
+
+export const ImageP = styled.p`
+  &&&{
+    left: 0;
+    color: #fff;
+    font-size: 1.3em;
+    position: absolute;
+    text-align: center;
+    top: 55%;
+    width: 66.6%;
+    letter-spacing: 3px;
+  }
+`;
