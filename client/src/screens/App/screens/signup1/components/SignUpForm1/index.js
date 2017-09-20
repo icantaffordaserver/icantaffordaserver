@@ -58,6 +58,7 @@ class SignUp1 extends React.Component {
 
   onSubmit = (event, data) => {
     event.preventDefault() // prevent page reload
+    console.log(data)
     this.setState({ error: '' }) // clear any old errors
     const {
       firstName,

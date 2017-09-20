@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import SignUpForm1 from '../components/SignUpForm1'
 
 import signUpMutation from '../graphql/signUpMutation'
-import signInMutation from '../../../shared/graphql/mutations/signInMutation'
+import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
 class SignUpContainer1 extends Component {
@@ -35,11 +35,12 @@ class SignUpContainer1 extends Component {
           email: userData.email,
           password: userData.password,
           birthday: userData.birthday,
+          bio: userData.bio,
         },
       })
       .then(() =>
         // Sign user in after account creation
-        this.props.signInMutation({
+        this.props.authenticateEmailUser({
           variables: {
             email: userData.email,
             password: userData.password,
@@ -47,7 +48,10 @@ class SignUpContainer1 extends Component {
         }),
       )
       .then(res => {
-        window.localStorage.setItem('auth_token', res.data.signinUser.token)
+        window.localStorage.setItem(
+          'auth_token',
+          res.data.authenticateEmailUser.token,
+        )
       })
       .then(() => {
         this.setState({ loading: false })
@@ -64,6 +68,8 @@ class SignUpContainer1 extends Component {
             loading: false,
             error: 'Email is already associated with an account',
           })
+        } else {
+          console.error(error)
         }
       })
   }
@@ -83,6 +89,6 @@ export default compose(
   withRouter,
   withApollo,
   graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(signInMutation, { name: 'signInMutation' }),
+  graphql(authenticateEmailUserMutation, { name: 'authenticateEmailUser' }),
   graphql(currentUserQuery),
 )(SignUpContainer1)

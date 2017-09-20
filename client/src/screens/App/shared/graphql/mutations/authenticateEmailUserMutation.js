@@ -5,7 +5,7 @@ import { gql } from 'react-apollo'
 
 export default gql`
   mutation signIn($email: String!, $password: String!) {
-    signinUser(email: { email: $email, password: $password }) {
+    authenticateEmailUser(email: $email, password: $password) {
       token
     }
   }

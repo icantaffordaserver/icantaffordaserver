@@ -1,6 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Header, Message, Grid, Form, Input, Button, Icon, Segment } from 'semantic-ui-react'
+import {
+  Header,
+  Message,
+  Grid,
+  Form,
+  Input,
+  Button,
+  Icon,
+  Segment,
+} from 'semantic-ui-react'
 
 class ResetPasswordForm extends React.Component {
   static propTypes = {
@@ -21,9 +30,15 @@ class ResetPasswordForm extends React.Component {
     const { password, confirm } = this.state
     // basic validation for the password fields
     if (password !== confirm) {
-      return this.setState({ error: true, errorMessage: 'Passwords do not match' })
+      return this.setState({
+        error: true,
+        errorMessage: 'Passwords do not match',
+      })
     } else if (password === '' || confirm === '') {
-      return this.setState({ error: true, errorMessage: 'Please complete both password fields' })
+      return this.setState({
+        error: true,
+        errorMessage: 'Please complete both password fields',
+      })
     }
     // clear the error if there was one previously
     this.setState({ error: false, errorMessage: '' })
@@ -37,9 +52,14 @@ class ResetPasswordForm extends React.Component {
         {this.props.success && <Icon name="check circle" />}
         {this.props.error && <Icon name="warning" />}
         <Message.Content>
-          {this.props.success && <Message.Header>Password reset succesfully</Message.Header>}
-          {this.props.error &&
-            <Message.Header>We were unable to reset your password</Message.Header>}
+          {this.props.success && (
+            <Message.Header>Password reset succesfully</Message.Header>
+          )}
+          {this.props.error && (
+            <Message.Header>
+              We were unable to reset your password
+            </Message.Header>
+          )}
         </Message.Content>
       </Message>
     )
@@ -54,7 +74,8 @@ class ResetPasswordForm extends React.Component {
           <Form onSubmit={this.handleSubmit} size="large">
             <Segment padded>
               <Header as="h3">
-                Enter your email address below and we'll send you password reset instructions.
+                Enter your email address below and we'll send you password reset
+                instructions.
               </Header>
               <Form.Field inline>
                 <Input
@@ -80,8 +101,15 @@ class ResetPasswordForm extends React.Component {
                   value={this.state.confirm}
                 />
               </Form.Field>
-              {this.state.error && <Header as="h5" content={this.state.errorMessage} color="red" />}
-              <Button fluid color="teal" size="large" loading={this.props.loading}>
+              {this.state.error && (
+                <Header as="h5" content={this.state.errorMessage} color="red" />
+              )}
+              <Button
+                fluid
+                color="teal"
+                size="large"
+                loading={this.props.loading}
+              >
                 Reset Password
               </Button>
             </Segment>
