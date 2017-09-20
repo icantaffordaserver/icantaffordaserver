@@ -7,7 +7,6 @@ import {
   SignUpImg,
   Div,
   OverLay,
-  FormDiv,
   ImageDiv,
   FormSegment,
   FormHeaderP,
@@ -20,10 +19,6 @@ import {
 import {
   Form,
   Header,
-  Segment,
-  Grid,
-  Button,
-  Container,
   Checkbox,
   Message,
 } from 'semantic-ui-react'
@@ -51,6 +46,7 @@ class SignUp1 extends React.Component {
     bio: '',
     location: '',
     interests: [],
+    suggestedInterest: '',
     error: '',
     showPassword: false,
     formStep: 0,
@@ -69,6 +65,7 @@ class SignUp1 extends React.Component {
       bio,
       location,
       interests,
+      suggestedInterest
     } = this.state
 
     const signUpErrors = validateSignUp(this.state)
@@ -85,9 +82,7 @@ class SignUp1 extends React.Component {
       email,
       password,
       birthday,
-      bio,
-      location,
-      interests,
+      bio
     })
   }
   addInterest = interest => {
@@ -265,6 +260,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest1"
                 />
               </a>
               <p>Interest Name</p>
@@ -278,6 +274,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest2"
                 />
               </a>
               <p>Interest Name</p>
@@ -291,6 +288,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest3"
                 />
               </a>
               <p>Interest Name</p>
@@ -304,6 +302,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest4"
                 />
               </a>
               <p>Interest Name</p>
@@ -319,6 +318,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest5"
                 />
               </a>
               <p>Interest Name</p>
@@ -332,6 +332,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest6"
                 />
               </a>
               <p>Interest Name</p>
@@ -345,6 +346,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest7"
                 />
               </a>
               <p>Interest Name</p>
@@ -358,6 +360,7 @@ class SignUp1 extends React.Component {
                 <img
                   style={{ borderRadius: '50px' }}
                   src="http://bulma.io/images/placeholders/64x64.png"
+                  alt="interest8"
                 />
               </a>
               <p>Interest Name</p>
@@ -372,7 +375,7 @@ class SignUp1 extends React.Component {
               name="interests"
               placeholder="List any other interests you have!"
               onChange={this.handleChange}
-              value={this.state.interests}
+              value={this.state.suggestedInterest}
             />
           </Div>
         </Form.Field>

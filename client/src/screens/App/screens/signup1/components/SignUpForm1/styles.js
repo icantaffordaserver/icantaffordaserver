@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import productShot from '../../assets/images/signup-shot1.jpg'
 import { Segment } from 'semantic-ui-react'
 
 export const FormH1 = styled.h1`
