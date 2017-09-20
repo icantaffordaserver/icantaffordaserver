@@ -1,19 +1,34 @@
-import React from "react";
+import React from 'react'
+
+import { Tab, TabMenu } from './style'
 
 export default props => {
   return (
-    <ul>
+    <TabMenu>
       <li>
-        <button onClick={e => props.changeTab(e, "about")}>About</button>
+        <Tab
+          active={props.active === 'about'}
+          onClick={e => props.changeTab(e, 'about')}
+        >
+          About
+        </Tab>
       </li>
       <li>
-        <button onClick={e => props.changeTab(e, "availability")}>
+        <Tab
+          active={props.active === 'availability'}
+          onClick={e => props.changeTab(e, 'availability')}
+        >
           Availability
-        </button>
+        </Tab>
       </li>
       <li>
-        <button onClick={e => props.changeTab(e, "settings")}>Settings</button>
+        <Tab
+          active={props.active === 'settings'}
+          onClick={e => props.changeTab(e, 'settings')}
+        >
+          Settings
+        </Tab>
       </li>
-    </ul>
-  );
-};
+    </TabMenu>
+  )
+}

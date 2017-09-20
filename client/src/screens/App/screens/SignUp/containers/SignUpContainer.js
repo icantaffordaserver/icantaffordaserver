@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 import SignUpForm from '../components/SignUpForm'
 
 import signUpMutation from '../graphql/signUpMutation'
-import signInMutation from '../../../shared/graphql/mutations/signInMutation'
+import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
 
 class SignUpContainer extends React.Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class SignUpContainer extends React.Component {
         },
       })
 
-      const signInResponse = await this.props.signInMutation({
+      const signInResponse = await this.props.authenticateEmailUserMutation({
         variables: {
           email,
           password,
@@ -42,7 +42,10 @@ class SignUpContainer extends React.Component {
       })
 
       // save the token in local storage, reset the store to requery user data, and redirect to dashboard
-      localStorage.setItem('auth_token', signInResponse.data.signinUser.token) // save token
+      localStorage.setItem(
+        'auth_token',
+        signInResponse.data.authenticateEmailUser.token,
+      ) // save token
       this.props.client.resetStore()
       this.props.history.push('/dashboard')
     } catch (error) {
@@ -72,5 +75,7 @@ export default compose(
   withRouter,
   withApollo,
   graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(signInMutation, { name: 'signInMutation' }),
+  graphql(authenticateEmailUserMutation, {
+    name: 'authenticateEmailUserMutation',
+  }),
 )(SignUpContainer)
