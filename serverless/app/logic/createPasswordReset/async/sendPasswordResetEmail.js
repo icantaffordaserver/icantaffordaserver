@@ -1,49 +1,32 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import { sendPasswordResetEmail } from 'mailer'
-import client from '../../../graphql/lokkaClient'
+import { sendPasswordResetEmail } from "../../../mailer";
+import { createClient } from "../../../../config/GraphQLClient";
 
-const getPasswordResetQuery = `
-  query getPwId($passwordResetId: ID!) {
-    getPasswordReset(id: $passwordResetId) {
-      email
-      resetToken
-      resetExpires
-      securityInfo
-      user {
-        firstName
-      }
-    }
-  }
-`
+import getPasswordResetQuery from "../../../graphql/queries/getPasswordResetQuery";
 
 export default async (req, res) => {
-  try {
-    const { id } = req.body.payload.changedPasswordReset
-    // have to fetch the data from scaphold because permissions don't pass this to async
-    // function, probably a better way to structure the permissions but will optimize later, TODO
-    const passwordResetResponse = await client.query(getPasswordResetQuery, {
-      passwordResetId: id,
+  const id = req.body.data.PasswordReset.node.id;
+  const client = createClient();
+
+  client
+    .request(getPasswordResetQuery, { id })
+    .then(response => {
+      const token = response.PasswordReset.token;
+      const { firstName, email } = response.PasswordReset.user;
+      const actionUrl = `https://toktumi-client.ngrok.io/reset/${id}/${token}`;
+      return sendPasswordResetEmail({
+        firstName,
+        recipientEmail: email,
+        actionUrl,
+        operatingSystem: "temporary",
+        browserName: "temporary"
+      });
     })
-    const {
-      email,
-      user: { firstName },
-      securityInfo,
-      resetToken,
-    } = passwordResetResponse.getPasswordReset
-    const actionUrl = `localhost:3000/reset/${id}/${resetToken}`
-    await sendPasswordResetEmail({
-      firstName,
-      recipientEmail: email,
-      actionUrl,
-      operatingSystem: securityInfo.os,
-      browserName: securityInfo.browser,
-    })
-    // send the data along the "logic" flow in the expected format to update the store
-    res.sendStatus(200)
-  } catch (err) {
-    console.log(err)
-    return res.status(400).send(err)
-  }
-}
+    .then(() => res.status(200).send({ message: "Password Reset email sent." }))
+    .catch(err => {
+      console.error(err);
+      res.status(400).send({ message: "Email not sent" });
+    });
+};
