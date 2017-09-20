@@ -11,7 +11,8 @@ export function validateSignUp(obj) {
     isEmpty(obj.password) ||
     isEmpty(obj.birthday) ||
     isEmpty(obj.bio) ||
-    isEmpty(obj.location)
+    isEmpty(obj.location) ||
+    isEmpty(obj.suggestedInterest)
   if (isFieldEmpty) return 'All fields must be completed'
   const isEmailValid = isEmail(obj.email)
   if (!isEmailValid) return 'Please enter a valid email'

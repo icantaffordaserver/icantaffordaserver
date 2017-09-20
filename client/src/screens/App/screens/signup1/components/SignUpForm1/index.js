@@ -51,6 +51,7 @@ class SignUp1 extends React.Component {
     bio: '',
     location: '',
     interests: [],
+    suggestedInterest: '',
     error: '',
     showPassword: false,
     formStep: 0,
@@ -68,6 +69,7 @@ class SignUp1 extends React.Component {
       bio,
       location,
       interests,
+      suggestedInterest
     } = this.state
 
     const signUpErrors = validateSignUp(this.state)
@@ -87,6 +89,7 @@ class SignUp1 extends React.Component {
       bio,
       location,
       interests,
+      suggestedInterest
     })
   }
   addInterest = interest => {
@@ -371,7 +374,7 @@ class SignUp1 extends React.Component {
               name="interests"
               placeholder="List any other interests you have!"
               onChange={this.handleChange}
-              value={this.state.interests}
+              value={this.state.suggestedInterest}
             />
           </Div>
         </Form.Field>
