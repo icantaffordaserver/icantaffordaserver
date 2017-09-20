@@ -15,8 +15,9 @@ export default gql`
       gender
       location
       bio
-      typeformProfileComplete
-      typeformProfile
+      passwordReset {
+        complete
+      }
       availability
       profilePhoto {
         url

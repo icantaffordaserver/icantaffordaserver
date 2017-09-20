@@ -14,24 +14,23 @@ class ForgotPasswordContainer extends React.Component {
   }
   state = { loading: false, success: false, error: false, message: '' }
 
-  handleSubmit = async email => {
-    try {
-      this.setState({ loading: true })
-      const securityInfo = {
-        // save security info to send in reset email
-        browser: `${platform.name} ${platform.version}`,
-        os: `${platform.os.family} ${platform.os.version}`,
-      }
-      await this.props.mutate({ variables: { email, securityInfo } })
-      this.setState({
-        loading: false,
-        success: true,
-        error: false,
-        message: 'Check your inbox for password reset instructions.',
-      })
-    } catch (err) {
-      this.setState({ loading: false, success: false, error: true, message: err.message })
+  handleSubmit = email => {
+    this.setState({ loading: true })
+    const securityInfo = {
+      // save security info to send in reset email
+      browser: `${platform.name} ${platform.version}`,
+      os: `${platform.os.family} ${platform.os.version}`,
     }
+
+    this.props
+      .mutate({ variables: { email } })
+      .then(() => this.setState({ success: true }))
+      .then(() => {
+        //Log user out until password is reset.
+        window.localStorage.removeItem('auth_token')
+        this.props.client.resetStore()
+      })
+      .catch(err => console.error(err))
   }
 
   render() {

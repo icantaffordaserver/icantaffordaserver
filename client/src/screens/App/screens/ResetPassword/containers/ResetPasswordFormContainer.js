@@ -17,6 +17,11 @@ class ResetPasswordContainer extends React.Component {
 
   state = { loading: false, success: false, error: false }
 
+  componentWillMount = () => {
+    // Remove the confirmation token from the URL
+    window.history.pushState(null, null, '/verify')
+  }
+
   async handleSubmit(password) {
     const { id, token } = this.props.match.params
     try {
