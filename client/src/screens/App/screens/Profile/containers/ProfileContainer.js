@@ -69,8 +69,10 @@ class ProfileContainer extends Component {
 }
 
 export default compose(
+  isVerified,
+  isAuthenticated,
   graphql(currentUserQuery),
   graphql(updateUserMutation, { name: 'updateUser' }),
   withApollo,
   withRouter,
-)(isVerified(isAuthenticated(ProfileContainer)))
+)(ProfileContainer)
