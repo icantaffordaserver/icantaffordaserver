@@ -121,3 +121,25 @@ export const ImageP = styled.p`
     letter-spacing: 3px;
   }
 `
+
+export const InterestsImg = styled.img`
+  &&& {
+    filter: grayscale(100%);
+    &.active {
+      filter: grayscale(0%);
+    }
+  }
+`
+export const InterestsDiv = styled.div`
+  &&& {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+`
+
+export const GenericCenterP = styled.p`
+  &&& {
+    text-align: center;
+  }
+`
