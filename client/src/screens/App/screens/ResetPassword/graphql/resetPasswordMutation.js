@@ -4,8 +4,8 @@
 import { gql } from 'react-apollo'
 
 export default gql`
-  mutation resetPassword($id: ID!, $password: String!) {
-    updatePassword(id: $id, newPassword: $password) {
+  mutation resetPassword($email: String!, $password: String!) {
+    updatePassword(email: $email, newPassword: $password) {
       id
     }
   }

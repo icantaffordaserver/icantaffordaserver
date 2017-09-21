@@ -56,9 +56,7 @@ class ResetPasswordForm extends React.Component {
             <Message.Header>Password reset succesfully</Message.Header>
           )}
           {this.props.error && (
-            <Message.Header>
-              We were unable to reset your password
-            </Message.Header>
+            <Message.Header>{this.props.error}</Message.Header>
           )}
         </Message.Content>
       </Message>
