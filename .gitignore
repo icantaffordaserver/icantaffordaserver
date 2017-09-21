@@ -17,6 +17,7 @@ coverage
 
 # API keys
 .env
+env.yml
 
 # Dependency directory
 node_modules
