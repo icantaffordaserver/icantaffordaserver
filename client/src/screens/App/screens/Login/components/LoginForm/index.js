@@ -132,7 +132,7 @@ class LoginForm extends Component {
               <Div className="columns">
                 <Div className="column">
                   <Link to="/">
-                    <FormLink href="/"> Forgot Passowrd? </FormLink>
+                    <FormLink href="/"> Forgot Password? </FormLink>
                   </Link>
                 </Div>
                 <Div className="column">
