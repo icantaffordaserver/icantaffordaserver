@@ -16,12 +16,7 @@ import {
   ImageP,
 } from './styles'
 
-import {
-  Form,
-  Header,
-  Checkbox,
-  Message,
-} from 'semantic-ui-react'
+import { Form, Header, Checkbox, Message } from 'semantic-ui-react'
 
 import productShot from '../../assets/images/signup-shot1.jpg'
 
@@ -65,7 +60,7 @@ class SignUp1 extends React.Component {
       bio,
       location,
       interests,
-      suggestedInterest
+      suggestedInterest,
     } = this.state
 
     const signUpErrors = validateSignUp(this.state)
@@ -82,7 +77,7 @@ class SignUp1 extends React.Component {
       email,
       password,
       birthday,
-      bio
+      bio,
     })
   }
   addInterest = interest => {

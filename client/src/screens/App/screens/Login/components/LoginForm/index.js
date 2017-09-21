@@ -1,9 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-
-
-
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import {
   Grid,
@@ -12,11 +9,11 @@ import {
   Image,
   Form,
   Divider,
-  Message
-} from "semantic-ui-react";
+  Message,
+} from 'semantic-ui-react'
 
-import logo from "../../../../shared/assets/logo.png";
-import productShot from "../../../../shared/assets/signup-shot1.jpg";
+import logo from '../../../../shared/assets/logo.png'
+import productShot from '../../../../shared/assets/signup-shot1.jpg'
 
 import {
   LoginButton,
@@ -33,63 +30,63 @@ import {
   FormNextButton,
   FormSubmitButton,
   ImageH1,
-  ImageP
-} from "./styles";
-import { validateLogin } from "./helpers";
+  ImageP,
+} from './styles'
+import { validateLogin } from './helpers'
 
 class LoginForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    error: PropTypes.string
-  };
+    error: PropTypes.string,
+  }
 
   static defaultProps = {
-    error: ""
-  };
+    error: '',
+  }
 
   state = {
-    email: "",
-    password: "",
-    error: ""
-  };
+    email: '',
+    password: '',
+    error: '',
+  }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   handleSubmit = (event, data) => {
-    event.preventDefault(); // prevent page reload
-    this.setState({ error: "" }); // clear any old errors
-    const { email, password } = data.formData;
-    const loginErrors = validateLogin(email, password);
-    if (typeof loginErrors === "string") {
+    event.preventDefault() // prevent page reload
+    this.setState({ error: '' }) // clear any old errors
+    const { email, password } = data.formData
+    const loginErrors = validateLogin(email, password)
+    if (typeof loginErrors === 'string') {
       // if validate login returns string we have an error
-      this.setState({ error: loginErrors });
-      return;
+      this.setState({ error: loginErrors })
+      return
     }
-    this.props.onSubmit(email, password);
-  };
+    this.props.onSubmit(email, password)
+  }
 
   renderErrors = () => {
-    if (this.state.error !== "") {
-      return <Message error header={this.state.error} />;
+    if (this.state.error !== '') {
+      return <Message error header={this.state.error} />
     }
-    if (this.props.error !== "") {
-      return <Message error header={this.props.error} />;
+    if (this.props.error !== '') {
+      return <Message error header={this.props.error} />
     }
-    return null;
-  };
+    return null
+  }
 
   render() {
-    const error = this.state.error !== "" || this.props.error !== "";
+    const error = this.state.error !== '' || this.props.error !== ''
 
     return (
-      <Div style={{ margin: "0", padding: "0" }} className="columns">
+      <Div style={{ margin: '0', padding: '0' }} className="columns">
         <ImageDiv className="column is-two-thirds">
           <OverLay>
             <SignUpImg src={productShot} alt="coffee shop" />
-            <ImageH1 style={{ fontFamily: "fabfeltscriptbold" }}>
+            <ImageH1 style={{ fontFamily: 'fabfeltscriptbold' }}>
               Toktumi
             </ImageH1>
             <ImageP>Join The Community</ImageP>
@@ -148,8 +145,8 @@ class LoginForm extends Component {
           </Form>
         </Div>
       </Div>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm
