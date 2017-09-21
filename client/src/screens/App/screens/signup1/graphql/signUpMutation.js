@@ -10,17 +10,15 @@ export default gql`
     $firstName: String!
     $lastName: String!
     $birthday: String!
-    $bio: String
-    $mutationVariables: Json
+    $bio: String!
   ) {
-    createUser(
+    signupUser(
       email: $email
       password: $password
       firstName: $firstName
       lastName: $lastName
       birthday: $birthday
       bio: $bio
-      mutationVariables: $mutationVariables
     ) {
       id
     }

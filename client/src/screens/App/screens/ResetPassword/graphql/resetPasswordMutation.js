@@ -4,9 +4,9 @@
 import { gql } from 'react-apollo'
 
 export default gql`
-  mutation resetPassword($id: ID!, $token: String!, $password: String!) {
-    updatePasswordReset(input: {id: $id, resetToken: $token, newPassword: $password,}) {
-      clientMutationId
+  mutation resetPassword($id: ID!, $password: String!) {
+    updatePassword(id: $id, newPassword: $password) {
+      id
     }
   }
 `

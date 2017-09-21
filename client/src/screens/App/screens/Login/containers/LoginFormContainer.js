@@ -71,7 +71,6 @@ class LoginContainer extends React.Component {
         this.props.client.resetStore()
       })
       .catch(error => {
-        console.error(error)
         if (
           error.message.includes('Could not find a user with that username')
         ) {
