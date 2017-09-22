@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
+import { isEmail } from 'validator'
 
 import isVerified from '../../../shared/HoCs/isVerified'
 import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
@@ -31,6 +32,12 @@ class ProfileContainer extends Component {
   handleEditProfile = userData => {
     //TODO: Figure out how to edit user email and password
     this.setState({ loading: true })
+    if (userData.email) {
+      if (!isEmail(userData.email)) {
+        this.setState({ error: true })
+        return
+      }
+    }
     this.props
       .updateUser({
         variables: {
@@ -39,6 +46,7 @@ class ProfileContainer extends Component {
           lastName: userData.lastName,
           bio: userData.bio,
           location: userData.location,
+          email: userData.email,
           profilePhotoId: userData.profilePhoto,
         },
         refetchQueries: [{ query: currentUserQuery }],

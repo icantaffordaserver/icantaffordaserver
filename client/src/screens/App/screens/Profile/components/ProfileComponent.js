@@ -45,7 +45,12 @@ class ProfileComponent extends Component {
           ) : this.state.currentTab === 'availability' ? (
             <AvailabilityComponent />
           ) : this.state.currentTab === 'settings' ? (
-            <SettingsComponent onSubmit={this.props.onSettingChange} />
+            <SettingsComponent
+              user={user}
+              onSubmit={this.props.onSettingChange}
+              error={this.props.error}
+              success={this.props.success}
+            />
           ) : null}
         </ProfileSection>
       </Profile>

@@ -5,8 +5,16 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import Dropzone from 'react-dropzone'
 
 import axios from 'axios'
+import { Message } from 'semantic-ui-react'
 
-import { SettingsForm, SettingsFormGroup, SettingsFormItem } from './style'
+import {
+  SettingsForm,
+  SettingsFormGroup,
+  SettingsFormLabel,
+  SettingsFormInput,
+  SettingsFormTextArea,
+  SettingsFormButton,
+} from './style'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
@@ -37,7 +45,7 @@ class SettingsComponent extends Component {
   onSubmit(e) {
     e.preventDefault()
     this.props.onSubmit(this.state)
-    this.props.history.push('/profile')
+    //this.props.history.push('/profile')
   }
 
   onFileUpload(files) {
@@ -53,53 +61,82 @@ class SettingsComponent extends Component {
         const { id, url } = response.data
         this.setState({ profilePhoto: id, imageUrl: url })
       })
-      .then(() => {
-        this.props.onSubmit(this.state)
-      })
       .catch(err => console.error(err))
+  }
+
+  renderMessages() {
+    if (this.props.error) return <Message>An error occured</Message>
+    if (this.props.success) return <Message>Successful!</Message>
   }
   render() {
     return (
       <SettingsForm onSubmit={e => this.onSubmit(e)}>
+        {this.renderMessages()}
         <SettingsFormGroup>
-          <SettingsFormItem style={{ flex: ' 1 auto', order: '1' }}>
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              name="firstName"
-              type="text"
-              onChange={e => this.handleChange(e)}
-            />
-          </SettingsFormItem>
-          <SettingsFormItem style={{ flex: ' 1 auto', order: '1' }}>
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              name="lastName"
-              type="text"
-              onChange={e => this.handleChange(e)}
-            />
-          </SettingsFormItem>
-          <SettingsFormItem style={{ flex: ' 1 100%', order: '2' }}>
-            <label htmlFor="bio">Bio:</label>
-            <textarea
-              maxLength="250"
-              name="bio"
-              onChange={e => this.handleChange(e)}
-            />
-          </SettingsFormItem>
-
-          <SettingsFormItem style={{ flex: ' 1 100%', order: '3' }}>
-            {!this.state.imageId && (
-              <Dropzone
-                onDrop={this.onFileUpload}
-                accept="image/*"
-                multiple={false}
-              >
-                <div>Drop an image or click to choose</div>
-              </Dropzone>
-            )}
-          </SettingsFormItem>
+          <SettingsFormLabel htmlFor="firstName">First Name:</SettingsFormLabel>
+          <SettingsFormInput
+            name="firstName"
+            type="text"
+            placeholder={this.props.user.firstName}
+            onChange={e => this.handleChange(e)}
+          />
         </SettingsFormGroup>
-        <input type="submit" />
+        <SettingsFormGroup>
+          <SettingsFormLabel htmlFor="lastName">Last Name:</SettingsFormLabel>
+          <SettingsFormInput
+            name="lastName"
+            type="text"
+            placeholder={this.props.user.lastName}
+            onChange={e => this.handleChange(e)}
+          />
+        </SettingsFormGroup>
+        <SettingsFormGroup>
+          <SettingsFormLabel htmlFor="email">Email:</SettingsFormLabel>
+          <SettingsFormInput
+            name="email"
+            type="text"
+            placeholder={this.props.user.email}
+            onChange={e => this.handleChange(e)}
+          />
+        </SettingsFormGroup>
+        <SettingsFormGroup>
+          <SettingsFormLabel htmlFor="bio">Bio:</SettingsFormLabel>
+          <SettingsFormTextArea
+            maxLength="250"
+            name="bio"
+            placeholder={this.props.user.bio}
+            onChange={e => this.handleChange(e)}
+          />
+        </SettingsFormGroup>
+
+        <SettingsFormGroup>
+          <SettingsFormLabel>Profile Photo:</SettingsFormLabel>
+          {!this.state.imageId && (
+            <Dropzone
+              onDrop={this.onFileUpload}
+              accept="image/*"
+              multiple={false}
+              style={{
+                display: 'flex',
+                width: 'fill-available',
+                padding: '10px',
+                border: 'solid 1px lightgray',
+                borderRadius: '5px',
+                height: '250px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2em',
+                color: 'lightgray',
+              }}
+            >
+              Click or drag and drop an image.
+            </Dropzone>
+          )}
+        </SettingsFormGroup>
+
+        <SettingsFormButton loading={this.props.loading}>
+          Submit
+        </SettingsFormButton>
       </SettingsForm>
     )
   }

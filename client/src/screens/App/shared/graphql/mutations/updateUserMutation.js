@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-06.
  */
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
 export default gql`
   mutation updateAccount(
@@ -11,6 +11,7 @@ export default gql`
     $location: String
     $bio: String
     $profilePhotoId: ID
+    $email: String
   ) {
     updateUser(
       id: $id
@@ -18,6 +19,7 @@ export default gql`
       lastName: $lastName
       location: $location
       bio: $bio
+      email: $email
       profilePhotoId: $profilePhotoId
     ) {
       id
@@ -25,4 +27,4 @@ export default gql`
       lastName
     }
   }
-`;
+`
