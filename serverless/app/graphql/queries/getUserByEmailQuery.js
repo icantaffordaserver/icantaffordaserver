@@ -5,16 +5,10 @@
 export default `
   query getUser($email: String){
     User(email: $email){
-            id
-            firstName
-            emailVerified
-            verifyEmail {
-              id
-              emailToVerify
-              token
-              expiry
-            }
-          }
-        }
-
-`
+        id,
+        firstName,
+        lastName,
+        password
+      }
+    }
+`;

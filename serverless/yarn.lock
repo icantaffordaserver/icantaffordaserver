@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/node@^7.0.14":
+  version "7.0.43"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.43.tgz#a187e08495a075f200ca946079c914e1a5fe962c"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1323,6 +1327,13 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bcrypt@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/bcrypt/-/bcrypt-1.0.3.tgz#b02ddc6c0b52ea16b8d3cf375d5a32e780dab548"
+  dependencies:
+    nan "2.6.2"
+    node-pre-gyp "0.6.36"
+
 big.js@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-3.1.3.tgz#4cada2193652eb3ca9ec8e55c9015669c9806978"
@@ -2643,13 +2654,21 @@ graceful-fs@^4.1.0, graceful-fs@^4.1.10, graceful-fs@^4.1.2, graceful-fs@^4.1.4,
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+graphcool-lib@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/graphcool-lib/-/graphcool-lib-0.0.3.tgz#c7277782d975a6dd428c217409f7d8a44be0cc0e"
+  dependencies:
+    "@types/node" "^7.0.14"
+    graphql-request "^1.2.0"
+    source-map-support "^0.4.15"
+
 graphlib@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/graphlib/-/graphlib-2.1.1.tgz#42352c52ba2f4d035cb566eb91f7395f76ebc951"
   dependencies:
     lodash "^4.11.1"
 
-graphql-request@^1.3.6:
+graphql-request@^1.2.0, graphql-request@^1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-1.3.6.tgz#7257d9c539e747b7ef8dbafc04e4a4231ca94464"
   dependencies:
@@ -3454,7 +3473,7 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.3.0:
+nan@2.6.2, nan@^2.3.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
@@ -3518,6 +3537,20 @@ node-libs-browser@^2.0.0:
     url "^0.11.0"
     util "^0.10.3"
     vm-browserify "0.0.4"
+
+node-pre-gyp@0.6.36:
+  version "0.6.36"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.6.36.tgz#db604112cb74e0d477554e9b505b17abddfab786"
+  dependencies:
+    mkdirp "^0.5.1"
+    nopt "^4.0.1"
+    npmlog "^4.0.2"
+    rc "^1.1.7"
+    request "^2.81.0"
+    rimraf "^2.6.1"
+    semver "^5.3.0"
+    tar "^2.2.1"
+    tar-pack "^3.4.0"
 
 node-pre-gyp@^0.6.29:
   version "0.6.34"
