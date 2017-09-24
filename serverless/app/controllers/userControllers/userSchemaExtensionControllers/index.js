@@ -5,6 +5,7 @@ import {
   signUpUser,
   authenticateUser,
   updatePassword,
+  sendBetaInvite,
 } from './handlers'
 
 const routes = Router()
@@ -14,6 +15,6 @@ routes.post('/triggerPasswordReset', triggerPasswordReset)
 routes.post('/signUpUser', signUpUser)
 routes.post('/authenticateUser', authenticateUser)
 routes.post('/updatePassword', updatePassword)
-//routes.post('/sendPasswordResetEmail', sendPasswordResetEmail)
+routes.post('/sendBetaInvite', sendBetaInvite)
 
 export default routes

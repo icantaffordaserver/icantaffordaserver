@@ -57,17 +57,17 @@ class SignUp1 extends React.Component {
     event.preventDefault() // prevent page reload
 
     this.setState({ error: '' }) // clear any old errors
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      birthday,
-      bio,
-      location,
-      interests,
-      suggestedInterest,
-    } = this.state
+    // const {
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   password,
+    //   birthday,
+    //   bio,
+    //   location,
+    //   interests,
+    //   suggestedInterest,
+    // } = this.state
 
     const signUpErrors = validateSignUp(this.state)
     if (typeof signUpErrors === 'string') {
@@ -78,12 +78,12 @@ class SignUp1 extends React.Component {
       return
     }
     this.props.onSubmit({
-      firstName,
-      lastName,
-      email,
-      password,
-      birthday,
-      bio,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+      birthday: this.state.birthday,
+      bio: this.state.bio,
     })
   }
   addInterest = (interest, event) => {

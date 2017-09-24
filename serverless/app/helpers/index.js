@@ -1,4 +1,7 @@
 import crypto from 'crypto'
+import { isEmail } from 'validator'
+
+import getUserByEmailQuery from '../graphql/queries/getUserByEmailQuery'
 
 /**
  * Generate a unique token
@@ -17,7 +20,7 @@ export function generateUniqueToken() {
 }
 
 export function generateInviteEmailUrl(inviteId, token) {
-  return `https://beta.toktumi.io/signup/${inviteId}/${token}`
+  return `https://toktumi-client.ngrok.io/signUp1/${inviteId}/${token}`
 }
 
 export function generateExpiryDate() {
@@ -27,4 +30,16 @@ export function generateExpiryDate() {
 
 export function generateEmailVerificationUrl(token) {
   return `https://toktumi-client.ngrok.io/verify/${token}`
+}
+
+export async function isValidEmail(email, client) {
+  if (!isEmail(email)) return false
+
+  const userExits = await client.request(getUserByEmailQuery, {
+    email,
+  })
+
+  if (userExits.User) return false
+
+  return true
 }

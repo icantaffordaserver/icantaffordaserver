@@ -7,7 +7,15 @@ import getUserByEmailQuery from '../../../../../graphql/queries/getUserByEmailQu
 import createUserMutation from '../../../../../graphql/mutations/createUserMutation'
 
 export default async (req, res) => {
-  const { firstName, lastName, email, password, birthday, bio } = req.body.data
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    birthday,
+    bio,
+    inviteId,
+  } = req.body.data
   const client = createClient()
   const SALT_ROUNDS = 10
 
@@ -26,10 +34,25 @@ export default async (req, res) => {
       password: hashedPassword,
       birthday,
       bio,
+      inviteId,
     }
-    await client.request(createUserMutation, variables)
+    const userResponse = await client.request(createUserMutation, variables)
 
-    res.status(200).send({ message: 'User successfully created.' })
+    if (inviteId) {
+      // Update invite to show it's been accepted.
+      await client.request(
+        `
+        mutation updateInvite($id: ID!, $userId: ID!){
+          updateInvites(id: $id, isAccepted: true, status: ACCEPTED, acceptedUserId: $userId){
+            id
+          }
+        }
+        `,
+        { id: inviteId, userId: userResponse.createUser.id },
+      )
+    }
+
+    res.status(200).send({ data: { id: userResponse.createUser.id } })
   } catch (error) {
     console.error(error)
     res.status(400).send({ message: error.message })
