@@ -8,6 +8,7 @@ import InputComponent from './components/InputComponent'
 import FormFooterComponent from './components/FormFooterComponent'
 import InterestsComponent from './components/InterestsComponent'
 import TextareaComponent from './components/TextareaComponent'
+import InputLocationComponent from './components/InputLocationComponent'
 
 import {
   FormH1,
@@ -134,11 +135,14 @@ class SignUp1 extends React.Component {
       this.state.interests.push(interest)
       image.classList.add('active')
     }
-    console.log(this.state.interests)
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleLocationChange = event => {
+    this.setState({ location: event })
   }
 
   handleTagChange = event => {
@@ -294,11 +298,9 @@ class SignUp1 extends React.Component {
         </Form.Field>
 
         <Form.Field>
-          <InputComponent
-            name="location"
-            placeholder="Location"
-            value={this.state.location}
-            handleChange={this.handleChange.bind(this)}
+          <InputLocationComponent
+            location={this.state.location}
+            handleLocationChange={this.handleLocationChange.bind(this)}
           />
         </Form.Field>
 
