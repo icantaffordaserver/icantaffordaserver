@@ -15,10 +15,8 @@ export default async (req, res) => {
   try {
     const client = createClient()
     const response = await client.request(getUserByEmailQuery, { email })
-
-    if (!response.User) throw new Error('Invalid Credentials.')
-
     const user = response.User
+    if (!user) throw new Error('Invalid Credentials.')
 
     const isCorrectPassword = await bcrypt.compare(password, user.password)
     if (!isCorrectPassword) throw new Error('Invalid Credentials.')

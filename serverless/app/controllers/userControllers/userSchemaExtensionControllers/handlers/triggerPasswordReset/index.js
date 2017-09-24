@@ -20,8 +20,7 @@ export default async (req, res) => {
         }
       }`)
 
-    console.log(response)
-    if (!response) throw new Error('Invalid Credentials.')
+    if (!response.User) throw new Error('Invalid Credentials.')
 
     const variables = {
       token: await generateUniqueToken(),
