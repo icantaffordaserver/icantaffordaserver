@@ -1,3 +1,5 @@
+import { isEmail } from 'validator'
+
 import { createClient } from '../../../../../../config/GraphQLClient'
 import sendVerificationEmail from '../../../../../mailer/emails/sendVerificationEmail.js'
 import {
@@ -5,8 +7,6 @@ import {
   generateEmailVerificationUrl,
   generateExpiryDate,
 } from '../../../../../helpers/'
-
-import { isEmail } from 'validator'
 
 import createVerifyEmailMutation from '../../../../../graphql/mutations/createVerifyEmailMutation'
 import getUserByEmailQuery from '../../../../../graphql/queries/getUserByEmailQuery'

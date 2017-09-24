@@ -20,6 +20,10 @@ export function generateInviteEmailUrl(inviteId, token) {
   return `https://beta.toktumi.io/signup/${inviteId}/${token}`
 }
 
+export function getPasswordResetUrl(id, token) {
+  return `https://toktumi-client.ngrok.io/reset/${id}/${token}`
+}
+
 export function generateExpiryDate() {
   const now = new Date()
   return new Date(now.getTime() + 86400000).toISOString()
