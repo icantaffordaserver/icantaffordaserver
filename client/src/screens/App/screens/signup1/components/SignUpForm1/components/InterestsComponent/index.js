@@ -36,7 +36,11 @@ class InterestsComponent extends Component {
   render() {
     const interestsList = this.renderInterests()
 
-    return <Div className="columns">{interestsList}</Div>
+    return (
+      <Div style={{ flexWrap: 'wrap' }} className="columns">
+        {interestsList}
+      </Div>
+    )
   }
 }
 export default InterestsComponent

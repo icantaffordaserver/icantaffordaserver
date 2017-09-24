@@ -7,6 +7,7 @@ import FormHeaderComponent from './components/FormHeaderComponent'
 import InputComponent from './components/InputComponent'
 import FormFooterComponent from './components/FormFooterComponent'
 import InterestsComponent from './components/InterestsComponent'
+import TextareaComponent from './components/TextareaComponent'
 
 import {
   FormH1,
@@ -285,18 +286,11 @@ class SignUp1 extends React.Component {
           or a dog person? Share anything you want here!
         </GenericCenterP>
         <Form.Field>
-          <Div className="field">
-            <Div className="control">
-              <textarea
-                style={{ resize: 'none' }}
-                className="textarea"
-                type="text"
-                name="bio"
-                onChange={this.handleChange}
-                value={this.state.bio}
-              />
-            </Div>
-          </Div>
+          <TextareaComponent
+            name="bio"
+            value={this.state.bio}
+            handleChange={this.handleChange.bind(this)}
+          />
         </Form.Field>
 
         <Form.Field>
