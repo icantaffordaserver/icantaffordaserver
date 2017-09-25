@@ -6,11 +6,12 @@ class InputLocationComponent extends Component {
     const inputProps = {
       value: this.props.location,
       onChange: this.props.handleLocationChange,
+      name: this.props.name,
     }
     const styles = {
       autocompleteContainer: { zIndex: '100' },
     }
-    console.log(this.props.location)
+
     return (
       <div>
         <PlacesAutoComplete styles={styles} inputProps={inputProps} />

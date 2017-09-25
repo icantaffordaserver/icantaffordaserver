@@ -51,7 +51,7 @@ class SignUp1 extends React.Component {
     birthday: '',
     bio: '',
     location: '',
-    interests: [],
+    interests: [''],
     suggestedInterest: '',
     tags: [],
     error: '',
@@ -90,6 +90,7 @@ class SignUp1 extends React.Component {
       password,
       birthday,
       bio,
+      location,
     })
   }
   getInterestsData = () => {
@@ -301,6 +302,7 @@ class SignUp1 extends React.Component {
           <InputLocationComponent
             location={this.state.location}
             handleLocationChange={this.handleLocationChange.bind(this)}
+            name="location"
           />
         </Form.Field>
 
