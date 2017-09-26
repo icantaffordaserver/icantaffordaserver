@@ -3,6 +3,7 @@
  */
 import { sendPasswordResetEmail } from '../../../../../mailer'
 import { createClient } from '../../../../../../config/GraphQLClient'
+import { getPasswordResetUrl } from '../../../../../helpers'
 
 import getPasswordResetQuery from '../../../../../graphql/queries/getPasswordResetQuery'
 
@@ -14,7 +15,7 @@ export default async (req, res) => {
     const response = await client.request(getPasswordResetQuery, { id })
     const token = response.PasswordReset.token
     const { firstName, email } = response.PasswordReset.user
-    const actionUrl = `https://toktumi-client.ngrok.io/reset/${id}/${token}`
+    const actionUrl = getPasswordResetUrl(id, token)
 
     await sendPasswordResetEmail({
       firstName,

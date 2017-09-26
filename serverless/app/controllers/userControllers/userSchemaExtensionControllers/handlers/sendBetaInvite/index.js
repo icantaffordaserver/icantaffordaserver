@@ -10,7 +10,19 @@ import createInviteMutation from '../../../../../graphql/mutations/createInviteM
 
 export default async (req, res) => {
   const client = createClient()
-  const { id, emailToInvite, firstName, lastName } = req.body.data
+
+  let data = null
+
+  if (req.body.data.InviteRequests !== undefined) {
+    data = req.body.data.InviteRequests.node
+  } else {
+    data = req.body.data
+  }
+  const { id, emailToInvite, firstName, lastName, isApproved } = data
+
+  if (isApproved !== undefined) {
+    if (!isApproved) return
+  }
 
   try {
     if (!await isValidEmail(emailToInvite, client))

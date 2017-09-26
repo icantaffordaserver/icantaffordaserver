@@ -25,27 +25,28 @@ class SignUpContainer1 extends Component {
   }
 
   componentWillMount = () => {
-    if (this.props.match.params.id && this.props.match.params.token) {
+    if (this.props.match.params.token) {
       window.history.pushState(null, null, '/signUp1')
-      this.handleInvite(this.props.match.params.id)
+      this.handleInvite(this.props.match.params.token)
+    } else {
+      this.setState({ error: 'Can only sign up with an invite.' })
     }
   }
 
   componentWillReceiveProps = nextProps => {}
 
-  handleInvite = async id => {
+  handleInvite = async token => {
     try {
       const response = await this.props.client.query({
         query: getInviteQuery,
         variables: {
-          id,
+          token,
         },
       })
 
       if (!response.data.Invites) throw new Error('Invite does not exist.')
-      if (this.props.match.params.token !== response.data.Invites.token)
-        throw new Error('Invalid Credentials.')
       if (response.data.Invites.isAccepted) throw new Error('Invite Claimed.')
+      if (this.state.error) throw new Error(this.state.error)
     } catch (error) {
       console.error(error)
       this.setState({ error: error.message })

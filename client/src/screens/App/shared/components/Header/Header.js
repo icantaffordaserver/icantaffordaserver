@@ -18,6 +18,7 @@ import {
 } from './styles'
 
 import ToktumiH1 from '../ToktumiH1'
+import InviteComponent from '../Invite/InviteComponent'
 
 class Header extends React.Component {
   static propTypes = {
@@ -74,6 +75,9 @@ class Header extends React.Component {
           <p>50 minutes until your next talk.</p>
 
           <Feedback>Feedback</Feedback>
+
+          <InviteComponent />
+
           <div>
             <UserButton>Help</UserButton>
             |

@@ -3,7 +3,7 @@ export default `
     $email: String!, 
     $firstName: String!, 
     $lastName: String!, 
-    $userId: ID!,
+    $userId: ID,
     $token: String!,
   ){
     createInvites(
