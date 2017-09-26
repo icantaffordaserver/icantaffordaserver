@@ -32,7 +32,8 @@ function App() {
         <Route path="/talk" component={withSideNav(Talk)} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
-        <Route exact path="/signUp1" render={SignUpScreen1} />
+        {/*<Route exact path="/signUp1" render={SignUpScreen1} />*/}
+        <Route path="/signUp1/:id/:token" render={SignUpScreen1} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
         <Route

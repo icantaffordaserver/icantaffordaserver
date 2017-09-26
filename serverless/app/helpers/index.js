@@ -17,18 +17,22 @@ export function generateUniqueToken() {
 }
 
 export function generateInviteEmailUrl(inviteId, token) {
-  return `https://beta.toktumi.io/signup/${inviteId}/${token}`
+  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/signup/${inviteId}/${token}`
 }
 
 export function getPasswordResetUrl(id, token) {
-  return `https://toktumi-client.ngrok.io/reset/${id}/${token}`
+  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/reset/${id}/${token}`
 }
 
-export function generateExpiryDate() {
+/**
+ * 
+ * @param {*} date 
+ */
+export function generateExpiryDate(date = 86400000) {
   const now = new Date()
-  return new Date(now.getTime() + 86400000).toISOString()
+  return new Date(now.getTime() + date).toISOString()
 }
 
 export function generateEmailVerificationUrl(token) {
-  return `https://toktumi-client.ngrok.io/verify/${token}`
+  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/verify/${token}`
 }
