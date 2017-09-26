@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
+import FormHeaderComponent from './components/FormHeaderComponent'
+import InputComponent from './components/InputComponent'
+import FormFooterComponent from './components/FormFooterComponent'
+import InterestsComponent from './components/InterestsComponent'
+import TextareaComponent from './components/TextareaComponent'
+import InputLocationComponent from './components/InputLocationComponent'
 
 import {
   FormH1,
@@ -45,7 +51,7 @@ class SignUp1 extends React.Component {
     birthday: '',
     bio: '',
     location: '',
-    interests: [],
+    interests: [''],
     suggestedInterest: '',
     tags: [],
     error: '',
@@ -84,7 +90,41 @@ class SignUp1 extends React.Component {
       password,
       birthday,
       bio,
+      location,
     })
+  }
+  getInterestsData = () => {
+    const data = {
+      data: {
+        allConnectionInterests: [
+          {
+            name: 'interest1',
+          },
+          {
+            name: 'interest2',
+          },
+          {
+            name: 'interest3',
+          },
+          {
+            name: 'interest4',
+          },
+          {
+            name: 'interest5',
+          },
+          {
+            name: 'interest6',
+          },
+          {
+            name: 'interest7',
+          },
+          {
+            name: 'interest8',
+          },
+        ],
+      },
+    }
+    return data
   }
   addInterest = (interest, event) => {
     const image = event.target
@@ -96,11 +136,14 @@ class SignUp1 extends React.Component {
       this.state.interests.push(interest)
       image.classList.add('active')
     }
-    console.log(this.state.interests)
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
+  }
+
+  handleLocationChange = event => {
+    this.setState({ location: event })
   }
 
   handleTagChange = event => {
@@ -131,254 +174,85 @@ class SignUp1 extends React.Component {
 
   FormSection1() {
     return (
-      <FormSegment padded>
-        <FormH1>SIGN UP</FormH1>
-        <Div className="columns">
-          <Div className="column">
-            <FormHeaderP>Account Info</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Select Interests</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Personal Bio</FormHeaderP>
-          </Div>
-        </Div>
+      <div>
         {this.renderErrors()}
         <Div className="columns">
           <Div className="column is-half">
             <Form.Field>
-              <Div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  onChange={this.handleChange}
-                  value={this.state.firstName}
-                />
-              </Div>
+              <InputComponent
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                handleChange={this.handleChange.bind(this)}
+              />
             </Form.Field>
           </Div>
           <Div className="column is-half">
             <Form.Field>
-              <Div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  onChange={this.handleChange}
-                  value={this.state.lastName}
-                />
-              </Div>
+              <InputComponent
+                name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                handleChange={this.handleChange.bind(this)}
+              />
             </Form.Field>
           </Div>
         </Div>
         <Form.Field>
-          <Div className="control">
-            <input
-              className="input"
-              type="text"
-              name="email"
-              placeholder="Email"
-              onChange={this.handleChange}
-              value={this.state.email}
-            />
-          </Div>
+          <InputComponent
+            name="email"
+            placeholder="Email"
+            value={this.state.email}
+            handleChange={this.handleChange.bind(this)}
+          />
         </Form.Field>
 
         <Div className="field">
-          <Div className="control">
-            <input
-              className="input"
-              type="password"
-              name="password"
-              placeholder="Password"
-              type={this.state.showPassword ? 'text' : 'password'}
-              onChange={this.handleChange}
-              value={this.state.password}
-            />
-          </Div>
+          <InputComponent
+            type={this.state.showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            handleChange={this.handleChange.bind(this)}
+          />
           <span>&nbsp;&nbsp;</span>
           <Checkbox onClick={this.showHidePass} label="Show password" />
         </Div>
         <Form.Field>
-          <Div className="control">
-            <input
-              className="input"
-              type="text"
-              name="birthday"
-              placeholder="DD/MM/YYYY"
-              onChange={this.handleChange}
-              value={this.state.birthday}
-            />
-          </Div>
+          <InputComponent
+            name="birthday"
+            placeholder="DD/MM/YYYY"
+            value={this.state.birthday}
+            handleChange={this.handleChange.bind(this)}
+          />
         </Form.Field>
 
-        {/* <Button
-        fluid
-        color="teal"
-        size="large"
-        loading={this.props.loading}
-      >
-        Create Account
-      </Button> */}
-        <FormNextButton
-          className="button is-primary"
-          onClick={this.getNextStep}
-        >
-          Select your interests!
-        </FormNextButton>
-
-        {/* TODO: facebook auth */}
-        {/* <Divider horizontal>Or</Divider>*/}
-        {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
-        <Header textAlign="center" size="tiny">
-          By signing up, you agree to the{' '}
-          <Link to="/termsofservice">Terms of Service</Link>.
-        </Header>
-        <p style={{ textAlign: 'center' }}>
-          Already have an account? <Link to="/login">Log in</Link>.
-        </p>
-      </FormSegment>
+        <Div className="columns">
+          <Div className="column">
+            <FormNextButton
+              className="button is-primary is"
+              onClick={this.getNextStep}
+            >
+              Select your interests!
+            </FormNextButton>
+          </Div>
+        </Div>
+        <FormFooterComponent />
+      </div>
     )
   }
 
   FormSection2() {
+    const interestsData = this.getInterestsData()
+
     return (
-      <FormSegment padded>
-        <FormH1>SIGN UP</FormH1>
-        <Div className="columns">
-          <Div className="column">
-            <FormHeaderP>Account Info</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Select Interests</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Personal Bio</FormHeaderP>
-          </Div>
-        </Div>
+      <div>
         {this.renderErrors()}
         <Form.Field>
-          <Div className="columns">
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest1', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest1"
-                  className={this.state.grayScale ? 'active' : ''}
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest2', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest2"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest3', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest3"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest4', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest4"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-          </Div>
-          <Div className="columns">
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest5', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest5"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest6', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest6"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest7', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest7"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-            <InterestsDiv className="column">
-              <a
-                onClick={event => {
-                  this.addInterest('Interest8', event)
-                }}
-              >
-                <InterestsImg
-                  style={{ borderRadius: '50px' }}
-                  src="http://via.placeholder.com/64/EE7600"
-                  alt="interest8"
-                />
-              </a>
-              <GenericCenterP>Interest Name</GenericCenterP>
-            </InterestsDiv>
-          </Div>
+          <InterestsComponent
+            getInterests={interestsData}
+            addInterest={this.addInterest.bind(this)}
+          />
         </Form.Field>
         <Form.Field>
           <Div className="column">
@@ -389,14 +263,6 @@ class SignUp1 extends React.Component {
           </Div>
         </Form.Field>
 
-        {/* <Button
-              fluid
-              color="teal"
-              size="large"
-              loading={this.props.loading}
-            >
-              Create Account
-            </Button> */}
         <Div className="columns">
           <Div className="column">
             <FormNextButton className="button is-primary" onClick={this.goBack}>
@@ -412,65 +278,32 @@ class SignUp1 extends React.Component {
             </FormNextButton>
           </Div>
         </Div>
-        {/* TODO: facebook auth */}
-        {/* <Divider horizontal>Or</Divider>*/}
-        {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
-        <Header textAlign="center" size="tiny">
-          By signing up, you agree to the{' '}
-          <Link to="/termsofservice">Terms of Service</Link>.
-        </Header>
-        <p style={{ textAlign: 'center' }}>
-          Already have an account? <Link to="/login">Log in</Link>.
-        </p>
-      </FormSegment>
+        <FormFooterComponent />
+      </div>
     )
   }
   FormSection3() {
     return (
-      <FormSegment padded>
-        <FormH1>SIGN UP</FormH1>
-        <Div className="columns">
-          <Div className="column">
-            <FormHeaderP>Account Info</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Select Interests</FormHeaderP>
-          </Div>
-          <Div className="column">
-            <FormHeaderP>Personal Bio</FormHeaderP>
-          </Div>
-        </Div>
+      <div>
         {this.renderErrors()}
-        <p style={{ FontSize: '2em' }}>
+        <GenericCenterP style={{ FontSize: '2em', paddingTop: '4%' }}>
           What are your interests? What are your passions? Are you a cat person
           or a dog person? Share anything you want here!
-        </p>
+        </GenericCenterP>
         <Form.Field>
-          <Div className="field">
-            <Div className="control">
-              <textarea
-                style={{ resize: 'none' }}
-                className="textarea"
-                type="text"
-                name="bio"
-                onChange={this.handleChange}
-                value={this.state.bio}
-              />
-            </Div>
-          </Div>
+          <TextareaComponent
+            name="bio"
+            value={this.state.bio}
+            handleChange={this.handleChange.bind(this)}
+          />
         </Form.Field>
 
         <Form.Field>
-          <Div className="control">
-            <input
-              className="input"
-              type="text"
-              name="location"
-              placeholder="location"
-              onChange={this.handleChange}
-              value={this.state.location}
-            />
-          </Div>
+          <InputLocationComponent
+            location={this.state.location}
+            handleLocationChange={this.handleLocationChange.bind(this)}
+            name="location"
+          />
         </Form.Field>
 
         <Div className="columns">
@@ -488,17 +321,8 @@ class SignUp1 extends React.Component {
             </FormSubmitButton>
           </Div>
         </Div>
-        {/* TODO: facebook auth */}
-        {/* <Divider horizontal>Or</Divider>*/}
-        {/* <Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
-        <Header textAlign="center" size="tiny">
-          By signing up, you agree to the{' '}
-          <Link to="/termsofservice">Terms of Service</Link>.
-        </Header>
-        <GenericCenterP>
-          Already have an account? <Link to="/login">Log in</Link>.
-        </GenericCenterP>
-      </FormSegment>
+        <FormFooterComponent />
+      </div>
     )
   }
   render() {
@@ -527,7 +351,15 @@ class SignUp1 extends React.Component {
         </ImageDiv>
         <Div className="column">
           <Form onSubmit={this.onSubmit} size="large" error={error}>
-            {form}
+            <FormSegment padded>
+              <FormHeaderComponent
+                title="SIGN UP"
+                headerOne="Account Info"
+                headerTwo="Select Interests"
+                headerThree="Personal Bio"
+              />
+              {form}
+            </FormSegment>
           </Form>
         </Div>
       </Div>

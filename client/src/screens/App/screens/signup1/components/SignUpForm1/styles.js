@@ -124,9 +124,8 @@ export const ImageP = styled.p`
 
 export const InterestsImg = styled.img`
   &&& {
-    filter: grayscale(100%);
     &.active {
-      filter: grayscale(0%);
+      box-shadow: 0 0 0 3px #4183c4;
     }
   }
 `
