@@ -15,8 +15,8 @@ export const Profile = styled.div`
 export const ProfileSection = styled.div`
   height: fill-available;
   width: 100%;
-  background: #fff;
-  padding: 60px;
+  background: linear-gradient(to top, #ddd, #d1d1f0);
+  padding: 60px 5px;
   position: relative;
   margin-top: 20%;
 `

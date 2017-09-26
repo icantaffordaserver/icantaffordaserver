@@ -34,6 +34,7 @@ class ProfileComponent extends Component {
 
   render() {
     const user = this.props.user
+
     return (
       <Profile background={background}>
         <ProfileSection>

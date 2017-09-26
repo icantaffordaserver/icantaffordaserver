@@ -10,10 +10,22 @@ export const AboutButton = styled.a`
   }
 `
 
-export const ProfileHeader = styled.h1`
+export const ProfileHeader = styled.h2`
   &&& {
-    background: rgba(255, 153, 0, 0.6);
-    padding: 2%;
     color: black;
+  }
+`
+
+export const UserColumn = styled.div`
+  &&& {
+    box-shadow: 1px 1px 3px black;
+    margin: 1%;
+    padding: 3%;
+    background: white;
+  }
+`
+
+export const UserColumns = styled.div`
+  &&& {
   }
 `
