@@ -26,11 +26,12 @@ export function getPasswordResetUrl(id, token) {
 
 /**
  * 
- * @param {*} date 
+ * @param {Days in milliseconds} days 
  */
-export function generateExpiryDate(date = 86400000) {
+export function generateExpiryDate(days = 86400000) {
+  const daysInMS = days || 86400000
   const now = new Date()
-  return new Date(now.getTime() + date).toISOString()
+  return new Date(now.getTime() + daysInMS).toISOString()
 }
 
 export function generateEmailVerificationUrl(token) {
