@@ -33,8 +33,6 @@ class HeaderContainer extends React.Component {
     const user =
       this.props.data && this.props.data.user ? this.props.data.user : null
 
-    console.log(user)
-
     // check for various properties
     const profilePhoto =
       user && user.profilePhoto ? user.profilePhoto.url : null
