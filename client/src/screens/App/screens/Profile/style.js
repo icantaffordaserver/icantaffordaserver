@@ -6,7 +6,9 @@ export const Profile = styled.div`
   box-shadow: -60px 0px 100px -90px #000;
   display: flex;
   flex-direction: column;
-  background: #999;
+  background-image: url("${props => props.background}");
+  background-size: cover;
+  opacity: 0.8;
 `
 
 export const ProfileSection = styled.div`

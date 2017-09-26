@@ -9,3 +9,11 @@ export const AboutButton = styled.a`
     border-radius: 2em;
   }
 `
+
+export const ProfileHeader = styled.h1`
+  &&& {
+    background: rgba(255, 153, 0, 0.6);
+    padding: 2%;
+    color: black;
+  }
+`

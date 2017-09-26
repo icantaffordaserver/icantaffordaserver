@@ -13,6 +13,13 @@ import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
+import background from '../styles/assets/userBackGround.jpg'
+
+/* 
+user background will actually be pulled from the user but for now we will just import a static image
+static will become user.background for example
+*/
+
 class ProfileComponent extends Component {
   state = {
     currentTab: 'about',
@@ -28,7 +35,7 @@ class ProfileComponent extends Component {
   render() {
     const user = this.props.user
     return (
-      <Profile>
+      <Profile background={background}>
         <ProfileSection>
           <ProfileTabs
             active={this.state.currentTab}

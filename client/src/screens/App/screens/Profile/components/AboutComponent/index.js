@@ -4,7 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
-import { AboutButton } from './styles'
+import { AboutButton, ProfileHeader } from './styles'
 
 class AboutComponent extends Component {
   render() {
@@ -24,16 +24,7 @@ class AboutComponent extends Component {
         </div>
 
         <div className="column is-offset-one-quarter">
-          <h1
-            style={{
-              background: 'rgba(255,153,0,0.6)',
-              padding: '2%',
-              color: 'black',
-            }}
-            className="title is-4"
-          >
-            Firestarters
-          </h1>
+          <ProfileHeader className="title is-4">Firestarters</ProfileHeader>
           <h4 style={{ textAlign: 'center' }}>
             The world is waiting to hear your thoughts
           </h4>
