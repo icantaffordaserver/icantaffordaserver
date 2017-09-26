@@ -8,13 +8,13 @@ import axios from 'axios'
 import { Message } from 'semantic-ui-react'
 
 import {
-  SettingsForm,
-  SettingsFormGroup,
-  SettingsFormLabel,
-  SettingsFormInput,
-  SettingsFormTextArea,
-  SettingsFormButton,
-} from './style'
+  Form,
+  FormGroup,
+  FormLabel,
+  FormInput,
+  FormTextArea,
+  FormButton,
+} from '../../../../styles/Forms.js'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
@@ -70,74 +70,74 @@ class SettingsComponent extends Component {
   }
   render() {
     return (
-      <SettingsForm onSubmit={e => this.onSubmit(e)}>
-        {this.renderMessages()}
-        <SettingsFormGroup>
-          <SettingsFormLabel htmlFor="firstName">First Name:</SettingsFormLabel>
-          <SettingsFormInput
-            name="firstName"
-            type="text"
-            placeholder={this.props.user.firstName}
-            onChange={e => this.handleChange(e)}
-          />
-        </SettingsFormGroup>
-        <SettingsFormGroup>
-          <SettingsFormLabel htmlFor="lastName">Last Name:</SettingsFormLabel>
-          <SettingsFormInput
-            name="lastName"
-            type="text"
-            placeholder={this.props.user.lastName}
-            onChange={e => this.handleChange(e)}
-          />
-        </SettingsFormGroup>
-        <SettingsFormGroup>
-          <SettingsFormLabel htmlFor="email">Email:</SettingsFormLabel>
-          <SettingsFormInput
-            name="email"
-            type="text"
-            placeholder={this.props.user.email}
-            onChange={e => this.handleChange(e)}
-          />
-        </SettingsFormGroup>
-        <SettingsFormGroup>
-          <SettingsFormLabel htmlFor="bio">Bio:</SettingsFormLabel>
-          <SettingsFormTextArea
-            maxLength="250"
-            name="bio"
-            placeholder={this.props.user.bio}
-            onChange={e => this.handleChange(e)}
-          />
-        </SettingsFormGroup>
+      <div style={{ width: '60%', margin: 'auto' }}>
+        <Form onSubmit={e => this.onSubmit(e)}>
+          {this.renderMessages()}
+          <FormGroup>
+            <FormLabel htmlFor="firstName">First Name:</FormLabel>
+            <FormInput
+              name="firstName"
+              type="text"
+              placeholder={this.props.user.firstName}
+              onChange={e => this.handleChange(e)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="lastName">Last Name:</FormLabel>
+            <FormInput
+              name="lastName"
+              type="text"
+              placeholder={this.props.user.lastName}
+              onChange={e => this.handleChange(e)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="email">Email:</FormLabel>
+            <FormInput
+              name="email"
+              type="text"
+              placeholder={this.props.user.email}
+              onChange={e => this.handleChange(e)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="bio">Bio:</FormLabel>
+            <FormTextArea
+              maxLength="250"
+              name="bio"
+              placeholder={this.props.user.bio}
+              onChange={e => this.handleChange(e)}
+            />
+          </FormGroup>
 
-        <SettingsFormGroup>
-          <SettingsFormLabel>Profile Photo:</SettingsFormLabel>
-          {!this.state.imageId && (
-            <Dropzone
-              onDrop={this.onFileUpload}
-              accept="image/*"
-              multiple={false}
-              style={{
-                display: 'flex',
-                width: 'fill-available',
-                padding: '10px',
-                border: 'solid 1px lightgray',
-                borderRadius: '5px',
-                height: '250px',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2em',
-                color: 'lightgray',
-              }}
-            >
-              Click or drag and drop an image.
-            </Dropzone>
-          )}
-        </SettingsFormGroup>
+          <FormGroup>
+            <FormLabel>Profile Photo:</FormLabel>
+            {!this.state.imageId && (
+              <Dropzone
+                onDrop={this.onFileUpload}
+                accept="image/*"
+                multiple={false}
+                style={{
+                  display: 'flex',
+                  width: 'fill-available',
+                  padding: '10px',
+                  border: 'solid 1px lightgray',
+                  borderRadius: '5px',
+                  height: '250px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '2em',
+                  color: 'lightgray',
+                }}
+              >
+                Click or drag and drop an image.
+              </Dropzone>
+            )}
+          </FormGroup>
 
-        <SettingsFormButton loading={this.props.loading}>
-          Submit
-        </SettingsFormButton>
-      </SettingsForm>
+          <FormButton loading={this.props.loading}>Submit</FormButton>
+        </Form>
+      </div>
     )
   }
 }

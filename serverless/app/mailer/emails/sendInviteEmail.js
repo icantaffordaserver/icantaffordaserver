@@ -16,7 +16,7 @@ export default function sendInviteEmail({
         TemplateId: 1735761,
         TemplateModel: {
           name: firstName,
-          action_url: actionUrl,
+          actionUrl,
         },
       },
       (error, result) => {
