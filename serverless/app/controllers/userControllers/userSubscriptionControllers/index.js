@@ -1,11 +1,14 @@
 import { Router } from 'express'
 
-import { sendVerificationEmail, sendPasswordResetEmail } from './handlers'
+import sendVerificationEmail from './handlers/sendVerificationEmail'
+import sendPasswordResetEmail from './handlers/sendPasswordResetEmail'
+import setPasswordResetComplete from './handlers/setPasswordResetComplete'
 
 const routes = Router()
 
-// ROutes for /users/subscription/[FUNCTION_NAME]
+// Routes for /users/subscription/[FUNCTION_NAME]
 routes.post('/sendVerificationEmail', sendVerificationEmail)
 routes.post('/sendPasswordResetEmail', sendPasswordResetEmail)
+routes.post('/setPasswordResetComplete', setPasswordResetComplete)
 
 export default routes

@@ -55,7 +55,7 @@ functions:
         headers:
           Content-Type: application/json
     type: resolver
-    schema: ./graphcool/src/sendInvite.subscription.graphql
+    schema: ./graphcool/src/sendInvite.schemaExtension.graphql
   updatePassword-schemaExtension:
     handler:
       webhook:
@@ -66,10 +66,12 @@ functions:
     schema: ./graphcool/src/updatePassword.schemaExtension.graphql
   setPasswordResetComplete-subscription:
     handler:
-      code:
-        src: ./code/user-subscriptions-setPasswordResetComplete.js
+      webhook:
+        url: https://toktumi-api.ngrok.io/user/subscription/setPasswordResetComplete
+        headers:
+          Content-Type: application/json
     type: subscription
-    query: ./code/user-subscriptions-setPasswordResetComplete.graphql
+    query: ./graphcool/src/setPasswordResetComplete.subscription.graphql
 permissions:
 - operation: ConnectionInterests.read
 - operation: ConnectionInterests.create
