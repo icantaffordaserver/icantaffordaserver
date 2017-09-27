@@ -24,7 +24,7 @@ class AboutComponent extends Component {
         <UserColumn center className="column is-one-third">
           <h1>{firstName + ' ' + lastName}</h1>
           <h3 style={{ margin: '0px', paddingBottom: '1%' }}>{location}</h3>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: '100%', padding: '1%' }}>
             <AboutButton className="button">Message</AboutButton>
             <AboutButton primary className="button">
               Talk
