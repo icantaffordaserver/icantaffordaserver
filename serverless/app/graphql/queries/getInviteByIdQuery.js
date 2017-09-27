@@ -2,8 +2,8 @@
  * Created by alexandermann on 2017-04-11.
  */
 export default `
-  query getInvite($inviteId: ID!) {
-    getInvites(id: $inviteId) {
+  query getInvite($token: String!) {
+    Invites(token: $token) {
       firstName
       lastName
       email
@@ -11,4 +11,4 @@ export default `
       isAccepted
     }
   }
-`;
+`

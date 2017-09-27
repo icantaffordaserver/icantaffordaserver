@@ -33,6 +33,7 @@ function App() {
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
         <Route exact path="/signUp1" render={SignUpScreen1} />
+        <Route path="/signUp1/:token" render={SignUpScreen1} />
         <Route path="/forgot" component={ForgotPassword} />
         <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
         <Route
