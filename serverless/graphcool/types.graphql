@@ -1,0 +1,175 @@
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+  user: User @relation(name: "UserOnFile")
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  connectionsMatched: [Connections!]! @relation(name: "ConnectionsOnUser")
+  connectionsRequested: ConnectionQueue @relation(name: "ConnectionQueueOnUser")
+  availability: Json
+  bio: String
+  connectionReviews: [ConnectionReviews!]! @relation(name: "ConnectionReviewsOnUser")
+  connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
+  email: String! @isUnique
+  emailVerified: Boolean! @defaultValue(value: false)
+  fireStarterSuggestions: [FireStarterSuggestions!]! @relation(name: "FireStarterSuggestionsOnUser")
+  firstName: String!
+  gender: Gender
+  invite: Invites @relation(name: "InvitesOnUser1")
+  invitesSent: [Invites!]! @relation(name: "InvitesOnUser")
+  isAcceptedToBeta: Boolean @defaultValue(value: false)
+  isAdmin: Boolean @defaultValue(value: false)
+  lastName: String!
+  location: String
+  mutationVariables: Json
+  password: String!
+  passwordReset: PasswordReset @relation(name: "PasswordResetOnUser")
+  phoneNumber: String
+  profilePhoto: File @relation(name: "UserOnFile")
+  roles: [Role!]! @relation(name: "RoleOnUser")
+  typeformProfile: Json
+  typeformProfileComplete: Boolean @defaultValue(value: false)
+  verifyEmail: VerifyEmail @relation(name: "UserOnVerifyEmail")
+  birthday: String!
+  connectionIntrests: [ConnectionInterests!]! @relation(name: "InterestedUsers")
+}
+
+type ConnectionReviews implements Node {
+  id: ID! @isUnique
+  comment: String
+  createdAt: DateTime!
+  rating: Int
+  updatedAt: DateTime!
+  connection: Connections @relation(name: "ConnectionsOnConnectionReviews")
+  user: User! @relation(name: "ConnectionReviewsOnUser")
+}
+
+type ConnectionQueue implements Node {
+  comment: String
+  createdAt: DateTime!
+  id: ID! @isUnique
+  isDequeued: Boolean
+  updatedAt: DateTime!
+  user: User @relation(name: "ConnectionQueueOnUser")
+  connection: Connections @relation(name: "ConnectionsOnConnectionQueue")
+}
+
+type Connections implements Node {
+  connectionTime: DateTime
+  createdAt: DateTime!
+  fireStarterSuggestion: String
+  id: ID! @isUnique
+  matchedBy: User @relation(name: "ConnectionsOnUser")
+  updatedAt: DateTime!
+  connectionQueues: [ConnectionQueue!]! @relation(name: "ConnectionsOnConnectionQueue")
+  participants: [User!]! @relation(name: "ConnectionsOnUser1")
+  reviews: [ConnectionReviews!]! @relation(name: "ConnectionsOnConnectionReviews")
+  status: ConnectionStatus!
+}
+
+type FireStarterSuggestions implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  url: String! @isUnique
+  users: [User!]! @relation(name: "FireStarterSuggestionsOnUser")
+}
+
+type InviteRequests implements Node {
+  createdAt: DateTime!
+  emailToInvite: String! @isUnique
+  firstName: String!
+  id: ID! @isUnique
+  invite: Invites @relation(name: "InvitesOnInviteRequests")
+  isApproved: Boolean! @defaultValue(value: false)
+  lastName: String!
+  referredFrom: String! @defaultValue(value: "Coming Soon Page")
+  updatedAt: DateTime!
+}
+
+type Invites implements Node {
+  acceptedUser: User @relation(name: "InvitesOnUser1")
+  createdAt: DateTime!
+  email: String! @isUnique
+  firstName: String!
+  id: ID! @isUnique
+  inviteRequest: InviteRequests @relation(name: "InvitesOnInviteRequests")
+  isAccepted: Boolean! @defaultValue(value: false)
+  lastName: String!
+  mutationVariables: Json
+  sentBy: User @relation(name: "InvitesOnUser")
+  status: InviteStatus! @defaultValue(value: SENT)
+  token: String! @isUnique
+  updatedAt: DateTime!
+}
+
+type PasswordReset implements Node {
+  createdAt: DateTime!
+  expiry: DateTime!
+  id: ID! @isUnique
+  securityInfo: Json
+  token: String!
+  updatedAt: DateTime!
+  user: User @relation(name: "PasswordResetOnUser")
+  complete: Boolean! @defaultValue(value: false)
+}
+
+type Role implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  members: [User!]! @relation(name: "RoleOnUser")
+  name: UserType! @defaultValue(value: BASIC_USER)
+  updatedAt: DateTime!
+}
+
+type VerifyEmail implements Node {
+  createdAt: DateTime!
+  emailToVerify: String!
+  expiry: DateTime!
+  id: ID! @isUnique
+  token: String! @isUnique
+  updatedAt: DateTime!
+  user: User @relation(name: "UserOnVerifyEmail")
+}
+
+type ConnectionInterests implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String! @isUnique
+  updatedAt: DateTime!
+  users: [User!]! @relation(name: "InterestedUsers")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum ConnectionStatus {
+  MATCHED
+  SCHEDULED
+  COMPLETED
+  BAILED
+  CANCELLED
+  REVIEWED
+}
+
+enum InviteStatus {
+  SENT
+  ACCEPTED
+}
+
+enum UserType {
+  BASIC_USER
+  ADMIN
+}

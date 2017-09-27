@@ -1,0 +1,13 @@
+subscription {
+  InviteRequests(
+    filter: { mutation_in: [UPDATED], updatedFields_contains: "isApproved" }
+  ) {
+    updatedFields
+    node {
+      firstName
+      lastName
+      emailToInvite
+      isApproved
+    }
+  }
+}
