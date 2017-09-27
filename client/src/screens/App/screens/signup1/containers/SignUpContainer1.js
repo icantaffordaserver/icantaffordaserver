@@ -8,6 +8,7 @@ import SignUpForm1 from '../components/SignUpForm1'
 import signUpMutation from '../graphql/signUpMutation'
 import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+import getInviteQuery from '../../../shared/graphql/queries/getInviteQuery'
 
 class SignUpContainer1 extends Component {
   static propTypes = {
@@ -15,12 +16,41 @@ class SignUpContainer1 extends Component {
     history: PropTypes.object.isRequired,
     client: PropTypes.object.isRequired,
     signUpMutation: PropTypes.func.isRequired,
-    signInMutation: PropTypes.func.isRequired,
+    authenticateEmailUser: PropTypes.func.isRequired,
   }
 
   state = {
     loading: false,
     error: '',
+  }
+
+  componentWillMount = () => {
+    if (this.props.match.params.token) {
+      window.history.pushState(null, null, '/signUp1')
+      this.handleInvite(this.props.match.params.token)
+    } else {
+      this.setState({ error: 'Can only sign up with an invite.' })
+    }
+  }
+
+  componentWillReceiveProps = nextProps => {}
+
+  handleInvite = async token => {
+    try {
+      const response = await this.props.client.query({
+        query: getInviteQuery,
+        variables: {
+          token,
+        },
+      })
+
+      if (!response.data.Invites) throw new Error('Invite does not exist.')
+      if (response.data.Invites.isAccepted) throw new Error('Invite Claimed.')
+      if (this.state.error) throw new Error(this.state.error)
+    } catch (error) {
+      console.error(error)
+      this.setState({ error: error.message })
+    }
   }
 
   handleSignUp = userData => {
@@ -36,6 +66,7 @@ class SignUpContainer1 extends Component {
           password: userData.password,
           birthday: userData.birthday,
           bio: userData.bio,
+          inviteId: this.props.match.params.id,
         },
       })
       .then(() =>
@@ -52,8 +83,6 @@ class SignUpContainer1 extends Component {
           'auth_token',
           res.data.authenticateEmailUser.token,
         )
-      })
-      .then(() => {
         this.setState({ loading: false })
         // reset the store after the user has been authenticated, then direct to dashboard
         this.props.client.resetStore()
