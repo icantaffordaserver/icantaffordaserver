@@ -127,6 +127,7 @@ class SettingsComponent extends Component {
                 justifyContent: 'center',
                 fontSize: '2em',
                 color: 'lightgray',
+                background: 'white',
               }}
             >
               Click or drag and drop an image.
