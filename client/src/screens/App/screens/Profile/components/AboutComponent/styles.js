@@ -18,14 +18,16 @@ export const ProfileHeader = styled.h2`
 
 export const UserColumn = styled.div`
   &&& {
-    box-shadow: 1px 1px 3px black;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
     margin: 1%;
-    padding: 3%;
+    padding: 2%;
+    border-radius: 3em;
     background: white;
   }
 `
 
 export const UserColumns = styled.div`
   &&& {
+    padding: 2%;
   }
 `

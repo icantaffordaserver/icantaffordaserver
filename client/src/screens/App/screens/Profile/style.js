@@ -3,13 +3,16 @@ import styled from 'styled-components'
 export const Profile = styled.div`
   height: fill-available;
   width: fill-available;
-  box-shadow: -60px 0px 100px -90px #000;
+  box-shadow: -60px 0px 100px -90px #d1d1f0;
   display: flex;
   flex-direction: column;
   background: #999;
   background-image: url("${props => props.background}");
   background-size: cover;
+  margin: 1%;
+  margin-top: 3%;
   opacity: 0.8;
+  
 `
 
 export const ProfileSection = styled.div`
@@ -26,6 +29,6 @@ export const ProfileAvatar = styled.img`
   height: 200px;
   width: 200px;
   top: -150px;
-  left: 40px;
+  left: 110px;
   border-radius: 51%;
 `
