@@ -24,7 +24,7 @@ export const UserColumn = styled.div`
     margin: 1%;
     padding: 1%;
     border-radius: 3em;
-    background: white;
+    background: #f8f8f8;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -34,8 +34,8 @@ export const UserColumn = styled.div`
 
 export const BioParagraph = styled.p`
   &&& {
-    paddingtop: 3%;
-    fontsize: 2.25vh;
+    padding: 2%;
+    font-size: 2.25vh;
   }
 `
 

@@ -22,14 +22,19 @@ class AboutComponent extends Component {
     const { firstName, lastName, email, bio, location } = this.props.user
     const tags = {
       data: {
-        tags: [{ tag: firstName }, { tag: lastName }, { tag: location }],
+        tags: [
+          { tag: 'Development' },
+          { tag: 'People' },
+          { tag: 'Space' },
+          { tag: 'Dogs' },
+        ],
       },
     }
 
     return (
       <UserColumns className="columns">
         <UserColumn center className="column is-one-third">
-          <h1>{firstName + ' ' + lastName}</h1>
+          <h1 style={{ margin: '0px' }}>{firstName + ' ' + lastName}</h1>
           <h3 style={{ margin: '0px', paddingBottom: '1%' }}>{location}</h3>
           <div style={{ width: '100%', padding: '1%' }}>
             {/* <AboutButton className="button">Message</AboutButton>

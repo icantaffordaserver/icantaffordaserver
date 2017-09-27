@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types'
 
+import { TagUl, TagLi } from './styles'
+
 class TagsComponent extends Component {
   renderTags = () => {
     const tagsData = this.props.tags
-    console.log(tagsData.data.tags)
+
     const listOfTags = tagsData.data.tags.map(tag => {
-      return <li key={tag.tag}>{tag.tag}</li>
+      return <TagLi key={tag.tag}>#{tag.tag}</TagLi>
     })
     return listOfTags
   }
