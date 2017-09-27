@@ -4,6 +4,8 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
+
+import TagsComponent from './components/TagsComponent'
 import {
   AboutButton,
   ProfileHeader,
@@ -18,6 +20,11 @@ import {
 class AboutComponent extends Component {
   render() {
     const { firstName, lastName, email, bio, location } = this.props.user
+    const tags = {
+      data: {
+        tags: [{ tag: firstName }, { tag: lastName }, { tag: location }],
+      },
+    }
 
     return (
       <UserColumns className="columns">
@@ -25,10 +32,11 @@ class AboutComponent extends Component {
           <h1>{firstName + ' ' + lastName}</h1>
           <h3 style={{ margin: '0px', paddingBottom: '1%' }}>{location}</h3>
           <div style={{ width: '100%', padding: '1%' }}>
-            <AboutButton className="button">Message</AboutButton>
+            {/* <AboutButton className="button">Message</AboutButton>
             <AboutButton primary className="button">
               Talk
-            </AboutButton>
+            </AboutButton> */}
+            <TagsComponent tags={tags} />
           </div>
 
           <BioParagraph>{bio}</BioParagraph>
