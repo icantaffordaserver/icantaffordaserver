@@ -1,0 +1,3 @@
+default: dev
+environments:
+  dev: cj3l0oa9r1uab0130s8nti73k

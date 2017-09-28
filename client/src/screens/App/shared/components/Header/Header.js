@@ -28,6 +28,7 @@ import logout from './assets/images/Assets_logout.png'
 import feedback from './assets/images/Assets_feedback.png'
 
 import ToktumiH1 from '../ToktumiH1'
+import InviteComponent from '../Invite/InviteComponent'
 
 class Header extends React.Component {
   static propTypes = {
@@ -85,10 +86,10 @@ class Header extends React.Component {
             <Link to="/talk" style={{ width: '100%' }}>
               <img style={{ height: '1.6em', padding: '3px' }} src={feedback} />
             </Link>
-            <Link to="/talk" style={{ width: '100%' }}>
-              <img style={{ height: '1.6em', padding: '3px' }} src={share} />
-            </Link>
+
+            <InviteComponent />
           </div>
+
           <div>
             <Link to="/talk" style={{ width: '100%' }}>
               <img style={{ height: '1.6em', padding: '3px' }} src={help} />

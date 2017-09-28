@@ -11,14 +11,16 @@ export default gql`
     $lastName: String!
     $birthday: String!
     $bio: String!
+    $inviteId: ID
   ) {
-    signupUser(
+    signUpUser(
       email: $email
       password: $password
       firstName: $firstName
       lastName: $lastName
       birthday: $birthday
       bio: $bio
+      inviteId: $inviteId
     ) {
       id
     }
