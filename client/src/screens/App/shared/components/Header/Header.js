@@ -81,12 +81,6 @@ class Header extends React.Component {
             src={this.props.profileImgSrc || generateGravatarUrl(email)}
           />
 
-          {/* <Feedback>Feedback</Feedback>
-          <div>
-            <UserButton>Help</UserButton>
-            |
-            <UserButton onClick={this.props.logout}>Logout</UserButton>
-          </div> */}
           <div style={{ paddingTop: '1%' }}>
             <Link to="/talk" style={{ width: '100%' }}>
               <img style={{ height: '1.6em', padding: '3px' }} src={feedback} />
