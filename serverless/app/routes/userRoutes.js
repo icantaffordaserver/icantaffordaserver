@@ -1,20 +1,13 @@
-import { Router } from "express";
+import { Router } from 'express'
 
-import { sendVerificationEmailHandler } from "../controllers/userControllers/user-subscription-controller";
-import sendPasswordResetEmail from "../logic/createPasswordReset/async/sendPasswordResetEmail";
+import userSubscriptionControllers from '../controllers/userControllers/userSubscriptionControllers'
+import userSchemaExtensionControllers from '../controllers/userControllers/userSchemaExtensionControllers'
 
-const routes = Router();
-
-const createUser = () => console.log("hi");
+const routes = Router()
 
 // All microservice functions related to users type
-routes.post("/requestPipeline", createUser);
-routes.use("/schemaExtension", createUser);
+//routes.use('/requestPipeline', userRequestPipelineControllers)
+routes.use('/schemaExtension', userSchemaExtensionControllers)
+routes.use('/subscription', userSubscriptionControllers)
 
-routes.post(
-  "/subscription/sendVerificationEmail",
-  sendVerificationEmailHandler
-);
-routes.post("/subscription/sendPasswordResetEmail", sendPasswordResetEmail);
-
-export default routes;
+export default routes
