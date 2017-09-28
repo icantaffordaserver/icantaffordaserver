@@ -18,6 +18,7 @@ import Inbox from './screens/Inbox'
 import Talk from './screens/Talk'
 
 import isAuthenticated from './shared/HoCs/isAuthenticated'
+import withSideNav from './shared/HoCs/withSideNav'
 
 import BackgroundWrapper from './styles/BackgroundWrapper'
 import './styles/styles.css'
