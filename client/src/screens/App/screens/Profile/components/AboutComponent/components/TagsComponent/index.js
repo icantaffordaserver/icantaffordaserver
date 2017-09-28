@@ -7,14 +7,14 @@ class TagsComponent extends Component {
   renderTags = () => {
     const tagsData = this.props.tags
 
-    const listOfTags = tagsData.data.tags.map(tag => {
-      return <TagLi key={tag.tag}>#{tag.tag}</TagLi>
+    const listOfTags = tagsData.data.tags.map(tags => {
+      return <TagLi key={tags.tag}>#{tags.tag}</TagLi>
     })
     return listOfTags
   }
   render() {
-    const tagsList = this.renderTags()
-    return <TagUl>{tagsList}</TagUl>
+    const TagsList = this.renderTags()
+    return <TagUl>{TagsList}</TagUl>
   }
 }
 

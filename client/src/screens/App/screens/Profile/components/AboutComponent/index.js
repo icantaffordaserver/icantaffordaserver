@@ -6,20 +6,19 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
 import TagsComponent from './components/TagsComponent'
+import FireStatersComponent from './components/FireStartersComponent'
 import {
   AboutButton,
   ProfileHeader,
   UserColumns,
   UserColumn,
   BioParagraph,
-  FireStarterHeader,
-  FireStarterColumn,
-  FireStarterParagraph,
 } from './styles'
 
 class AboutComponent extends Component {
   render() {
     const { firstName, lastName, email, bio, location } = this.props.user
+    // placeholder data will be replaced when user query is refactored
     const tags = {
       data: {
         tags: [
@@ -30,6 +29,15 @@ class AboutComponent extends Component {
         ],
       },
     }
+    const FireStaters = {
+      data: {
+        FireStaters: [
+          { id: 1, title: 'What are things that worry you?', answer: bio },
+          { id: 2, title: 'What are things that worry you?', answer: bio },
+        ],
+      },
+    }
+    // placeholder
 
     return (
       <UserColumns className="columns">
@@ -46,31 +54,8 @@ class AboutComponent extends Component {
 
           <BioParagraph>{bio}</BioParagraph>
         </UserColumn>
-
         <UserColumn className="column">
-          <ProfileHeader>Firestarters</ProfileHeader>
-          <FireStarterColumn className="column">
-            <FireStarterHeader>
-              What are things that worry you?
-            </FireStarterHeader>
-            <FireStarterParagraph>
-              Bacon ipsum dolor amet ham hock shoulder drumstick chicken
-              meatball ground round beef ribs pork ribeye meatloaf corned beef
-              cow picanha. Meatball swine short loin shank, ham pork chop corned
-              beef turkey tenderloin burgdoggen tail brisket jerky picanh
-            </FireStarterParagraph>
-          </FireStarterColumn>
-          <FireStarterColumn className="column">
-            <FireStarterHeader>
-              What are things that worry you?
-            </FireStarterHeader>
-            <FireStarterParagraph>
-              Bacon ipsum dolor amet ham hock shoulder drumstick chicken
-              meatball ground round beef ribs pork ribeye meatloaf corned beef
-              cow picanha. Meatball swine short loin shank, ham pork chop corned
-              beef turkey tenderloin burgdoggen tail brisket jerky picanh
-            </FireStarterParagraph>
-          </FireStarterColumn>
+          <FireStatersComponent firestarters={FireStaters} />
         </UserColumn>
       </UserColumns>
     )
