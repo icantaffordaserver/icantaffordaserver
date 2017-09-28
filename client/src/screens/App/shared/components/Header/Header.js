@@ -17,6 +17,16 @@ import {
   UserDetails,
 } from './styles'
 
+import call from './assets/images/Assets_call.png'
+import logoBeta from './assets/images/Assets_logobeta.png'
+import inbox from './assets/images/Assets_notification.png'
+import profile from './assets/images/Assets_profile.png'
+
+import help from './assets/images/Assets_help.png'
+import share from './assets/images/Assets_share.png'
+import logout from './assets/images/Assets_logout.png'
+import feedback from './assets/images/Assets_feedback.png'
+
 import ToktumiH1 from '../ToktumiH1'
 
 class Header extends React.Component {
@@ -42,7 +52,7 @@ class Header extends React.Component {
     return (
       <SideNav>
         <Logo>
-          <ToktumiH1>Toktumi</ToktumiH1>
+          <img style={{ height: '3.2em' }} src={logoBeta} />
         </Logo>
 
         <SideNavMenu>
@@ -50,19 +60,19 @@ class Header extends React.Component {
             <SideNavMenuItem
               active={this.props.location.pathname === '/profile'}
             >
-              Profile
+              <img style={{ height: '1.3em' }} src={profile} />
             </SideNavMenuItem>
           </Link>
 
           <Link to="/inbox" style={{ width: '100%' }}>
             <SideNavMenuItem active={this.props.location.pathname === '/inbox'}>
-              Inbox
+              <img style={{ height: '1.3em' }} src={inbox} />
             </SideNavMenuItem>
           </Link>
 
           <Link to="/talk" style={{ width: '100%' }}>
             <SideNavMenuItem active={this.props.location.pathname === '/talk'}>
-              Talk
+              <img style={{ height: '1.3em' }} src={call} />
             </SideNavMenuItem>
           </Link>
         </SideNavMenu>
@@ -70,14 +80,28 @@ class Header extends React.Component {
           <Avatar
             src={this.props.profileImgSrc || generateGravatarUrl(email)}
           />
-          <h4>{firstName + ' ' + lastName}</h4>
-          <p>50 minutes until your next talk.</p>
 
-          <Feedback>Feedback</Feedback>
+          {/* <Feedback>Feedback</Feedback>
           <div>
             <UserButton>Help</UserButton>
             |
             <UserButton onClick={this.props.logout}>Logout</UserButton>
+          </div> */}
+          <div style={{ paddingTop: '1%' }}>
+            <Link to="/talk" style={{ width: '100%' }}>
+              <img style={{ height: '1.6em', padding: '3px' }} src={feedback} />
+            </Link>
+            <Link to="/talk" style={{ width: '100%' }}>
+              <img style={{ height: '1.6em', padding: '3px' }} src={share} />
+            </Link>
+          </div>
+          <div>
+            <Link to="/talk" style={{ width: '100%' }}>
+              <img style={{ height: '1.6em', padding: '3px' }} src={help} />
+            </Link>
+            <Link to="/talk" style={{ width: '100%' }}>
+              <img style={{ height: '1.6em', padding: '3px' }} src={logout} />
+            </Link>
           </div>
         </UserDetails>
       </SideNav>

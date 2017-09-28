@@ -27,9 +27,9 @@ function App() {
   return (
     <BackgroundWrapper>
       <Switch>
-        <Route path="/profile" component={withSideNav(Profile)} />
-        <Route path="/inbox" component={withSideNav(Inbox)} />
-        <Route path="/talk" component={withSideNav(Talk)} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/inbox" component={Inbox} />
+        <Route path="/talk" component={Talk} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
         <Route exact path="/signUp1" render={SignUpScreen1} />

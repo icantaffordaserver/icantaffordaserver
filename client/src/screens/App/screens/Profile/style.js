@@ -6,6 +6,7 @@ export const Profile = styled.div`
   box-shadow: -60px 0px 100px -90px #d1d1f0;
   display: flex;
   flex-direction: column;
+  padding-left: 3%;
   background: linear-gradient(to left, #ff7f50, #ff9839);
 `
 
