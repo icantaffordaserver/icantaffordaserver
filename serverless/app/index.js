@@ -13,8 +13,7 @@ import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware'
 import routes from './routes'
 
 // make sure to export the app
-const app = (module.exports = express())
-
+const app = express()
 app.use(awsServerlessExpressMiddleware.eventContext())
 app.use(bodyParser.json())
 app.use(cors())
@@ -48,3 +47,5 @@ if (app.get('env') === 'prod' || app.get('env') === 'prod') {
     })
   })
 }
+
+export { app }

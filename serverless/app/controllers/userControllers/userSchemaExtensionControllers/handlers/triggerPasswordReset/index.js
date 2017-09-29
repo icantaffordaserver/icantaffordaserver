@@ -9,6 +9,8 @@ import createPasswordResetMutation from '../../../../../graphql/mutations/create
 
 export default async (req, res) => {
   const email = req.body.data.email
+
+  console.log('reached')
   const client = createClient()
 
   try {
