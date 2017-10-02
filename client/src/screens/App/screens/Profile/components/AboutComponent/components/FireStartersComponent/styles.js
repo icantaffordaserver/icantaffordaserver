@@ -10,6 +10,7 @@ export const FireStarterHeader = styled.h4`
 export const FireStarterParagraph = styled.p`
   &&& {
     padding: 2%;
+    width: 100%;
   }
 `
 export const FireStarterColumn = styled.div`
