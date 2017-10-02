@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-04-12.
  */
 import styled, { keyframes, css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const SideNav = styled.div`
   display: flex;
@@ -40,12 +41,14 @@ export const SideNavMenu = styled.div`
 `
 export const SideNavMenuItem = styled.h4`
   color: #000;
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-size: 1.5vw;
   font-family: Lato;
   font-weight: 300;
   width: 100%;
-  padding: 5% 0;
+  padding: 12% 0;
   ${props =>
     props.active &&
     css`
@@ -98,4 +101,8 @@ export const UserButton = styled.button`
   background: transparent;
   font-size: 1vw;
   color: #333;
+`
+export const NavLink = styled(Link)`
+  width: 100%;
+  padding-left: 3px;
 `

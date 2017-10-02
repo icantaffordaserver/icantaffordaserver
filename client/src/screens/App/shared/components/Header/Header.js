@@ -15,6 +15,7 @@ import {
   SideNavMenu,
   SideNavMenuItem,
   UserDetails,
+  NavLink,
 } from './styles'
 
 import call from './assets/images/Assets_call.png'
@@ -57,25 +58,25 @@ class Header extends React.Component {
         </Logo>
 
         <SideNavMenu>
-          <Link to="/profile" style={{ width: '100%' }}>
+          <NavLink to="/profile" style={{ width: '100%' }}>
             <SideNavMenuItem
               active={this.props.location.pathname === '/profile'}
             >
               <img style={{ height: '1.3em' }} src={profile} />
             </SideNavMenuItem>
-          </Link>
+          </NavLink>
 
-          <Link to="/inbox" style={{ width: '100%' }}>
+          <NavLink to="/inbox" style={{ width: '100%' }}>
             <SideNavMenuItem active={this.props.location.pathname === '/inbox'}>
               <img style={{ height: '1.3em' }} src={inbox} />
             </SideNavMenuItem>
-          </Link>
+          </NavLink>
 
-          <Link to="/talk" style={{ width: '100%' }}>
+          <NavLink to="/talk" style={{ width: '100%' }}>
             <SideNavMenuItem active={this.props.location.pathname === '/talk'}>
               <img style={{ height: '1.3em' }} src={call} />
             </SideNavMenuItem>
-          </Link>
+          </NavLink>
         </SideNavMenu>
         <UserDetails>
           <Avatar
