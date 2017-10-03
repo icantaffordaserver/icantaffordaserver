@@ -11,8 +11,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 import './semantic/dist/semantic.min.css'
 import './assets/fonts/fonts.css'
-// Graph.cool api: https://api.graph.cool/simple/v1/cizpv0k3u6kcq0127mxlb8urr
-// Scaphold.io api: https://us-west-2.api.scaphold.io/graphql/shift-beta
 
 const { graphqlUrl, subscriptionUrl } = config
 const client = makeApolloClient(graphqlUrl, subscriptionUrl)

@@ -17,6 +17,8 @@ import Profile from './screens/Profile'
 import Inbox from './screens/Inbox'
 import Talk from './screens/Talk'
 
+import SideNav from './shared/containers/HeaderContainer'
+
 import isAuthenticated from './shared/HoCs/isAuthenticated'
 import withSideNav from './shared/HoCs/withSideNav'
 
@@ -26,23 +28,11 @@ import './styles/styles.css'
 function App() {
   return (
     <BackgroundWrapper>
+      <SideNav />
       <Switch>
         <Route path="/profile" component={Profile} />
         <Route path="/inbox" component={Inbox} />
         <Route path="/talk" component={Talk} />
-        <Route path="/login" component={LoginScreen} />
-        <Route exact path="/signUp" render={SignUpScreen} />
-        <Route exact path="/signUp1" render={SignUpScreen1} />
-        <Route path="/signUp1/:token" render={SignUpScreen1} />
-        <Route path="/forgot" component={ForgotPassword} />
-        <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
-        <Route
-          path="/verify/:token"
-          component={isAuthenticated(VerifyAccount)}
-        />
-        <Route path="/notVerified" component={NotVerified} />
-        <Route path="/notLoggedIn" component={NotLoggedIn} />
-        <Route component={NotFound404} />
       </Switch>
     </BackgroundWrapper>
   )
@@ -52,7 +42,17 @@ const Root = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={ComingSoon} />
-      <Route component={App} />
+      <Route path="/" component={App} />
+      <Route path="/login" component={LoginScreen} />
+      <Route exact path="/signUp" render={SignUpScreen} />
+      <Route exact path="/signUp1" render={SignUpScreen1} />
+      <Route path="/signUp1/:token" render={SignUpScreen1} />
+      <Route path="/forgot" component={ForgotPassword} />
+      <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
+      <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)} />
+      <Route path="/notVerified" component={NotVerified} />
+      <Route path="/notLoggedIn" component={NotLoggedIn} />
+      <Route component={NotFound404} />
     </Switch>
   </BrowserRouter>
 )

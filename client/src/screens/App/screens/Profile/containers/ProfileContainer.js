@@ -7,7 +7,6 @@ import { isEmail } from 'validator'
 import isVerified from '../../../shared/HoCs/isVerified'
 import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
 import ProfileComponent from '../components/ProfileComponent'
-import SideNav from '../../../shared/containers/HeaderContainer'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../shared/graphql/mutations/updateUserMutation'
@@ -66,16 +65,13 @@ class ProfileContainer extends Component {
     if (this.props.data.loading) return null
 
     return (
-      <div>
-        <SideNav />
-        <ProfileComponent
-          onSettingChange={this.handleEditProfile}
-          user={this.props.data.user}
-          error={this.state.error}
-          loading={this.state.loading}
-          success={this.state.success}
-        />
-      </div>
+      <ProfileComponent
+        onSettingChange={this.handleEditProfile}
+        user={this.props.data.user}
+        error={this.state.error}
+        loading={this.state.loading}
+        success={this.state.success}
+      />
     )
   }
 }
