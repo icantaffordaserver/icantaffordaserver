@@ -8,6 +8,11 @@ import { Profile, ProfileSection, ProfileAvatar } from '../style'
 import AboutComponent from './AboutComponent'
 import AvailabilityComponent from './AvailabilityComponent'
 import SettingsComponent from './SettingsComponent'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import {
+  StyledTab,
+  StyledTabList,
+} from '../../../shared/components/Tabs/styles'
 
 import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
 
@@ -36,28 +41,34 @@ class ProfileComponent extends Component {
     return (
       <Profile>
         <ProfileSection>
-          <ProfileTabs
-            active={this.state.currentTab}
-            changeTab={this.changeTab.bind(this)}
-          />
+          <Tabs>
+            <StyledTabList>
+              <Tab>About</Tab>
+              <Tab>Availability</Tab>
+              <Tab>Settings</Tab>
+            </StyledTabList>
+            <TabPanel>
+              <AboutComponent user={user} />
+            </TabPanel>
+            <TabPanel>
+              <AvailabilityComponent />
+            </TabPanel>
+            <TabPanel>
+              <SettingsComponent
+                user={user}
+                onSubmit={this.props.onSettingChange}
+                error={this.props.error}
+                success={this.props.success}
+              />
+            </TabPanel>
+          </Tabs>
+
           <ProfileAvatar
             src={
               (user.profilePhoto ? user.profilePhoto.url : null) ||
               generateGravatarUrl(user.email)
             }
           />
-          {this.state.currentTab === 'about' ? (
-            <AboutComponent user={user} />
-          ) : this.state.currentTab === 'availability' ? (
-            <AvailabilityComponent />
-          ) : this.state.currentTab === 'settings' ? (
-            <SettingsComponent
-              user={user}
-              onSubmit={this.props.onSettingChange}
-              error={this.props.error}
-              success={this.props.success}
-            />
-          ) : null}
         </ProfileSection>
       </Profile>
     )
