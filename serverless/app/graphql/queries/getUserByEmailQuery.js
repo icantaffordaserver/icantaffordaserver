@@ -8,7 +8,10 @@ export default `
         id,
         firstName,
         lastName,
-        password
+        password,
+        passwordReset{
+          id
+        }
       }
     }
 `
