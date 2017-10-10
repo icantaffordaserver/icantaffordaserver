@@ -18,11 +18,13 @@ type User implements Node {
   connectionsRequested: ConnectionQueue @relation(name: "ConnectionQueueOnUser")
   availability: Json
   bio: String
-  connectionReviews: [ConnectionReviews!]! @relation(name: "ConnectionReviewsOnUser")
+  connectionReviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionReviewsOnUser")
   connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
   email: String! @isUnique
   emailVerified: Boolean! @defaultValue(value: false)
-  fireStarterSuggestions: [FireStarterSuggestions!]! @relation(name: "FireStarterSuggestionsOnUser")
+  fireStarterSuggestions: [FireStarterSuggestions!]!
+    @relation(name: "FireStarterSuggestionsOnUser")
   firstName: String!
   gender: Gender
   invite: Invites @relation(name: "InvitesOnUser1")
@@ -37,6 +39,10 @@ type User implements Node {
   phoneNumber: String
   profilePhoto: File @relation(name: "UserOnFile")
   roles: [Role!]! @relation(name: "RoleOnUser")
+  reportsGiven: [ConnectionReport!]
+    @relation(name: "ConnectionReportOnUserReporter")
+  reportsReceived: [ConnectionReport!]
+    @relation(name: "ConnectionReportOnUserReported")
   typeformProfile: Json
   typeformProfileComplete: Boolean @defaultValue(value: false)
   verifyEmail: VerifyEmail @relation(name: "UserOnVerifyEmail")
@@ -52,6 +58,18 @@ type ConnectionReviews implements Node {
   updatedAt: DateTime!
   connection: Connections @relation(name: "ConnectionsOnConnectionReviews")
   user: User! @relation(name: "ConnectionReviewsOnUser")
+}
+
+type ConnectionReport implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  reportedBy: User! @relation(name: "ConnectionReportOnUserReporter")
+  reportedUser: User @relation(name: "ConnectionReportOnUserReported")
+  connection: Connections! @relation(name: "ConnectionsOnConnectionReport")
+  reason: ReportType!
+  comment: String
+  resolved: Boolean! @defaultValue(value: false)
 }
 
 type ConnectionQueue implements Node {
@@ -71,10 +89,14 @@ type Connections implements Node {
   id: ID! @isUnique
   matchedBy: User @relation(name: "ConnectionsOnUser")
   updatedAt: DateTime!
-  connectionQueues: [ConnectionQueue!]! @relation(name: "ConnectionsOnConnectionQueue")
+  connectionQueues: [ConnectionQueue!]!
+    @relation(name: "ConnectionsOnConnectionQueue")
   participants: [User!]! @relation(name: "ConnectionsOnUser1")
-  reviews: [ConnectionReviews!]! @relation(name: "ConnectionsOnConnectionReviews")
+  reviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionsOnConnectionReviews")
   status: ConnectionStatus!
+  token: String! @isUnique
+  report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
 }
 
 type FireStarterSuggestions implements Node {
@@ -172,4 +194,10 @@ enum InviteStatus {
 enum UserType {
   BASIC_USER
   ADMIN
+}
+
+enum ReportType {
+  HARASSMENT
+  QUALITY
+  OUTAGE
 }

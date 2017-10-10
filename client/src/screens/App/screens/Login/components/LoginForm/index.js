@@ -58,7 +58,7 @@ class LoginForm extends Component {
   handleSubmit = (event, data) => {
     event.preventDefault() // prevent page reload
     this.setState({ error: '' }) // clear any old errors
-    const { email, password } = data.formData
+    const { email, password } = this.state
     const loginErrors = validateLogin(email, password)
     if (typeof loginErrors === 'string') {
       // if validate login returns string we have an error

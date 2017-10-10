@@ -4,6 +4,7 @@
 import { Router } from 'express'
 
 import userRoutes from './userRoutes'
+import getToken from '../helpers/twilio'
 
 // import createInvites from './logic/createInvites/index'
 // import updateInvites from './logic/updateInvites/index'
@@ -27,6 +28,7 @@ routes.use('/user', userRoutes)
 
 // All microservice functions related to VerifyEmail type
 routes.use('/createVerifyEmail', createVerifyEmail)
+routes.post('/token', getToken)
 
 // All microservice functions related to Connection type
 // routes.use('/addToUsersConnectionsConnection', addToUsersConnectionsConnection)

@@ -29,7 +29,8 @@ function App() {
       <Switch>
         <Route path="/profile" component={withSideNav(Profile)} />
         <Route path="/inbox" component={withSideNav(Inbox)} />
-        <Route path="/talk" component={withSideNav(Talk)} />
+        <Route exact path="/talk" component={withSideNav(Talk)} />
+        <Route path="/talk/:sessionId" component={withSideNav(Talk)} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
         <Route exact path="/signUp1" render={SignUpScreen1} />

@@ -18,6 +18,8 @@ coverage
 # API keys
 .env
 env.yml
+client/.env.development
+
 
 # Dependency directory
 node_modules
@@ -38,3 +40,4 @@ Thumbs.db
 public/js/bundle.js
 .vscode/settings.json
 client/yarn.lock
+serverless/yarn.lock

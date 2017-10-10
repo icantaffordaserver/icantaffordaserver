@@ -50,6 +50,8 @@
     "semantic-ui-react": "^0.64.8",
     "styled-components": "^1.4.6",
     "subscriptions-transport-ws": "^0.5.5",
+    "twilio-chat": "^1.2.0",
+    "twilio-video": "^1.4.0",
     "validator": "^7.0.0"
   },
   "scripts": {

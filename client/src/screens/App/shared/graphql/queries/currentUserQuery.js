@@ -36,7 +36,7 @@ export default gql`
         updatedAt
         createdAt
       }
-      connections {
+      connections(orderBy: createdAt_DESC, first: 1) {
         status
         connectionTime
         fireStarterSuggestion
@@ -47,6 +47,12 @@ export default gql`
           id
           rating
           createdAt
+        }
+        participants {
+          id
+          firstName
+          lastName
+          email
         }
       }
       connectionReviews {
