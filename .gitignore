@@ -1,40 +1,29 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.swp
-*.sqlite3
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-pids
-logs
-results
-tmp
-coverage
+# dependencies
+/node_modules
 
-# API keys
-.env
-env.yml
+# testing
+/coverage
 
-# Dependency directory
-node_modules
-bower_components
+# production
+/build
 
-# Serverless Build Info
-.serverless/**
-lib
-
-# Editors
-.idea
-*.iml
-
-# OS metadata
+# misc
 .DS_Store
-Thumbs.db
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-public/js/bundle.js
-.vscode/settings.json
-client/yarn.lock
+# package directories
+jspm_packages
+
+### Repo Specific
+.happypack
+dist/*
+build/*
+.vscode
+.serverless
+.webpack
+env.yml

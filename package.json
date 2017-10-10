@@ -1,0 +1,7 @@
+{
+  "name": "toktumi",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {},
+  "workspaces": ["packages/*"]
+}
