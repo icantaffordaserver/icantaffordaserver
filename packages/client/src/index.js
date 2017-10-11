@@ -9,7 +9,7 @@ import makeApolloClient from './utils/makeApolloClient'
 import App from './screens/App'
 import registerServiceWorker from './registerServiceWorker'
 
-import './semantic/dist/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css'
 import './assets/fonts/fonts.css'
 
 const { graphqlUrl, subscriptionUrl } = config
