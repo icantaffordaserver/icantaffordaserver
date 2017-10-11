@@ -1,4 +1,4 @@
-import Video, { createLocalTracks } from 'twilio-video'
+import Video from 'twilio-video'
 
 export default async function createVideoConnection(
   token,
@@ -43,11 +43,14 @@ class VideoConnection {
     participant.on('trackRemoved', this.trackRemoved)
   }
   onDisconnect = participant => {
-    participant.tracks.forEach(track => {
-      track.detach().forEach(element => element.remove())
-    })
+    participant.tracks.forEach(track => this.trackRemoved)
+  }
 
-    this.roomDisconnected()
+  close() {
+    const participant = this.room.localParticipant
+    participant.tracks.forEach(track => {
+      participant.removeTrack(track)
+    })
   }
 
   trackAdded = (ref, track) => {

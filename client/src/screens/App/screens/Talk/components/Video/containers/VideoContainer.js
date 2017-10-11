@@ -11,15 +11,21 @@ class VideoContainer extends Component {
     const token = this.props.token
     const roomName = this.props.roomName
 
-    const video = await createVideoConnection(
+    const videoConnection = await createVideoConnection(
       token,
       roomName,
       this.onDisconnect,
     )
+
+    this.setState({ videoConnection })
+  }
+
+  componentWillUnmount() {
+    this.state.videoConnection.close()
   }
 
   onDisconnect = () => {
-    console.log('User disconnected')
+    console.log('User disconnected.')
   }
 
   render() {
