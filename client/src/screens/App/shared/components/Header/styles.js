@@ -12,20 +12,9 @@ export const SideNav = styled.div`
   position: fixed;
   width: 63px;
   min-width: 60px;
-  background: #444343; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #444343,
-    #7c7c8f
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #444343,
-    #7c7c8f
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #393f63;
   box-shadow: 3px 0px 2px #555;
-  z-index: 1;
+  z-index: 2;
   font-family: Lato;
 `
 
@@ -68,7 +57,6 @@ export const UserDetails = styled.div`
   position: fixed;
   bottom: 25px;
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: center;
 `

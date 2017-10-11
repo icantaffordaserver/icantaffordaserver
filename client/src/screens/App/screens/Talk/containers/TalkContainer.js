@@ -11,7 +11,7 @@ import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
 class TalkContainer extends Component {
   render() {
-    return <TalkComponent />
+    return <TalkComponent user={this.props.data.user} />
   }
 }
 
