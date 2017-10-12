@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import {
-  StyledTabs,
   StyledCardTab,
   StyledCardTabPanel,
   StyledTabListRelative,
@@ -16,6 +15,7 @@ import {
 } from './styles'
 import CardTagsWrapper from './CardTagsWrapper'
 import CardTag from './CardTag'
+import CardContentWrapper from './CardContentWrapper'
 
 class ProfileCardComponent extends Component {
   renderTags = () => (
@@ -37,7 +37,7 @@ class ProfileCardComponent extends Component {
             <StyledTabListRelative>
               <StyledCardTab>Overview</StyledCardTab>
               <StyledCardTab>Bio</StyledCardTab>
-              <StyledCardTab>Firestarters</StyledCardTab>
+              <StyledCardTab>Thoughts</StyledCardTab>
             </StyledTabListRelative>
             <StyledCardTabPanel>
               <ProfileImage src={this.props.avatar} />
@@ -45,8 +45,19 @@ class ProfileCardComponent extends Component {
               <small>{this.props.location}</small>
               {this.props.tags ? this.renderTags() : null}
             </StyledCardTabPanel>
-            <StyledCardTabPanel>bio</StyledCardTabPanel>
-            <StyledCardTabPanel>Firestarters</StyledCardTabPanel>
+            <StyledCardTabPanel>
+              <CardContentWrapper>{this.props.bio}</CardContentWrapper>
+            </StyledCardTabPanel>
+            <StyledCardTabPanel>
+              <CardContentWrapper>
+                <h4>Title</h4>
+                {this.props.bio}
+              </CardContentWrapper>
+              <CardContentWrapper>
+                <h4>Title</h4>
+                {this.props.bio}
+              </CardContentWrapper>
+            </StyledCardTabPanel>
             <TalkButton>
               {this.props.talkInvite ? 'Invite to Talk' : 'Accept Invite'}
             </TalkButton>

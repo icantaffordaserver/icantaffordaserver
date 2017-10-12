@@ -1,12 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
-export const StyledTabs = styled(Tabs)`
-  &:before {
-    justify-content: center;
-  }
-`
-
 export const StyledCardTab = styled(Tab)`
   width: 32%;
   padding: 3%;
@@ -20,10 +14,19 @@ export const StyledCardTab = styled(Tab)`
 `
 StyledCardTab.tabsRole = 'Tab'
 
+export const StyledTab = styled(Tab)`
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    box-shadow: 0px 2px 0px orange;
+  }
+`
+StyledTab.tabsRole = 'Tab'
+
 export const StyledCardTabPanel = styled(TabPanel)`
 padding-top: 1%;
 background: #fff;
-min-width: 323px;
 display: -webkit-flex;
 display: flex;
 -webkit-flex-direction: column /* works with row or column */

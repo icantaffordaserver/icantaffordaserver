@@ -6,6 +6,7 @@ export const CardTag = styled.li`
   margin-right: 4px;
   margin-bottom: 4px;
   font-weight: 600;
+  border-radius: 3px
 
   background: #ddd;
   border: 1px solid #ddd;
