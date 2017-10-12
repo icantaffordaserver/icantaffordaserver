@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProfileCard from './ProfileCardComponent/ProfileCardComponent'
+import UpcomingComponent from './UpcomingComponent/UpcomingComponent'
 import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import {
@@ -29,11 +30,41 @@ class TalkComponent extends Component {
         ],
       },
     }
+    const UserPlaceHolderData = {
+      data: {
+        users: [
+          {
+            name: 'Yvvonne Smith',
+            location: 'Toronto, Canada',
+            interests: ['Space', 'People', 'Dogs'],
+            bio:
+              'Hello, here is a generic test bio that I will put here for now to see what it will look like Hello, here is a generic test bio that I will put here for now to see what it will look likeHello, here is a generic test bio that I will put here for now to see what it will look likeHello, here is a generic test bio that I will put here for now to see what it will look like',
+            photo: 'http://via.placeholder.com/150x150',
+          },
+          {
+            name: 'Thomas Brown',
+            location: 'Toronto, Canada',
+            interests: ['Space', 'People', 'Dogs'],
+            bio:
+              'Hello, here is a generic test bio that I will put here for now to see what it will look like',
+            photo: 'http://via.placeholder.com/150x150',
+          },
+          {
+            name: 'Greg Smith',
+            location: 'Toronto, Canada',
+            interests: ['Space', 'People', 'Dogs'],
+            bio:
+              'Hello, here is a generic test bio that I will put here for now to see what it will look like',
+            photo: 'http://via.placeholder.com/150x150',
+          },
+        ],
+      },
+    }
     const user = this.props.user
     document.body.style.backgroundColor = '#ced0e7'
     return (
       <Tabs>
-        <StyledTabList style={{ width: '99%' }}>
+        <StyledTabList>
           <StyledTab>Introductions</StyledTab>
           <StyledTab>Upcoming</StyledTab>
           <StyledTab>History</StyledTab>
@@ -68,11 +99,18 @@ class TalkComponent extends Component {
                   location={user.location}
                   tags={tagsPlaceholderData}
                   talkInvite={false}
+                  bio={user.bio}
                 />
               </div>
             </div>
           </TabPanel>
-          <TabPanel />
+          <TabPanel>
+            <UpcomingComponent
+              talks={user.connections}
+              userSuggestions={UserPlaceHolderData}
+              test={user.connectionReviews}
+            />
+          </TabPanel>
           <TabPanel />
         </TalkWrapper>
       </Tabs>

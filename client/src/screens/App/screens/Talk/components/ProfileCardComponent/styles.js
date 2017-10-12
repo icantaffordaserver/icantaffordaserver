@@ -43,3 +43,12 @@ export const TalkButton = styled.button`
     transition: all 0.3s ease;
   }
 `
+export const CardContent = styled.div`
+  max-height: 180px;
+  text-align: center;
+  overflow-y: scroll;
+  min-height: 180px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`

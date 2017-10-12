@@ -15,6 +15,7 @@ export const StyledCardTab = styled(Tab)`
 StyledCardTab.tabsRole = 'Tab'
 
 export const StyledTab = styled(Tab)`
+  color: #f2f2f2;
   &:hover {
     cursor: pointer;
   }
@@ -42,12 +43,13 @@ export const StyledTabList = styled(TabList)`
   border: none;
   position: fixed;
   top: 0;
-  width: 98%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   background: #7781c8;
   z-index: 1;
   font-size: 1.5em;
+  overflow: overlay;
   padding: 10px 30px;
   ${props =>
     props.active ? css`background: #fff;` : css`background: ${props.color};`};
