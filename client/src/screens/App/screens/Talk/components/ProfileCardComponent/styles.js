@@ -35,4 +35,11 @@ export const TalkButton = styled.button`
   padding: 3%;
   border: none;
   background: linear-gradient(180deg, #ff9839 0%, #ff7f50 100%);
+
+  &:hover {
+    background: linear-gradient(180deg, #ff7f50 0%, #ff9839 100%);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 `

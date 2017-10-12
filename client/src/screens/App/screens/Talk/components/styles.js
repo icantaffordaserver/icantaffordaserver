@@ -6,3 +6,4 @@ export const TalkWrapper = styled.div`
   padding: 2% 8%;
   margin-left: 3%;
 `
+export const TalkHeader = styled.h3`border-bottom: solid;`

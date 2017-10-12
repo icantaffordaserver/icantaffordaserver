@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProfileCard from './ProfileCardComponent/ProfileCardComponent'
 import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
 
-import { TalkWrapper } from './styles'
+import { TalkWrapper, TalkHeader } from './styles'
 
 class TalkComponent extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class TalkComponent extends Component {
       <TalkWrapper>
         <div className="columns">
           <div className="column">
-            <h3>Suggested</h3>
+            <TalkHeader>Suggested</TalkHeader>
             <ProfileCard
               avatar={
                 (user.profilePhoto ? user.profilePhoto.url : null) ||
@@ -45,7 +45,7 @@ class TalkComponent extends Component {
         </div>
         <div className="columns">
           <div className="column">
-            <h3>Invitations</h3>
+            <TalkHeader>Invitations</TalkHeader>
             <ProfileCard
               avatar={
                 (user.profilePhoto ? user.profilePhoto.url : null) ||
