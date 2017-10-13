@@ -111,7 +111,13 @@ class TalkComponent extends Component {
               test={user.connectionReviews}
             />
           </TabPanel>
-          <TabPanel />
+          <TabPanel>
+            <UpcomingComponent
+              talks={user.connections}
+              userSuggestions={UserPlaceHolderData}
+              test={user.connectionReviews}
+            />
+          </TabPanel>
         </TalkWrapper>
       </Tabs>
     )

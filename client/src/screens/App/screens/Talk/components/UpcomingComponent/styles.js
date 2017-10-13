@@ -24,7 +24,7 @@ export const RequestButton = styled.button`
   background: ${props =>
     props.primary
       ? 'linear-gradient(180deg, #ff9839 0%, #ff7f50 100%)'
-      : 'red'};
+      : 'linear-gradient(180deg, #ff6a83 0%, #bf000a 98.9%)'};
   border: none;
   padding: 2%;
   margin: 1vh;
