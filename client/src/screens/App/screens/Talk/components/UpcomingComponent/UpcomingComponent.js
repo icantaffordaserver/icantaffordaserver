@@ -6,6 +6,8 @@ import {
   ProfileImageWrapper,
   UserInfo,
   UserInfoWrapper,
+  RequestButton,
+  ButtonWrapper,
 } from './styles'
 import UpcomingTag from './UpcomingTag'
 import UpcomingTagsWrapper from './UpcomingTagsWrapper'
@@ -30,6 +32,10 @@ class UpcomingComponent extends Component {
               </UpcomingTagsWrapper>
               <p>{user.bio}</p>
             </UserInfo>
+            <ButtonWrapper className="column is-2">
+              <RequestButton primary>Talk</RequestButton>
+              <RequestButton>Reschedule</RequestButton>
+            </ButtonWrapper>
           </UserInfoWrapper>
         </UpcomingContainer>
       )

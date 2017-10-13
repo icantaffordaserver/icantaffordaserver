@@ -19,3 +19,25 @@ export const ProfileImageWrapper = styled.div`
   align-items: center !important;
   justify-content: center !important;
 `
+export const RequestButton = styled.button`
+  width: 54%;
+  background: ${props =>
+    props.primary
+      ? 'linear-gradient(180deg, #ff9839 0%, #ff7f50 100%)'
+      : 'red'};
+  border: none;
+  padding: 2%;
+  margin: 1vh;
+  border-radius: 5px;
+
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+`
+export const ButtonWrapper = styled.div`
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  flex-flow: column;
+`
