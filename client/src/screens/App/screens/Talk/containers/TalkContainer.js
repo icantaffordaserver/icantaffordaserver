@@ -6,7 +6,7 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import isVerified from '../../../shared/HoCs/isVerified'
 import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
 import TalkComponent from '../components/TalkComponent'
-import ConversationComponent from '../containers/ConversationContainer'
+import Conversation from '../components/Conversation'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import connectionByTokenQuery from '../../../shared/graphql/queries/connectionByTokenQuery'
@@ -66,7 +66,7 @@ class TalkContainer extends Component {
 
   render() {
     return this.state.isConversation ? (
-      <ConversationComponent sessionId={this.state.sessionId} />
+      <Conversation sessionId={this.state.sessionId} />
     ) : this.props.data.loading ? null : (
       <TalkComponent />
     )

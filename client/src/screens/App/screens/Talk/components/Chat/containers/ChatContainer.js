@@ -11,7 +11,7 @@ class ChatContainer extends Component {
 
   async componentWillMount() {
     // Create the chat client
-    const channel = await createChatRoom(this.props.token)
+    const channel = await createChatRoom(this.props.token, this.props.roomName)
 
     // Events
     channel.on('messageAdded', this.addMessage)
@@ -32,6 +32,7 @@ class ChatContainer extends Component {
 
   handleChange = e => {
     e.preventDefault()
+    console.log(e)
     this.setState({
       [e.target.name]: e.target.value,
     })
@@ -39,6 +40,8 @@ class ChatContainer extends Component {
 
   sendMessage = e => {
     e.preventDefault()
+    this.refs.textBox.value = ''
+    this.refs.textBox.focus()
     this.state.channel.sendMessage(this.state.message)
   }
 
@@ -49,13 +52,20 @@ class ChatContainer extends Component {
   }
 
   render() {
-    if (!this.state.channel) return null
+    if (!this.state.channel) return <div className="loader active inline" />
 
     return (
       <div>
         <Chat messages={this.state.messages} />
-        <input name="message" type="text" onChange={this.handleChange} />
-        <button onClick={this.sendMessage}>Send Message</button>
+        <form action="" onSubmit={this.sendMessage}>
+          <input
+            ref="textBox"
+            name="message"
+            type="text"
+            onChange={this.handleChange}
+          />
+          <button onClick={this.sendMessage}>Send Message</button>
+        </form>
       </div>
     )
   }

@@ -7,9 +7,10 @@ import moment from 'moment'
 import axios from 'axios'
 
 import ConversationComponent from '../components/ConversationComponent'
-import CountdownComponent from '../components/CountdownComponent'
+import CountdownComponent from '../../../components/CountdownComponent'
+import PostConversation from '../../../components/PostConversation'
 
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 
 class ConversationContainer extends Component {
   /**
@@ -83,7 +84,22 @@ class ConversationContainer extends Component {
     })
     const token = request.data.token
 
-    this.setState({ areTalking: true, roomName, token })
+    this.setState({
+      areTalking: true,
+      conversationEnded: false,
+      roomName,
+      token,
+    })
+  }
+
+  handleEndConversation = async (e, status) => {
+    e.preventDefault()
+    this.props.client.resetStore()
+    this.setState({
+      areTalking: false,
+      conversationEnded: true,
+      conversationStatus: status,
+    })
   }
 
   render() {
@@ -91,17 +107,21 @@ class ConversationContainer extends Component {
 
     return (
       <div>
-        {this.state.areTalking ? (
+        {this.state.areTalking && !this.state.conversationEnded ? (
           <ConversationComponent
             roomName={this.state.roomName}
             token={this.state.token}
             user={this.state.otherUser}
+            onFinish={this.handleEndConversation}
           />
         ) : (
           <CountdownComponent
             start={this.handleStartConversation}
             toConversation={this.state.toConversation}
           />
+        )}
+        {this.state.conversationEnded && (
+          <PostConversation status={this.state.conversationStatus} />
         )}
         <button onClick={this.handleStartConversation}>Start</button>
       </div>

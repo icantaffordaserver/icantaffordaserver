@@ -5,14 +5,14 @@ export default async function createChatRoom(token, roomName) {
     const client = await Chat.create(token)
     await client.initialize()
 
-    // Check if channel exists already, if not create one.
     let channel
     try {
       channel = await client.getChannelByUniqueName(roomName)
     } catch (error) {
       channel = await client.createChannel({ uniqueName: roomName })
     }
-    channel = channel.join()
+
+    channel = await channel.join()
 
     return channel
   } catch (error) {}

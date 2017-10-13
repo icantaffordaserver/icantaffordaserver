@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 
 import moment from 'moment'
 
-import Chat from '../components/Chat'
-import Video from '../components/Video'
+import Chat from '../../../components/Chat'
+import Video from '../../../components/Video'
+import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {
   render() {
@@ -14,10 +15,12 @@ class ConversationComponent extends Component {
       <div>
         <h1>Conversation with {this.props.user.firstName}</h1>
 
-        <div className="conversation">
-          <Chat roomName={this.props.roomName} token={this.props.token} />
+        <Conversation>
           <Video roomName={this.props.roomName} token={this.props.token} />
-        </div>
+          <Chat roomName={this.props.roomName} token={this.props.token} />
+        </Conversation>
+
+        <button onClick={this.props.onFinish}>End Conversation</button>
       </div>
     )
   }

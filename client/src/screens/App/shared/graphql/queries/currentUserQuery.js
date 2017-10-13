@@ -42,6 +42,7 @@ export default gql`
         fireStarterSuggestion
         createdAt
         id
+        token
         reviews {
           comment
           id

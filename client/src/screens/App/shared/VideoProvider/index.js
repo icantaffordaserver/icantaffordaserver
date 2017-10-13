@@ -9,6 +9,10 @@ export default async function createVideoConnection(
   try {
     const room = await Video.connect(token, {
       name: roomName,
+      video: {
+        height: 720,
+        width: 1280,
+      },
     })
 
     const video = new VideoConnection(room, onDisconnect)
@@ -43,7 +47,9 @@ class VideoConnection {
     participant.on('trackRemoved', this.trackRemoved)
   }
   onDisconnect = participant => {
+    const remote = document.getElementById('remote-user-video')
     participant.tracks.forEach(track => this.trackRemoved)
+    remote.innerHTML = null
   }
 
   close() {

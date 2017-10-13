@@ -4,11 +4,7 @@ import { VideoControls } from '../styles'
 
 class VideoComponent extends Component {
   render() {
-    return (
-      <div id="remote-user-video">
-        <VideoControls />
-      </div>
-    )
+    return <div id="remote-user-video" />
   }
 }
 
