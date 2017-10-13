@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Moment from 'moment'
+import moment from 'moment'
 import {
   UserImage,
   UpcomingContainer,
@@ -11,11 +11,13 @@ import {
 } from './styles'
 import UpcomingTag from './UpcomingTag'
 import UpcomingTagsWrapper from './UpcomingTagsWrapper'
+import Request from '../RequestTalkComponent/RequestTalkComponent'
 
 class UpcomingComponent extends Component {
   renderUsers = callTime => {
     const connections = this.props.userSuggestions
-    const time = Moment()
+    const currentTime = moment()
+    const nextCallTime = moment(callTime)
 
     const columnLayout = connections.data.users.map(user => {
       return (
@@ -36,10 +38,11 @@ class UpcomingComponent extends Component {
             </UserInfo>
             <ButtonWrapper className="column is-2">
               <RequestButton primary>
-                {time.to(callTime) != time.subtract(1, 'd')
-                  ? time.to(callTime)
+                {currentTime.to(callTime) != currentTime.subtract(1, 'd')
+                  ? currentTime.to(callTime)
                   : 'Talk'}
               </RequestButton>
+              <Request timeUntil={moment(callTime).valueOf()} />
               <RequestButton>Reschedule</RequestButton>
             </ButtonWrapper>
           </UserInfoWrapper>
@@ -62,7 +65,7 @@ class UpcomingComponent extends Component {
             }}
             className="column is-2"
           >
-            <h4>{Moment(talk[i].connectionTime).format('MMMM DD')}</h4>
+            <h4>{moment(talk[i].connectionTime).format('MMMM DD')}</h4>
           </div>
           <div
             className="column"
