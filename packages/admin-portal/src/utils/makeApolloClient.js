@@ -10,9 +10,7 @@ import {
 // creates a subscription ready Apollo Client instance
 // Note that scapholdUrl expects the url without the http:// or wss://
 function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
-  const graphqlUrl = `https://${graphqlEndpoint}`
-  const webSocketUrl = `wss://${subscriptionEndpoint}`
-  const networkInterface = createNetworkInterface({ uri: graphqlUrl })
+  const networkInterface = createNetworkInterface({ uri: graphqlEndpoint })
   const wsClient = new SubscriptionClient(subscriptionEndpoint, {
     connectionParams: {
       Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
