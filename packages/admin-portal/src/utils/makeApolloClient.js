@@ -2,8 +2,10 @@
  * Created by alexandermann on 2017-02-22.
  */
 import ApolloClient, { createNetworkInterface } from 'apollo-client'
-import { SubscriptionClient } from 'subscriptions-transport-ws'
-import addGraphQLSubscriptions from './addGraphQLSubscriptions'
+import {
+  SubscriptionClient,
+  addGraphQLSubscriptions,
+} from 'subscriptions-transport-ws'
 
 // creates a subscription ready Apollo Client instance
 // Note that scapholdUrl expects the url without the http:// or wss://
@@ -11,7 +13,11 @@ function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
   const graphqlUrl = `https://${graphqlEndpoint}`
   const webSocketUrl = `wss://${subscriptionEndpoint}`
   const networkInterface = createNetworkInterface({ uri: graphqlUrl })
-  const wsClient = new SubscriptionClient(webSocketUrl)
+  const wsClient = new SubscriptionClient(subscriptionEndpoint, {
+    connectionParams: {
+      Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+    },
+  })
 
   networkInterface.use([
     {

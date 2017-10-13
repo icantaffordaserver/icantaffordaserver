@@ -1,19 +1,30 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { Component } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { ApolloProvider } from 'react-apollo'
 
-import Home from "./Pages/Home";
-import WithSideNav from "./components/SideNav";
+import InvitesPage from './Pages/InvitesPage'
+import WithSideNav from './components/SideNav'
+
+import makeApolloClient from './utils/makeApolloClient'
+
+// TODO: refactor these to env vars
+const client = makeApolloClient(
+  'http://localhost:60000/simple/v1/cj8oohufi00050137y3aopsyv',
+  'ws://localhost:60000/subscriptions/v1/cj8oohufi00050137y3aopsyv',
+)
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <WithSideNav>
-          <Route path="/" component={Home} />
-        </WithSideNav>
-      </BrowserRouter>
-    );
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <WithSideNav>
+            <Route path="/invites" component={InvitesPage} />
+          </WithSideNav>
+        </BrowserRouter>
+      </ApolloProvider>
+    )
   }
 }
 
-export default App;
+export default App

@@ -2,6 +2,6 @@ platformToken: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDY5NTc0MjEsImNs
 clusters:
   local:
     host: 'http://localhost:60000'
-    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDc4MjI1MjEsImNsaWVudElkIjoiY2o4b21sZjRwMDAwMDAxNDIzZXJjc25jYyJ9.ALkrsWFc_zZe5FObOsPpQd4veV3nru6ggbUmlGVU_GM
+    clusterSecret: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDc4MjI1MjEsImNsaWVudElkIjoiY2o4b21sZjRwMDAwMDAxNDIzZXJjc25jYyJ9.ALkrsWFc_zZe5FObOsPpQd4veV3nru6ggbUmlGVU_GM
 targets:
   default: local/cj8oohufi00050137y3aopsyv

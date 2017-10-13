@@ -55,7 +55,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dev": "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
+    "start:dev":
+      "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -64,12 +65,9 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "gitDir": "../",
+    "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   }
 }
