@@ -37,12 +37,8 @@ class UpcomingComponent extends Component {
               <p>{user.bio}</p>
             </UserInfo>
             <ButtonWrapper className="column is-2">
-              <RequestButton primary>
-                {currentTime.to(callTime) != currentTime.subtract(1, 'd')
-                  ? currentTime.to(callTime)
-                  : 'Talk'}
-              </RequestButton>
-              <Request timeUntil={moment(callTime).valueOf()} />
+              <Request timeUntil={callTime} buttonText="Talk" />
+
               <RequestButton>Reschedule</RequestButton>
             </ButtonWrapper>
           </UserInfoWrapper>

@@ -1,27 +1,39 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { RequestButton } from '../UpcomingComponent/styles'
 
 class RequestTalkComponent extends Component {
   static propTypes = {
     timeUntil: PropTypes.number,
   }
+  componentDidMount() {
+    this.interval = setInterval(this.tick, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   displayTimeRemaining = time => {
     const timeThreshold = 86400000
-    const timeUntil = time - Date.now()
+    const currentTime = moment()
+    const milliseconds = moment(time).valueOf()
 
+    const timeUntil = milliseconds - Date.now()
+    timeUntil < timeThreshold ? time.toNow() : currentTime.to(time)
     if (timeUntil < timeThreshold) {
-      console.log('hello')
-    } else console.log('bye')
+      return time.toNow()
+    }
+    if (timeUntil <= 0) {
+      return this.props.buttonText
+    } else return currentTime.to(time)
   }
   render() {
-    console.log(this.props.timeUntil)
     return (
-      <div>
+      <RequestButton primary>
         {this.displayTimeRemaining(this.props.timeUntil)}
-        <p>hello</p>
-      </div>
+      </RequestButton>
     )
   }
 }
