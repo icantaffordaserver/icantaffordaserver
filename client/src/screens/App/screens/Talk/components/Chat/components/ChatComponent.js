@@ -2,6 +2,12 @@ import React from 'react'
 
 import MessageList from './MessageListComponent'
 
+import { ChatBox } from '../styles'
 export default props => {
-  return <MessageList messages={props.messages} />
+  if (!props.messages) return null
+  return (
+    <ChatBox>
+      <MessageList messages={props.messages} />
+    </ChatBox>
+  )
 }

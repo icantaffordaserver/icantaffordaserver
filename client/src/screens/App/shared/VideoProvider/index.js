@@ -49,7 +49,7 @@ class VideoConnection {
   close() {
     const participant = this.room.localParticipant
     participant.tracks.forEach(track => {
-      participant.removeTrack(track)
+      participant.unpublishTrack(track)
     })
   }
 

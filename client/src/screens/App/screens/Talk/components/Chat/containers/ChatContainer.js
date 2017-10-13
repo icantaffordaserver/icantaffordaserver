@@ -11,15 +11,7 @@ class ChatContainer extends Component {
 
   async componentWillMount() {
     // Create the chat client
-    const chat = await createChatRoom(this.props.token)
-
-    // Create/Connect to channel
-    let channel = await chat
-      .createChannel({ uniqueName: this.props.roomName })
-      .catch(err => chat.getChannelByUniqueName(this.props.roomName))
-
-    // Join channel
-    channel = await channel.join()
+    const channel = await createChatRoom(this.props.token)
 
     // Events
     channel.on('messageAdded', this.addMessage)
@@ -57,7 +49,7 @@ class ChatContainer extends Component {
   }
 
   render() {
-    if (!this.state.messages) return null
+    if (!this.state.channel) return null
 
     return (
       <div>
