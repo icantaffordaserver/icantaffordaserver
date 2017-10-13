@@ -13,8 +13,10 @@ import UpcomingTag from './UpcomingTag'
 import UpcomingTagsWrapper from './UpcomingTagsWrapper'
 
 class UpcomingComponent extends Component {
-  renderUsers = () => {
+  renderUsers = callTime => {
     const connections = this.props.userSuggestions
+    const time = Moment()
+
     const columnLayout = connections.data.users.map(user => {
       return (
         <UpcomingContainer>
@@ -33,7 +35,11 @@ class UpcomingComponent extends Component {
               <p>{user.bio}</p>
             </UserInfo>
             <ButtonWrapper className="column is-2">
-              <RequestButton primary>Talk</RequestButton>
+              <RequestButton primary>
+                {time.to(callTime) != time.subtract(1, 'd')
+                  ? time.to(callTime)
+                  : 'Talk'}
+              </RequestButton>
               <RequestButton>Reschedule</RequestButton>
             </ButtonWrapper>
           </UserInfoWrapper>
@@ -62,7 +68,7 @@ class UpcomingComponent extends Component {
             className="column"
             style={{ background: '#f8f8f8', height: '100%' }}
           >
-            {this.renderUsers()}
+            {this.renderUsers(talk[i].connectionTime)}
           </div>
         </div>
       )

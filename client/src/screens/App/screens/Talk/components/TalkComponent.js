@@ -13,6 +13,7 @@ import { TalkWrapper, TalkHeader } from './styles'
 class TalkComponent extends Component {
   constructor(props) {
     super(props)
+    this.state = { tabIndex: 0 }
   }
 
   render() {
@@ -63,7 +64,10 @@ class TalkComponent extends Component {
     const user = this.props.user
     document.body.style.backgroundColor = '#ced0e7'
     return (
-      <Tabs>
+      <Tabs
+        selectedIndex={this.state.tabIndex}
+        onSelect={tabIndex => this.setState({ tabIndex })}
+      >
         <StyledTabList>
           <StyledTab>Introductions</StyledTab>
           <StyledTab>Upcoming</StyledTab>
@@ -108,14 +112,12 @@ class TalkComponent extends Component {
             <UpcomingComponent
               talks={user.connections}
               userSuggestions={UserPlaceHolderData}
-              test={user.connectionReviews}
             />
           </TabPanel>
           <TabPanel>
             <UpcomingComponent
               talks={user.connections}
               userSuggestions={UserPlaceHolderData}
-              test={user.connectionReviews}
             />
           </TabPanel>
         </TalkWrapper>
