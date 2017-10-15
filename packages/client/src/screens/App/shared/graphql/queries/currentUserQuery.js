@@ -36,17 +36,24 @@ export default gql`
         updatedAt
         createdAt
       }
-      connections {
+      connections(orderBy: createdAt_DESC, first: 1) {
         status
         connectionTime
         fireStarterSuggestion
         createdAt
         id
+        token
         reviews {
           comment
           id
           rating
           createdAt
+        }
+        participants {
+          id
+          firstName
+          lastName
+          email
         }
       }
       connectionReviews {

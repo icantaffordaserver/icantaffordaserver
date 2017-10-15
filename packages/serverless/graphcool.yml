@@ -1,4 +1,4 @@
-types: ./types.graphql
+types: ./graphcool/types.graphql
 functions:
   sendInvite-subscription:
     handler:

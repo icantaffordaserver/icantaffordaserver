@@ -30,9 +30,23 @@ function App() {
     <BackgroundWrapper>
       <SideNav />
       <Switch>
-        <Route path="/profile" component={Profile} />
-        <Route path="/inbox" component={Inbox} />
-        <Route path="/talk" component={Talk} />
+        <Route path="/profile" component={withSideNav(Profile)} />
+        <Route path="/inbox" component={withSideNav(Inbox)} />
+        <Route exact path="/talk" component={withSideNav(Talk)} />
+        <Route path="/talk/:sessionId" component={withSideNav(Talk)} />
+        <Route path="/login" component={LoginScreen} />
+        <Route exact path="/signUp" render={SignUpScreen} />
+        <Route exact path="/signUp1" render={SignUpScreen1} />
+        <Route path="/signUp1/:token" render={SignUpScreen1} />
+        <Route path="/forgot" component={ForgotPassword} />
+        <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
+        <Route
+          path="/verify/:token"
+          component={isAuthenticated(VerifyAccount)}
+        />
+        <Route path="/notVerified" component={NotVerified} />
+        <Route path="/notLoggedIn" component={NotLoggedIn} />
+        <Route component={NotFound404} />
       </Switch>
     </BackgroundWrapper>
   )

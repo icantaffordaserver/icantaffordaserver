@@ -1,0 +1,134 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Redirect, withRouter } from 'react-router-dom'
+import { graphql, compose, withApollo } from 'react-apollo'
+
+import moment from 'moment'
+import axios from 'axios'
+
+import ConversationComponent from '../components/ConversationComponent'
+import CountdownComponent from '../../../components/CountdownComponent'
+import PostConversation from '../../../components/PostConversation'
+
+import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
+
+class ConversationContainer extends Component {
+  /**
+   * TODO:
+   *  - Countdown to conversation if entered early [Done]
+   *  - Countdown styles
+   *  - Redirect to conversation 5 min before it starts (GLOBALLY)[Pondering...]
+   *  - Video provider [Done]
+   *  - Video Styles 
+   *  - Chat provider [Done]
+   *  - Chat Styles
+   *  - Error states
+   */
+
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    client: PropTypes.object.isRequired,
+  }
+
+  state = {
+    error: '',
+    success: false,
+    loading: false,
+    MINUTES_TO_START: 5, // Better way of doing this?
+    areTalking: false,
+  }
+
+  /**
+   * NEEDS TO BE REDESIGNED
+   */
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.data.loading) {
+      let areTalking = this.state.areTalking
+      const connection = nextProps.data.user.connections[0]
+
+      // Check conversation start time and convert to moment duration.
+      let toConversation = moment.duration(
+        moment(connection.connectionTime).diff(moment()),
+        'milliseconds',
+      )
+
+      //Check if conversation is starting soon
+      if (toConversation.asMinutes() <= this.state.MINUTES_TO_START) {
+        areTalking = true
+        toConversation = moment.duration(0, 'milliseconds')
+      }
+      // Other user
+      const otherUser = connection.participants.filter(
+        user => user.id !== nextProps.data.user.id,
+      )[0]
+
+      this.setState({
+        toConversation,
+        otherUser,
+        areTalking,
+      })
+    }
+  }
+
+  handleStartConversation = async e => {
+    e.preventDefault()
+    const name = this.props.data.user.firstName
+    const roomName = await this.props.data.user.connections[0].id
+    const request = await axios.post(process.env.REACT_APP_VIDEO_ID_TOKEN_URL, {
+      name,
+      roomName,
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+    const token = request.data.token
+
+    this.setState({
+      areTalking: true,
+      conversationEnded: false,
+      roomName,
+      token,
+    })
+  }
+
+  handleEndConversation = async (e, status) => {
+    e.preventDefault()
+    this.props.client.resetStore()
+    this.setState({
+      areTalking: false,
+      conversationEnded: true,
+      conversationStatus: status,
+    })
+  }
+
+  render() {
+    if (this.props.data.loading) return null
+
+    return (
+      <div>
+        {this.state.areTalking && !this.state.conversationEnded ? (
+          <ConversationComponent
+            roomName={this.state.roomName}
+            token={this.state.token}
+            user={this.state.otherUser}
+            onFinish={this.handleEndConversation}
+          />
+        ) : (
+          <CountdownComponent
+            start={this.handleStartConversation}
+            toConversation={this.state.toConversation}
+          />
+        )}
+        {this.state.conversationEnded && (
+          <PostConversation status={this.state.conversationStatus} />
+        )}
+        <button onClick={this.handleStartConversation}>Start</button>
+      </div>
+    )
+  }
+}
+
+export default compose(graphql(currentUserQuery), withRouter, withApollo)(
+  ConversationContainer,
+)
