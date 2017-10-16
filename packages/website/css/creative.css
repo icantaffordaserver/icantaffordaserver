@@ -1,8 +1,3 @@
-/*!
- * Start Bootstrap - Createive v4.0.0-beta (http://startbootstrap.com/template-overviews/creative)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-creative/blob/master/LICENSE)
- */
 body,
 html {
   width: 100%;
@@ -10,6 +5,7 @@ html {
 
 body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif; 
+  background: linear-gradient(269.96deg, #00122A 0.03%, #393F63 98.86%);
   }
 
 hr {
@@ -48,8 +44,7 @@ p {
 }
 
 footer {
-  padding-top:30px;
-  padding-bottom: 30px;
+  margin-top:10px;
   background: linear-gradient(269.96deg, #00122A 0.03%, #393F63 98.86%);
 }
   footer a:link {
@@ -70,19 +65,8 @@ footer {
   }
 
 .bg-lower {
-  position: relative;
-  width: 100%;
-  min-height: auto;
-  color: white;
-  /** background-image: url("../img/bottomback.png"); **/
-  background: linear-gradient(269.96deg, #00122A 0.03%, #393F63 98.86%);
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  padding-top:40px;
-  padding-bottom:40px;
+  padding-top:20px;
+  
 }
 
 .heading-lower {
@@ -91,7 +75,7 @@ footer {
 
 .button-lower {
   text-align:center;
-  margin-top:60px;
+  margin-top:100px;
 }
 
 .bg-primary {
@@ -105,7 +89,7 @@ footer {
   color: rgba(255, 255, 255, 0.7); }
 
 section {
-  padding: 100px 0; }
+  padding: 50px 0; }
 
 .section-heading {
   margin-top: 0; }
@@ -132,6 +116,7 @@ body {
   -webkit-tap-highlight-color: #222222; }
 
 #mainNav {
+  margin:0;
   border-color: rgba(34, 34, 34, 0.05);
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -201,11 +186,12 @@ header.masthead {
   min-height: auto;
   text-align: right;
   color: white;
-  background-image: url("../img/new_header.png");
+  background-image: url("../img/pluto.png");
+  background-repeat:no-repeat;
   background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
   background-size: cover; }
   header.masthead .header-content {
     position: relative;
