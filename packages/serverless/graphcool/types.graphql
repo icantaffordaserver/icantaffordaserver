@@ -1,4 +1,4 @@
-type ConnectionInterests implements Node {
+type ConnectionInterests @model {
   createdAt: DateTime!
   id: ID! @isUnique
   name: String! @isUnique
@@ -6,7 +6,7 @@ type ConnectionInterests implements Node {
   users: [User!]! @relation(name: "InterestedUsers")
 }
 
-type ConnectionReviews implements Node {
+type ConnectionReviews @model {
   id: ID! @isUnique
   comment: String
   createdAt: DateTime!
@@ -25,7 +25,7 @@ enum ConnectionStatus {
   REVIEWED
 }
 
-type ConnectionSuggestion implements Node {
+type ConnectionSuggestion @model {
   id: ID! @isUnique
   suggestedBy: User! @relation(name: "ConnectionSuggestionsOnAdminUser")
   users: [User!]! @relation(name: "ConnectionSuggestionsOnUser")
@@ -35,7 +35,7 @@ type ConnectionSuggestion implements Node {
   isAvailabilityOverlapping: Boolean @defaultValue(value: false)
 }
 
-type ConnectionReport implements Node {
+type ConnectionReport @model {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
@@ -47,7 +47,7 @@ type ConnectionReport implements Node {
   resolved: Boolean! @defaultValue(value: false)
 }
 
-type Connections implements Node {
+type Connections @model {
   connectionTime: DateTime
   createdAt: DateTime!
   fireStarterSuggestion: String
@@ -64,7 +64,7 @@ type Connections implements Node {
   report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
 }
 
-type File implements Node {
+type File @model {
   contentType: String!
   createdAt: DateTime!
   id: ID! @isUnique
@@ -76,7 +76,7 @@ type File implements Node {
   user: User @relation(name: "UserOnFile")
 }
 
-type FireStarterSuggestions implements Node {
+type FireStarterSuggestions @model {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
@@ -89,7 +89,7 @@ enum Gender {
   FEMALE
 }
 
-type InviteRequests implements Node {
+type InviteRequests @model {
   createdAt: DateTime!
   emailToInvite: String! @isUnique
   firstName: String!
@@ -106,7 +106,7 @@ enum InviteStatus {
   ACCEPTED
 }
 
-type Invites implements Node {
+type Invites @model {
   acceptedUser: User @relation(name: "InvitesOnUser1")
   createdAt: DateTime!
   email: String! @isUnique
@@ -122,7 +122,7 @@ type Invites implements Node {
   updatedAt: DateTime!
 }
 
-type PasswordReset implements Node {
+type PasswordReset @model {
   createdAt: DateTime!
   expiry: DateTime!
   id: ID! @isUnique
@@ -133,7 +133,7 @@ type PasswordReset implements Node {
   complete: Boolean! @defaultValue(value: false)
 }
 
-type Role implements Node {
+type Role @model {
   createdAt: DateTime!
   id: ID! @isUnique
   members: [User!]! @relation(name: "RoleOnUser")
@@ -141,7 +141,7 @@ type Role implements Node {
   updatedAt: DateTime!
 }
 
-type User implements Node {
+type User @model {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
@@ -190,7 +190,7 @@ enum UserType {
   ADMIN
 }
 
-type VerifyEmail implements Node {
+type VerifyEmail @model {
   createdAt: DateTime!
   emailToVerify: String!
   expiry: DateTime!
