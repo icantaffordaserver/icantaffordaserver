@@ -19,8 +19,17 @@ class PostConversationContainer extends Component {
    *  - Leave comment for user
    *  - Request friendship? (semantics)
    */
+
+  handleReview = e => {
+    e.preventDefault()
+  }
+  handleReport = e => {
+    e.preventDefault()
+  }
+
   render() {
-    return <PostConversationComponent />
+    if (!this.props.user) return null
+    return <PostConversationComponent user={this.props.user} />
   }
 }
 

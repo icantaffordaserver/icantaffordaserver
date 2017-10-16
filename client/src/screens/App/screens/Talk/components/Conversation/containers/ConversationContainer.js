@@ -37,6 +37,7 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
+    conversationEnded: true,
   }
 
   /**
@@ -94,7 +95,7 @@ class ConversationContainer extends Component {
 
   handleEndConversation = async (e, status) => {
     e.preventDefault()
-    this.props.client.resetStore()
+
     this.setState({
       areTalking: false,
       conversationEnded: true,
@@ -102,11 +103,21 @@ class ConversationContainer extends Component {
     })
   }
 
+  componentWillUnmount() {
+    this.handleEndConversation(new Event(null), 'Left')
+  }
+
   render() {
     if (this.props.data.loading) return null
 
     return (
       <div>
+        {this.state.conversationEnded && (
+          <PostConversation
+            user={this.state.otherUser}
+            status={this.state.conversationStatus}
+          />
+        )}
         {this.state.areTalking && !this.state.conversationEnded ? (
           <ConversationComponent
             roomName={this.state.roomName}
@@ -119,9 +130,6 @@ class ConversationContainer extends Component {
             start={this.handleStartConversation}
             toConversation={this.state.toConversation}
           />
-        )}
-        {this.state.conversationEnded && (
-          <PostConversation status={this.state.conversationStatus} />
         )}
         <button onClick={this.handleStartConversation}>Start</button>
       </div>

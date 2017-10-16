@@ -6,8 +6,8 @@ import { ChatBox } from '../styles'
 export default props => {
   if (!props.messages) return null
   return (
-    <ChatBox>
+    <div>
       <MessageList messages={props.messages} />
-    </ChatBox>
+    </div>
   )
 }
