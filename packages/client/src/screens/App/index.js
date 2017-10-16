@@ -20,7 +20,6 @@ import Talk from './screens/Talk'
 import SideNav from './shared/containers/HeaderContainer'
 
 import isAuthenticated from './shared/HoCs/isAuthenticated'
-import withSideNav from './shared/HoCs/withSideNav'
 
 import BackgroundWrapper from './styles/BackgroundWrapper'
 import './styles/styles.css'
@@ -30,10 +29,10 @@ function App() {
     <BackgroundWrapper>
       <SideNav />
       <Switch>
-        <Route path="/profile" component={withSideNav(Profile)} />
-        <Route path="/inbox" component={withSideNav(Inbox)} />
-        <Route exact path="/talk" component={withSideNav(Talk)} />
-        <Route path="/talk/:sessionId" component={withSideNav(Talk)} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/inbox" component={Inbox} />
+        <Route exact path="/talk" component={Talk} />
+        <Route path="/talk/:sessionId" component={Talk} />
         <Route path="/login" component={LoginScreen} />
         <Route exact path="/signUp" render={SignUpScreen} />
         <Route exact path="/signUp1" render={SignUpScreen1} />
