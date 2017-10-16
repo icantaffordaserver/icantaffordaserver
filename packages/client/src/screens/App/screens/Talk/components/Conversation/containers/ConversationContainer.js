@@ -9,6 +9,7 @@ import axios from 'axios'
 import ConversationComponent from '../components/ConversationComponent'
 import CountdownComponent from '../../../components/CountdownComponent'
 import PostConversation from '../../../components/PostConversation'
+import { Conversation } from '../styles'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 
@@ -75,13 +76,16 @@ class ConversationContainer extends Component {
     e.preventDefault()
     const name = this.props.data.user.firstName
     const roomName = await this.props.data.user.connections[0].id
-    const request = await axios.post(process.env.REACT_APP_VIDEO_ID_TOKEN_URL, {
-      name,
-      roomName,
-      headers: {
-        'Content-type': 'application/json',
+    const request = await axios.post(
+      process.env.REACT_APP_CONVERSATION_TOKEN_URL,
+      {
+        name,
+        roomName,
+        headers: {
+          'Content-type': 'application/json',
+        },
       },
-    })
+    )
     const token = request.data.token
 
     this.setState({
@@ -94,7 +98,7 @@ class ConversationContainer extends Component {
 
   handleEndConversation = async (e, status) => {
     e.preventDefault()
-    this.props.client.resetStore()
+
     this.setState({
       areTalking: false,
       conversationEnded: true,
@@ -102,11 +106,21 @@ class ConversationContainer extends Component {
     })
   }
 
+  componentWillUnmount() {
+    this.handleEndConversation(new Event(null), 'Left')
+  }
+
   render() {
     if (this.props.data.loading) return null
 
     return (
-      <div>
+      <Conversation>
+        {this.state.conversationEnded && (
+          <PostConversation
+            user={this.state.otherUser}
+            status={this.state.conversationStatus}
+          />
+        )}
         {this.state.areTalking && !this.state.conversationEnded ? (
           <ConversationComponent
             roomName={this.state.roomName}
@@ -120,11 +134,8 @@ class ConversationContainer extends Component {
             toConversation={this.state.toConversation}
           />
         )}
-        {this.state.conversationEnded && (
-          <PostConversation status={this.state.conversationStatus} />
-        )}
         <button onClick={this.handleStartConversation}>Start</button>
-      </div>
+      </Conversation>
     )
   }
 }

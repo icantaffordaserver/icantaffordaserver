@@ -12,8 +12,8 @@ export default async function createChatRoom(token, roomName) {
       channel = await client.createChannel({ uniqueName: roomName })
     }
 
-    channel = await channel.join()
-
     return channel
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+  }
 }

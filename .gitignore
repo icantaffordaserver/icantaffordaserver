@@ -1,2 +1,6 @@
 .DS_STORE
 node_modules/
+
+.yarnrc
+packages/client/.env
+yarn.lock

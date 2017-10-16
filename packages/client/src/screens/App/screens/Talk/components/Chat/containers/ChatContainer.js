@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Chat from '../components/ChatComponent'
 import createChatRoom from '../../../../../shared/ChatProvider'
+import { ChatBox } from '../styles'
 
 class ChatContainer extends Component {
   state = {
@@ -11,7 +12,8 @@ class ChatContainer extends Component {
 
   async componentWillMount() {
     // Create the chat client
-    const channel = await createChatRoom(this.props.token, this.props.roomName)
+    let channel = await createChatRoom(this.props.token, this.props.roomName)
+    channel = await channel.join()
 
     // Events
     channel.on('messageAdded', this.addMessage)
@@ -55,7 +57,7 @@ class ChatContainer extends Component {
     if (!this.state.channel) return <div className="loader active inline" />
 
     return (
-      <div>
+      <ChatBox>
         <Chat messages={this.state.messages} />
         <form action="" onSubmit={this.sendMessage}>
           <input
@@ -66,7 +68,7 @@ class ChatContainer extends Component {
           />
           <button onClick={this.sendMessage}>Send Message</button>
         </form>
-      </div>
+      </ChatBox>
     )
   }
 }
