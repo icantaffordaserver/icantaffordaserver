@@ -1,15 +1,15 @@
 import { isEmail } from 'validator'
 
-import { createClient } from '../../../../../../config/GraphQLClient'
-import sendVerificationEmail from '../../../../../mailer/emails/sendVerificationEmail.js'
+import { createClient } from '../../../../../config/GraphQLClient'
+import sendVerificationEmail from '../../../../mailer/emails/sendVerificationEmail'
 import {
   generateUniqueToken,
   generateEmailVerificationUrl,
   generateExpiryDate,
-} from '../../../../../helpers/'
+} from '../../../../helpers'
 
-import createVerifyEmailMutation from '../../../../../graphql/mutations/createVerifyEmailMutation'
-import getUserByEmailQuery from '../../../../../graphql/queries/getUserByEmailQuery'
+import createVerifyEmailMutation from '../../../../graphql/mutations/createVerifyEmailMutation'
+import getUserByEmailQuery from '../../../../graphql/queries/getUserByEmailQuery'
 
 export default async (req, res) => {
   const client = createClient()

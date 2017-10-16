@@ -4,7 +4,6 @@
 import { Router } from 'express'
 
 import userRoutes from './userRoutes'
-import getToken from '../helpers/twilio'
 
 // import createInvites from './logic/createInvites/index'
 // import updateInvites from './logic/updateInvites/index'
@@ -14,6 +13,8 @@ import createVerifyEmail from '../logic/createVerifyEmail/index'
 // import addToUsersConnectionsConnection from './logic/addToUsersConnectionsConnection/index'
 
 const routes = Router()
+
+routes.get('/health', (req, res) => res.send({ message: 'All good' }))
 
 // All microservice functions related to user type
 routes.use('/user', userRoutes)
@@ -28,7 +29,7 @@ routes.use('/user', userRoutes)
 
 // All microservice functions related to VerifyEmail type
 routes.use('/createVerifyEmail', createVerifyEmail)
-routes.post('/token', getToken)
+// routes.post('/token', getToken)
 
 // All microservice functions related to Connection type
 // routes.use('/addToUsersConnectionsConnection', addToUsersConnectionsConnection)

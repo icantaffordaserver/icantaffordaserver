@@ -7,7 +7,7 @@
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
-    "start:dev": "concurrently --kill-others 'serverless offline -P 4000 --stage dev' 'ngrok http -subdomain=toktumi-api 4000'",
+    "start:dev": "serverless offline -P 4000 --stage dev",
     "prepareLibs": "node scripts/prepareLibs.js",
     "build": "node scripts/bundleLambdas.js",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
@@ -17,7 +17,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "gitDir": "../",
+    "gitDir": "../../",
     "linters": {
       "*.{js,json,css}": [
         "prettier --write",
@@ -40,15 +40,13 @@
     "rimraf": "^2.6.1",
     "serverless": "^1.23.0",
     "serverless-offline": "^3.15.3",
-    "serverless-webpack": "^3.0.0",
+    "serverless-webpack": "^3.1.2",
     "shelljs": "^0.7.7",
-    "webpack": "^2.4.1",
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "aws-serverless-express": "https://github.com/jeremygiberson/aws-serverless-express.git",
     "axios": "^0.16.2",
-    "bcrypt": "^1.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.0",
     "cors": "^2.8.4",
     "express": "^4.15.4",
@@ -58,6 +56,7 @@
     "moment": "^2.18.1",
     "morgan": "^1.8.2",
     "postmark": "^1.4.1",
+    "serverless-http": "^1.5.1",
     "source-map-support": "^0.4.15",
     "twilio": "^3.7.0",
     "validator": "^8.2.0"

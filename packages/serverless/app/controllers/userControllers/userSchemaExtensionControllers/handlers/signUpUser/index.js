@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 
 import { createClient } from '../../../../../../config/GraphQLClient'
