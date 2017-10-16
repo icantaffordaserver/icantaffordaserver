@@ -3,7 +3,7 @@ functions:
   sendInvite-subscription:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/sendBetaInvite
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/sendBetaInvite
         headers:
           Content-Type: application/json
     type: subscription
@@ -11,7 +11,7 @@ functions:
   setPasswordResetComplete-subscription:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/subscription/setPasswordResetComplete
+        url: http://docker.for.mac.localhost:4000/user/subscription/setPasswordResetComplete
         headers:
           Content-Type: application/json
     type: subscription
@@ -19,7 +19,7 @@ functions:
   authenticateUser-schemaExtension:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/authenticateUser
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/authenticateUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -27,7 +27,7 @@ functions:
   sendPasswordResetEmail-subscription:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/subscription/sendPasswordResetEmail
+        url: http://docker.for.mac.localhost:4000/user/subscription/sendPasswordResetEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -35,7 +35,7 @@ functions:
   signUpUser-schemaExtension:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/signUpUser
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/signUpUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -43,7 +43,7 @@ functions:
   sendVerificationEmail-subscription:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/subscription/sendVerificationEmail
+        url: http://docker.for.mac.localhost:4000/user/subscription/sendVerificationEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -51,7 +51,7 @@ functions:
   triggerPasswordReset-schemaExtension:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/triggerPasswordReset
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/triggerPasswordReset
         headers:
           Content-Type: application/json
     type: resolver
@@ -59,7 +59,7 @@ functions:
   sendInvite-schemaExtension:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/sendBetaInvite
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/sendBetaInvite
         headers:
           Content-Type: application/json
     type: resolver
@@ -67,7 +67,7 @@ functions:
   updatePassword-schemaExtension:
     handler:
       webhook:
-        url: http://172.18.0.1:4000/user/schemaExtension/updatePassword
+        url: http://docker.for.mac.localhost:4000/user/schemaExtension/updatePassword
         headers:
           Content-Type: application/json
     type: resolver
@@ -85,10 +85,6 @@ permissions:
 - operation: ConnectionReviews.create
 - operation: ConnectionReviews.update
 - operation: ConnectionReviews.delete
-- operation: ConnectionQueue.read
-- operation: ConnectionQueue.create
-- operation: ConnectionQueue.update
-- operation: ConnectionQueue.delete
 - operation: Connections.read
 - operation: Connections.create
 - operation: Connections.update
@@ -132,9 +128,7 @@ permissions:
 - operation: ConnectionReviewsOnUser.*
 - operation: ConnectionsOnUser1.*
 - operation: ConnectionsOnUser.*
-- operation: ConnectionQueueOnUser.*
 - operation: InterestedUsers.*
-- operation: ConnectionsOnConnectionQueue.*
 - operation: UserOnVerifyEmail.*
 rootTokens:
 - adminToken
