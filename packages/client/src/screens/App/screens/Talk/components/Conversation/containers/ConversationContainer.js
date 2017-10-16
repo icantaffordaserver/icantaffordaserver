@@ -9,6 +9,7 @@ import axios from 'axios'
 import ConversationComponent from '../components/ConversationComponent'
 import CountdownComponent from '../../../components/CountdownComponent'
 import PostConversation from '../../../components/PostConversation'
+import { Conversation } from '../styles'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 
@@ -37,7 +38,6 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
-    conversationEnded: true,
   }
 
   /**
@@ -76,13 +76,16 @@ class ConversationContainer extends Component {
     e.preventDefault()
     const name = this.props.data.user.firstName
     const roomName = await this.props.data.user.connections[0].id
-    const request = await axios.post(process.env.REACT_APP_VIDEO_ID_TOKEN_URL, {
-      name,
-      roomName,
-      headers: {
-        'Content-type': 'application/json',
+    const request = await axios.post(
+      process.env.REACT_APP_CONVERSATION_TOKEN_URL,
+      {
+        name,
+        roomName,
+        headers: {
+          'Content-type': 'application/json',
+        },
       },
-    })
+    )
     const token = request.data.token
 
     this.setState({
@@ -111,7 +114,7 @@ class ConversationContainer extends Component {
     if (this.props.data.loading) return null
 
     return (
-      <div>
+      <Conversation>
         {this.state.conversationEnded && (
           <PostConversation
             user={this.state.otherUser}
@@ -132,7 +135,7 @@ class ConversationContainer extends Component {
           />
         )}
         <button onClick={this.handleStartConversation}>Start</button>
-      </div>
+      </Conversation>
     )
   }
 }

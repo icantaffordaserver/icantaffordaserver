@@ -2,3 +2,5 @@
 node_modules/
 
 .yarnrc
+packages/client/.env
+yarn.lock

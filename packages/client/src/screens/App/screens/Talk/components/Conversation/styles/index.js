@@ -7,4 +7,5 @@ export const Conversation = styled.div`
   justify-content: center;
   width: 90%;
   margin: auto;
+  margin-left: 80px;
 `

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { graphql, compose } from 'react-apollo'
+
 import ProfileCard from './ProfileCardComponent/ProfileCardComponent'
 import UpcomingComponent from './UpcomingComponent/UpcomingComponent'
 import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
@@ -10,13 +12,24 @@ import {
 
 import { TalkWrapper, TalkHeader } from './styles'
 
+import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+
 class TalkComponent extends Component {
   constructor(props) {
     super(props)
     this.state = { tabIndex: 0 }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.loading) {
+      this.setState({
+        user: nextProps.data.user,
+      })
+    }
+  }
+
   render() {
+    if (!this.state.user) return null
     const tagsPlaceholderData = {
       data: {
         tags: [
@@ -61,7 +74,7 @@ class TalkComponent extends Component {
         ],
       },
     }
-    const user = this.props.user
+    const user = this.state.user
     document.body.style.backgroundColor = '#ced0e7'
     return (
       <Tabs
@@ -125,4 +138,4 @@ class TalkComponent extends Component {
     )
   }
 }
-export default TalkComponent
+export default compose(graphql(currentUserQuery))(TalkComponent)

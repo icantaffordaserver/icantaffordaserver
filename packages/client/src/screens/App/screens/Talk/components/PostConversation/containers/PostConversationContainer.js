@@ -6,9 +6,13 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import PostConversationComponent from '../components/PostConversationComponent'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
+import userReviewMutation from '../../../../../shared/graphql/mutations/userReviewMutation'
+import userReportMutation from '../../../../../shared/graphql/mutations/userReportMutation'
 
 class PostConversationContainer extends Component {
-  static propTypes = {}
+  static propTypes = {
+    review: PropTypes.object.isRequired,
+  }
 
   state = {}
 
@@ -33,6 +37,10 @@ class PostConversationContainer extends Component {
   }
 }
 
-export default compose(withRouter, withApollo, graphql(currentUserQuery))(
-  PostConversationContainer,
-)
+export default compose(
+  withRouter,
+  withApollo,
+  graphql(currentUserQuery),
+  // graphql(userReportMutation, { name: 'reportMutation' }),
+  // graphql(userReviewMutation, { name: 'reviewMutation' }),
+)(PostConversationContainer)
