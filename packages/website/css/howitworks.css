@@ -50,4 +50,13 @@ body {
     body {
         padding-top: 56px;
     }
+    content-img {
+    display:block;
+	margin: 0 auto;
+	max-width:90%;
+	height:auto;
+    }
+    img-responsive {
+    	
+    }
 }
