@@ -1,9 +1,14 @@
 types: ./graphcool/types.graphql
+custom:
+  dev:
+    WEBHOOK_URL: docker.for.mac.localhost
+  prod:
+    WEBHOOK_URL: "http://test.com/prod"
 functions:
   sendInvite-subscription:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/sendBetaInvite
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/sendBetaInvite
         headers:
           Content-Type: application/json
     type: subscription
@@ -11,7 +16,7 @@ functions:
   setPasswordResetComplete-subscription:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/subscription/setPasswordResetComplete
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/setPasswordResetComplete
         headers:
           Content-Type: application/json
     type: subscription
@@ -19,7 +24,7 @@ functions:
   authenticateUser-schemaExtension:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/authenticateUser
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/authenticateUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -27,7 +32,7 @@ functions:
   sendPasswordResetEmail-subscription:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/subscription/sendPasswordResetEmail
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendPasswordResetEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -35,7 +40,7 @@ functions:
   signUpUser-schemaExtension:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/signUpUser
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/signUpUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -43,7 +48,7 @@ functions:
   sendVerificationEmail-subscription:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/subscription/sendVerificationEmail
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendVerificationEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -51,7 +56,7 @@ functions:
   triggerPasswordReset-schemaExtension:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/triggerPasswordReset
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/triggerPasswordReset
         headers:
           Content-Type: application/json
     type: resolver
@@ -59,7 +64,7 @@ functions:
   sendInvite-schemaExtension:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/sendBetaInvite
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/sendBetaInvite
         headers:
           Content-Type: application/json
     type: resolver
@@ -67,7 +72,7 @@ functions:
   updatePassword-schemaExtension:
     handler:
       webhook:
-        url: http://docker.for.mac.localhost:4000/user/schemaExtension/updatePassword
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/updatePassword
         headers:
           Content-Type: application/json
     type: resolver
