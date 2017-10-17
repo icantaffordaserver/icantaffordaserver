@@ -37,13 +37,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#">Home</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="howitworks.html">How It Works</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#login">Log In</a>
+              <a class="nav-link js-scroll-trigger" href="#sign-up-button">Sign Up</a>
             </li>
           </ul>
         </div>
@@ -58,7 +58,11 @@
           <h1 id="homeHeading">Pluto</h1>
           <h3>Turn your small talk into big ideas</h3>
           <h4>Connect with people like you and have a life-changing conversation</h4>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#signup">Sign up!</a>
+          <form id="sign-up-button" action="https://formspree.io/blake@talkpluto.com" method="POST">
+            <input class="header-form" placeholder="Your name" type="text" name="name">
+            <input class="header-form" placeholder="Your email" type="email" name="_replyto"><br>
+            <input class="btn btn-primary btn-xl js-scroll-trigger header-form" type="submit" value="Submit">
+          </form>
         </div>
       </div>
     </header>
@@ -116,20 +120,18 @@
           <div class="container">
             <ul class="list-inline">
               <li class="list-inline-item">
-                <a href="page-top">Home</a>
+                <a href="#page-top">Home</a>
               </li>
               <li class="footer-menu-divider list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="#howitworks.html">How It Works</a>
+                <a href="mailto:hello@talkpluto.com">Contact</a>
               </li>
-              <li class="footer-menu-divider list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#contact">Contact</a>
-              </li>
+              <!--
               <li class="footer-menu-divider list-inline-item">&sdot;</li>
               <li class="list-inline-item">
                 <a href="#tos">Terms of Service</a>
               </li>
+            -->
             </ul>
             <p class="copyright text-muted small">Copyright &copy; Pluto 2017.  All Rights Reserved</p>
           </div>
