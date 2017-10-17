@@ -1,17 +1,16 @@
 {
   "name": "serverless",
   "version": "0.0.1",
-  "files": [
-    "bin"
-  ],
+  "files": ["bin"],
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
-    "start:dev": "serverless offline -P 4000 --stage dev",
+    "start:dev": "serverless offline --host 0.0.0.0 --port 4000 --stage dev",
     "prepareLibs": "node scripts/prepareLibs.js",
     "build": "node scripts/bundleLambdas.js",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
-    "create": "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
+    "create":
+      "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
     "update": "npm run transpile && claudia update",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
@@ -19,10 +18,7 @@
   "lint-staged": {
     "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   },
   "author": "Alexander Mann",
