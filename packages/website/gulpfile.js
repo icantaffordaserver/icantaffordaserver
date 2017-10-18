@@ -17,7 +17,7 @@ var banner = [
   ' <%= pkg.author %>\n',
   ' * Licensed under <%= pkg.license %> (https://github.com/BlackrockDigital/<%= pkg.name %>/blob/master/LICENSE)\n',
   ' */\n',
-  '',
+  ''
 ].join('')
 
 // Compiles SCSS files from /scss into /css
@@ -27,14 +27,14 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(
       header(banner, {
-        pkg: pkg,
-      }),
+        pkg: pkg
+      })
     )
     .pipe(gulp.dest('css'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -44,16 +44,16 @@ gulp.task('minify-css', ['sass'], function() {
     .src('css/*.css')
     .pipe(
       cleanCSS({
-        compatibility: 'ie8',
-      }),
+        compatibility: 'ie8'
+      })
     )
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
     .pipe(concat('style.min.css'))
     .pipe(gulp.dest('css'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -64,19 +64,19 @@ gulp.task('minify-js', function() {
     .pipe(uglify())
     .pipe(
       header(banner, {
-        pkg: pkg,
-      }),
+        pkg: pkg
+      })
     )
     .pipe(
       rename({
-        suffix: '.min',
-      }),
+        suffix: '.min'
+      })
     )
     .pipe(gulp.dest('js'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -88,14 +88,14 @@ gulp.task('copy', function() {
       'node_modules/bootstrap/dist/**/*',
       '!**/npm.js',
       '!**/bootstrap-theme.*',
-      '!**/*.map',
+      '!**/*.map'
     ])
     .pipe(gulp.dest('vendor/bootstrap'))
 
   gulp
     .src([
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/jquery/dist/jquery.min.js'
     ])
     .pipe(gulp.dest('vendor/jquery'))
 
@@ -110,7 +110,7 @@ gulp.task('copy', function() {
   gulp
     .src([
       'node_modules/popper.js/dist/umd/popper.js',
-      'node_modules/popper.js/dist/umd/popper.min.js',
+      'node_modules/popper.js/dist/umd/popper.min.js'
     ])
     .pipe(gulp.dest('vendor/popper'))
 
@@ -125,7 +125,7 @@ gulp.task('copy', function() {
       '!node_modules/font-awesome/.npmignore',
       '!node_modules/font-awesome/*.txt',
       '!node_modules/font-awesome/*.md',
-      '!node_modules/font-awesome/*.json',
+      '!node_modules/font-awesome/*.json'
     ])
     .pipe(gulp.dest('vendor/font-awesome'))
 })
@@ -137,8 +137,8 @@ gulp.task('default', ['sass', 'minify-css', 'minify-js', 'copy'])
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: '',
-    },
+      baseDir: ''
+    }
   })
 })
 
@@ -152,6 +152,7 @@ gulp.task(
     gulp.watch('js/*.js', ['minify-js'])
     // Reloads the browser whenever HTML or JS files change
     gulp.watch('*.html', browserSync.reload)
+    gulp.watch('css/style.min.css', browserSync.reload)
     gulp.watch('js/**/*.js', browserSync.reload)
-  },
+  }
 )
