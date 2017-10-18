@@ -1,3 +1,4 @@
-default: dev
-environments:
-  dev: cj3l0oa9r1uab0130s8nti73k
+targets:
+  dev: shared-eu-west-1/cj3l0oa9r1uab0130s8nti73k
+  default: dev
+clusters: {}

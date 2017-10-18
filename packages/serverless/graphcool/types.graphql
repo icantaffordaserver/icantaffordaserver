@@ -18,11 +18,13 @@ type User implements Node {
   connectionsRequested: ConnectionQueue @relation(name: "ConnectionQueueOnUser")
   availability: Json
   bio: String
-  connectionReviews: [ConnectionReviews!]! @relation(name: "ConnectionReviewsOnUser")
+  connectionReviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionReviewsOnUser")
   connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
   email: String! @isUnique
   emailVerified: Boolean! @defaultValue(value: false)
-  fireStarterSuggestions: [FireStarterSuggestions!]! @relation(name: "FireStarterSuggestionsOnUser")
+  fireStarterSuggestions: [FireStarterSuggestions!]!
+    @relation(name: "FireStarterSuggestionsOnUser")
   firstName: String!
   gender: Gender
   invite: Invites @relation(name: "InvitesOnUser1")
@@ -41,7 +43,12 @@ type User implements Node {
   typeformProfileComplete: Boolean @defaultValue(value: false)
   verifyEmail: VerifyEmail @relation(name: "UserOnVerifyEmail")
   birthday: String!
-  connectionIntrests: [ConnectionInterests!]! @relation(name: "InterestedUsers")
+  connectionInterests: [ConnectionInterests!]!
+    @relation(name: "InterestedUsers")
+  connectionSuggestions: [ConnectionSuggestion]
+    @relation(name: "ConnectionSuggestionsOnUser")
+  connectionsSuggested: [ConnectionSuggestion]
+    @relation(name: "ConnectionSuggestionsOnAdminUser")
 }
 
 type ConnectionReviews implements Node {
@@ -71,10 +78,14 @@ type Connections implements Node {
   id: ID! @isUnique
   matchedBy: User @relation(name: "ConnectionsOnUser")
   updatedAt: DateTime!
-  connectionQueues: [ConnectionQueue!]! @relation(name: "ConnectionsOnConnectionQueue")
+  connectionQueues: [ConnectionQueue!]!
+    @relation(name: "ConnectionsOnConnectionQueue")
   participants: [User!]! @relation(name: "ConnectionsOnUser1")
-  reviews: [ConnectionReviews!]! @relation(name: "ConnectionsOnConnectionReviews")
+  reviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionsOnConnectionReviews")
   status: ConnectionStatus!
+  connectionSuggestion: ConnectionSuggestion
+    @relation(name: "ConnectionSuggestionsOnConnection")
 }
 
 type FireStarterSuggestions implements Node {
@@ -148,6 +159,16 @@ type ConnectionInterests implements Node {
   name: String! @isUnique
   updatedAt: DateTime!
   users: [User!]! @relation(name: "InterestedUsers")
+}
+
+type ConnectionSuggestion implements Node {
+  id: ID! @isUnique
+  suggestedBy: User! @relation(name: "ConnectionSuggestionsOnAdminUser")
+  users: [User!]! @relation(name: "ConnectionSuggestionsOnUser")
+  potentialTimesSnapshot: Json
+  isScheduled: Boolean @defaultValue(value: false)
+  connection: Connections @relation(name: "ConnectionSuggestionsOnConnection")
+  isAvailabilityOverlapping: Boolean @defaultValue(value: false)
 }
 
 enum Gender {
