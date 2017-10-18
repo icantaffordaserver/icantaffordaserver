@@ -1,7 +1,7 @@
 types: ./graphcool/types.graphql
 custom:
   dev:
-    WEBHOOK_URL: docker.for.mac.localhost
+    WEBHOOK_URL: "http://docker.for.mac.localhost:4000"
   prod:
     WEBHOOK_URL: "http://test.com/prod"
 functions:

@@ -11,6 +11,7 @@
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
     "create":
       "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
+    "deploy:dev": "graphcool deploy --target dev",
     "update": "npm run transpile && claudia update",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
