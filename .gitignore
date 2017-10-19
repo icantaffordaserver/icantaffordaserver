@@ -1,2 +1,7 @@
 .DS_STORE
 node_modules/
+.yarnrc
+packages/client/.env
+packages/serverless/package-lock.json
+packages/website/package-lock.json
+dist/

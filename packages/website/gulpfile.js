@@ -8,6 +8,8 @@ var uglify = require('gulp-uglify')
 var pkg = require('./package.json')
 var autoprefixer = require('gulp-autoprefixer')
 var concat = require('gulp-concat')
+var imagemin = require('gulp-imagemin')
+var minifyHTML = require('gulp-minify-html')
 
 // Set the banner content
 var banner = [
@@ -17,7 +19,7 @@ var banner = [
   ' <%= pkg.author %>\n',
   ' * Licensed under <%= pkg.license %> (https://github.com/BlackrockDigital/<%= pkg.name %>/blob/master/LICENSE)\n',
   ' */\n',
-  ''
+  '',
 ].join('')
 
 // Compiles SCSS files from /scss into /css
@@ -27,14 +29,14 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(
       header(banner, {
-        pkg: pkg
-      })
+        pkg: pkg,
+      }),
     )
     .pipe(gulp.dest('css'))
     .pipe(
       browserSync.reload({
-        stream: true
-      })
+        stream: true,
+      }),
     )
 })
 
@@ -44,16 +46,16 @@ gulp.task('minify-css', ['sass'], function() {
     .src('css/*.css')
     .pipe(
       cleanCSS({
-        compatibility: 'ie8'
-      })
+        compatibility: 'ie8',
+      }),
     )
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
     .pipe(concat('style.min.css'))
-    .pipe(gulp.dest('css'))
+    .pipe(gulp.dest('dist/css'))
     .pipe(
       browserSync.reload({
-        stream: true
-      })
+        stream: true,
+      }),
     )
 })
 
@@ -64,19 +66,19 @@ gulp.task('minify-js', function() {
     .pipe(uglify())
     .pipe(
       header(banner, {
-        pkg: pkg
-      })
+        pkg: pkg,
+      }),
     )
     .pipe(
       rename({
-        suffix: '.min'
-      })
+        suffix: '.min',
+      }),
     )
-    .pipe(gulp.dest('js'))
+    .pipe(gulp.dest('dist/js'))
     .pipe(
       browserSync.reload({
-        stream: true
-      })
+        stream: true,
+      }),
     )
 })
 
@@ -88,35 +90,35 @@ gulp.task('copy', function() {
       'node_modules/bootstrap/dist/**/*',
       '!**/npm.js',
       '!**/bootstrap-theme.*',
-      '!**/*.map'
+      '!**/*.map',
     ])
-    .pipe(gulp.dest('vendor/bootstrap'))
+    .pipe(gulp.dest('dist/vendor/bootstrap'))
 
   gulp
     .src([
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/jquery/dist/jquery.min.js'
+      'node_modules/jquery/dist/jquery.min.js',
     ])
-    .pipe(gulp.dest('vendor/jquery'))
+    .pipe(gulp.dest('dist/vendor/jquery'))
 
   gulp
     .src(['node_modules/magnific-popup/dist/*'])
-    .pipe(gulp.dest('vendor/magnific-popup'))
+    .pipe(gulp.dest('dist/vendor/magnific-popup'))
 
   gulp
     .src(['node_modules/scrollreveal/dist/*.js'])
-    .pipe(gulp.dest('vendor/scrollreveal'))
+    .pipe(gulp.dest('dist/vendor/scrollreveal'))
 
   gulp
     .src([
       'node_modules/popper.js/dist/umd/popper.js',
-      'node_modules/popper.js/dist/umd/popper.min.js'
+      'node_modules/popper.js/dist/umd/popper.min.js',
     ])
-    .pipe(gulp.dest('vendor/popper'))
+    .pipe(gulp.dest('dist/vendor/popper'))
 
   gulp
     .src(['node_modules/jquery.easing/*.js'])
-    .pipe(gulp.dest('vendor/jquery-easing'))
+    .pipe(gulp.dest('dist/vendor/jquery-easing'))
 
   gulp
     .src([
@@ -125,9 +127,27 @@ gulp.task('copy', function() {
       '!node_modules/font-awesome/.npmignore',
       '!node_modules/font-awesome/*.txt',
       '!node_modules/font-awesome/*.md',
-      '!node_modules/font-awesome/*.json'
+      '!node_modules/font-awesome/*.json',
     ])
-    .pipe(gulp.dest('vendor/font-awesome'))
+    .pipe(gulp.dest('dist/vendor/font-awesome'))
+})
+
+gulp.task('html', function() {
+  gulp
+    .src('*.html')
+    .pipe(minifyHTML())
+    .pipe(gulp.dest('dist/'))
+})
+
+gulp.task('images', function() {
+  gulp
+    .src('img/*')
+    .pipe(
+      imagemin({
+        progressive: true,
+      }),
+    )
+    .pipe(gulp.dest('dist/img'))
 })
 
 // Default task
@@ -137,10 +157,20 @@ gulp.task('default', ['sass', 'minify-css', 'minify-js', 'copy'])
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: ''
-    }
+      baseDir: 'dist/',
+    },
   })
 })
+
+gulp.task('build', [
+  'sass',
+  'minify-css',
+  'minify-js',
+  'images',
+  'html',
+  'browserSync',
+  'copy',
+])
 
 // Dev task with browserSync
 gulp.task(
@@ -154,5 +184,5 @@ gulp.task(
     gulp.watch('*.html', browserSync.reload)
     gulp.watch('css/style.min.css', browserSync.reload)
     gulp.watch('js/**/*.js', browserSync.reload)
-  }
+  },
 )

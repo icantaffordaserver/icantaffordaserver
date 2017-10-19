@@ -3,7 +3,14 @@
   "name": "startbootstrap-creative",
   "version": "4.0.0-beta",
   "description": "Creative is a stylish one page HTML theme for Bootstrap.",
-  "keywords": ["css", "sass", "html", "responsive", "theme", "template"],
+  "keywords": [
+    "css",
+    "sass",
+    "html",
+    "responsive",
+    "theme",
+    "template"
+  ],
   "homepage": "https://startbootstrap.com/template-overviews/creative",
   "bugs": {
     "url": "https://github.com/BlackrockDigital/startbootstrap-creative/issues",
@@ -11,17 +18,21 @@
   },
   "license": "MIT",
   "author": "Start Bootstrap",
-  "contributors": ["David Miller (http://davidmiller.io/)"],
+  "contributors": [
+    "David Miller (http://davidmiller.io/)"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/BlackrockDigital/startbootstrap-creative.git"
   },
   "scripts": {
-    "start": "gulp dev"
+    "start": "gulp build"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
     "font-awesome": "4.7.0",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-minify-html": "^1.0.6",
     "jquery": "^3.2.1",
     "jquery.easing": "^1.4.1",
     "magnific-popup": "^1.1.0",
