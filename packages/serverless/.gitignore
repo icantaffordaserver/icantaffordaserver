@@ -1,0 +1,13 @@
+.DS_STORE
+node_modules/
+
+.yarnrc
+packages/client/.env
+yarn.lock
+packages/serverless/.graphcoolrc
+packages/serverless/env.yml
+packages/serverless/package-lock.json
+packages/serverless/.webpack/service/lambda.js
+packages/serverless/.webpack/service/lambda.js.map
+packages/website/package-lock.json
+env.yml
