@@ -13,9 +13,8 @@ export default async(req, res) => {
     system: process.env.GRAPHCOOL_SYSTEM_ENDPOINT,
     subscriptions: process.env.GRAPHCOOL_SUBSCRIPTION_ENDPOINT
   }
-  const graphcool = fromEvent(req.body, {endpoints, token: process.env.GRAPHCOOL_ROOT_TOKEN})
+  const graphcool = fromEvent(req.body, {endpoints})
   const api = graphcool.api('simple/v1')
-  console.log(api)
 
   if (!isEmail(email)) 
     throw new Error('Invalid Credentials.')

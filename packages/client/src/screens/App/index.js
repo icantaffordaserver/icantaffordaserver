@@ -1,7 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-
-import HeaderContainer from './shared/containers/HeaderContainer'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import LoginScreen from './screens/Login'
 import SignUpScreen from './screens/SignUp'
@@ -27,25 +25,22 @@ import './styles/styles.css'
 function App() {
   return (
     <BackgroundWrapper>
-      <SideNav />
+      <SideNav/>
       <Switch>
-        <Route path="/profile" component={Profile} />
-        <Route path="/inbox" component={Inbox} />
-        <Route exact path="/talk" component={Talk} />
-        <Route path="/talk/:sessionId" component={Talk} />
-        <Route path="/login" component={LoginScreen} />
-        <Route exact path="/signUp" render={SignUpScreen} />
-        <Route exact path="/signUp1" render={SignUpScreen1} />
-        <Route path="/signUp1/:token" render={SignUpScreen1} />
-        <Route path="/forgot" component={ForgotPassword} />
-        <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
-        <Route
-          path="/verify/:token"
-          component={isAuthenticated(VerifyAccount)}
-        />
-        <Route path="/notVerified" component={NotVerified} />
-        <Route path="/notLoggedIn" component={NotLoggedIn} />
-        <Route component={NotFound404} />
+        <Route path="/profile" component={Profile}/>
+        <Route path="/inbox" component={Inbox}/>
+        <Route exact path="/talk" component={Talk}/>
+        <Route path="/talk/:sessionId" component={Talk}/>
+        <Route path="/login" component={LoginScreen}/>
+        <Route exact path="/signUp" render={SignUpScreen}/>
+        <Route exact path="/signUp1" render={SignUpScreen1}/>
+        <Route path="/signUp1/:token" render={SignUpScreen1}/>
+        <Route path="/forgot" component={ForgotPassword}/>
+        <Route path="/reset/:id/:token" component={ResetPasswordScreen}/>
+        <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)}/>
+        <Route path="/notVerified" component={NotVerified}/>
+        <Route path="/notLoggedIn" component={NotLoggedIn}/>
+        <Route component={NotFound404}/>
       </Switch>
     </BackgroundWrapper>
   )
@@ -54,18 +49,18 @@ function App() {
 const Root = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={ComingSoon} />
-      <Route path="/" component={App} />
-      <Route path="/login" component={LoginScreen} />
-      <Route exact path="/signUp" render={SignUpScreen} />
-      <Route exact path="/signUp1" render={SignUpScreen1} />
-      <Route path="/signUp1/:token" render={SignUpScreen1} />
-      <Route path="/forgot" component={ForgotPassword} />
-      <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
-      <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)} />
-      <Route path="/notVerified" component={NotVerified} />
-      <Route path="/notLoggedIn" component={NotLoggedIn} />
-      <Route component={NotFound404} />
+      <Route exact path="/" component={ComingSoon}/>
+      <Route path="/" component={App}/>
+      <Route path="/login" component={LoginScreen}/>
+      <Route exact path="/signUp" render={SignUpScreen}/>
+      <Route exact path="/signUp1" render={SignUpScreen1}/>
+      <Route path="/signUp1/:token" render={SignUpScreen1}/>
+      <Route path="/forgot" component={ForgotPassword}/>
+      <Route path="/reset/:id/:token" component={ResetPasswordScreen}/>
+      <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)}/>
+      <Route path="/notVerified" component={NotVerified}/>
+      <Route path="/notLoggedIn" component={NotLoggedIn}/>
+      <Route component={NotFound404}/>
     </Switch>
   </BrowserRouter>
 )
