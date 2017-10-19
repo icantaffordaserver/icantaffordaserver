@@ -1,20 +1,13 @@
-// Styling for the masthead
 header.masthead {
   position: relative;
   width: 100%;
-  text-align: right;
+  text-align: center;
   color: white;
-  background-image: url("../img/pluto.png");
-  background-repeat: no-repeat;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
-  background-position: center;
+  margin-top: 40%;
   .header-content {
     position: relative;
     width: 100%;
-    text-align: right;
+    text-align: center;
     .header-content-inner {
       h1 {
         font-family: 'Krona One';
@@ -22,31 +15,38 @@ header.masthead {
         font-size: 40px;
         font-weight: 700;
         margin-bottom: 20px;
-        text-align: right;
+        text-align: center;
       }
       h3 {
         font-size: 25px;
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 10px;
-        text-align: right;
+        text-align: center;
       }
       h4 {
         font-size: 16px;
         font-weight: 700;
         margin-top: 10;
         margin-bottom: 50px;
-        text-align: right;
+        text-align: center;
+      }
+      h5 {
+        font-size: 20px;
+        font-weight: 400;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
       }
       hr {
-        margin: 30px auto;
+        margin: 30px center;
       }
       p {
         font-size: 14px;
         font-weight: 700;
         margin-bottom: 50px;
         color: white;
-        text-align: right;
+        text-align: center;
       }
     }
   }
@@ -54,12 +54,23 @@ header.masthead {
 
 @media (min-width: 768px) {
   header.masthead {
+    background-image: url("../img/pluto.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-position: center;
     height: 100%;
+    margin-top: 0;
     min-height: 600px;
+    text-align: right;
+    float: right;
     .header-content {
       position: absolute;
       top: 50%;
       padding: 0 0px;
+      text-align: right;
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
@@ -68,13 +79,40 @@ header.masthead {
         margin-right: auto;
         margin-left: auto;
         h1 {
-          font-size: 50px;
+          font-family: 'Krona One';
+          color: #F05F40;
+          font-size: 40px;
+          font-weight: 700;
+          margin-bottom: 20px;
+          text-align: right;
+        }
+        h3 {
+          font-size: 25px;
+          font-weight: 700;
+          margin-top: 0;
+          margin-bottom: 10px;
+          text-align: right;
+        }
+        h4 {
+          font-size: 16px;
+          font-weight: 700;
+          margin-top: 10;
+          margin-bottom: 50px;
+          text-align: right;
+        }
+        h5 {
+          font-size: 20px;
+          font-weight: 400;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          text-align: right;
         }
         p {
           font-size: 18px;
-          max-width: 80%;
-          margin-right: auto;
-          margin-left: auto;
+          font-weight: 700;
+          margin-bottom: 50px;
+          color: white;
+          text-align: right;
         }
       }
     }

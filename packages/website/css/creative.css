@@ -84,7 +84,7 @@ body {
 
 #mainNav {
   border-color: rgba(34, 34, 34, 0.05);
-  background-color: transparent;
+  background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -149,69 +149,107 @@ body {
 header.masthead {
   position: relative;
   width: 100%;
-  text-align: right;
+  text-align: center;
   color: white;
-  background-image: url("../img/pluto.png");
-  background-repeat: no-repeat;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
-  background-position: center; }
+  margin-top:40%;
+  }
   header.masthead .header-content {
     position: relative;
     width: 100%;
-    text-align: right; }
+    text-align: center; }
     header.masthead .header-content .header-content-inner h1 {
       font-family: 'Krona One';
       color: #F05F40;
       font-size: 40px;
       font-weight: 700;
       margin-bottom: 20px;
-      text-align: right; }
+      text-align: center; }
     header.masthead .header-content .header-content-inner h3 {
       font-size: 25px;
       font-weight: 700;
       margin-top: 0;
       margin-bottom: 10px;
-      text-align: right; }
+      text-align: center; }
     header.masthead .header-content .header-content-inner h4 {
       font-size: 16px;
       font-weight: 700;
       margin-top: 10;
       margin-bottom: 50px;
-      text-align: right; }
+      text-align: center; }
+    header.masthead .header-content .header-content-inner h5 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center; }
     header.masthead .header-content .header-content-inner hr {
-      margin: 30px auto; }
+      margin: 30px center; }
     header.masthead .header-content .header-content-inner p {
       font-size: 14px;
       font-weight: 700;
       margin-bottom: 50px;
       color: white;
-      text-align: right; }
+      text-align: center; }
+
 
 @media (min-width: 768px) {
   header.masthead {
+    background-image: url("../img/pluto.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-position: center; 
     height: 100%;
-    min-height: 600px; }
+    margin-top:0;
+    min-height: 600px;
+    text-align:right;
+    float:right; }
     header.masthead .header-content {
       position: absolute;
       top: 50%;
       padding: 0 0px;
+      text-align: right;
       -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
       transform: translateY(-50%); }
-      header.masthead .header-content .header-content-inner {
-        max-width: 1000px;
-        margin-right: auto;
-        margin-left: auto; }
-        header.masthead .header-content .header-content-inner h1 {
-          font-size: 50px; }
-        header.masthead .header-content .header-content-inner p {
-          font-size: 18px;
-          max-width: 80%;
+        header.masthead .header-content .header-content-inner {
+          max-width: 1000px;
           margin-right: auto;
-          margin-left: auto; } }
+          margin-left: auto; }
+          header.masthead .header-content .header-content-inner h1 {
+        font-family: 'Krona One';
+        color: #F05F40;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: right; }
+        header.masthead .header-content .header-content-inner h3 {
+        font-size: 25px;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-align: right; }
+        header.masthead .header-content .header-content-inner h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 10;
+        margin-bottom: 50px;
+        text-align: right; }
+        header.masthead .header-content .header-content-inner h5 {
+        font-size: 20px;
+        font-weight: 400;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: right; }
+        header.masthead .header-content .header-content-inner p {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 50px;
+        color: white;
+        text-align: right; }
+  }
 
 .header-form {
   border: 1px solid #777294;
@@ -498,11 +536,12 @@ fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fi
   padding: 15px 30px; }
 
 .button-lower {
-  margin-top: 50px; }
+  margin-top: 50px;
+  margin-bottom: 50px; }
 
 #mainNav {
   border-color: rgba(34, 34, 34, 0.05);
-  background-color: transparent;
+  background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -621,3 +660,31 @@ body {
     margin: 0 auto;
     max-width: 90%;
     height: auto; } }
+
+
+/** Social Media Styling **/
+.fa {
+  padding:7px;
+  margin-left:10px;
+  font-size: 17px;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+.fa:hover {
+    opacity: 0.7;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+.fa-instagram {
+  background: #125688;
+  color: white;
+}

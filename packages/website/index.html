@@ -24,6 +24,9 @@
   <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
   <link href="css/style.min.css" rel="stylesheet">
 
+  <!-- Social Media CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- Google Analytics JavaScript -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108285689-1"></script>
   <script>
@@ -69,12 +72,14 @@
           <h1>Pluto</h1>
           <h3>Turn your small talk into big ideas</h3>
           <h4>Connect with people like you and have a life-changing conversation</h4>
-          <form id="sign-up-button" action="https://formspree.io/blake@talkpluto.com" method="POST">
-            <input class="header-form" placeholder="Your name" type="text" name="name">
-            <input class="header-form" placeholder="Your email" type="email" name="_replyto">
-            <br>
-            <input class="btn btn-primary btn-xl js-scroll-trigger" type="submit" value="Submit">
-          </form>
+          <form action="https://talkpluto.us17.list-manage.com/subscribe/post?u=785666cbd8a056a4b6ecc9bab&amp;id=5ba2df8027" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <h5 id="sign-up-button">Subscribe to our mailing list</h5>
+            <input type="text" value="" name="FNAME" class="header-form" id="mce-FNAME" placeholder="First Name" required>
+            <input type="email" value="" name="EMAIL" class="header-form email" id="mce-EMAIL" placeholder="Email Address" required>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_785666cbd8a056a4b6ecc9bab_5ba2df8027" tabindex="-1" value=""></div>
+          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-xl js-scroll-trigger header-form"></div>
+        </form>
         </div>
       </div>
     </header>
@@ -141,12 +146,12 @@
         <li class="list-inline-item">
           <a href="mailto:hello@talkpluto.com">Contact</a>
         </li>
-        <!--
-              <li class="footer-menu-divider list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#tos">Terms of Service</a>
-              </li>
-            -->
+        <li class="footer-menu-divider list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com/TalkPuto/" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/talkpluto" class="fa fa-twitter"></a>
+            <a href="https://www.instagram.com/talkpluto/" class="fa fa-instagram"></a>
+        </li>
       </ul>
       <p class="copyright text-muted small">Copyright &copy; Pluto 2017. All Rights Reserved</p>
     </div>
@@ -164,6 +169,9 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/creative.min.js"></script>
+
+  <!-- MailChimp JS -->
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us17.list-manage.com","uuid":"785666cbd8a056a4b6ecc9bab","lid":"5ba2df8027"}) })</script>
 
   
 
