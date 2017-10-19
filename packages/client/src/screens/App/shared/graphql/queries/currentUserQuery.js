@@ -1,9 +1,9 @@
 /**
  * Created by alexandermann on 2017-02-28.
  */
-import { gql } from 'react-apollo'
+import {gql} from 'react-apollo'
 
-export default gql`
+export default gql `
   {
     user {
       id
@@ -29,12 +29,6 @@ export default gql`
       verifyEmail {
         id
         emailToVerify
-      }
-      connectionsRequested {
-        id
-        comment
-        updatedAt
-        createdAt
       }
       connections(orderBy: createdAt_DESC, first: 1) {
         status

@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import { isEmail } from 'validator'
+import {isEmail} from 'validator'
 
 import getUserByEmailQuery from '../graphql/queries/getUserByEmailQuery'
 
@@ -30,7 +30,7 @@ export function getPasswordResetUrl(id, token) {
 /**
  * Generates an expiry date based on given milliseconds.
  * 1 Day = 86400000 ms
- * @param {Date} days 
+ * @param {Date} days
  */
 export function generateExpiryDate(days = 86400000) {
   const daysInMS = days || 86400000
@@ -43,13 +43,13 @@ export function generateEmailVerificationUrl(token) {
 }
 
 export async function isValidEmail(email, client) {
-  if (!isEmail(email)) return false
+  if (!isEmail(email)) 
+    return false
 
-  const userExits = await client.request(getUserByEmailQuery, {
-    email,
-  })
-
-  if (userExits.User) return false
+  const userExits = await client.request(getUserByEmailQuery, {email})
+  console.log(userExits)
+  if (userExits.User) 
+    return false
 
   return true
 }
