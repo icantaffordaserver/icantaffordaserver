@@ -52,7 +52,9 @@ class LoginForm extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
   }
 
   handleSubmit = (event, data) => {
@@ -82,11 +84,21 @@ class LoginForm extends Component {
     const error = this.state.error !== '' || this.props.error !== ''
 
     return (
-      <Div style={{ margin: '0', padding: '0' }} className="columns">
+      <Div
+        style={{
+          margin: '0',
+          padding: '0',
+        }}
+        className="columns"
+      >
         <ImageDiv className="column is-two-thirds">
           <OverLay>
             <SignUpImg src={productShot} alt="coffee shop" />
-            <ImageH1 style={{ fontFamily: 'fabfeltscriptbold' }}>
+            <ImageH1
+              style={{
+                fontFamily: 'fabfeltscriptbold',
+              }}
+            >
               Toktumi
             </ImageH1>
             <ImageP>Join The Community</ImageP>
@@ -97,47 +109,46 @@ class LoginForm extends Component {
             <FormSegment padded loading={this.props.loading}>
               <FormH1>Login</FormH1>
 
-              <Form onSubmit={this.handleSubmit} size="large" error={error}>
-                {this.renderErrors()}
-                <Form.Group inline widths={9}>
-                  <Form.Field width={16}>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <input
-                      className="input"
-                      name="email"
-                      placeholder="your@email.com"
-                      onChange={this.handleChange}
-                      value={this.state.email}
-                    />
-                  </Form.Field>
-                </Form.Group>
-                <Form.Group inline widths={9}>
-                  <Form.Field width={16}>
-                    <FormLabel htmlFor="passowrd">Password</FormLabel>
-                    <input
-                      className="input"
-                      name="password"
-                      placeholder="*********"
-                      type="password"
-                      onChange={this.handleChange}
-                      value={this.state.password}
-                    />
-                  </Form.Field>
-                </Form.Group>
-                <FormSubmitButton className="button is-primary is-fullwidth">
-                  Login
-                </FormSubmitButton>
-                <Divider />
-              </Form>
+              {this.renderErrors()}
+              <Form.Group inline widths={9}>
+                <Form.Field width={16}>
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <input
+                    className="input"
+                    name="email"
+                    placeholder="your@email.com"
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group inline widths={9}>
+                <Form.Field width={16}>
+                  <FormLabel htmlFor="passowrd">Password</FormLabel>
+                  <input
+                    className="input"
+                    name="password"
+                    placeholder="*********"
+                    type="password"
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                  />
+                </Form.Field>
+              </Form.Group>
+              <FormSubmitButton className="button is-primary is-fullwidth">
+                Login
+              </FormSubmitButton>
+              <Divider />
+
               <Div className="columns">
                 <Div className="column">
                   <Link to="/">
-                    <FormLink href="/"> Forgot Password? </FormLink>
+                    <FormLink href="/">Forgot Password?</FormLink>
                   </Link>
                 </Div>
                 <Div className="column">
                   <Link to="/">
-                    <FormLink href="/"> Don't have an account? </FormLink>
+                    <FormLink href="/">Don't have an account?</FormLink>
                   </Link>
                 </Div>
               </Div>

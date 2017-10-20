@@ -4,7 +4,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation ForgotPassword($email: String!, $securityInfo: JSON!) {
+  mutation ForgotPassword($email: String!) {
     triggerPasswordReset(email: $email) {
       id
     }

@@ -4,16 +4,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
-import { gql, graphql, compose } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
 
-import {
-  Form,
-  FormGroup,
-  FormButton,
-  FormInput,
-  FormLabel,
-} from '../../styles/Forms'
+import { Form, FormGroup, FormButton, FormInput } from '../../styles/Forms'
 import { Label } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 
@@ -45,7 +39,9 @@ class ComingSoon extends React.Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleSubmit = async event => {
@@ -69,7 +65,11 @@ class ComingSoon extends React.Component {
       }) // clear the current message
 
       await this.props.mutate({
-        variables: { email, firstName, lastName },
+        variables: {
+          email,
+          firstName,
+          lastName,
+        },
       })
       this.setState({
         loading: false,
@@ -102,7 +102,9 @@ class ComingSoon extends React.Component {
         </h2>
         <br />
         <Form
-          style={{ width: 'fill-available !important' }}
+          style={{
+            width: 'fill-available !important',
+          }}
           onSubmit={this.handleSubmit}
         >
           <FormGroup>
