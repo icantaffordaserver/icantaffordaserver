@@ -150,7 +150,7 @@ header.masthead {
   width: 100%;
   text-align: center;
   color: white;
-  margin-top: 40%; }
+  margin-top: 20%; }
   header.masthead .header-content-inner h1 {
     font-family: 'Krona One';
     color: #F05F40;
@@ -243,7 +243,10 @@ form {
     .service-box {
       margin: 20px auto; } }
   .service-box p {
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    font-size: 1.25em; }
+  .service-box h3 {
+    font-size: 2.175rem; }
 
 .portfolio-box {
   position: relative;
