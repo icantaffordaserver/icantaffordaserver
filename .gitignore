@@ -5,3 +5,4 @@ packages/client/.env
 packages/serverless/package-lock.json
 packages/website/package-lock.json
 dist/
+packages/client/.env.development

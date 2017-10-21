@@ -6,23 +6,25 @@ body {
 .body-text {
   color: white;
   position: relative;
-  margin-top: 20px;
-  font-size: 15px;
+  margin-top: 25%;
+  font-size: 1.5em;
+  font-weight: 300;
 }
 
 .title {
-  color: white;
+  color: $theme-primary;
   margin-top: 100px;
   text-align: center;
-  font-family: "Krona One", "Lato", "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 4.25vw;
 }
 
 .title-content {
   color: white;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-family: "Krona One", "Lato", "Open Sans", sans-serif;
+  margin: 10% 0 5% 0;
+  text-align: left;
+  font-family:  "Open Sans", sans-serif;
 }
 
 .circ-crop {
@@ -56,5 +58,20 @@ body {
     margin: 0 auto;
     max-width: 90%;
     height: auto;
+  }
+}
+
+@media (max-width:768px){
+
+  .title{
+    font-size: 36px;
+  }
+  .body-text{
+    margin-top: 5%;
+    font-size: 15px;
+  }
+
+  .title-content{
+    font-size: 26px;
   }
 }
