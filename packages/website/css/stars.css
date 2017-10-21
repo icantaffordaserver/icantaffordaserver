@@ -29,6 +29,24 @@
   margin-top: -5%;
 }
 
+.pluto-letter{
+  color: #F05F40;
+  font-size: 1.2em;
+}
+
 .expanded{
   max-width: 90% !important; 
+}
+
+.section-heading{
+  font-size: 4em;
+}
+
+@media (max-width:768px){
+  .section-heading{
+    font-size: 2em;
+  }
+  .pluto-letter{
+    font-size: 1em
+  }
 }
