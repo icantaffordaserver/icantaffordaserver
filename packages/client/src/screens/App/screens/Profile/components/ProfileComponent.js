@@ -14,8 +14,6 @@ import {
   StyledTabList,
 } from '../../../shared/components/Tabs/styles'
 
-import generateGravatarUrl from '../../../shared/helpers/generateGravatarUrl'
-
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
 /* 
@@ -36,41 +34,33 @@ class ProfileComponent extends Component {
   }
 
   render() {
+    if (!this.props.user) return null
     const user = this.props.user
 
     return (
-      <Profile>
-        <ProfileSection>
-          <Tabs>
-            <StyledTabList>
-              <Tab>About</Tab>
-              <Tab>Availability</Tab>
-              <Tab>Settings</Tab>
-            </StyledTabList>
-            <TabPanel>
-              <AboutComponent user={user} />
-            </TabPanel>
-            <TabPanel>
-              <AvailabilityComponent />
-            </TabPanel>
-            <TabPanel>
-              <SettingsComponent
-                user={user}
-                onSubmit={this.props.onSettingChange}
-                error={this.props.error}
-                success={this.props.success}
-              />
-            </TabPanel>
-          </Tabs>
-
-          <ProfileAvatar
-            src={
-              (user.profilePhoto ? user.profilePhoto.url : null) ||
-              generateGravatarUrl(user.email)
-            }
-          />
-        </ProfileSection>
-      </Profile>
+      <ProfileSection>
+        <Tabs>
+          <StyledTabList>
+            <StyledTab>About</StyledTab>
+            <StyledTab>Availability</StyledTab>
+            <StyledTab>Settings</StyledTab>
+          </StyledTabList>
+          <TabPanel>
+            <AboutComponent user={user} />
+          </TabPanel>
+          <TabPanel>
+            <AvailabilityComponent />
+          </TabPanel>
+          <TabPanel>
+            <SettingsComponent
+              user={user}
+              onSubmit={this.props.onSettingChange}
+              error={this.props.error}
+              success={this.props.success}
+            />
+          </TabPanel>
+        </Tabs>
+      </ProfileSection>
     )
   }
 }

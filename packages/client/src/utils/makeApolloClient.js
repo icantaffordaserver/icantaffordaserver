@@ -1,8 +1,8 @@
 /**
  * Created by alexandermann on 2017-02-22.
  */
-import ApolloClient, {createNetworkInterface} from 'apollo-client'
-import {SubscriptionClient} from 'subscriptions-transport-ws'
+import ApolloClient, { createNetworkInterface } from 'apollo-client'
+import { SubscriptionClient } from 'subscriptions-transport-ws'
 import addGraphQLSubscriptions from './addGraphQLSubscriptions'
 
 // creates a subscription ready Apollo Client instance Note that scapholdUrl
@@ -10,7 +10,7 @@ import addGraphQLSubscriptions from './addGraphQLSubscriptions'
 function makeApolloClient() {
   const graphqlUrl = process.env.REACT_APP_GRAPHQL_URL
   const webSocketUrl = process.env.REACT_APP_WEBSOCKET_URL
-  const networkInterface = createNetworkInterface({uri: graphqlUrl})
+  const networkInterface = createNetworkInterface({ uri: graphqlUrl })
   const wsClient = new SubscriptionClient(webSocketUrl)
 
   networkInterface.use([
@@ -21,22 +21,26 @@ function makeApolloClient() {
           req.options.headers = {} // Create the header object if needed.
         }
         const AuthToken = localStorage.getItem('auth_token')
+
         if (AuthToken) {
           // assumes we have logged in and stored the returned user token in local storage
           req.options.headers.Authorization = `Bearer ${AuthToken}`
         }
         next()
-      }
-    }
+      },
+    },
   ])
 
-  const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(networkInterface, wsClient,)
+  const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
+    networkInterface,
+    wsClient,
+  )
 
   return new ApolloClient({
     networkInterface: networkInterfaceWithSubscriptions,
     dataIdFromObject: o => o.id,
     queryDeduplication: true, // use so that we do not fetch the same query multiple times
-    initialState: {}
+    initialState: {},
   })
 }
 

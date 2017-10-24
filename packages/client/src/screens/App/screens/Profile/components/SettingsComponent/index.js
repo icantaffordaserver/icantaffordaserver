@@ -15,6 +15,7 @@ import {
   FormTextArea,
   FormButton,
 } from '../../../../styles/Forms.js'
+import { Button } from '../../../../styles'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
@@ -135,7 +136,12 @@ class SettingsComponent extends Component {
             )}
           </FormGroup>
 
-          <FormButton loading={this.props.loading}>Submit</FormButton>
+          <Button
+            className={this.props.className ? this.props.className : ''}
+            loading={this.props.loading}
+          >
+            Submit
+          </Button>
         </Form>
       </div>
     )

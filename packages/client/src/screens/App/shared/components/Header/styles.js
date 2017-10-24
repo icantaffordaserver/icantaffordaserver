@@ -9,7 +9,6 @@ export const SideNav = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
-  position: fixed;
   width: 63px;
   min-width: 60px;
   background: #393f63;

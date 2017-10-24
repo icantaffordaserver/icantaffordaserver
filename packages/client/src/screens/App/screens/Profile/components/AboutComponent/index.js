@@ -4,12 +4,14 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
+import generateGravatarUrl from '../../../../shared/helpers/generateGravatarUrl'
 
 import ProfileTagsWrapper from './components/ProfileTagsWrapper'
 import ProfileTag from './components/ProfileTag'
 import ProfileName from './components/ProfileName'
 import ProfileLocation from './components/ProfileLocation'
 import FireStatersComponent from './components/FireStartersComponent'
+import { ProfileAvatar } from '../../style'
 import {
   AboutButton,
   ProfileHeader,
@@ -17,6 +19,8 @@ import {
   UserColumn,
   BioParagraph,
 } from './styles'
+
+import { Content } from '../../../../styles'
 
 // placeholder data will be replaced when user query is refactored
 const tagsPlaceholderData = {
@@ -62,11 +66,24 @@ class AboutComponent extends Component {
   )
 
   render() {
-    const { firstName, lastName, email, bio, location } = this.props.user
+    const {
+      firstName,
+      lastName,
+      email,
+      bio,
+      location,
+      profilePhoto,
+    } = this.props.user
 
     return (
       <UserColumns className="columns">
-        <UserColumn center className="column is-one-third">
+        <Content>
+          <ProfileAvatar
+            src={
+              (profilePhoto ? profilePhoto.url : null) ||
+              generateGravatarUrl(email)
+            }
+          />
           <ProfileName>{`${firstName} ${lastName}`}</ProfileName>
           <ProfileLocation>{location}</ProfileLocation>
           {/* <AboutButton className="button">Message</AboutButton>
@@ -76,10 +93,10 @@ class AboutComponent extends Component {
           {this.renderTags()}
 
           <BioParagraph>{bio}</BioParagraph>
-        </UserColumn>
-        <UserColumn className="column">
+        </Content>
+        <Content>
           <FireStatersComponent firestarters={FireStaters} />
-        </UserColumn>
+        </Content>
       </UserColumns>
     )
   }

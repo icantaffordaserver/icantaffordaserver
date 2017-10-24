@@ -7,17 +7,21 @@ import {
   Segment,
   Input,
   Image,
-  Form,
   Divider,
   Message,
 } from 'semantic-ui-react'
-
+import {
+  Form,
+  FormButton,
+  FormGroup,
+  FormInput,
+  FormLabel,
+} from '../../../../styles/Forms'
 import logo from '../../../../shared/assets/logo.png'
 import productShot from '../../../../shared/assets/signup-shot1.jpg'
 
 import {
   LoginButton,
-  FormLabel,
   FormLink,
   FormH1,
   SignUpImg,
@@ -59,12 +63,14 @@ class LoginForm extends Component {
 
   handleSubmit = (event, data) => {
     event.preventDefault() // prevent page reload
+    console.log('clicked')
     this.setState({ error: '' }) // clear any old errors
     const { email, password } = this.state
     const loginErrors = validateLogin(email, password)
     if (typeof loginErrors === 'string') {
       // if validate login returns string we have an error
       this.setState({ error: loginErrors })
+      console.log('error')
       return
     }
     this.props.onSubmit(email, password)
@@ -105,39 +111,38 @@ class LoginForm extends Component {
           </OverLay>
         </ImageDiv>
         <Div className="column">
-          <Form onSubmit={this.onSubmit} size="large" error={error}>
+          <Form onSubmit={this.handleSubmit} size="large" error={error}>
             <FormSegment padded loading={this.props.loading}>
-              <FormH1>Login</FormH1>
+              <FormH1>Sign In</FormH1>
 
               {this.renderErrors()}
-              <Form.Group inline widths={9}>
-                <Form.Field width={16}>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <input
-                    className="input"
-                    name="email"
-                    placeholder="your@email.com"
-                    onChange={this.handleChange}
-                    value={this.state.email}
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Group inline widths={9}>
-                <Form.Field width={16}>
-                  <FormLabel htmlFor="passowrd">Password</FormLabel>
-                  <input
-                    className="input"
-                    name="password"
-                    placeholder="*********"
-                    type="password"
-                    onChange={this.handleChange}
-                    value={this.state.password}
-                  />
-                </Form.Field>
-              </Form.Group>
-              <FormSubmitButton className="button is-primary is-fullwidth">
+              <FormGroup>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <input
+                  className="input"
+                  name="email"
+                  placeholder="your@email.com"
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                />
+              </FormGroup>
+              <FormGroup>
+                <FormLabel htmlFor="passowrd">Password</FormLabel>
+                <input
+                  className="input"
+                  name="password"
+                  placeholder="*********"
+                  type="password"
+                  onChange={this.handleChange}
+                  value={this.state.password}
+                />
+              </FormGroup>
+              <FormButton
+                loading={this.props.loading}
+                className="button is-primary is-fullwidth"
+              >
                 Login
-              </FormSubmitButton>
+              </FormButton>
               <Divider />
 
               <Div className="columns">

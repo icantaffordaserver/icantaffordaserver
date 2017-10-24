@@ -42,8 +42,8 @@ class LoginContainer extends React.Component {
       const token = response.data.authenticateEmailUser.token
       window.localStorage.setItem('auth_token', token)
 
-      this.client.resetStore()
       await this.setState({ loading: false })
+      this.props.client.resetStore()
     } catch (error) {
       if (error.message.includes('Could not find a user with that username')) {
         this.props.client.resetStore()

@@ -8,7 +8,8 @@ import { graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
 
 import { Form, FormGroup, FormButton, FormInput } from '../../styles/Forms'
-import { Label } from 'semantic-ui-react'
+import { Button } from '../../styles'
+import { Label, Icon } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 
 import logo from '../../shared/assets/logo.png'
@@ -128,9 +129,10 @@ class ComingSoon extends React.Component {
               onChange={this.onChange}
             />
           </FormGroup>
-          <FormButton icon="send" loading={loading}>
+          <Button loading={loading}>
+            <Icon name="send" />
             Send
-          </FormButton>
+          </Button>
           {message && (
             <Label basic color={error ? 'red' : 'green'} pointing="left">
               {message}

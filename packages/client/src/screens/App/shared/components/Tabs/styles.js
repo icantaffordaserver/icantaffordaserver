@@ -18,6 +18,7 @@ export const StyledTab = styled(Tab)`
   color: #f2f2f2;
   &:hover {
     cursor: pointer;
+    box-shadow: 0px 2px 0px orange;
   }
   &:active {
     box-shadow: 0px 2px 0px orange;
@@ -42,7 +43,10 @@ StyledCardTabPanel.tabsRole = 'TabPanel'
 export const StyledTabList = styled(TabList)`
   border: none;
   position: fixed;
+  margin: 0;
+  list-style: none;
   top: 0;
+  left: 60px;
   width: 100%;
   display: flex;
   justify-content: space-around;

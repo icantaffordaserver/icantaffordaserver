@@ -1,9 +1,9 @@
 /**
  * Created by alexandermann on 2017-02-28.
  */
-import {gql} from 'react-apollo'
+import { gql } from 'react-apollo'
 
-export default gql `
+export default gql`
   {
     user {
       id

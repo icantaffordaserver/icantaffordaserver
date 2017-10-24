@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {ApolloProvider} from 'react-apollo'
-import {LocaleProvider} from 'antd'
+import LocaleProvider from 'antd/lib/locale-provider'
 import enUS from 'antd/lib/locale-provider/en_US'
 
 import makeApolloClient from './utils/makeApolloClient'

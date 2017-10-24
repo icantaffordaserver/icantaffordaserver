@@ -6,18 +6,19 @@ export const VideoControls = styled.div`
   position: absolute;
   width: 77px;
   height: 471px;
-  left: 1338px;
+  right: 1338px;
   top: 262px;
-  position: absolute;
-  width: 326px;
-  height: 77px;
-  left: 1415px;
-  top: 334px;
-
+  z-index: 1000;
   background: #c4c4c4;
-  transform: rotate(90deg);
 `
 
+export const VideoPlayer = styled.div`
+  height: 720px;
+  width: 1280px;
+  display: block;
+  background: #333;
+  transform: rotateY(180deg);
+`
 // /* Video Controls */
 
 // /* Turn On/Off Camera Icon */

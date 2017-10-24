@@ -92,10 +92,14 @@ class Header extends React.Component {
           </div>
 
           <div>
-            <Link to="/talk" style={{ width: '100%' }}>
+            <Link to="/help" style={{ width: '100%' }}>
               <img style={{ height: '1.6em', padding: '3px' }} src={help} />
             </Link>
-            <Link to="/talk" style={{ width: '100%' }}>
+            <Link
+              to="/logout"
+              onClick={this.props.logout}
+              style={{ width: '100%' }}
+            >
               <img style={{ height: '1.6em', padding: '3px' }} src={logout} />
             </Link>
           </div>

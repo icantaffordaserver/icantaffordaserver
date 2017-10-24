@@ -12,3 +12,4 @@ packages/serverless/.webpack/service/lambda.js.map
 packages/website/package-lock.json
 packages/client/.env.development
 yarn.lock
+packages/website

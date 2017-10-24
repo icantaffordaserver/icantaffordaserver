@@ -40,6 +40,7 @@ export const BioParagraph = styled.p`
 `
 
 export const UserColumns = styled.div`
+  display: flex;
   &&& {
     padding: 2%;
   }

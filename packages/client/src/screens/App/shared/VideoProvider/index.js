@@ -49,13 +49,12 @@ class VideoConnection {
   onDisconnect = participant => {
     const remote = document.getElementById('remote-user-video')
     participant.tracks.forEach(track => this.trackRemoved)
-    remote.innerHTML = null
   }
 
   close() {
     const participant = this.room.localParticipant
     participant.tracks.forEach(track => {
-      participant.unpublishTrack(track)
+      participant.removeTrack(track)
     })
   }
 

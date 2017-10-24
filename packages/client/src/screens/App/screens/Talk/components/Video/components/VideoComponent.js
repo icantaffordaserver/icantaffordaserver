@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 
-import { VideoControls } from '../styles'
+import Report from '../../Report'
+
+import { VideoControls, VideoPlayer } from '../styles'
 
 class VideoComponent extends Component {
   render() {
-    return <div id="remote-user-video" />
+    return (
+      <VideoPlayer id="remote-user-video">
+        <VideoControls>
+          {' '}
+          <Report />{' '}
+        </VideoControls>
+      </VideoPlayer>
+    )
   }
 }
 
