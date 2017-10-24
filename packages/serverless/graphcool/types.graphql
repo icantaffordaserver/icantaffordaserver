@@ -1,0 +1,207 @@
+type ConnectionInterests @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String! @isUnique
+  updatedAt: DateTime!
+  users: [User!]! @relation(name: "InterestedUsers")
+}
+
+type ConnectionReviews @model {
+  id: ID! @isUnique
+  comment: String
+  createdAt: DateTime!
+  rating: Int
+  updatedAt: DateTime!
+  connection: Connections @relation(name: "ConnectionsOnConnectionReviews")
+  user: User! @relation(name: "ConnectionReviewsOnUser")
+}
+
+enum ConnectionStatus {
+  MATCHED
+  SCHEDULED
+  COMPLETED
+  BAILED
+  CANCELLED
+  REVIEWED
+}
+
+type ConnectionSuggestion @model {
+  id: ID! @isUnique
+  suggestedBy: User! @relation(name: "ConnectionSuggestionsOnAdminUser")
+  users: [User!]! @relation(name: "ConnectionSuggestionsOnUser")
+  potentialTimesSnapshot: Json
+  isScheduled: Boolean @defaultValue(value: false)
+  connection: Connections @relation(name: "ConnectionSuggestionOnConnection")
+  isAvailabilityOverlapping: Boolean @defaultValue(value: false)
+}
+
+type ConnectionReport @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  reportedBy: User! @relation(name: "ConnectionReportOnReporterUser")
+  reportedUser: User @relation(name: "ConnectionReportOnReportedUser")
+  connection: Connections! @relation(name: "ConnectionsOnConnectionReport")
+  reason: ReportType!
+  comment: String
+  resolved: Boolean! @defaultValue(value: false)
+}
+
+type Connections @model {
+  connectionTime: DateTime
+  createdAt: DateTime!
+  fireStarterSuggestion: String
+  id: ID! @isUnique
+  matchedBy: User @relation(name: "ConnectionsOnUser")
+  updatedAt: DateTime!
+  participants: [User!]! @relation(name: "ConnectionsOnUser1")
+  reviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionsOnConnectionReviews")
+  status: ConnectionStatus!
+  connectionSuggestion: ConnectionSuggestion
+    @relation(name: "ConnectionSuggestionOnConnection")
+  token: String! @isUnique
+  report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
+}
+
+type File @model {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+  user: User @relation(name: "UserOnFile")
+}
+
+type FireStarterSuggestions @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  url: String! @isUnique
+  users: [User!]! @relation(name: "FireStarterSuggestionsOnUser")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type InviteRequests @model {
+  createdAt: DateTime!
+  emailToInvite: String! @isUnique
+  firstName: String!
+  id: ID! @isUnique
+  invite: Invites @relation(name: "InvitesOnInviteRequests")
+  isApproved: Boolean! @defaultValue(value: false)
+  lastName: String!
+  referredFrom: String! @defaultValue(value: "Coming Soon Page")
+  updatedAt: DateTime!
+}
+
+enum InviteStatus {
+  SENT
+  ACCEPTED
+}
+
+type Invites @model {
+  acceptedUser: User @relation(name: "InvitesOnUser1")
+  createdAt: DateTime!
+  email: String! @isUnique
+  firstName: String!
+  id: ID! @isUnique
+  inviteRequest: InviteRequests @relation(name: "InvitesOnInviteRequests")
+  isAccepted: Boolean! @defaultValue(value: false)
+  lastName: String!
+  mutationVariables: Json
+  sentBy: User @relation(name: "InvitesOnUser")
+  status: InviteStatus! @defaultValue(value: SENT)
+  token: String! @isUnique
+  updatedAt: DateTime!
+}
+
+type PasswordReset @model {
+  createdAt: DateTime!
+  expiry: DateTime!
+  id: ID! @isUnique
+  securityInfo: Json
+  token: String!
+  updatedAt: DateTime!
+  user: User @relation(name: "PasswordResetOnUser")
+  complete: Boolean! @defaultValue(value: false)
+}
+
+type Role @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  members: [User!]! @relation(name: "RoleOnUser")
+  name: UserType! @defaultValue(value: BASIC_USER)
+  updatedAt: DateTime!
+}
+
+type User @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  connectionsMatched: [Connections!]! @relation(name: "ConnectionsOnUser")
+  availability: Json
+  bio: String
+  connectionReviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionReviewsOnUser")
+  connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
+  email: String! @isUnique
+  emailVerified: Boolean! @defaultValue(value: false)
+  fireStarterSuggestions: [FireStarterSuggestions!]!
+    @relation(name: "FireStarterSuggestionsOnUser")
+  firstName: String!
+  gender: Gender
+  invite: Invites @relation(name: "InvitesOnUser1")
+  invitesSent: [Invites!]! @relation(name: "InvitesOnUser")
+  isAcceptedToBeta: Boolean @defaultValue(value: false)
+  isAdmin: Boolean @defaultValue(value: false)
+  lastName: String!
+  location: String
+  mutationVariables: Json
+  password: String!
+  passwordReset: PasswordReset @relation(name: "PasswordResetOnUser")
+  phoneNumber: String
+  profilePhoto: File @relation(name: "UserOnFile")
+  roles: [Role!]! @relation(name: "RoleOnUser")
+  typeformProfile: Json
+  typeformProfileComplete: Boolean @defaultValue(value: false)
+  verifyEmail: VerifyEmail @relation(name: "UserOnVerifyEmail")
+  birthday: String!
+  connectionInterests: [ConnectionInterests!]!
+    @relation(name: "InterestedUsers")
+  connectionSuggestions: [ConnectionSuggestion!]!
+    @relation(name: "ConnectionSuggestionsOnUser")
+  connectionsSuggested: [ConnectionSuggestion!]!
+    @relation(name: "ConnectionSuggestionsOnAdminUser")
+  connectionIncidents: [ConnectionReport!]!
+    @relation(name: "ConnectionReportOnReportedUser")
+  reportedUsers: [ConnectionReport!]!
+    @relation(name: "ConnectionReportOnReporterUser")
+}
+
+enum UserType {
+  BASIC_USER
+  ADMIN
+}
+
+type VerifyEmail @model {
+  createdAt: DateTime!
+  emailToVerify: String!
+  expiry: DateTime!
+  id: ID! @isUnique
+  token: String! @isUnique
+  updatedAt: DateTime!
+  user: User @relation(name: "UserOnVerifyEmail")
+}
+
+enum ReportType {
+  HARASSMENT
+  QUALITY
+  OUTAGE
+}

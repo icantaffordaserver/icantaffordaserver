@@ -1,0 +1,65 @@
+{
+  "name": "serverless",
+  "version": "0.0.1",
+  "files": [
+    "bin"
+  ],
+  "description": "The serverless functions powering the backend of toktumi",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "serverless offline --host 0.0.0.0 --port 4000 --stage dev",
+    "prepareLibs": "node scripts/prepareLibs.js",
+    "build": "node scripts/bundleLambdas.js",
+    "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
+    "create": "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
+    "deploy:dev": "graphcool deploy --target dev",
+    "update": "npm run transpile && claudia update",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "gitDir": "../../",
+    "linters": {
+      "*.{js,json,css}": [
+        "prettier --write",
+        "git add"
+      ]
+    }
+  },
+  "author": "Alexander Mann",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "concurrently": "^3.5.0",
+    "eslint": "^4.6.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "js-yaml": "^3.10.0",
+    "lint-staged": "^4.2.2",
+    "prettier": "^1.7.0",
+    "rimraf": "^2.6.1",
+    "serverless": "^1.23.0",
+    "serverless-offline": "^3.15.3",
+    "serverless-webpack": "^3.1.2",
+    "shelljs": "^0.7.7",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "graphcool-lib": "^0.1.3",
+    "graphql-request": "^1.3.6",
+    "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
+    "morgan": "^1.8.2",
+    "postmark": "^1.4.1",
+    "serverless-http": "^1.5.1",
+    "source-map-support": "^0.4.15",
+    "twilio": "^3.7.0",
+    "validator": "^8.2.0"
+  }
+}

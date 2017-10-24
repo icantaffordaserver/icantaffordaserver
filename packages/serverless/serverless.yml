@@ -1,0 +1,38 @@
+service: toktumi-serverless-api
+
+# Use the serverless-webpack plugin to transpile ES6
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+# Enable auto-packing of external modules
+custom:
+  webpackIncludeModules: true
+  defaultStage: dev
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  # if ${opt:stage} is not specified will default to the value of dev see: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy#deployment-without-stage-and-region-options
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: us-east-1
+  profile: toktumi # the profile in .aws/credentials
+  timeout: 60
+
+  # you can define service wide environment variables here
+  environment: ${file(env.yml):${self:provider.stage}}
+
+package:
+  include:
+    - node_modules/**
+
+functions:
+  express-server:
+    name: ${self:provider.stage}-api
+    description: An express app to handle graphcool and app backend functionality
+    handler: lambda.handler
+    events:
+      - http:
+          path: /{proxy+} # Path for this endpoint
+          method: any # HTTP method for this endpoint
+          cors: true # Turn on CORS for this endpoint, but don't forget to return the right header in your response
