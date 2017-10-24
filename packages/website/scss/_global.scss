@@ -88,3 +88,8 @@ body {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .main-title-fix {
+    margin-top: 230px;
+  }
+}

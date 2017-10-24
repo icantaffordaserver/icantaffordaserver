@@ -3,7 +3,7 @@ header.masthead {
   width: 100%;
   text-align: center;
   color: white;
-  margin-top: 20%;
+  margin-top: 150px;
   .header-content-inner {
     h1 {
       font-family: 'Krona One';
@@ -54,48 +54,47 @@ header.masthead {
     min-height: 600px;
     text-align: right;
     float: right;
-
-      .header-content-inner {
-        max-width: 1000px;
-        margin-right: auto;
-        margin-left: auto;
-        h1 {
-          font-family: 'Krona One';
-          color: #F05F40;
-          font-size: 40px;
-          font-weight: 700;
-          margin-bottom: 20px;
-          text-align: right;
-        }
-        h3 {
-          font-size: 4em;
-          font-weight: 700;
-          margin-bottom: 5%;
-          text-align: right;
-        }
-        h4 {
-          font-size: 2em;
-          font-weight: 300;
-          margin-bottom: 50px;
-          text-align: right;
-        }
-        h5 {
-          font-size: 1.5em;
-          font-weight: bold;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          text-align: right;
-        }
-        p {
-          font-size: 18px;
-          font-weight: 700;
-          margin-bottom: 50px;
-          color: white;
-          text-align: right;
-        }
+    .header-content-inner {
+      max-width: 1000px;
+      margin-right: auto;
+      margin-left: auto;
+      h1 {
+        font-family: 'Krona One';
+        color: #F05F40;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: right;
+      }
+      h3 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 5%;
+        text-align: right;
+      }
+      h4 {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 50px;
+        text-align: right;
+      }
+      h5 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 50px;
+        color: white;
+        text-align: right;
       }
     }
   }
+}
 
 form {
   display: flex;

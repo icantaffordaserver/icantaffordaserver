@@ -79,9 +79,13 @@ body {
   /* w3c */
   color: white; }
 
+@media (max-width: 768px) {
+  .main-title-fix {
+    margin-top: 230px; } }
+
 #mainNav {
   border-color: rgba(34, 34, 34, 0.05);
-  background-color: white;
+  background-color: transparent;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: bold;
   -webkit-transition: all 0.2s;
@@ -116,7 +120,7 @@ body {
       #mainNav .navbar-nav > li.nav-item > a.nav-link:focus.active:hover,
       #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
         background-color: transparent; }
-  @media (min-width: 992px) {
+  @media (min-width: 700px) {
     #mainNav {
       border-color: rgba(255, 255, 255, 0.3);
       background-color: transparent; }
@@ -150,7 +154,7 @@ header.masthead {
   width: 100%;
   text-align: center;
   color: white;
-  margin-top: 20%; }
+  margin-top: 150px; }
   header.masthead .header-content-inner h1 {
     font-family: 'Krona One';
     color: #F05F40;
@@ -204,12 +208,12 @@ header.masthead {
         margin-bottom: 20px;
         text-align: right; }
       header.masthead .header-content-inner h3 {
-        font-size: 4em;
+        font-size: 30px;
         font-weight: 700;
         margin-bottom: 5%;
         text-align: right; }
       header.masthead .header-content-inner h4 {
-        font-size: 2em;
+        font-size: 20px;
         font-weight: 300;
         margin-bottom: 50px;
         text-align: right; }
@@ -593,8 +597,7 @@ body {
 .body-text {
   color: white;
   position: relative;
-  margin-top: 25%;
-  font-size: 1.5em;
+  font-size: 20px;
   font-weight: 300; }
 
 .title {
@@ -609,7 +612,9 @@ body {
   color: white;
   margin: 10% 0 5% 0;
   text-align: left;
-  font-family: "Open Sans", sans-serif; }
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  text-align: center; }
 
 .circ-crop {
   border-radius: 50%;
