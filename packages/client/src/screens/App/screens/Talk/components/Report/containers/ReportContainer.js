@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
 import ReportComponent from '../components/ReportComponent'
 
 import reportMutation from '../../../../../shared/graphql/mutations/reportMutation'
+import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
+
 class ReportContainer extends Component {
   state = {
     loading: false,
     error: false,
     success: false,
   }
-  componentWillRecieveProps(nextProps) {
-    this.setState()
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.data.loading) {
+      const connection = nextProps.data.user.connections[0]
+      const otherUser = connection.participants.filter(
+        user => user.id !== nextProps.data.user.id,
+      )[0]
+
+      this.setState({
+        connectionId: connection.id,
+        otherUser,
+        userId: nextProps.data.user.id,
+      })
+    }
   }
   handleChange = e => {
     this.setState({
@@ -24,9 +37,9 @@ class ReportContainer extends Component {
     try {
       if (!reason) throw new Error()
 
-      const connectionId = this.props.connectionId
-      const otherUserId = this.props.otherUser.id
-      const userId = this.props.userId
+      const connectionId = this.state.connectionId
+      const otherUserId = this.state.otherUser.id
+      const userId = this.state.userId
       const comment = this.state.comment
 
       const response = await this.props.mutate({
@@ -45,10 +58,11 @@ class ReportContainer extends Component {
     }
   }
   render() {
-    if (!this.props.otherUser) return null
+    if (this.props.data.loading || !this.state.otherUser) return null
+
     return (
       <ReportComponent
-        firstName={this.props.otherUser.firstName}
+        firstName={this.state.otherUser.firstName}
         success={this.state.success}
         loading={this.state.loading}
         error={this.state.error}
@@ -59,4 +73,6 @@ class ReportContainer extends Component {
   }
 }
 
-export default graphql(reportMutation)(ReportContainer)
+export default compose(graphql(reportMutation), graphql(currentUserQuery))(
+  ReportContainer,
+)

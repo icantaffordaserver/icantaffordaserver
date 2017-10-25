@@ -8,7 +8,6 @@ import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {
   render() {
-    if (!this.props.otherUser) return null
     const name = `${this.props.otherUser.firstName}`
     return (
       <div>
@@ -19,9 +18,6 @@ class ConversationComponent extends Component {
             roomName={this.props.roomName}
             token={this.props.token}
             toggleChat={this.props.toggleChat}
-            connectionId={this.props.connectionId}
-            otherUser={this.props.otherUser}
-            userId={this.props.userId}
           />
 
           <Chat

@@ -69,7 +69,6 @@ class ConversationContainer extends Component {
         toConversation,
         otherUser,
         areTalking,
-        connectionId: connection.id,
       })
     }
   }
@@ -96,7 +95,6 @@ class ConversationContainer extends Component {
       conversationEnded: false,
       roomName,
       token,
-      userId,
     })
   }
 
@@ -134,7 +132,6 @@ class ConversationContainer extends Component {
           <ConversationComponent
             roomName={this.state.roomName}
             token={this.state.token}
-            userId={this.state.userId}
             otherUser={this.state.otherUser}
             onFinish={this.handleEndConversation}
             chat={this.state.chat}

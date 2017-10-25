@@ -7,10 +7,7 @@ class CountdownComponent extends Component {
   state = {
     loading: true,
     countdown: setInterval(() => this.tickDown(), 1000),
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ toConversation: nextProps.toConversation })
+    toConversation: this.props.toConversation,
   }
 
   async componentWillUnmount() {

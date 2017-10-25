@@ -23,10 +23,6 @@ class VideoContainer extends Component {
     this.setState({ videoConnection })
   }
 
-  componentWillRecieveProps(nextProps) {
-    this.setState()
-  }
-
   componentWillUnmount() {
     this.state.videoConnection.close()
   }
@@ -70,7 +66,6 @@ class VideoContainer extends Component {
   }
 
   render() {
-    if (!this.props.otherUser) return null
     return (
       <VideoComponent
         toggleAudio={this.toggleAudio}

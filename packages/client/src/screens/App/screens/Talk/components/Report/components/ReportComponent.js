@@ -82,7 +82,7 @@ class ReportComponent extends Component {
               />
             </FormGroup>
 
-            <Button huge loading={this.props.loading}>
+            <Button medium loading={this.props.loading}>
               Submit
             </Button>
           </Form>
