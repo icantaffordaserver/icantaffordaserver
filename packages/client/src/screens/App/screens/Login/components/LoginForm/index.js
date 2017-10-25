@@ -2,40 +2,19 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import { Message } from 'semantic-ui-react'
+import { LoginWrapper, LoginFormWrapper, LoginImageContainer } from './styles'
 import {
-  Grid,
-  Segment,
-  Input,
-  Image,
-  Divider,
-  Message,
-} from 'semantic-ui-react'
-import {
+  Content,
+  Title,
+  Subheading,
   Form,
-  FormButton,
+  Button,
   FormGroup,
-  FormInput,
-  FormLabel,
-} from '../../../../styles/Forms'
-import logo from '../../../../shared/assets/logo.png'
-import productShot from '../../../../shared/assets/signup-shot1.jpg'
+  Input,
+  Label,
+} from '../../../../styles'
 
-import {
-  LoginButton,
-  FormLink,
-  FormH1,
-  SignUpImg,
-  Div,
-  OverLay,
-  FormDiv,
-  ImageDiv,
-  FormSegment,
-  FormHeaderP,
-  FormNextButton,
-  FormSubmitButton,
-  ImageH1,
-  ImageP,
-} from './styles'
 import { validateLogin } from './helpers'
 
 class LoginForm extends Component {
@@ -63,7 +42,6 @@ class LoginForm extends Component {
 
   handleSubmit = (event, data) => {
     event.preventDefault() // prevent page reload
-    console.log('clicked')
     this.setState({ error: '' }) // clear any old errors
     const { email, password } = this.state
     const loginErrors = validateLogin(email, password)
@@ -90,77 +68,31 @@ class LoginForm extends Component {
     const error = this.state.error !== '' || this.props.error !== ''
 
     return (
-      <Div
-        style={{
-          margin: '0',
-          padding: '0',
-        }}
-        className="columns"
-      >
-        <ImageDiv className="column is-two-thirds">
-          <OverLay>
-            <SignUpImg src={productShot} alt="coffee shop" />
-            <ImageH1
-              style={{
-                fontFamily: 'fabfeltscriptbold',
-              }}
-            >
-              Toktumi
-            </ImageH1>
-            <ImageP>Join The Community</ImageP>
-          </OverLay>
-        </ImageDiv>
-        <Div className="column">
-          <Form onSubmit={this.handleSubmit} size="large" error={error}>
-            <FormSegment padded loading={this.props.loading}>
-              <FormH1>Sign In</FormH1>
-
-              {this.renderErrors()}
-              <FormGroup>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <input
-                  className="input"
-                  name="email"
-                  placeholder="your@email.com"
-                  onChange={this.handleChange}
-                  value={this.state.email}
-                />
-              </FormGroup>
-              <FormGroup>
-                <FormLabel htmlFor="passowrd">Password</FormLabel>
-                <input
-                  className="input"
-                  name="password"
-                  placeholder="*********"
-                  type="password"
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                />
-              </FormGroup>
-              <FormButton
-                loading={this.props.loading}
-                className="button is-primary is-fullwidth"
-              >
-                Login
-              </FormButton>
-              <Divider />
-
-              <Div className="columns">
-                <Div className="column">
-                  <Link to="/">
-                    <FormLink href="/">Forgot Password?</FormLink>
-                  </Link>
-                </Div>
-                <Div className="column">
-                  <Link to="/">
-                    <FormLink href="/">Don't have an account?</FormLink>
-                  </Link>
-                </Div>
-              </Div>
-            </FormSegment>
+      <LoginWrapper>
+        <LoginImageContainer>
+          <Title huge>PLUTO</Title>
+          <Subheading medium>Join the community.</Subheading>
+        </LoginImageContainer>
+        <LoginFormWrapper>
+          <Title large>Sign In</Title>
+          {this.renderErrors()}
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input name="email" onChange={this.handleChange} />
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <Button loading={this.props.loading}> Login </Button>
           </Form>
-        </Div>
-      </Div>
+        </LoginFormWrapper>
+      </LoginWrapper>
     )
   }
 }
