@@ -57,7 +57,7 @@ class ChatContainer extends Component {
     if (!this.state.channel) return <div className="loader active inline" />
 
     return (
-      <ChatBox>
+      <ChatBox hidden={this.props.hidden}>
         <Chat messages={this.state.messages} />
         <form action="" onSubmit={this.sendMessage}>
           <input

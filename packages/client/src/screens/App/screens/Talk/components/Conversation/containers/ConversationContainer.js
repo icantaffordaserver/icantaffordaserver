@@ -38,6 +38,7 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
+    chat: false,
   }
 
   /**
@@ -68,6 +69,7 @@ class ConversationContainer extends Component {
         toConversation,
         otherUser,
         areTalking,
+        connectionId: connection.id,
       })
     }
   }
@@ -75,6 +77,7 @@ class ConversationContainer extends Component {
   handleStartConversation = async e => {
     e.preventDefault()
     const name = this.props.data.user.firstName
+    const userId = this.props.data.user.id
     const roomName = await this.props.data.user.connections[0].id
     const request = await axios.post(
       process.env.REACT_APP_CONVERSATION_TOKEN_URL,
@@ -88,11 +91,12 @@ class ConversationContainer extends Component {
     )
     const token = request.data.token
 
-    this.setState({
+    await this.setState({
       areTalking: true,
       conversationEnded: false,
       roomName,
       token,
+      userId,
     })
   }
 
@@ -106,12 +110,17 @@ class ConversationContainer extends Component {
     })
   }
 
+  toggleChat = e => {
+    e.preventDefault()
+    this.setState({ chat: !this.state.chat })
+  }
+
   componentWillUnmount() {
     this.handleEndConversation(new Event(null), 'Left')
   }
 
   render() {
-    if (this.props.data.loading) return null
+    if (this.props.data.loading || !this.state.otherUser) return null
 
     return (
       <Conversation>
@@ -125,8 +134,12 @@ class ConversationContainer extends Component {
           <ConversationComponent
             roomName={this.state.roomName}
             token={this.state.token}
-            user={this.state.otherUser}
+            userId={this.state.userId}
+            otherUser={this.state.otherUser}
             onFinish={this.handleEndConversation}
+            chat={this.state.chat}
+            toggleChat={this.toggleChat}
+            connectionId={this.state.connectionId}
           />
         ) : (
           <CountdownComponent

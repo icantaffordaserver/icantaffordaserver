@@ -8,16 +8,27 @@ import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {
   render() {
-    if (!this.props.user) return null
-
-    const name = `${this.props.user.firstName}`
+    if (!this.props.otherUser) return null
+    const name = `${this.props.otherUser.firstName}`
     return (
       <div>
-        <h1>Conversation with {this.props.user.firstName}</h1>
+        <h1>Conversation with {name}</h1>
 
         <Conversation>
-          <Video roomName={this.props.roomName} token={this.props.token} />
-          <Chat roomName={this.props.roomName} token={this.props.token} />
+          <Video
+            roomName={this.props.roomName}
+            token={this.props.token}
+            toggleChat={this.props.toggleChat}
+            connectionId={this.props.connectionId}
+            otherUser={this.props.otherUser}
+            userId={this.props.userId}
+          />
+
+          <Chat
+            roomName={this.props.roomName}
+            hidden={!this.props.chat}
+            token={this.props.token}
+          />
         </Conversation>
 
         <button onClick={this.props.onFinish}>End Conversation</button>

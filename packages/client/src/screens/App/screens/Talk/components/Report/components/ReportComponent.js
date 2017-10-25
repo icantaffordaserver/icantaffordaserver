@@ -1,96 +1,95 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import {
-  Button,
-  Modal,
-  Header,
-  Icon,
-  Message,
-  Dropdown,
-} from 'semantic-ui-react'
+import { Modal, Header, Icon, Message, Dropdown } from 'semantic-ui-react'
 import {
   Form,
-  FormButton,
   FormGroup,
-  FormInput,
-  FormLabel,
-  FormTextArea,
-} from '../../../../../styles/Forms'
+  Label,
+  TextArea,
+  Content,
+  Title,
+  Button,
+} from '../../../../../styles'
 
 import ReportIcon from './ReportIconComponent'
 
-export default props => {
-  const reportOptions = [
+class ReportComponent extends Component {
+  state = {}
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  handleSubmit = e => {
+    e.preventDefault()
+
+    const reportType = this.state.reportType
+    this.props.onSubmit(reportType)
+  }
+
+  reportOptions = [
     {
-      text: 'Jenny Hess',
-      value: '1',
+      text: `Report ${this.props.firstName}`,
+      value: 'HARASSMENT',
     },
     {
-      text: 'Jenny Hess',
-      value: '2',
+      text: `Service Issue`,
+      value: 'SERVICE',
     },
     {
-      text: 'Jenny Hess',
-      value: '3',
-    },
-    {
-      text: 'Jenny Hess',
-      value: '4',
-    },
-    {
-      text: 'Jenny Hess',
-      value: '5',
-    },
-    {
-      text: 'Jenny Hess',
-      value: '6',
+      text: 'Bad Quality',
+      value: 'QUALITY',
     },
   ]
-  return (
-    <Modal
-      trigger={
-        <a>
-          <ReportIcon />
-        </a>
-      }
-      basic
-    >
-      <div
-        className="hnbfcgjknm"
-        style={{
-          marginTop: '20%',
-          height: 'fit-content',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#fff',
-          color: '#333',
-          padding: '2em',
-        }}
-      >
-        <Form>
-          <Header
-            size={'huge'}
-            style={{ textAlign: 'center', marginBottom: '1em' }}
-          >
-            <Icon name="send" /> Report
-          </Header>
-          <FormGroup>
-            <FormLabel>Issue:</FormLabel>
-            <Dropdown
-              placeholder="Select an issue"
-              fluid
-              selection
-              options={reportOptions}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormTextArea placeholder="Extra comments." />
-          </FormGroup>
 
-          <FormButton loading={props.loading}>Submit</FormButton>
-        </Form>
-      </div>
-    </Modal>
-  )
+  renderMessages() {
+    return this.props.error ? (
+      <Message warning>An error occured!</Message>
+    ) : (
+      this.props.success && <Message success>Report Sent!</Message>
+    )
+  }
+  render() {
+    return (
+      <Modal
+        trigger={
+          <a>
+            <ReportIcon />
+          </a>
+        }
+        basic
+      >
+        <Content>
+          <Form onSubmit={this.handleSubmit}>
+            <Title>
+              <Icon name="send" /> Report
+            </Title>
+            {this.renderMessages()}
+            <FormGroup>
+              <Label>Issue</Label>
+              <Dropdown
+                placeholder="Select an issue"
+                fluid
+                selection
+                name="reportType"
+                options={this.reportOptions}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Comment</Label>
+              <TextArea
+                placeholder="Extra comments."
+                onChange={this.props.onChange}
+              />
+            </FormGroup>
+
+            <Button huge loading={this.props.loading}>
+              Submit
+            </Button>
+          </Form>
+        </Content>
+      </Modal>
+    )
+  }
 }
+
+export default ReportComponent
