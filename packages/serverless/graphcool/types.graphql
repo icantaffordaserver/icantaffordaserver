@@ -10,10 +10,22 @@ type ConnectionReviews @model {
   id: ID! @isUnique
   comment: String
   createdAt: DateTime!
-  rating: Int
+  enjoyedConversation: Boolean!
+  audioSatisfactory: Boolean!
+  videoSatisfactory: Boolean!
   updatedAt: DateTime!
-  connection: Connections @relation(name: "ConnectionsOnConnectionReviews")
+  connection: Connections! @relation(name: "ConnectionsOnConnectionReviews")
   user: User! @relation(name: "ConnectionReviewsOnUser")
+  reviewee: User! @relation(name: "UserComment")
+}
+
+type ConnectionJournal @model {
+  id: ID! @isUnique
+  note: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  connection: Connections! @relation(name: "ConnectionsOnConnectionJournal")
+  user: User! @relation(name: "ConnectionJournalOnUser")
 }
 
 enum ConnectionStatus {
@@ -62,6 +74,8 @@ type Connections @model {
     @relation(name: "ConnectionSuggestionOnConnection")
   token: String! @isUnique
   report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
+  userJounals: [ConnectionJournal!]!
+    @relation(name: "ConnectionsOnConnectionJournal")
 }
 
 type File @model {
@@ -148,6 +162,7 @@ type User @model {
   connectionsMatched: [Connections!]! @relation(name: "ConnectionsOnUser")
   availability: Json
   bio: String
+  comments: [ConnectionReviews!]! @relation(name: "UserComment")
   connectionReviews: [ConnectionReviews!]!
     @relation(name: "ConnectionReviewsOnUser")
   connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
@@ -183,6 +198,8 @@ type User @model {
     @relation(name: "ConnectionReportOnReportedUser")
   reportedUsers: [ConnectionReport!]!
     @relation(name: "ConnectionReportOnReporterUser")
+  journalEntries: [ConnectionJournal!]!
+    @relation(name: "ConnectionJournalOnUser")
 }
 
 enum UserType {
