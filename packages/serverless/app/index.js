@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev', { stream: logger.stream }))
+  app.use(morgan('dev'))
 }
 
 app.use('/', routes)
