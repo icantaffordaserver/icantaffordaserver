@@ -7,7 +7,6 @@ import moment from 'moment'
 import axios from 'axios'
 
 import ConversationComponent from '../components/ConversationComponent'
-import CountdownComponent from '../../../components/CountdownComponent'
 import PostConversation from '../../../components/PostConversation'
 import { Conversation } from '../styles'
 
@@ -41,33 +40,21 @@ class ConversationContainer extends Component {
     chat: false,
   }
 
-  /**
-   * NEEDS TO BE REDESIGNED
-   */
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
       let areTalking = this.state.areTalking
       const connection = nextProps.data.user.connections[0]
 
-      // Check conversation start time and convert to moment duration.
-      let toConversation = moment.duration(
-        moment(connection.connectionTime).diff(moment()),
-        'milliseconds',
-      )
-
       //Check if conversation is starting soon
-      if (toConversation.asMinutes() <= this.state.MINUTES_TO_START) {
+      if (
+        moment().diff(moment(connection.connectionTime)) <=
+        this.state.MINUTES_TO_START
+      ) {
         areTalking = true
-        toConversation = moment.duration(0, 'milliseconds')
       }
-      // Other user
-      const otherUser = connection.participants.filter(
-        user => user.id !== nextProps.data.user.id,
-      )[0]
 
       this.setState({
-        toConversation,
-        otherUser,
+        connection,
         areTalking,
       })
     }
@@ -128,22 +115,16 @@ class ConversationContainer extends Component {
             status={this.state.conversationStatus}
           />
         )}
-        {this.state.areTalking && !this.state.conversationEnded ? (
-          <ConversationComponent
-            roomName={this.state.roomName}
-            token={this.state.token}
-            otherUser={this.state.otherUser}
-            onFinish={this.handleEndConversation}
-            chat={this.state.chat}
-            toggleChat={this.toggleChat}
-            connectionId={this.state.connectionId}
-          />
-        ) : (
-          <CountdownComponent
-            start={this.handleStartConversation}
-            toConversation={this.state.toConversation}
-          />
-        )}
+        {this.state.areTalking &&
+          !this.state.conversationEnded && (
+            <ConversationComponent
+              roomName={this.state.roomName}
+              onFinish={this.handleEndConversation}
+              chat={this.state.chat}
+              toggleChat={this.toggleChat}
+              connection={this.state.connection}
+            />
+          )}
         <button onClick={this.handleStartConversation}>Start</button>
       </Conversation>
     )

@@ -11,8 +11,6 @@ import {
   Button,
 } from '../../../../../styles'
 
-import ReportIcon from './ReportIconComponent'
-
 class ReportComponent extends Component {
   state = {}
 
@@ -49,14 +47,7 @@ class ReportComponent extends Component {
   }
   render() {
     return (
-      <Modal
-        trigger={
-          <a>
-            <ReportIcon />
-          </a>
-        }
-        basic
-      >
+      <Modal trigger={<a />} basic>
         <Content>
           <Form onSubmit={this.handleSubmit}>
             <Title>
