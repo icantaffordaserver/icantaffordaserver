@@ -7,7 +7,7 @@ import PostConversationComponent from '../components/PostConversationComponent'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 import userReviewMutation from '../../../../../shared/graphql/mutations/userReviewMutation'
-import userReportMutation from '../../../../../shared/graphql/mutations/userReportMutation'
+import reportMutation from '../../../../../shared/graphql/mutations/reportMutation'
 
 class PostConversationContainer extends Component {
   static propTypes = {
@@ -41,6 +41,6 @@ export default compose(
   withRouter,
   withApollo,
   graphql(currentUserQuery),
-  // graphql(userReportMutation, { name: 'reportMutation' }),
+  // graphql(reportMutation, { name: 'reportMutation' }),
   // graphql(userReviewMutation, { name: 'reviewMutation' }),
 )(PostConversationContainer)

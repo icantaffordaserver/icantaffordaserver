@@ -190,5 +190,5 @@ type VerifyEmail @model {
 enum ReportType {
   HARASSMENT
   QUALITY
-  OUTAGE
+  SERVICE
 }
