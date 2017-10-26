@@ -37,7 +37,8 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
-    chat: false,
+    chat: false, // Chat disabled by default
+    conversationEnded: false,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -111,7 +112,9 @@ class ConversationContainer extends Component {
       <Conversation>
         {this.state.conversationEnded && (
           <PostConversation
-            user={this.state.otherUser}
+            userId={this.props.data.user.id}
+            connectionId={this.state.connectionId}
+            otherUser={this.state.otherUser}
             status={this.state.conversationStatus}
           />
         )}

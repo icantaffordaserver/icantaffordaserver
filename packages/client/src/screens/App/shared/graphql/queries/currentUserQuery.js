@@ -40,7 +40,6 @@ export default gql`
         reviews {
           comment
           id
-          rating
           createdAt
         }
         participants {
@@ -48,20 +47,6 @@ export default gql`
           firstName
           lastName
           email
-        }
-      }
-      connectionReviews {
-        id
-        createdAt
-        comment
-        connection {
-          id
-          connectionTime
-          status
-          participants {
-            id
-            firstName
-          }
         }
       }
     }
