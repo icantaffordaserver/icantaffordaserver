@@ -14,7 +14,7 @@ export default async (req, res) => {
   let data = null
 
   if (req.body.data.InviteRequests !== undefined) {
-    data = req.body.data.InviteRequests.node
+    data = req.body.data.Invite.node
   } else {
     data = req.body.data
   }

@@ -89,14 +89,14 @@ enum Gender {
   FEMALE
 }
 
-type Invites @model {
+type Invite @model {
   id: ID! @isUnique
   emailToInvite: String! @isUnique
   firstName: String!
   lastName: String!
-  acceptedUser: User @relation(name: "InvitesOnUserAccepted")
+  acceptedUser: User @relation(name: "InviteOnUserAccepted")
   isApproved: Boolean! @defaultValue(value: false)
-  sentBy: User @relation(name: "InvitesOnUserSentBy")
+  sentBy: User @relation(name: "InviteOnUserSentBy")
   token: String! @isUnique
   inviteType: InviteType!
   createdAt: DateTime!
@@ -144,8 +144,8 @@ type User @model {
     @relation(name: "FireStarterSuggestionsOnUser")
   firstName: String!
   gender: Gender
-  invite: Invites @relation(name: "InvitesOnUserAccepted")
-  invitesSent: [Invites!]! @relation(name: "InvitesOnUserSentBy")
+  invite: Invite @relation(name: "InviteOnUserAccepted")
+  invitesSent: [Invite!]! @relation(name: "InviteOnUserSentBy")
   isAcceptedToBeta: Boolean @defaultValue(value: false)
   isAdmin: Boolean @defaultValue(value: false)
   lastName: String!

@@ -1,5 +1,5 @@
 subscription {
-  Invites(
+  Invite(
     filter: { mutation_in: [UPDATED], updatedFields_contains: "isApproved" }
   ) {
     updatedFields

@@ -98,10 +98,10 @@ permissions:
 - operation: FireStarterSuggestions.create
 - operation: FireStarterSuggestions.update
 - operation: FireStarterSuggestions.delete
-- operation: Invites.read
-- operation: Invites.create
-- operation: Invites.update
-- operation: Invites.delete
+- operation: Invite.read
+- operation: Invite.create
+- operation: Invite.update
+- operation: Invite.delete
 - operation: PasswordReset.read
 - operation: PasswordReset.create
 - operation: PasswordReset.update
