@@ -1,12 +1,12 @@
 /**
  * Created by alexandermann on 2017-03-10.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   {
     viewer {
-      allConnections(orderBy:{field: createdAt, direction: DESC}) {
+      allConnections(orderBy: { field: createdAt, direction: DESC }) {
         edges {
           node {
             id
@@ -50,5 +50,4 @@ export default gql`
       }
     }
   }
-
-`;
+`

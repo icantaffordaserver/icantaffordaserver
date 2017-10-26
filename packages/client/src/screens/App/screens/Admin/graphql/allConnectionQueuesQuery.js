@@ -1,12 +1,12 @@
 /**
  * Created by alexandermann on 2017-03-09.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   {
     viewer {
-      allConnectionQueues(where: {isDequeued: {eq: false}}) {
+      allConnectionQueues(where: { isDequeued: { eq: false } }) {
         edges {
           node {
             id
@@ -33,5 +33,4 @@ export default gql`
       }
     }
   }
-
-`;
+`

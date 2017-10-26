@@ -5,6 +5,7 @@ export default {
     secondary: '#7781c8',
     white: '#fff',
     gray: '#e0e0e0',
+    darkGray: '#333',
   },
 
   size: {
@@ -21,7 +22,7 @@ export default {
     huge: 5,
   },
   fontSize: {
-    small: 1,
+    small: 1.1,
     medium: 2,
     large: 4,
     huge: 6,
@@ -36,6 +37,7 @@ export default {
   container: {
     default: 70,
     expanded: 90,
+    full: 100,
   },
 
   shadow: {

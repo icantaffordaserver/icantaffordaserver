@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-08.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   {
@@ -9,7 +9,7 @@ export default gql`
       user {
         id
       }
-      allInviteRequests(where: {isApproved: {eq: false}}) {
+      allInviteRequests(where: { isApproved: { eq: false } }) {
         edges {
           node {
             id
@@ -22,4 +22,4 @@ export default gql`
       }
     }
   }
-`;
+`

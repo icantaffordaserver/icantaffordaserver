@@ -9,7 +9,7 @@ const styles = bind(Theme)
 export const Button = styled(button)`
   transition: all 0.25s ease !important;
   padding: ${styles.padding}% !important;
-  width: ${styles.size}%;
+  width: ${props => (props.fullWidth ? 100 : styles.size)}%;
   background: ${styles.color}!important;
   border: solid 1px ${styles.color}!important;
   border-radius: 5px !important;

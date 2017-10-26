@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
@@ -36,7 +36,7 @@ export const Content = styled.div`
   border-radius: ${styles.borderRadius}px;
   box-shadow: ${styles.shadow};
   padding: 2% 5%;
-  margin: auto;
+  margin: 2% auto;
 `
 Content.defaultProps = {
   color: 'white',
@@ -67,4 +67,31 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 `
+export const RowContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+export const Section = styled.section`
+  width: 100%;
+  padding: 2% 5%;
+  background: ${styles.color};
+  border-radius: ${styles.borderRadius}
+  box-shadow: ${styles.shadow}
+  ${props =>
+    props.inline &&
+    css`
+      display: inline-flex;
+      justify-content: space-between;
+    `}
+`
+Section.defaultProps = {
+  color: 'white',
+  borderRadius: 'square',
+  shadow: 'none',
+}
