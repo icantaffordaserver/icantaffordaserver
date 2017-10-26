@@ -89,37 +89,24 @@ enum Gender {
   FEMALE
 }
 
-type InviteRequests @model {
-  createdAt: DateTime!
+type Invite @model {
+  id: ID! @isUnique
   emailToInvite: String! @isUnique
   firstName: String!
-  id: ID! @isUnique
-  invite: Invites @relation(name: "InvitesOnInviteRequests")
+  lastName: String!
+  acceptedUser: User @relation(name: "InviteOnUserAccepted")
   isApproved: Boolean! @defaultValue(value: false)
-  lastName: String!
-  referredFrom: String! @defaultValue(value: "Coming Soon Page")
-  updatedAt: DateTime!
-}
-
-enum InviteStatus {
-  SENT
-  ACCEPTED
-}
-
-type Invites @model {
-  acceptedUser: User @relation(name: "InvitesOnUser1")
-  createdAt: DateTime!
-  email: String! @isUnique
-  firstName: String!
-  id: ID! @isUnique
-  inviteRequest: InviteRequests @relation(name: "InvitesOnInviteRequests")
-  isAccepted: Boolean! @defaultValue(value: false)
-  lastName: String!
-  mutationVariables: Json
-  sentBy: User @relation(name: "InvitesOnUser")
-  status: InviteStatus! @defaultValue(value: SENT)
+  sentBy: User @relation(name: "InviteOnUserSentBy")
   token: String! @isUnique
+  inviteType: InviteType!
+  createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+enum InviteType {
+  SENT_BY_ADMIN
+  SENT_BY_USER
+  REQUESTED_FROM_WEBSITE
 }
 
 type PasswordReset @model {
@@ -157,8 +144,8 @@ type User @model {
     @relation(name: "FireStarterSuggestionsOnUser")
   firstName: String!
   gender: Gender
-  invite: Invites @relation(name: "InvitesOnUser1")
-  invitesSent: [Invites!]! @relation(name: "InvitesOnUser")
+  invite: Invite @relation(name: "InviteOnUserAccepted")
+  invitesSent: [Invite!]! @relation(name: "InviteOnUserSentBy")
   isAcceptedToBeta: Boolean @defaultValue(value: false)
   isAdmin: Boolean @defaultValue(value: false)
   lastName: String!
@@ -203,5 +190,5 @@ type VerifyEmail @model {
 enum ReportType {
   HARASSMENT
   QUALITY
-  OUTAGE
+  SERVICE
 }

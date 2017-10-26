@@ -1,3 +1,43 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+*.sqlite3
+
+pids
+logs
+results
+tmp
+coverage
+
+# API keys
+.env
+
+# Dependency directory
+node_modules
+bower_components
+
+# Editors
+.idea
+*.iml
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+public/js/bundle.js
+packages/client/.env.development
+
+packages/website
+packages/serverless/.graphcoolrc
+packages/serverless/env.yml
+packages/serverless/package-lock.json
+packages/serverless/.webpack
 .DS_STORE
 node_modules/
 
