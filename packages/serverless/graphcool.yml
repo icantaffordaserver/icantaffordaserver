@@ -118,6 +118,14 @@ permissions:
 - operation: ConnectionInterests.create
 - operation: ConnectionInterests.update
 - operation: ConnectionInterests.delete
+- operation: ConnectionReport.read
+- operation: ConnectionReport.create
+- operation: ConnectionReport.update
+- operation: ConnectionReport.delete
+- operation: ConnectionJournal.read
+- operation: ConnectionJournal.create
+- operation: ConnectionJournal.update
+- operation: ConnectionJournal.delete
 - operation: FireStarterSuggestionsOnUser.*
 - operation: ConnectionsOnConnectionReviews.*
 - operation: PasswordResetOnUser.*
@@ -126,8 +134,14 @@ permissions:
 - operation: ConnectionReviewsOnUser.*
 - operation: ConnectionsOnUser1.*
 - operation: ConnectionsOnUser.*
+- operation: ConnectionsOnConnectionJournal.*
+- operation: ConnectionJournalOnUser.*
 - operation: InterestedUsers.*
 - operation: UserOnVerifyEmail.*
+- operation: UserComment.*
+- operation: ConnectionsOnConnectionReport.*
+- operation: ConnectionReportOnReporterUser.*
+- operation: ConnectionReportOnReportedUser.*
 rootTokens:
 - adminToken
 - update-email

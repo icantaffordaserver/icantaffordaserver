@@ -59,7 +59,7 @@ class ReportContainer extends Component {
   }
   render() {
     if (this.props.data.loading || !this.state.otherUser) return null
-
+    console.log(this.props.button)
     return (
       <ReportComponent
         firstName={this.state.otherUser.firstName}
@@ -68,6 +68,7 @@ class ReportContainer extends Component {
         error={this.state.error}
         onChange={this.handleChange}
         onSubmit={this.handleReport}
+        button={this.props.button}
       />
     )
   }

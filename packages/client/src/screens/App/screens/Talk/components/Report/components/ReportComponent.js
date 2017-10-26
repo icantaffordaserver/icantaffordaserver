@@ -9,6 +9,7 @@ import {
   Content,
   Title,
   Button,
+  TextLink,
 } from '../../../../../styles'
 
 import ReportIcon from './ReportIconComponent'
@@ -48,15 +49,15 @@ class ReportComponent extends Component {
     )
   }
   render() {
+    const trigger = this.props.button ? (
+      <TextLink>I'd like to report something.</TextLink>
+    ) : (
+      <a>
+        <ReportIcon />
+      </a>
+    )
     return (
-      <Modal
-        trigger={
-          <a>
-            <ReportIcon />
-          </a>
-        }
-        basic
-      >
+      <Modal trigger={trigger} basic>
         <Content>
           <Form onSubmit={this.handleSubmit}>
             <Title>

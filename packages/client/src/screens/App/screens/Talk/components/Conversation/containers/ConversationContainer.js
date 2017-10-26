@@ -38,7 +38,8 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
-    chat: false,
+    chat: false, // Chat disabled by default
+    conversationEnded: false,
   }
 
   /**
@@ -68,6 +69,7 @@ class ConversationContainer extends Component {
       this.setState({
         toConversation,
         otherUser,
+        connectionId: connection.id,
         areTalking,
       })
     }
@@ -124,7 +126,9 @@ class ConversationContainer extends Component {
       <Conversation>
         {this.state.conversationEnded && (
           <PostConversation
-            user={this.state.otherUser}
+            userId={this.props.data.user.id}
+            connectionId={this.state.connectionId}
+            otherUser={this.state.otherUser}
             status={this.state.conversationStatus}
           />
         )}
@@ -136,7 +140,6 @@ class ConversationContainer extends Component {
             onFinish={this.handleEndConversation}
             chat={this.state.chat}
             toggleChat={this.toggleChat}
-            connectionId={this.state.connectionId}
           />
         ) : (
           <CountdownComponent
