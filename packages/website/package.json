@@ -26,7 +26,8 @@
     "url": "https://github.com/BlackrockDigital/startbootstrap-creative.git"
   },
   "scripts": {
-    "start": "gulp build"
+    "start": "gulp build",
+    "dev": "gulp dev"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
