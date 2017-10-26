@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-09.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   mutation createConnection($connection: CreateConnectionsInput!) {
@@ -13,4 +13,4 @@ export default gql`
       }
     }
   }
-`;
+`
