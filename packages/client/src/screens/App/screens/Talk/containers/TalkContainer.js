@@ -29,7 +29,7 @@ class TalkContainer extends Component {
   componentWillMount() {
     const sessionId = this.props.match.params.sessionId
     if (sessionId) {
-      window.history.pushState(null, null, '/talk/conversation')
+      //window.history.pushState(null, null, '/talk/conversation')
     }
   }
 

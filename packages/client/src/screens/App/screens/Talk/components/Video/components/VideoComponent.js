@@ -1,34 +1,22 @@
 import React, { Component } from 'react'
 
 import Report from '../../Report'
+import VideoControls from './VideoControlsComponent'
 
-import { VideoControls, VideoPlayer } from '../styles'
-import { Button, ColumnContainer } from '../../../../../styles'
+import { VideoPlayer } from '../styles'
+import { Button, RowContainer } from '../../../../../styles'
 
 class VideoComponent extends Component {
   render() {
     return (
-      <ColumnContainer>
+      <RowContainer>
         <VideoPlayer id="remote-user-video" />
-        <VideoControls>
-          <Report
-            connectionId={this.props.connectionId}
-            otherUser={this.props.otherUser}
-          />
-          <Button small onClick={this.props.toggleVideo}>
-            Video
-          </Button>
-          <Button small onClick={this.props.toggleAudio}>
-            Audio
-          </Button>
-          <Button small onClick={this.props.fullscreen}>
-            Fullscreen
-          </Button>
-          <Button small onClick={this.props.toggleChat}>
-            Chat
-          </Button>
-        </VideoControls>
-      </ColumnContainer>
+        <VideoControls
+          toggleVideo={this.props.toggleVideo}
+          toggleAudio={this.props.toggleAudio}
+          toggleChat={this.props.toggleChat}
+        />
+      </RowContainer>
     )
   }
 }

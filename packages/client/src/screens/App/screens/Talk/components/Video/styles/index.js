@@ -2,11 +2,20 @@ import styled from 'styled-components'
 
 /* Video Controls */
 
-export const VideoControls = styled.div`
-  width: 50%;
+export const ControlsWrapper = styled.ul`
+  width: 20%;
   display: flex;
-  position: fixed;
+  flex-direction: column;
+  height: 720px;
+  align-items: center;
   background: #c4c4c4;
+  list-style: none;
+  padding: 0;
+`
+
+export const Control = styled.li`
+  margin: 0;
+  padding: 0;
 `
 
 export const VideoPlayer = styled.div`
