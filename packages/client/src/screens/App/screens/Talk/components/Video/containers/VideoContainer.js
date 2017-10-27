@@ -8,6 +8,7 @@ class VideoContainer extends Component {
   state = {
     audio: true,
     video: true,
+    chat: false,
   }
 
   async componentDidMount() {
@@ -68,10 +69,15 @@ class VideoContainer extends Component {
   render() {
     return (
       <VideoComponent
+        token={this.props.token}
+        roomName={this.props.roomName}
         toggleAudio={this.toggleAudio}
         toggleVideo={this.toggleVideo}
-        toggleChat={this.props.toggleChat}
+        toggleChat={this.toggleChat}
         fullscreen={this.fullscreen}
+        video={this.state.video}
+        audio={this.state.audio}
+        chat={this.state.chat}
       />
     )
   }

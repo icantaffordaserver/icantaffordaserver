@@ -3,7 +3,7 @@ import styled from 'styled-components'
 /* Video Controls */
 
 export const ControlsWrapper = styled.ul`
-  width: 20%;
+  width: 10%;
   display: flex;
   flex-direction: column;
   height: 720px;
@@ -14,8 +14,9 @@ export const ControlsWrapper = styled.ul`
 `
 
 export const Control = styled.li`
-  margin: 0;
-  padding: 0;
+  margin: 4em auto;
+  padding: 1%;
+  height: 20%;
 `
 
 export const VideoPlayer = styled.div`

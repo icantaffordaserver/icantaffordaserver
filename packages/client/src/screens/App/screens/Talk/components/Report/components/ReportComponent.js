@@ -47,15 +47,8 @@ class ReportComponent extends Component {
     )
   }
   render() {
-    const trigger = this.props.button ? (
-      <TextLink>I'd like to report something.</TextLink>
-    ) : (
-      <a>
-        <ReportIcon />
-      </a>
-    )
     return (
-      <Modal trigger={<a />} basic>
+      <Modal trigger={<a>{this.props.children}</a>} basic>
         <Content>
           <Form onSubmit={this.handleSubmit}>
             <Title>
