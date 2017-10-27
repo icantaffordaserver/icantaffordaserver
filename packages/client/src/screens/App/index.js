@@ -14,7 +14,7 @@ import Profile from './screens/Profile'
 import Inbox from './screens/Inbox'
 import Talk from './screens/Talk'
 
-import SideNav from './shared/containers/HeaderContainer'
+import Nav from './shared/components/Navigation'
 
 import isAuthenticated from './shared/HoCs/isAuthenticated'
 
@@ -24,7 +24,7 @@ import './styles/styles.css'
 function App() {
   return (
     <Background>
-      <SideNav />
+      <Nav />
       <Screen>
         <Switch>
           <Route path="/profile" component={Profile} />

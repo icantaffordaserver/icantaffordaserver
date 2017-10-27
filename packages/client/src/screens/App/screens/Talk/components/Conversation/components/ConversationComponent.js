@@ -4,6 +4,8 @@ import moment from 'moment'
 
 import Chat from '../../../components/Chat'
 import Video from '../../../components/Video'
+
+import { Title } from '../../../../../styles'
 import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {
@@ -14,20 +16,18 @@ class ConversationComponent extends Component {
     )[0]
 
     return (
-      <div>
-        <h1>Conversation with {otherUser.firstName}</h1>
+      <Conversation>
+        <Title>Conversation with {otherUser.firstName}</Title>
 
-        <Conversation>
-          <Video
-            token={this.props.token}
-            roomName={this.props.roomName}
-            connection={this.props.connection}
-            toggleChat={this.props.toggleChat}
-          />
-        </Conversation>
+        <Video
+          token={this.props.token}
+          roomName={this.props.roomName}
+          connection={this.props.connection}
+          toggleChat={this.props.toggleChat}
+        />
 
         <button onClick={this.props.onFinish}>End Conversation</button>
-      </div>
+      </Conversation>
     )
   }
 }

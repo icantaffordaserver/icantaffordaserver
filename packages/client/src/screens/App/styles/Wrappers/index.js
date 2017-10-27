@@ -6,12 +6,10 @@ const styles = bind(Theme)
 
 export const Background = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-grow: 1;
-  height: 100% !important;
   background: ${styles.color};
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow-y: scroll;
 `
 Background.defaultProps = {
   color: 'gray',
