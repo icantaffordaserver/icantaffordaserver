@@ -24,7 +24,7 @@ Title.defaultProps = {
 }
 
 export const Subheading = styled.h4`
-  color: ${styles.color}
+  color: ${styles.color};
   font-weight: 300;
   margin: 0 auto;
   text-align: ${props =>
@@ -67,7 +67,7 @@ TextLink.defaultProps = {
 }
 
 export const Text = styled.p`
-  color: ${styles.color}
+  color: ${styles.color};
   margin: 0;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>

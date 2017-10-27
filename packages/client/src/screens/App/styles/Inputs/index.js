@@ -31,7 +31,7 @@ Button.defaultProps = {
 
 export const Input = styled.input`
   flex: 1 1 auto;
-  width: fill-available;
+  width: 100%;
   padding: 10px;
   font-size: 1.25em;
   border: solid 1px lightgray;
@@ -40,7 +40,7 @@ export const Input = styled.input`
 
 export const TextArea = styled.textarea`
   flex: 1 1 auto;
-  width: fill-available;
+  width: 100%;
   padding: 10px;
   font-size: 1.25em;
   border: solid 1px lightgray;

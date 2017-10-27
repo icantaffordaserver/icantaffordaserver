@@ -81,14 +81,14 @@ export const Section = styled.section`
   width: 100%;
   padding: 2% 5%;
   background: ${styles.color};
-  border-radius: ${styles.borderRadius}
-  box-shadow: ${styles.shadow}
+  border-radius: ${styles.borderRadius};
+  box-shadow: ${styles.shadow};
   ${props =>
     props.inline &&
     css`
       display: inline-flex;
       justify-content: space-between;
-    `}
+    `};
 `
 Section.defaultProps = {
   color: 'white',

@@ -25,11 +25,14 @@ class ChatContainer extends Component {
 
   async componentWillUnmount() {
     const channel = this.state.channel
-    const members = await channel.getMembersCount()
 
-    // Delete channel when both users have left.
-    if (members <= 1) channel.delete()
-    else channel.leave()
+    if (channel) {
+      const members = await channel.getMembersCount()
+
+      // Delete channel when both users have left.
+      if (members <= 1) channel.delete()
+      else channel.leave()
+    }
   }
 
   handleChange = e => {
