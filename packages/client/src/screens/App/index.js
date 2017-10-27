@@ -52,7 +52,7 @@ const Root = () => (
       <Route path="/profile" component={App} />
       <Route path="/inbox" component={App} />
       <Route path="/talk" component={App} />
-      <Route path="*" component={NotFound404} />
+      <Route component={NotFound404} />
     </Switch>
   </BrowserRouter>
 )
