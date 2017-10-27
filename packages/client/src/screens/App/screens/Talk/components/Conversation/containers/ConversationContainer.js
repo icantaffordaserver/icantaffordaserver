@@ -7,7 +7,6 @@ import moment from 'moment'
 import axios from 'axios'
 
 import ConversationComponent from '../components/ConversationComponent'
-import CountdownComponent from '../../../components/CountdownComponent'
 import PostConversation from '../../../components/PostConversation'
 import { Conversation } from '../styles'
 
@@ -41,19 +40,10 @@ class ConversationContainer extends Component {
     conversationEnded: false,
   }
 
-  /**
-   * NEEDS TO BE REDESIGNED
-   */
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
       let areTalking = this.state.areTalking
       const connection = nextProps.data.user.connections[0]
-
-      // Check conversation start time and convert to moment duration.
-      let toConversation = moment.duration(
-        moment(connection.connectionTime).diff(moment()),
-        'milliseconds',
-      )
 
       //Check if conversation is starting soon
       if (
@@ -61,17 +51,10 @@ class ConversationContainer extends Component {
         this.state.MINUTES_TO_START
       ) {
         areTalking = true
-        toConversation = moment.duration(0, 'milliseconds')
       }
-      // Other user
-      const otherUser = connection.participants.filter(
-        user => user.id !== nextProps.data.user.id,
-      )[0]
 
       this.setState({
-        toConversation,
-        otherUser,
-        connectionId: connection.id,
+        connection,
         areTalking,
       })
     }

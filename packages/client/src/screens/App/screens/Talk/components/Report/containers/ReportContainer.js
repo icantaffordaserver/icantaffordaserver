@@ -69,6 +69,7 @@ class ReportContainer extends Component {
         onChange={this.handleChange}
         onSubmit={this.handleReport}
         button={this.props.button}
+        children={this.props.children}
       />
     )
   }
