@@ -38,7 +38,6 @@ class ConversationContainer extends Component {
     loading: false,
     MINUTES_TO_START: 5, // Better way of doing this?
     areTalking: false,
-    chat: false, // Chat disabled by default
     conversationEnded: false,
   }
 
@@ -57,7 +56,10 @@ class ConversationContainer extends Component {
       )
 
       //Check if conversation is starting soon
-      if (toConversation.asMinutes() <= this.state.MINUTES_TO_START) {
+      if (
+        moment(connection.connectionTime).diff(moment()) <=
+        this.state.MINUTES_TO_START
+      ) {
         areTalking = true
         toConversation = moment.duration(0, 'milliseconds')
       }
@@ -110,43 +112,32 @@ class ConversationContainer extends Component {
     })
   }
 
-  toggleChat = e => {
-    e.preventDefault()
-    this.setState({ chat: !this.state.chat })
-  }
-
   componentWillUnmount() {
     this.handleEndConversation(new Event(null), 'Left')
   }
 
   render() {
-    if (this.props.data.loading || !this.state.otherUser) return null
+    if (this.props.data.loading) return null
 
     return (
       <Conversation>
         {this.state.conversationEnded && (
           <PostConversation
             userId={this.props.data.user.id}
-            connectionId={this.state.connectionId}
-            otherUser={this.state.otherUser}
+            connection={this.state.connection}
             status={this.state.conversationStatus}
           />
         )}
-        {this.state.areTalking && !this.state.conversationEnded ? (
-          <ConversationComponent
-            roomName={this.state.roomName}
-            token={this.state.token}
-            otherUser={this.state.otherUser}
-            onFinish={this.handleEndConversation}
-            chat={this.state.chat}
-            toggleChat={this.toggleChat}
-          />
-        ) : (
-          <CountdownComponent
-            start={this.handleStartConversation}
-            toConversation={this.state.toConversation}
-          />
-        )}
+        {this.state.areTalking &&
+          !this.state.conversationEnded && (
+            <ConversationComponent
+              roomName={this.state.roomName}
+              token={this.state.token}
+              onFinish={this.handleEndConversation}
+              connection={this.state.connection}
+              userId={this.props.data.user.id}
+            />
+          )}
         <button onClick={this.handleStartConversation}>Start</button>
       </Conversation>
     )

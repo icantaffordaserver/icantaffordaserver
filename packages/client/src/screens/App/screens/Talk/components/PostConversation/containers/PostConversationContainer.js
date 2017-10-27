@@ -17,6 +17,9 @@ class PostConversationContainer extends Component {
   state = {
     loading: false,
     error: false,
+    otherUser: this.props.connection.participants.filter(
+      user => user.id !== this.props.userId,
+    )[0],
   }
 
   /**
@@ -41,13 +44,15 @@ class PostConversationContainer extends Component {
     this.setState({ loading: true })
     try {
       const { journalEntry, loading, error, ...rest } = this.state
-      const { userId, connectionId } = this.props
+      const userId = this.props.userId
+      const connectionId = this.props.connection.id
+
       const review = await this.props.reviewConversation({
         variables: {
           ...rest,
           userId,
           connectionId,
-          revieweeId: this.state.comment ? this.props.otherUser.id : null,
+          revieweeId: this.state.comment ? this.state.otherUser.id : null,
         },
       })
 
@@ -74,7 +79,7 @@ class PostConversationContainer extends Component {
         error={this.state.error}
         handleChange={this.handleChange}
         handleReview={this.handleReview}
-        otherUser={this.props.otherUser}
+        otherUser={this.state.otherUser}
       />
     )
   }

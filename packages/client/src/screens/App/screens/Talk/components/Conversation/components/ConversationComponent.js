@@ -8,22 +8,21 @@ import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {
   render() {
-    const name = `${this.props.otherUser.firstName}`
+    const connection = this.props.connection
+    const otherUser = connection.participants.filter(
+      user => user.id !== this.props.userId,
+    )[0]
+
     return (
       <div>
-        <h1>Conversation with {name}</h1>
+        <h1>Conversation with {otherUser.firstName}</h1>
 
         <Conversation>
           <Video
-            roomName={this.props.roomName}
             token={this.props.token}
+            roomName={this.props.roomName}
+            connection={this.props.connection}
             toggleChat={this.props.toggleChat}
-          />
-
-          <Chat
-            roomName={this.props.roomName}
-            hidden={!this.props.chat}
-            token={this.props.token}
           />
         </Conversation>
 
