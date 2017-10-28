@@ -5,7 +5,6 @@ export const Conversation = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  margin-left: 80px;
 `

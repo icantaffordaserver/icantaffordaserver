@@ -25,7 +25,7 @@ class VideoContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.state.videoConnection.close()
+    this.state.videoConnection && this.state.videoConnection.close()
   }
 
   onDisconnect = () => {

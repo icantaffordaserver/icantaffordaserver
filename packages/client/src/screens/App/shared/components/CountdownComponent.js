@@ -7,7 +7,10 @@ class CountdownComponent extends Component {
   state = {
     loading: true,
     countdown: setInterval(() => this.tickDown(), 1000),
-    toConversation: this.props.toConversation,
+    toConversation: moment.duration(
+      moment(this.props.startTime).diff(moment()),
+      'milliseconds',
+    ),
   }
 
   async componentWillUnmount() {
@@ -54,7 +57,7 @@ class CountdownComponent extends Component {
         {!this.state.loading ? (
           this.state.timeRemaining
         ) : (
-          <div className="loader active inline" />
+          <Loader active color="orange" />
         )}
       </div>
     )
