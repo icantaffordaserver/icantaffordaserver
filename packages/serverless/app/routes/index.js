@@ -3,7 +3,7 @@
  */
 import { Router } from 'express'
 
-import userRoutes from './userRoutes'
+import userRoutes from './user-routes'
 
 const routes = Router()
 

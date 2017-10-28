@@ -2,9 +2,9 @@ import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 import { fromEvent } from 'graphcool-lib'
 
-import { createClient } from '../../../../../../config/GraphQLClient'
+import { createClient } from '../../../../config/GraphQLClient'
 
-import getUserByEmailQuery from '../../../../../graphql/queries/getUserByEmailQuery'
+import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 
 export default async (req, res) => {
   const { email, password } = req.body.data

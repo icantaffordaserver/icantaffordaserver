@@ -1,12 +1,12 @@
-import { createClient } from '../../../../../../config/GraphQLClient'
+import { createClient } from '../../../../config/GraphQLClient'
 import {
   generateUniqueToken,
   isValidEmail,
   generateInviteEmailUrl,
-} from '../../../../../helpers'
-import { sendInviteEmail } from '../../../../../mailer'
+} from '../../../helpers'
+import { sendInviteEmail } from '../../../mailer'
 
-import createInviteMutation from '../../../../../graphql/mutations/createInviteMutation'
+import createInviteMutation from '../../../graphql/mutations/createInviteMutation'
 
 export default async (req, res) => {
   const client = createClient()

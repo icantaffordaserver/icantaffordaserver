@@ -1,11 +1,11 @@
 /**
  * Created by alexandermann on 2017-03-27.
  */
-import { sendPasswordResetEmail } from '../../../../mailer'
-import { createClient } from '../../../../../config/GraphQLClient'
-import { getPasswordResetUrl } from '../../../../helpers'
+import { sendPasswordResetEmail } from '../../../mailer'
+import { createClient } from '../../../../config/GraphQLClient'
+import { getPasswordResetUrl } from '../../../helpers'
 
-import getPasswordResetQuery from '../../../../graphql/queries/getPasswordResetQuery'
+import getPasswordResetQuery from '../../../graphql/queries/getPasswordResetQuery'
 
 export default async (req, res) => {
   const id = req.body.data.PasswordReset.node.id

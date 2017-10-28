@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import {isEmail} from 'validator'
+import { isEmail } from 'validator'
 
 import getUserByEmailQuery from '../graphql/queries/getUserByEmailQuery'
 
@@ -43,13 +43,11 @@ export function generateEmailVerificationUrl(token) {
 }
 
 export async function isValidEmail(email, client) {
-  if (!isEmail(email)) 
-    return false
+  if (!isEmail(email)) return false
 
-  const userExits = await client.request(getUserByEmailQuery, {email})
+  const userExits = await client.request(getUserByEmailQuery, { email })
   console.log(userExits)
-  if (userExits.User) 
-    return false
+  if (userExits.User) return false
 
   return true
 }

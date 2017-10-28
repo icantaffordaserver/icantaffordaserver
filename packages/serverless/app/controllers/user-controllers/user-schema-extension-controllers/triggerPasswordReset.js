@@ -1,11 +1,8 @@
 process.env.TZ = 'UTC'
-import { createClient } from '../../../../../../config/GraphQLClient'
-import {
-  generateUniqueToken,
-  generateExpiryDate,
-} from '../../../../../helpers/'
+import { createClient } from '../../../../config/GraphQLClient'
+import { generateUniqueToken, generateExpiryDate } from '../../../helpers'
 
-import createPasswordResetMutation from '../../../../../graphql/mutations/createPasswordResetMutation'
+import createPasswordResetMutation from '../../../graphql/mutations/createPasswordResetMutation'
 
 export default async (req, res) => {
   const email = req.body.data.email

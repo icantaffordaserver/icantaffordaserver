@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 
-import { createClient } from '../../../../../../config/GraphQLClient'
+import { createClient } from '../../../../config/GraphQLClient'
 
-import getUserByEmailQuery from '../../../../../graphql/queries/getUserByEmailQuery'
-import createUserMutation from '../../../../../graphql/mutations/createUserMutation'
+import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
+import createUserMutation from '../../../graphql/mutations/createUserMutation'
 
 export default async (req, res) => {
   const {
