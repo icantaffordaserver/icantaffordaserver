@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import userSubscriptionRoutes from './userSubscriptionRoutes'
 import userSchemaExtensionRoutes from './userSchemaExtensionRoutes'
-import getToken from '../../helpers/twilio'
+import getToken from '../../utils/twilio'
 
 const routes = Router()
 

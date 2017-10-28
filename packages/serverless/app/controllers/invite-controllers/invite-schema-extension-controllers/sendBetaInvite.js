@@ -3,7 +3,7 @@ import {
   generateUniqueToken,
   isValidEmail,
   generateInviteEmailUrl,
-} from '../../../helpers'
+} from '../../../utils'
 import { sendInviteEmail } from '../../../mailer'
 
 import createInviteMutation from '../../../graphql/mutations/createInviteMutation'

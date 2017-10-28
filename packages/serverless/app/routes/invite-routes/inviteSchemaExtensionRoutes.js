@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import sendBetaInviteController from '../../controllers/invite-controllers/invite-schema-extension-controllers/sendBetaInviteController'
+import sendBetaInviteController from '../../controllers/invite-controllers/invite-schema-extension-controllers/sendBetaInvite'
 
 const routes = Router()
 

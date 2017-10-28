@@ -3,7 +3,7 @@
  */
 import { sendPasswordResetEmail } from '../../../mailer'
 import { createClient } from '../../../../config/GraphQLClient'
-import { getPasswordResetUrl } from '../../../helpers'
+import { getPasswordResetUrl } from '../../../utils'
 
 import getPasswordResetQuery from '../../../graphql/queries/getPasswordResetQuery'
 

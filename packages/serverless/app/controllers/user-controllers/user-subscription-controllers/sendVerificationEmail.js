@@ -6,7 +6,7 @@ import {
   generateUniqueToken,
   generateEmailVerificationUrl,
   generateExpiryDate,
-} from '../../../helpers'
+} from '../../../utils'
 
 import createVerifyEmailMutation from '../../../graphql/mutations/createVerifyEmailMutation'
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'

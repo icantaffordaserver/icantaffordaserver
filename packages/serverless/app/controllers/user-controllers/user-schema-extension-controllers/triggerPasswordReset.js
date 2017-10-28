@@ -1,6 +1,6 @@
 process.env.TZ = 'UTC'
 import { createClient } from '../../../../config/GraphQLClient'
-import { generateUniqueToken, generateExpiryDate } from '../../../helpers'
+import { generateUniqueToken, generateExpiryDate } from '../../../utils'
 
 import createPasswordResetMutation from '../../../graphql/mutations/createPasswordResetMutation'
 
