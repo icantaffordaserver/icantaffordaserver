@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-import sendBetaInviteController from '../../controllers/invite-controllers/invite-schema-extension-controllers/sendBetaInvite'
+import sendInviteController from '../../controllers/invite-controllers/invite-schema-extension-controllers/sendInvite'
 
 const routes = Router()
 
-routes.post('/sendBetaInvite', sendBetaInviteController)
+routes.post('/sendInvite', sendInviteController)
 
 export default routes

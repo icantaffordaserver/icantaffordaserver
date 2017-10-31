@@ -2,14 +2,13 @@
  * Created by alexandermann on 2017-03-27.
  */
 import { sendPasswordResetEmail } from '../../../mailer'
-import { createClient } from '../../../../config/GraphQLClient'
-import { getPasswordResetUrl } from '../../../utils'
+import client from '../../../../config/GraphQLClient'
+import getPasswordResetUrl from '../../../utils/getPasswordResetUrl'
 
 import getPasswordResetQuery from '../../../graphql/queries/getPasswordResetQuery'
 
 export default async (req, res) => {
   const id = req.body.data.PasswordReset.node.id
-  const client = createClient()
 
   try {
     const response = await client.request(getPasswordResetQuery, { id })

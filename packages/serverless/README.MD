@@ -17,8 +17,8 @@ To set up your dev environment please see the following steps:
 5. Build the local graphcool dev containers - `graphcool local up`
 6. Set your local webhook server URL in your environment (this must be done for every new shell opening - it does not persist after shell close). You can alternatively add this to your permanant environment variables on your system.
 
-   * If on linux/windows you will run something like `export WEBHOOK_SERVER_URL=http://[YOUR_COMPUTER_NETWORK_IP]`
-   * If on mac you will run `export WEBHOOK_SERVER_URL=http://docker.for.mac.localhost`
+   * If on linux/windows you will run something like `export WEBHOOK_SERVER_URL=http://[YOUR_COMPUTER_NETWORK_IP]:4000`
+   * If on mac you will run `export WEBHOOK_SERVER_URL=http://docker.for.mac.localhost:4000`
 6. Deploy the built images - `graphcool deploy`
 7. Once you deploy you will get a confirmation of you environment setup from graphcool. It will specify the endpoints that are setup locally. You will need these addresses for starting the local lambda funcion-as-a-service (FaaS)
 
@@ -41,8 +41,13 @@ dev:
   TWILIO_VIDEO_API_KEY_SECRET: 1u6RoBUsHpagW8kw8QuqMJqom75x1Fcb
   TWILIO_CHAT_SERVICE_SID: IS2d57b75ef6724d38aeca3bcfebbd663f
    ```
-
-  11. Now you can start your local dev server
+   *Note*: you can get your `GRAPHCOOL_AUTH_TOKEN` for `env.yml` by executing `graphcool root-token adminToken` in your console.
+  
+  11. You will need to add `graphcool` to your `/etc/hosts` file. You can do that by adding the following line to the bottom of the file:
+  ```
+  0.0.0.0         graphcool
+  ```
+  12. Now you can start your local dev server
   ```
   yarn start:dev
   ```

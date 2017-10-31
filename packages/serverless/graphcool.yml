@@ -8,7 +8,7 @@ functions:
   sendInvite-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/sendBetaInvite
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/sendInvite
         headers:
           Content-Type: application/json
     type: subscription
@@ -64,9 +64,7 @@ functions:
   sendInvite-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/sendBetaInvite
-        headers:
-          Content-Type: application/json
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/schemaExtension/sendInvite
     type: resolver
     schema: ./graphcool/src/sendInvite.schemaExtension.graphql
   updatePassword-schemaExtension:
@@ -144,9 +142,3 @@ permissions:
 - operation: ConnectionReportOnReportedUser.*
 rootTokens:
 - adminToken
-- update-email
-- AuthenticateUser
-- SignUpUser
-- UpdatePassword
-- TriggerPasswordReset
-- SendInvite

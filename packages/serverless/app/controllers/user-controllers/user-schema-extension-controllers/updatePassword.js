@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 
-import { createClient } from '../../../../config/GraphQLClient'
+import client from '../../../../config/GraphQLClient'
 
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 import updateUserMutation from '../../../graphql/mutations/updateUserMutation'
@@ -13,7 +13,6 @@ export default async (req, res) => {
   if (!isEmail(email)) throw new Error('Invalid Credentials')
 
   try {
-    const client = createClient()
     const response = await client.request(getUserByEmailQuery, { email })
     const user = response.User
     if (!user) throw new Error('Invalid Credentials')
