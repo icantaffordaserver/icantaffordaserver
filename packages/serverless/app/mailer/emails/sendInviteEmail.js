@@ -11,7 +11,7 @@ export default function sendInviteEmail({
   return new Promise((resolve, reject) => {
     PostmarkMailer.sendEmailWithTemplate(
       {
-        From: 'hello@toktumi.io',
+        From: process.env.EMAIL_TO_SEND_FROM,
         To: recipientEmail,
         TemplateId: 1735761,
         TemplateModel: {
@@ -20,8 +20,8 @@ export default function sendInviteEmail({
         },
       },
       (error, result) => {
-        if (error) reject(error)
-        else resolve(result)
+        if (error) return reject(error)
+        resolve(result)
       },
     )
   })

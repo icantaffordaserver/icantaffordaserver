@@ -4,7 +4,7 @@ import { GraphQLClient } from 'graphql-request'
 // here
 const client = new GraphQLClient(process.env.GRAPHCOOL_SIMPLE_ENDPOINT, {
   headers: {
-    Authorization: process.env.GRAPHCOOL_AUTH_TOKEN,
+    Authorization: `Bearer ${process.env.GRAPHCOOL_AUTH_TOKEN}`,
   },
 })
 

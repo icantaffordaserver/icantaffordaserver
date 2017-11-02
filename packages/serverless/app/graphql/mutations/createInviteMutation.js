@@ -3,7 +3,9 @@ export default `
     $emailToInvite: String!
     $firstName: String!
     $lastName: String!
-    $token: String!
+    $token: String
+    $expiry: DateTime
+    $isApproved: Boolean
     $inviteType: InviteType!
     $sentByUserId: ID
   ) {
@@ -11,9 +13,11 @@ export default `
       emailToInvite: $emailToInvite
       firstName: $firstName
       lastName: $lastName
-      sentById: $sentByUserId
-      inviteType: $inviteType
       token: $token
+      expiry: $expiry
+      isApproved: $isApproved
+      inviteType: $inviteType
+      sentById: $sentByUserId
     ) {
       id
     }

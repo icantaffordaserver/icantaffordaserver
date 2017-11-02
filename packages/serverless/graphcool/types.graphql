@@ -111,7 +111,8 @@ type Invite @model {
   acceptedUser: User @relation(name: "InviteOnUserAccepted")
   isApproved: Boolean! @defaultValue(value: false)
   sentBy: User @relation(name: "InviteOnUserSentBy")
-  token: String! @isUnique
+  token: String @isUnique
+  expiry: DateTime
   inviteType: InviteType!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -121,6 +122,7 @@ enum InviteType {
   SENT_BY_ADMIN
   SENT_BY_USER
   REQUESTED_FROM_WEBSITE
+  NEEDS_ADMIN_APPROVAL
 }
 
 type PasswordReset @model {

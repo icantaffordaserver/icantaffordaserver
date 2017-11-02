@@ -1,3 +1,3 @@
-export default function generateInviteEmailUrl(inviteId, token) {
-  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/signup/${inviteId}/${token}`
+export default function generateInviteEmailUrl(token) {
+  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/signup/${token}`
 }
