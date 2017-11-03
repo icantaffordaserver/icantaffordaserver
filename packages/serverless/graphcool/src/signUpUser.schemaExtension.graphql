@@ -10,6 +10,7 @@ extend type Mutation {
     lastName: String!
     birthday: String!
     bio: String!
+    location: String
     inviteId: ID
   ): SignupEmailUserPayload
 }

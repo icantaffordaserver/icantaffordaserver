@@ -7,9 +7,8 @@ import { Redirect } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
 
-import { Form, FormGroup, FormButton, FormInput } from '../../styles/Forms'
-import { Button } from '../../styles'
-import { Label, Icon } from 'semantic-ui-react'
+import { Button, Form, FormGroup, Input, Label } from '../../styles'
+import { Icon } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 
 import logo from '../../shared/assets/logo.png'
@@ -108,22 +107,27 @@ class ComingSoon extends React.Component {
           }}
           onSubmit={this.handleSubmit}
         >
+          {message && (
+            <Label basic color={error ? 'red' : 'green'} pointing="left">
+              {message}
+            </Label>
+          )}
           <FormGroup>
-            <FormInput
+            <Input
               name="firstName"
               placeholder="First Name"
               onChange={this.onChange}
             />
           </FormGroup>
           <FormGroup>
-            <FormInput
+            <Input
               name="lastName"
               placeholder="Last Name"
               onChange={this.onChange}
             />
           </FormGroup>
           <FormGroup>
-            <FormInput
+            <Input
               name="email"
               placeholder="Email Address"
               onChange={this.onChange}
@@ -133,11 +137,6 @@ class ComingSoon extends React.Component {
             <Icon name="send" />
             Send
           </Button>
-          {message && (
-            <Label basic color={error ? 'red' : 'green'} pointing="left">
-              {message}
-            </Label>
-          )}
         </Form>
       </SignUpContainer>
     )

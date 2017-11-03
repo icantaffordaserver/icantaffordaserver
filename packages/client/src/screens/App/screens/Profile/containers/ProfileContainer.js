@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { isEmail } from 'validator'
 
@@ -14,13 +14,14 @@ import updateUserMutation from '../../../shared/graphql/mutations/updateUserMuta
 class ProfileContainer extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+    client: PropTypes.object.isRequired,
   }
 
   state = {
     loading: false,
     success: false,
     error: false,
+    editing: false,
   }
 
   componentWillReceiveProps = nextProps => {
@@ -29,6 +30,9 @@ class ProfileContainer extends Component {
     }
   }
 
+  handleOpen = () => {
+    this.setState({ editing: !this.state.editing })
+  }
   handleEditProfile = userData => {
     //TODO: Figure out how to edit user email and password
     this.setState({ loading: true })
@@ -52,7 +56,7 @@ class ProfileContainer extends Component {
         refetchQueries: [{ query: currentUserQuery }],
       })
       .then(response => {
-        this.setState({ loading: false, success: true })
+        this.setState({ loading: false, success: true, editing: false })
       })
       .catch(err => {
         console.error(err)
@@ -66,11 +70,13 @@ class ProfileContainer extends Component {
 
     return (
       <ProfileComponent
-        onSettingChange={this.handleEditProfile}
+        onSubmit={this.handleEditProfile}
         user={this.props.data.user}
         error={this.state.error}
         loading={this.state.loading}
         success={this.state.success}
+        editing={this.state.editing}
+        open={this.handleOpen}
       />
     )
   }
@@ -82,5 +88,4 @@ export default compose(
   graphql(currentUserQuery),
   graphql(updateUserMutation, { name: 'updateUser' }),
   withApollo,
-  withRouter,
 )(ProfileContainer)

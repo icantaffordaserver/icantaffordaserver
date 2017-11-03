@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React from 'react'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
@@ -12,8 +13,8 @@ export const Button = styled(button)`
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
   background: ${styles.color}!important;
   border: solid 1px ${styles.color}!important;
-  border-radius: 5px !important;
-  margin: auto !important;
+  border-radius: ${styles.borderRadius}px !important;
+  margin: ${props => (props.noMargin ? 0 : 'auto')} !important;
   font-size: ${styles.fontSize}em !important;
   color: #fff !important;
   &:hover {
@@ -27,6 +28,7 @@ Button.defaultProps = {
   size: 'medium',
   fontSize: 'medium',
   padding: 'medium',
+  borderRadius: 'default',
 }
 
 export const Input = styled.input`

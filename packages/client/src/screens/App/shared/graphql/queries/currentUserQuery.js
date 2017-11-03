@@ -30,7 +30,11 @@ export default gql`
         id
         emailToVerify
       }
-      connections(orderBy: createdAt_DESC, first: 1) {
+      connections(
+        orderBy: connectionTime_ASC
+        first: 1
+        filter: { status: SCHEDULED }
+      ) {
         status
         connectionTime
         fireStarterSuggestion

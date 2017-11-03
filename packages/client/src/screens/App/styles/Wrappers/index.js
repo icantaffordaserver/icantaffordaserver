@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
+import { Card as card } from 'semantic-ui-react'
+
 const styles = bind(Theme)
 
 export const Background = styled.div`
@@ -62,11 +64,16 @@ export const FormGroup = styled.div`
 export const ColumnContainer = styled.div`
   height: 100%;
   width: 100%;
+  margin: 1% auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${props => props.center && 'center'};
   justify-content: space-between;
+  background: ${styles.color};
 `
+ColumnContainer.defaultProps = {
+  color: 'transparent',
+}
 export const RowContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -87,9 +94,30 @@ export const Section = styled.section`
       display: inline-flex;
       justify-content: space-between;
     `};
+  &.compressed {
+    width: 65%;
+  }
 `
 Section.defaultProps = {
   color: 'white',
   borderRadius: 'square',
   shadow: 'none',
 }
+
+export const Card = styled.div`
+  margin: ${props => (props.row ? '0 5% 0 0' : 0)};
+  width: ${props => (props.row ? 100 : 90)}%;
+  min-height: 200px;
+  height: max-content;
+  padding: 2% 5%;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: ${props => (props.row ? 'space-evenly' : 'center')};
+  flex-direction: ${props => (props.row ? 'row' : 'column')};
+
+  &.pushed {
+    margin-top: 3.35em;
+  }
+`

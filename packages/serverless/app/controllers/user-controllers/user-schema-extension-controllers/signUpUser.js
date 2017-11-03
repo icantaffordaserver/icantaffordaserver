@@ -14,6 +14,7 @@ export default async (req, res) => {
     password,
     birthday,
     bio,
+    location,
     inviteId,
   } = req.body.data
   const client = createClient()
@@ -34,6 +35,7 @@ export default async (req, res) => {
       password: hashedPassword,
       birthday,
       bio,
+      location,
       inviteId,
     }
     const userResponse = await client.request(createUserMutation, variables)

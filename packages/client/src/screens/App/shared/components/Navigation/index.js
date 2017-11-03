@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
-import Countdown from '../CountdownComponent.js'
+import Countdown from '../Countdown'
 
 import currentUserQuery from '../../graphql/queries/currentUserQuery'
 

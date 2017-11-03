@@ -40,7 +40,7 @@ class ConversationContainer extends Component {
     conversationEnded: false,
   }
 
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
       let areTalking = this.state.areTalking
       const connection = nextProps.data.user.connections[0]
@@ -53,7 +53,7 @@ class ConversationContainer extends Component {
         areTalking = true
       }
 
-      this.setState({
+      await this.setState({
         connection,
         areTalking,
       })
@@ -101,7 +101,6 @@ class ConversationContainer extends Component {
 
   render() {
     if (this.props.data.loading) return null
-
     return (
       <Conversation>
         {this.state.conversationEnded && (

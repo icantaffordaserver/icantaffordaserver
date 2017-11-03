@@ -12,6 +12,7 @@ export default gql`
     $bio: String
     $profilePhotoId: ID
     $email: String
+    $availability: Json
   ) {
     updateUser(
       id: $id
@@ -21,6 +22,7 @@ export default gql`
       bio: $bio
       email: $email
       profilePhotoId: $profilePhotoId
+      availability: $availability
     ) {
       id
       firstName

@@ -2,12 +2,14 @@
  * Created by alexandermann on 2017-04-26.
  */
 import { Router } from 'express'
+import seed from '../utils/seed'
 
 import userRoutes from './user-routes'
 
 const routes = Router()
 
 routes.get('/health', (req, res) => res.send({ message: 'All good' }))
+routes.get('/seed', seed)
 
 // All microservice functions related to user type
 routes.use('/user', userRoutes)

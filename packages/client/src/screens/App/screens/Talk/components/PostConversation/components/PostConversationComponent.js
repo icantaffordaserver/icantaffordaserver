@@ -58,7 +58,7 @@ class PostConversationComponent extends React.Component {
                 Did you enjoy the conversation with{' '}
                 {this.props.otherUser.firstName}?
               </Text>
-              <Text>
+              <Text right>
                 <input
                   type="checkbox"
                   name="enjoyedConversation"

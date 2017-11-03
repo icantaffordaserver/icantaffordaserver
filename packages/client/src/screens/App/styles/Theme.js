@@ -4,8 +4,9 @@ export default {
     primary: '#393f63',
     secondary: '#7781c8',
     white: '#fff',
-    gray: '#e0e0e0',
+    gray: '#F8F8F8',
     darkGray: '#333',
+    transparent: 'transparent',
   },
 
   size: {

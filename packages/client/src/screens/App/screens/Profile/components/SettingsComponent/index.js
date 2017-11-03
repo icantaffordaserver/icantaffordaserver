@@ -5,17 +5,18 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import Dropzone from 'react-dropzone'
 
 import axios from 'axios'
-import { Message } from 'semantic-ui-react'
+import { Message, Modal } from 'semantic-ui-react'
 
 import {
+  ColumnContainer,
   Form,
   FormGroup,
-  FormLabel,
-  FormInput,
-  FormTextArea,
-  FormButton,
-} from '../../../../styles/Forms.js'
-import { Button } from '../../../../styles'
+  Label,
+  Input,
+  TextArea,
+  Button,
+  TextLink,
+} from '../../../../styles'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
@@ -71,79 +72,86 @@ class SettingsComponent extends Component {
   }
   render() {
     return (
-      <div style={{ width: '60%', margin: 'auto' }}>
-        <Form onSubmit={e => this.onSubmit(e)}>
-          {this.renderMessages()}
-          <FormGroup>
-            <FormLabel htmlFor="firstName">First Name:</FormLabel>
-            <FormInput
-              name="firstName"
-              type="text"
-              placeholder={this.props.user.firstName}
-              onChange={e => this.handleChange(e)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="lastName">Last Name:</FormLabel>
-            <FormInput
-              name="lastName"
-              type="text"
-              placeholder={this.props.user.lastName}
-              onChange={e => this.handleChange(e)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="email">Email:</FormLabel>
-            <FormInput
-              name="email"
-              type="text"
-              placeholder={this.props.user.email}
-              onChange={e => this.handleChange(e)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel htmlFor="bio">Bio:</FormLabel>
-            <FormTextArea
-              maxLength="250"
-              name="bio"
-              placeholder={this.props.user.bio}
-              onChange={e => this.handleChange(e)}
-            />
-          </FormGroup>
+      <Modal
+        trigger={<TextLink onClick={this.props.open}>Edit profile</TextLink>}
+        basic
+        open={this.props.editing}
+        onClose={this.props.open}
+      >
+        <ColumnContainer white>
+          <Form onSubmit={e => this.onSubmit(e)}>
+            {this.renderMessages()}
+            <FormGroup>
+              <Label htmlFor="firstName">First Name:</Label>
+              <Input
+                name="firstName"
+                type="text"
+                placeholder={this.props.user.firstName}
+                onChange={e => this.handleChange(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="lastName">Last Name:</Label>
+              <Input
+                name="lastName"
+                type="text"
+                placeholder={this.props.user.lastName}
+                onChange={e => this.handleChange(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="email">Email:</Label>
+              <Input
+                name="email"
+                type="text"
+                placeholder={this.props.user.email}
+                onChange={e => this.handleChange(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="bio">Bio:</Label>
+              <TextArea
+                maxLength="250"
+                name="bio"
+                placeholder={this.props.user.bio}
+                onChange={e => this.handleChange(e)}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <FormLabel>Profile Photo:</FormLabel>
-            {!this.state.imageId && (
-              <Dropzone
-                onDrop={this.onFileUpload}
-                accept="image/*"
-                multiple={false}
-                style={{
-                  display: 'flex',
-                  width: 'fill-available',
-                  padding: '10px',
-                  border: 'solid 1px lightgray',
-                  borderRadius: '5px',
-                  height: '250px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '2em',
-                  color: 'lightgray',
-                }}
-              >
-                Click or drag and drop an image.
-              </Dropzone>
-            )}
-          </FormGroup>
+            <FormGroup>
+              <Label>Profile Photo:</Label>
+              {!this.state.imageId && (
+                <Dropzone
+                  onDrop={this.onFileUpload}
+                  accept="image/*"
+                  multiple={false}
+                  style={{
+                    display: 'flex',
+                    width: 'fill-available',
+                    padding: '10px',
+                    border: 'solid 1px lightgray',
+                    borderRadius: '5px',
+                    height: '250px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2em',
+                    color: 'lightgray',
+                  }}
+                >
+                  Click or drag and drop an image.
+                </Dropzone>
+              )}
+            </FormGroup>
 
-          <Button
-            className={this.props.className ? this.props.className : ''}
-            loading={this.props.loading}
-          >
-            Submit
-          </Button>
-        </Form>
-      </div>
+            <Button
+              className={this.props.className ? this.props.className : ''}
+              loading={this.props.loading}
+            >
+              Submit
+            </Button>
+          </Form>
+        </ColumnContainer>
+      </Modal>
     )
   }
 }
