@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 
-import { createClient } from '../../../../config/GraphQLClient'
+import client from '../../../../config/GraphQLClient'
 
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 import createUserMutation from '../../../graphql/mutations/createUserMutation'
@@ -17,7 +17,6 @@ export default async (req, res) => {
     location,
     inviteId,
   } = req.body.data
-  const client = createClient()
   const SALT_ROUNDS = 10
 
   try {

@@ -2,38 +2,39 @@ import bcrypt from 'bcryptjs'
 import { isEmail } from 'validator'
 import { fromEvent } from 'graphcool-lib'
 
-import { createClient } from '../../../../config/GraphQLClient'
+import client from '../../../../config/GraphQLClient'
 
 import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 
 export default async (req, res) => {
-  const { email, password } = req.body.data
-  const endpoints = {
-    simple: process.env.GRAPHCOOL_SIMPLE_ENDPOINT,
-    system: process.env.GRAPHCOOL_SYSTEM_ENDPOINT,
-    subscriptions: process.env.GRAPHCOOL_SUBSCRIPTION_ENDPOINT,
-  }
-  const graphcool = fromEvent(req.body, { endpoints })
-
-  if (!isEmail(email)) throw new Error('Invalid Credentials.')
-
   try {
-    const client = createClient()
+    const graphcool = fromEvent(req.body)
+    const api = graphcool.api('simple/v1')
+
+    const { email, password } = req.body.data
+    if (!isEmail(email)) throw new Error('Invalid Credentials.')
+
     const response = await client.request(getUserByEmailQuery, { email })
     const user = response.User
     if (!user) throw new Error('Invalid Credentials.')
 
+    // determine if the password is correct
     const isCorrectPassword = await bcrypt.compare(password, user.password)
     if (!isCorrectPassword) throw new Error('Invalid Credentials.')
+
+    // generate a token from the graphcool system api
     const token = await graphcool.generateNodeToken(user.id, 'User')
+
+    // send a successful response with the token
     res.status(200).send({
-      message: 'Logged in.',
       data: {
         token,
       },
     })
   } catch (error) {
     console.error(error)
-    res.status(400).send({ message: error.message })
+    res
+      .status(200)
+      .send({ error: 'An unexpected error occured during authentication.' })
   }
 }
