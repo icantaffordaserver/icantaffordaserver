@@ -1,10 +1,9 @@
 import UserData from './MOCK_DATA.json'
 import ConnectionData from './connections.json'
 
-import { createClient } from '../../config/GraphQLClient'
+import client from '../../config/GraphQLClient'
 
 export default async (req, res) => {
-  const client = await createClient()
   const loggedInUserId = 'cj967wrtq008c0151v3id3wkg' // This is to seed connections
 
   //Uncomment if you need to delete users and replace id array with users you'd like to keep

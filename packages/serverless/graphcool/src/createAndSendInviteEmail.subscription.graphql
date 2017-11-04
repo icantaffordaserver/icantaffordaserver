@@ -1,0 +1,18 @@
+subscription {
+  Invite(
+    filter: {
+      mutation_in: [CREATED, UPDATED]
+      node: { inviteStatus: INVITE_APPROVED, isApproved: true }
+    }
+  ) {
+    node {
+      id
+      firstName
+      lastName
+      emailToInvite
+      inviteType
+      inviteStatus
+      isApproved
+    }
+  }
+}

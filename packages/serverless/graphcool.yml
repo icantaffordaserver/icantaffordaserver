@@ -67,6 +67,14 @@ functions:
         url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/schemaExtension/sendInvite
     type: resolver
     schema: ./graphcool/src/sendInvite.schemaExtension.graphql
+  createAndSendInviteEmail-subscription:
+    type: subscription
+    query: ./graphcool/src/createAndSendInviteEmail.subscription.graphql
+    handler:
+      webhook: 
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/createAndSendInviteEmail
+        headers:
+          Content-Type: application/json
   updatePassword-schemaExtension:
     handler:
       webhook:

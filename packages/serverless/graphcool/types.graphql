@@ -110,10 +110,12 @@ type Invite @model {
   lastName: String!
   acceptedUser: User @relation(name: "InviteOnUserAccepted")
   isApproved: Boolean! @defaultValue(value: false)
+  approvedBy: User @relation(name: "InviteApprovedByUser")
   sentBy: User @relation(name: "InviteOnUserSentBy")
   token: String @isUnique
   expiry: DateTime
   inviteType: InviteType!
+  inviteStatus: InviteStatus!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -122,7 +124,13 @@ enum InviteType {
   SENT_BY_ADMIN
   SENT_BY_USER
   REQUESTED_FROM_WEBSITE
-  NEEDS_ADMIN_APPROVAL
+}
+
+enum InviteStatus {
+  INVITE_NEEDS_ADMIN_APPROVAL
+  INVITE_APPROVED
+  INVITE_EMAIL_SENT
+  INVITE_ACCEPTED
 }
 
 type PasswordReset @model {
@@ -189,6 +197,7 @@ type User @model {
     @relation(name: "ConnectionReportOnReporterUser")
   journalEntries: [ConnectionJournal!]!
     @relation(name: "ConnectionJournalOnUser")
+  invitesApproved: Invite @relation(name: "InviteApprovedByUser")
 }
 
 enum UserType {
