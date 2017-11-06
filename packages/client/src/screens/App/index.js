@@ -40,7 +40,7 @@ function App() {
 const Root = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={ComingSoon} />
+      <Route exact path="/" component={LoginScreen} />
       <Route path="/login" component={LoginScreen} />
       <Route exact path="/signUp" render={SignUpScreen} />
       <Route path="/signUp/:token" render={SignUpScreen} />

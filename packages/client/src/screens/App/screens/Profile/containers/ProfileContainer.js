@@ -5,7 +5,6 @@ import { graphql, compose, withApollo } from 'react-apollo'
 import { isEmail } from 'validator'
 
 import isVerified from '../../../shared/HoCs/isVerified'
-import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
 import ProfileComponent from '../components/ProfileComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
@@ -84,7 +83,6 @@ class ProfileContainer extends Component {
 
 export default compose(
   isVerified,
-  isAuthenticated,
   graphql(currentUserQuery),
   graphql(updateUserMutation, { name: 'updateUser' }),
   withApollo,

@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-03-21.
  */
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { compose } from 'recompose'
@@ -21,6 +22,7 @@ export default WrappedComponent => {
       const { data } = nextProps
 
       if (!data.loading && !data.user) {
+        window.localStorage.removeItem('auth_token')
         this.props.history.push('/notloggedin')
       }
     }

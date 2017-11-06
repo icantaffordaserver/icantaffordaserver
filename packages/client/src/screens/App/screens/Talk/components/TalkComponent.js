@@ -67,6 +67,7 @@ class TalkComponent extends Component {
                 key={connection.id}
                 connection={connection}
                 handleConversation={this.props.handleConversation}
+                showProfile={this.showProfile}
               />
             ))}
         </ColumnContainer>

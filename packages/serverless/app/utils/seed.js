@@ -1,11 +1,10 @@
 import UserData from './MOCK_DATA.json'
 import ConnectionData from './connections.json'
 
-import { createClient } from '../../config/GraphQLClient'
+import client from '../../config/GraphQLClient'
 
 export default async (req, res) => {
-  const client = await createClient()
-  const loggedInUserId = 'cj967wrtq008c0151v3id3wkg' // This is to seed connections
+  const loggedInUserId = 'cj9ofpke800mp0150oabzwop9' // This is to seed connections
 
   //Uncomment if you need to delete users and replace id array with users you'd like to keep
   // const { allUsers } = await client.request(`query{allUsers{id}}`)
@@ -27,45 +26,45 @@ export default async (req, res) => {
   //   }
   // })
 
-  UserData.map(async User => {
-    const { signUpUser } = await client.request(
-      `
-    mutation signUp(
-      $email: String!
-      $password: String!
-      $firstName: String!
-      $lastName: String!
-      $birthday: String!
-      $bio: String!
-      $location: String
-      $inviteId: ID
-    ) {
-      signUpUser(
-        email: $email
-        password: $password
-        firstName: $firstName
-        lastName: $lastName
-        birthday: $birthday
-        bio: $bio
-        location: $location
-        inviteId: $inviteId
-      ) {
-        id
-      }
-    }
-    `,
-      User,
-    )
+  // UserData.map(async User => {
+  //   const { signUpUser } = await client.request(
+  //     `
+  //   mutation signUp(
+  //     $email: String!
+  //     $password: String!
+  //     $firstName: String!
+  //     $lastName: String!
+  //     $birthday: String!
+  //     $bio: String!
+  //     $location: String
+  //     $inviteId: ID
+  //   ) {
+  //     signUpUser(
+  //       email: $email
+  //       password: $password
+  //       firstName: $firstName
+  //       lastName: $lastName
+  //       birthday: $birthday
+  //       bio: $bio
+  //       location: $location
+  //       inviteId: $inviteId
+  //     ) {
+  //       id
+  //     }
+  //   }
+  //   `,
+  //     User,
+  //   )
 
-    const { user } = await client.request(
-      `mutation verify($id: ID!){
-      updateUser(id:$id, emailVerified:true){
-        id
-      }
-    }`,
-      { id: signUpUser.id },
-    )
-  })
+  //   // const { user } = await client.request(
+  //   //   `mutation verify($id: ID!){
+  //   //   updateUser(id:$id, emailVerified:true){
+  //   //     id
+  //   //   }
+  //   // }`,
+  //   //   { id: signUpUser.id },
+  //   // )
+  // })
 
   const { allUsers } = await client.request(
     `query{

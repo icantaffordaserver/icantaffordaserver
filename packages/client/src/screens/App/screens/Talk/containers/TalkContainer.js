@@ -102,6 +102,10 @@ class TalkContainer extends Component {
   }
 }
 
-export default compose(graphql(currentUserQuery), withRouter, withApollo)(
-  TalkContainer,
-)
+export default compose(
+  isVerified,
+  isAuthenticated,
+  graphql(currentUserQuery),
+  withRouter,
+  withApollo,
+)(TalkContainer)
