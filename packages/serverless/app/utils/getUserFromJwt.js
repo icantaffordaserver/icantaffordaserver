@@ -1,5 +1,5 @@
 import client from '../../config/GraphQLClient'
-import getUserById from '../../app/graphql/queries/getUserById'
+import getUserById from '../../app/graphql/queries/getUserByIdQuery'
 import getUserIdFromJwt from './getUserIdFromJwt'
 
 // Note that the return object looks like { User: { USER_DATA_HERE } }

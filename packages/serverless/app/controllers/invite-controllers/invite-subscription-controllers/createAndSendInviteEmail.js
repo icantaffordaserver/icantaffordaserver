@@ -7,7 +7,6 @@ import sendInviteEmail from '../../../mailer/emails/sendInviteEmail'
 
 export default async (req, res) => {
   try {
-    console.log(req.body.data.Invite.node)
     // pull the relevant invite details from the invite
     const invite = req.body.data.Invite.node
 
@@ -16,6 +15,7 @@ export default async (req, res) => {
     const expiry = generateExpiryDate(7) // expires in 7 days
     const inviteStatus = 'INVITE_EMAIL_SENT'
     const inviteUrl = generateInviteEmailUrl(token)
+
     // send the email to the user
     await sendInviteEmail({
       firstName: invite.firstName,

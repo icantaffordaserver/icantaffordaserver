@@ -1,9 +1,10 @@
 import bcrypt from 'bcryptjs'
-import { isEmail } from 'validator'
+import { isEmail, normalizeEmail } from 'validator'
 
 import client from '../../../../config/GraphQLClient'
 
-import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
+import getUserByEmail from '../../../utils/getUserByEmail'
+import getInviteByToken from '../../../utils/getInviteByToken'
 import createUserMutation from '../../../graphql/mutations/createUserMutation'
 
 export default async (req, res) => {
@@ -15,17 +16,42 @@ export default async (req, res) => {
     birthday,
     bio,
     location,
-    inviteId,
+    inviteToken,
   } = req.body.data
   const SALT_ROUNDS = 10
 
   try {
-    if (!isEmail(email)) throw new Error('Email invalid.')
+    // we will remove the requirement for having an invite token later on
+    // when we move out of invite only phase
+    if (!inviteToken)
+      return res
+        .status(200)
+        .send({ error: 'You must provide a valid invite token.' })
 
-    const userExists = await client.request(getUserByEmailQuery, { email })
+    if (!isEmail(email))
+      return res
+        .status(200)
+        .send({ error: 'You must provide a valid email address.' })
 
-    if (userExists.User) throw new Error('User Exists with that email.')
+    if (!await getUserByEmail(email))
+      return res.status.send({
+        error: 'A user already exists with that email.',
+      })
 
+    const sanitizedEmail = normalizeEmail(email)
+    const invite = await getInviteByToken(inviteToken)
+    if (!invite.isApproved)
+      return res.status(200).send({
+        error:
+          'This invite must be approved by an admin before you can sign up.',
+      })
+
+    if (invite.emailToInvite !== sanitizedEmail)
+      return res
+        .status(200)
+        .send({ error: 'Your signup email must match the invite email.' })
+
+    // invite is approved and everything looks valid
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
     const variables = {
       firstName,
@@ -35,27 +61,32 @@ export default async (req, res) => {
       birthday,
       bio,
       location,
-      inviteId,
     }
     const userResponse = await client.request(createUserMutation, variables)
 
-    if (inviteId) {
-      // Update invite to show it's been accepted.
-      await client.request(
-        `
-        mutation updateInvite($id: ID!, $userId: ID!){
-          updateInvites(id: $id, isAccepted: true, status: ACCEPTED, acceptedUserId: $userId){
+    // Update invite to show it's been accepted
+    await client.request(
+      `
+        mutation updateInvite($id: ID!, $userId: ID!) {
+          updateInvites(
+            id: $id
+            isAccepted: true
+            status: INVITE_ACCEPTED
+            acceptedUserId: $userId
+          ) {
             id
           }
         }
-        `,
-        { id: inviteId, userId: userResponse.createUser.id },
-      )
-    }
+      `,
+      { id: invite.id, userId: userResponse.createUser.id },
+    )
 
     res.status(200).send({ data: { id: userResponse.createUser.id } })
   } catch (error) {
     console.error(error)
-    res.status(400).send({ message: error.message })
+    res.status(200).send({
+      message:
+        'An error occurred while trying to sign you up - please try again.',
+    })
   }
 }
