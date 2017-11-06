@@ -6,7 +6,9 @@ export default `
     $token: String
     $expiry: DateTime
     $isApproved: Boolean
+    $approvedByUserId: ID
     $inviteType: InviteType!
+    $inviteStatus: InviteStatus!
     $sentByUserId: ID
   ) {
     createInvite(
@@ -16,7 +18,9 @@ export default `
       token: $token
       expiry: $expiry
       isApproved: $isApproved
+      approvedById: $approvedByUserId
       inviteType: $inviteType
+      inviteStatus: $inviteStatus
       sentById: $sentByUserId
     ) {
       id

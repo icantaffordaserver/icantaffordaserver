@@ -8,6 +8,7 @@ export default function sendInviteEmail({
   recipientEmail,
   actionUrl,
 }) {
+  console.log(firstName, recipientEmail, actionUrl)
   return new Promise((resolve, reject) => {
     PostmarkMailer.sendEmailWithTemplate(
       {
