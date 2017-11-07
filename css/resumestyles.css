@@ -1,0 +1,373 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color:#333;
+    color:#f1f1f1;
+    margin:0 0;
+    min-width:1500px;
+}
+
+.img-fluid{
+    width:100%;
+    height:auto;
+}
+
+section {
+    min-height:250px;
+}
+
+a:hover {
+    opacity:0.7;
+}
+
+/* Highlight & Underline CSS */
+
+.highlight {
+    background: linear-gradient(to left, transparent, #403a3e, #994351);
+    background-repeat: no-repeat;
+    background-size: 100% 0.6em;
+    background-position:50% 70%;
+    padding-right:60px;
+}
+
+.underline-header {
+    background:linear-gradient(to left, transparent, #403a3e, #994351);
+    background-repeat: no-repeat;
+    background-size: 100% 0.4em;
+    background-position: 50% 88%;
+    padding-right:30px;
+}
+
+.underline-content {
+    background:linear-gradient(to right, #403a3e, #994351);
+    background-repeat: no-repeat;
+    background-size: 100% 0.6em;
+    background-position: 50% 88%;
+    padding-right:10px;
+    padding-bottom:4px;
+}
+
+.underline-content-alt {
+    background:linear-gradient(to right,transparent, #4d3c75, #153861);
+    background-repeat: no-repeat;
+    background-size: 100% 0.6em;
+    background-position: 50% 88%;
+    padding-right:10px;
+    padding-bottom:4px;
+}
+
+/* Header CSS */
+header {
+    height:auto;
+    width:100%;
+    min-height: 800px;
+}
+
+.profilepic {
+    height: auto;
+    width: 10em;
+    max-width:50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    padding: 50% 30%;
+}
+
+.header-icon {
+    margin: 7px 10%;
+}
+
+header h1 {
+    font-family: 'Croissant One', sans-serif;
+    margin-top:23%;
+    margin-left:10%;
+    margin-bottom:0;
+}
+
+.header-name {
+    font-weight: 700;
+    font-size:4em;
+}
+
+.header-text {
+    font-family: 'Ruluko', sans-serif;
+    font-weight: 400;
+    font-size:16px;
+    margin: 5px 10%;
+}
+
+.left-header-container {
+    width:30%;
+    float:left;
+    height:100%;
+    background-color:#333;
+    min-height:800px;
+}
+
+.right-header-container {
+    width:70%;
+    float:left;
+    height:100%;
+    background-color:#555;
+    min-height:800px;
+}
+
+/* Content Body Styling */
+
+.section-title {
+    text-align:right;
+    font-size:20px;
+    font-family: 'Merriweather', serif;
+    padding-right:30px;
+    padding-top:3px;
+    opacity:0.85;
+}
+
+.section-content {
+    font-size:16px;
+    font-family: 'Open Sans', serif;
+    padding-left:30px;
+    padding-right:90px;
+    padding-top: 10px;
+    opacity:0.9;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.section-list {
+    font-size:14px;
+    font-family: 'Open Sans', serif;
+    padding-left:70px;
+    padding-right:90px;
+    opacity:0.9;
+}
+
+.experience-title {
+    font-size:20px;
+    font-family: 'Open Sans', serif;
+    padding-left:30px;
+    padding-right:90px;
+    padding-top: 0px;
+    opacity:0.9;
+    font-weight:700;
+    margin-bottom: 6px;
+    letter-spacing:1px;
+}
+
+.experience-content {
+    font-size:15px;
+    font-family: 'Open Sans', serif;
+    padding-left:30px;
+    padding-right:90px;
+    padding-top: 0px;
+    opacity:0.9;
+    margin-top: 6px;
+}
+
+/* Content Containers (sections) */
+
+.about-container {
+    height:150px;
+}
+
+.experience-container {
+    height:800px;
+}
+
+.volunteer-container {
+    height:650px;
+}
+
+.end-container{
+    height:20px;
+    bottom:0;
+}
+
+.end-container p {
+    text-align:center;
+    margin:10px 10px;
+    color:#f1f1f1;
+}
+
+.end-container a:link {
+    color:rgb(175, 208, 253);
+    text-decoration:none;
+}
+
+.end-container a:visited {
+    color:rgb(175, 208, 253);
+    text-decoration:none;
+}
+
+.end-container a:hover {
+    color:rgb(230, 239, 252);
+    text-decoration:none;
+}
+
+.end-container a:active {
+    color:rgb(175, 208, 253);
+    text-decoration:none;
+}
+
+/* Table of Contents - Same-page bookmarking */
+.table-of-contents {
+    bottom: 0;
+    float:left;
+    height:auto;
+    margin-left: 105px;
+    margin-top:20px;
+    min-width:500px;
+}
+
+.toc-items{
+    font-size:20px;
+    color:#f1f1f1;
+    list-style: none;
+    border-left: 2px solid #f1f1f1;;
+    padding-left: 30px;
+}
+
+.toc-items li{
+    margin-bottom: 10px;
+}
+.toc-items li a:link {
+    display: inline-block;
+    color:rgb(175, 208, 253);
+    text-decoration:none;
+    border-bottom: 3px solid transparent;
+    border-right: 3px solid transparent;
+    width: 0px;
+    transition: 1s ease;
+    white-space: nowrap;
+    height: 25px;    
+}
+
+.toc-items li a:visited {
+    color:rgb(175, 208, 253);
+    text-decoration:none;
+    
+}
+.toc-items li a:hover {
+    color:rgb(248, 191, 191);
+    text-decoration:none;
+    border-bottom: 3px solid silver;
+    border-right: 3px solid silver;
+    width: 280px;
+}
+.toc-items li a:active {
+    color:rgb(248, 191, 191);
+    text-decoration:none;
+}
+
+/* Skills Container */
+.skills-container {
+    width:auto;
+    height:300px;
+}
+
+.skills-container1 {
+    bottom: 0;
+    height:300px;
+    width:30%;
+    float:right;
+    background-color:#696969;    
+}
+.skills-container2 {
+    bottom: 0;
+    height:300px;
+    width:40%;
+    float:right;
+    background-color:#696969;    
+}
+
+/* Background Containers - background colors are defined here */
+
+.left-box1 {
+    width:30%;
+    float:left;
+    height:100%;
+    background-color:#333;
+}
+
+.left-box2 {
+    width:30%;
+    float:left;
+    height:100%;
+    background-color:#222;
+}
+
+.right-box1 {
+    width:70%;
+    float:left;
+    height:100%;
+    background-color:#555;
+}
+
+.right-box2 {
+    width:70%;
+    float:left;
+    height:100%;
+    background-color:#444;
+}
+
+.skills-box {
+    width:100%;
+    background-color:#111;
+    float:left;
+}
+
+/* Social Media Icon Styling */
+
+.fa {
+    margin:7px 0;
+    padding: 11px;
+    font-size: 20px;
+    width:18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: white;
+    background:grey;
+    transition: 0.7s ease;
+}
+
+.fa:hover {
+    opacity: 0.9;
+}
+
+.fa-facebook:hover {
+    background:
+    linear-gradient(#3B5998, transparent);
+}
+
+.fa-instagram:hover {
+    background:  
+    linear-gradient( #400080, transparent), 
+    linear-gradient(200deg, #d047d1, #ff0000, #ffff00);
+}
+
+.fa-github:hover {
+    background:
+    linear-gradient(#6e5494, transparent);
+}
+
+.fa-envelope:hover {
+    background:
+    linear-gradient(green, transparent);
+}
+
+.fa-home {
+    float:right;
+    margin-right: 30px;
+}
+
+.fa-home:hover {
+    opacity:0.7;
+    
+}
+
+/* Fade In Scroll Styling */
+.hideme {
+    opacity:0;
+}
