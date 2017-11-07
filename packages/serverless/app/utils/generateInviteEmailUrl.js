@@ -1,3 +1,3 @@
 export default function generateInviteEmailUrl(token) {
-  return `${process.env.TOKTUMI_CLIENT_DOMAIN}/signup/${token}`
+  return `${process.env.PLUTO_CLIENT_DOMAIN}/signup/${token}`
 }
