@@ -40,7 +40,7 @@ class NavigationComponent extends Component {
         </NavigationContainer>
         {!this.props.data.loading &&
           this.props.data.user &&
-          (this.props.user.connections ? (
+          (this.props.data.user.connections ? (
             <ConversationCorner>
               <Countdown
                 startTime={this.props.data.user.connections[0].connectionTime}
