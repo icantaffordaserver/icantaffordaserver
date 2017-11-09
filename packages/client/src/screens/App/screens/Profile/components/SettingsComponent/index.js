@@ -73,7 +73,11 @@ class SettingsComponent extends Component {
   render() {
     return (
       <Modal
-        trigger={<TextLink onClick={this.props.open}>Edit profile</TextLink>}
+        trigger={
+          <TextLink to="" onClick={this.props.open}>
+            Edit profile
+          </TextLink>
+        }
         basic
         open={this.props.editing}
         onClose={this.props.open}

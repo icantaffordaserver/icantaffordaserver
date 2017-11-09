@@ -29,7 +29,7 @@ export const Introduction = styled.div`
   }
 
   & > .overlay {
-    height: 100%;
+    height: 80%;
     width: 100%;
     display: none;
     align-items: center;

@@ -29,7 +29,8 @@ class ProfileContainer extends Component {
     }
   }
 
-  handleOpen = () => {
+  handleOpen = e => {
+    e.preventDefault()
     this.setState({ editing: !this.state.editing })
   }
   handleEditProfile = userData => {
