@@ -18,6 +18,9 @@ import {
 
 class NavigationComponent extends Component {
   render() {
+    if (this.props.data.loading) {
+      return null
+    }
     return (
       <Navigation>
         <NavigationContainer>
@@ -38,7 +41,7 @@ class NavigationComponent extends Component {
             </Link>
           </NavigationLinks>
         </NavigationContainer>
-        {!this.props.data.loading &&
+        {this.props.data.loading &&
           this.props.data.user &&
           (this.props.user.connections ? (
             <ConversationCorner>

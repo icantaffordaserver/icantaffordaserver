@@ -136,7 +136,6 @@ permissions:
 - operation: ConnectionsOnConnectionReviews.*
 - operation: PasswordResetOnUser.*
 - operation: RoleOnUser.*
-- operation: UserOnFile.*
 - operation: ConnectionReviewsOnUser.*
 - operation: ConnectionsOnUser1.*
 - operation: ConnectionsOnUser.*
