@@ -18,9 +18,8 @@ import {
 
 class NavigationComponent extends Component {
   render() {
-    if (this.props.data.loading) {
-      return null
-    }
+    if (this.props.data.loading) return null
+
     return (
       <Navigation>
         <NavigationContainer>
@@ -43,7 +42,7 @@ class NavigationComponent extends Component {
         </NavigationContainer>
         {this.props.data.loading &&
           this.props.data.user &&
-          (this.props.user.connections ? (
+          (this.props.user.connections.length !== 0 ? (
             <ConversationCorner>
               <Countdown
                 startTime={this.props.data.user.connections[0].connectionTime}

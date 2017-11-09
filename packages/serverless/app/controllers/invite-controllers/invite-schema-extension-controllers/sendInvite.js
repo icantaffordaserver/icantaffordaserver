@@ -1,5 +1,4 @@
 import isEmail from 'validator/lib/isEmail'
-import normalizeEmail from 'validator/lib/normalizeEmail'
 
 import client from '../../../../config/GraphQLClient'
 import getUserByEmail from '../../../utils/getUserByEmail'
@@ -25,11 +24,10 @@ export default async (req, res) => {
       return res.status(200).send({ error: 'Email is not a valid string.' })
     }
 
-    // sanitize the email to prevent weird alias' and check if it exists in our
-    // users table and invite table
-    const sanitizedEmail = normalizeEmail(emailToInvite)
-    const doesEmailExist = await getUserByEmail(sanitizedEmail)
-    if (doesEmailExist) {
+    const userReceivingInvite = await getUserByEmail(emailToInvite)
+    // cannot send an invite to an email that already has a user account
+    // associated with it
+    if (userReceivingInvite !== null) {
       return res.status(200).send({ error: 'This email already exists!' })
     }
 
