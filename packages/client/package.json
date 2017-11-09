@@ -17,6 +17,7 @@
     "antd": "^2.13.6",
     "apollo-client": "^1.4.2",
     "axios": "^0.15.3",
+    "cloudinary-react": "^1.0.4",
     "countdown": "^2.6.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
@@ -27,6 +28,8 @@
     "react-big-calendar": "^0.17.0",
     "react-dom": "^15.6.0",
     "react-dropzone": "^3.13.2",
+    "react-image-crop": "^3.0.7",
+    "react-modal": "^3.1.0",
     "react-places-autocomplete": "^5.4.3",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
@@ -44,7 +47,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dev": "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
+    "start:dev":
+      "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -53,10 +57,7 @@
   "lint-staged": {
     "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   }
 }
