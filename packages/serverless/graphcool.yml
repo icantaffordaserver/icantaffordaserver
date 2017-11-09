@@ -5,6 +5,14 @@ custom:
   prod:
     WEBHOOK_URL: "http://test.com/prod"
 functions:
+  getConversationToken-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/getConversationToken
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/getConversationToken.schemaExtension.graphql
   sendInvite-subscription:
     handler:
       webhook:
