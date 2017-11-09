@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
@@ -49,7 +50,7 @@ export const Label = styled.label`
 Label.defaultProps = {
   color: 'accent',
 }
-export const TextLink = styled.a`
+export const TextLink = styled(Link)`
   transition: all 0.15s ease;
   color: ${styles.color};
   font-size: ${styles.fontSize}em;

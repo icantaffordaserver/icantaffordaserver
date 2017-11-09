@@ -47,7 +47,7 @@ Content.defaultProps = {
 
 export const Form = styled.form`
   display: flex;
-  margin: 10% auto;
+  margin: 1% auto;
   justify-content: space-between;
   flex-direction: column;
   width: ${styles.container}%;
