@@ -3,12 +3,6 @@ import PropTypes from 'prop-types'
 import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
-import SettingsComponent from './SettingsComponent'
-import AvailabilityComponent from './AvailabilityComponent'
-import FireStartersComponent from './FireStartersComponent'
-
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-
 import {
   Button,
   Content,
@@ -28,6 +22,7 @@ import { Modal } from 'semantic-ui-react'
 import SettingsComponent from './SettingsComponent'
 import AvailabilityComponent from './AvailabilityComponent'
 import UploadPhotoComponent from './UploadPhotoComponent'
+import FireStartersComponent from './FireStartersComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
