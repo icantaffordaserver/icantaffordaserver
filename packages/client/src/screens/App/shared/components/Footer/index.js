@@ -32,7 +32,7 @@ class FooterComponent extends Component {
               <Link to="/contact">Contact Us</Link>
             </Column>
             <Column fluid md={1}>
-              <Link to="/logout" onClick={e => this.handleLogout(e)}>
+              <Link to="/logout" onClick={this.handleLogout}>
                 Logout
               </Link>
             </Column>
