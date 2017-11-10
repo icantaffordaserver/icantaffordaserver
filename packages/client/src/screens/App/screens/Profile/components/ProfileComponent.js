@@ -18,6 +18,7 @@ import { Modal } from 'semantic-ui-react'
 
 import SettingsComponent from './SettingsComponent'
 import AvailabilityComponent from './AvailabilityComponent'
+import UploadPhotoComponent from './UploadPhotoComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
@@ -57,6 +58,7 @@ class ProfileComponent extends Component {
           editing={this.props.editing}
           open={this.props.open}
         />
+        <UploadPhotoComponent />
         <Section inline gray>
           <ColumnContainer>
             <Title medium left fullWidth>

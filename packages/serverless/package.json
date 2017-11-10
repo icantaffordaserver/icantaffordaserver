@@ -1,9 +1,7 @@
 {
   "name": "serverless",
   "version": "0.0.1",
-  "files": [
-    "bin"
-  ],
+  "files": ["bin"],
   "description": "The serverless functions powering the backend of toktumi",
   "main": "index.js",
   "scripts": {
@@ -11,7 +9,8 @@
     "prepareLibs": "node scripts/prepareLibs.js",
     "build": "node scripts/bundleLambdas.js",
     "cmp": "babel functions/sampleExpress/src -d functions/sampleExpress/lib",
-    "create": "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
+    "create":
+      "npm run transpile && claudia create --region us-east-1 --api-module bin/claudia",
     "deploy:dev": "graphcool deploy --target dev",
     "update": "npm run transpile && claudia update",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,10 +19,7 @@
   "lint-staged": {
     "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   },
   "author": "Alexander Mann",
@@ -51,6 +47,7 @@
     "axios": "^0.16.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.0",
+    "cloudinary": "^1.9.1",
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "graphcool-lib": "^0.1.4",

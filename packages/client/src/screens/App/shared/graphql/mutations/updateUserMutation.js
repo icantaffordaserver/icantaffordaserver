@@ -10,7 +10,7 @@ export default gql`
     $lastName: String
     $location: String
     $bio: String
-    $profilePhotoId: ID
+    $profilePhotoUrl: String
     $email: String
     $availability: Json
   ) {
@@ -21,7 +21,7 @@ export default gql`
       location: $location
       bio: $bio
       email: $email
-      profilePhotoId: $profilePhotoId
+      profilePhotoUrl: $profilePhotoUrl
       availability: $availability
     ) {
       id

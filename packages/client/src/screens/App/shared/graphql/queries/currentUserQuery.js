@@ -19,10 +19,7 @@ export default gql`
         complete
       }
       availability
-      profilePhoto {
-        url
-        name
-      }
+      profilePhotoUrl
       roles {
         name
       }

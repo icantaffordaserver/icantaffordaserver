@@ -1,6 +1,6 @@
 export default `
-  mutation updateUserPassword ($id: ID!, $password: String!){
-    updateUser(id: $id, password: $password){
+  mutation updateUser ($id: ID!, $password: String, $profilePhotoUrl: String){
+    updateUser(id: $id, password: $password, profilePhotoUrl: $profilePhotoUrl){
       id
     }
   }

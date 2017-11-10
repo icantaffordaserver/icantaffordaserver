@@ -87,7 +87,6 @@ type File @model {
   size: Int!
   updatedAt: DateTime!
   url: String! @isUnique
-  user: User @relation(name: "UserOnFile")
 }
 
 type FireStarterSuggestions @model {
@@ -179,7 +178,7 @@ type User @model {
   password: String!
   passwordReset: PasswordReset @relation(name: "PasswordResetOnUser")
   phoneNumber: String
-  profilePhoto: File @relation(name: "UserOnFile")
+  profilePhotoUrl: String
   roles: [Role!]! @relation(name: "RoleOnUser")
   typeformProfile: Json
   typeformProfileComplete: Boolean @defaultValue(value: false)
