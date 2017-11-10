@@ -89,12 +89,21 @@ type File @model {
   url: String! @isUnique
 }
 
-type FireStarterSuggestions @model {
+type FireStarter @model {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
-  url: String! @isUnique
-  users: [User!]! @relation(name: "FireStarterSuggestionsOnUser")
+  question: String! @isUnique
+  answers: [FireStarterAnswer!]! @relation(name: "FireStarterAnswers")
+}
+
+type FireStarterAnswer @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  question: FireStarter! @relation(name: "FireStarterAnswers")
+  answer: String!
+  answeredBy: User! @relation(name: "UserFireStarterAnswer")
 }
 
 enum Gender {
@@ -164,8 +173,8 @@ type User @model {
   connections: [Connections!]! @relation(name: "ConnectionsOnUser1")
   email: String! @isUnique
   emailVerified: Boolean! @defaultValue(value: false)
-  fireStarterSuggestions: [FireStarterSuggestions!]!
-    @relation(name: "FireStarterSuggestionsOnUser")
+  fireStarterAnswers: [FireStarterAnswer!]!
+    @relation(name: "UserFireStarterAnswer")
   firstName: String!
   gender: Gender
   invite: Invite @relation(name: "InviteOnUserAccepted")

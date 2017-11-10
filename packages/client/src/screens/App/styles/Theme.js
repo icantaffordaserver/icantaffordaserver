@@ -11,7 +11,7 @@ export default {
 
   size: {
     small: 20,
-    medium: 40,
+    medium: 50,
     large: 60,
     huge: 80,
   },

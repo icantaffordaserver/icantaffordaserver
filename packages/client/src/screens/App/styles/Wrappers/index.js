@@ -79,12 +79,15 @@ export const RowContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
 `
 
 export const Section = styled.section`
   width: 100%;
-  padding: 2% 5%;
+  padding: 2%;
+  flex-wrap: wrap;
   background: ${styles.color};
   border-radius: ${styles.borderRadius};
   box-shadow: ${styles.shadow};
@@ -106,18 +109,12 @@ Section.defaultProps = {
 
 export const Card = styled.div`
   margin: ${props => (props.row ? '0 5% 0 0' : 0)};
-  width: ${props => (props.row ? 100 : 90)}%;
-  min-height: 200px;
-  height: max-content;
+  width: ${props => (props.row ? 100 : 48)}%;
+  min-height: 250px;
+  margin: 1% 0;
   padding: 2% 5%;
   border-radius: 5px;
   background: #fff;
   display: flex;
-  align-items: center;
-  justify-content: ${props => (props.row ? 'space-evenly' : 'center')};
-  flex-direction: ${props => (props.row ? 'row' : 'column')};
-
-  &.pushed {
-    margin-top: 3.35em;
-  }
+  flex-direction: column;
 `

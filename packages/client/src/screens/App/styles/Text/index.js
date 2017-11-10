@@ -12,7 +12,7 @@ const getColor = (color, key) => {
 export const Title = styled.h1`
   color: ${styles.color};
   font-weight: bold;
-  margin: 2% auto;
+  margin: 2% auto !important;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
@@ -68,8 +68,8 @@ TextLink.defaultProps = {
 }
 
 export const Text = styled.p`
-  width: 100%;
   color: ${styles.color};
+  width: ${props => (props.fullWidth ? 100 : 0)}%;
   margin: 0;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>
