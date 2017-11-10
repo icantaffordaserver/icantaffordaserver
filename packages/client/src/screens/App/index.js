@@ -15,7 +15,7 @@ import Inbox from './screens/Inbox'
 import Talk from './screens/Talk'
 
 import Nav from './shared/components/Navigation'
-
+import Footer from './shared/components/Footer'
 import isAuthenticated from './shared/HoCs/isAuthenticated'
 
 import { Background, Screen } from './styles/'
@@ -33,6 +33,7 @@ function App() {
           <Route path="/talk/:sessionId" component={Talk} />
         </Switch>
       </Screen>
+      <Footer />
     </Background>
   )
 }

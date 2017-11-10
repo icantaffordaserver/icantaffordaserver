@@ -21,7 +21,6 @@ import AvailabilityComponent from './AvailabilityComponent'
 import UploadPhotoComponent from './UploadPhotoComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-
 /* 
 user background will actually be pulled from the user but for now we will just import a static image
 static will become user.background for example
