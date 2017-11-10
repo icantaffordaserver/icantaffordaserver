@@ -23,17 +23,11 @@ class ProfileContainer extends Component {
     editing: false,
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (!nextProps.data.loading) {
-      //this.handleEditProfile(nextProps.data.user);
-    }
-  }
-
-  handleOpen = () => {
+  handleOpen = e => {
+    e.preventDefault()
     this.setState({ editing: !this.state.editing })
   }
   handleEditProfile = userData => {
-    //TODO: Figure out how to edit user email and password
     this.setState({ loading: true })
     if (userData.email) {
       if (!isEmail(userData.email)) {

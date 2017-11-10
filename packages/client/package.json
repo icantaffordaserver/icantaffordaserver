@@ -21,6 +21,7 @@
     "axios": "^0.15.3",
     "cloudinary-react": "^1.0.4",
     "countdown": "^2.6.0",
+    "graphql-tag": "^2.5.0",
     "hedron": "^0.7.1",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

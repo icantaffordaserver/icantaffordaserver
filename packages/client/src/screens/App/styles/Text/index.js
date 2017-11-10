@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
@@ -11,7 +12,7 @@ const getColor = (color, key) => {
 export const Title = styled.h1`
   color: ${styles.color};
   font-weight: bold;
-  margin: 2% auto;
+  margin: 2% auto !important;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
@@ -49,7 +50,7 @@ export const Label = styled.label`
 Label.defaultProps = {
   color: 'accent',
 }
-export const TextLink = styled.a`
+export const TextLink = styled(Link)`
   transition: all 0.15s ease;
   color: ${styles.color};
   font-size: ${styles.fontSize}em;
@@ -67,8 +68,8 @@ TextLink.defaultProps = {
 }
 
 export const Text = styled.p`
-  width: 100%;
   color: ${styles.color};
+  width: ${props => (props.fullWidth ? 100 : 0)}%;
   margin: 0;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>

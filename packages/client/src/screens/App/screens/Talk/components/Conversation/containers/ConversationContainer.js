@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, withRouter } from 'react-router-dom'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql, compose, withApollo, gql } from 'react-apollo'
 
 import moment from 'moment'
 import axios from 'axios'
@@ -65,17 +65,20 @@ class ConversationContainer extends Component {
     const name = this.props.data.user.firstName
     const userId = this.props.data.user.id
     const roomName = await this.props.data.user.connections[0].id
-    const request = await axios.post(
-      process.env.REACT_APP_CONVERSATION_TOKEN_URL,
-      {
-        name,
-        roomName,
-        headers: {
-          'Content-type': 'application/json',
-        },
+    const request = await this.props.client.query({
+      query: gql`
+        query getToken($connectionId: ID!) {
+          getConversationToken(connectionId: $connectionId) {
+            token
+          }
+        }
+      `,
+      variables: {
+        connectionId: roomName,
       },
-    )
-    const token = request.data.token
+    })
+    console.log(request)
+    const token = request.data.getConversationToken.token
 
     await this.setState({
       areTalking: true,

@@ -1,0 +1,22 @@
+<svg width="26" height="26" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 2</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1727 181)">
+<g id="Group 2">
+<g id="Group">
+<g id="Subtract">
+<use xlink:href="#path0_fill" transform="matrix(-0.999697 0.0246192 -0.0119602 -0.999928 1746.69 -156.104)" fill="#F9F9F9"/>
+</g>
+</g>
+<g id="Rectangle">
+<use href="#path1_fill" transform="matrix(-0.999998 0.00183839 0.00114047 1 1752.99 -167.916)" fill="#F9F9F9"/>
+<use xlink:href="#path2_fill" transform="matrix(-0.999998 0.00183839 0.00114047 1 1752.99 -167.916)" fill="#F9F9F9"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 6.52359 24.8982C 8.14505 24.8982 13.1014 14.6629 13.1014 9.44604C 13.1014 4.22914 10.1685 4.66079e-06 6.55063 4.85904e-13C 2.93284 -1.65528e-06 -0.000104534 4.22914 2.79434e-09 9.44605C -1.75323e-05 14.663 5.42096 24.8982 6.52359 24.8982ZM 6.55081 14.5899C 8.66425 14.5899 10.3774 12.1195 10.3775 9.07196C 10.3774 6.02445 8.66416 3.55397 6.55085 3.55397C 4.43742 3.55397 2.72412 6.02445 2.72417 9.07196C 2.7241 12.1195 4.43738 14.5899 6.55081 14.5899Z"/>
+<path id="path1_fill" d="M 21.0104 0L 25.9173 4.48503L 25.9854 12.8276L 21.0104 12.8276L 21.0104 0Z"/>
+<path id="path2_fill" d="M 4.9365 0.0303501L 0.0430834 4.52911L 0 12.8718L 4.97492 12.8579L 4.9365 0.0303501Z"/>
+</defs>
+</svg>

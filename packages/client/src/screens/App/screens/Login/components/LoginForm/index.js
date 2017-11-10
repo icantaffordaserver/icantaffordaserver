@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { Message } from 'semantic-ui-react'
-import { LoginWrapper, LoginFormWrapper, LoginImageContainer } from './styles'
+import {
+  LoginWrapper,
+  LoginFormWrapper,
+  LoginImageContainer,
+  Links,
+} from './styles'
 import {
   Content,
   Title,
@@ -13,7 +18,9 @@ import {
   FormGroup,
   Input,
   Label,
+  TextLink,
 } from '../../../../styles'
+import Planet from '../../../../shared/assets/planet.png'
 
 import { validateLogin } from './helpers'
 
@@ -70,11 +77,12 @@ class LoginForm extends Component {
     return (
       <LoginWrapper>
         <LoginImageContainer>
-          <Title huge>PLUTO</Title>
-          <Subheading medium>Join the community.</Subheading>
+          <Title huge style={{ marginBottom: '-5px' }}>
+            PLUT<img style={{ height: '65px' }} src={Planet} alt="" />
+          </Title>
+          <Subheading large>Change the conversation.</Subheading>
         </LoginImageContainer>
         <LoginFormWrapper>
-          <Title large>Sign In</Title>
           {this.renderErrors()}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
@@ -91,6 +99,11 @@ class LoginForm extends Component {
             </FormGroup>
             <Button loading={this.props.loading}> Login </Button>
           </Form>
+          <Links>
+            <TextLink to="/signup">Don't have an account?</TextLink>
+
+            <TextLink to="/forgot">Forgot password?</TextLink>
+          </Links>
         </LoginFormWrapper>
       </LoginWrapper>
     )

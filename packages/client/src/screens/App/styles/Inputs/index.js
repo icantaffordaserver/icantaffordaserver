@@ -15,6 +15,10 @@ export const Button = styled(button)`
   border: solid 1px ${styles.color}!important;
   border-radius: ${styles.borderRadius}px !important;
   margin: ${props => (props.noMargin ? 0 : 'auto')} !important;
+  ${props =>
+    props.left
+      ? `margin-left: 0 !important`
+      : props.right && `margin-right:0 !important`};
   font-size: ${styles.fontSize}em !important;
   color: #fff !important;
   &:hover {
@@ -41,11 +45,10 @@ export const Input = styled.input`
 `
 
 export const TextArea = styled.textarea`
-  flex: 1 1 auto;
   width: 100%;
   padding: 10px;
   font-size: 1.25em;
   border: solid 1px lightgray;
   border-radius: 5px;
-  height: 250px;
+  height: 100px;
 `

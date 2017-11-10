@@ -4,7 +4,7 @@ import ConnectionData from './connections.json'
 import client from '../../config/GraphQLClient'
 
 export default async (req, res) => {
-  const loggedInUserId = 'cj967wrtq008c0151v3id3wkg' // This is to seed connections
+  const loggedInUserId = 'cj9ofpke800mp0150oabzwop9' // This is to seed connections
 
   //Uncomment if you need to delete users and replace id array with users you'd like to keep
   // const { allUsers } = await client.request(`query{allUsers{id}}`)

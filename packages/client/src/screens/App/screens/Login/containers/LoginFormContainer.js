@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import LoginForm from '../components/LoginForm'
@@ -44,6 +44,7 @@ class LoginContainer extends React.Component {
 
       await this.setState({ loading: false })
       this.props.client.resetStore()
+      this.props.history.push('/profile')
     } catch (error) {
       if (error.message.includes('Could not find a user with that username')) {
         this.props.client.resetStore()
@@ -68,7 +69,9 @@ class LoginContainer extends React.Component {
   }
 }
 
-export default compose(withApollo, graphql(authenticateEmailUserMutation))(
-  LoginContainer,
-)
+export default compose(
+  withApollo,
+  withRouter,
+  graphql(authenticateEmailUserMutation),
+)(LoginContainer)
 // wrap the component with withApollo so we can expose the client prop

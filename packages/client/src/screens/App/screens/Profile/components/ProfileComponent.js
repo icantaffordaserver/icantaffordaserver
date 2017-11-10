@@ -4,8 +4,10 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import {
+  Button,
   Content,
   ColumnContainer,
+  RowContainer,
   Section,
   Card,
   Title,
@@ -13,19 +15,16 @@ import {
   Tag,
   Text,
   TextLink,
+  TextArea,
 } from '../../../styles'
 import { Modal } from 'semantic-ui-react'
 
 import SettingsComponent from './SettingsComponent'
 import AvailabilityComponent from './AvailabilityComponent'
 import UploadPhotoComponent from './UploadPhotoComponent'
+import FireStartersComponent from './FireStartersComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-
-/* 
-user background will actually be pulled from the user but for now we will just import a static image
-static will become user.background for example
-*/
 
 class ProfileComponent extends Component {
   state = {
@@ -58,12 +57,16 @@ class ProfileComponent extends Component {
           editing={this.props.editing}
           open={this.props.open}
         />
-        <UploadPhotoComponent />
         <Section inline gray>
-          <ColumnContainer>
-            <Title medium left fullWidth>
+          <Section inline gray>
+            <Title medium left>
               General Info
             </Title>
+            <Title medium left>
+              Bio
+            </Title>
+          </Section>
+          <RowContainer>
             <Card>
               <Title small darkGray fullWidth>
                 {user.firstName} {user.lastName}
@@ -79,17 +82,13 @@ class ProfileComponent extends Component {
                 <Tag>#Like</Tag>
               </Section>
             </Card>
-          </ColumnContainer>
-          <ColumnContainer>
-            <Title medium left fullWidth>
-              Bio
-            </Title>
+
             <Card>
-              <Text left small>
+              <Text left small fullWidth>
                 {this.props.user.bio}
               </Text>
             </Card>
-          </ColumnContainer>
+          </RowContainer>
         </Section>
 
         <ColumnContainer>
@@ -98,49 +97,10 @@ class ProfileComponent extends Component {
           </Title>
           <AvailabilityComponent />
         </ColumnContainer>
-
-        <Section inline gray>
-          <ColumnContainer>
-            <Title medium left fullWidth>
-              Q & A
-            </Title>
-            <Card>
-              <Text left small>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Card>
-          </ColumnContainer>
-          <ColumnContainer>
-            <Card className="pushed">
-              <Text left small>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Card>
-          </ColumnContainer>
-        </Section>
+        <FireStartersComponent />
       </ColumnContainer>
     )
   }
 }
 
-export default compose(graphql(currentUserQuery), withApollo, withRouter)(
-  ProfileComponent,
-)
+export default graphql(currentUserQuery)(ProfileComponent)
