@@ -79,3 +79,11 @@ Text.defaultProps = {
   color: 'darkGray',
   fontSize: 'small',
 }
+
+export const ButtonText = styled.p`
+  font-family: Lato
+  font-style: bold
+  font-size: 20px
+  line-height: 24px
+  text-align: center
+`
