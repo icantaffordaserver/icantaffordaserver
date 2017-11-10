@@ -25,6 +25,12 @@ import {
 } from '../../../styles'
 import { Modal } from 'semantic-ui-react'
 
+import SettingsComponent from './SettingsComponent'
+import AvailabilityComponent from './AvailabilityComponent'
+import UploadPhotoComponent from './UploadPhotoComponent'
+
+import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+
 class ProfileComponent extends Component {
   state = {
     loading: false,
