@@ -7,6 +7,11 @@ import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import { Message, Modal } from 'semantic-ui-react'
 
+import ReactModal from 'react-modal'
+import ReactCrop, { makeAspectCrop } from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
+
+import { Page, Row, Column } from 'hedron'
 import {
   ColumnContainer,
   Form,
@@ -20,12 +25,6 @@ import {
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
-
-import ReactModal from 'react-modal'
-import ReactCrop, { makeAspectCrop } from 'react-image-crop'
-import 'react-image-crop/dist/ReactCrop.css'
-
-import { Page, Row, Column } from 'hedron'
 
 class UploadPhotoComponent extends Component {
   constructor() {
