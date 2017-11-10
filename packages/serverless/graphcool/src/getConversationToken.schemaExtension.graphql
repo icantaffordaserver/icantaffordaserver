@@ -1,0 +1,7 @@
+type ConversationTokenPayload {
+  token: String!
+}
+
+extend type Query {
+  getConversationToken(connectionId: ID!): ConversationTokenPayload
+}

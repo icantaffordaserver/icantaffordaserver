@@ -1,0 +1,44 @@
+{
+  "name": "admin-portal",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-client": "^1.9.3",
+    "emotion": "^8.0.2",
+    "graphql-tag": "^2.4.2",
+    "react": "^16.0.0",
+    "react-apollo": "^1.4.16",
+    "react-dom": "^16.0.0",
+    "react-icons": "^2.2.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.14",
+    "styled-components": "^2.2.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.4",
+    "typescript": "^2.5.3",
+    "typescript-styled-plugin": "^0.0.5"
+  },
+  "lint-staged": {
+    "gitDir": "../../",
+    "linters": {
+      "*.{js,json,css}": [
+        "prettier --write",
+        "git add"
+      ]
+    }
+  }
+}
