@@ -69,7 +69,7 @@ TextLink.defaultProps = {
 
 export const Text = styled.p`
   color: ${styles.color};
-  width: ${props => (props.fullWidth ? 100 : 0)}%;
+  width: 100%;
   margin: 0;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>
