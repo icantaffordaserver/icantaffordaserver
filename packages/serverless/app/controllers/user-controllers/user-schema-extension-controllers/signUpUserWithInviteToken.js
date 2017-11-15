@@ -7,6 +7,7 @@ import getUserByEmail from '../../../utils/getUserByEmail'
 import getInviteByToken from '../../../utils/getInviteByToken'
 import createUserMutation from '../../../graphql/mutations/createUserMutation'
 
+// This function will support signing up a user with an invite token
 export default async (req, res) => {
   const {
     firstName,
