@@ -51,4 +51,5 @@ export const TextArea = styled.textarea`
   border: solid 1px lightgray;
   border-radius: 5px;
   height: 100px;
+  overflow: hidden;
 `

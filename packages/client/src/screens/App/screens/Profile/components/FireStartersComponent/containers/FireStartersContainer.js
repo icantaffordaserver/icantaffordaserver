@@ -69,6 +69,7 @@ class FireStartersContainer extends Component {
     this.setState({ loading: false })
   }
   render() {
+    console.log('firestarter: ', this.state)
     return (
       <FireStartersComponent
         answers={this.state.fireStarterAnswers}

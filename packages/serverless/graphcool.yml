@@ -3,7 +3,7 @@ custom:
   dev:
     WEBHOOK_URL: ${env:WEBHOOK_SERVER_URL}
   prod:
-    WEBHOOK_URL: "http://test.com/prod"
+    WEBHOOK_URL: http://test.com/prod
 functions:
   getConversationToken-schemaExtension:
     handler:
