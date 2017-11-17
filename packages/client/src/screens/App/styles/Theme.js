@@ -7,6 +7,8 @@ export default {
     gray: '#F8F8F8',
     darkGray: '#333',
     transparent: 'transparent',
+    cancel: '#EB5757',
+    accept: '#219653',
   },
 
   size: {

@@ -4,6 +4,7 @@ type ConnectionInterests @model {
   name: String! @isUnique
   updatedAt: DateTime!
   users: [User!]! @relation(name: "InterestedUsers")
+  isApproved: Boolean! @migrationValue(value: "false")
 }
 
 type ConnectionReviews @model {

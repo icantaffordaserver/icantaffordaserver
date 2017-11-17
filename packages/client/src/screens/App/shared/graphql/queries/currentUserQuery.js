@@ -23,6 +23,10 @@ export default gql`
       roles {
         name
       }
+      connectionInterests {
+        id
+        name
+      }
       verifyEmail {
         id
         emailToVerify

@@ -13,6 +13,7 @@ export default gql`
     $profilePhotoUrl: String
     $email: String
     $availability: Json
+    $connectionInterestsIds: [ID!]
   ) {
     updateUser(
       id: $id
@@ -23,6 +24,7 @@ export default gql`
       email: $email
       profilePhotoUrl: $profilePhotoUrl
       availability: $availability
+      connectionInterestsIds: $connectionInterestsIds
     ) {
       id
       firstName

@@ -11,8 +11,10 @@ export const Profile = styled.div`
 
 export const ProfileSection = styled.div`
   width: 100%;
-  padding: 60px 5px;
-  position: relative;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 'square';
+  shadow: 'none';
 `
 
 export const ProfileAvatar = styled.img`
@@ -20,4 +22,19 @@ export const ProfileAvatar = styled.img`
   width: 200px;
 
   border-radius: 51%;
+`
+export const TrophyContainer = styled.div`
+  background: linear-gradient(0deg, white, #f9a0ab);
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: none;
+  padding: 2% 5%;
+  height: 400px;
+`
+export const FireStarterContainer = styled.div`
+  width: 100%;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 'square';
+  shadow: 'none';
 `
