@@ -28,5 +28,5 @@ export default WrappedComponent => {
     }
   }
 
-  return compose(graphql(currentUserQuery), isAuthenticated,)(isVerified)
+  return compose(graphql(currentUserQuery), isAuthenticated)(isVerified)
 }

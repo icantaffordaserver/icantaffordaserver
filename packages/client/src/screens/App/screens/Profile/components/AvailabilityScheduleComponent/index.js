@@ -71,13 +71,15 @@ class AvailabilityScheduleComponent extends Component {
     ]
     console.log('setting state')
     // Convert availability props to nested array of boolean values
-    for (let i = 0; i < days.length; i++) {
-      for (let j = 0; j < data[days[i]].length; j++) {
-        let index = times.indexOf(data[days[i]][j])
-        cells[index + 1][i + 1] = true
+    if (data) {
+      for (let i = 0; i < days.length; i++) {
+        for (let j = 0; j < data[days[i]].length; j++) {
+          let index = times.indexOf(data[days[i]][j])
+          cells[index + 1][i + 1] = true
+        }
       }
     }
-    if (this.state.cells === cells) return
+    // if (this.state.cells === cells) return
     console.log(cells)
     this.setState({ cells })
   }

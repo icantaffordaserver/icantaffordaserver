@@ -18,6 +18,7 @@ const createUserMutation = `
     $location: String
     $inviteId: ID
     $isAdmin: Boolean
+    $emailVerified: Boolean
   ) {
     createUser(
       email: $email
@@ -29,6 +30,7 @@ const createUserMutation = `
       location: $location
       inviteId: $inviteId
       isAdmin: $isAdmin
+      emailVerified: $emailVerified
     ) {
       id
     }
@@ -50,6 +52,7 @@ const createUsers = async () => {
         birthday: user.birthday,
         location: user.location,
         isAdmin: user.isAdmin,
+        emailVerified: true,
       })
       console.log('Created user: ', user.email)
     }),
