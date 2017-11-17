@@ -9,9 +9,7 @@ const styles = bind(Theme)
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   background: ${styles.color};
-  overflow-y: scroll;
 `
 Background.defaultProps = {
   color: 'gray',
@@ -68,7 +66,6 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: ${props => props.center && 'center'};
-  justify-content: space-between;
   background: ${styles.color};
 `
 ColumnContainer.defaultProps = {

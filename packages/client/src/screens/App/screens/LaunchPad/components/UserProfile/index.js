@@ -12,11 +12,11 @@ import {
   TextLink,
 } from '../../../../styles'
 
-import { Modal, Icon } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 
 export default props => {
   return (
-    <Modal basic trigger={<Icon name="eye" size="huge" />}>
+    <Modal basic trigger={props.trigger}>
       <ColumnContainer>
         <Section inline gray>
           <Card row>

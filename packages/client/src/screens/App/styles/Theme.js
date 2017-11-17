@@ -17,10 +17,10 @@ export default {
   },
 
   padding: {
-    small: 2,
-    medium: 3,
-    large: 4,
-    huge: 5,
+    small: 5,
+    medium: 7,
+    large: 10,
+    huge: 15,
   },
   fontSize: {
     small: 1.1,

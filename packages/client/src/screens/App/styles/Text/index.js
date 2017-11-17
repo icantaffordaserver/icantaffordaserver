@@ -74,6 +74,7 @@ export const Text = styled.p`
   font-size: ${styles.fontSize}em;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
+  font-weight: ${props => (props.light ? 'light' : props.bold ? 'bold' : null)};
 `
 Text.defaultProps = {
   color: 'darkGray',

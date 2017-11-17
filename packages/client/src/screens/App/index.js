@@ -12,6 +12,7 @@ import NotLoggedIn from './screens/NotLoggedIn'
 import ComingSoon from './screens/ComingSoon'
 import Profile from './screens/Profile'
 import Inbox from './screens/Inbox'
+import LaunchPad from './screens/LaunchPad'
 import Talk from './screens/Talk'
 
 import Nav from './shared/components/Navigation'
@@ -29,7 +30,7 @@ function App() {
         <Switch>
           <Route path="/profile" component={Profile} />
           <Route path="/inbox" component={Inbox} />
-          <Route exact path="/talk" component={Talk} />
+          <Route exact path="/talk" component={LaunchPad} />
           <Route path="/talk/:sessionId" component={Talk} />
         </Switch>
       </Screen>

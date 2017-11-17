@@ -5,15 +5,14 @@ import { graphql, compose, withApollo } from 'react-apollo'
 
 import moment from 'moment'
 
-import isVerified from '../../../shared/HoCs/isVerified'
-import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
-import Conversation from '../components/Conversation'
+import isVerified from '../../shared/HoCs/isVerified'
+import LaunchPadComponent from './components/LaunchPadComponent'
 
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-import allUserConnectionsQuery from '../../../shared/graphql/queries/allUserConnectionsQuery'
-import connectionByTokenQuery from '../../../shared/graphql/queries/connectionByTokenQuery'
+import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
+import allUserConnectionsQuery from '../../shared/graphql/queries/allUserConnectionsQuery'
+import connectionByTokenQuery from '../../shared/graphql/queries/connectionByTokenQuery'
 
-class TalkContainer extends Component {
+class LaunchPadContainer extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -89,18 +88,13 @@ class TalkContainer extends Component {
   }
 
   render() {
-    return (
-      this.state.isConversation && (
-        <Conversation sessionId={this.state.sessionId} />
-      )
-    )
+    return <LaunchPadComponent connections={this.state.connections} />
   }
 }
 
 export default compose(
   isVerified,
-  isAuthenticated,
   graphql(currentUserQuery),
   withRouter,
   withApollo,
-)(TalkContainer)
+)(LaunchPadContainer)
