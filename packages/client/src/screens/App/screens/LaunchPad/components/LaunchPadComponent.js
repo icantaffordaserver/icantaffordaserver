@@ -74,6 +74,7 @@ class LaunchPadComponent extends Component {
             <i>
               <Subheading fullWidth darkGray>
                 {this.state.allUpcoming &&
+                  this.state.allUpcoming.length > 0 &&
                   moment(this.state.allUpcoming[0].connectionTime).format(
                     '[Connect on] MMM[.] D [at] h:MMA',
                   )}

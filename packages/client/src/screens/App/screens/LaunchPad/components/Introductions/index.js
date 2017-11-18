@@ -63,13 +63,15 @@ class IntroductionsComponent extends Component {
               </Introduction>
             )
           })}
-        <Icon
-          style={{ margin: 'auto', cursor: 'pointer' }}
-          name="chevron right"
-          size="big"
-          circular
-          onClick={this.rotate}
-        />
+        {this.state.introductions.length > 4 && (
+          <Icon
+            style={{ margin: 'auto', cursor: 'pointer' }}
+            name="chevron right"
+            size="big"
+            circular
+            onClick={this.rotate}
+          />
+        )}
       </IntroductionsContainer>
     )
   }
