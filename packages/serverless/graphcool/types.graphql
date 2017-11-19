@@ -65,6 +65,7 @@ type Connections @model {
   createdAt: DateTime!
   fireStarterSuggestion: String
   id: ID! @isUnique
+  accepted: Boolean @defaultValue(value: false) @migrationValue(value: false)
   matchedBy: User @relation(name: "ConnectionsOnUser")
   updatedAt: DateTime!
   participants: [User!]! @relation(name: "ConnectionsOnUser1")

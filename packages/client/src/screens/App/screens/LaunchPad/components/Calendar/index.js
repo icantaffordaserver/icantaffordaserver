@@ -31,7 +31,7 @@ class CalendarComponent extends Component {
     let currentDay = 1
     while (currentDay <= numDays) {
       this.props.upcoming.map(con => {
-        if (this.isConnection(con.connectionTime, monthDate.toISOString())) {
+        if (this.isEqualDates(con.connectionTime, monthDate.toISOString())) {
           daysInMonth.push(con)
           monthDate.add(1, 'day')
           currentDay++
@@ -44,12 +44,13 @@ class CalendarComponent extends Component {
     return daysInMonth
   }
 
-  isConnection = (connection, currentDay) => {
+  isEqualDates = (day1, day2 = moment()) => {
     return (
-      moment(connection).format('DDD/MMM/YYYY') ===
-      moment(currentDay).format('DDD/MMM/YYYY')
+      moment(day1).format('DDD/MMM/YYYY') ===
+      moment(day2).format('DDD/MMM/YYYY')
     )
   }
+
   nextMonth = () => {
     const currentMonth = this.state.currentMonth.add(1, 'month')
     this.setState({ currentMonth })
@@ -63,7 +64,9 @@ class CalendarComponent extends Component {
     if (!this.props.upcoming) return null
     return (
       <Wrapper>
-        <LeftChev onClick={this.lastMonth} />
+        {moment(this.state.currentMonth).isAfter(moment()) && (
+          <LeftChev onClick={this.lastMonth} />
+        )}
         <RightChev onClick={this.nextMonth} />
         <h1>{moment(this.state.currentMonth).format('MMMM-YYYY')}</h1>
         <Header>
@@ -76,7 +79,11 @@ class CalendarComponent extends Component {
                 <Day
                   dow={this.state.dow[moment(day.connectionTime).format('ddd')]}
                   key={day.connectionTime}
-                  className="event"
+                  className={
+                    this.isEqualDates(day.connectionTime)
+                      ? 'today event'
+                      : 'event'
+                  }
                   onClick={() => this.props.updateUpcoming(day)}
                 >
                   {moment(day.connectionTime).format('D')}
@@ -84,7 +91,11 @@ class CalendarComponent extends Component {
               )
             } else {
               return (
-                <Day dow={this.state.dow[moment(day).format('ddd')]} key={day}>
+                <Day
+                  dow={this.state.dow[moment(day).format('ddd')]}
+                  key={day}
+                  className={this.isEqualDates(day) && 'today'}
+                >
                   {moment(day).format('D')}
                 </Day>
               )

@@ -4,11 +4,12 @@ export const IntroductionsContainer = styled.div`
   grid-area: intros;
   display: grid;
   grid-template-rows: 400px;
-  grid-template-columns: 150px 150px 150px 150px 50px;
+  grid-template-columns: 300px 300px 300px 300px 50px;
   grid-gap: 20px;
 `
 
 export const Introduction = styled.div`
+  position: relative;
   display: grid;
   grid-template-rows: 0.63fr 0.36fr;
   grid-template-columns: auto;
@@ -19,6 +20,15 @@ export const Introduction = styled.div`
 export const ProfilePhoto = styled.div`
   grid-area: photo;
   opacity: 0.6;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > p {
+    width: 60%;
+    font-weight: bold;
+  }
   background: #fff; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to bottom,
@@ -67,5 +77,16 @@ export const Tags = styled.div`
 
   & > p:last-child{
     margin: 0 0 1em !important;
+  }
+`
+export const Pass = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 0;
+  color: #333;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
   }
 `

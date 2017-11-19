@@ -64,6 +64,8 @@ export const Day = styled.div`
   }
   &.event {
     border-top: 3px solid red;
-    margin-top: -3px;
+  }
+  &.today {
+    background: #ff7f50;
   }
 `

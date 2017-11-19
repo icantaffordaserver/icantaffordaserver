@@ -1,92 +1,74 @@
 import React from 'react'
+import moment from 'moment'
 
+import { Button, Title, Subheading, Text, Tag } from '../../../../styles'
 import {
-  Content,
-  ColumnContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-} from '../../../../styles'
-
-import { Modal } from 'semantic-ui-react'
+  ProfileWrapper,
+  User,
+  UserDetails,
+  ProfilePhoto,
+  Tags,
+  QASection,
+  QA,
+  Left,
+  Right,
+  Avatar,
+} from './styles'
+import { Modal, Icon } from 'semantic-ui-react'
 
 export default props => {
+  const user = props.user
   return (
     <Modal basic trigger={props.trigger}>
-      <ColumnContainer>
-        <Section inline gray>
-          <Card row>
-            <img
-              src={
-                'https://api.adorable.io/avatars/285/' +
-                props.user.email +
-                '.png'
-              }
-              alt=""
+      <ProfileWrapper>
+        <User>
+          {props.connection.status === 'MATCHED' ? (
+            <ProfilePhoto>
+              <Icon name="lock" size="huge" />
+              <p>
+                Pictues are only displayed once both parties have accepted the
+                invitation!
+              </p>
+            </ProfilePhoto>
+          ) : (
+            <Avatar
+              src={'https://api.adorable.io/avatars/285/' + user.email + '.png'}
             />
-            <div style={{ marginLeft: '1em' }}>
-              <Text>
-                <b style={{ marginRight: '10px', fontSize: '1.5em' }}>
-                  {props.user.firstName} {props.user.lastName}
-                </b>{' '}
-                {props.user.location}
-              </Text>
-              <hr />
-              <Section inline>
-                <Tag>#Stuff</Tag>
-                <Tag>#That</Tag>
-                <Tag>#I</Tag>
-                <Tag>#Like</Tag>
-              </Section>
-              <Text left>{props.user.bio}</Text>
-            </div>
-          </Card>
-        </Section>
-        <Section inline gray>
-          <ColumnContainer>
-            <Card>
-              <Text left small>
-                <Title darkGray left fullWidth small>
-                  What do you think about stuff?
-                </Title>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Card>
-          </ColumnContainer>
-          <ColumnContainer>
-            <Card>
-              <Text left small>
-                <Title darkGray left fullWidth small>
-                  What do you think about stuff?
-                </Title>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Card>
-          </ColumnContainer>
-        </Section>
-      </ColumnContainer>
+          )}
+          <UserDetails>
+            <Title fullWidth small left darkGray noMargin>
+              {user.firstName} {user.lastName}
+            </Title>
+            <i>
+              <Subheading fullWidth left darkGray>
+                {moment(props.connection.time).format(
+                  '[Connect on] MMM[.] D [at] h:MMA',
+                )}
+              </Subheading>
+            </i>
+            <Tags>
+              {user.interests &&
+                user.interests.map(interest => <Tag>#{interest.name}</Tag>)}
+            </Tags>
+            <Text left>{user.bio}</Text>
+          </UserDetails>
+        </User>
+        <QASection>
+          <Left />
+          <QA />
+          <QA />
+          <Right />
+        </QASection>
+        {props.connection.status === 'MATCHED' && (
+          <Button
+            square
+            small
+            onClick={() => props.scheduleInvitation(props.connection)}
+          >
+            Invite to Conversation
+          </Button>
+        )}
+      </ProfileWrapper>
     </Modal>
   )
 }

@@ -7,10 +7,13 @@ import moment from 'moment'
 
 import isVerified from '../../shared/HoCs/isVerified'
 import LaunchPadComponent from './components/LaunchPadComponent'
+import { Loader } from 'semantic-ui-react'
 
 import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
-import allUserConnectionsQuery from '../../shared/graphql/queries/allUserConnectionsQuery'
 import connectionByTokenQuery from '../../shared/graphql/queries/connectionByTokenQuery'
+import getAllConnections from './graphql/queries/getAllConnections'
+import deleteConnectionMutation from '../../shared/graphql/mutations/deleteConnectionMutation'
+import scheduleConnection from './graphql/mutations/scheduleConnection'
 
 class LaunchPadContainer extends Component {
   static propTypes = {
@@ -40,15 +43,29 @@ class LaunchPadContainer extends Component {
     if (!nextProps.data.loading) {
       if (sessionId) this.handleConversation()
       else {
-        const connections = await this.props.client.query({
-          query: allUserConnectionsQuery,
-          variables: {
-            userId: nextProps.data.user.id,
-          },
-        })
-
-        await this.setState({ connections: connections.data.connections })
+        this.fetchConnections()
       }
+    }
+  }
+
+  fetchConnections = async () => {
+    const client = this.props.client
+
+    try {
+      const { data: { invitations, history, upcoming } } = await client.query({
+        query: getAllConnections,
+        variables: { id: this.props.data.user.id },
+      })
+      this.setState({
+        connections: {
+          invitations,
+          history,
+          upcoming,
+        },
+        nextConnection: upcoming.length > 0 && upcoming[0],
+      })
+    } catch (e) {
+      console.error(e)
     }
   }
 
@@ -83,12 +100,74 @@ class LaunchPadContainer extends Component {
     }
   }
 
-  scheduleConversation = async connection => {
-    console.log('Scheduled: ', connection.id)
+  passInvitation = async id => {
+    const request = await this.props.client.mutate({
+      mutation: deleteConnectionMutation,
+      variables: { id },
+    })
+
+    await this.fetchConnections()
+  }
+
+  scheduleInvitation = async connection => {
+    const { client } = this.props
+
+    // If other user has already accepted, move the conversation to scheduled.
+    if (connection.accepted) {
+      await client.mutate({
+        mutation: scheduleConnection,
+        variables: {
+          id: connection.id,
+          status: 'SCHEDULED',
+        },
+      })
+    } else {
+      await client.mutate({
+        mutation: scheduleConnection,
+        variables: {
+          id: connection.id,
+          accepted: true,
+        },
+      })
+    }
+    await this.props.client.resetStore()
+    await this.fetchConnections()
+  }
+
+  updateUpcoming = connection => {
+    this.setState({
+      nextConnection: connection,
+    })
+
+    console.log('called')
   }
 
   render() {
-    return <LaunchPadComponent connections={this.state.connections} />
+    if (this.state.connections && !this.props.data.loading) {
+      return (
+        <LaunchPadComponent
+          connections={this.state.connections}
+          nextConnection={this.state.nextConnection}
+          passInvitation={this.passInvitation}
+          scheduleInvitation={this.scheduleInvitation}
+          updateUpcoming={this.updateUpcoming}
+        />
+      )
+    } else {
+      return (
+        <div
+          style={{
+            height: '100vh',
+            width: '100vw',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Loader active size="massive" />
+        </div>
+      )
+    }
   }
 }
 
