@@ -12,7 +12,7 @@ export default {
   },
 
   size: {
-    small: 20,
+    small: 30,
     medium: 50,
     large: 60,
     huge: 80,
@@ -20,9 +20,9 @@ export default {
 
   padding: {
     small: 2,
-    medium: 3,
-    large: 4,
-    huge: 5,
+    medium: 5,
+    large: 7,
+    huge: 10,
   },
   fontSize: {
     small: 1.1,

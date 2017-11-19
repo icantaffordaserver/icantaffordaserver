@@ -8,7 +8,12 @@ import getUserByEmailQuery from '../../../graphql/queries/getUserByEmailQuery'
 
 export default async (req, res) => {
   try {
-    const graphcool = fromEvent(req.body)
+    const endpoints = {
+      simple: process.env.GRAPHCOOL_SIMPLE_ENDPOINT,
+      system: process.env.GRAPHCOOL_SYSTEM_ENDPOINT,
+      subscriptions: process.env.GRAPHCOOL_SUBSCRIPTION_ENDPOINT,
+    }
+    const graphcool = fromEvent(req.body, { endpoints })
 
     const { email, password } = req.body.data
     if (!isEmail(email)) throw new Error('Invalid Credentials.')

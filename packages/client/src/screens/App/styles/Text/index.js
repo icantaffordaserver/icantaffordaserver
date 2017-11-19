@@ -12,7 +12,7 @@ const getColor = (color, key) => {
 export const Title = styled.h1`
   color: ${styles.color};
   font-weight: bold;
-  margin: 2% auto !important;
+  margin: ${props => (props.noMargin ? 0 : `2%`)} auto !important;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
@@ -69,11 +69,12 @@ TextLink.defaultProps = {
 
 export const Text = styled.p`
   color: ${styles.color};
-  width: ${props => (props.fullWidth ? 100 : 0)}%;
+  width: 100%;
   margin: 0;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
+  font-weight: ${props => (props.light ? 'light' : props.bold ? 'bold' : null)};
 `
 Text.defaultProps = {
   color: 'darkGray',

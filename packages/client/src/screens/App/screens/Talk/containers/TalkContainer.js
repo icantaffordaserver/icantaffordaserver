@@ -7,7 +7,6 @@ import moment from 'moment'
 
 import isVerified from '../../../shared/HoCs/isVerified'
 import isAuthenticated from '../../../shared/HoCs/isAuthenticated'
-import TalkComponent from '../components/TalkComponent'
 import Conversation from '../components/Conversation'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
@@ -90,14 +89,10 @@ class TalkContainer extends Component {
   }
 
   render() {
-    return this.state.isConversation ? (
-      <Conversation sessionId={this.state.sessionId} />
-    ) : this.props.data.loading && !this.state.connections ? null : (
-      <TalkComponent
-        connections={this.state.connections}
-        scheduleConversation={this.scheduleConversation}
-        handleConversation={this.handleConversation}
-      />
+    return (
+      this.state.isConversation && (
+        <Conversation sessionId={this.state.sessionId} />
+      )
     )
   }
 }
