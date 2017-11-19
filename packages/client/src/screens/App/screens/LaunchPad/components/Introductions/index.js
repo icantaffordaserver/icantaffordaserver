@@ -18,28 +18,11 @@ import {
 import viewIcon from '../../../../shared/assets/view.svg'
 
 class IntroductionsComponent extends Component {
-  state = {
-    introductions: this.props.introductions,
-  }
-  rotate = () => {
-    // Copies array to avoid mutating state
-    let arr = this.state.introductions.slice()
-    const first = arr.shift()
-    arr.push(first)
-    this.setState({ introductions: arr })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.introductions) {
-      this.setState({ introductions: nextProps.introductions })
-    }
-  }
-
   render() {
     return (
       <IntroductionsContainer>
-        {this.state.introductions &&
-          this.state.introductions.slice(0, 4).map(introduction => {
+        {this.props.introductions &&
+          this.props.introductions.slice(0, 4).map(introduction => {
             const user = introduction.participants[0]
             return (
               <Introduction key={introduction.id}>
@@ -87,12 +70,12 @@ class IntroductionsComponent extends Component {
               </Introduction>
             )
           })}
-        {this.state.introductions.length > 4 && (
+        {this.props.introductions.length > 4 && (
           <Icon
             style={{ margin: 'auto', cursor: 'pointer' }}
             name="chevron right"
             size="big"
-            onClick={this.rotate}
+            onClick={this.props.rotate}
           />
         )}
       </IntroductionsContainer>

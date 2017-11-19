@@ -48,6 +48,16 @@ class LaunchPadContainer extends Component {
     }
   }
 
+  rotate = () => {
+    // Copies array to avoid mutating state
+    let arr = this.state.connections.invitations.slice()
+    const first = arr.shift()
+    arr.push(first)
+    this.setState({
+      connections: { ...this.state.connections, invitations: arr },
+    })
+  }
+
   fetchConnections = async () => {
     const client = this.props.client
 
@@ -105,7 +115,7 @@ class LaunchPadContainer extends Component {
       mutation: deleteConnectionMutation,
       variables: { id },
     })
-
+    await this.props.client.resetStore()
     await this.fetchConnections()
   }
 
@@ -138,8 +148,6 @@ class LaunchPadContainer extends Component {
     this.setState({
       nextConnection: connection,
     })
-
-    console.log('called')
   }
 
   render() {
@@ -151,6 +159,7 @@ class LaunchPadContainer extends Component {
           passInvitation={this.passInvitation}
           scheduleInvitation={this.scheduleInvitation}
           updateUpcoming={this.updateUpcoming}
+          rotate={this.rotate}
         />
       )
     } else {

@@ -16,21 +16,8 @@ import Calendar from './Calendar'
 import Upcoming from './Upcoming'
 
 class LaunchPadComponent extends Component {
-  state = {
-    ...this.props.connections,
-    nextConnection: this.props.nextConnection,
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.connections) {
-      this.setState({
-        ...nextProps.connections,
-        nextConnection: nextProps.nextConnection,
-      })
-    }
-  }
-
   render() {
+    const { invitations, upcoming, history } = this.props.connections
     return (
       <Layout>
         <Invitations>
@@ -39,9 +26,10 @@ class LaunchPadComponent extends Component {
           </Title>
 
           <Introductions
-            introductions={this.state.invitations}
+            introductions={invitations}
             passInvitation={this.props.passInvitation}
             scheduleInvitation={this.props.scheduleInvitation}
+            rotate={this.props.rotate}
           />
         </Invitations>
         <Title>
@@ -49,21 +37,21 @@ class LaunchPadComponent extends Component {
         </Title>
         <Schedule>
           <Calendar
-            upcoming={this.state.upcoming}
+            upcoming={upcoming}
             updateUpcoming={this.props.updateUpcoming}
           />
           <Title>
             <h1>Up Next</h1>
             <i>
               <Subheading fullWidth darkGray>
-                {this.state.upcoming.length > 0 &&
-                  moment(this.state.upcoming[0].connectionTime).format(
+                {upcoming.length > 0 &&
+                  moment(upcoming[0].connectionTime).format(
                     '[Connect on] MMM[.] D [at] h:MMA',
                   )}
               </Subheading>
             </i>
           </Title>
-          <Upcoming connection={this.state.nextConnection} />
+          <Upcoming connection={this.props.nextConnection} />
         </Schedule>
         <History>
           {/* <Title>History</Title>
