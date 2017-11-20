@@ -13,6 +13,7 @@ export default gql`
       emailVerified
       phoneNumber
       gender
+      gradientColors
       location
       bio
       passwordReset {

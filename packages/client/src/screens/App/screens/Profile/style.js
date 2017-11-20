@@ -24,7 +24,8 @@ export const ProfileAvatar = styled.img`
   border-radius: 51%;
 `
 export const TrophyContainer = styled.div`
-  background: linear-gradient(0deg, white, #f9a0ab);
+  background: ${props =>
+    `linear-gradient(0deg,${props.bottomColor}, ${props.topColor})`};
   align-items: center;
   justify-content: space-between;
   box-shadow: none;
@@ -37,4 +38,32 @@ export const FireStarterContainer = styled.div`
   background: white;
   border-radius: 'square';
   shadow: 'none';
+`
+export const TrophyColorPicker = styled.div`
+  width: 95%;
+  height: 50px;
+  background: ${props =>
+    `linear-gradient(0deg,${props.bottomColor}, ${props.topColor})`};
+  margin: 10px;
+  border: ${props =>
+    props.isSelected ? '2px solid green' : '1px solid #C4C4C4'};
+`
+
+export const Button = styled.button`
+  transition: all 0.25s ease !important;
+  padding: 2% !important;
+  width: 100%;
+  height: 50px;
+  background: ${props => props.color};
+  border: solid 1px ${props => props.color};
+  border-radius: 30px;
+  font-size: 14px;
+  color: ${props => props.inverseColor};
+  &:hover {
+    color: ${props => (props.noHoverChange ? props.inverseColor : props.color)};
+    border: solid 1px
+      ${props => (props.noHoverChange ? props.inverseColor : props.color)};
+    background: ${props =>
+      props.noHoverChange ? props.color : props.inverseColor};
+  }
 `
