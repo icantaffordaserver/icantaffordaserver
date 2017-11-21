@@ -1,60 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../../../styles'
+import { Card, Title, Subheading, Text } from '../../../../../styles'
+import { FireStarters, FireStarterAnswers, Answer } from '../styles'
+import AnswerFireStarters from './AnswerFireStarterComponent'
 
-export default props => {
-  return (
-    <Section gray>
-      <Title medium left fullWidth>
-        Q & A
-      </Title>
-      <RowContainer>
-        {props.answers &&
-          props.answers.map(fireStarterAnswer => {
-            const { question } = fireStarterAnswer.question
-            const { answer } = fireStarterAnswer
-            return (
-              <Card key={fireStarterAnswer.id}>
-                <Title small fullWidth left darkGray>
-                  {question}
-                </Title>
-                <Text left small fullWidth>
-                  {answer}
-                </Text>
-              </Card>
-            )
-          })}
-
-        {props.question && (
-          <Card>
-            <Title small fullWidth left darkGray>
-              {props.question.question}
-            </Title>
-            <TextArea maxlength={250} onChange={props.answerChange} />
-            <Button
-              loading={props.loading}
-              onClick={props.answerFireStarter}
-              small
-              left
-            >
-              Submit
-            </Button>
-          </Card>
-        )}
-      </RowContainer>
-    </Section>
-  )
+class FireStarterComponent extends Component {
+  render() {
+    console.log(this.props.answers)
+    return (
+      <FireStarters>
+        <AnswerFireStarters {...this.props} />
+        <FireStarterAnswers>
+          {this.props.answers &&
+            this.props.answers.map(fireStarter => (
+              <Answer>
+                <h1>{fireStarter.question.question}</h1>
+                <Text left>{fireStarter.answer}</Text>
+              </Answer>
+            ))}
+        </FireStarterAnswers>
+      </FireStarters>
+    )
+  }
 }
+
+export default FireStarterComponent

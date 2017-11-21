@@ -50,7 +50,9 @@ export const Label = styled.label`
 Label.defaultProps = {
   color: 'accent',
 }
-export const TextLink = styled(Link)`
+export const TextLink = styled(Link).attrs({
+  to: '/',
+})`
   transition: all 0.15s ease;
   color: ${styles.color};
   font-size: ${styles.fontSize}em;
@@ -71,6 +73,7 @@ export const Text = styled.p`
   color: ${styles.color};
   width: 100%;
   margin: 0;
+  padding: 0 5%;
   font-size: ${styles.fontSize}em;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};

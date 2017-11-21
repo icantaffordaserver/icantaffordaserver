@@ -20,6 +20,10 @@ import ProfileIcon from '../../assets/profile-icon.svg'
 import Planet from '../../assets/planet.png'
 
 class NavigationComponent extends Component {
+  toConnection = () => {
+    const { token } = this.props.data.user.connections[0]
+    this.props.history.push(`/talk/${token}`)
+  }
   render() {
     if (this.props.data.loading || !this.props.data.user) return null
 
@@ -43,6 +47,7 @@ class NavigationComponent extends Component {
                 <Countdown
                   noLoader
                   startTime={this.props.data.user.connections[0].connectionTime}
+                  navigate={this.toConnection}
                 />
               </ConversationCorner>
             ) : null}

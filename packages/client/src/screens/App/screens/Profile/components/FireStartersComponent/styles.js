@@ -1,0 +1,71 @@
+import styled from 'styled-components'
+import { Icon } from 'semantic-ui-react'
+
+export const FireStarters = styled.div`
+  display: grid;
+  grid-template-rows: 400px auto;
+  grid-template-columns: auto;
+  grid-template-areas: 'select' 'answers';
+  grid-gap: 40px;
+`
+export const QuestionSelector = styled.div`
+  position: relative;
+  grid-area: select;
+  width: 100%;
+  padding: 1% 5%;
+  background: #fff;
+`
+export const QuestionList = styled.ul`
+  margin: 1% auto;
+  width: 80%;
+  padding: 0;
+  list-style: none;
+  max-height: 250px;
+  overflow-y: scroll;
+  & > :nth-child(odd) {
+    background: #f7f7f7;
+  }
+`
+
+export const Question = styled.li`
+  font-size: 1.25em;
+  padding: 2% 5%;
+  background: #e7e7e7;
+  & > i {
+    float: right;
+  }
+`
+
+export const FireStarterAnswers = styled.div`
+  grid-area: answers;
+  min-height: 100px;
+  display: grid;
+  grid-template-rows: 250px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  margin-bottom: 1em;
+`
+export const Answer = styled.div`
+  background: #fff;
+  padding: 0;
+  & > h1 {
+    background: #7781c8;
+    min-height: 80px;
+    font-size: 1.35em;
+    padding: 3% 1%;
+    margin-top: 0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+  }
+`
+
+export const Back = styled(Icon).attrs({
+  name: 'arrow left',
+  size: 'big',
+  color: 'grey',
+})`
+position: absolute;
+top: 25px;
+left: 15px;
+`

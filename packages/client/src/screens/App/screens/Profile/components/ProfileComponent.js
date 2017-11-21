@@ -332,7 +332,7 @@ class Availabilty extends Component {
     return (
       <div>
         <SubTitleSection
-          title={'AVAILABLITY'}
+          title={'AVAILABILITY'}
           handleEdit={this.handleEditButton}
         />
         <AvailabilityScheduleComponent
@@ -420,11 +420,8 @@ class ProfileComponent extends Component {
         <Box width={1} mx="auto">
           <QA user={user} />
         </Box>
-        <Box width={1 / 2}>
-          <FireStarters />
-        </Box>
-        <Box width={1 / 2}>
-          <FireStarters />
+        <Box width={1}>
+          <FireStartersComponent />
         </Box>
         {/* <Box width={1} mx='auto'>
             <SettingsComponent

@@ -12,8 +12,8 @@ export default {
   },
 
   size: {
-    small: 30,
-    medium: 50,
+    small: 20,
+    medium: 40,
     large: 60,
     huge: 80,
   },
@@ -33,12 +33,12 @@ export default {
 
   borderRadius: {
     square: 0,
-    default: 5,
-    round: 10,
+    default: 1,
+    round: 2,
   },
 
   container: {
-    default: 70,
+    default: 65,
     expanded: 90,
     full: 100,
   },

@@ -13,7 +13,7 @@ export const Button = styled(button)`
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
   background: ${styles.color}!important;
   border: solid 1px ${styles.color}!important;
-  border-radius: ${styles.borderRadius}px !important;
+  border-radius: ${styles.borderRadius}em !important;
   margin: ${props => (props.noMargin ? 0 : 'auto')} !important;
   ${props =>
     props.left
@@ -52,4 +52,5 @@ export const TextArea = styled.textarea`
   border-radius: 5px;
   height: 100px;
   overflow: hidden;
+  resize: none;
 `
