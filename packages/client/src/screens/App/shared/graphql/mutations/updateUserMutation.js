@@ -13,6 +13,7 @@ export default gql`
     $profilePhotoUrl: String
     $email: String
     $availability: Json
+    $gradientColors: Json
     $connectionInterestsIds: [ID!]
   ) {
     updateUser(
@@ -24,6 +25,7 @@ export default gql`
       email: $email
       profilePhotoUrl: $profilePhotoUrl
       availability: $availability
+      gradientColors: $gradientColors
       connectionInterestsIds: $connectionInterestsIds
     ) {
       id

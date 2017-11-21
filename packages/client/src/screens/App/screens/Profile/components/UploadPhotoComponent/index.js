@@ -12,6 +12,8 @@ import ReactCrop, { makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
 import { Page, Row, Column } from 'hedron'
+import { Flex, Box, Grid } from 'grid-styled'
+
 import {
   ColumnContainer,
   Form,
@@ -23,6 +25,9 @@ import {
   TextLink,
 } from '../../../../styles'
 
+import { TrophyColorPicker, Button } from '../../style'
+import ConfirmAndCancel from '../shared/ConfirmAndCancel'
+
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
 
@@ -32,7 +37,7 @@ class UploadPhotoComponent extends Component {
     this.state = {
       showModal: false,
       files: [],
-      display: 'inline',
+      uploadBoxDisplay: 'inline',
       crop: {
         x: 0,
         y: 0,
@@ -43,6 +48,8 @@ class UploadPhotoComponent extends Component {
       pixelCrop: {},
       naturalHeight: 0,
       naturalWidth: 0,
+      topColor: '',
+      bottomColor: '',
     }
 
     this.handleOpenModal = this.handleOpenModal.bind(this)
@@ -98,61 +105,123 @@ class UploadPhotoComponent extends Component {
   }
 
   handleSave = () => {
-    let data = new FormData()
+    let gradientColors = {
+      top: this.state.topColor,
+      bottom: this.state.bottomColor,
+    }
 
-    data.append('file', this.state.files[0])
-    data.append('tags', `toktumi`)
-    data.append('upload_preset', 'cqovpxkc')
-    data.append('api_key', '425252445786336')
-    data.append('timestamp', (Date.now() / 1000) | 0)
+    if (this.state.files.length > 0) {
+      let data = new FormData()
 
-    // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-    axios
-      .post('https://api.cloudinary.com/v1_1/toktumi/image/upload', data, {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      data.append('file', this.state.files[0])
+      data.append('tags', `toktumi`)
+      data.append('upload_preset', 'cqovpxkc')
+      data.append('api_key', '425252445786336')
+      data.append('timestamp', (Date.now() / 1000) | 0)
+      console.log(data)
+      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      axios
+        .post('https://api.cloudinary.com/v1_1/toktumi/image/upload', data, {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        })
+        .then(response => {
+          const data = response.data
+          const fileURL = data.secure_url
+          console.log('data : ', data, 'fileURL: ', fileURL)
+          return data
+        })
+        .then(data => {
+          let url =
+            'https://res.cloudinary.com/toktumi/image/upload/' +
+            'c_crop,h_' +
+            this.state.pixelCrop.height +
+            ',w_' +
+            this.state.pixelCrop.width +
+            ',x_' +
+            this.state.pixelCrop.x +
+            ',y_' +
+            this.state.pixelCrop.y +
+            '/v' +
+            data.version +
+            '/' +
+            data.public_id +
+            '.png'
+          console.log(url)
+          return this.props.mutate({
+            variables: {
+              id: this.props.data.user.id,
+              profilePhotoUrl: url,
+              gradientColors,
+            },
+            refetchQueries: [
+              {
+                query: currentUserQuery,
+              },
+            ],
+          })
+        })
+        .then(() => this.setState({ showModal: false }))
+        .catch(err => console.error(err))
+    } else {
+      console.log({
+        id: this.props.data.user.id,
+        gradientColors,
       })
-      .then(response => {
-        const data = response.data
-        const fileURL = data.secure_url
-        console.log('data : ', data, 'fileURL: ', fileURL)
-        return data
-      })
-      .then(data => {
-        let url =
-          'https://res.cloudinary.com/toktumi/image/upload/' +
-          'c_crop,h_' +
-          this.state.pixelCrop.height +
-          ',w_' +
-          this.state.pixelCrop.width +
-          ',x_' +
-          this.state.pixelCrop.x +
-          ',y_' +
-          this.state.pixelCrop.y +
-          '/v' +
-          data.version +
-          '/' +
-          data.public_id +
-          '.png'
-        console.log(url)
-        return this.props.mutate({
+      this.props
+        .mutate({
           variables: {
             id: this.props.data.user.id,
-            profilePhotoUrl: url,
+            gradientColors,
           },
+          refetchQueries: [
+            {
+              query: currentUserQuery,
+            },
+          ],
         })
+        .then(() => this.setState({ showModal: false }))
+        .then(() => console.log(this.props.data.user))
+        .catch(err => console.error(err))
+    }
+  }
+  handleCancel = () => this.setState({ showModal: false })
+
+  handleSelect = (topColor, bottomColor) =>
+    this.setState({ topColor, bottomColor }, () => console.log(this.state))
+
+  componentDidMount = () => {
+    const { gradientColors } = this.props.data.user
+    if (gradientColors) {
+      this.setState({
+        topColor: gradientColors.top,
+        bottomColor: gradientColors.bottom,
       })
-      .then(() => this.setState({ showModal: false }))
-      .catch(err => console.error(err))
+    } else {
+      this.setState({ topColor: '#F9A0AC', bottomColor: '#F9F9F9' })
+    }
+    console.log('Upload Photo component: ', this.props)
   }
 
   render() {
     let dropzoneRef
+    let gradientChoices = [
+      { top: '#F9A0AC', bottom: '#F9F9F9' },
+      { top: '#7F00FF', bottom: '#E100FF' },
+      { top: '#667DB6', bottom: '#0082C8' },
+      { top: '#5A3F37', bottom: '#2C7744' },
+      { top: '#FF9966', bottom: '#FF5E62' },
+      { top: '#ACB6E5', bottom: '#ACE5DE' },
+      { top: '#D9A7C7', bottom: '#FFFCDC' },
+      { top: '#E1EEC3', bottom: '#F59597' },
+      { top: '#00D2FF', bottom: '#928DAB' },
+      { top: '#474340', bottom: '#8C8FA3' },
+    ]
+    const { topColor, bottomColor } = this.state
     return (
       <div>
         <button onClick={this.handleOpenModal}>Upload/Crop Photo!</button>
         <ReactModal
           isOpen={this.state.showModal}
-          contentLabel="Inline Styles Modal Example"
           onRequestClose={this.handleCloseModal}
           style={{
             overlay: {
@@ -160,103 +229,91 @@ class UploadPhotoComponent extends Component {
             },
             content: {
               width: '60%',
-              height: '60%',
+              height: '80%',
               margin: 'auto auto',
             },
           }}
         >
-          <Page fluid>
-            <Row>
-              <Column>
-                <h4>Upload Profile Photo!</h4>
-                <p>
-                  <i>
-                    Upload a picture of yourself doing your favourite hobby or
-                    one of your proudest accomplishments!
-                  </i>
-                </p>
-              </Column>
-            </Row>
-            <Row
-              style={
-                this.state.naturalHeight > 255 && this.state.naturalWidth > 255
-                  ? { display: 'inline', marginBottom: '20px' }
-                  : { display: 'none' }
-              }
+          <Flex wrap>
+            <Box width={95 / 100} ml="5%">
+              <button
+                style={{
+                  backgroundColor: '#E0E0E0',
+                  margin: '0 auto',
+                  height: '3vh',
+                  width: '10vw',
+                }}
+                onClick={() => {
+                  dropzoneRef.open()
+                }}
+              >
+                <ButtonText>Upload Picture</ButtonText>
+              </button>
+            </Box>
+            <Box
+              width={9 / 10}
+              ml="5%"
+              pt={2}
+              style={{ display: this.state.uploadBoxDisplay }}
             >
-              <Column>
-                <button
-                  style={{
-                    backgroundColor: '#E0E0E0',
-                    margin: '0 auto',
-                    height: '3vh',
-                    width: '10vw',
-                  }}
-                  onClick={() => {
-                    dropzoneRef.open()
-                  }}
-                >
-                  <ButtonText>Choose Photo</ButtonText>
-                </button>
-              </Column>
-            </Row>
-            <Row style={{ display: this.state.display }}>
-              <Column xs={12} md={12}>
-                <Dropzone
-                  ref={node => {
-                    dropzoneRef = node
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '32vh',
-                    borderWidth: '2px',
-                    borderColor: 'rgb(102, 102, 102)',
-                    borderStyle: 'dashed',
-                    borderRadius: '5px',
-                    //margin: '20px 5vw 20px 5vw'
-                  }}
-                  accept="image/*"
-                  onDrop={(accepted, rejected) => {
-                    this.setState({ files: accepted, display: 'none' }, () =>
-                      console.log(accepted),
-                    )
-                  }}
-                >
-                  <p style={{ margin: '20px' }}>
-                    Try dropping some files here, or click to select files to
-                    upload.
-                  </p>
-                </Dropzone>
-              </Column>
-            </Row>
-            <CropBox
-              file={this.state.files[0]}
-              crop={this.state.crop}
-              onChange={this.onCropChange}
-              onImageLoaded={this.onImageLoaded}
-              onComplete={this.onCropComplete}
-              pixelCrop={this.state.pixelCrop}
-              naturalHeight={this.state.naturalHeight}
-              naturalWidth={this.state.naturalWidth}
+              <Dropzone
+                ref={node => {
+                  dropzoneRef = node
+                }}
+                style={{
+                  width: '100%',
+                  height: '32vh',
+                  borderWidth: '2px',
+                  borderColor: 'rgb(102, 102, 102)',
+                  borderStyle: 'dashed',
+                  borderRadius: '5px',
+                  //margin: '20px 5vw 20px 5vw'
+                }}
+                accept="image/*"
+                onDrop={(accepted, rejected) => {
+                  this.setState(
+                    { files: accepted, uploadBoxDisplay: 'none' },
+                    () => console.log(accepted),
+                  )
+                }}
+              >
+                <p style={{ margin: '20px' }}>
+                  Drag and drop a picture here, or click Upload Picture above
+                </p>
+              </Dropzone>
+            </Box>
+            <Box width={9 / 10} ml="5%">
+              <CropBox
+                file={this.state.files[0]}
+                crop={this.state.crop}
+                onChange={this.onCropChange}
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                pixelCrop={this.state.pixelCrop}
+                naturalHeight={this.state.naturalHeight}
+                naturalWidth={this.state.naturalWidth}
+              />
+            </Box>
+            <Box width={9 / 10} ml="5%" pt={2}>
+              <h4>Pick your colour scheme</h4>
+            </Box>
+            <Flex wrap width={4 / 5} ml="10%" pt={2}>
+              {gradientChoices.map(x => (
+                <Box width={1 / 5} key={x.top}>
+                  <TrophyColorPicker
+                    bottomColor={x.bottom}
+                    topColor={x.top}
+                    isSelected={x.top === topColor && x.bottom === bottomColor}
+                    onClick={() => this.handleSelect(x.top, x.bottom)}
+                  />
+                </Box>
+              ))}
+            </Flex>
+            <ConfirmAndCancel
+              handleSave={this.handleSave}
+              handleCancel={this.handleCancel}
             />
-            <Row>
-              <Column mdShift={3} md={6}>
-                <button
-                  style={{
-                    backgroundColor: '#27AE60',
-                    margin: '0 auto',
-                    height: '6vh',
-                    width: '25vw',
-                  }}
-                  onClick={this.handleSave}
-                >
-                  <ButtonText style={{ color: 'white' }}>
-                    Confirm Changes
-                  </ButtonText>
-                </button>
-              </Column>
-            </Row>
-          </Page>
+          </Flex>
         </ReactModal>
       </div>
     )
@@ -267,41 +324,30 @@ const CropBox = props => {
   console.log('CropBox props: ', props)
   if (props.file) {
     return (
-      <div>
-        <Row
-          style={
-            props.naturalHeight > 255 && props.naturalWidth > 255
-              ? { display: 'inline' }
-              : { display: 'none' }
-          }
-        >
-          <Column>
-            <h4>Introduction Preview: </h4>
-            <p>
-              <i>
-                This is what your introduction card will look like to others:
-              </i>
-            </p>
-            <ReactCrop
-              src={props.file.preview}
-              crop={props.crop}
-              onChange={props.onChange}
-              onImageLoaded={props.onImageLoaded}
-              onComplete={props.onComplete}
-            />
-          </Column>
-        </Row>
-        <Row
+      <div
+        style={
+          props.naturalHeight > 255 && props.naturalWidth > 255
+            ? { display: 'inline' }
+            : { display: 'none' }
+        }
+      >
+        <h4>Crop your photo below. </h4>
+        <ReactCrop
+          src={props.file.preview}
+          crop={props.crop}
+          onChange={props.onChange}
+          onImageLoaded={props.onImageLoaded}
+          onComplete={props.onComplete}
+        />
+        <div
           style={
             props.naturalHeight < 256 || props.naturalWidth < 256
               ? { display: 'inline' }
               : { display: 'none' }
           }
         >
-          <Column>
-            <p>Please upload an image that is atleast 256x256 px.</p>
-          </Column>
-        </Row>
+          <p>Please upload an image that is atleast 256x256 px.</p>
+        </div>
       </div>
     )
   } else return <div />

@@ -20,14 +20,14 @@ import {
 
 import { TrophyContainer, ProfileSection, FireStarterContainer } from '../style'
 
-import { Modal } from 'semantic-ui-react'
-
-import SettingsComponent from './SettingsComponent'
-import AvailabilityComponent from './AvailabilityComponent'
 import UploadPhotoComponent from './UploadPhotoComponent'
 import FireStartersComponent from './FireStartersComponent'
 
-import AvailabilityScheduleComponent from './AvailabilityScheduleComponent'
+import Schedule from './ScheduleComponent'
+import Biography from './Biography'
+import Availabilty from './Availability'
+import SubTitleSection from './shared/SubTitleSection'
+import UserInfo from './UserInfo'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import allConnectionInterests from '../../../shared/graphql/queries/allConnectionInterests'
@@ -38,6 +38,7 @@ import SVG from 'react-inlinesvg'
 
 import EmptyAvatar from '../../../../../assets/pictures/empty_avatar.jpg'
 import EditIcon from '../../../../../assets/icons/icon.svg'
+
 /* 
 user background will actually be pulled from the user but for now we will just import a static image
 static will become user.background for example
@@ -398,11 +399,21 @@ class ProfileComponent extends Component {
     const user = this.props.user
     const data = this.props.data
     console.log('User : ', user)
-    console.log(this.props)
+    let gradient
+    if (user.gradientColors) {
+      gradient = user.gradientColors
+    } else {
+      gradient = { top: '#F9A0AC', bottom: '#F9F9F9' }
+    }
+    //console.log(user.gradientColors.top, user.gradientColors.bottom)
+
     return (
       <Flex wrap>
         <Box width={1} mx="auto">
-          <TrophyContainer />
+          <TrophyContainer
+            topColor={gradient.top}
+            bottomColor={gradient.bottom}
+          />
         </Box>
         <Box width={1 / 4} ml="2%" mt="5%">
           <ProfilePhoto url={user.profilePhotoUrl} />
@@ -423,28 +434,7 @@ class ProfileComponent extends Component {
         <Box width={1}>
           <FireStartersComponent />
         </Box>
-        {/* <Box width={1} mx='auto'>
-            <SettingsComponent
-              user={this.props.user}
-              onSubmit={this.props.onSubmit}
-              error={this.props.error}
-              loading={this.props.loading}
-              success={this.props.success}
-              editing={this.props.editing}
-              open={this.props.open}
-            />
-          </Box> */}
         {/* 
-            <SettingsComponent
-              user={this.props.user}
-              onSubmit={this.props.onSubmit}
-              error={this.props.error}
-              loading={this.props.loading}
-              success={this.props.success}
-              editing={this.props.editing}
-              open={this.props.open}
-            />
-
             <FireStartersComponent /> // Does not work
           */}
       </Flex>
