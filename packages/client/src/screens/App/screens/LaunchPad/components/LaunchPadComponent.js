@@ -2,14 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import { Subheading } from '../../../styles'
-import {
-  Layout,
-  Invitations,
-  Schedule,
-  UpcomingComponent,
-  History,
-  Title,
-} from '../styles'
+import { Layout, Invitations, Schedule, Title } from '../styles'
 
 import Introductions from './Introductions'
 import Calendar from './Calendar'
@@ -53,10 +46,6 @@ class LaunchPadComponent extends Component {
           </Title>
           <Upcoming connection={this.props.nextConnection} />
         </Schedule>
-        <History>
-          {/* <Title>History</Title>
-          <HistoryComponent /> */}
-        </History>
       </Layout>
     )
   }

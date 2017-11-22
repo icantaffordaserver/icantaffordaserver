@@ -14,10 +14,11 @@ import {
   Logo,
   ConversationCorner,
 } from './styles'
+import { Title } from '../../../styles'
 
 import ConnectionIcon from '../../assets/connections-icon.svg'
 import ProfileIcon from '../../assets/profile-icon.svg'
-import Planet from '../../assets/planet.png'
+import logo from '../../assets/logo.svg'
 
 class NavigationComponent extends Component {
   render() {
@@ -25,29 +26,38 @@ class NavigationComponent extends Component {
 
     return (
       <Navigation>
-        <NavigationContainer>
-          <Logo>
-            <h1>PLUT</h1>
-            <img src={Planet} alt="" />
-          </Logo>
+        {this.props.conversation ? (
+          <NavigationContainer>
+            <Title fullWidth medium center white>
+              Talk with{' '}
+              {this.props.data.user.connections[0].participants[0].firstName}
+            </Title>
+          </NavigationContainer>
+        ) : (
+          <NavigationContainer>
+            <Logo src={logo} />
 
-          <NavigationLinks>
-            <Link to="/talk">
-              <img src={ConnectionIcon} />
-            </Link>
-            <Link to="/profile">
-              <img src={ProfileIcon} />
-            </Link>
-            {this.props.data.user.connections.length !== 0 ? (
-              <ConversationCorner>
-                <Countdown
-                  noLoader
-                  startTime={this.props.data.user.connections[0].connectionTime}
-                />
-              </ConversationCorner>
-            ) : null}
-          </NavigationLinks>
-        </NavigationContainer>
+            <NavigationLinks>
+              <Link to="/talk">
+                <img src={ConnectionIcon} />
+              </Link>
+              <Link to="/profile">
+                <img src={ProfileIcon} />
+              </Link>
+              {this.props.data.user.connections.length !== 0 ? (
+                <ConversationCorner>
+                  <Countdown
+                    noLoader
+                    startTime={
+                      this.props.data.user.connections[0].connectionTime
+                    }
+                    navigate={this.toConnection}
+                  />
+                </ConversationCorner>
+              ) : null}
+            </NavigationLinks>
+          </NavigationContainer>
+        )}
       </Navigation>
     )
   }

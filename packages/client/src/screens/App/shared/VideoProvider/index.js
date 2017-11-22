@@ -4,15 +4,17 @@ export default async function createVideoConnection(
   token,
   roomName,
   onDisconnect,
+  screenWidth,
+  screenHeight,
   localRef = null,
 ) {
   try {
+    console.log(screenHeight, screenWidth)
     const room = await Video.connect(token, {
       name: roomName,
       audio: true,
       video: {
         height: 720,
-        width: 1280,
       },
     })
 
@@ -40,6 +42,7 @@ class VideoConnection {
     this.room.once('disconnected', error =>
       this.room.participants.forEach(this.onDisconnect),
     )
+    console.log(this.room.localParticipant.videoTracks[0])
   }
 
   toggleAudio = () => {
@@ -56,18 +59,19 @@ class VideoConnection {
 
   onConnect = participant => {
     const remote = document.getElementById('remote-user-video')
-
+    console.log('connected')
     participant.on('trackAdded', track => this.trackAdded(remote, track))
     participant.tracks.forEach(track => this.trackAdded(remote, track))
     participant.on('trackRemoved', this.trackRemoved)
+    console.log(this.room.localParticipant.videoTracks[0])
   }
   onDisconnect = participant => {
     const remote = document.getElementById('remote-user-video')
+    const video = remote && remote.getElementsByTagName('video')[0]
+    const audio = remote && remote.getElementsByTagName('audio')[0]
     participant.tracks.forEach(track => this.trackRemoved)
-    if (remote) {
-      remote.getElementsByTagName('video')[0].remove()
-      remote.getElementsByTagName('audio')[0].remove()
-    }
+    video && video.remove()
+    audio && audio.remove()
   }
 
   close() {
@@ -79,7 +83,9 @@ class VideoConnection {
   }
 
   trackAdded = (ref, track) => {
+    console.log(track)
     ref.appendChild(track.attach())
+    console.log('adding: ', track.dimensions)
   }
 
   trackRemoved = track => {

@@ -2,7 +2,7 @@
  * Created by alexandermann on 2017-03-21.
  */
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { compose } from 'recompose'
@@ -32,7 +32,7 @@ export default WrappedComponent => {
     }
   }
 
-  return compose(graphql(currentUserQuery), withLoadingNoIndicator)(
+  return compose(graphql(currentUserQuery), withLoadingNoIndicator, withRouter)(
     isAuthenticated,
   )
 }

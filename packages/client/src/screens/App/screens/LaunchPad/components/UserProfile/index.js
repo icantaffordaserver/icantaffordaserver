@@ -18,6 +18,7 @@ import { Modal, Icon } from 'semantic-ui-react'
 
 export default props => {
   const user = props.user
+  const answers = user.fireStarterAnswers
   return (
     <Modal basic trigger={props.trigger}>
       <ProfileWrapper>
@@ -53,12 +54,18 @@ export default props => {
             <Text left>{user.bio}</Text>
           </UserDetails>
         </User>
-        <QASection>
-          <Left />
-          <QA />
-          <QA />
-          <Right />
-        </QASection>
+        {answers.length > 0 && (
+          <QASection>
+            <Left />
+            {answers.map(answer => (
+              <QA key={answer.id}>
+                <h1>{answer.question.question}</h1>
+                <Text>{answer.answer}</Text>
+              </QA>
+            ))}
+            <Right />
+          </QASection>
+        )}
         {props.connection.status === 'MATCHED' && (
           <Button
             square

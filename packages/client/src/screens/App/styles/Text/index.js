@@ -12,7 +12,7 @@ const getColor = (color, key) => {
 export const Title = styled.h1`
   color: ${styles.color};
   font-weight: bold;
-  margin: ${props => (props.noMargin ? 0 : `2%`)} auto !important;
+  margin: ${props => (props.noMargin ? 0 : `2%`)} auto;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
