@@ -5,6 +5,7 @@ import './style.css'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import { Button } from '../../../../styles'
+import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
@@ -24,7 +25,7 @@ const times = [
   '21:00',
 ]
 
-class AvailabilityScheduleComponent extends Component {
+class Schedule extends Component {
   state = {
     cells: [
       [false, false, false, false, false, false, false, false],
@@ -41,9 +42,10 @@ class AvailabilityScheduleComponent extends Component {
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
     ],
+    clickSave: false,
   }
 
-  componentDidMount() {
+  convertToBoolean = () => {
     let data = this.props.data.user.availability
     let days = [
       'monday',
@@ -82,6 +84,18 @@ class AvailabilityScheduleComponent extends Component {
     // if (this.state.cells === cells) return
     console.log(cells)
     this.setState({ cells })
+  }
+  componentDidMount() {
+    this.convertToBoolean()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.edit !== nextProps.edit && this.state.clickSave === false) {
+      this.convertToBoolean()
+    }
+    if (this.props.edit === nextProps.edit) {
+      this.setState({ clickSave: false })
+    }
   }
 
   render() {
@@ -132,34 +146,12 @@ class AvailabilityScheduleComponent extends Component {
           ))}
         </TableDragSelect>
         <div
-          style={{
-            margin: '1% auto',
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '50%',
-          }}
+          style={this.props.edit ? { display: 'inline' } : { display: 'none' }}
         >
-          <Button
-            small
-            noMargin
-            color="cancel"
-            onClick={this.handleClear}
-            style={
-              this.props.edit ? { display: 'inline' } : { display: 'none' }
-            }
-          >
-            Clear
-          </Button>
-          <Button
-            noMargin
-            onClick={this.setAvailability}
-            small
-            style={
-              this.props.edit ? { display: 'inline' } : { display: 'none' }
-            }
-          >
-            Save
-          </Button>
+          <ConfirmAndCancel
+            handleSave={this.setAvailability}
+            handleCancel={this.handleClear}
+          />
         </div>
       </div>
     )
@@ -212,7 +204,10 @@ class AvailabilityScheduleComponent extends Component {
         }
       }
     }
-
+    console.log({
+      id: this.props.data.user.id,
+      availability,
+    })
     this.props
       .mutate({
         variables: {
@@ -225,7 +220,9 @@ class AvailabilityScheduleComponent extends Component {
           },
         ],
       })
-      .then(() => this.props.handleEdit())
+      .then(() =>
+        this.setState({ clickSave: true }, () => this.props.handleEdit()),
+      )
       .then(() => console.log('success: Availability updated.'))
       .catch(err => console.error(err))
   }
@@ -235,4 +232,4 @@ export default compose(
   withApollo,
   graphql(currentUserQuery),
   graphql(updateUserMutation),
-)(AvailabilityScheduleComponent)
+)(Schedule)

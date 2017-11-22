@@ -38,9 +38,8 @@ export const Question = styled.li`
 
 export const FireStarterAnswers = styled.div`
   grid-area: answers;
-  min-height: 100px;
   display: grid;
-  grid-template-rows: 250px;
+  grid-auto-rows: 300px;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   margin-bottom: 1em;
@@ -65,7 +64,7 @@ export const Back = styled(Icon).attrs({
   size: 'big',
   color: 'grey',
 })`
-position: absolute;
-top: 25px;
-left: 15px;
+  position: absolute;
+  top: 25px;
+  left: 15px;
 `
