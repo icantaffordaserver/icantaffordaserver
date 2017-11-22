@@ -80,6 +80,13 @@ type Connections @model {
     @relation(name: "ConnectionsOnConnectionJournal")
 }
 
+type ConversationPrompt @model {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  question: String! @isUnique
+}
+
 type File @model {
   contentType: String!
   createdAt: DateTime!
@@ -178,6 +185,7 @@ type User @model {
   fireStarterAnswers: [FireStarterAnswer!]!
     @relation(name: "UserFireStarterAnswer")
   firstName: String!
+  gradientColors: Json
   gender: Gender
   invite: Invite @relation(name: "InviteOnUserAccepted")
   invitesSent: [Invite!]! @relation(name: "InviteOnUserSentBy")
