@@ -6,7 +6,9 @@ import { Card as card } from 'semantic-ui-react'
 
 const styles = bind(Theme)
 
-export const Background = styled.div`background: ${styles.color};`
+export const Background = styled.div`
+  background: ${styles.color};
+`
 Background.defaultProps = {
   color: 'gray',
 }

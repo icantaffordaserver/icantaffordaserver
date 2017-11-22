@@ -40,7 +40,7 @@ export default props => {
           <TextArea value={currentAnswer} onChange={answerChange} />
           <Button
             small
-            accept
+            accent
             round
             loading={loading}
             disabled={
@@ -52,7 +52,7 @@ export default props => {
             Confirm
           </Button>
           {currentFireStarter.answer !== undefined && (
-            <Button small round cancel onClick={deleteAnswer}>
+            <Button small round altGray onClick={deleteAnswer}>
               Delete
             </Button>
           )}

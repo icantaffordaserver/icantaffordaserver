@@ -13,7 +13,7 @@ class FireStarterComponent extends Component {
         <FireStarterAnswers>
           {this.props.answers &&
             this.props.answers.map(fireStarter => (
-              <Answer>
+              <Answer key={fireStarter.id}>
                 <h1>{fireStarter.question.question}</h1>
                 <Text left>{fireStarter.answer}</Text>
               </Answer>
