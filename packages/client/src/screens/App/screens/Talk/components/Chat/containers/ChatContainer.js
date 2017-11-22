@@ -8,19 +8,21 @@ class ChatContainer extends Component {
   state = {
     messages: [],
     message: '',
+    chatStarted: false,
   }
+  async openChat() {
+    if (!this.state.chatStarted) {
+      // Create the chat client
+      let channel = await createChatRoom(this.props.token, this.props.roomName)
+      channel = await channel.join()
+      console.log(channel)
+      // Events
+      channel.on('messageAdded', this.addMessage)
 
-  async componentWillMount() {
-    // Create the chat client
-    let channel = await createChatRoom(this.props.token, this.props.roomName)
-    channel = await channel.join()
-
-    // Events
-    channel.on('messageAdded', this.addMessage)
-
-    // Fetch previous messages and set state
-    let messages = await channel.getMessages()
-    this.setState({ messages: messages.items, channel })
+      // Fetch previous messages and set state
+      let messages = await channel.getMessages()
+      this.setState({ messages: messages.items, channel, chatStarted: true })
+    }
   }
 
   async componentWillUnmount() {
@@ -57,8 +59,8 @@ class ChatContainer extends Component {
   }
 
   render() {
+    if (!this.props.hidden) this.openChat()
     if (!this.state.channel) return <div className="loader active inline" />
-
     return (
       <ChatBox hidden={this.props.hidden}>
         <Chat messages={this.state.messages} />

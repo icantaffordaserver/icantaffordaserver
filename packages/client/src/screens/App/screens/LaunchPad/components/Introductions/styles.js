@@ -4,7 +4,7 @@ export const IntroductionsContainer = styled.div`
   grid-area: intros;
   display: grid;
   grid-template-rows: 400px;
-  grid-template-columns: 300px 300px 300px 300px 50px;
+  grid-template-columns: 275px 275px 275px 275px 50px;
   grid-gap: 20px;
 `
 

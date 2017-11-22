@@ -17,8 +17,6 @@ class ConversationComponent extends Component {
 
     return (
       <Conversation>
-        <Title>Conversation with {otherUser.firstName}</Title>
-
         <Video
           token={this.props.token}
           roomName={this.props.roomName}
