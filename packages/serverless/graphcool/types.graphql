@@ -104,7 +104,7 @@ type FireStarter @model {
   updatedAt: DateTime!
   question: String! @isUnique
   answers: [FireStarterAnswer!]! @relation(name: "FireStarterAnswers")
-  type: FireStarterType!
+  type: FireStarterType! @migrationValue(value: CURIOSITIES)
 }
 
 enum FireStarterType {

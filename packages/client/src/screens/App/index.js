@@ -13,6 +13,7 @@ import ComingSoon from './screens/ComingSoon'
 import Profile from './screens/Profile'
 import Inbox from './screens/Inbox'
 import LaunchPad from './screens/LaunchPad'
+import Settings from './screens/Settings'
 import Talk from './screens/Talk'
 
 import Nav from './shared/components/Navigation'
@@ -30,12 +31,21 @@ function App() {
         <Switch>
           <Route path="/profile" component={Profile} />
           <Route path="/inbox" component={Inbox} />
-          <Route exact path="/talk" component={LaunchPad} />
-          <Route path="/talk/:sessionId" component={Talk} />
+          <Route path="/talk" component={LaunchPad} />
+          <Route path="/settings" component={Settings} />
         </Switch>
       </Screen>
       <Footer />
     </Background>
+  )
+}
+
+function Conversation() {
+  return (
+    <div style={{ overflow: 'hidden' }}>
+      <Nav conversation />
+      <Route path="/talk/:sessionId" component={Talk} />
+    </div>
   )
 }
 
@@ -53,7 +63,9 @@ const Root = () => (
       <Route path="/notLoggedIn" component={NotLoggedIn} />
       <Route path="/profile" component={App} />
       <Route path="/inbox" component={App} />
-      <Route path="/talk" component={App} />
+      <Route exact path="/talk" component={App} />
+      <Route path="/settings" component={App} />
+      <Route path="/talk/:sessionId" component={Conversation} />
       <Route component={NotFound404} />
     </Switch>
   </BrowserRouter>

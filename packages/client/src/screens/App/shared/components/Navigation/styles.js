@@ -10,7 +10,6 @@ export const Navigation = styled.div`
   width: 100%;
   height: 63px;
   background-color: ${styles.color};
-  margin-bottom: 1em;
   position: relative;
   flex: none;
 `
@@ -25,6 +24,9 @@ export const NavigationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & > h1 {
+    margin: 0 !important;
+  }
 `
 NavigationContainer.defaultProps = {
   container: 'default',
@@ -53,25 +55,9 @@ export const Link = styled(NavLink)`
   }
 `
 
-export const Logo = styled.div`
-  color: ${styles.color};
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 2px;
-  & > h1 {
-    margin: auto;
-  }
-  & > img {
-    width: 35px;
-    height: 29px;
-    flex: none;
-  }
+export const Logo = styled.img`
+  height: 30px;
 `
-Logo.defaultProps = {
-  color: 'accent',
-}
 
 export const ConversationCorner = styled.div`
   color: #fff;

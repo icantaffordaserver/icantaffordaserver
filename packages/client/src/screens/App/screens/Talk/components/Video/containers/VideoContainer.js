@@ -9,19 +9,24 @@ class VideoContainer extends Component {
     audio: true,
     video: true,
     chat: false,
+    videoStarted: false,
   }
 
   async componentDidMount() {
     const token = this.props.token
     const roomName = this.props.roomName
 
-    const videoConnection = await createVideoConnection(
-      token,
-      roomName,
-      this.onDisconnect,
-    )
+    if (!this.state.videoStarted) {
+      const videoConnection = await createVideoConnection(
+        token,
+        roomName,
+        this.onDisconnect,
+        window.screen.availWidth,
+        window.screen.availHeight,
+      )
 
-    await this.setState({ videoConnection })
+      await this.setState({ videoConnection, videoStarted: true })
+    }
   }
 
   componentWillUnmount() {

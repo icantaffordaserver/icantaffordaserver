@@ -5,6 +5,7 @@ export default {
     secondary: '#7781c8',
     white: '#fff',
     gray: '#F8F8F8',
+    altGray: '#D7D7D7',
     darkGray: '#333',
     transparent: 'transparent',
     cancel: '#EB5757',
@@ -12,7 +13,7 @@ export default {
   },
 
   size: {
-    small: 20,
+    small: 25,
     medium: 40,
     large: 60,
     huge: 80,

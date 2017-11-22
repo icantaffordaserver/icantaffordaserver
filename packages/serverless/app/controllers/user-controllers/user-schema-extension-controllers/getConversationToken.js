@@ -45,7 +45,7 @@ export default async (req, res) => {
     )
 
     // Set the Identity of this token
-    accessToken.identity = user.id
+    accessToken.identity = `${user.firstName} ${user.lastName}`
 
     // Grant access
     const videoGrant = new VideoGrant()

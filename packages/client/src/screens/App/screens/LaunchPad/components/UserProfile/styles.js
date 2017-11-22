@@ -71,33 +71,41 @@ export const QASection = styled.div`
 
 export const QA = styled.div`
   background: #fff;
-  height: 200px;
-  width: 310px;
+  padding: 0;
+  & > h1 {
+    background: #7781c8;
+    min-height: 80px;
+    font-size: 1.35em;
+    padding: 3% 1%;
+    margin-top: 0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+  }
 `
 export const Left = styled(Icon).attrs({
   name: 'chevron left',
   size: 'huge',
 })`
-    margin: auto !important;
-    grid-area: left;
+  margin: auto !important;
+  grid-area: left;
 
-    &:hover{
-        cursor: pointer;
-        color: #333;
-    }
-
+  &:hover {
+    cursor: pointer;
+    color: #333;
+  }
 `
 export const Right = styled(Icon).attrs({
   name: 'chevron right',
   size: 'huge',
 })`
-    margin: auto !important;
-    grid-area: right;
+  margin: auto !important;
+  grid-area: right;
 
- &:hover{
-        cursor: pointer;
-        color: #333;
-    }
+  &:hover {
+    cursor: pointer;
+    color: #333;
+  }
 `
 export const Avatar = styled.img`
   height: 200px;

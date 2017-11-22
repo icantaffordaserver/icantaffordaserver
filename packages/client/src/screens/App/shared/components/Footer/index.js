@@ -6,9 +6,8 @@ import isAuthenticated from '../../HoCs/isAuthenticated'
 import isVerified from '../../HoCs/isVerified'
 import currentUserQuery from '../../graphql/queries/currentUserQuery'
 
-import { Footer, Link, Logo } from './styles.js'
-
-import { Page, Row, Column } from 'hedron'
+import { Footer, Links, Link, Logo, FooterWrapper } from './styles.js'
+import logo from '../../assets/logo.svg'
 
 class FooterComponent extends Component {
   handleLogout = e => {
@@ -19,26 +18,19 @@ class FooterComponent extends Component {
 
   render() {
     return (
-      <Page fluid>
+      <FooterWrapper>
         <Footer>
-          <Row divisions={12} justifyContent={'space-between'}>
-            <Column fluid mdShift={5} md={1}>
-              <Logo>PLUTO</Logo>
-            </Column>
-            <Column fluid mdShift={2} md={1}>
-              <Link to="/toc">Terms and Conditions</Link>
-            </Column>
-            <Column fluid md={1}>
-              <Link to="/contact">Contact Us</Link>
-            </Column>
-            <Column fluid md={1}>
-              <Link to="/logout" onClick={this.handleLogout}>
-                Logout
-              </Link>
-            </Column>
-          </Row>
+          <Logo src={logo} />
+          <Links>
+            <Link to="/toc">Terms & Conditions</Link>
+            <Link to="/contact">Contact Us</Link>
+            <Link to="/settings">Settings</Link>
+            <Link active={false} to="/" onClick={this.handleLogout}>
+              Logout
+            </Link>
+          </Links>
         </Footer>
-      </Page>
+      </FooterWrapper>
     )
   }
 }

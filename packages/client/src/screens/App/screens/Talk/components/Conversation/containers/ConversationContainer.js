@@ -4,27 +4,15 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo, gql } from 'react-apollo'
 
 import moment from 'moment'
-import axios from 'axios'
 
 import ConversationComponent from '../components/ConversationComponent'
 import PostConversation from '../../../components/PostConversation'
 import { Conversation } from '../styles'
+import { Loader } from 'semantic-ui-react'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 
 class ConversationContainer extends Component {
-  /**
-   * TODO:
-   *  - Countdown to conversation if entered early [Done]
-   *  - Countdown styles
-   *  - Redirect to conversation 5 min before it starts (GLOBALLY)[Pondering...]
-   *  - Video provider [Done]
-   *  - Video Styles 
-   *  - Chat provider [Done]
-   *  - Chat Styles
-   *  - Error states
-   */
-
   static propTypes = {
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -42,30 +30,33 @@ class ConversationContainer extends Component {
 
   async componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
-      let areTalking = this.state.areTalking
       const connection = nextProps.data.user.connections[0]
-
-      //Check if conversation is starting soon
-      if (
-        moment(connection.connectionTime).diff(moment()) <=
-        this.state.MINUTES_TO_START
-      ) {
-        areTalking = true
-      }
 
       await this.setState({
         connection,
-        areTalking,
       })
+      if (this.shouldStart()) this.handleStartConversation()
     }
+    null
   }
 
-  handleStartConversation = async e => {
-    e.preventDefault()
+  shouldStart = async () => {
+    if (this.state.connection) await this.props.data.user
+
+    return
+    !this.state.areTalking &&
+      !this.state.conversationEnded &&
+      moment(this.state.connection.connectionTime).diff(moment()) <=
+        this.state.MINUTES_TO_START
+  }
+
+  handleStartConversation = async () => {
     const name = this.props.data.user.firstName
     const userId = this.props.data.user.id
     const roomName = await this.props.data.user.connections[0].id
-    const request = await this.props.client.query({
+    const {
+      data: { getConversationToken: { token } },
+    } = await this.props.client.query({
       query: gql`
         query getToken($connectionId: ID!) {
           getConversationToken(connectionId: $connectionId) {
@@ -77,19 +68,15 @@ class ConversationContainer extends Component {
         connectionId: roomName,
       },
     })
-    console.log(request)
-    const token = request.data.getConversationToken.token
-
     await this.setState({
       areTalking: true,
-      conversationEnded: false,
       roomName,
       token,
     })
   }
 
   handleEndConversation = async (e, status) => {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     this.setState({
       areTalking: false,
@@ -99,11 +86,25 @@ class ConversationContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.handleEndConversation(new Event(null), 'Left')
+    this.handleEndConversation(null, 'Left')
   }
 
   render() {
-    if (this.props.data.loading) return null
+    if (this.props.data.loading || !this.state.connection)
+      return (
+        <div
+          style={{
+            height: '100vh',
+            width: '100vw',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Loader active size="massive" />
+        </div>
+      )
+
     return (
       <Conversation>
         {this.state.conversationEnded && (
@@ -123,7 +124,6 @@ class ConversationContainer extends Component {
               userId={this.props.data.user.id}
             />
           )}
-        <button onClick={this.handleStartConversation}>Start</button>
       </Conversation>
     )
   }
