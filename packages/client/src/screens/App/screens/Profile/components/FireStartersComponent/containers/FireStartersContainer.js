@@ -5,26 +5,31 @@ import FireStartersComponent from '../components/FireStartersComponent'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 import userAnswerFireStarterMutation from '../../../../../shared/graphql/mutations/userAnswerFireStarterMutation'
+import updateFireStarterAnswerMutation from '../../../../../shared/graphql/mutations/updateFireStarterAnswerMutation'
+import deleteFireStarterAnswerMutation from '../../../../../shared/graphql/mutations/deleteFireStarterAnswerMutation'
 import allUserFireStarterAnswersQuery from '../../../../../shared/graphql/queries/allUserFireStarterAnswersQuery'
 import getUserFireStartersQuery from '../../../../../shared/graphql/queries/getUserFireStartersQuery'
 
 class FireStartersContainer extends Component {
   state = {
     fireStarterAnswer: '',
+    currentFireStarter: null,
     loading: false,
   }
 
-  async componentWillReceiveProps(nextProps) {
-    const { loading } = nextProps.data
+  async componentDidMount() {
+    const { loading } = this.props.data
     if (!loading) {
       this.getFireStarters()
     }
   }
+
   answerChange = e => {
     this.setState({
       fireStarterAnswer: e.target.value,
     })
   }
+
   getFireStarters = async () => {
     const { user } = this.props.data
 
@@ -38,44 +43,100 @@ class FireStartersContainer extends Component {
     const fireStarterAnswers = response.data.allFireStarterAnswers
     const answerIds = fireStarterAnswers.map(answer => answer.id)
 
-    const getFireStarter = await this.props.client.query({
+    const { data: { answered, unanswered } } = await this.props.client.query({
       query: getUserFireStartersQuery,
       variables: {
         answered: answerIds,
       },
     })
 
-    const currentFireStarter = getFireStarter.data.allFireStarters[0]
-
     await this.setState({
       fireStarterAnswers,
-      currentFireStarter,
+      allFireStarters: {
+        answered,
+        unanswered,
+      },
+      currentFireStarter: null,
+      fireStarterAnswer: '',
+      loading: false,
     })
+  }
+
+  getFireStarterAnswer = id => {
+    return this.state.fireStarterAnswers.filter(
+      fireStarterAnswer => fireStarterAnswer.question.id === id,
+    )[0]
+  }
+
+  deleteFireStarterAnswer = async e => {
+    if (e) e.preventDefault()
+
+    // Only delete if the question has been answered.
+    if (this.state.currentFireStarter.answer !== undefined) {
+      this.setState({ loading: true })
+      await this.props.client.mutate({
+        mutation: deleteFireStarterAnswerMutation,
+        variables: { id: this.state.currentFireStarter.id },
+      })
+
+      await this.props.client.resetStore()
+      await this.getFireStarters()
+    }
   }
 
   handleAnswerFireStarter = async e => {
     this.setState({ loading: true })
-    await this.props.client.mutate({
+    const fireStarter = this.state.currentFireStarter
+    const answer = this.state.fireStarterAnswer
+    let mutation = {
       mutation: userAnswerFireStarterMutation,
       variables: {
         userId: this.props.data.user.id,
-        fireStarterId: this.state.currentFireStarter.id,
-        answer: this.state.fireStarterAnswer,
+        fireStarterId: fireStarter.id,
+        answer,
       },
-      refetchQueries: [{ query: getUserFireStartersQuery }],
-    })
+    }
 
+    if (fireStarter.answer) {
+      mutation = {
+        mutation: updateFireStarterAnswerMutation,
+        variables: { id: fireStarter.id, answer },
+      }
+    }
+
+    await this.props.client.mutate(mutation)
+    await this.props.client.resetStore()
     await this.getFireStarters()
-    this.setState({ loading: false })
   }
+
+  selectQuestion = async fireStarter => {
+    if (this.state.allFireStarters.answered.includes(fireStarter)) {
+      const { question, ...rest } = this.getFireStarterAnswer(fireStarter.id)
+      fireStarter = { ...rest, question: question.question }
+    }
+
+    await this.setState({
+      currentFireStarter: fireStarter,
+      fireStarterAnswer: fireStarter.answer,
+    })
+  }
+
+  clearQuestion = () => {
+    this.setState({ currentFireStarter: null, fireStarterAnswer: '' })
+  }
+
   render() {
-    console.log('firestarter: ', this.state)
     return (
       <FireStartersComponent
         answers={this.state.fireStarterAnswers}
-        question={this.state.currentFireStarter}
-        answerFireStarter={this.handleAnswerFireStarter}
+        currentAnswer={this.state.fireStarterAnswer}
         answerChange={this.answerChange}
+        answerFireStarter={this.handleAnswerFireStarter}
+        currentFireStarter={this.state.currentFireStarter}
+        fireStarters={this.state.allFireStarters}
+        selectQuestion={this.selectQuestion}
+        clearQuestion={this.clearQuestion}
+        deleteAnswer={this.deleteFireStarterAnswer}
         loading={this.state.loading}
       />
     )

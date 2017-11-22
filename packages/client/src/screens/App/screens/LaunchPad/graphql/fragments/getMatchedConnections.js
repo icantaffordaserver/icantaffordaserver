@@ -4,10 +4,11 @@ import connectionsFragment from '../fragments/connectionsFragment'
 
 export default gql`
   fragment getMatchedConnections on Query {
-    invitations: allConnections(
+    invitations: allConnectionses(
       filter: { status: MATCHED, participants_some: { id: $id } }
     ) {
-      ...connectionsFragment
+      ...connectionDetails
     }
   }
+  ${connectionsFragment}
 `

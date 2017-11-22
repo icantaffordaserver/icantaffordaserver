@@ -21,6 +21,10 @@ import ProfileIcon from '../../assets/profile-icon.svg'
 import logo from '../../assets/logo.svg'
 
 class NavigationComponent extends Component {
+  toConnection = () => {
+    const { token } = this.props.data.user.connections[0]
+    this.props.history.push(`/talk/${token}`)
+  }
   render() {
     if (this.props.data.loading || !this.props.data.user) return null
 

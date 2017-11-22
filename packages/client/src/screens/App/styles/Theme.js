@@ -34,12 +34,12 @@ export default {
 
   borderRadius: {
     square: 0,
-    default: 5,
-    round: 10,
+    default: 1,
+    round: 2,
   },
 
   container: {
-    default: 70,
+    default: 65,
     expanded: 90,
     full: 100,
   },

@@ -29,7 +29,7 @@ export const Content = styled.div`
   width: ${styles.container}%;
   align-items: center;
   justify-content: space-between;
-  border-radius: ${styles.borderRadius}px;
+  border-radius: ${styles.borderRadius}em;
   box-shadow: ${styles.shadow};
   padding: 2% 5%;
   margin: 2% auto;
@@ -84,7 +84,7 @@ export const Section = styled.section`
   padding: 2%;
   flex-wrap: wrap;
   background: ${styles.color};
-  border-radius: ${styles.borderRadius};
+  border-radius: ${styles.borderRadius}em;
   box-shadow: ${styles.shadow};
   ${props =>
     props.inline &&
