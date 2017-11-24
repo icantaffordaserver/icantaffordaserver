@@ -27,14 +27,19 @@ class NavigationComponent extends Component {
   }
   render() {
     if (this.props.data.loading || !this.props.data.user) return null
-
+    const connection =
+      this.props.data.user.connections && this.props.data.user.connections[0]
+    const otherUser =
+      connection &&
+      connection.participants.filter(
+        user => user.id !== this.props.data.user.id,
+      )[0]
     return (
       <Navigation>
         {this.props.conversation ? (
           <NavigationContainer>
             <Title fullWidth medium center white>
-              Talk with{' '}
-              {this.props.data.user.connections[0].participants[0].firstName}
+              Talk with {otherUser.firstName}
             </Title>
           </NavigationContainer>
         ) : (

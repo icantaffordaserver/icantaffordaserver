@@ -108,6 +108,10 @@ permissions:
 - operation: Connections.create
 - operation: Connections.update
 - operation: Connections.delete
+- operation: ConversationPrompt.read
+- operation: ConversationPrompt.create
+- operation: ConversationPrompt.update
+- operation: ConversationPrompt.delete
 - operation: FireStarter.read
 - operation: FireStarter.create
 - operation: FireStarter.update

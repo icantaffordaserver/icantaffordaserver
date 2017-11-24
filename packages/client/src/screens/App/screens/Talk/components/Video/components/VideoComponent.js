@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import VideoControls from './VideoControlsComponent'
 import Chat from '../../Chat'
+import ConversationPrompt from './ConversationPromptComponent'
 
 import { VideoPlayer } from '../styles'
 import { Button, RowContainer, ColumnContainer } from '../../../../../styles'
@@ -14,14 +15,17 @@ class VideoComponent extends Component {
           token={this.props.token}
           roomName={this.props.roomName}
           hidden={!this.props.chat}
+          toggleChat={this.props.toggleChat}
+          otherUser={this.props.otherUser}
         />
+        {/* 
+        <ConversationPrompt /> */}
         <VideoControls
           toggleVideo={this.props.toggleVideo}
           toggleAudio={this.props.toggleAudio}
-          toggleChat={this.props.toggleChat}
           audio={this.props.audio}
           video={this.props.video}
-          chat={this.props.chat}
+          endConversation={this.props.endConversation}
         />
       </VideoPlayer>
     )

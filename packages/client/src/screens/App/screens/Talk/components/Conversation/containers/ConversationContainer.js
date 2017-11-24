@@ -119,7 +119,7 @@ class ConversationContainer extends Component {
             <ConversationComponent
               roomName={this.state.roomName}
               token={this.state.token}
-              onFinish={this.handleEndConversation}
+              endConversation={this.handleEndConversation}
               connection={this.state.connection}
               userId={this.props.data.user.id}
             />

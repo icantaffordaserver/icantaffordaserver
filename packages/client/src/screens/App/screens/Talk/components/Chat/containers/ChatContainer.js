@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
-import Chat from '../components/ChatComponent'
+import { addResponseMessage } from 'react-chat-widget'
+import Chat from 'twilio-chat'
 import createChatRoom from '../../../../../shared/ChatProvider'
 import { ChatBox } from '../styles'
+import '../styles/widget.css'
 
 class ChatContainer extends Component {
   state = {
@@ -11,17 +13,29 @@ class ChatContainer extends Component {
     chatStarted: false,
   }
   async openChat() {
+    console.log(this.state)
     if (!this.state.chatStarted) {
-      // Create the chat client
-      let channel = await createChatRoom(this.props.token, this.props.roomName)
-      channel = await channel.join()
-      console.log(channel)
+      const client = await Chat.create(this.props.token)
+      await client.initialize()
+
+      let channel
+      try {
+        channel = await client.getChannelByUniqueName(this.props.roomName)
+      } catch (error) {
+        console.log(error)
+        channel = await client.createChannel({
+          uniqueName: this.props.roomName,
+        })
+      }
+      const joinedChannel = await channel.join()
+
       // Events
       channel.on('messageAdded', this.addMessage)
 
-      // Fetch previous messages and set state
-      let messages = await channel.getMessages()
-      this.setState({ messages: messages.items, channel, chatStarted: true })
+      await this.setState({
+        channel: joinedChannel,
+        chatStarted: true,
+      })
     }
   }
 
@@ -37,6 +51,15 @@ class ChatContainer extends Component {
     }
   }
 
+  addMessage = message => {
+    const otherUser = this.props.otherUser
+    const otherUserName = otherUser.firstName + ' ' + otherUser.lastName
+    if (message.author === otherUserName) {
+      console.log(message.author, otherUserName)
+      addResponseMessage(message.body)
+    }
+  }
+
   handleChange = e => {
     e.preventDefault()
     console.log(e)
@@ -45,35 +68,19 @@ class ChatContainer extends Component {
     })
   }
 
-  sendMessage = e => {
-    e.preventDefault()
-    this.refs.textBox.value = ''
-    this.refs.textBox.focus()
-    this.state.channel.sendMessage(this.state.message)
-  }
-
-  addMessage = message => {
-    const messages = this.state.messages
-    messages.push(message)
-    this.setState({ messages })
+  sendMessage = message => {
+    this.state.channel.sendMessage(message)
   }
 
   render() {
-    if (!this.props.hidden) this.openChat()
+    if (!this.state.chatStarted) this.openChat()
     if (!this.state.channel) return <div className="loader active inline" />
     return (
-      <ChatBox hidden={this.props.hidden}>
-        <Chat messages={this.state.messages} />
-        <form action="" onSubmit={this.sendMessage}>
-          <input
-            ref="textBox"
-            name="message"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <button onClick={this.sendMessage}>Send Message</button>
-        </form>
-      </ChatBox>
+      <ChatBox
+        title="Quick Chat"
+        subtitle=""
+        handleNewUserMessage={this.sendMessage}
+      />
     )
   }
 }

@@ -11,33 +11,21 @@ export default props => {
     <ControlsWrapper>
       <Controls>
         <Control>
-          <Icon
-            name="chat"
-            size="large"
-            onClick={props.toggleChat}
-            color={props.chat && 'red'}
-          />
+          <Icon name="chat" size="large" />
         </Control>
-        <Control>
-          <Icon
-            name="camera"
-            size="large"
-            onClick={props.toggleVideo}
-            color={!props.video && 'red'}
-          />
+        <Control onClick={props.toggleVideo}>
+          <Icon name="camera" size="large" color={!props.video && 'red'} />
         </Control>
-        <Control>
-          <Icon
-            name="microphone"
-            size="large"
-            onClick={props.toggleAudio}
-            color={!props.audio && 'red'}
-          />
+        <Control onClick={props.toggleAudio}>
+          <Icon name="microphone" size="large" color={!props.audio && 'red'} />
         </Control>
         <Control>
           <Report>
             <Icon name="flag" size="large" color="red" />
           </Report>
+        </Control>
+        <Control onClick={props.endConversation}>
+          <Icon name="close" size="large" />
         </Control>
         <img src={alien} alt="" />
       </Controls>

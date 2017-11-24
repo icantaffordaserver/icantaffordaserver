@@ -43,7 +43,6 @@ function App() {
 function Conversation() {
   return (
     <div style={{ overflow: 'hidden' }}>
-      <Nav conversation />
       <Route path="/talk/:sessionId" component={Talk} />
     </div>
   )
