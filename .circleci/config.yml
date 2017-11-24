@@ -21,7 +21,7 @@ jobs:
           command: cd packages/client && yarn build
       - run:
           name: Upload to S3
-          command: aws s3 sync build/ s3://pluto-client-staging
+          command: pwd && aws s3 sync packages/client/build/ s3://pluto-client-staging
       - run:
           name: Invalidate Cloudfront
           command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
