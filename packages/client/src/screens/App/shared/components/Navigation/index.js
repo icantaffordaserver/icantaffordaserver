@@ -33,10 +33,10 @@ class NavigationComponent extends Component {
 
           <NavigationLinks>
             <Link to="/talk">
-              <img src={ConnectionIcon} />
+              <img alt="connection_icon" src={ConnectionIcon} />
             </Link>
             <Link to="/profile">
-              <img src={ProfileIcon} />
+              <img alt="profile_icon" src={ProfileIcon} />
             </Link>
             {this.props.data.user.connections.length !== 0 ? (
               <ConversationCorner>

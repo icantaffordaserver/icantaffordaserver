@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo, gql } from 'react-apollo'
 
 import moment from 'moment'
-import axios from 'axios'
 
 import ConversationComponent from '../components/ConversationComponent'
 import PostConversation from '../../../components/PostConversation'
@@ -19,7 +18,7 @@ class ConversationContainer extends Component {
    *  - Countdown styles
    *  - Redirect to conversation 5 min before it starts (GLOBALLY)[Pondering...]
    *  - Video provider [Done]
-   *  - Video Styles 
+   *  - Video Styles
    *  - Chat provider [Done]
    *  - Chat Styles
    *  - Error states
@@ -62,8 +61,6 @@ class ConversationContainer extends Component {
 
   handleStartConversation = async e => {
     e.preventDefault()
-    const name = this.props.data.user.firstName
-    const userId = this.props.data.user.id
     const roomName = await this.props.data.user.connections[0].id
     const request = await this.props.client.query({
       query: gql`

@@ -1,27 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
 import { Message } from 'semantic-ui-react'
+
 import {
   LoginWrapper,
   LoginFormWrapper,
   LoginImageContainer,
-  Links,
 } from '../../../Login/components/LoginForm/styles'
-import {
-  Content,
-  Title,
-  Subheading,
-  Form,
-  Button,
-  FormGroup,
-  Input,
-  Label,
-  TextLink,
-} from '../../../../styles'
-import Planet from '../../../../shared/assets/planet.png'
-
+import { Form, Button, FormGroup, Input, Label } from '../../../../styles'
 import SVG from 'react-inlinesvg'
 import logo from '../../../../shared/assets/Signup-Logo.svg'
 

@@ -1,21 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../../styles'
+import { Title } from '../../../../styles'
 
-import { Flex, Box, Grid } from 'grid-styled'
+import { Grid } from 'grid-styled'
 import SVG from 'react-inlinesvg'
 
 import EditIcon from '../../../../../../assets/icons/icon.svg'

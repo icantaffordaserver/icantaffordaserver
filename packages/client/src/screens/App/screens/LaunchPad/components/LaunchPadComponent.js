@@ -2,14 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 import { Subheading } from '../../../styles'
-import {
-  Layout,
-  Invitations,
-  Schedule,
-  UpcomingComponent,
-  History,
-  Title,
-} from '../styles'
+import { Layout, Invitations, Schedule, History, Title } from '../styles'
 
 import Introductions from './Introductions'
 import Calendar from './Calendar'
@@ -17,7 +10,7 @@ import Upcoming from './Upcoming'
 
 class LaunchPadComponent extends Component {
   render() {
-    const { invitations, upcoming, history } = this.props.connections
+    const { invitations, upcoming } = this.props.connections
     return (
       <Layout>
         <Invitations>

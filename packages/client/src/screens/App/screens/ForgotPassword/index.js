@@ -5,6 +5,6 @@ import React from 'react'
 
 import ForgotPasswordContainer from './containers/ForgotPasswordFormContainer'
 
-const ForgotPasswordScreen = () => (<ForgotPasswordContainer />)
+const ForgotPasswordScreen = () => <ForgotPasswordContainer />
 
 export default ForgotPasswordScreen

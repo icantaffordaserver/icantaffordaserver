@@ -9,7 +9,6 @@ import {
   Message,
   Icon,
 } from 'semantic-ui-react'
-import isEmail from 'validator/lib/isEmail'
 
 import { ResetPasswordButton } from './styles'
 

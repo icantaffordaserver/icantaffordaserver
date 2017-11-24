@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { Logo, Button } from '../WelcomeChooseInterests/styles.js'
+import { Button } from '../WelcomeChooseInterests/styles.js'
 
 import { Title, TextArea } from '../../../../styles'
 
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 import Graphic1 from '../../assets/Group.svg'
 import SVG from 'react-inlinesvg'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
-import allConnectionInterests from '../../../../shared/graphql/queries/allConnectionInterests'
-import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
-import createConnectionInterest from '../../../../shared/graphql/mutations/createConnectionInterest.js'
 
 import Planet from '../../../../shared/assets/planet.png'
-
-import Biography from '../../../Profile/components/Biography.js'
 
 class WelcomeBio extends Component {
   render() {

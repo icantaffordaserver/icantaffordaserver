@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-import moment from 'moment'
-
-import Chat from '../../../components/Chat'
 import Video from '../../../components/Video'
 
 import { Title } from '../../../../../styles'

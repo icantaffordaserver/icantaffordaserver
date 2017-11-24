@@ -11,7 +11,8 @@ export default gql`
       }
       orderBy: connectionTime_ASC
     ) {
-      ...connectionsFragment
+      ...connectionDetails
     }
   }
+  ${connectionsFragment}
 `

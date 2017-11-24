@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 
 import PostConversationComponent from '../components/PostConversationComponent'
 
-import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
 import userReviewMutation from '../../../../../shared/graphql/mutations/userReviewMutation'
 import userJournalEntryMutation from '../../../../../shared/graphql/mutations/userJournalEntryMutation'
 
@@ -47,7 +46,7 @@ class PostConversationContainer extends Component {
       const userId = this.props.userId
       const connectionId = this.props.connection.id
 
-      const review = await this.props.reviewConversation({
+      await this.props.reviewConversation({
         variables: {
           ...rest,
           userId,
@@ -56,7 +55,7 @@ class PostConversationContainer extends Component {
         },
       })
 
-      const addJournalEntry = await this.props.journalEntry({
+      await this.props.journalEntry({
         variables: {
           userId,
           connectionId,

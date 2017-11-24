@@ -1,10 +1,5 @@
 import gql from 'graphql-tag'
 
-import getMatchedFragment from '../fragments/getMatchedConnections'
-import getUpcomingFragment from '../fragments/getUpcomingConnections'
-import getPastFragment from '../fragments/getPastConnections'
-import connectionsDetails from '../fragments/connectionsFragment'
-
 /**
  * Apollo doesn't support inline fragments atm?
  * https://dev-blog.apollodata.com/webpacking-your-graphql-documents-bf9697ed259b

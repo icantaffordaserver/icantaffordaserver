@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import moment from 'moment'
@@ -111,7 +111,7 @@ class LaunchPadContainer extends Component {
   }
 
   passInvitation = async id => {
-    const request = await this.props.client.mutate({
+    await this.props.client.mutate({
       mutation: deleteConnectionMutation,
       variables: { id },
     })

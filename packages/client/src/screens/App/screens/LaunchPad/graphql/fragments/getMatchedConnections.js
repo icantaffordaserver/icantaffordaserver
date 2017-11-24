@@ -7,7 +7,8 @@ export default gql`
     invitations: allConnections(
       filter: { status: MATCHED, participants_some: { id: $id } }
     ) {
-      ...connectionsFragment
+      ...connectionDetails
     }
   }
+  ${connectionsFragment}
 `

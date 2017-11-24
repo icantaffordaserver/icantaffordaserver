@@ -5,10 +5,6 @@ import Theme from '../Theme'
 
 const styles = bind(Theme)
 
-const getColor = (color, key) => {
-  return color ? color : styles.key
-}
-
 export const Title = styled.h1`
   color: ${styles.color};
   font-weight: bold;

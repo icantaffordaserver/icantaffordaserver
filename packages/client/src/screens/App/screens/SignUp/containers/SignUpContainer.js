@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { graphql, withApollo, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
@@ -96,17 +95,10 @@ class SignUpContainer extends Component {
     // e.preventDefualt() // ALWAYS PREVENT DEFAULT ON ANY BUTTON SUBMISSION
     // SignUp mutation
     console.log('handleSignup props : ', this.props)
-    const {
-      password,
-      password2,
-      firstName,
-      lastName,
-      email,
-      inviteToken,
-    } = this.state
+    const { password, firstName, lastName, email, inviteToken } = this.state
 
     try {
-      const signup = await this.props.signUpMutation({
+      await this.props.signUpMutation({
         variables: {
           firstName,
           lastName,

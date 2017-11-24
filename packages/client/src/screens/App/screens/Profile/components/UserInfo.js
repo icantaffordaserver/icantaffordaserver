@@ -1,22 +1,8 @@
 import React, { Component } from 'react'
-import SubTitleSection from './shared/SubTitleSection'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../styles'
+import { Title, Tag } from '../../../styles'
 
-import { Flex, Box, Grid } from 'grid-styled'
+import { Grid } from 'grid-styled'
 import { ProfileSection } from '../style'
 import ChooseInterests from './ChooseInterestsComponent'
 import EditIcon from '../../../../../assets/icons/icon.svg'
