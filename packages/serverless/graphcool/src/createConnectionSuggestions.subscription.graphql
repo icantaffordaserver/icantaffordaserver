@@ -1,0 +1,15 @@
+#
+#   THIS IS TRIGGERED WHEN A CONNECTION IS CREATED WITH A STATUS OF "MATCHED".
+#   This subscription will CREATE a connection suggestion for every user associated
+#   with the connection.
+#
+subscription {
+  Connections(filter: { mutation_in: [CREATED], node: { status: MATCHED } }) {
+    node {
+      id
+      participants {
+        id
+      }
+    }
+  }
+}

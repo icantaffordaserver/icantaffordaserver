@@ -12,6 +12,7 @@ const createFireStarterMutation = `
   ) {
     createFireStarter(
       question: $question
+      type: CURIOSITIES
     ) {
       id
     }
