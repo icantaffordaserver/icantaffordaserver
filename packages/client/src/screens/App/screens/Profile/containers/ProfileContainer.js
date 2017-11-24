@@ -23,6 +23,7 @@ class ProfileContainer extends Component {
   }
 
   handleOpen = e => {
+    const
     e.preventDefault()
     this.setState({ editing: !this.state.editing })
   }
