@@ -30,6 +30,10 @@ jobs:
           command: echo Funny how many tests there are wow!
   deploy-aws:
     steps:
+      - checkout
+      - run: 
+          name: I should be deploying to aws
+          command: echo Deploying aws staging
      
 workflows:
   version: 2
