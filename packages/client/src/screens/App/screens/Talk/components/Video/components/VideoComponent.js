@@ -4,7 +4,6 @@ import VideoControls from './VideoControlsComponent'
 import Chat from '../../Chat'
 
 import { VideoPlayer } from '../styles'
-import { Button, RowContainer, ColumnContainer } from '../../../../../styles'
 
 class VideoComponent extends Component {
   render() {

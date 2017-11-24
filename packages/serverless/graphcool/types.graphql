@@ -134,6 +134,7 @@ type Invite @model {
   firstName: String!
   lastName: String!
   acceptedUser: User @relation(name: "InviteOnUserAccepted")
+  isAccepted: Boolean! @defaultValue(value: false) @migrationValue(value: false)
   isApproved: Boolean! @defaultValue(value: false)
   approvedBy: User @relation(name: "InviteApprovedByUser")
   sentBy: User @relation(name: "InviteOnUserSentBy")

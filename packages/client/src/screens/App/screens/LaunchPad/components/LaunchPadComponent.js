@@ -10,7 +10,7 @@ import Upcoming from './Upcoming'
 
 class LaunchPadComponent extends Component {
   render() {
-    const { invitations, upcoming, history } = this.props.connections
+    const { invitations, upcoming } = this.props.connections
     return (
       <Layout>
         <Invitations>

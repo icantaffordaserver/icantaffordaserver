@@ -11,6 +11,6 @@ extend type Mutation {
     birthday: String!
     bio: String!
     location: String
-    inviteId: ID
+    inviteToken: String!
   ): SignupEmailUserPayload
 }

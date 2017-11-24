@@ -1,31 +1,15 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 import Dropzone from 'react-dropzone'
-
 import axios from 'axios'
-import { Message, Modal } from 'semantic-ui-react'
-
+import ReactCrop, { makeAspectCrop } from 'react-image-crop' // eslint-disable-line
 import ReactModal from 'react-modal'
-import ReactCrop, { makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
-import { Page, Row, Column } from 'hedron'
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 
-import {
-  ColumnContainer,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  TextArea,
-  ButtonText,
-  TextLink,
-} from '../../../../styles'
-
-import { TrophyColorPicker, Button } from '../../style'
+import { TrophyColorPicker } from '../../style'
 import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
@@ -247,7 +231,7 @@ class UploadPhotoComponent extends Component {
                   dropzoneRef.open()
                 }}
               >
-                <ButtonText>Upload Picture</ButtonText>
+                Upload Picture
               </button>
             </Box>
             <Box

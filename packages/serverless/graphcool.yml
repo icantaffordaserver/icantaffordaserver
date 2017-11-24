@@ -2,6 +2,9 @@ types: ./graphcool/types.graphql
 custom:
   dev:
     WEBHOOK_URL: ${env:WEBHOOK_SERVER_URL}
+  staging: 
+    # move to an environment variable on circle ci
+    WEBHOOK_URL: https://yh3w5yykgg.execute-api.us-east-1.amazonaws.com/staging/
   prod:
     WEBHOOK_URL: http://test.com/prod
 functions:

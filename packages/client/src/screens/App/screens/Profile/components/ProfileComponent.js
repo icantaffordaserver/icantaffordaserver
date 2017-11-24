@@ -1,43 +1,23 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../styles'
-
-import { TrophyContainer, ProfileSection, FireStarterContainer } from '../style'
+import { TrophyContainer } from '../style'
 
 import UploadPhotoComponent from './UploadPhotoComponent'
-import FireStartersComponent from './FireStartersComponent'
 
-import Schedule from './ScheduleComponent'
 import Biography from './Biography'
 import Availabilty from './Availability'
 import SubTitleSection from './shared/SubTitleSection'
 import UserInfo from './UserInfo'
+import FireStartersComponent from './FireStartersComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import allConnectionInterests from '../../../shared/graphql/queries/allConnectionInterests'
 import updateUserMutation from '../../../shared/graphql/mutations/updateUserMutation'
 import createConnectionInterest from '../../../shared/graphql/mutations/createConnectionInterest.js'
-import { Flex, Box, Grid } from 'grid-styled'
-import SVG from 'react-inlinesvg'
+import { Flex, Box } from 'grid-styled'
 
 import EmptyAvatar from '../../../../../assets/pictures/empty_avatar.jpg'
-import EditIcon from '../../../../../assets/icons/icon.svg'
 
 /* 
 user background will actually be pulled from the user but for now we will just import a static image
@@ -96,9 +76,9 @@ const ProfilePhoto = props => {
   return (
     <div style={{ marginTop: '-250px', width: '100%' }}>
       {props.url ? (
-        <img src={props.url} height="300" width="300" />
+        <img alt="profile_photo" src={props.url} height="300" width="300" />
       ) : (
-        <img src={EmptyAvatar} height="300" width="300" />
+        <img alt="empty_avatar" src={EmptyAvatar} height="300" width="300" />
       )}
     </div>
   )

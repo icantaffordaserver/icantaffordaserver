@@ -11,7 +11,7 @@ export default gql`
     $lastName: String!
     $birthday: String!
     $bio: String!
-    $inviteId: ID
+    $inviteToken: String!
   ) {
     signUpUser(
       email: $email
@@ -20,7 +20,7 @@ export default gql`
       lastName: $lastName
       birthday: $birthday
       bio: $bio
-      inviteId: $inviteId
+      inviteToken: $inviteToken
     ) {
       id
     }

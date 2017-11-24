@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import React from 'react'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 

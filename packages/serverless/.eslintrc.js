@@ -5,7 +5,7 @@ module.exports = {
     'plugin:import/warnings',
     'prettier',
   ],
-  plugins: ['prettier'],
+  plugins: ['json', 'prettier'],
   env: {
     es6: true,
     node: true,

@@ -2,6 +2,7 @@
  * Created by alexandermann on 2017-03-21.
  */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql, compose } from 'react-apollo'
 import currentUserQuery from '../graphql/queries/currentUserQuery'
 import isAuthenticated from './isAuthenticated'
@@ -9,15 +10,15 @@ import isAuthenticated from './isAuthenticated'
 export default WrappedComponent => {
   class isVerified extends React.Component {
     static propTypes = {
-      data: React.PropTypes.object.isRequired,
-      history: React.PropTypes.object.isRequired,
+      data: PropTypes.object.isRequired,
+      history: PropTypes.object.isRequired,
     }
 
     componentWillReceiveProps(nextProps) {
       const { data } = nextProps
 
       if (!data.loading && data.user && !data.user.emailVerified) {
-        this.props.history.push('/notverified')
+        // this.props.history.push('/notverified')
       }
     }
 
