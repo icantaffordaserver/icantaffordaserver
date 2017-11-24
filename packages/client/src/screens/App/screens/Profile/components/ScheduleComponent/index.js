@@ -2,13 +2,6 @@ import React, { Component } from 'react'
 import TableDragSelect from './table'
 import './style.css'
 
-import { graphql, compose, withApollo } from 'react-apollo'
-
-import { Button } from '../../../../styles'
-
-import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
-import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
-
 const times = [
   '10:00',
   '11:00',

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex } from 'grid-styled'
 import { Tag } from '../../../../../styles'
 
 /**
  * props interets = all ConnectionInterests
  * props changeColor = function to change the color of border when selected/de-selected
- * props selectedTags = array of all tags that are selected 
+ * props selectedTags = array of all tags that are selected
  */
 
 const ChooseInterests = ({ interests, changeColor, selectedTags }) => (

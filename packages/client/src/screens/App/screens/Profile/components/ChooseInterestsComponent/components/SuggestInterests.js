@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Box, Grid } from 'grid-styled'
-import { Tag, Input, Button } from '../../../../../styles'
+import { Flex, Box } from 'grid-styled'
+import { Input, Button } from '../../../../../styles'
 
 /**
  * props suggestion = value of the input field

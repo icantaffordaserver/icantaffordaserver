@@ -2,20 +2,7 @@ import React, { Component } from 'react'
 import SubTitleSection from './shared/SubTitleSection'
 import ConfirmAndCancel from './shared/ConfirmAndCancel'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../styles'
+import { Text, TextArea } from '../../../styles'
 
 import { ProfileSection } from '../style'
 

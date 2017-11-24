@@ -1,0 +1,88 @@
+header.masthead {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  text-align: right;
+  color: white;
+  background-image: url("../img/pluto.png");
+  background-repeat:no-repeat;
+  background-position: center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: cover; }
+  header.masthead .header-content {
+    position: relative;
+    width: 100%;
+    padding: 150px 15px 100px;
+    text-align: right; }
+    header.masthead .header-content .header-content-inner h1 {
+      font-family: 'Krona One';
+      color: #F05F40;
+      font-size: 40px;
+      font-weight: 700;
+      margin-top: 100px;
+      margin-bottom: 20px;
+      text-align:right;
+    }
+    header.masthead .header-content .header-content-inner h3 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align:right;
+  }
+  header.masthead .header-content .header-content-inner h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10;
+    margin-bottom: 50px;
+    text-align:right;
+  }
+    header.masthead .header-content .header-content-inner hr {
+      margin: 30px auto; }
+      
+    header.masthead .header-content .header-content-inner p {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      color: white;
+      text-align:right;
+      }
+  @media (min-width: 768px) {
+    header.masthead {
+      height: 100%;
+      min-height: 600px; }
+      header.masthead .header-content {
+        position: absolute;
+        top: 50%;
+        padding: 0 0px;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%); }
+        header.masthead .header-content .header-content-inner {
+          max-width: 1000px;
+          margin-right: auto;
+          margin-left: auto; }
+          header.masthead .header-content .header-content-inner h1 {
+            font-size: 50px; }
+          header.masthead .header-content .header-content-inner p {
+            font-size: 18px;
+            max-width: 80%;
+            margin-right: auto;
+            margin-left: auto; }}
+
+.header-form {
+  border: 1px solid #777294;
+  background: #f8f8f8;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #666;
+  -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+  -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+  box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(000,000,000,0.7) 0 0px 0px;
+  padding:8px;
+  margin-bottom:20px;
+  width:280px;
+}

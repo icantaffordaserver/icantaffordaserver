@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Modal, Header, Icon, Message, Dropdown } from 'semantic-ui-react'
+import { Modal, Icon, Message, Dropdown } from 'semantic-ui-react'
 import {
   Form,
   FormGroup,
@@ -9,7 +9,6 @@ import {
   Content,
   Title,
   Button,
-  TextLink,
 } from '../../../../../styles'
 
 class ReportComponent extends Component {

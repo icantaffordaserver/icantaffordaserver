@@ -20,25 +20,46 @@ jobs:
           name: Build create-react-app
           command: cd packages/client && yarn build
       - run:
-          name: Deploy to staging aws environment
-          command: serverless deploy --stage staging
+          name: Upload to S3
+          command: pwd && aws s3 sync packages/client/build/ s3://pluto-client-staging
+      - run:
+          name: Invalidate Cloudfront
+          command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
   test:
+    docker:
+        - image: amann11/circleci-node-aws:latest
     steps:
       - checkout
       - run:
           name: Haha I should be testing stuff
           command: echo Funny how many tests there are wow!
   deploy-aws:
+    docker:
+        - image: amann11/circleci-node-aws:latest
     steps:
+      - checkout
+      - run: 
+          name: I should be deploying to aws
+          command: echo Deploying aws staging
+      - run:
+          name: Deploy to server to aws staging environment
+          command: cd packages/serverless serverless deploy --stage staging
      
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - deploy-aws:
           filters:
             branches:
               only: master

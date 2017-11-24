@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button } from '../../style'
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 
 const ConfirmAndCancel = ({ handleSave, handleCancel }) => {
   return (

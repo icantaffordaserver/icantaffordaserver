@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { Message } from 'semantic-ui-react'
@@ -10,7 +9,6 @@ import {
   Links,
 } from './styles'
 import {
-  Content,
   Title,
   Subheading,
   Form,
@@ -72,8 +70,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    const error = this.state.error !== '' || this.props.error !== ''
-
     return (
       <LoginWrapper>
         <LoginImageContainer>

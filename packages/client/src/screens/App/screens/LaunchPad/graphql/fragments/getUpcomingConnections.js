@@ -8,7 +8,8 @@ export default gql`
       filter: { status: SCHEDULED, participants_some: { id: $id } }
       orderBy: connectionTime_ASC
     ) {
-      ...connectionsFragment
+      ...connectionDetails
     }
   }
+  ${connectionsFragment}
 `

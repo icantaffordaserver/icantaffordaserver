@@ -1,25 +1,8 @@
 import React, { Component } from 'react'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-  Input,
-} from '../../../../styles'
-
 import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
-import { Flex, Box, Grid } from 'grid-styled'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
@@ -99,7 +82,6 @@ class ChooseInterestsComponent extends Component {
 
   componentDidMount() {
     console.log('Choose Interests : ', this.props)
-    const { selectedTags } = this.state
 
     if (this.props.data.user) {
       const { connectionInterests } = this.props.data.user
@@ -110,7 +92,6 @@ class ChooseInterestsComponent extends Component {
 
   render() {
     const { interests } = this.props
-    const { selectedTags } = this.state
 
     return (
       <div style={{ marginLeft: '10px', marginTop: '20px' }}>

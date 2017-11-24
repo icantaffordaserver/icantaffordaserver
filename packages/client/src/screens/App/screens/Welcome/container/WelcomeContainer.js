@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { graphql, withApollo, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 
 import WelcomeChooseInterests from '../components/WelcomeChooseInterests'
 import WelcomeBio from '../components/WelcomeBio'
 import WelcomeAvailability from '../components/WelcomeAvailability'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-import allConnectionInterests from '../../../shared/graphql/queries/allConnectionInterests'
 import updateUserMutation from '../../../shared/graphql/mutations/updateUserMutation'
 import createConnectionInterest from '../../../shared/graphql/mutations/createConnectionInterest.js'
 

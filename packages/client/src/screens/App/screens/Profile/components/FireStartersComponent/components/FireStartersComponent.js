@@ -2,16 +2,11 @@ import React from 'react'
 
 import {
   Button,
-  Content,
-  ColumnContainer,
   RowContainer,
   Section,
   Card,
   Title,
-  Subheading,
-  Tag,
   Text,
-  TextLink,
   TextArea,
 } from '../../../../../styles'
 

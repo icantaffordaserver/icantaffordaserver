@@ -1,8 +1,4 @@
-import styled, { css } from 'styled-components'
-import { bind } from 'styled-props'
-import Theme from '../Theme'
-
-const styles = bind(Theme)
+import styled from 'styled-components'
 
 export const Tag = styled.div`
   background: #c4c4c4;

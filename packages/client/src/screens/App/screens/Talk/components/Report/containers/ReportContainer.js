@@ -42,7 +42,7 @@ class ReportContainer extends Component {
       const userId = this.state.userId
       const comment = this.state.comment
 
-      const response = await this.props.mutate({
+      await this.props.mutate({
         variables: {
           userId,
           comment,

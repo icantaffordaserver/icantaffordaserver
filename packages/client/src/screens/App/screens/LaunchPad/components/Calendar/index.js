@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import _ from 'lodash'
 
 import { Calendar, Day, Wrapper, Header, LeftChev, RightChev } from './styles'
 
@@ -30,6 +29,8 @@ class CalendarComponent extends Component {
 
     let currentDay = 1
     while (currentDay <= numDays) {
+      // TODO: Fix this, no functions in loops
+      // eslint-disable-next-line
       this.props.upcoming.map(con => {
         if (this.isEqualDates(con.connectionTime, monthDate.toISOString())) {
           daysInMonth.push(con)

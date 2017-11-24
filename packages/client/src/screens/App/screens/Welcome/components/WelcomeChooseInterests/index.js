@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { Logo, Button } from './styles'
+import { Button } from './styles'
 
 import { Title } from '../../../../styles'
 
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 import Graphic1 from '../../assets/graphic1.svg'
 import SVG from 'react-inlinesvg'
 
