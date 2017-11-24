@@ -14,7 +14,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
-    "lint-staged": "^4.2.1",
+    "lint-staged": "^5.0.0",
     "prettier": "^1.7.0",
     "react-scripts": "^1.0.14"
   },
@@ -59,7 +59,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dev": "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
+    "start:dev":
+      "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
     "build": "react-scripts build",
     "lint": "eslint .",
     "test": "react-scripts test --env=jsdom",
@@ -67,12 +68,8 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   }
 }

@@ -49,10 +49,17 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
       - test:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - deploy-aws:
           filters:
             branches:
               only: master
