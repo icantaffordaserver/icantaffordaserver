@@ -2,36 +2,26 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import { Message } from 'semantic-ui-react'
 import {
-  Grid,
-  Segment,
-  Input,
-  Image,
-  Form,
-  Divider,
-  Message,
-} from 'semantic-ui-react'
-
-import logo from '../../../../shared/assets/logo.png'
-import productShot from '../../../../shared/assets/signup-shot1.jpg'
-
-import {
-  LoginButton,
-  FormLabel,
-  FormLink,
-  FormH1,
-  SignUpImg,
-  Div,
-  OverLay,
-  FormDiv,
-  ImageDiv,
-  FormSegment,
-  FormHeaderP,
-  FormNextButton,
-  FormSubmitButton,
-  ImageH1,
-  ImageP,
+  LoginWrapper,
+  LoginFormWrapper,
+  LoginImageContainer,
+  Links,
 } from './styles'
+import {
+  Content,
+  Title,
+  Subheading,
+  Form,
+  Button,
+  FormGroup,
+  Input,
+  Label,
+  TextLink,
+} from '../../../../styles'
+import Planet from '../../../../shared/assets/planet.png'
+
 import { validateLogin } from './helpers'
 
 class LoginForm extends Component {
@@ -52,17 +42,20 @@ class LoginForm extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
   }
 
   handleSubmit = (event, data) => {
     event.preventDefault() // prevent page reload
     this.setState({ error: '' }) // clear any old errors
-    const { email, password } = data.formData
+    const { email, password } = this.state
     const loginErrors = validateLogin(email, password)
     if (typeof loginErrors === 'string') {
       // if validate login returns string we have an error
       this.setState({ error: loginErrors })
+      console.log('error')
       return
     }
     this.props.onSubmit(email, password)
@@ -82,69 +75,37 @@ class LoginForm extends Component {
     const error = this.state.error !== '' || this.props.error !== ''
 
     return (
-      <Div style={{ margin: '0', padding: '0' }} className="columns">
-        <ImageDiv className="column is-two-thirds">
-          <OverLay>
-            <SignUpImg src={productShot} alt="coffee shop" />
-            <ImageH1 style={{ fontFamily: 'fabfeltscriptbold' }}>
-              Toktumi
-            </ImageH1>
-            <ImageP>Join The Community</ImageP>
-          </OverLay>
-        </ImageDiv>
-        <Div className="column">
-          <Form onSubmit={this.onSubmit} size="large" error={error}>
-            <FormSegment padded loading={this.props.loading}>
-              <FormH1>Login</FormH1>
-
-              <Form onSubmit={this.handleSubmit} size="large" error={error}>
-                {this.renderErrors()}
-                <Form.Group inline widths={9}>
-                  <Form.Field width={16}>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <input
-                      className="input"
-                      name="email"
-                      placeholder="your@email.com"
-                      onChange={this.handleChange}
-                      value={this.state.email}
-                    />
-                  </Form.Field>
-                </Form.Group>
-                <Form.Group inline widths={9}>
-                  <Form.Field width={16}>
-                    <FormLabel htmlFor="passowrd">Password</FormLabel>
-                    <input
-                      className="input"
-                      name="password"
-                      placeholder="*********"
-                      type="password"
-                      onChange={this.handleChange}
-                      value={this.state.password}
-                    />
-                  </Form.Field>
-                </Form.Group>
-                <FormSubmitButton className="button is-primary is-fullwidth">
-                  Login
-                </FormSubmitButton>
-                <Divider />
-              </Form>
-              <Div className="columns">
-                <Div className="column">
-                  <Link to="/">
-                    <FormLink href="/"> Forgot Password? </FormLink>
-                  </Link>
-                </Div>
-                <Div className="column">
-                  <Link to="/">
-                    <FormLink href="/"> Don't have an account? </FormLink>
-                  </Link>
-                </Div>
-              </Div>
-            </FormSegment>
+      <LoginWrapper>
+        <LoginImageContainer>
+          <Title huge style={{ marginBottom: '-5px' }}>
+            PLUT<img style={{ height: '65px' }} src={Planet} alt="" />
+          </Title>
+          <Subheading large>Change the conversation.</Subheading>
+        </LoginImageContainer>
+        <LoginFormWrapper>
+          {this.renderErrors()}
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input name="email" onChange={this.handleChange} />
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <Button loading={this.props.loading}> Login </Button>
           </Form>
-        </Div>
-      </Div>
+          <Links>
+            <TextLink to="/signup">Don't have an account?</TextLink>
+
+            <TextLink to="/forgot">Forgot password?</TextLink>
+          </Links>
+        </LoginFormWrapper>
+      </LoginWrapper>
     )
   }
 }

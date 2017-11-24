@@ -1,6 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Header, Form, Segment, Input, Message, Icon } from 'semantic-ui-react'
+import {
+  Grid,
+  Header,
+  Form,
+  Segment,
+  Input,
+  Message,
+  Icon,
+} from 'semantic-ui-react'
 import isEmail from 'validator/lib/isEmail'
 
 import { ResetPasswordButton } from './styles'
@@ -19,26 +27,9 @@ class Forgot extends React.Component {
     error: '',
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
-
-  handleSubmit = (event, data) => {
-    event.preventDefault()
-    this.setState({ error: '' }) // clear any existing errors
-
-    const { email } = data.formData
-
-    if (!isEmail(email)) {
-      this.setState({ error: 'Please enter a valid email' })
-    } else {
-      this.props.onSubmit(email)
-    }
-  }
-
   renderMessage() {
-    // use props for server errors, state for client side errors
-    // if an error message exists in state then show it
+    // use props for server errors, state for client side errors if an error message
+    // exists in state then show it
     if (this.state.error !== '') {
       return (
         <Message warning icon>
@@ -67,13 +58,14 @@ class Forgot extends React.Component {
       <Grid centered verticalAlign="middle">
         <Grid.Column width={6} textAlign="center">
           {this.renderMessage()}
-          <Form onSubmit={this.handleSubmit} size="large">
+          <Form onSubmit={this.props.onSubmit} size="large">
             <Segment padded>
               <Header as="h2" color="Black">
                 Forgot Password
               </Header>
               <Header as="h3">
-                Enter your email address below and we'll send you password reset instructions.
+                Enter your email address below and we'll send you password reset
+                instructions.
               </Header>
               <Form.Field>
                 <Input
@@ -86,9 +78,12 @@ class Forgot extends React.Component {
                   value={this.props.email}
                 />
               </Form.Field>
-              <ResetPasswordButton fluid size="large" loading={this.props.loading}>
-                Reset
-                Password
+              <ResetPasswordButton
+                fluid
+                size="large"
+                loading={this.props.loading}
+              >
+                Reset Password
               </ResetPasswordButton>
             </Segment>
           </Form>

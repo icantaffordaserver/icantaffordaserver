@@ -1,7 +1,4 @@
-/**
- * Created by alexandermann on 2017-03-01.
- */
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql, withApollo, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
@@ -10,62 +7,157 @@ import SignUpForm from '../components/SignUpForm'
 
 import signUpMutation from '../graphql/signUpMutation'
 import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
+import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+import getInviteQuery from '../../../shared/graphql/queries/getInviteQuery'
 
-class SignUpContainer extends React.Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    client: PropTypes.object.isRequired,
-  }
-
+class SignUpContainer extends Component {
   state = {
-    loading: false,
+    email: '',
+    password: '',
+    password2: '',
+    firstName: '',
+    lastName: '',
     error: '',
+    inviteToken: '',
   }
 
-  handleSignUp = async (firstName, lastName, email, password) => {
+  componentDidMount = () => {
+    console.log('SignUpContainer : ', this.props)
+    if (this.props.match.params.token) {
+      // window.history.pushState(null, null, '/signUp')
+      this.handleInvite(this.props.match.params.token)
+    } else {
+      this.setState({ error: 'Can only sign up with an invite.' })
+    }
+  }
+
+  componentWillReceiveProps = nextProps => {}
+
+  handleInvite = async token => {
     try {
-      this.setState({ loading: true })
-      await this.props.signUpMutation({
+      const response = await this.props.client.query({
+        query: getInviteQuery,
         variables: {
-          email,
-          password,
-          firstName,
-          lastName,
+          token,
         },
       })
 
-      const signInResponse = await this.props.authenticateEmailUserMutation({
-        variables: {
-          email,
-          password,
-        },
+      const { firstName, lastName, emailToInvite } = response.data.Invite
+
+      this.setState({
+        email: emailToInvite,
+        firstName,
+        lastName,
+        inviteToken: this.props.match.params.token,
       })
 
-      // save the token in local storage, reset the store to requery user data, and redirect to dashboard
-      localStorage.setItem(
-        'auth_token',
-        signInResponse.data.authenticateEmailUser.token,
-      ) // save token
-      this.props.client.resetStore()
-      this.props.history.push('/dashboard')
+      console.log(response)
+      if (!response.data.Invite) throw new Error('Invite does not exist.')
+      if (response.data.Invite.isAccepted) throw new Error('Invite Claimed.')
+      if (this.state.error) throw new Error(this.state.error)
     } catch (error) {
-      if (error.message.includes("Field 'username' must be unique")) {
-        // check email is not taken
-        console.dir(error)
-        this.setState({
-          loading: false,
-          error: 'Email is already associated with an account',
-        })
+      console.error(error)
+      this.setState({ error: error.message })
+    }
+  }
+
+  handleLogin = async (email, password) => {
+    this.setState({ loading: true, error: '' })
+    try {
+      const response = await this.props.mutate({
+        variables: {
+          email,
+          password,
+        },
+      })
+
+      if (!response.data) {
+        throw new Error()
+      }
+
+      const token = response.data.authenticateEmailUser.token
+      window.localStorage.setItem('auth_token', token)
+
+      await this.setState({ loading: false })
+      this.props.client.resetStore()
+      this.props.history.push('/profile')
+    } catch (error) {
+      if (error.message.includes('Could not find a user with that username')) {
+        this.props.client.resetStore()
+        this.setState({ loading: false, error: 'Invalid Credentials' })
+      } else {
+        this.props.client.resetStore()
+        this.setState({ loading: false, error: 'Invalid Credentials' })
       }
     }
+  }
+
+  handleSignUp = async e => {
+    // e.preventDefualt() // ALWAYS PREVENT DEFAULT ON ANY BUTTON SUBMISSION
+    // SignUp mutation
+    console.log('handleSignup props : ', this.props)
+    const {
+      password,
+      password2,
+      firstName,
+      lastName,
+      email,
+      inviteToken,
+    } = this.state
+
+    try {
+      const signup = await this.props.signUpMutation({
+        variables: {
+          firstName,
+          lastName,
+          email,
+          password,
+          birthday: ' ',
+          bio: ' ',
+          inviteToken,
+        },
+      })
+
+      // Sign user in after account creation
+      const login = await this.props.authenticateEmailUser({
+        variables: {
+          email,
+          password,
+        },
+      })
+
+      const token = login.data.authenticateEmailUser.token
+      console.log(token)
+      window.localStorage.setItem('auth_token', token)
+
+      this.props.client.resetStore()
+      this.props.history.push('/welcome')
+    } catch (error) {
+      if (error.message.includes('User already exists with that information')) {
+        this.props.client.resetStore()
+        this.setState({ error: 'Email is already associated with an account' })
+      } else {
+        this.props.client.resetStore()
+        this.setState({ error: 'Invalid Credentials' })
+      }
+    }
+  }
+
+  handleChange = event => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => console.log(this.state),
+    )
   }
 
   render() {
     return (
       <SignUpForm
         onSubmit={this.handleSignUp}
-        loading={this.state.loading}
-        error={this.state.error}
+        handleChange={this.handleChange}
+        data={this.state}
       />
     )
   }
@@ -75,7 +167,6 @@ export default compose(
   withRouter,
   withApollo,
   graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(authenticateEmailUserMutation, {
-    name: 'authenticateEmailUserMutation',
-  }),
+  graphql(authenticateEmailUserMutation, { name: 'authenticateEmailUser' }),
+  graphql(currentUserQuery),
 )(SignUpContainer)

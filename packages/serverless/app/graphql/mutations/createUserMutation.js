@@ -5,6 +5,7 @@ export default `
     $email: String!, 
     $password: String!, 
     $birthday: String!, 
+    $location: String
     $bio: String!){
       createUser(
         firstName: $firstName,
@@ -13,6 +14,7 @@ export default `
         password: $password,
         birthday: $birthday,
         bio: $bio,
+        location: $location
       ){
         id
       }

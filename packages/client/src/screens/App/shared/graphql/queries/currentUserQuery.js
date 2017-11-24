@@ -13,54 +13,46 @@ export default gql`
       emailVerified
       phoneNumber
       gender
+      gradientColors
       location
       bio
       passwordReset {
         complete
       }
       availability
-      profilePhoto {
-        url
+      profilePhotoUrl
+      roles {
         name
       }
-      roles {
+      connectionInterests {
+        id
         name
       }
       verifyEmail {
         id
         emailToVerify
       }
-      connectionsRequested {
-        id
-        comment
-        updatedAt
-        createdAt
-      }
-      connections {
+      connections(
+        orderBy: connectionTime_ASC
+        first: 1
+        filter: { status: SCHEDULED }
+      ) {
         status
         connectionTime
         fireStarterSuggestion
         createdAt
         id
+        token
         reviews {
           comment
           id
-          rating
           createdAt
         }
-      }
-      connectionReviews {
-        id
-        createdAt
-        comment
-        connection {
+        participants {
           id
-          connectionTime
-          status
-          participants {
-            id
-            firstName
-          }
+          firstName
+          lastName
+          email
         }
       }
     }

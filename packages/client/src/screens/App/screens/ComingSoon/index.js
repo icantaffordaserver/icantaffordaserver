@@ -4,17 +4,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
-import { gql, graphql, compose } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import styled from 'styled-components'
 
-import {
-  Form,
-  FormGroup,
-  FormButton,
-  FormInput,
-  FormLabel,
-} from '../../styles/Forms'
-import { Label } from 'semantic-ui-react'
+import { Button, Form, FormGroup, Input, Label } from '../../styles'
+import { Icon } from 'semantic-ui-react'
 import { isEmail } from 'validator'
 
 import logo from '../../shared/assets/logo.png'
@@ -45,7 +39,9 @@ class ComingSoon extends React.Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleSubmit = async event => {
@@ -69,7 +65,11 @@ class ComingSoon extends React.Component {
       }) // clear the current message
 
       await this.props.mutate({
-        variables: { email, firstName, lastName },
+        variables: {
+          email,
+          firstName,
+          lastName,
+        },
       })
       this.setState({
         loading: false,
@@ -102,38 +102,41 @@ class ComingSoon extends React.Component {
         </h2>
         <br />
         <Form
-          style={{ width: 'fill-available !important' }}
+          style={{
+            width: 'fill-available !important',
+          }}
           onSubmit={this.handleSubmit}
         >
+          {message && (
+            <Label basic color={error ? 'red' : 'green'} pointing="left">
+              {message}
+            </Label>
+          )}
           <FormGroup>
-            <FormInput
+            <Input
               name="firstName"
               placeholder="First Name"
               onChange={this.onChange}
             />
           </FormGroup>
           <FormGroup>
-            <FormInput
+            <Input
               name="lastName"
               placeholder="Last Name"
               onChange={this.onChange}
             />
           </FormGroup>
           <FormGroup>
-            <FormInput
+            <Input
               name="email"
               placeholder="Email Address"
               onChange={this.onChange}
             />
           </FormGroup>
-          <FormButton icon="send" loading={loading}>
+          <Button loading={loading}>
+            <Icon name="send" />
             Send
-          </FormButton>
-          {message && (
-            <Label basic color={error ? 'red' : 'green'} pointing="left">
-              {message}
-            </Label>
-          )}
+          </Button>
         </Form>
       </SignUpContainer>
     )

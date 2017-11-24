@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
 class SideNavProfileHeader extends Component {
   render() {
@@ -17,23 +17,24 @@ class SideNavProfileHeader extends Component {
         <Name>Billy Walsh</Name>
         <Location>Toronto, ON</Location>
       </Wrapper>
-    );
+    )
   }
 }
 
-export default SideNavProfileHeader;
+export default SideNavProfileHeader
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
-`;
+  margin-top: 16px;
+`
 
 const ImageContainer = styled.div`
   position: relative;
   width: 80px;
-`;
+`
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -41,14 +42,14 @@ const ImageWrapper = styled.div`
   height: 80px;
   overflow: hidden;
   border-radius: 50%;
-`;
+`
 
 const Image = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   width: 80px;
-`;
+`
 
 const Badge = styled.div`
   position: absolute;
@@ -61,10 +62,12 @@ const Badge = styled.div`
   padding: 5px 5px;
   z-index: 1;
   font-size: 12px;
-`;
+`
 
-const Name = styled.h3`margin: 0;`;
+const Name = styled.h3`
+  margin: 0;
+`
 const Location = styled.h5`
   margin: 0;
   margin-top: 10px;
-`;
+`

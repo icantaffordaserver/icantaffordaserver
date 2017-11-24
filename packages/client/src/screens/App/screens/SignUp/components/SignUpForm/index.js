@@ -1,141 +1,107 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
+import { Message } from 'semantic-ui-react'
 import {
+  LoginWrapper,
+  LoginFormWrapper,
+  LoginImageContainer,
+  Links,
+} from '../../../Login/components/LoginForm/styles'
+import {
+  Content,
+  Title,
+  Subheading,
   Form,
-  Header,
-  Segment,
-  Grid,
   Button,
-  Container,
-  Message,
-} from 'semantic-ui-react'
+  FormGroup,
+  Input,
+  Label,
+  TextLink,
+} from '../../../../styles'
+import Planet from '../../../../shared/assets/planet.png'
 
-import { validateSignUp } from './helpers'
+import SVG from 'react-inlinesvg'
+import logo from '../../../../shared/assets/Signup-Logo.svg'
 
-class SignUp extends React.Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.string,
-  }
-  static defaultProps = {
-    error: '',
-  }
+class SignUpForm extends Component {
+  //   handleSubmit = (event, data) => {
+  //     event.preventDefault() // prevent page reload
+  //     this.setState({ error: '' }) // clear any old errors
+  //     const { email, password, firstName, lastName, password2} = this.state
+  //     const loginErrors = validateLogin(email, password)
+  //     if (typeof loginErrors === 'string') {
+  //       // if validate login returns string we have an error
+  //       this.setState({ error: loginErrors })
+  //       console.log('error')
+  //       return
+  //     }
+  //
 
-  state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    error: '',
-  }
-
-  onSubmit = (event, data) => {
-    event.preventDefault() // prevent page reload
-    this.setState({ error: '' }) // clear any old errors
-    const { firstName, lastName, email, password } = data.formData
-    const signUpErrors = validateSignUp(firstName, lastName, email, password)
-    if (typeof signUpErrors === 'string') {
-      // if validate sign up returns string we have an error
-      this.setState({ error: signUpErrors })
-      return
-    }
-    this.props.onSubmit(firstName, lastName, email, password)
-  }
-
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value })
-  }
+  //     this.props.onSubmit(email, password, firstName, lastName)
+  //   }
 
   renderErrors = () => {
-    if (this.state.error !== '')
-      return <Message error header={this.state.error} />
-    if (this.props.error !== '')
-      return <Message error header={this.props.error} />
+    if (this.props.data.error !== '') {
+      return <Message error header={this.props.data.error} />
+    }
     return null
   }
 
   render() {
-    const error = this.state.error !== '' || this.props.error !== ''
+    const { handleChange, onSubmit } = this.props
+    const { email, firstName, lastName, password, password2 } = this.props.data
+    // const error = this.state.error !== '' || this.props.error !== ''
+    console.log('SignUpForm : ', this.props)
     return (
-      <Grid centered verticalAlign="middle">
-        <Grid.Column width={6} textAlign="left">
-          <Form onSubmit={this.onSubmit} size="large" error={error}>
-            <Segment padded>
-              <Header textAlign="center" as="h2" color="teal">
-                Create an account
-              </Header>
-              {this.renderErrors()}
-              <Form.Field>
-                <Form.Input
-                  label="First Name"
-                  name="firstName"
-                  icon="quote left"
-                  iconPosition="left"
-                  placeholder="First Name"
-                  onChange={this.handleChange}
-                  value={this.state.firstName}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="Last Name"
-                  name="lastName"
-                  icon="quote left"
-                  iconPosition="left"
-                  placeholder="Last Name"
-                  onChange={this.handleChange}
-                  value={this.state.lastName}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="Email"
-                  name="email"
-                  icon="mail"
-                  iconPosition="left"
-                  placeholder="Email"
-                  onChange={this.handleChange}
-                  value={this.state.email}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  label="Password"
-                  name="password"
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                  onChange={this.handleChange}
-                  value={this.state.password}
-                />
-              </Form.Field>
-              <Button
-                fluid
-                color="teal"
-                size="large"
-                loading={this.props.loading}
-              >
-                Create Account
-              </Button>
-              {/* TODO: facebook auth */}
-              {/*<Divider horizontal>Or</Divider>*/}
-              {/*<Button fluid color="blue" size="large">Create Account with Facebook</Button>*/}
-              <Header textAlign="center" size="tiny">
-                By signing up, you agree to the{' '}
-                <Link to="/termsofservice">Terms of Service</Link>.
-              </Header>
-              <p style={{ textAlign: 'center' }}>
-                Already have an account? <Link to="/login">Log in</Link>.
-              </p>
-            </Segment>
+      <LoginWrapper>
+        <LoginImageContainer>
+          <SVG src={logo} />
+        </LoginImageContainer>
+        <LoginFormWrapper>
+          {this.renderErrors()}
+          <Form>
+            <FormGroup>
+              <Label>First Name</Label>
+              <Input
+                name="firstName"
+                onChange={handleChange}
+                value={firstName}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Last Name</Label>
+              <Input name="lastName" onChange={handleChange} value={lastName} />
+            </FormGroup>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input name="email" onChange={handleChange} value={email} />
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                value={password}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Re-enter password</Label>
+              <Input
+                type="password"
+                name="password2"
+                onChange={handleChange}
+                value={password2}
+              />
+            </FormGroup>
           </Form>
-        </Grid.Column>
-      </Grid>
+          <Button onClick={onSubmit}> Register </Button>
+        </LoginFormWrapper>
+      </LoginWrapper>
     )
   }
 }
 
-export default SignUp
+export default SignUpForm

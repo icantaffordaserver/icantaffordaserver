@@ -1,86 +1,108 @@
 types: ./graphcool/types.graphql
+custom:
+  dev:
+    WEBHOOK_URL: ${env:WEBHOOK_SERVER_URL}
+  staging: 
+    # move to an environment variable on circle ci
+    WEBHOOK_URL: https://yh3w5yykgg.execute-api.us-east-1.amazonaws.com/staging/
+  prod:
+    WEBHOOK_URL: http://test.com/prod
 functions:
-  authenticateUser-schemaExtension:
+  getConversationToken-schemaExtension:
     handler:
       webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/authenticateUser
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/getConversationToken
         headers:
           Content-Type: application/json
     type: resolver
-    schema: ./graphcool/src/authenticateUser.schemaExtension.graphql
-  sendVerificationEmail-subscription:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/subscription/sendVerificationEmail
-        headers:
-          Content-Type: application/json
-    type: subscription
-    query: ./graphcool/src/sendVerificationEmail.subscription.graphql
-  signUpUser-schemaExtension:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/signUpUser
-        headers:
-          Content-Type: application/json
-    type: resolver
-    schema: ./graphcool/src/signUpUser.schemaExtension.graphql
-  triggerPasswordReset-schemaExtension:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/triggerPasswordReset
-        headers:
-          Content-Type: application/json
-    type: resolver
-    schema: ./graphcool/src/triggerPasswordReset.schemaExtension.graphql
+    schema: ./graphcool/src/getConversationToken.schemaExtension.graphql
   sendInvite-subscription:
     handler:
       webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/sendBetaInvite
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/sendInvite
         headers:
           Content-Type: application/json
     type: subscription
     query: ./graphcool/src/sendInvite.subscription.graphql
-  sendPasswordResetEmail-subscription:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/subscription/sendPasswordResetEmail
-        headers:
-          Content-Type: application/json
-    type: subscription
-    query: ./graphcool/src/sendPasswordResetEmail.subscription.graphql
-  sendInvite-schemaExtension:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/sendBetaInvite
-        headers:
-          Content-Type: application/json
-    type: resolver
-    schema: ./graphcool/src/sendInvite.schemaExtension.graphql
-  updatePassword-schemaExtension:
-    handler:
-      webhook:
-        url: https://toktumi-api.ngrok.io/user/schemaExtension/updatePassword
-        headers:
-          Content-Type: application/json
-    type: resolver
-    schema: ./graphcool/src/updatePassword.schemaExtension.graphql
   setPasswordResetComplete-subscription:
     handler:
       webhook:
-        url: https://toktumi-api.ngrok.io/user/subscription/setPasswordResetComplete
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/setPasswordResetComplete
         headers:
           Content-Type: application/json
     type: subscription
     query: ./graphcool/src/setPasswordResetComplete.subscription.graphql
+  authenticateUser-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/authenticateUser
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/authenticateUser.schemaExtension.graphql
+  sendPasswordResetEmail-subscription:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendPasswordResetEmail
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/sendPasswordResetEmail.subscription.graphql
+  signUpUser-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/signUpUser
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/signUpUser.schemaExtension.graphql
+  sendVerificationEmail-subscription:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendVerificationEmail
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/sendVerificationEmail.subscription.graphql
+  triggerPasswordReset-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/triggerPasswordReset
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/triggerPasswordReset.schemaExtension.graphql
+  sendInvite-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/schemaExtension/sendInvite
+    type: resolver
+    schema: ./graphcool/src/sendInvite.schemaExtension.graphql
+  createAndSendInviteEmail-subscription:
+    type: subscription
+    query: ./graphcool/src/createAndSendInviteEmail.subscription.graphql
+    handler:
+      webhook: 
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/createAndSendInviteEmail
+        headers:
+          Content-Type: application/json
+  updatePassword-schemaExtension:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/updatePassword
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/updatePassword.schemaExtension.graphql
 permissions:
-- operation: ConnectionInterests.read
-- operation: ConnectionInterests.create
-- operation: ConnectionInterests.update
-- operation: ConnectionInterests.delete
-- operation: ConnectionQueue.read
-- operation: ConnectionQueue.create
-- operation: ConnectionQueue.update
-- operation: ConnectionQueue.delete
+- operation: File.read
+- operation: File.create
+- operation: File.update
+- operation: File.delete
+- operation: User.read
+- operation: User.create
+- operation: User.update
+- operation: User.delete
 - operation: ConnectionReviews.read
 - operation: ConnectionReviews.create
 - operation: ConnectionReviews.update
@@ -89,22 +111,18 @@ permissions:
 - operation: Connections.create
 - operation: Connections.update
 - operation: Connections.delete
-- operation: File.read
-- operation: File.create
-- operation: File.update
-- operation: File.delete
-- operation: FireStarterSuggestions.read
-- operation: FireStarterSuggestions.create
-- operation: FireStarterSuggestions.update
-- operation: FireStarterSuggestions.delete
-- operation: InviteRequests.read
-- operation: InviteRequests.create
-- operation: InviteRequests.update
-- operation: InviteRequests.delete
-- operation: Invites.read
-- operation: Invites.create
-- operation: Invites.update
-- operation: Invites.delete
+- operation: FireStarter.read
+- operation: FireStarter.create
+- operation: FireStarter.update
+- operation: FireStarter.delete
+- operation: FireStarterAnswer.read
+- operation: FireStarterAnswer.create
+- operation: FireStarterAnswer.update
+- operation: FireStarterAnswer.delete
+- operation: Invite.read
+- operation: Invite.create
+- operation: Invite.update
+- operation: Invite.delete
 - operation: PasswordReset.read
 - operation: PasswordReset.create
 - operation: PasswordReset.update
@@ -113,34 +131,37 @@ permissions:
 - operation: Role.create
 - operation: Role.update
 - operation: Role.delete
-- operation: User.read
-- operation: User.create
-- operation: User.update
-- operation: User.delete
 - operation: VerifyEmail.read
 - operation: VerifyEmail.create
 - operation: VerifyEmail.update
 - operation: VerifyEmail.delete
-- operation: ConnectionQueueOnUser.*
-- operation: ConnectionReviewsOnUser.*
-- operation: ConnectionsOnConnectionQueue.*
+- operation: ConnectionInterests.read
+- operation: ConnectionInterests.create
+- operation: ConnectionInterests.update
+- operation: ConnectionInterests.delete
+- operation: ConnectionReport.read
+- operation: ConnectionReport.create
+- operation: ConnectionReport.update
+- operation: ConnectionReport.delete
+- operation: ConnectionJournal.read
+- operation: ConnectionJournal.create
+- operation: ConnectionJournal.update
+- operation: ConnectionJournal.delete
+- operation: FireStarterAnswers.*
+- operation: UserFireStarterAnswer.*
 - operation: ConnectionsOnConnectionReviews.*
-- operation: ConnectionsOnUser.*
-- operation: ConnectionsOnUser1.*
-- operation: FireStarterSuggestionsOnUser.*
-- operation: InterestedUsers.*
-- operation: InvitesOnInviteRequests.*
-- operation: InvitesOnUser.*
-- operation: InvitesOnUser1.*
 - operation: PasswordResetOnUser.*
 - operation: RoleOnUser.*
-- operation: UserOnFile.*
+- operation: ConnectionReviewsOnUser.*
+- operation: ConnectionsOnUser1.*
+- operation: ConnectionsOnUser.*
+- operation: ConnectionsOnConnectionJournal.*
+- operation: ConnectionJournalOnUser.*
+- operation: InterestedUsers.*
 - operation: UserOnVerifyEmail.*
+- operation: UserComment.*
+- operation: ConnectionsOnConnectionReport.*
+- operation: ConnectionReportOnReporterUser.*
+- operation: ConnectionReportOnReportedUser.*
 rootTokens:
 - adminToken
-- update-email
-- AuthenticateUser
-- SignUpUser
-- UpdatePassword
-- TriggerPasswordReset
-- SendInvite
