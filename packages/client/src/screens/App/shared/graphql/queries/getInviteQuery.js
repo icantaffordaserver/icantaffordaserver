@@ -2,8 +2,11 @@ import { gql } from 'react-apollo'
 
 export default gql`
   query getInvite($token: String!) {
-    Invites(token: $token) {
+    Invite(token: $token) {
       id
+      firstName
+      lastName
+      emailToInvite
     }
   }
 `

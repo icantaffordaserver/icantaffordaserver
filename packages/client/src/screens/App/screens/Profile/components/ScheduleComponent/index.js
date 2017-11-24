@@ -5,7 +5,6 @@ import './style.css'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import { Button } from '../../../../styles'
-import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../../../shared/graphql/mutations/updateUserMutation'
@@ -26,86 +25,27 @@ const times = [
 ]
 
 class Schedule extends Component {
-  state = {
-    cells: [
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-    ],
-    clickSave: false,
-  }
-
-  convertToBoolean = () => {
-    let data = this.props.data.user.availability
-    let days = [
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday',
-      'sunday',
-    ]
-    let cells = [
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-    ]
-    console.log('setting state')
-    // Convert availability props to nested array of boolean values
-    if (data) {
-      for (let i = 0; i < days.length; i++) {
-        for (let j = 0; j < data[days[i]].length; j++) {
-          let index = times.indexOf(data[days[i]][j])
-          cells[index + 1][i + 1] = true
-        }
-      }
-    }
-    // if (this.state.cells === cells) return
-    console.log(cells)
-    this.setState({ cells })
-  }
   componentDidMount() {
-    this.convertToBoolean()
+    console.log('schedule : ', this.props)
+    this.props.convertToBoolean()
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.edit !== nextProps.edit && this.state.clickSave === false) {
-      this.convertToBoolean()
+    if (this.props.edit !== nextProps.edit && this.props.clickSave === false) {
+      this.props.convertToBoolean()
     }
-    if (this.props.edit === nextProps.edit) {
-      this.setState({ clickSave: false })
-    }
+    console.log('nextProps : ', nextProps)
+
+    // if (this.props.edit === nextProps.edit) {
+    //   this.setState({ clickSave: false })
+    // }
   }
 
   render() {
+    const { edit, cells, handleChange } = this.props
     return (
       <div>
-        <TableDragSelect
-          value={this.state.cells}
-          onChange={this.handleChange}
-          edit={this.props.edit}
-        >
+        <TableDragSelect value={cells} onChange={handleChange} edit={edit}>
           <tr>
             <td disabled className="header" />
             <td disabled className="header">
@@ -145,91 +85,9 @@ class Schedule extends Component {
             </tr>
           ))}
         </TableDragSelect>
-        <div
-          style={this.props.edit ? { display: 'inline' } : { display: 'none' }}
-        >
-          <ConfirmAndCancel
-            handleSave={this.setAvailability}
-            handleCancel={this.handleClear}
-          />
-        </div>
       </div>
     )
   }
-
-  handleChange = cells => {
-    if (this.props.edit) {
-      this.setState({ cells })
-    }
-  }
-
-  handleClear = () => {
-    const cells = [
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-      [false, false, false, false, false, false, false, false],
-    ]
-    if (this.props.edit) {
-      this.setState({ cells })
-    }
-  }
-
-  setAvailability = () => {
-    let availability = {
-      monday: [],
-      tuesday: [],
-      wednesday: [],
-      thursday: [],
-      friday: [],
-      saturday: [],
-      sunday: [],
-    }
-
-    let data = this.state.cells
-    // Convert nested array of boolean values from this.state.cells to "availability" variable's data structure
-    for (let i = 1; i < data.length; i++) {
-      for (let j = 1; j < data[i].length; j++) {
-        if (data[i][j]) {
-          availability[Object.keys(availability)[j - 1]].push(times[i - 1])
-        }
-      }
-    }
-    console.log({
-      id: this.props.data.user.id,
-      availability,
-    })
-    this.props
-      .mutate({
-        variables: {
-          id: this.props.data.user.id,
-          availability,
-        },
-        refetchQueries: [
-          {
-            query: currentUserQuery,
-          },
-        ],
-      })
-      .then(() =>
-        this.setState({ clickSave: true }, () => this.props.handleEdit()),
-      )
-      .then(() => console.log('success: Availability updated.'))
-      .catch(err => console.error(err))
-  }
 }
 
-export default compose(
-  withApollo,
-  graphql(currentUserQuery),
-  graphql(updateUserMutation),
-)(Schedule)
+export default Schedule

@@ -21,19 +21,23 @@ export default async (req, res) => {
   const SALT_ROUNDS = 10
 
   try {
+    console.log(req.body.data)
     // we will remove the requirement for having an invite token later on
     // when we move out of invite only phase
     if (!inviteToken)
-      return res
-        .status(200)
-        .send({ error: 'You must provide a valid invite token.' })
+      return res.status(200).send({
+        error: {
+          req: req.body.data,
+          message: 'You must provide a valid invite token.',
+        },
+      })
 
     if (!isEmail(email))
       return res
         .status(200)
         .send({ error: 'You must provide a valid email address.' })
 
-    if (!await getUserByEmail(email))
+    if (await getUserByEmail(email))
       return res.status(200).send({
         error: 'A user already exists with that email.',
       })
@@ -68,10 +72,10 @@ export default async (req, res) => {
     await client.request(
       `
         mutation updateInvite($id: ID!, $userId: ID!) {
-          updateInvites(
+          updateInvite(
             id: $id
             isAccepted: true
-            status: INVITE_ACCEPTED
+            inviteStatus: INVITE_ACCEPTED
             acceptedUserId: $userId
           ) {
             id
@@ -80,12 +84,12 @@ export default async (req, res) => {
       `,
       { id: invite.id, userId: userResponse.createUser.id },
     )
-
+    console.log(userResponse.createUser.id)
     res.status(200).send({ data: { id: userResponse.createUser.id } })
   } catch (error) {
     console.error(error)
     res.status(200).send({
-      message:
+      error:
         'An error occurred while trying to sign you up - please try again.',
     })
   }

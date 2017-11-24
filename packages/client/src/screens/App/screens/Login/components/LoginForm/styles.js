@@ -3,12 +3,13 @@
  * edited by Georgios Psarakis 2017-09-19. 
  */
 import styled from 'styled-components'
-import BackgroundImage from '../../../../shared/assets/backsplash.jpeg'
+import BackgroundImage from '../../../../shared/assets/product-hunt-landing.jpg'
 
 export const LoginWrapper = styled.div`
   height: 100%;
   width: 100%;
   background: url(${BackgroundImage});
+  opacity: 0.9;
   background-size: cover;
   background-repeat: none;
   display: flex;

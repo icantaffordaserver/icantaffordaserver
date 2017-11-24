@@ -14,6 +14,7 @@ import Profile from './screens/Profile'
 import Inbox from './screens/Inbox'
 import LaunchPad from './screens/LaunchPad'
 import Talk from './screens/Talk'
+import Welcome from './screens/Welcome'
 
 import Nav from './shared/components/Navigation'
 import Footer from './shared/components/Footer'
@@ -46,6 +47,7 @@ const Root = () => (
       <Route path="/login" component={LoginScreen} />
       <Route exact path="/signUp" render={SignUpScreen} />
       <Route path="/signUp/:token" render={SignUpScreen} />
+      <Route exact path="/welcome" render={Welcome} />
       <Route path="/forgot" component={ForgotPassword} />
       <Route path="/reset/:id/:token" component={ResetPasswordScreen} />
       <Route path="/verify/:token" component={isAuthenticated(VerifyAccount)} />

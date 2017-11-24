@@ -59,7 +59,7 @@ class UserInfo extends Component {
         {this.state.edit ? (
           <ChooseInterests
             interests={allConnectionInterestses}
-            props={props}
+            data={props}
             handleEdit={this.handleEditButton}
           />
         ) : null}

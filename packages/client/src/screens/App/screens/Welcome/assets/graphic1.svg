@@ -1,0 +1,252 @@
+<svg width="186" height="165" viewBox="0 0 186 165" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 10</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(1762 11327)">
+<g id="Group 10">
+<g id="Ellipse 10">
+<use xlink:href="#path0_fill" transform="translate(-1720.14 -11326.1)" fill="#E0E0E0"/>
+</g>
+<g id="Ellipse 11">
+<use xlink:href="#path1_fill" transform="translate(-1721.8 -11325.6)" fill="#6FCF97"/>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path2_fill" transform="translate(-1755.75 -11267)" fill="#828282"/>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path3_fill" transform="translate(-1751.84 -11262)" fill="#8FDCF4"/>
+</g>
+<g id="Mask Group">
+<mask id="mask0_alpha" mask-type="alpha">
+<g id="Rectangle 16.2">
+<use xlink:href="#path4_fill" transform="translate(-1719.26 -11262)" fill="#C4C4C4"/>
+</g>
+</mask>
+<g id="Subtract" mask="url(#mask0_alpha)">
+<use xlink:href="#path5_fill" transform="translate(-1712.05 -11251.5)" fill="#EB5757"/>
+</g>
+<g id="Ellipse 11.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path6_fill" transform="translate(-1682.6 -11252.9)" fill="#C376E0"/>
+</g>
+<g id="Rectangle 16.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path7_fill" transform="translate(-1672.44 -11230.8)" fill="#C64747"/>
+</g>
+<g id="Ellipse 11" mask="url(#mask0_alpha)">
+<use xlink:href="#path6_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1712.75 -11246.3)" fill="#C376E0"/>
+</g>
+<g id="Ellipse 14.8" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1676.55 -11256.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.9" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1675.62 -11256.6)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.10" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1674.69 -11257.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.11" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1673.76 -11257.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.12" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1672.83 -11257.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.13" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1671.9 -11257.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.14" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1671.43 -11256.6)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.15" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-1670.97 -11255.7)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1707.58 -11253.5)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1706.76 -11254.1)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.2" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1705.95 -11254.8)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.3" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1705.03 -11255)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.4" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1704.12 -11255.2)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.5" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1703.21 -11255.3)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1702.66 -11255)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14.7" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1702.02 -11254.2)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 10" mask="url(#mask0_alpha)">
+<use xlink:href="#path9_fill" transform="translate(-1710.24 -11236.6)" fill="#C376E0"/>
+</g>
+<g id="Ellipse 12" mask="url(#mask0_alpha)">
+<use xlink:href="#path10_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1708.31 -11252.4)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 12.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path10_fill" transform="translate(-1677.02 -11255.7)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 13" mask="url(#mask0_alpha)">
+<use xlink:href="#path11_fill" transform="matrix(0.979667 -0.200628 0.200628 0.979667 -1703.74 -11251)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 13.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path11_fill" transform="translate(-1672.83 -11253.8)" fill="#4F4F4F"/>
+</g>
+<g id="Ellipse 14" mask="url(#mask0_alpha)">
+<use xlink:href="#path12_fill" transform="translate(-1693.31 -11215.7)" fill="#D53D3D"/>
+</g>
+<g id="Ellipse 15" mask="url(#mask0_alpha)">
+<use xlink:href="#path13_fill" transform="matrix(0.97152 -0.236959 0.236959 0.97152 -1693.43 -11232.5)" fill="#9B51E0"/>
+</g>
+<g id="Ellipse 15.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path14_fill" transform="matrix(0.97152 -0.236959 -0.236959 -0.97152 -1696.73 -11232.9)" fill="#9B51E0"/>
+</g>
+<g id="Ellipse 15.3" mask="url(#mask0_alpha)">
+<use xlink:href="#path14_fill" transform="matrix(0.999882 0.015331 0.015331 -0.999882 -1687.68 -11235.1)" fill="#9B51E0"/>
+</g>
+<g id="Ellipse 15.2" mask="url(#mask0_alpha)">
+<use xlink:href="#path15_fill" transform="matrix(0.97152 -0.236959 -0.236959 -0.97152 -1683.04 -11232.5)" fill="#9B51E0"/>
+</g>
+<g id="Rectangle 17" mask="url(#mask0_alpha)">
+<use xlink:href="#path16_fill" transform="translate(-1711.39 -11218.9)" fill="#7E5858"/>
+</g>
+<g id="Rectangle 16" mask="url(#mask0_alpha)">
+<use xlink:href="#path7_fill" transform="matrix(-1 0 0 1 -1707.19 -11230.8)" fill="#C64747"/>
+</g>
+<g id="Rectangle 18" mask="url(#mask0_alpha)">
+<use xlink:href="#path17_fill" transform="matrix(0.963803 -0.266615 0.266615 0.963803 -1693.36 -11211.4)" fill="#333333"/>
+</g>
+</g>
+<g id="Vector 2">
+<use xlink:href="#path18_fill" transform="translate(-1751.88 -11262)" fill="#F2F2F2" fill-opacity="0.4"/>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path19_fill" transform="matrix(0.824372 -0.566048 0.566048 0.824372 -1660.71 -11179)" fill="#333030"/>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path20_fill" transform="translate(-1660.85 -11183.1)" fill="#7E5858"/>
+</g>
+<g id="Ellipse 5">
+<use xlink:href="#path21_fill" transform="translate(-1658.06 -11218.5)" fill="#219653"/>
+</g>
+<g id="Ellipse 6">
+<use xlink:href="#path22_fill" transform="matrix(0.963502 -0.267701 0.267701 0.963502 -1652.52 -11236.2)" fill="#219653"/>
+</g>
+<g id="Ellipse 6.19">
+<use xlink:href="#path23_fill" transform="matrix(0.973854 0.227177 -0.227177 0.973854 -1608.49 -11236.7)" fill="#219653"/>
+</g>
+<g id="Ellipse 7">
+<use xlink:href="#path24_fill" transform="translate(-1656.66 -11240.8)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 7.1">
+<use xlink:href="#path24_fill" transform="translate(-1611.99 -11240.8)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 8">
+<use xlink:href="#path25_fill" transform="translate(-1656.66 -11238)" fill="#828282"/>
+</g>
+<g id="Ellipse 8.1">
+<use xlink:href="#path25_fill" transform="translate(-1611.99 -11238.5)" fill="#828282"/>
+</g>
+<g id="Ellipse 9">
+<use xlink:href="#path26_fill" transform="translate(-1615.71 -11211.5)" fill="#166839"/>
+</g>
+<g id="Ellipse 9.2">
+<use xlink:href="#path27_fill" transform="translate(-1622.69 -11212.9)" fill="#166839"/>
+</g>
+<g id="Ellipse 9.3">
+<use xlink:href="#path27_fill" transform="translate(-1621.29 -11205.5)" fill="#166839"/>
+</g>
+<g id="Ellipse 9.1">
+<use xlink:href="#path28_fill" transform="translate(-1629.2 -11208.7)" fill="#166839"/>
+</g>
+<g id="Group 9">
+<g id="Subtract">
+<use xlink:href="#path29_fill" transform="translate(-1658.21 -11232.5)" fill="#EB5757"/>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path30_fill" transform="matrix(-1 0 0 1 -1651.2 -11202.7)" fill="#C64747"/>
+</g>
+<g id="Rectangle 16.1">
+<use xlink:href="#path30_fill" transform="translate(-1601.16 -11202.7)" fill="#C64747"/>
+</g>
+</g>
+<g id="Rectangle 16">
+<use xlink:href="#path31_fill" transform="translate(-1761.14 -11303.6)" fill="url(#paint55_linear)"/>
+</g>
+<g id="Rectangle 17">
+<use xlink:href="#path32_fill" transform="translate(-1725.93 -11318.1)" fill="#E0E0E0"/>
+</g>
+<g id="Polygon 4">
+<use xlink:href="#path33_fill" transform="matrix(1 0 0 -1 -1700.17 -11277)" fill="#E0E0E0"/>
+</g>
+<g id="Rectangle 18">
+<use xlink:href="#path34_fill" transform="translate(-1711.5 -11312.4)" fill="#C4C4C4"/>
+</g>
+<g id="Rectangle 18.1">
+<use xlink:href="#path35_fill" transform="translate(-1668.06 -11312.4)" fill="#C4C4C4"/>
+</g>
+<g id="Rectangle 18.5">
+<use xlink:href="#path36_fill" transform="translate(-1711.5 -11297)" fill="#C4C4C4"/>
+</g>
+<g id="Rectangle 18.4">
+<use xlink:href="#path37_fill" transform="translate(-1658.21 -11304.7)" fill="#C4C4C4"/>
+</g>
+<g id="Rectangle 18.2">
+<use xlink:href="#path38_fill" transform="translate(-1649.63 -11312.4)" fill="#C4C4C4"/>
+</g>
+<g id="Rectangle 18.3">
+<use xlink:href="#path39_fill" transform="translate(-1711.5 -11304.7)" fill="#C4C4C4"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint55_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-5.45581e-15 59.7953 -77.9038 3.66141e-15 131.06 81.6003)">
+<stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+<stop offset="0.874374" stop-color="#FFFFFF"/>
+</linearGradient>
+<path id="path0_fill" d="M 2.0638 1.0319C 2.0638 1.6018 1.6018 2.0638 1.0319 2.0638C 0.461997 2.0638 0 1.6018 0 1.0319C 0 0.461997 0.461997 0 1.0319 0C 1.6018 0 2.0638 0.461997 2.0638 1.0319Z"/>
+<path id="path1_fill" d="M 0.93079 0.465395C 0.93079 0.722425 0.722425 0.93079 0.465395 0.93079C 0.208364 0.93079 0 0.722425 0 0.465395C 0 0.208364 0.208364 0 0.465395 0C 0.722425 0 0.93079 0.208364 0.93079 0.465395Z"/>
+<path id="path2_fill" d="M 0 0L 96.7633 0L 96.7633 65.2472L 0 65.2472L 0 0Z"/>
+<path id="path3_fill" d="M 0 0L 88.8904 0L 88.8904 56.7782L 0 56.7782L 0 0Z"/>
+<path id="path4_fill" d="M 0 0L 60.9667 0L 60.9667 56.7782L 0 56.7782L 0 0Z"/>
+<path id="path5_fill" fill-rule="evenodd" d="M 0 21.3076C 0 9.54004 9.95581 0 22.2371 0C 34.5181 0 44.4739 9.54004 44.4739 21.3076L 39.5322 21.3076C 39.5322 12.1553 31.7888 4.73535 22.2368 4.73535C 12.6848 4.73535 4.94141 12.1553 4.94141 21.3076L 0 21.3076Z"/>
+<path id="path6_fill" d="M 9.77329 22.3389C 9.77329 34.6764 7.58547 44.6779 4.88665 44.6779C 2.18783 44.6779 0 34.6764 0 22.3389C 0 10.0015 6.84177 0 9.54059 0C 12.2394 0 9.77329 10.0015 9.77329 22.3389Z"/>
+<path id="path7_fill" d="M 0 0L 0.404633 0C 4.59469 0 7.99141 3.39671 7.99141 7.58677C 7.99141 11.7768 4.59469 15.1735 0.404632 15.1735L 0 15.1735L 0 0Z"/>
+<path id="path8_fill" d="M 1.32295 3.49046C 1.32295 5.41819 1.0268 6.98092 0.661477 6.98092C 0.296153 6.98092 0 5.41819 0 3.49046C 0 1.56273 0.825335 0 1.19066 0C 1.55598 0 1.32295 1.56273 1.32295 3.49046Z"/>
+<path id="path9_fill" d="M 40.6673 23.3825C 40.6673 36.7998 32.9928 36.4629 20.6553 36.4629C 8.31787 36.4629 -1.45095 41.0207 0.177959 23.3825C 0.177959 9.96527 8.31787 0 20.6553 0C 32.9928 0 40.6673 2.73471 40.6673 23.3825Z"/>
+<path id="path10_fill" d="M 10.2387 5.11934C 10.2387 7.94668 7.94668 10.2387 5.11934 10.2387C 2.29201 10.2387 0 7.94668 0 5.11934C 0 2.29201 2.29201 0 5.11934 0C 7.94668 0 10.2387 2.29201 10.2387 5.11934Z"/>
+<path id="path11_fill" d="M 6.05013 3.02507C 6.05013 4.69576 4.69576 6.05013 3.02507 6.05013C 1.35437 6.05013 0 4.69576 0 3.02507C 0 1.35437 1.35437 0 3.02507 0C 4.69576 0 6.05013 1.35437 6.05013 3.02507Z"/>
+<path id="path12_fill" d="M 20.012 0.483566C 20.012 2.06697 15.5321 7.44632 10.006 7.44632C 4.47983 7.44632 0 2.06697 0 0.483566C 0 -1.09984 4.47983 1.71229 10.006 1.71229C 15.5321 1.71229 20.012 -1.09984 20.012 0.483566Z"/>
+<path id="path13_fill" d="M 6.98092 0.93079C 6.98092 1.44485 5.41819 1.86158 3.49046 1.86158C 1.56273 1.86158 0 1.44485 0 0.93079C 0 0.416729 1.56273 0 3.49046 0C 5.41819 0 6.98092 0.416729 6.98092 0.93079Z"/>
+<path id="path14_fill" d="M 2.85174 0.380232C 2.85174 0.590229 2.21336 0.760465 1.42587 0.760465C 0.638384 0.760465 0 0.590229 0 0.380232C 0 0.170236 0.638384 0 1.42587 0C 2.21336 0 2.85174 0.170236 2.85174 0.380232Z"/>
+<path id="path15_fill" d="M 4.44451 0.592601C 4.44451 0.919886 3.44957 1.1852 2.22225 1.1852C 0.994937 1.1852 0 0.919886 0 0.592601C 0 0.265317 0.994937 0 2.22225 0C 3.44957 0 4.44451 0.265317 4.44451 0.592601Z"/>
+<path id="path16_fill" d="M 0 0L 2.68232 0L 2.68232 4.96032L 0 4.96032L 0 0Z"/>
+<path id="path17_fill" d="M 0 1.52389C 0 0.682268 0.682268 0 1.52389 0L 2.80968 0C 3.6513 0 4.33357 0.682268 4.33357 1.52389C 4.33357 2.36551 3.6513 3.04778 2.80968 3.04778L 1.52389 3.04778C 0.682267 3.04778 0 2.36551 0 1.52389Z"/>
+<path id="path18_fill" d="M 88.9306 0L 0 0.047313L 0.000627371 57.0274L 88.9306 0Z"/>
+<path id="path19_fill" d="M 0 0L 1.31048 0L 1.31048 11.3798L 0.383659 11.6432L 0 0Z"/>
+<path id="path20_fill" d="M 0 0L 2.79237 0L 2.79237 4.65395L 0 4.65395L 0 0Z"/>
+<path id="path21_fill" d="M 61.8975 34.9046C 61.8975 54.1819 48.0413 55.8474 30.9488 55.8474C 13.8562 55.8474 0 54.1819 0 34.9046C 0 15.6273 13.8562 0 30.9488 0C 48.0413 0 61.8975 15.6273 61.8975 34.9046Z"/>
+<path id="path22_fill" d="M 8.00004 23.1194C 8.00004 35.1999 6.64568 44.993 4.97498 44.993C 3.30428 44.993 1.94991 35.1999 1.94991 23.1194C 1.94991 11.039 -1.17981 0 0.49089 0C 2.16159 0 8.00004 11.039 8.00004 23.1194Z"/>
+<path id="path23_fill" d="M 8.04277 20.8163C 8.04277 32.8967 6.6884 42.6898 5.0177 42.6898C 3.347 42.6898 1.99263 32.8967 1.99263 20.8163C 1.99263 8.73586 -1.18526 -4.07741e-08 0.485437 2.06677e-16C 2.15613 2.06677e-16 8.04277 8.73586 8.04277 20.8163Z"/>
+<path id="path24_fill" d="M 8.37711 4.18855C 8.37711 6.50183 6.50183 8.37711 4.18855 8.37711C 1.87528 8.37711 0 6.50183 0 4.18855C 0 1.87528 1.87528 0 4.18855 0C 6.50183 0 8.37711 1.87528 8.37711 4.18855Z"/>
+<path id="path25_fill" d="M 1.39618 1.39618C 1.39618 2.16728 1.08364 2.79237 0.698092 2.79237C 0.312547 2.79237 0 2.16728 0 1.39618C 0 0.625093 0.312547 0 0.698092 0C 1.08364 0 1.39618 0.625093 1.39618 1.39618Z"/>
+<path id="path26_fill" d="M 5.58474 1.16349C 5.58474 1.80606 4.33455 2.32697 2.79237 2.32697C 1.25019 2.32697 0 1.80606 0 1.16349C 0 0.520911 1.25019 0 2.79237 0C 4.33455 0 5.58474 0.520911 5.58474 1.16349Z"/>
+<path id="path27_fill" d="M 3.25776 0.698092C 3.25776 1.08364 2.52849 1.39618 1.62888 1.39618C 0.729275 1.39618 0 1.08364 0 0.698092C 0 0.312547 0.729275 0 1.62888 0C 2.52849 0 3.25776 0.312547 3.25776 0.698092Z"/>
+<path id="path28_fill" d="M 5.11934 0.698092C 5.11934 1.08364 3.97334 1.39618 2.55967 1.39618C 1.146 1.39618 0 1.08364 0 0.698092C 0 0.312547 1.146 0 2.55967 0C 3.97334 0 5.11934 0.312547 5.11934 0.698092Z"/>
+<path id="path29_fill" fill-rule="evenodd" d="M 0 30.7158C 0 13.752 14.3401 0 32.0293 0C 49.7188 0 64.0588 13.752 64.0588 30.7158L 56.9409 30.7168C 56.9409 17.5225 45.7876 6.82617 32.0291 6.82617C 18.2708 6.82617 7.11743 17.5225 7.11743 30.7168L 0 30.7158Z"/>
+<path id="path30_fill" d="M 0 0L 1.51056 0C 7.0334 0 11.5106 4.47715 11.5106 10L 11.5106 11.8736C 11.5106 17.3964 7.0334 21.8736 1.51056 21.8736L 0 21.8736L 0 0Z"/>
+<path id="path31_fill" d="M 0 0L 184.216 0L 184.216 141.396L 0 141.396L 0 0Z"/>
+<path id="path32_fill" d="M 0 15.9398C 0 7.13648 7.13648 0 15.9398 0L 101.501 0C 110.304 0 117.441 7.13648 117.441 15.9398C 117.441 24.7431 110.304 31.8795 101.501 31.8795L 15.9398 31.8795C 7.13649 31.8795 0 24.7431 0 15.9398Z"/>
+<path id="path33_fill" d="M 7.66968 0L 14.3118 13.7616L 1.02754 13.7616L 7.66968 0Z"/>
+<path id="path34_fill" d="M 0 0L 38.9316 0L 38.9316 4.97521L 0 4.97521L 0 0Z"/>
+<path id="path35_fill" d="M 0 0L 14.3738 0L 14.3738 4.97521L 0 4.97521L 0 0Z"/>
+<path id="path36_fill" d="M 0 0L 28.8982 0L 28.8982 4.97521L 0 4.97521L 0 0Z"/>
+<path id="path37_fill" d="M 0 0L 35.5196 0L 35.5196 4.97521L 0 4.97521L 0 0Z"/>
+<path id="path38_fill" d="M 0 0L 26.9393 0L 26.9393 4.97521L 0 4.97521L 0 0Z"/>
+<path id="path39_fill" d="M 0 0L 51.6863 0L 51.6863 4.97521L 0 4.97521L 0 0Z"/>
+</defs>
+</svg>

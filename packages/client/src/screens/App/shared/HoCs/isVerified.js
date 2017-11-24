@@ -17,7 +17,7 @@ export default WrappedComponent => {
       const { data } = nextProps
 
       if (!data.loading && data.user && !data.user.emailVerified) {
-        this.props.history.push('/notverified')
+        // this.props.history.push('/notverified')
       }
     }
 

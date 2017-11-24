@@ -60,7 +60,8 @@ class CountdownComponent extends Component {
     } else {
       // Start Conversation
       clearInterval(this.state.countdown)
-      this.props.start()
+      console.log('Countdown this.props.start() : ', this.props)
+      // this.props.start()
     }
   }
   render() {

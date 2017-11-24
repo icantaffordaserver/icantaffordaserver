@@ -14,16 +14,18 @@ import {
   TextLink,
   TextArea,
   Input,
-} from '../../../styles'
+} from '../../../../styles'
 
-import ConfirmAndCancel from './shared/ConfirmAndCancel'
+import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import { Flex, Box, Grid } from 'grid-styled'
 import { graphql, compose, withApollo } from 'react-apollo'
 
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
+import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 
-class ChooseInterests extends Component {
+import ChooseInterests from './components/ChooseInterests'
+import SuggestInterests from './components/SuggestInterests'
+class ChooseInterestsComponent extends Component {
   state = {
     selectedTags: [],
     suggestion: '',
@@ -96,11 +98,14 @@ class ChooseInterests extends Component {
   }
 
   componentDidMount() {
-    const { connectionInterests } = this.props.data.user
+    console.log('Choose Interests : ', this.props)
     const { selectedTags } = this.state
 
-    let interestIds = connectionInterests.map(interest => interest.id)
-    this.setState({ selectedTags: interestIds })
+    if (this.props.data.user) {
+      const { connectionInterests } = this.props.data.user
+      let interestIds = connectionInterests.map(interest => interest.id)
+      this.setState({ selectedTags: interestIds })
+    }
   }
 
   render() {
@@ -114,49 +119,18 @@ class ChooseInterests extends Component {
           <br />
           <i>Multiple interests can be selected.</i>
         </p>
-        <Flex width={1} wrap>
-          {interests.map((x, i) => (
-            <Box width={1 / 7} key={x.id}>
-              <div
-                style={{
-                  justifyContent: 'space-between',
-                }}
-                onClick={() => this.changeColor(x.id)}
-              >
-                <Tag isSelected={selectedTags.includes(x.id)}>#{x.name}</Tag>
-              </div>
-            </Box>
-          ))}
-        </Flex>
-        <Flex wrap width={1}>
-          <Box width={1 / 3} ml="8%" pr={2}>
-            <p>
-              Create your own interest:
-              <br />
-              <i>
-                This will show up in your profile, and if popular enought, we
-                may feature it in the future!
-              </i>
-            </p>
-          </Box>
-          <Box width={1 / 4} pr={2}>
-            <Input
-              value={this.state.suggestion}
-              type="text"
-              onChange={this.handleChange}
-            />
-          </Box>
-          <Box width={1 / 4}>
-            <Button
-              fontSize={'small'}
-              noMargin
-              color="accept"
-              onClick={this.handleSubmit}
-            >
-              Submit
-            </Button>
-          </Box>
-        </Flex>
+
+        <ChooseInterests
+          interests={interests}
+          changeColor={this.changeColor}
+          selectedTags={this.state.selectedTags}
+        />
+        <SuggestInterests
+          suggestion={this.state.suggestion}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+
         <ConfirmAndCancel
           handleSave={this.handleConfirm}
           handleCancel={this.handleClear}
@@ -166,4 +140,4 @@ class ChooseInterests extends Component {
   }
 }
 
-export default compose(graphql(currentUserQuery))(ChooseInterests)
+export default compose(graphql(currentUserQuery))(ChooseInterestsComponent)
