@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Card, Title, Subheading, Text } from '../../../../../styles'
+import { Text } from '../../../../../styles'
 import { FireStarters, FireStarterAnswers, Answer } from '../styles'
 import AnswerFireStarters from './AnswerFireStarterComponent'
 
