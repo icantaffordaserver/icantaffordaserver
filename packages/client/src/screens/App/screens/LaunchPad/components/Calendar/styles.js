@@ -5,18 +5,32 @@ import { Icon } from 'semantic-ui-react'
 export const Wrapper = styled.div`
   grid-area: cal;
   background: #fff;
+  display: grid;
+  grid-template-rows: minmax(10%, 100px) auto;
+  grid-template-areas: 'heading' 'calendar-body';
+`
+export const Heading = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
+  & > h1 {
+    margin: 0 2em !important;
+  }
+`
+
+export const CalendarWrapper = styled.div`
+  grid-area: calendar-body;
+  display: grid;
+  grid-template-rows: minmax(10%, 60px) 1fr;
 `
 
 export const Header = styled.div`
   border-top: 3px solid #eee;
   display: grid;
+  margin: auto;
+  width: 90%;
   grid-template-rows: 80px;
-  grid-template-columns: repeat(7, 100px);
+  grid-template-columns: repeat(7, minmax(10%, 100px));
   & > h3:first-child {
     margin-top: 25px;
   }
@@ -29,32 +43,27 @@ export const Calendar = styled.div`
   padding: 2% 5%;
   display: grid;
   text-align: center;
-  grid-template-columns: repeat(7, [col] 100px);
+  grid-auto-rows: minmax(10%, 100px);
+  grid-template-columns: repeat(7, [col] minmax(10%, 100px));
 `
 
 export const LeftChev = styled(Icon).attrs({
   name: 'left chevron',
   size: 'big',
 })`
-  position: absolute;
-  left: 105px;
-  top: 40px;
   cursor: pointer;
 `
 export const RightChev = styled(Icon).attrs({
   name: 'right chevron',
   size: 'big',
 })`
-  position: absolute;
-  right: 105px;
-  top: 40px;
   cursor: pointer;
 `
 export const Day = styled.div`
   padding: 5px;
   grid-column: col ${props => props.dow};
-  height: 100px;
   font-size: 1em;
+  min-height: 50px;
   display: flex;
   flex-direction: column;
   position: relative;
