@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Title } from '../../../styles/Text/index.js'
-
 import { Input } from '../../../styles/Inputs/index.js'
 
 import { Flex, Box } from 'grid-styled'

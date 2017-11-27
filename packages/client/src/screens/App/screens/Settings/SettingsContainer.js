@@ -16,10 +16,6 @@ import updatePasswordMutation from '../../shared/graphql/mutations/updatePasswor
 const FullScreen = Flex.extend`
   height: 90vh;
 `
-const Modal = Box.extend`
-  margin: auto auto;
-`
-
 class SettingsContainer extends Component {
   state = {
     showModal: false,
@@ -132,7 +128,7 @@ class SettingsContainer extends Component {
   }
 
   handleDelete = () => {
-    const { deleteAccount, feedback } = this.state
+    const { deleteAccount } = this.state
     const { user } = this.props.data
 
     if (deleteAccount === 'GOODBYE') {

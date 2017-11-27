@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-
-import { Title } from '../../../styles/Text/index.js'
+import React from 'react'
 
 import { Input } from '../../../styles/Inputs/index.js'
 
@@ -12,10 +10,6 @@ import { ProfileSection } from '../../Profile/style'
 const Modal = Box.extend`
   margin: auto auto;
 `
-const FullScreen = Flex.extend`
-  height: 50vh;
-`
-
 const customStyles = {
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.6)',
