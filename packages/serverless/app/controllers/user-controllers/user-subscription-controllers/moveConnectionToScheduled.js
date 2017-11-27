@@ -35,7 +35,8 @@ export default async (req, res) => {
           }),
       )
     }
-  } catch (error) {
     res.status(200).send({ data: { id } })
+  } catch (error) {
+    res.status(200).send({ error: error.message })
   }
 }

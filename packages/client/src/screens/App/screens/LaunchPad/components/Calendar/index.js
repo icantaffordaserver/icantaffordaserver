@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-import { Calendar, Day, Wrapper, Header, LeftChev, RightChev } from './styles'
+import {
+  Calendar,
+  Day,
+  Wrapper,
+  Header,
+  Heading,
+  CalendarWrapper,
+  LeftChev,
+  RightChev,
+} from './styles'
 
 class CalendarComponent extends Component {
   state = {
@@ -65,44 +74,49 @@ class CalendarComponent extends Component {
     if (!this.props.upcoming) return null
     return (
       <Wrapper>
-        {moment(this.state.currentMonth).isAfter(moment()) && (
+        <Heading>
           <LeftChev onClick={this.lastMonth} />
-        )}
-        <RightChev onClick={this.nextMonth} />
-        <h1>{moment(this.state.currentMonth).format('MMMM-YYYY')}</h1>
-        <Header>
-          {Object.keys(this.state.dow).map(day => <h3 key={day}>{day}</h3>)}
-        </Header>
-        <Calendar>
-          {this.getDaysInMonth().map(day => {
-            if (typeof day === 'object') {
-              return (
-                <Day
-                  dow={this.state.dow[moment(day.connectionTime).format('ddd')]}
-                  key={day.connectionTime}
-                  className={
-                    this.isEqualDates(day.connectionTime)
-                      ? 'today event'
-                      : 'event'
-                  }
-                  onClick={() => this.props.updateUpcoming(day)}
-                >
-                  {moment(day.connectionTime).format('D')}
-                </Day>
-              )
-            } else {
-              return (
-                <Day
-                  dow={this.state.dow[moment(day).format('ddd')]}
-                  key={day}
-                  className={this.isEqualDates(day) && 'today'}
-                >
-                  {moment(day).format('D')}
-                </Day>
-              )
-            }
-          })}
-        </Calendar>
+          <h1>{moment(this.state.currentMonth).format('MMMM YYYY')}</h1>
+          <RightChev onClick={this.nextMonth} />
+        </Heading>
+
+        <CalendarWrapper>
+          <Header>
+            {Object.keys(this.state.dow).map(day => <h3 key={day}>{day}</h3>)}
+          </Header>
+          <Calendar>
+            {this.getDaysInMonth().map(day => {
+              if (typeof day === 'object') {
+                return (
+                  <Day
+                    dow={
+                      this.state.dow[moment(day.connectionTime).format('ddd')]
+                    }
+                    key={day.connectionTime}
+                    className={
+                      this.isEqualDates(day.connectionTime)
+                        ? 'today event'
+                        : 'event'
+                    }
+                    onClick={() => this.props.updateUpcoming(day)}
+                  >
+                    {moment(day.connectionTime).format('D')}
+                  </Day>
+                )
+              } else {
+                return (
+                  <Day
+                    dow={this.state.dow[moment(day).format('ddd')]}
+                    key={day}
+                    className={this.isEqualDates(day) && 'today'}
+                  >
+                    {moment(day).format('D')}
+                  </Day>
+                )
+              }
+            })}
+          </Calendar>
+        </CalendarWrapper>
       </Wrapper>
     )
   }
