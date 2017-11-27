@@ -1,5 +1,6 @@
 version: 2
 jobs:
+  # currently all jobs are staging environment
   build:
     working_directory: ~/toktumi
     # The primary container is an instance of the first list image listed. Your build commands run in this container.
@@ -25,6 +26,9 @@ jobs:
       - run:
           name: Invalidate Cloudfront
           command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
+      - run:
+          name: Deploy serverless to lambda aws staging environment
+          command: serverless --version && cd packages/serverless && serverless deploy --stage staging
   test:
     docker:
         - image: amann11/circleci-node-aws:latest
@@ -33,17 +37,6 @@ jobs:
       - run:
           name: Haha I should be testing stuff
           command: echo Funny how many tests there are wow!
-  deploy-aws:
-    docker:
-        - image: amann11/circleci-node-aws:latest
-    steps:
-      - checkout
-      - run: 
-          name: I should be deploying to aws
-          command: echo Deploying aws staging
-      - run:
-          name: Deploy to server to aws staging environment
-          command: cd packages/serverless serverless deploy --stage staging
      
 workflows:
   version: 2
@@ -56,10 +49,6 @@ workflows:
       - test:
           requires:
             - build
-          filters:
-            branches:
-              only: master
-      - deploy-aws:
           filters:
             branches:
               only: master
