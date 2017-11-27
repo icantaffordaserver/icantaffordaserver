@@ -16,7 +16,6 @@ provider:
   # if ${opt:stage} is not specified will default to the value of dev see: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy#deployment-without-stage-and-region-options
   stage: ${opt:stage, self:custom.defaultStage}
   region: us-east-1
-  profile: pluto # the profile in .aws/credentials
   timeout: 60
 
   # you can define service wide environment variables here, same as .env
