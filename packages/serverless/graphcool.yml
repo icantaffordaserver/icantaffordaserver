@@ -1,17 +1,9 @@
 types: ./graphcool/types.graphql
-custom:
-  dev:
-    WEBHOOK_URL: ${env:WEBHOOK_SERVER_URL}
-  staging: 
-    # move to an environment variable on circle ci
-    WEBHOOK_URL: https://yh3w5yykgg.execute-api.us-east-1.amazonaws.com/staging/
-  prod:
-    WEBHOOK_URL: http://test.com/prod
 functions:
   getConversationToken-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/getConversationToken
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/getConversationToken
         headers:
           Content-Type: application/json
     type: resolver
@@ -19,7 +11,7 @@ functions:
   sendInvite-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/sendInvite
+        url: ${env:WEBHOOK_SERVER_URL}/invite/subscription/sendInvite
         headers:
           Content-Type: application/json
     type: subscription
@@ -27,7 +19,7 @@ functions:
   setPasswordResetComplete-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/setPasswordResetComplete
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/setPasswordResetComplete
         headers:
           Content-Type: application/json
     type: subscription
@@ -51,7 +43,7 @@ functions:
   authenticateUser-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/authenticateUser
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/authenticateUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -59,7 +51,7 @@ functions:
   sendPasswordResetEmail-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendPasswordResetEmail
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/sendPasswordResetEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -67,7 +59,7 @@ functions:
   signUpUser-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/signUpUser
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/signUpUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -75,7 +67,7 @@ functions:
   sendVerificationEmail-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendVerificationEmail
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/sendVerificationEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -83,7 +75,7 @@ functions:
   triggerPasswordReset-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/triggerPasswordReset
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/triggerPasswordReset
         headers:
           Content-Type: application/json
     type: resolver
@@ -91,7 +83,7 @@ functions:
   sendInvite-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/schemaExtension/sendInvite
+        url: ${env:WEBHOOK_SERVER_URL}/invite/schemaExtension/sendInvite
     type: resolver
     schema: ./graphcool/src/sendInvite.schemaExtension.graphql
   createAndSendInviteEmail-subscription:
@@ -99,13 +91,13 @@ functions:
     query: ./graphcool/src/createAndSendInviteEmail.subscription.graphql
     handler:
       webhook: 
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/createAndSendInviteEmail
+        url: ${env:WEBHOOK_SERVER_URL}/invite/subscription/createAndSendInviteEmail
         headers:
           Content-Type: application/json
   updatePassword-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/updatePassword
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/updatePassword
         headers:
           Content-Type: application/json
     type: resolver

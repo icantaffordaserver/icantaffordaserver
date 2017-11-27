@@ -1,4 +1,3 @@
-import '../loadEnv' // needs to be at the top to load env vars
 import bcrypt from 'bcryptjs'
 import throat from 'throat'
 

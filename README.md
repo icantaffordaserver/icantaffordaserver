@@ -13,6 +13,8 @@ dev:
   TWILIO_CHAT_SERVICE_SID:
 ```
 
+Following a monorepo + linting structure as seen here https://github.com/sudo-suhas/lint-staged-multi-pkg
+
 ## Shift Web App
 
 ### Configuration
