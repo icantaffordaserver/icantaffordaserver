@@ -27,7 +27,7 @@ jobs:
           name: Invalidate Cloudfront
           command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
       - run:
-        name: Deploy to server to aws staging environment
+        name: Deploy serverless to lambda aws staging environment
         command: serverless --version && cd packages/serverless && serverless deploy --stage staging
   test:
     docker:
@@ -37,6 +37,7 @@ jobs:
       - run:
           name: Haha I should be testing stuff
           command: echo Funny how many tests there are wow!
+     
 workflows:
   version: 2
   build_and_test:
