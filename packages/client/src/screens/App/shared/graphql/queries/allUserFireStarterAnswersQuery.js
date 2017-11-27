@@ -5,6 +5,7 @@ export default gql`
     allFireStarterAnswers(filter: { answeredBy: { id: $userId } }) {
       id
       question {
+        id
         question
       }
       answer

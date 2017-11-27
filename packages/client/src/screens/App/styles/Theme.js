@@ -5,6 +5,7 @@ export default {
     secondary: '#7781c8',
     white: '#fff',
     gray: '#F8F8F8',
+    altGray: '#D7D7D7',
     darkGray: '#333',
     transparent: 'transparent',
     cancel: '#EB5757',
@@ -12,8 +13,8 @@ export default {
   },
 
   size: {
-    small: 30,
-    medium: 50,
+    small: 25,
+    medium: 40,
     large: 60,
     huge: 80,
   },
@@ -33,12 +34,12 @@ export default {
 
   borderRadius: {
     square: 0,
-    default: 5,
-    round: 10,
+    default: 1,
+    round: 2,
   },
 
   container: {
-    default: 70,
+    default: 65,
     expanded: 90,
     full: 100,
   },

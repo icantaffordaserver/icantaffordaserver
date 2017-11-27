@@ -18,6 +18,7 @@ import { Modal, Icon } from 'semantic-ui-react'
 
 export default props => {
   const user = props.user
+  const answers = user.fireStarterAnswers
   return (
     <Modal basic trigger={props.trigger}>
       <ProfileWrapper>
@@ -50,20 +51,30 @@ export default props => {
               {user.interests &&
                 user.interests.map(interest => <Tag>#{interest.name}</Tag>)}
             </Tags>
-            <Text left>{user.bio}</Text>
+            <p>{user.bio}</p>
           </UserDetails>
         </User>
-        <QASection>
-          <Left />
-          <QA />
-          <QA />
-          <Right />
-        </QASection>
-        {props.connection.status === 'MATCHED' && (
+        {answers.length > 0 && (
+          <QASection>
+            <Left />
+            {answers.map(answer => (
+              <QA key={answer.id}>
+                <h1>{answer.question.question}</h1>
+                <Text>{answer.answer}</Text>
+              </QA>
+            ))}
+            <Right />
+          </QASection>
+        )}
+        {props.connection.accepted ? (
+          <Button square small disabled>
+            Pending...
+          </Button>
+        ) : (
           <Button
             square
             small
-            onClick={() => props.scheduleInvitation(props.connection)}
+            onClick={() => props.scheduleInvitation(props.connection.id)}
           >
             Invite to Conversation
           </Button>

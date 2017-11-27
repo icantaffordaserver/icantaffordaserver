@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Layout = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  width: 100%;
   grid-template-rows: auto 60px auto auto;
+  grid-template-columns: 1fr;
   grid-template-areas: 'invites' 'title' 'schedule' 'history';
   grid-gap: 40px;
 `
@@ -12,7 +13,7 @@ export const Invitations = styled.div`
   grid-area: invites;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px 1fr;
   grid-template-areas: ' title' ' intros';
   grid-gap: 20px;
 `
@@ -20,7 +21,7 @@ export const Invitations = styled.div`
 export const Schedule = styled.div`
   grid-area: schedule;
   display: grid;
-  grid-template-columns: [col] 1fr [col] 400px;
+  grid-template-columns: [col] calc(65% - 10px) [col] calc(35% - 10px);
   grid-template-rows: [row] 70px [row] 1fr;
   grid-template-areas: 'cal title' 'cal upcoming';
   grid-gap: 20px;

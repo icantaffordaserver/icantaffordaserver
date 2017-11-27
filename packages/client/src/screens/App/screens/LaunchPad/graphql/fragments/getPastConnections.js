@@ -4,7 +4,7 @@ import connectionsFragment from '../fragments/connectionsFragment'
 
 export default gql`
   fragment getPastConnections on Query {
-    history: allConnections(
+    history: allConnectionses(
       filter: {
         status_not_in: [MATCHED, SCHEDULED]
         participants_some: { id: $id }

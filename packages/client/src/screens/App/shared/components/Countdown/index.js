@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-
-import { Loader } from 'semantic-ui-react'
 import moment from 'moment'
+
+import { Loader, Button } from 'semantic-ui-react'
 
 /**
  * @prop startTime: A string representing a start time.
@@ -17,6 +17,7 @@ class CountdownComponent extends Component {
       moment(this.props.startTime).diff(moment()),
       'milliseconds',
     ),
+    timeUp: false,
   }
 
   async componentWillUnmount() {
@@ -34,9 +35,9 @@ class CountdownComponent extends Component {
       return
     }
     if (duration.days() > 0) {
-      format = `${duration.days() > 10
-        ? duration.days()
-        : `0${duration.days()}`}:HH:MM:ss`
+      format = `${
+        duration.days() > 10 ? duration.days() : `0${duration.days()}`
+      }:HH:MM:ss`
     } else {
       format = 'HH:MM:ss'
     }
@@ -60,13 +61,16 @@ class CountdownComponent extends Component {
     } else {
       // Start Conversation
       clearInterval(this.state.countdown)
-      console.log('Countdown this.props.start() : ', this.props)
-      // this.props.start()
+      this.setState({ timeUp: true, loading: false })
     }
   }
   render() {
     return !this.state.loading ? (
-      <p style={{ textAlign: 'left' }}>{this.state.timeRemaining}</p>
+      this.state.timeUp ? (
+        <Button onClick={this.props.navigate}>Talk Now</Button>
+      ) : (
+        <p style={{ textAlign: 'left' }}>{this.state.timeRemaining}</p>
+      )
     ) : (
       !this.props.noLoader && <Loader active color="orange" />
     )

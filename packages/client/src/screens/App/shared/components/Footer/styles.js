@@ -6,15 +6,34 @@ import { NavLink } from 'react-router-dom'
 
 const styles = bind(Theme)
 
-export const Footer = styled.div`
+export const FooterWrapper = styled.div`
+  height: 60px;
+  width: 100%;
   padding: 5px;
   background-color: ${styles.color};
-  margin-bottom: 1em;
 `
-Footer.defaultProps = {
+FooterWrapper.defaultProps = {
   color: 'primary',
 }
 
+export const Footer = styled.div`
+  height: 100%;
+  width: ${styles.container}%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+Footer.defaultProps = {
+  container: 'default',
+}
+
+export const Links = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 45%;
+`
 export const Link = styled(NavLink)`
   transform: all 0.25s ease;
   color: ${styles.color};
@@ -30,10 +49,7 @@ Link.defaultProps = {
   color: 'white',
 }
 
-export const Logo = styled.h1`
-  color: ${styles.color};
+export const Logo = styled.img`
+  height: 30px;
   margin: 0;
 `
-Logo.defaultProps = {
-  color: 'accent',
-}

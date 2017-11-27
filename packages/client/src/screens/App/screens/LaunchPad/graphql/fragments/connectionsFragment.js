@@ -19,6 +19,13 @@ export default gql`
       email
       location
       bio
+      fireStarterAnswers {
+        id
+        question {
+          question
+        }
+        answer
+      }
     }
   }
 `

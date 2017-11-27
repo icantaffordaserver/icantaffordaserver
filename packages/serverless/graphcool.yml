@@ -24,6 +24,22 @@ functions:
           Content-Type: application/json
     type: subscription
     query: ./graphcool/src/setPasswordResetComplete.subscription.graphql
+  moveConnectionToScheduled-subscription:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/moveConnectionToScheduled
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/moveConnectionToScheduled.subscription.graphql
+  createConnectionSuggestions-subscription:
+    handler:
+      webhook:
+        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/createConnectionSuggestions
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/createConnectionSuggestions.subscription.graphql
   authenticateUser-schemaExtension:
     handler:
       webhook:
@@ -95,14 +111,22 @@ permissions:
 - operation: User.create
 - operation: User.update
 - operation: User.delete
-- operation: ConnectionReviews.read
-- operation: ConnectionReviews.create
-- operation: ConnectionReviews.update
-- operation: ConnectionReviews.delete
 - operation: Connections.read
 - operation: Connections.create
 - operation: Connections.update
 - operation: Connections.delete
+- operation: ConnectionReviews.read
+- operation: ConnectionReviews.create
+- operation: ConnectionReviews.update
+- operation: ConnectionReviews.delete
+- operation: ConnectionSuggestion.read
+- operation: ConnectionSuggestion.create
+- operation: ConnectionSuggestion.update
+- operation: ConnectionSuggestion.delete
+- operation: ConversationPrompt.read
+- operation: ConversationPrompt.create
+- operation: ConversationPrompt.update
+- operation: ConversationPrompt.delete
 - operation: FireStarter.read
 - operation: FireStarter.create
 - operation: FireStarter.update
@@ -155,5 +179,7 @@ permissions:
 - operation: ConnectionsOnConnectionReport.*
 - operation: ConnectionReportOnReporterUser.*
 - operation: ConnectionReportOnReportedUser.*
+- operation: ConnectionSuggestionsForUser.*
+- operation: ConnectionSuggestionOnConnection.*
 rootTokens:
 - adminToken

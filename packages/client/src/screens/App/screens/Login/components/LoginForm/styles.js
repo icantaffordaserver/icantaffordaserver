@@ -1,6 +1,6 @@
 /**
  * Created by alexandermann on 2017-06-06.
- * edited by Georgios Psarakis 2017-09-19. 
+ * edited by Georgios Psarakis 2017-09-19.
  */
 import styled from 'styled-components'
 import BackgroundImage from '../../../../shared/assets/product-hunt-landing.jpg'

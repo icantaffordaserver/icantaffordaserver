@@ -119,27 +119,17 @@ class LaunchPadContainer extends Component {
     await this.fetchConnections()
   }
 
-  scheduleInvitation = async connection => {
+  scheduleInvitation = async id => {
+    this.setState({ loading: true })
     const { client } = this.props
 
-    // If other user has already accepted, move the conversation to scheduled.
-    if (connection.accepted) {
-      await client.mutate({
-        mutation: scheduleConnection,
-        variables: {
-          id: connection.id,
-          status: 'SCHEDULED',
-        },
-      })
-    } else {
-      await client.mutate({
-        mutation: scheduleConnection,
-        variables: {
-          id: connection.id,
-          accepted: true,
-        },
-      })
-    }
+    await client.mutate({
+      mutation: scheduleConnection,
+      variables: {
+        id,
+      },
+    })
+
     await this.props.client.resetStore()
     await this.fetchConnections()
   }

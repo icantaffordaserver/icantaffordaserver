@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 
-import { Title, Text } from '../../../styles'
-
-import { TrophyContainer, FireStarterContainer } from '../style'
+import { TrophyContainer } from '../style'
 
 import UploadPhotoComponent from './UploadPhotoComponent'
 
@@ -11,6 +9,7 @@ import Biography from './Biography'
 import Availabilty from './Availability'
 import SubTitleSection from './shared/SubTitleSection'
 import UserInfo from './UserInfo'
+import FireStartersComponent from './FireStartersComponent'
 
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import allConnectionInterests from '../../../shared/graphql/queries/allConnectionInterests'
@@ -24,50 +23,6 @@ import EmptyAvatar from '../../../../../assets/pictures/empty_avatar.jpg'
 user background will actually be pulled from the user but for now we will just import a static image
 static will become user.background for example
 */
-const FireStarters = props => {
-  return (
-    <FireStarterContainer>
-      <div
-        style={{
-          width: '95%',
-          marginBottom: '20px',
-          marginRight: '-200px',
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: '#7781C8',
-            width: '100%',
-            padding: '5px',
-            marginBotton: '10px',
-          }}
-        >
-          <Title small fullWidth left darkGray style={{ color: 'white' }}>
-            What are some topics you’re passionate about?
-          </Title>
-        </div>
-        <Text left small fullWidth>
-          I’m extremely interested in placeholder text. I find it very
-          interesting and there’s always a lot to talk about. I could talk for
-          hours just about the characters and the direction that the field is
-          going in. My peers are also very opinionated about palceholder text.
-          Sometimes we just sit in my living room on a Friday night and have
-          very heated discussions about placeholder text. I’ve lost touch with
-          some of my friends over arguments we’ve had about placeholder text.
-        </Text>
-      </div>
-    </FireStarterContainer>
-  )
-}
-
-const QA = props => {
-  return (
-    <div>
-      <SubTitleSection title={'Q&A'} />
-    </div>
-  )
-}
-
 class ProfileComponent extends Component {
   state = {
     loading: false,
@@ -78,7 +33,6 @@ class ProfileComponent extends Component {
     if (!this.props.user) return null
     const user = this.props.user
     const data = this.props.data
-    console.log('User : ', user)
     let gradient
     if (user.gradientColors) {
       gradient = user.gradientColors
@@ -108,18 +62,11 @@ class ProfileComponent extends Component {
         <Box width={1} mx="auto">
           <Availabilty user={user} />
         </Box>
+
         <Box width={1} mx="auto">
-          <QA user={user} />
+          <SubTitleSection title={'Q&A'} />
+          <FireStartersComponent />
         </Box>
-        <Box width={1 / 2}>
-          <FireStarters />
-        </Box>
-        <Box width={1 / 2}>
-          <FireStarters />
-        </Box>
-        {/* 
-            <FireStartersComponent /> // Does not work
-          */}
       </Flex>
     )
   }
