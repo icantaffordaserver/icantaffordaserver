@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Grid } from 'grid-styled'
+import { Flex, Box } from 'grid-styled'
 import SVG from 'react-inlinesvg'
 import Graphic from './assets/Graphic1.svg'
 import { Title, SubTitle, TextLink } from './style'

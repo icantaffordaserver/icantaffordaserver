@@ -19,7 +19,7 @@ class UserInfo extends Component {
     console.log(this.props, ' User Info')
     let { firstName, lastName, connectionInterests } = this.props.user
     let { allConnectionInterestses } = this.props.data
-    let { user, props, data } = this.props
+    let { user } = this.props
     let { updateUser, loading } = this.props.props
     return (
       <ProfileSection>
