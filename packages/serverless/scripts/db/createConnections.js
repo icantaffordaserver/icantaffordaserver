@@ -1,5 +1,3 @@
-import '../loadEnv'
-
 import client from '../../config/GraphQLClient'
 import generateUniqueToken from '../../app/utils/generateUniqueToken'
 

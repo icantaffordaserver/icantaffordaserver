@@ -9,6 +9,7 @@
     "db:seed": "babel-node ./scripts/db/seed.js",
     "db:drop": "babel-node ./scripts/db/drop.js",
     "deploy:dev": "graphcool deploy --target dev",
+    "loadEnv": "export $(cat .env | xargs)",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
   },

@@ -1,5 +1,6 @@
 version: 2
 jobs:
+  # currently all jobs are staging environment
   build:
     working_directory: ~/toktumi
     # The primary container is an instance of the first list image listed. Your build commands run in this container.
@@ -43,7 +44,7 @@ jobs:
           command: echo Deploying aws staging
       - run:
           name: Deploy to server to aws staging environment
-          command: cd packages/serverless serverless deploy --stage staging
+          command: serverless --version && cd packages/serverless && serverless deploy --stage staging
      
 workflows:
   version: 2
