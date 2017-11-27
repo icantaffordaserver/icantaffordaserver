@@ -8,7 +8,7 @@
     "start:dev": "serverless offline --host 0.0.0.0 --port 4000 --stage dev",
     "db:seed": "babel-node ./scripts/db/seed.js",
     "db:drop": "babel-node ./scripts/db/drop.js",
-    "deploy:dev": "graphcool deploy --target dev",
+    "deploy:graphcool:dev": "graphcool deploy --target dev",
     "loadEnv": "export $(cat .env | xargs)",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
