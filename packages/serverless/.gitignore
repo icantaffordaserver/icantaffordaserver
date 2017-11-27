@@ -2,4 +2,6 @@
 node_modules/
 .webpack/
 env.yml
+.env
+.env.staging
 .serverless

@@ -1,4 +1,3 @@
-import '../loadEnv' // needs to be at the top to load env vars
 import throat from 'throat'
 
 // set the max concurrency for requests to 2
