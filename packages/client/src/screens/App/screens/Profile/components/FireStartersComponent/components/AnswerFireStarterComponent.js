@@ -1,13 +1,7 @@
 import React from 'react'
 
 import { Icon } from 'semantic-ui-react'
-import {
-  TextArea,
-  Button,
-  Title,
-  Subheading,
-  TextLink,
-} from '../../../../../styles'
+import { TextArea, Button, Title } from '../../../../../styles'
 import { QuestionSelector, QuestionList, Question, Back } from '../styles'
 
 export default props => {

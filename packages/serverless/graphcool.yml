@@ -27,7 +27,7 @@ functions:
   moveConnectionToScheduled-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/moveConnectionToScheduled
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/moveConnectionToScheduled
         headers:
           Content-Type: application/json
     type: subscription
@@ -35,7 +35,7 @@ functions:
   createConnectionSuggestions-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/createConnectionSuggestions
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/createConnectionSuggestions
         headers:
           Content-Type: application/json
     type: subscription
