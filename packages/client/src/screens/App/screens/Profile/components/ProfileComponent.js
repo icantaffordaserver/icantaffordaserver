@@ -40,7 +40,7 @@ class ProfileComponent extends Component {
       gradient = { top: '#F9A0AC', bottom: '#F9F9F9' }
     }
     //console.log(user.gradientColors.top, user.gradientColors.bottom)
-
+    if (this.props.loading) return null
     return (
       <Flex wrap>
         <Box width={1} mx="auto">

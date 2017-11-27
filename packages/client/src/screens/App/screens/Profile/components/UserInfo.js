@@ -19,7 +19,8 @@ class UserInfo extends Component {
     console.log(this.props, ' User Info')
     let { firstName, lastName, connectionInterests } = this.props.user
     let { allConnectionInterestses } = this.props.data
-    let { props } = this.props
+    let { user, props, data } = this.props
+    let { updateUser, loading } = this.props.props
     return (
       <ProfileSection>
         <div style={{ marginLeft: '10px' }}>
@@ -45,7 +46,9 @@ class UserInfo extends Component {
         {this.state.edit ? (
           <ChooseInterests
             interests={allConnectionInterestses}
-            data={props}
+            loading={loading}
+            user={user}
+            updateUser={updateUser}
             handleEdit={this.handleEditButton}
           />
         ) : null}

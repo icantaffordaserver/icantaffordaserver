@@ -5,6 +5,7 @@ import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 import { graphql, compose } from 'react-apollo'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
+import createConnectionInterest from '../../../../shared/graphql/mutations/createConnectionInterest.js'
 
 import ChooseInterests from './components/ChooseInterests'
 import SuggestInterests from './components/SuggestInterests'
@@ -42,9 +43,8 @@ class ChooseInterestsComponent extends Component {
   }
 
   handleSubmit = () => {
-    let { props } = this.props
     console.log(this.props, ' Choose interests')
-    props
+    this.props
       .createConnectionInterest({
         variables: {
           name: this.state.suggestion,
@@ -59,12 +59,12 @@ class ChooseInterestsComponent extends Component {
     this.setState({ selectedTags: [] }, () => this.props.handleEdit())
 
   handleConfirm = () => {
-    let { props } = this.props
     let connectionInterestsIds = this.state.selectedTags
-    props
+    console.log(this.props)
+    this.props
       .updateUser({
         variables: {
-          id: props.user.id,
+          id: this.props.user.id,
           connectionInterestsIds,
         },
         refetchQueries: [
@@ -83,8 +83,8 @@ class ChooseInterestsComponent extends Component {
   componentDidMount() {
     console.log('Choose Interests : ', this.props)
 
-    if (this.props.data.user) {
-      const { connectionInterests } = this.props.data.user
+    if (this.props.user) {
+      const { connectionInterests } = this.props.user
       let interestIds = connectionInterests.map(interest => interest.id)
       this.setState({ selectedTags: interestIds })
     }
@@ -93,6 +93,7 @@ class ChooseInterestsComponent extends Component {
   render() {
     const { interests } = this.props
 
+    if (this.props.loading) return null
     return (
       <div style={{ marginLeft: '10px', marginTop: '20px' }}>
         <p>
@@ -121,4 +122,7 @@ class ChooseInterestsComponent extends Component {
   }
 }
 
-export default compose(graphql(currentUserQuery))(ChooseInterestsComponent)
+export default compose(
+  graphql(currentUserQuery, { name: 'currentUser' }),
+  graphql(createConnectionInterest, { name: 'createConnectionInterest' }),
+)(ChooseInterestsComponent)
