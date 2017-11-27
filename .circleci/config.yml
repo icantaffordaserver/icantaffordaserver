@@ -27,8 +27,8 @@ jobs:
           name: Invalidate Cloudfront
           command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
       - run:
-        name: Deploy serverless to lambda aws staging environment
-        command: serverless --version && cd packages/serverless && serverless deploy --stage staging
+          name: Deploy serverless to lambda aws staging environment
+          command: serverless --version && cd packages/serverless && serverless deploy --stage staging
   test:
     docker:
         - image: amann11/circleci-node-aws:latest
