@@ -9,7 +9,7 @@ subscription {
       id
       connection {
         connectionId: id
-        connectionSuggestion {
+        connectionSuggestions {
           id
           accepted
         }
