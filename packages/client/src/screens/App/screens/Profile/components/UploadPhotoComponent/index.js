@@ -6,10 +6,13 @@ import axios from 'axios'
 import ReactCrop, { makeAspectCrop } from 'react-image-crop' // eslint-disable-line
 import ReactModal from 'react-modal'
 import 'react-image-crop/dist/ReactCrop.css'
-
 import { Flex, Box } from 'grid-styled'
+import SVG from 'react-inlinesvg'
+
+import EditIcon from '../../../../../../assets/icons/icon.svg'
 
 import { TrophyColorPicker } from '../../style'
+
 import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
@@ -203,7 +206,9 @@ class UploadPhotoComponent extends Component {
     const { topColor, bottomColor } = this.state
     return (
       <div>
-        <button onClick={this.handleOpenModal}>Upload/Crop Photo!</button>
+        <div onClick={this.handleOpenModal}>
+          <SVG src={EditIcon} />
+        </div>
         <ReactModal
           isOpen={this.state.showModal}
           onRequestClose={this.handleCloseModal}

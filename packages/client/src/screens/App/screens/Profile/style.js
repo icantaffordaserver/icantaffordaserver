@@ -67,3 +67,18 @@ export const Button = styled.button`
       props.noHoverChange ? props.color : props.inverseColor};
   }
 `
+
+export const SuggestionSubmitButton = styled.button`
+  transition: all 0.25s ease !important;
+  padding: 2% !important;
+  width: 40%;
+  background: #219653 !important;
+  border: solid 1px #219653 !important;
+  font-size: 1.1em !important;
+  color: #fff !important;
+  &:hover {
+    color: #219653 !important;
+    border: solid 1px #219653 !important;
+    background: #fff !important;
+  }
+`

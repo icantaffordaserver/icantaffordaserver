@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ConfirmAndCancel from '../shared/ConfirmAndCancel'
 
 import { graphql, compose } from 'react-apollo'
+import { Box } from 'grid-styled'
 
 import currentUserQuery from '../../../../shared/graphql/queries/currentUserQuery'
 import createConnectionInterest from '../../../../shared/graphql/mutations/createConnectionInterest.js'
@@ -95,29 +96,37 @@ class ChooseInterestsComponent extends Component {
 
     if (this.props.loading) return null
     return (
-      <div style={{ marginLeft: '10px', marginTop: '20px' }}>
-        <p>
-          Choose your interests:
-          <br />
-          <i>Multiple interests can be selected.</i>
-        </p>
-
-        <ChooseInterests
-          interests={interests}
-          changeColor={this.changeColor}
-          selectedTags={this.state.selectedTags}
-        />
-        <SuggestInterests
-          suggestion={this.state.suggestion}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-
-        <ConfirmAndCancel
-          handleSave={this.handleConfirm}
-          handleCancel={this.handleClear}
-        />
-      </div>
+      <Box width={1} p={2}>
+        {/* <div style={{ marginLeft: '10px', marginTop: '20px' }}> */}
+        <Box width={1} p={2}>
+          <p>
+            Choose your interests:
+            <br />
+            <i>Multiple interests can be selected.</i>
+          </p>
+        </Box>
+        <Box width={1} p={2}>
+          <ChooseInterests
+            interests={interests}
+            changeColor={this.changeColor}
+            selectedTags={this.state.selectedTags}
+          />
+        </Box>
+        <Box width={1} p={2}>
+          <SuggestInterests
+            suggestion={this.state.suggestion}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+        </Box>
+        <Box width={1} p={2}>
+          <ConfirmAndCancel
+            handleSave={this.handleConfirm}
+            handleCancel={this.handleClear}
+          />
+        </Box>
+        {/* </div> */}
+      </Box>
     )
   }
 }

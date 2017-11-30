@@ -57,9 +57,28 @@ class WelcomeContainer extends Component {
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
     ],
+    chooseInterestsSuccess: true,
+    bioSuccess: true,
+    availabilitySuccess: true,
+    locationSuccess: true,
+    suggestionSuccess: false,
   }
 
-  incrementCount = () => this.setState({ count: this.state.count + 1 })
+  incrementCount = () => {
+    const { selectedTags, bio, count } = this.state
+    if (count === 0 && selectedTags.length > 0) {
+      this.setState({ count: this.state.count + 1 })
+    }
+    if (count === 0 && selectedTags.length === 0) {
+      this.setState({ chooseInterestsSuccess: false })
+    }
+    if (count === 1 && bio.length > 0) {
+      this.setState({ count: this.state.count + 1 })
+    }
+    if (count === 1 && bio.length === 0) {
+      this.setState({ bioSuccess: false })
+    }
+  }
 
   changeColor = id => {
     let index = this.state.selectedTags.indexOf(id)
@@ -82,18 +101,11 @@ class WelcomeContainer extends Component {
     }
   }
 
-  handleSuggestionInput = e => {
-    if (e.target.value) {
-      this.setState({ suggestion: e.target.value })
-    }
-  }
-
-  handleBioInput = e => {
-    if (e.target.value) {
-      this.setState({ bio: e.target.value })
-    }
-  }
-
+  handleInput = event =>
+    this.setState({ [event.target.name]: event.target.value }, () =>
+      console.log(this.state),
+    )
+  handleLocationChange = location => this.setState({ location })
   handleSubmitInterest = () => {
     console.log(this.props, ' Choose interests')
     this.props
@@ -102,12 +114,15 @@ class WelcomeContainer extends Component {
           name: this.state.suggestion,
         },
       })
-      .then(() => this.setState({ suggestion: '' }))
+      .then(() => this.setState({ suggestion: '', suggestionSuccess: true }))
+      .then(() =>
+        setTimeout(() => {
+          this.setState({ suggestionSuccess: false })
+        }, 1000),
+      )
       .then(() => console.log(this.state))
       .catch(err => console.error(err))
   }
-
-  handleLocationChange = location => this.setState({ location })
 
   handleCompleteOnBoarding = () => {
     const { bio, cells, location } = this.state
@@ -141,19 +156,35 @@ class WelcomeContainer extends Component {
       connectionInterestsIds,
     })
 
-    this.props
-      .updateUser({
-        variables: {
-          id: this.props.data.user.id,
-          connectionInterestsIds,
-          bio,
-          availability,
-          location,
-        },
-      })
-      .then(() => this.props.client.resetStore())
-      .then(() => this.props.history.push('/profile'))
-      .catch(err => console.error(err))
+    let merged = [].concat.apply([], cells)
+
+    if (merged.filter(x => x).length > 0 && location.length > 0) {
+      this.props
+        .updateUser({
+          variables: {
+            id: this.props.data.user.id,
+            connectionInterestsIds,
+            bio,
+            availability,
+            location,
+          },
+        })
+        .then(() => this.props.client.resetStore())
+        .then(() => this.props.history.push('/profile'))
+        .catch(err => console.error(err))
+    }
+    if (merged.filter(x => x).length === 0) {
+      this.setState({ availabilitySuccess: false })
+    }
+    if (merged.filter(x => x).length > 0) {
+      this.setState({ availabilitySuccess: true })
+    }
+    if (location.length === 0) {
+      this.setState({ locationSuccess: false })
+    }
+    if (location.length > 0) {
+      this.setState({ locationSuccess: true })
+    }
   }
 
   convertToBoolean = () => {
@@ -203,7 +234,19 @@ class WelcomeContainer extends Component {
   handleScheduleChange = cells => this.setState({ cells })
 
   render() {
-    const { count, bio, selectedTags, suggestion, location, cells } = this.state
+    const {
+      count,
+      bio,
+      selectedTags,
+      suggestion,
+      location,
+      cells,
+      chooseInterestsSuccess,
+      bioSuccess,
+      locationSuccess,
+      availabilitySuccess,
+      suggestionSuccess,
+    } = this.state
     let view = null
 
     if (count === 0) {
@@ -213,8 +256,10 @@ class WelcomeContainer extends Component {
           selectedTags={selectedTags}
           changeColor={this.changeColor}
           suggestion={suggestion}
-          handleChange={this.handleSuggestionInput}
+          handleChange={this.handleInput}
           handleSubmit={this.handleSubmitInterest}
+          chooseInterestsSuccess={chooseInterestsSuccess}
+          suggestionSuccess={suggestionSuccess}
         />
       )
     }
@@ -223,7 +268,8 @@ class WelcomeContainer extends Component {
         <WelcomeBio
           bio={bio}
           incrementCount={this.incrementCount}
-          handleChange={this.handleBioInput}
+          handleChange={this.handleInput}
+          bioSuccess={bioSuccess}
         />
       )
     }
@@ -236,6 +282,8 @@ class WelcomeContainer extends Component {
           cells={cells}
           convertToBoolean={this.convertToBoolean}
           handleScheduleChange={this.handleScheduleChange}
+          availabilitySuccess={availabilitySuccess}
+          locationSuccess={locationSuccess}
         />
       )
     }

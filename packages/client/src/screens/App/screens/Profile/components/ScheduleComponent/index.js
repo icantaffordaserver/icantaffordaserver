@@ -64,7 +64,7 @@ class Schedule extends Component {
             </td>
           </tr>
           {times.map((x, i) => (
-            <tr>
+            <tr key={i}>
               <td disabled className="header">
                 {x}
               </td>
