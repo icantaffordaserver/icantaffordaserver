@@ -52,3 +52,4 @@ packages/website/package-lock.json
 packages/client/.env.development
 yarn.lock
 packages/website
+packages/admin-portal/.envrc
