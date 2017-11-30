@@ -65,13 +65,7 @@ class WelcomeContainer extends Component {
   }
 
   incrementCount = () => {
-    const {
-      selectedTags,
-      bio,
-      count,
-      chooseInterestsSuccess,
-      bioSuccess,
-    } = this.state
+    const { selectedTags, bio, count } = this.state
     if (count === 0 && selectedTags.length > 0) {
       this.setState({ count: this.state.count + 1 })
     }
@@ -131,13 +125,7 @@ class WelcomeContainer extends Component {
   }
 
   handleCompleteOnBoarding = () => {
-    const {
-      bio,
-      cells,
-      location,
-      availabilitySuccess,
-      locationSuccess,
-    } = this.state
+    const { bio, cells, location } = this.state
     let connectionInterestsIds = this.state.selectedTags
 
     let availability = {
