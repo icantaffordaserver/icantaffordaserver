@@ -6,6 +6,7 @@
     "apollo-client": "^1.9.3",
     "emotion": "^8.0.2",
     "graphql-tag": "^2.4.2",
+    "moment": "^2.19.2",
     "react": "^16.0.0",
     "react-apollo": "^1.4.16",
     "react-dom": "^16.0.0",

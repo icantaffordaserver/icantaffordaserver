@@ -3,7 +3,15 @@ import styled from 'styled-components'
 
 class InvitesTableRow extends Component {
   render() {
-    const { date, name, sentBy, inviteType } = this.props
+    const {
+      date,
+      name,
+      sentBy,
+      inviteType,
+      tableState,
+      acceptInvite,
+      deleteInvite,
+    } = this.props
 
     return (
       <InviteRow>
@@ -11,8 +19,16 @@ class InvitesTableRow extends Component {
         <InviteName>{name}</InviteName>
         <InviteSentBy>{sentBy}</InviteSentBy>
         <InviteType>{inviteType}</InviteType>
-        <RowButton success>Accept</RowButton>
-        <RowButton danger>Decline</RowButton>
+        {tableState === 'pending' && (
+          <RowButton success onClick={e => acceptInvite(e, this.props.id)}>
+            Accept
+          </RowButton>
+        )}
+        {tableState === 'pending' && (
+          <RowButton danger onClick={e => deleteInvite(e, this.props.id)}>
+            Decline
+          </RowButton>
+        )}
       </InviteRow>
     )
   }
@@ -24,10 +40,10 @@ const InviteRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   margin-top: 8px;
-  margin-left: 102px;
   background: #fdfdfd;
-  width: 778px;
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(22, 23, 26, 0.25);
