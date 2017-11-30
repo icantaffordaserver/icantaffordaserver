@@ -1,5 +1,5 @@
 {
   "linters": {
-    "*.{js,json,css}": ["eslint --fix", "prettier --write", "git add"]
+    "*.{js,json}": ["eslint --fix", "prettier --write", "git add"]
   }
 }

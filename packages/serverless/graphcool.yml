@@ -1,5 +1,13 @@
 types: ./graphcool/types.graphql
 functions:
+  matchUsers-schemaExtension:
+    handler:
+      webhook:
+        url: ${env:WEBHOOK_SERVER_URL}/admin/schemaExtension/matchUsers
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/matchUsers.schemaExtension.graphql
   getConversationToken-schemaExtension:
     handler:
       webhook:

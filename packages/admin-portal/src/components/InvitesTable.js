@@ -14,14 +14,20 @@ class InvitesTable extends Component {
           <InviteTypeHeader>Invite Type</InviteTypeHeader>
         </HeaderRow>
         <RowContainer>
-          {[...new Array(40)].map(() => (
-            <InvitesTableRow
-              date={'29/11/2017'}
-              name={'Liban Hassan'}
-              sentBy={'Georgie'}
-              inviteType={'SENT_BY_USER'}
-            />
-          ))}
+          {this.props.invites &&
+            this.props.invites.map(invite => (
+              <InvitesTableRow
+                key={invite.id}
+                id={invite.id}
+                date={invite.createdAt}
+                name={invite.firstName + ' ' + invite.lastName}
+                sentBy={invite.sentBy && invite.sentBy.firstName}
+                inviteType={invite.inviteType}
+                tableState={this.props.tableState}
+                acceptInvite={this.props.acceptInvite}
+                deleteInvite={this.props.deleteInvite}
+              />
+            ))}
         </RowContainer>
       </TableContainer>
     )
@@ -39,10 +45,11 @@ const TableContainer = styled.div`
 const HeaderRow = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-left: 102px;
   margin-top: 16px;
   margin-bottom: 16px;
-  width: 778px;
+  width: 60%;
 `
 
 const DateHeader = styled.div`

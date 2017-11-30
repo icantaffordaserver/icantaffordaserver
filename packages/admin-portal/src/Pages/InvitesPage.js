@@ -1,36 +1,97 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import { graphql, compose, withApollo } from 'react-apollo'
 import styled from 'styled-components'
 
 import InvitesTable from '../components/InvitesTable'
+import allInvitesQuery from '../graphql/queries/allInvitesQuery'
+import gql from 'graphql-tag'
 
 class Home extends Component {
+  state = {
+    tableState: 'pending',
+  }
+
+  setTableState = tableState => {
+    this.setState({
+      tableState,
+    })
+  }
+
+  approveInvite = async (e, id) => {
+    e.preventDefault()
+    await this.props.client.mutate({
+      mutation: gql`
+        mutation($id: ID!) {
+          updateInvite(id: $id, isApproved: true) {
+            id
+          }
+        }
+      `,
+      variables: {
+        id,
+      },
+    })
+
+    await this.props.client.resetStore()
+  }
+
+  deleteInvite = async (e, id) => {
+    e.preventDefault()
+    await this.props.client.mutate({
+      mutation: gql`
+        mutation($id: ID!) {
+          deleteInvite(id: $id) {
+            id
+          }
+        }
+      `,
+      variables: {
+        id,
+      },
+    })
+    await this.props.client.resetStore()
+  }
   render() {
+    const tableState = this.state.tableState
+    const invites =
+      tableState === 'pending'
+        ? this.props.data.pendingInvites
+        : this.props.data.approvedInvites
     return (
       <PageContainer>
         <HeaderContainer>
           <PageTitle>Invites</PageTitle>
           <ToggleContainer>
-            <Text bold>Pending</Text>
+            <Text bold onClick={() => this.setTableState('pending')}>
+              Pending
+            </Text>
             <Spacer />
-            <Text>Accepted</Text>
+            <Text onClick={() => this.setTableState('approved')}>Approved</Text>
           </ToggleContainer>
-          <Button>Send Invite</Button>
+          <Button onClick={() => this.props.history.push('/admin/sendInvite')}>
+            Send Invite
+          </Button>
         </HeaderContainer>
         <TableContainer>
-          <InvitesTable />
+          <InvitesTable
+            invites={invites}
+            tableState={tableState}
+            approveInvite={this.approveInvite}
+            deleteInvite={this.deleteInvite}
+          />
         </TableContainer>
       </PageContainer>
     )
   }
 }
 
-export default Home
+export default compose(graphql(allInvitesQuery), withApollo, withRouter)(Home)
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 960px;
-  width: 960px;
+  width: 90%;
   height: 100%;
   margin-left: 32px;
 `
@@ -39,7 +100,7 @@ const TableContainer = styled.div`
   margin-top: 16px;
   margin-bottom: 80px;
   flex-grow: 1;
-  width: 960px;
+  width: 90%;
   display: flex;
   border: 1px solid #e1e7ed;
   border-radius: 5px;
