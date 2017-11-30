@@ -1,0 +1,10 @@
+type matchUsersPayload {
+  id: ID!
+}
+
+extend type Mutation {
+  matchUsers(
+    connectionTime: DateTime!
+    participantsIds: [ID]!
+  ): matchUsersPayload
+}

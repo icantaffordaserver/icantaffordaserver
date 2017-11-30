@@ -1,61 +1,111 @@
-// Styling for the masthead
 header.masthead {
   position: relative;
   width: 100%;
-  min-height: auto;
   text-align: center;
   color: white;
-  background-image: url('../img/header.jpg');
-  background-position: center;
-  @include background-cover;
-  .header-content {
-    position: relative;
-    width: 100%;
-    padding: 150px 15px 100px;
-    text-align: center;
+  margin-top: 150px;
+  .header-content-inner {
+    h1 {
+      font-family: 'Krona One';
+      color: #F05F40;
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: 300;
+      margin-top: 10;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    h5 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    hr {
+      margin: 30px center;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      color: white;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    height: 100%;
+    margin-top: 0;
+    min-height: 600px;
+    text-align: right;
+    float: right;
     .header-content-inner {
+      max-width: 1000px;
+      margin-right: auto;
+      margin-left: auto;
       h1 {
+        font-family: 'Krona One';
+        color: #F05F40;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: right;
+      }
+      h3 {
         font-size: 30px;
         font-weight: 700;
-        margin-top: 0;
-        margin-bottom: 0;
-        text-transform: uppercase;
+        margin-bottom: 5%;
+        text-align: right;
       }
-      hr {
-        margin: 30px auto;
-      }
-      p {
-        font-size: 16px;
+      h4 {
+        font-size: 20px;
         font-weight: 300;
         margin-bottom: 50px;
-        color: fade-out(white, .3);
+        text-align: right;
+      }
+      h5 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: right;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 50px;
+        color: white;
+        text-align: right;
       }
     }
   }
-  @media (min-width: 768px) {
-    height: 100%;
-    min-height: 600px;
-    .header-content {
-      position: absolute;
-      top: 50%;
-      padding: 0 50px;
-      -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
-      .header-content-inner {
-        max-width: 1000px;
-        margin-right: auto;
-        margin-left: auto;
-        h1 {
-          font-size: 50px;
-        }
-        p {
-          font-size: 18px;
-          max-width: 80%;
-          margin-right: auto;
-          margin-left: auto;
-        }
-      }
-    }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  input[type=text], input[type=email]{
+    padding:1%;
+    margin: 1%;
+    border-radius: 5px;
+    width: 60%;
   }
 }

@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^7.2.3",
     "concurrently": "^3.5.0",
-    "eslint": "^4.9.0",
+    "eslint": "^4.1.1",
     "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-react": "^7.4.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.2.1",
+    "eslint-plugin-react": "^7.1.0",
+    "lint-staged": "^5.0.0",
     "prettier": "^1.7.0",
     "react-scripts": "^1.0.14"
   },
@@ -42,6 +45,7 @@
     "react-places-autocomplete": "^5.4.3",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-svg": "^2.2.2",
     "react-table-drag-select": "^0.3.1",
     "react-tabs": "^2.0.0",
     "react-tagsinput": "^3.18.0",
@@ -57,8 +61,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dev": "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
+    "start:dev":
+      "concurrently --kill-others 'ngrok http -subdomain=toktumi-client 3000' 'react-scripts start'",
     "build": "react-scripts build",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
@@ -66,10 +73,7 @@
   "lint-staged": {
     "gitDir": "../../",
     "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.{js,json,css}": ["prettier --write", "git add"]
     }
   }
 }

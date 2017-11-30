@@ -14,7 +14,8 @@ export default async (req, res) => {
     // try to identify the user who sent the invite, if coming from outbound (
     // ie. website, blog, etc) there will not be a token that corresponds to a
     // user
-    const userJwt = req.body.context.auth.token
+    const userJwt =
+      req.body.context && req.body.context.auth && req.body.context.auth.token
     const user = userJwt ? (await getUserFromJwt(userJwt)).User : null
     const { emailToInvite, firstName, lastName } = req.body.data
 

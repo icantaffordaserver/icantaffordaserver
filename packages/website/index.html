@@ -1,48 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Hey Pluto!</title>
+  <title>Hey Pluto!</title>
 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="img/logo.png" />
 
-    <!-- Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Krona+One" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.min.css" rel="stylesheet">
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-    <!-- CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link href="css/creative.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Krona+One" rel="stylesheet">
 
-  </head>
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)    
+}(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '131145090899374');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=131145090899374&ev=PageView
+  &noscript=1" />
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+</head>
 
-  <body id="page-top">
+<body id="page-top">
 
-    <!-- Navigation -->
+  <div class="stars-body">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Pluto</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#howto">How It Works</a>
+              <a class="nav-link js-scroll-trigger" href="howitworks.html">How It Works</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
+              <a class="nav-link js-scroll-trigger" href="http://www.blog.talkpluto.com">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#login">Log In</a>
+              <a class="nav-link js-scroll-trigger" href="#sign-up-button">Sign Up</a>
             </li>
           </ul>
         </div>
@@ -50,100 +71,144 @@
     </nav>
 
     <!-- Landing Header + Hero Image -->
+    <div class="main-title-fix">
+      <h1 class="main-title">Welcome to
+        <span class="pluto-title">PLUTO</span>
+      </h1>
+    </div>
     <header class="masthead">
-      <div class="header-content">
-        <div class="header-content-inner">
-          <h1 id="homeHeading">Pluto</h1>
-          <h3>Turn your small talk into big ideas</h3>
-          <h4>Connect with people like you and have a life-changing conversation</h4>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#signup">Sign up!</a>
+      <div class="container expanded">
+        <div class="row">
+          <div class="col-lg-6 pluto-img">
+            <img class="img-fluid" style="background-color:transparent;" src="img/pluto1.png">
+          </div>
+          <div class="col-lg-6">
+            <div class="header-content-inner">
+              <h3>It's time to improve the way we connect online.</h3>
+              <h4>Connect with people like you and have a life changing conversation. We’re a community of real people talking
+                to each other, face-to-face.</h4>
+              <form action="https://talkpluto.us17.list-manage.com/subscribe/post?u=785666cbd8a056a4b6ecc9bab&amp;id=5ba2df8027" method="post"
+                id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate sign-up-form" target="_blank"
+                novalidate>
+                <h5 id="sign-up-button">Join the Community!</h5>
+                <input type="text" value="" name="FNAME" class="header-form" id="mce-FNAME" placeholder="First Name" required>
+                <input type="email" value="" name="EMAIL" class="header-form email" id="mce-EMAIL" placeholder="Email Address" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input type="text" name="b_785666cbd8a056a4b6ecc9bab_5ba2df8027" tabindex="-1" value="">
+                </div>
+                <div class="clear">
+                  <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-xl js-scroll-trigger header-form">
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+
       </div>
     </header>
 
     <!-- Picture divider -->
-  <div>
-    <img class="img-responsive" src="img/spaceship.png">
-  </div>
+    <div>
+      <img class="img-fluid" style="background-color:transparent;" src="img/spaceship.png">
+    </div>
 
     <!-- Value Props -->
     <section class="bg-lower" id="services">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading heading-lower">Let's reinvent the way we talk online</h2>
-          </div>
+      <div class="container expanded">
+
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">
+            <span class="pluto-letter">P</span>eople
+            <span class="pluto-letter">L</span>ike
+            <span class="pluto-letter">U</span>
+            <span class="pluto-letter">T</span>alking
+            <span class="pluto-letter">O</span>nline</h2>
         </div>
-      </div>
-      <div class="container">
-        <div class="row heading-lower">
+
+        <div class="row">
           <div class="col-lg-4 text-center">
-          <img class="img-responsive" src="img/webasset_Meet.png">
+            <img class="img-fluid" src="img/webasset_Meet.png">
             <div class="service-box">
               <h3>Meet</h3>
-              <p>It’s hard to meet new friends who you click with. We’ll introduce you to a diverse range of people who all have something interesting to say.</p>
+              <p>It’s hard to meet new friends who you click with. We’ll introduce you to a diverse range of people who all
+                have something interesting to say.</p>
             </div>
           </div>
           <div class="col-lg-4 text-center">
-          <img class="img-responsive" src="img/webasset_Connect.png">
-            <div class="service-box">              
+            <img class="img-fluid" src="img/webasset_Connect.png">
+            <div class="service-box">
               <h3>Connect</h3>
-              <p>Skip the small talk and speak about the things that really matter. Talk about what gets you out of bed in the morning. Connect on a deeper level, faster.</p>
+              <p>Skip the small talk and speak about the things that really matter. Talk about what gets you out of bed in the
+                morning. Connect on a deeper level, faster.</p>
             </div>
           </div>
           <div class="col-lg-4 text-center">
-          <img class="img-responsive" src="img/webasset_Learn.png">
+            <img class="img-fluid" src="img/webasset_Learn.png">
             <div class="service-box">
               <h3>Learn</h3>
-              <p>Everybody knows something you don’t know yet but should. Have conversations that will change your perspective, and just might change your life.</p>
+              <p>Everybody knows something you don’t know yet but should. Have conversations that will change your perspective,
+                and just might change your life.</p>
             </div>
           </div>
         </div>
       </div>
-      <row>
-      <div class="container text-center">
-        <a class="btn btn-default btn-xl sr-button button-lower" href="http://startbootstrap.com/template-overviews/creative/">Learn More</a>
-        </div>
-      </row>
+
     </section>
 
+
+
     <!-- Footer -->
-    <footer>
-          <div class="container">
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <a href="#">About</a>
-              </li>
-              <li class="footer-menu-divider list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#about">Blog</a>
-              </li>
-              <li class="footer-menu-divider list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#services">Contact</a>
-              </li>
-              <li class="footer-menu-divider list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#contact">Terms of Service</a>
-              </li>
-            </ul>
-            <p class="copyright text-muted small">Copyright &copy; Pluto 2017.  All Rights Reserved</p>
-          </div>
-        </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  </div>
+  <!-- Navigation -->
+  <footer>
+    <div class="container">
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a class="nav-link js-scroll-trigger" href="#page-top">Home</a>
+        </li>
+        <li class="footer-menu-divider list-inline-item">&sdot;</li>
+        <li class="list-inline-item">
+          <a href="mailto:hello@talkpluto.com">Contact</a>
+        </li>
+        <li class="footer-menu-divider list-inline-item">&sdot;</li>
+        <li class="list-inline-item">
+          <a href="https://www.facebook.com/TalkPluto/" class="fa fa-facebook"></a>
+          <a href="https://twitter.com/talkpluto" class="fa fa-twitter"></a>
+          <a href="https://www.instagram.com/talkpluto/" class="fa fa-instagram"></a>
+        </li>
+      </ul>
+      <p class="copyright text-muted small">Copyright &copy; Pluto 2017. All Rights Reserved</p>
+    </div>
+  </footer>
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper/popper.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="js/creative.min.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-  </body>
+  <!-- Custom scripts for this template -->
+  <script src="js/creative.min.js"></script>
+
+
+  <!-- Google Analytics JavaScript -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108285689-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-108285689-1');
+  </script>
+
+</body>
 
 </html>

@@ -1,21 +1,10 @@
 import React, { Component } from 'react'
+import { Box } from 'grid-styled'
+
 import SubTitleSection from './shared/SubTitleSection'
 import ConfirmAndCancel from './shared/ConfirmAndCancel'
 
-import {
-  Button,
-  Content,
-  ColumnContainer,
-  RowContainer,
-  Section,
-  Card,
-  Title,
-  Subheading,
-  Tag,
-  Text,
-  TextLink,
-  TextArea,
-} from '../../../styles'
+import { Text, TextArea } from '../../../styles'
 
 import { ProfileSection } from '../style'
 
@@ -47,7 +36,7 @@ class Biography extends Component {
 
   render() {
     return (
-      <div>
+      <Box width={1} py={2}>
         <SubTitleSection
           title={'BIOGRAPHY'}
           handleEdit={this.handleEditButton}
@@ -64,6 +53,7 @@ class Biography extends Component {
               <ConfirmAndCancel
                 handleSave={this.handleSave}
                 handleCancel={this.handleClear}
+                cancelText={'Clear'}
               />
             </div>
           ) : (
@@ -72,7 +62,7 @@ class Biography extends Component {
             </Text>
           )}
         </ProfileSection>
-      </div>
+      </Box>
     )
   }
 }

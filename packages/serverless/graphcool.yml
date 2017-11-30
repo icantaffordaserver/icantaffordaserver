@@ -1,14 +1,17 @@
 types: ./graphcool/types.graphql
-custom:
-  dev:
-    WEBHOOK_URL: ${env:WEBHOOK_SERVER_URL}
-  prod:
-    WEBHOOK_URL: http://test.com/prod
 functions:
+  matchUsers-schemaExtension:
+    handler:
+      webhook:
+        url: ${env:WEBHOOK_SERVER_URL}/admin/schemaExtension/matchUsers
+        headers:
+          Content-Type: application/json
+    type: resolver
+    schema: ./graphcool/src/matchUsers.schemaExtension.graphql
   getConversationToken-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/getConversationToken
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/getConversationToken
         headers:
           Content-Type: application/json
     type: resolver
@@ -16,7 +19,7 @@ functions:
   sendInvite-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/sendInvite
+        url: ${env:WEBHOOK_SERVER_URL}/invite/subscription/sendInvite
         headers:
           Content-Type: application/json
     type: subscription
@@ -24,15 +27,31 @@ functions:
   setPasswordResetComplete-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/setPasswordResetComplete
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/setPasswordResetComplete
         headers:
           Content-Type: application/json
     type: subscription
     query: ./graphcool/src/setPasswordResetComplete.subscription.graphql
+  moveConnectionToScheduled-subscription:
+    handler:
+      webhook:
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/moveConnectionToScheduled
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/moveConnectionToScheduled.subscription.graphql
+  createConnectionSuggestions-subscription:
+    handler:
+      webhook:
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/createConnectionSuggestions
+        headers:
+          Content-Type: application/json
+    type: subscription
+    query: ./graphcool/src/createConnectionSuggestions.subscription.graphql
   authenticateUser-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/authenticateUser
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/authenticateUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -40,7 +59,7 @@ functions:
   sendPasswordResetEmail-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendPasswordResetEmail
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/sendPasswordResetEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -48,7 +67,7 @@ functions:
   signUpUser-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/signUpUser
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/signUpUser
         headers:
           Content-Type: application/json
     type: resolver
@@ -56,7 +75,7 @@ functions:
   sendVerificationEmail-subscription:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/subscription/sendVerificationEmail
+        url: ${env:WEBHOOK_SERVER_URL}/user/subscription/sendVerificationEmail
         headers:
           Content-Type: application/json
     type: subscription
@@ -64,7 +83,7 @@ functions:
   triggerPasswordReset-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/triggerPasswordReset
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/triggerPasswordReset
         headers:
           Content-Type: application/json
     type: resolver
@@ -72,7 +91,7 @@ functions:
   sendInvite-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/schemaExtension/sendInvite
+        url: ${env:WEBHOOK_SERVER_URL}/invite/schemaExtension/sendInvite
     type: resolver
     schema: ./graphcool/src/sendInvite.schemaExtension.graphql
   createAndSendInviteEmail-subscription:
@@ -80,13 +99,13 @@ functions:
     query: ./graphcool/src/createAndSendInviteEmail.subscription.graphql
     handler:
       webhook: 
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/invite/subscription/createAndSendInviteEmail
+        url: ${env:WEBHOOK_SERVER_URL}/invite/subscription/createAndSendInviteEmail
         headers:
           Content-Type: application/json
   updatePassword-schemaExtension:
     handler:
       webhook:
-        url: ${self:custom.${opt:target}.WEBHOOK_URL}/user/schemaExtension/updatePassword
+        url: ${env:WEBHOOK_SERVER_URL}/user/schemaExtension/updatePassword
         headers:
           Content-Type: application/json
     type: resolver
@@ -100,14 +119,18 @@ permissions:
 - operation: User.create
 - operation: User.update
 - operation: User.delete
-- operation: ConnectionReviews.read
-- operation: ConnectionReviews.create
-- operation: ConnectionReviews.update
-- operation: ConnectionReviews.delete
 - operation: Connections.read
 - operation: Connections.create
 - operation: Connections.update
 - operation: Connections.delete
+- operation: ConnectionReviews.read
+- operation: ConnectionReviews.create
+- operation: ConnectionReviews.update
+- operation: ConnectionReviews.delete
+- operation: ConnectionSuggestion.read
+- operation: ConnectionSuggestion.create
+- operation: ConnectionSuggestion.update
+- operation: ConnectionSuggestion.delete
 - operation: ConversationPrompt.read
 - operation: ConversationPrompt.create
 - operation: ConversationPrompt.update
@@ -164,5 +187,7 @@ permissions:
 - operation: ConnectionsOnConnectionReport.*
 - operation: ConnectionReportOnReporterUser.*
 - operation: ConnectionReportOnReportedUser.*
+- operation: ConnectionSuggestionsForUser.*
+- operation: ConnectionSuggestionOnConnection.*
 rootTokens:
 - adminToken

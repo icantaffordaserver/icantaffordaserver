@@ -1,15 +1,3 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import Settings from './SettingsContainer'
 
-import SettingsComponent from './SettingsComponent'
-
-class SettingsContainer extends Component {
-  static propTypes = {}
-  state = {}
-
-  render() {
-    return <SettingsComponent />
-  }
-}
-
-export default SettingsContainer
+export default Settings

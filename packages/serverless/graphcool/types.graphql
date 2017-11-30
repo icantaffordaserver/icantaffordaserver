@@ -7,6 +7,25 @@ type ConnectionInterests @model {
   isApproved: Boolean! @migrationValue(value: "false")
 }
 
+type Connections @model {
+  connectionTime: DateTime!
+  createdAt: DateTime!
+  fireStarterSuggestion: String
+  id: ID! @isUnique
+  matchedBy: User @relation(name: "ConnectionsOnUser")
+  updatedAt: DateTime!
+  participants: [User!]! @relation(name: "ConnectionsOnUser1")
+  reviews: [ConnectionReviews!]!
+    @relation(name: "ConnectionsOnConnectionReviews")
+  status: ConnectionStatus!
+  connectionSuggestions: [ConnectionSuggestion!]!
+    @relation(name: "ConnectionSuggestionOnConnection")
+  token: String! @isUnique
+  report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
+  userJounals: [ConnectionJournal!]!
+    @relation(name: "ConnectionsOnConnectionJournal")
+}
+
 type ConnectionReviews @model {
   id: ID! @isUnique
   comment: String
@@ -40,12 +59,10 @@ enum ConnectionStatus {
 
 type ConnectionSuggestion @model {
   id: ID! @isUnique
-  suggestedBy: User! @relation(name: "ConnectionSuggestionsOnAdminUser")
-  users: [User!]! @relation(name: "ConnectionSuggestionsOnUser")
-  potentialTimesSnapshot: Json
-  isScheduled: Boolean @defaultValue(value: false)
+  suggestedBy: User @relation(name: "ConnectionSuggestionsOnAdminUser")
+  user: User @relation(name: "ConnectionSuggestionsForUser")
+  accepted: Boolean @defaultValue(value: false)
   connection: Connections @relation(name: "ConnectionSuggestionOnConnection")
-  isAvailabilityOverlapping: Boolean @defaultValue(value: false)
 }
 
 type ConnectionReport @model {
@@ -58,26 +75,6 @@ type ConnectionReport @model {
   reason: ReportType!
   comment: String
   resolved: Boolean! @defaultValue(value: false)
-}
-
-type Connections @model {
-  connectionTime: DateTime
-  createdAt: DateTime!
-  fireStarterSuggestion: String
-  id: ID! @isUnique
-  accepted: Boolean @defaultValue(value: false) @migrationValue(value: false)
-  matchedBy: User @relation(name: "ConnectionsOnUser")
-  updatedAt: DateTime!
-  participants: [User!]! @relation(name: "ConnectionsOnUser1")
-  reviews: [ConnectionReviews!]!
-    @relation(name: "ConnectionsOnConnectionReviews")
-  status: ConnectionStatus!
-  connectionSuggestion: ConnectionSuggestion
-    @relation(name: "ConnectionSuggestionOnConnection")
-  token: String! @isUnique
-  report: ConnectionReport @relation(name: "ConnectionsOnConnectionReport")
-  userJounals: [ConnectionJournal!]!
-    @relation(name: "ConnectionsOnConnectionJournal")
 }
 
 type ConversationPrompt @model {
@@ -118,9 +115,9 @@ type FireStarterAnswer @model {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
-  question: FireStarter! @relation(name: "FireStarterAnswers")
+  question: FireStarter @relation(name: "FireStarterAnswers")
   answer: String!
-  answeredBy: User! @relation(name: "UserFireStarterAnswer")
+  answeredBy: User @relation(name: "UserFireStarterAnswer")
 }
 
 enum Gender {
@@ -134,6 +131,7 @@ type Invite @model {
   firstName: String!
   lastName: String!
   acceptedUser: User @relation(name: "InviteOnUserAccepted")
+  isAccepted: Boolean! @defaultValue(value: false) @migrationValue(value: false)
   isApproved: Boolean! @defaultValue(value: false)
   approvedBy: User @relation(name: "InviteApprovedByUser")
   sentBy: User @relation(name: "InviteOnUserSentBy")
@@ -214,7 +212,7 @@ type User @model {
   connectionInterests: [ConnectionInterests!]!
     @relation(name: "InterestedUsers")
   connectionSuggestions: [ConnectionSuggestion!]!
-    @relation(name: "ConnectionSuggestionsOnUser")
+    @relation(name: "ConnectionSuggestionsForUser")
   connectionsSuggested: [ConnectionSuggestion!]!
     @relation(name: "ConnectionSuggestionsOnAdminUser")
   connectionIncidents: [ConnectionReport!]!

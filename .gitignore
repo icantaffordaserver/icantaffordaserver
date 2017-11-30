@@ -44,7 +44,6 @@ node_modules/
 .yarnrc
 packages/client/.env
 yarn.lock
-packages/serverless/.graphcoolrc
 packages/serverless/env.yml
 packages/serverless/package-lock.json
 packages/serverless/.webpack/service/lambda.js
@@ -53,3 +52,4 @@ packages/website/package-lock.json
 packages/client/.env.development
 yarn.lock
 packages/website
+packages/admin-portal/.envrc

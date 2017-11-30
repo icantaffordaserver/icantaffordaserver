@@ -5,7 +5,6 @@ import Chat from '../../Chat'
 import ConversationPrompt from './ConversationPromptComponent'
 
 import { VideoPlayer } from '../styles'
-import { Button, RowContainer, ColumnContainer } from '../../../../../styles'
 
 class VideoComponent extends Component {
   render() {

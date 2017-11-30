@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo, gql } from 'react-apollo'
 
 import moment from 'moment'
@@ -37,22 +37,20 @@ class ConversationContainer extends Component {
       })
       if (this.shouldStart()) this.handleStartConversation()
     }
-    null
   }
 
   shouldStart = async () => {
     if (this.state.connection) await this.props.data.user
 
-    return
-    !this.state.areTalking &&
+    return (
+      !this.state.areTalking &&
       !this.state.conversationEnded &&
       moment(this.state.connection.connectionTime).diff(moment()) <=
         this.state.MINUTES_TO_START
+    )
   }
 
   handleStartConversation = async () => {
-    const name = this.props.data.user.firstName
-    const userId = this.props.data.user.id
     const roomName = await this.props.data.user.connections[0].id
     const {
       data: { getConversationToken: { token } },

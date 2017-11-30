@@ -1,30 +1,35 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
-import { ApolloProvider } from 'react-apollo'
-
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import InvitesPage from './Pages/InvitesPage'
+import LoginPage from './Pages/LoginPage'
+import isAdmin from './HoCs/isAdmin'
 import WithSideNav from './components/SideNav'
+import ForbiddenPage from './Pages/ForbiddenPage'
+import UpcomingPage from './Pages/UpcomingPage'
+import UsersPage from './Pages/UsersPage'
+import SendInvitePage from './Pages/SendInvitePage'
+import ReportsPage from './Pages/ReportsPage'
 
-import makeApolloClient from './utils/makeApolloClient'
-
-// TODO: refactor these to env vars
-const client = makeApolloClient(
-  'http://localhost:60000/simple/v1/cj8oohufi00050137y3aopsyv',
-  'ws://localhost:60000/subscriptions/v1/cj8oohufi00050137y3aopsyv',
+const AuthenticatedRoutes = () => (
+  <WithSideNav>
+    <Switch>
+      <Route exact path="/admin/" component={InvitesPage} />
+      <Route path="/admin/invites" component={InvitesPage} />
+      <Route path="/admin/feedback" component={ReportsPage} />
+      <Route path="/admin/queue" component={UsersPage} />
+      <Route path="/admin/upcoming" component={UpcomingPage} />
+      <Route path="/admin/sendInvite" component={SendInvitePage} />
+    </Switch>
+  </WithSideNav>
 )
-
-class App extends Component {
-  render() {
-    return (
-      <ApolloProvider client={client}>
-        <BrowserRouter>
-          <WithSideNav>
-            <Route path="/invites" component={InvitesPage} />
-          </WithSideNav>
-        </BrowserRouter>
-      </ApolloProvider>
-    )
-  }
-}
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/login" component={LoginPage} />
+      <Route path="/admin" component={isAdmin(AuthenticatedRoutes)} />
+      <Route path="*" component={ForbiddenPage} />
+    </Switch>
+  </BrowserRouter>
+)
 
 export default App

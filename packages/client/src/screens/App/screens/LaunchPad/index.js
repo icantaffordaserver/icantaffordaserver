@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
 
 import moment from 'moment'
@@ -111,7 +111,7 @@ class LaunchPadContainer extends Component {
   }
 
   passInvitation = async id => {
-    const request = await this.props.client.mutate({
+    await this.props.client.mutate({
       mutation: deleteConnectionMutation,
       variables: { id },
     })
@@ -119,27 +119,17 @@ class LaunchPadContainer extends Component {
     await this.fetchConnections()
   }
 
-  scheduleInvitation = async connection => {
+  scheduleInvitation = async id => {
+    this.setState({ loading: true })
     const { client } = this.props
 
-    // If other user has already accepted, move the conversation to scheduled.
-    if (connection.accepted) {
-      await client.mutate({
-        mutation: scheduleConnection,
-        variables: {
-          id: connection.id,
-          status: 'SCHEDULED',
-        },
-      })
-    } else {
-      await client.mutate({
-        mutation: scheduleConnection,
-        variables: {
-          id: connection.id,
-          accepted: true,
-        },
-      })
-    }
+    await client.mutate({
+      mutation: scheduleConnection,
+      variables: {
+        id,
+      },
+    })
+
     await this.props.client.resetStore()
     await this.fetchConnections()
   }

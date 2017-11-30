@@ -1,4 +1,3 @@
-import '../loadEnv'
 import throat from 'throat'
 
 const throttle = throat(2)

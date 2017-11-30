@@ -45,6 +45,7 @@ function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
     dataIdFromObject: o => o.id,
     queryDeduplication: true, // use so that we do not fetch the same query multiple times
     initialState: {},
+    addTypename: true,
   })
 }
 

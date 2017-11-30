@@ -35,9 +35,9 @@ class CountdownComponent extends Component {
       return
     }
     if (duration.days() > 0) {
-      format = `${duration.days() > 10
-        ? duration.days()
-        : `0${duration.days()}`}:HH:MM:ss`
+      format = `${
+        duration.days() > 10 ? duration.days() : `0${duration.days()}`
+      }:HH:MM:ss`
     } else {
       format = 'HH:MM:ss'
     }

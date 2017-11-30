@@ -25,7 +25,7 @@ class FooterComponent extends Component {
             <Link to="/toc">Terms & Conditions</Link>
             <Link to="/contact">Contact Us</Link>
             <Link to="/settings">Settings</Link>
-            <Link active={false} to="/" onClick={this.handleLogout}>
+            <Link to="/" onClick={this.handleLogout}>
               Logout
             </Link>
           </Links>

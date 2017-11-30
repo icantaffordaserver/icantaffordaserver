@@ -8,15 +8,10 @@
     "start:dev": "serverless offline --host 0.0.0.0 --port 4000 --stage dev",
     "db:seed": "babel-node ./scripts/db/seed.js",
     "db:drop": "babel-node ./scripts/db/drop.js",
-    "deploy:dev": "graphcool deploy --target dev",
+    "deploy:graphcool:dev": "graphcool deploy --target dev",
+    "loadEnv": "export $(cat .env | xargs)",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "gitDir": "../../",
-    "linters": {
-      "*.{js,json,css}": ["prettier --write", "git add"]
-    }
   },
   "author": "Alexander Mann",
   "license": "MIT",
@@ -29,9 +24,10 @@
     "eslint": "^4.6.1",
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-prettier": "^2.3.1",
     "js-yaml": "^3.10.0",
-    "lint-staged": "^4.2.2",
+    "lint-staged": "^5.0.0",
     "prettier": "^1.7.0",
     "rimraf": "^2.6.1",
     "serverless": "^1.23.0",

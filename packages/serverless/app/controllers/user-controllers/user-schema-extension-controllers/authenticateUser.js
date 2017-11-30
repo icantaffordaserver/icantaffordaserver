@@ -36,7 +36,7 @@ export default async (req, res) => {
       },
     })
   } catch (error) {
-    console.error(error)
+    console.log(error)
     res.status(200).send({
       error: {
         message: 'An unexpected error occured during authentication.',

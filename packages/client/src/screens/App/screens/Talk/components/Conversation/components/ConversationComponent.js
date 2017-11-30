@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 
-import moment from 'moment'
-
-import Chat from '../../../components/Chat'
 import Video from '../../../components/Video'
 import Nav from '../../../../../shared/components/Navigation'
 
-import { Title } from '../../../../../styles'
 import { Conversation } from '../styles'
 
 class ConversationComponent extends Component {

@@ -5,10 +5,14 @@ import FaUserPlus from 'react-icons/lib/fa/user-plus'
 import FaGroup from 'react-icons/lib/fa/group'
 import FaCal from 'react-icons/lib/fa/calendar'
 import FaPencil from 'react-icons/lib/fa/pencil-square'
+import FaPowerOff from 'react-icons/lib/fa/power-off'
 
 import ProfileHeader from './SideNavProfileHeader'
 
 class SideNav extends Component {
+  logout = () => {
+    window.localStorage.removeItem('auth_token')
+  }
   render() {
     return (
       <AppWrapper>
@@ -17,25 +21,29 @@ class SideNav extends Component {
           <SideNavWrapper>
             <ProfileHeader />
             <MenuContainer>
-              <MenuItem to="/invites">
+              <MenuItem to="/admin/invites">
                 <FaUserPlus size={24} />
                 <MenuText>Invites</MenuText>
                 <Notification>8</Notification>
               </MenuItem>
-              <MenuItem to="/queue">
+              <MenuItem to="/admin/queue">
                 <FaGroup size={24} />
                 <MenuText>Queue</MenuText>
                 <Notification>8</Notification>
               </MenuItem>
-              <MenuItem to="/upcoming">
+              <MenuItem to="/admin/upcoming">
                 <FaCal size={24} />
                 <MenuText>Upcoming</MenuText>
                 <Notification>8</Notification>
               </MenuItem>
-              <MenuItem to="/feedback">
+              <MenuItem to="/admin/feedback">
                 <FaPencil size={24} />
                 <MenuText>Feedback</MenuText>
                 <Notification>8</Notification>
+              </MenuItem>
+              <MenuItem to="/login" onClick={this.logout}>
+                <FaPowerOff size={24} />
+                <MenuText>Logout</MenuText>
               </MenuItem>
             </MenuContainer>
           </SideNavWrapper>

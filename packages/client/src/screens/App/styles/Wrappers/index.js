@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components'
 import { bind } from 'styled-props'
 import Theme from '../Theme'
 
-import { Card as card } from 'semantic-ui-react'
-
 const styles = bind(Theme)
 
 export const Background = styled.div`

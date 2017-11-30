@@ -19,10 +19,14 @@ import viewIcon from '../../../../shared/assets/view.svg'
 
 class IntroductionsComponent extends Component {
   render() {
+    const { connectionSuggestions } = this.props.introductions
+    console.log(connectionSuggestions)
+
     return (
       <IntroductionsContainer>
-        {this.props.introductions &&
-          this.props.introductions.slice(0, 4).map(introduction => {
+        {connectionSuggestions &&
+          connectionSuggestions.slice(0, 4).map(suggestion => {
+            const introduction = suggestion.connection
             const user = introduction.participants[0]
             return (
               <Introduction key={introduction.id}>
@@ -51,9 +55,9 @@ class IntroductionsComponent extends Component {
                   </Subheading>
                   <UserProfile
                     connection={{
-                      id: introduction.id,
+                      id: suggestion.id,
                       time: introduction.connectionTime,
-                      accepted: introduction.accepted,
+                      accepted: suggestion.accepted,
                       status: introduction.status,
                     }}
                     user={user}

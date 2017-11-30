@@ -1,4 +1,3 @@
-import '../loadEnv' // needs to be at the top to load env vars
 import throat from 'throat'
 
 const throttle = throat(2)
@@ -12,6 +11,7 @@ const createFireStarterMutation = `
   ) {
     createFireStarter(
       question: $question
+      type: CURIOSITIES
     ) {
       id
     }
