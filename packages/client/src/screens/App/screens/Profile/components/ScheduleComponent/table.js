@@ -79,7 +79,8 @@ export default class TableDragSelect extends React.Component {
   }
 
   render = () => {
-    const { value, onChange, ...props } = this.props
+    const { value, onChange, edit, ...props } = this.props
+    console.log('table props : ', this.props)
     return (
       <table className="table-drag-select" {...props}>
         <tbody>{this.renderRows()}</tbody>
@@ -229,13 +230,13 @@ class Cell extends React.Component {
   }
 
   handleTouchStart = e => {
-    if (!this.props.disabled) {
+    if (!this.props.disabled && this.props.editable) {
       this.props.onTouchStart(e)
     }
   }
 
   handleTouchMove = e => {
-    if (!this.props.disabled) {
+    if (!this.props.disabled && this.props.editable) {
       this.props.onTouchMove(e)
     }
   }

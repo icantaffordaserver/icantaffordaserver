@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
+import { Box } from 'grid-styled'
 
 import SubTitleSection from './shared/SubTitleSection'
 import Schedule from './ScheduleComponent'
@@ -164,7 +165,7 @@ class Availabilty extends Component {
     const { edit, cells } = this.state
 
     return (
-      <div>
+      <Box width={1} py={2}>
         <SubTitleSection
           title={'AVAILABLITY'}
           handleEdit={this.handleEditButton}
@@ -179,9 +180,10 @@ class Availabilty extends Component {
           <ConfirmAndCancel
             handleSave={this.setAvailability}
             handleCancel={this.handleClear}
+            cancelText={'Clear'}
           />
         </div>
-      </div>
+      </Box>
     )
   }
 }
