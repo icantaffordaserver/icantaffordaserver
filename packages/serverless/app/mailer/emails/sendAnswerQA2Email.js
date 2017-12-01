@@ -1,9 +1,6 @@
-/**
- * Created by alexandermann on 2017-03-26.
- */
 import PostmarkMailer from '../../../config/PostmarkMailer'
 
-export default function sendInviteEmail({
+export default function sendAnswerQA2Email({
   firstName,
   recipientEmail,
   actionUrl,
@@ -14,7 +11,7 @@ export default function sendInviteEmail({
         {
           From: 'hello@toktumi.io',
           To: recipientEmail,
-          TemplateId: 1497643,
+          TemplateId: 1501822,
           TemplateModel: {
             name: firstName,
             action_url: actionUrl,
@@ -27,6 +24,5 @@ export default function sendInviteEmail({
       )
     })
   }
-  else throw new Error("Email requires firstName, reciepientEmail and actionUrl.")    
-  
+  else throw new Error("Email requires firstName, reciepientEmail and actionUrl.")  
 }

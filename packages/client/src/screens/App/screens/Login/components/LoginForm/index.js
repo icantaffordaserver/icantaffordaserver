@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import SVG from 'react-inlinesvg'
 import { Message } from 'semantic-ui-react'
+import { Flex, Box } from 'grid-styled'
+import { NavLink } from 'react-router-dom'
+
+import { validateLogin } from './helpers'
+
 import {
   LoginWrapper,
   LoginFormWrapper,
   LoginImageContainer,
   Links,
+  ActiveButton,
+  InActiveButton,
 } from './styles'
 import {
   Title,
@@ -18,9 +25,8 @@ import {
   Label,
   TextLink,
 } from '../../../../styles'
-import Planet from '../../../../shared/assets/planet.png'
 
-import { validateLogin } from './helpers'
+import Logo from '../../../../shared/assets/Signup-Logo.svg'
 
 class LoginForm extends Component {
   static propTypes = {
@@ -73,12 +79,21 @@ class LoginForm extends Component {
     return (
       <LoginWrapper>
         <LoginImageContainer>
-          <Title huge style={{ marginBottom: '-5px' }}>
-            PLUT<img style={{ height: '65px' }} src={Planet} alt="" />
-          </Title>
-          <Subheading large>Change the conversation.</Subheading>
+          <SVG src={Logo} />
         </LoginImageContainer>
         <LoginFormWrapper>
+          <Flex wrap width={1} py={2}>
+            <Box width={1 / 3} ml="17%">
+              <NavLink to="/login">
+                <ActiveButton>Login</ActiveButton>
+              </NavLink>
+            </Box>
+            <Box width={1 / 3} ml="-1%">
+              <NavLink to="/signup">
+                <InActiveButton>Register</InActiveButton>
+              </NavLink>
+            </Box>
+          </Flex>
           {this.renderErrors()}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
