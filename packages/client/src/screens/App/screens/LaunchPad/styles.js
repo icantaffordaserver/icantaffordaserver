@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Layout = styled.div`
   display: grid;
   width: 100%;
+  margin-top: 1em;
   grid-template-rows: auto 60px auto auto;
   grid-template-columns: 1fr;
   grid-template-areas: 'invites' 'title' 'schedule' 'history';

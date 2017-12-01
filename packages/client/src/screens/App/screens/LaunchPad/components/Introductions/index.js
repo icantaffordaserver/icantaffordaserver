@@ -20,7 +20,6 @@ import viewIcon from '../../../../shared/assets/view.svg'
 class IntroductionsComponent extends Component {
   render() {
     const { connectionSuggestions } = this.props.introductions
-    console.log(connectionSuggestions)
 
     return (
       <IntroductionsContainer>
@@ -66,15 +65,15 @@ class IntroductionsComponent extends Component {
                   />
                   <Tags>
                     {user.connectInterests &&
-                      user.connectInterests.map(interest => (
-                        <Tag>{interest.name}</Tag>
+                      user.connectInterests.map((interest, i) => (
+                        <Tag key={i}>{interest.name}</Tag>
                       ))}
                   </Tags>
                 </Info>
               </Introduction>
             )
           })}
-        {this.props.introductions.length > 4 && (
+        {connectionSuggestions.length > 4 && (
           <Icon
             style={{ margin: 'auto', cursor: 'pointer' }}
             name="chevron right"

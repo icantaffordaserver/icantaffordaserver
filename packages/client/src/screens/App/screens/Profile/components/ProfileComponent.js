@@ -45,7 +45,6 @@ class ProfileComponent extends Component {
     } else {
       gradient = { top: '#F9A0AC', bottom: '#F9F9F9' }
     }
-    //console.log(user.gradientColors.top, user.gradientColors.bottom)
     if (this.props.loading) return null
     return (
       <ThemeProvider

@@ -82,32 +82,23 @@ class WelcomeContainer extends Component {
 
   changeColor = id => {
     let index = this.state.selectedTags.indexOf(id)
-    console.log('index: ', index)
     if (index === -1) {
-      this.setState({ selectedTags: [...this.state.selectedTags, id] }, () =>
-        console.log(this.state),
-      )
+      this.setState({ selectedTags: [...this.state.selectedTags, id] })
     } else {
       const selectedTags = this.state.selectedTags
-      this.setState(
-        {
-          selectedTags: [
-            ...selectedTags.slice(0, index),
-            ...selectedTags.slice(index + 1),
-          ],
-        },
-        () => console.log(this.state),
-      )
+      this.setState({
+        selectedTags: [
+          ...selectedTags.slice(0, index),
+          ...selectedTags.slice(index + 1),
+        ],
+      })
     }
   }
 
   handleInput = event =>
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      console.log(this.state),
-    )
+    this.setState({ [event.target.name]: event.target.value })
   handleLocationChange = location => this.setState({ location })
   handleSubmitInterest = () => {
-    console.log(this.props, ' Choose interests')
     this.props
       .createConnectionInterest({
         variables: {
@@ -120,7 +111,6 @@ class WelcomeContainer extends Component {
           this.setState({ suggestionSuccess: false })
         }, 1000),
       )
-      .then(() => console.log(this.state))
       .catch(err => console.error(err))
   }
 
@@ -147,14 +137,6 @@ class WelcomeContainer extends Component {
         }
       }
     }
-
-    console.log('Handle Onboarding : ', {
-      id: this.props.data.user.id,
-      availability,
-      bio,
-      location,
-      connectionInterestsIds,
-    })
 
     let merged = [].concat.apply([], cells)
 
@@ -188,7 +170,6 @@ class WelcomeContainer extends Component {
   }
 
   convertToBoolean = () => {
-    console.log('convertoboolean : ', this.props)
     let cells = [
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
@@ -227,7 +208,6 @@ class WelcomeContainer extends Component {
     }
 
     // if (this.state.cells === cells) return
-    console.log(cells)
     this.setState({ cells })
   }
 
@@ -288,7 +268,6 @@ class WelcomeContainer extends Component {
       )
     }
     if (this.props.data.loading) return null
-    console.log(' WelcomeContainer : ', this.props)
     return (
       <FullScreen
         style={{ background: 'linear-gradient(0deg, #617EA5, #1E252F)' }}

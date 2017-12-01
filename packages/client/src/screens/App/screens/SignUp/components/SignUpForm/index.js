@@ -41,7 +41,6 @@ class SignUpForm extends Component {
     const { handleChange, onSubmit } = this.props
     const { email, firstName, lastName, password, password2 } = this.props.data
     // const error = this.state.error !== '' || this.props.error !== ''
-    console.log('SignUpForm : ', this.props)
     return (
       <LoginWrapper>
         <LoginImageContainer>

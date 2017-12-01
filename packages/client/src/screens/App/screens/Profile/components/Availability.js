@@ -67,10 +67,6 @@ class Availabilty extends Component {
         }
       }
     }
-    console.log({
-      id: this.props.data.user.id,
-      availability,
-    })
 
     this.props
       .mutate({
@@ -85,7 +81,6 @@ class Availabilty extends Component {
         ],
       })
       .then(() => this.setState({ clickSave: true }, this.handleEditButton))
-      .then(() => console.log('success: Availability updated.'))
       .catch(err => console.error(err))
   }
 
@@ -111,7 +106,6 @@ class Availabilty extends Component {
   }
 
   convertToBoolean = () => {
-    console.log('Availability convertToBoolean : ', this.props)
     let cells = [
       [false, false, false, false, false, false, false, false],
       [false, false, false, false, false, false, false, false],
@@ -151,7 +145,6 @@ class Availabilty extends Component {
     }
 
     // if (this.state.cells === cells) return
-    console.log(cells)
     this.setState({ cells })
   }
 

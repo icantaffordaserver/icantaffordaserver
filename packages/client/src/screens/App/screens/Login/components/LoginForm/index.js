@@ -16,8 +16,6 @@ import {
   InActiveButton,
 } from './styles'
 import {
-  Title,
-  Subheading,
   Form,
   Button,
   FormGroup,
@@ -59,7 +57,6 @@ class LoginForm extends Component {
     if (typeof loginErrors === 'string') {
       // if validate login returns string we have an error
       this.setState({ error: loginErrors })
-      console.log('error')
       return
     }
     this.props.onSubmit(email, password)

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
+import { Widget } from 'react-chat-widget'
+
 /* Text Chat */
 
-export const ChatBox = styled.div`
-  width: inherit;
-  background: #c4c4c4;
-  display: ${props => (props.hidden ? 'none' : 'inherit')};
-  position: absolute;
-  bottom: 0;
+export const ChatBox = styled(Widget)`
+  &.widget-container {
+    left: 25px !important;
+  }
 `

@@ -16,7 +16,6 @@ import Graphic from '../../assets/Graphic2.png'
 
 class WelcomeBio extends Component {
   render() {
-    console.log(this.props)
     const { bio, incrementCount, handleChange, bioSuccess } = this.props
 
     return (

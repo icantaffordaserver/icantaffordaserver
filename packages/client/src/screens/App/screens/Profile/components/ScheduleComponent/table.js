@@ -80,7 +80,6 @@ export default class TableDragSelect extends React.Component {
 
   render = () => {
     const { value, onChange, edit, ...props } = this.props
-    console.log('table props : ', this.props)
     return (
       <table className="table-drag-select" {...props}>
         <tbody>{this.renderRows()}</tbody>

@@ -21,7 +21,6 @@ class SignUpContainer extends Component {
   }
 
   componentDidMount = () => {
-    console.log('SignUpContainer : ', this.props)
     if (this.props.match.params.token) {
       // window.history.pushState(null, null, '/signUp')
       this.handleInvite(this.props.match.params.token)
@@ -50,7 +49,6 @@ class SignUpContainer extends Component {
         inviteToken: this.props.match.params.token,
       })
 
-      console.log(response)
       if (!response.data.Invite) throw new Error('Invite does not exist.')
       if (response.data.Invite.isAccepted) throw new Error('Invite Claimed.')
       if (this.state.error) throw new Error(this.state.error)
@@ -94,7 +92,6 @@ class SignUpContainer extends Component {
   handleSignUp = async e => {
     // e.preventDefualt() // ALWAYS PREVENT DEFAULT ON ANY BUTTON SUBMISSION
     // SignUp mutation
-    console.log('handleSignup props : ', this.props)
     const { password, firstName, lastName, email, inviteToken } = this.state
 
     try {
@@ -119,7 +116,6 @@ class SignUpContainer extends Component {
       })
 
       const token = login.data.authenticateEmailUser.token
-      console.log(token)
       window.localStorage.setItem('auth_token', token)
 
       this.props.client.resetStore()
@@ -136,12 +132,9 @@ class SignUpContainer extends Component {
   }
 
   handleChange = event => {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      () => console.log(this.state),
-    )
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
   }
 
   render() {

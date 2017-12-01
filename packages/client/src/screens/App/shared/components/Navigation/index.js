@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 import Countdown from '../Countdown'
-
+import gql from 'graphql-tag'
 import isVerified from '../../HoCs/isVerified'
 import currentUserQuery from '../../graphql/queries/currentUserQuery'
 
@@ -25,16 +26,41 @@ class NavigationComponent extends Component {
     const { token } = this.props.data.user.connections[0]
     this.props.history.push(`/talk/${token}`)
   }
+
+  checkPast = async ({ id, connectionTime }) => {
+    if (moment().isAfter(moment(connectionTime).add(1, 'h'))) {
+      await this.props.client.mutate({
+        mutation: gql`
+          mutation($id: ID!) {
+            updateConnections(id: $id, status: BAILED) {
+              id
+            }
+          }
+        `,
+        variables: {
+          id,
+        },
+        refetchQueries: [{ query: currentUserQuery }],
+      })
+    }
+  }
+
   render() {
     if (this.props.data.loading || !this.props.data.user) return null
-
+    const connection =
+      this.props.data.user.connections && this.props.data.user.connections[0]
+    if (connection) this.checkPast(connection)
+    const otherUser =
+      connection &&
+      connection.participants.filter(
+        user => user.id !== this.props.data.user.id,
+      )[0]
     return (
       <Navigation>
         {this.props.conversation ? (
           <NavigationContainer>
             <Title fullWidth medium center white>
-              Talk with{' '}
-              {this.props.data.user.connections[0].participants[0].firstName}
+              Talk with {otherUser.firstName}
             </Title>
           </NavigationContainer>
         ) : (
@@ -67,6 +93,9 @@ class NavigationComponent extends Component {
   }
 }
 
-export default compose(graphql(currentUserQuery), isVerified, withRouter)(
-  NavigationComponent,
-)
+export default compose(
+  graphql(currentUserQuery),
+  isVerified,
+  withRouter,
+  withApollo,
+)(NavigationComponent)

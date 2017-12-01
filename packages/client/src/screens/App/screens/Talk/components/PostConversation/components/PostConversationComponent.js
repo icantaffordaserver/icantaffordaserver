@@ -1,99 +1,108 @@
 import React from 'react'
 
+import { Background, Screen, Button, TextArea } from '../../../../../styles'
+import Nav from '../../../../../shared/components/Navigation'
 import {
-  Button,
-  TextArea,
-  ColumnContainer,
-  Content,
-  Section,
-  Title,
-  Subheading,
-  Text,
-} from '../../../../../styles'
-
-import Report from '../../Report'
+  PostConvoWrapper,
+  TechnicalFeedback,
+  ConversationFeedback,
+  Comments,
+  Journal,
+  TitleWrapper,
+  Heading,
+  SoundQuality,
+  VideoQuality,
+  Buttons,
+  ToggleButton,
+} from '../styles'
 
 class PostConversationComponent extends React.Component {
   render() {
+    const {
+      videoSatisfactory,
+      audioSatisfactory,
+      setAudioSatisfactory,
+      setVideoSatisfactory,
+      handleChange,
+      handleReview,
+      loading,
+    } = this.props
     return (
-      <ColumnContainer>
-        <Title large>Post Conversation</Title>
-        <Subheading darkGray medium fullWidth>
-          Thanks for using Pluto! We're always working hard to make the platform
-          better for you. Please take a couple minutes to give us some feedback
-          so we can help foster even better conversations!
-        </Subheading>
-        <Content expanded>
-          <Section>
-            <Title left medium fullWidth primary>
-              Technical Feedback
-            </Title>
-            <Section gray inline>
-              <Text left>Was the video quality good?</Text>
-              <input
-                type="checkbox"
-                name="videoSatisfactory"
-                checked={this.props.videoSatisfactory}
-                onChange={this.props.handleChange}
-              />
-            </Section>
-            <Section darkGray inline>
-              <Text left white>
-                Was the audio quality good?
-              </Text>
-              <input
-                type="checkbox"
-                name="audioSatisfactory"
-                checked={this.props.audioSatisfactory}
-                onChange={this.props.handleChange}
-              />
-            </Section>
-          </Section>
-          <Section>
-            <Title left medium fullWidth primary>
-              Conversation Feedback
-            </Title>
-            <Section gray inline>
-              <Text left>
-                Did you enjoy the conversation with{' '}
-                {this.props.otherUser.firstName}?
-              </Text>
-              <Text right>
-                <input
-                  type="checkbox"
-                  name="enjoyedConversation"
-                  checked={this.props.enjoyedConversation}
-                  onChange={this.props.handleChange}
-                />
-              </Text>
-            </Section>
-            <Section darkGray>
-              <Text left white>
-                Do you have any comments for {this.props.otherUser.firstName}?
-              </Text>
-              <TextArea name="comment" onChange={this.props.handleChange} />
-            </Section>
-          </Section>
-          <Section>
-            <Title left medium fullWidth primary>
-              Journal
-            </Title>
-            <Subheading left darkGray fullWidth>
-              This is for your eyes only. Jot down anything from the
-              conversation you'd like to remember.
-            </Subheading>
-            <TextArea name="journalEntry" onChange={this.props.handleChange} />
-          </Section>
-          <Button
-            secondary
-            loading={this.props.loading}
-            onClick={this.props.handleReview}
-          >
-            Submit
-          </Button>
-          <Report button />
-        </Content>
-      </ColumnContainer>
+      <Background>
+        <Nav />
+        <Screen>
+          <PostConvoWrapper>
+            <TitleWrapper>
+              <h1>Thank You!</h1>
+              <p>
+                Thanks for using Pluto. We really hope you enjoyed your
+                conversation. We’re very interested in your feedback, and taking
+                a couple minutes to fill out this form would really go a long
+                way in helping us develop the community and platform!
+              </p>
+            </TitleWrapper>
+            <TechnicalFeedback>
+              <Heading>Technical Feedback</Heading>
+              <SoundQuality>
+                <h3>Was the sound quality good?</h3>
+                <Buttons>
+                  <ToggleButton
+                    className={audioSatisfactory && 'yes'}
+                    onClick={() => setAudioSatisfactory(true)}
+                  >
+                    Yes
+                  </ToggleButton>
+                  <ToggleButton
+                    className={audioSatisfactory === false && 'no'}
+                    onClick={() => setAudioSatisfactory(false)}
+                  >
+                    No
+                  </ToggleButton>
+                </Buttons>
+              </SoundQuality>
+              <VideoQuality>
+                <h3>Was the video quality good?</h3>
+                <Buttons>
+                  <ToggleButton
+                    className={videoSatisfactory && 'yes'}
+                    onClick={() => setVideoSatisfactory(true)}
+                  >
+                    Yes
+                  </ToggleButton>
+                  <ToggleButton
+                    className={videoSatisfactory === false && 'no'}
+                    onClick={() => setVideoSatisfactory(false)}
+                  >
+                    No
+                  </ToggleButton>
+                </Buttons>
+              </VideoQuality>
+            </TechnicalFeedback>
+            <ConversationFeedback>
+              <Heading>Conversation Feedback</Heading>
+              <Comments>
+                <h3>
+                  How was the quality of the content in your conversation? How
+                  do you feel afterwards?
+                </h3>
+                <TextArea name="comment" onChange={handleChange} />
+              </Comments>
+              <Journal>
+                <h3>
+                  Jot down any thoughts or notes that your conversation may have
+                  inspired! No one can read this but you. (Optional)
+                </h3>
+                <TextArea name="journalEntry" onChange={handleChange} />
+              </Journal>
+            </ConversationFeedback>
+            <Buttons>
+              <Button round small onClick={handleReview} loading={loading}>
+                Submit Feedback
+              </Button>
+            </Buttons>
+          </PostConvoWrapper>
+        </Screen>
+      </Background>
     )
   }
 }
