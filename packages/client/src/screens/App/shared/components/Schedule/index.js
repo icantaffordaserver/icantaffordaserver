@@ -20,7 +20,6 @@ class ScheduleComponent extends Component {
         events={this.props.events}
         min={moment('12:00PM', 'h:mmA').toDate()}
         defaultView="week"
-        onSelectEvent={event => console.log(event)}
         onSelectSlot={slotInfo => this.props.handleChange(slotInfo)}
       />
     )

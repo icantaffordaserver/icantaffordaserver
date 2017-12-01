@@ -34,7 +34,7 @@ class VideoContainer extends Component {
   }
 
   onDisconnect = () => {
-    console.log('User disconnected.')
+    this.props.endConversation()
   }
 
   toggleAudio = e => {

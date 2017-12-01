@@ -13,7 +13,6 @@ class ChatContainer extends Component {
     chatStarted: false,
   }
   async openChat() {
-    console.log(this.state)
     if (!this.state.chatStarted) {
       const client = await Chat.create(this.props.token)
       await client.initialize()
@@ -22,7 +21,6 @@ class ChatContainer extends Component {
       try {
         channel = await client.getChannelByUniqueName(this.props.roomName)
       } catch (error) {
-        console.log(error)
         channel = await client.createChannel({
           uniqueName: this.props.roomName,
         })
@@ -55,14 +53,12 @@ class ChatContainer extends Component {
     const otherUser = this.props.otherUser
     const otherUserName = otherUser.firstName + ' ' + otherUser.lastName
     if (message.author === otherUserName) {
-      console.log(message.author, otherUserName)
       addResponseMessage(message.body)
     }
   }
 
   handleChange = e => {
     e.preventDefault()
-    console.log(e)
     this.setState({
       [e.target.name]: e.target.value,
     })

@@ -6,7 +6,6 @@ import AnswerFireStarters from './AnswerFireStarterComponent'
 
 class FireStarterComponent extends Component {
   render() {
-    console.log(this.props.answers)
     return (
       <FireStarters>
         <AnswerFireStarters {...this.props} />

@@ -34,7 +34,6 @@ class ForgotPasswordContainer extends React.Component {
       browser: `${platform.name} ${platform.version}`,
       os: `${platform.os.family} ${platform.os.version}`,
     }
-    console.log(securityInfo)
     const email = this.state.email
     this.props
       .mutate({

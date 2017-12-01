@@ -18,22 +18,16 @@ class ChooseInterestsComponent extends Component {
 
   changeColor = id => {
     let index = this.state.selectedTags.indexOf(id)
-    console.log('index: ', index)
     if (index === -1) {
-      this.setState({ selectedTags: [...this.state.selectedTags, id] }, () =>
-        console.log(this.state),
-      )
+      this.setState({ selectedTags: [...this.state.selectedTags, id] })
     } else {
       const selectedTags = this.state.selectedTags
-      this.setState(
-        {
-          selectedTags: [
-            ...selectedTags.slice(0, index),
-            ...selectedTags.slice(index + 1),
-          ],
-        },
-        () => console.log(this.state),
-      )
+      this.setState({
+        selectedTags: [
+          ...selectedTags.slice(0, index),
+          ...selectedTags.slice(index + 1),
+        ],
+      })
     }
   }
 
@@ -44,7 +38,6 @@ class ChooseInterestsComponent extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.props, ' Choose interests')
     this.props
       .createConnectionInterest({
         variables: {
@@ -52,7 +45,6 @@ class ChooseInterestsComponent extends Component {
         },
       })
       .then(() => this.setState({ suggestion: '' }))
-      .then(() => console.log(this.state))
       .catch(err => console.error(err))
   }
 
@@ -61,7 +53,6 @@ class ChooseInterestsComponent extends Component {
 
   handleConfirm = () => {
     let connectionInterestsIds = this.state.selectedTags
-    console.log(this.props)
     this.props
       .updateUser({
         variables: {
@@ -77,13 +68,10 @@ class ChooseInterestsComponent extends Component {
       .then(() =>
         this.setState({ selectedTags: [] }, () => this.props.handleEdit()),
       )
-      .then(() => console.log(this.state))
       .catch(err => console.error(err))
   }
 
   componentDidMount() {
-    console.log('Choose Interests : ', this.props)
-
     if (this.props.user) {
       const { connectionInterests } = this.props.user
       let interestIds = connectionInterests.map(interest => interest.id)

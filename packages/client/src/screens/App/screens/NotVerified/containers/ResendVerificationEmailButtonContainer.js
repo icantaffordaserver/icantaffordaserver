@@ -33,10 +33,17 @@ class ResendVerificationEmailButtonContainer extends React.Component {
           input: { userId: id, emailToVerify: email },
         },
       })
-      this.setState({ loading: false, buttonStatusMessage: 'Email sent!', success: true })
+      this.setState({
+        loading: false,
+        buttonStatusMessage: 'Email sent!',
+        success: true,
+      })
     } catch (error) {
-      console.log(error)
-      this.setState({ loading: false, buttonStatusMessage: 'An error occurred', error: true })
+      this.setState({
+        loading: false,
+        buttonStatusMessage: 'An error occurred',
+        error: true,
+      })
     }
   }
 
@@ -56,6 +63,7 @@ class ResendVerificationEmailButtonContainer extends React.Component {
   }
 }
 
-export default compose(graphql(currentUserQuery), graphql(resendVerificationEmailMutation))(
-  ResendVerificationEmailButtonContainer,
-)
+export default compose(
+  graphql(currentUserQuery),
+  graphql(resendVerificationEmailMutation),
+)(ResendVerificationEmailButtonContainer)

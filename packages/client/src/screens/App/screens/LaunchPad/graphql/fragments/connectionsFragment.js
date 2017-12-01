@@ -19,6 +19,9 @@ export default gql`
       email
       location
       bio
+      connectionInterests(filter: { isApproved: true }) {
+        name
+      }
       fireStarterAnswers {
         id
         question {

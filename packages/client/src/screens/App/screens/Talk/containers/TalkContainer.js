@@ -84,10 +84,6 @@ class TalkContainer extends Component {
     }
   }
 
-  scheduleConversation = async connection => {
-    console.log('Scheduled: ', connection.id)
-  }
-
   render() {
     return (
       this.state.isConversation && (

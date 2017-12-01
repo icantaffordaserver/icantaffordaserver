@@ -5,6 +5,8 @@ import UserProfile from '../UserProfile'
 
 import { UpcomingWrapper, Avatar, Tags } from './styles'
 import { Tag, Title, Subheading, Text, Button } from '../../../../styles'
+import EmptyProfile from '../../../../../../assets/pictures/empty_avatar.jpg'
+
 const UpcomingComponent = props => {
   const connection = props.connection
   const user = connection && connection.participants[0]
@@ -13,7 +15,7 @@ const UpcomingComponent = props => {
     return (
       <UpcomingWrapper>
         <Avatar
-          src={'https://api.adorable.io/avatars/285/' + user.email + '.png'}
+          src={user.profilePhotoUrl ? user.profilePhotoUrl : EmptyProfile}
         />
         <Title fullWidth small darkGray>
           {user.firstName} {user.lastName}
@@ -25,9 +27,9 @@ const UpcomingComponent = props => {
             )}
         </Subheading>
         <Tags>
-          <Tag>#Cool</Tag>
-          <Tag>#Stuff</Tag>
-          <Tag>#Smile</Tag>
+          {user.connectionInterests.map((interest, i) => (
+            <Tag key={i}>{interest.name}</Tag>
+          ))}
         </Tags>
         <Text light>{user.bio}</Text>
         <UserProfile

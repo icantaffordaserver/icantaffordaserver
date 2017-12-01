@@ -19,7 +19,6 @@ const times = [
 
 class Schedule extends Component {
   componentDidMount() {
-    console.log('schedule : ', this.props)
     this.props.convertToBoolean()
   }
 
@@ -27,7 +26,6 @@ class Schedule extends Component {
     if (this.props.edit !== nextProps.edit && this.props.clickSave === false) {
       this.props.convertToBoolean()
     }
-    console.log('nextProps : ', nextProps)
 
     // if (this.props.edit === nextProps.edit) {
     //   this.setState({ clickSave: false })

@@ -74,7 +74,7 @@ class ConversationContainer extends Component {
     })
   }
 
-  handleEndConversation = async (e, status) => {
+  handleEndConversation = async e => {
     if (e) e.preventDefault()
 
     await this.props.client.mutate({
@@ -86,7 +86,6 @@ class ConversationContainer extends Component {
     this.setState({
       areTalking: false,
       conversationEnded: true,
-      conversationStatus: status,
     })
   }
 

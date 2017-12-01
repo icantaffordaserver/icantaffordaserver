@@ -50,11 +50,14 @@ class LaunchPadContainer extends Component {
 
   rotate = () => {
     // Copies array to avoid mutating state
-    let arr = this.state.connections.invitations.slice()
+    let arr = this.state.connections.invitations.connectionSuggestions.slice()
     const first = arr.shift()
     arr.push(first)
     this.setState({
-      connections: { ...this.state.connections, invitations: arr },
+      connections: {
+        ...this.state.connections,
+        invitations: { connectionSuggestions: arr },
+      },
     })
   }
 
@@ -66,9 +69,14 @@ class LaunchPadContainer extends Component {
         query: getAllConnections,
         variables: { id: this.props.data.user.id },
       })
+
       this.setState({
         connections: {
-          invitations,
+          invitations: {
+            connectionSuggestions: invitations.connectionSuggestions.filter(
+              con => moment(con.connectionTime).isAfter(moment()),
+            ),
+          },
           history,
           upcoming,
         },

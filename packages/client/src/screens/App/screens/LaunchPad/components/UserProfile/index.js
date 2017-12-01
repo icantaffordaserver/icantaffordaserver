@@ -15,6 +15,7 @@ import {
   Avatar,
 } from './styles'
 import { Modal, Icon } from 'semantic-ui-react'
+import EmptyProfile from '../../../../../../assets/pictures/empty_avatar.jpg'
 
 export default props => {
   const user = props.user
@@ -33,7 +34,7 @@ export default props => {
             </ProfilePhoto>
           ) : (
             <Avatar
-              src={'https://api.adorable.io/avatars/285/' + user.email + '.png'}
+              src={user.profilePhotoUrl ? user.profilePhotoUrl : EmptyProfile}
             />
           )}
           <UserDetails>

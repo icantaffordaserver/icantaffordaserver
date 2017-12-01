@@ -41,7 +41,6 @@ class TalkComponent extends Component {
     return <UserProfile id={id} />
   }
   render() {
-    console.log(this.state)
     return (
       <ColumnContainer>
         <ColumnContainer>
