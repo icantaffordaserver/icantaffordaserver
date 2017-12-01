@@ -59,7 +59,6 @@ class ReportContainer extends Component {
   }
   render() {
     if (this.props.data.loading || !this.state.otherUser) return null
-    console.log(this.props.button)
     return (
       <ReportComponent
         firstName={this.state.otherUser.firstName}

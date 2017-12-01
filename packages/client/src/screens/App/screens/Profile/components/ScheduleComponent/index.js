@@ -19,7 +19,6 @@ const times = [
 
 class Schedule extends Component {
   componentDidMount() {
-    console.log('schedule : ', this.props)
     this.props.convertToBoolean()
   }
 
@@ -27,7 +26,6 @@ class Schedule extends Component {
     if (this.props.edit !== nextProps.edit && this.props.clickSave === false) {
       this.props.convertToBoolean()
     }
-    console.log('nextProps : ', nextProps)
 
     // if (this.props.edit === nextProps.edit) {
     //   this.setState({ clickSave: false })
@@ -40,32 +38,32 @@ class Schedule extends Component {
       <div>
         <TableDragSelect value={cells} onChange={handleChange} edit={edit}>
           <tr>
-            <td disabled className="header" />
-            <td disabled className="header">
+            <td disabled className="theader" />
+            <td disabled className="theader">
               Monday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Tuesday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Wednesday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Thursday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Friday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Saturday
             </td>
-            <td disabled className="header">
+            <td disabled className="theader">
               Sunday
             </td>
           </tr>
           {times.map((x, i) => (
             <tr key={i}>
-              <td disabled className="header">
+              <td disabled className="theader">
                 {x}
               </td>
               <td />

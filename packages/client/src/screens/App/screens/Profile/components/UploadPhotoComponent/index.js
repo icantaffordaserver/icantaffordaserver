@@ -66,25 +66,15 @@ class UploadPhotoComponent extends Component {
         image,
       },
       () =>
-        this.setState(
-          {
-            naturalHeight: image.naturalHeight,
-            naturalWidth: image.naturalWidth,
-          },
-          () =>
-            console.log(
-              'image: ',
-              this.state.naturalHeight,
-              this.state.naturalWidth,
-            ),
-        ),
+        this.setState({
+          naturalHeight: image.naturalHeight,
+          naturalWidth: image.naturalWidth,
+        }),
     )
   }
 
   onCropComplete = (crop, pixelCrop) => {
-    this.setState({ pixelCrop }, () =>
-      console.log('onCropComplete, pixelCrop:', pixelCrop),
-    )
+    this.setState({ pixelCrop })
   }
 
   onCropChange = crop => {
@@ -105,7 +95,6 @@ class UploadPhotoComponent extends Component {
       data.append('upload_preset', 'cqovpxkc')
       data.append('api_key', '425252445786336')
       data.append('timestamp', (Date.now() / 1000) | 0)
-      console.log(data)
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
       axios
         .post('https://api.cloudinary.com/v1_1/toktumi/image/upload', data, {
@@ -113,8 +102,6 @@ class UploadPhotoComponent extends Component {
         })
         .then(response => {
           const data = response.data
-          const fileURL = data.secure_url
-          console.log('data : ', data, 'fileURL: ', fileURL)
           return data
         })
         .then(data => {
@@ -133,7 +120,6 @@ class UploadPhotoComponent extends Component {
             '/' +
             data.public_id +
             '.png'
-          console.log(url)
           return this.props.mutate({
             variables: {
               id: this.props.data.user.id,
@@ -150,10 +136,6 @@ class UploadPhotoComponent extends Component {
         .then(() => this.setState({ showModal: false }))
         .catch(err => console.error(err))
     } else {
-      console.log({
-        id: this.props.data.user.id,
-        gradientColors,
-      })
       this.props
         .mutate({
           variables: {
@@ -167,14 +149,13 @@ class UploadPhotoComponent extends Component {
           ],
         })
         .then(() => this.setState({ showModal: false }))
-        .then(() => console.log(this.props.data.user))
         .catch(err => console.error(err))
     }
   }
   handleCancel = () => this.setState({ showModal: false })
 
   handleSelect = (topColor, bottomColor) =>
-    this.setState({ topColor, bottomColor }, () => console.log(this.state))
+    this.setState({ topColor, bottomColor })
 
   componentDidMount = () => {
     const { gradientColors } = this.props.data.user
@@ -186,7 +167,6 @@ class UploadPhotoComponent extends Component {
     } else {
       this.setState({ topColor: '#F9A0AC', bottomColor: '#F9F9F9' })
     }
-    console.log('Upload Photo component: ', this.props)
   }
 
   render() {
@@ -260,10 +240,7 @@ class UploadPhotoComponent extends Component {
                 }}
                 accept="image/*"
                 onDrop={(accepted, rejected) => {
-                  this.setState(
-                    { files: accepted, uploadBoxDisplay: 'none' },
-                    () => console.log(accepted),
-                  )
+                  this.setState({ files: accepted, uploadBoxDisplay: 'none' })
                 }}
               >
                 <p style={{ margin: '20px' }}>
@@ -310,7 +287,6 @@ class UploadPhotoComponent extends Component {
 }
 
 const CropBox = props => {
-  console.log('CropBox props: ', props)
   if (props.file) {
     return (
       <div

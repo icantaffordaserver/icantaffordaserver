@@ -18,7 +18,6 @@ import InputLocation from './InputLocation'
 
 class WelcomeAvailability extends Component {
   render() {
-    console.log('welcome Availability : ', this.props)
     const {
       location,
       handleLocationChange,
@@ -29,7 +28,6 @@ class WelcomeAvailability extends Component {
       locationSuccess,
       availabilitySuccess,
     } = this.props
-    console.log('locationSUCCESS ', locationSuccess)
     return (
       <ThemeProvider
         theme={{

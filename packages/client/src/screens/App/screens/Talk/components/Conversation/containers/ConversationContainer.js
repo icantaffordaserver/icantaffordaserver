@@ -11,6 +11,7 @@ import { Conversation } from '../styles'
 import { Loader } from 'semantic-ui-react'
 
 import currentUserQuery from '../../../../../shared/graphql/queries/currentUserQuery'
+import setConnectionCompleted from '../../../../../shared/graphql/mutations/setConnectionCompleted'
 
 class ConversationContainer extends Component {
   static propTypes = {
@@ -73,13 +74,18 @@ class ConversationContainer extends Component {
     })
   }
 
-  handleEndConversation = async (e, status) => {
+  handleEndConversation = async e => {
     if (e) e.preventDefault()
 
+    await this.props.client.mutate({
+      mutation: setConnectionCompleted,
+      variables: {
+        id: this.props.data.user.connections[0].id,
+      },
+    })
     this.setState({
       areTalking: false,
       conversationEnded: true,
-      conversationStatus: status,
     })
   }
 
@@ -117,7 +123,7 @@ class ConversationContainer extends Component {
             <ConversationComponent
               roomName={this.state.roomName}
               token={this.state.token}
-              onFinish={this.handleEndConversation}
+              endConversation={this.handleEndConversation}
               connection={this.state.connection}
               userId={this.props.data.user.id}
             />

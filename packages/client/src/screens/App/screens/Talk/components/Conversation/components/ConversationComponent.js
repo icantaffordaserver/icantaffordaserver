@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Video from '../../../components/Video'
+import Nav from '../../../../../shared/components/Navigation'
 
 import { Conversation } from '../styles'
 
@@ -13,12 +14,14 @@ class ConversationComponent extends Component {
 
     return (
       <Conversation>
+        <Nav conversation />
         <Video
           token={this.props.token}
           roomName={this.props.roomName}
           connection={this.props.connection}
-          toggleChat={this.props.toggleChat}
           otherUser={otherUser}
+          toggleChat={this.props.toggleChat}
+          endConversation={this.props.endConversation}
         />
 
         <button onClick={this.props.onFinish}>End Conversation</button>

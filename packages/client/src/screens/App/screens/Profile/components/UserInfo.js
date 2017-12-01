@@ -17,7 +17,6 @@ class UserInfo extends Component {
   handleEditButton = () => this.setState({ edit: !this.state.edit })
 
   render() {
-    console.log(this.props, ' User Info')
     let { firstName, lastName, connectionInterests } = this.props.user
     let { allConnectionInterestses } = this.props.data
     let { user } = this.props

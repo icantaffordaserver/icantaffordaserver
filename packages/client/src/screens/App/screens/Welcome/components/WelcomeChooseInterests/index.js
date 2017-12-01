@@ -20,7 +20,6 @@ import SuggestInterests from '../../../Profile/components/ChooseInterestsCompone
 
 class WelcomeInterests extends Component {
   render() {
-    console.log(this.props)
     const { allConnectionInterestses, loading } = this.props.data
     const {
       incrementCount,

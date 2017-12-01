@@ -33,9 +33,7 @@ class SettingsContainer extends Component {
   handleOpenModal = () => this.setState({ showModal: true })
 
   handleInputChange = event =>
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      console.log(this.state),
-    )
+    this.setState({ [event.target.name]: event.target.value })
 
   handleClear = () =>
     this.setState({
