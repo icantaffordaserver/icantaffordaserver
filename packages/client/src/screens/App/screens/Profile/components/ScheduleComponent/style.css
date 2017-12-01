@@ -38,7 +38,7 @@
 }
 
 /* Cells that cannot be interacted with */
-.table-drag-select .header {
+.table-drag-select .theader {
   /* Put yer css here */
   background-color: #7781c8;
   color: white;
