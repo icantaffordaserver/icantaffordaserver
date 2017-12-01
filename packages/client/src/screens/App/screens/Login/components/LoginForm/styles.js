@@ -41,3 +41,34 @@ export const Links = styled.div`
   justify-content: space-around;
   margin-top: 2em;
 `
+
+export const ActiveButton = styled.button`
+  transition: all 0.25s ease !important;
+  width: 100%;
+  background: #ff7f50;
+  border: solid 1px #ff7f50;
+  font-size: 2em;
+  color: #ffff;
+  height: auto;
+  padding: 10px 0px;
+  // &:hover {
+  //   color: #ff7f50;
+  //   border: solid 1px #ff7f50;
+  //   background: #fff !important;
+  }
+`
+
+export const InActiveButton = styled.button`
+transition: all 0.25s ease !important;
+width: 100%;
+background: #F2F2F2;
+border: solid 1px #BDBDBD;
+font-size: 2em;
+color: #828282;
+padding: 10px 0px;
+// &:hover {
+//   color: #ffff;
+//   border: solid 1px #ff7f50;
+//   background: #ff7f50 !important;
+}
+`

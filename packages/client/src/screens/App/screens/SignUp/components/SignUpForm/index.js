@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Message } from 'semantic-ui-react'
-
+import { Flex, Box } from 'grid-styled'
+import { NavLink } from 'react-router-dom'
 import {
   LoginWrapper,
   LoginFormWrapper,
   LoginImageContainer,
+  ActiveButton,
+  InActiveButton,
 } from '../../../Login/components/LoginForm/styles'
 import { Form, Button, FormGroup, Input, Label } from '../../../../styles'
 import SVG from 'react-inlinesvg'
@@ -45,6 +48,18 @@ class SignUpForm extends Component {
           <SVG src={logo} />
         </LoginImageContainer>
         <LoginFormWrapper>
+          <Flex wrap width={1} py={2}>
+            <Box width={1 / 3} ml="17%">
+              <NavLink to="/login">
+                <InActiveButton>Login</InActiveButton>
+              </NavLink>
+            </Box>
+            <Box width={1 / 3} ml="-1%">
+              <NavLink to="/signup">
+                <ActiveButton>Register</ActiveButton>
+              </NavLink>
+            </Box>
+          </Flex>
           {this.renderErrors()}
           <Form>
             <FormGroup>
