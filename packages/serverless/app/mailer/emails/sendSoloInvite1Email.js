@@ -1,24 +1,23 @@
-/**
- * Created by alexandermann on 2017-03-26.
- */
 import PostmarkMailer from '../../../config/PostmarkMailer'
 
-export default function sendVerificationEmail({
+export default function sendSoloInvite1Email({
   firstName,
   recipientEmail,
-  actionUrl,
+  matchName,
+  actionUrl
 }) {
-  if (firstName && recipientEmail && matchName && actionUrl) {
-    
+    if (firstName && recipientEmail && matchName && actionUrl) {
+        
   return new Promise((resolve, reject) => {
     PostmarkMailer.sendEmailWithTemplate(
       {
         From: 'hello@toktumi.io',
         To: recipientEmail,
-        TemplateId: 1497643,
+        TemplateId: 4002621,
         TemplateModel: {
           name: firstName,
-          action_url: actionUrl,
+          match_name: matchName,
+          action_url: actionUrl
         },
       },
       (error, result) => {
@@ -27,7 +26,7 @@ export default function sendVerificationEmail({
       },
     )
   })
-}
-  else throw new Error("Email requires firstName, reciepientEmail and actionUrl.")       
-  
+    }
+    else throw new Error("Email requires firstName, reciepientEmail, actionUrl and matchName.")       
+    
 }
