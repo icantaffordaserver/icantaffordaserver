@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 
@@ -9,10 +8,6 @@ import userReviewMutation from '../../../../../shared/graphql/mutations/userRevi
 import userJournalEntryMutation from '../../../../../shared/graphql/mutations/userJournalEntryMutation'
 
 class PostConversationContainer extends Component {
-  static propTypes = {
-    review: PropTypes.object.isRequired,
-  }
-
   state = {
     loading: false,
     error: false,
@@ -21,23 +16,22 @@ class PostConversationContainer extends Component {
     )[0],
   }
 
-  /**
-   * TODO:
-   *  - Review service/conversation/user
-   *  - Report service/conversation/user
-   *  - Leave comment for user
-   *  - Request friendship? (semantics)
-   */
-
   handleChange = e => {
-    const target = e.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
-
     this.setState({
-      [name]: value,
+      [e.target.name]: e.target.value,
     })
   }
+  setAudioSatisfactory = value => {
+    this.setState({
+      audioSatisfactory: value,
+    })
+  }
+  setVideoSatisfactory = value => {
+    this.setState({
+      videoSatisfactory: value,
+    })
+  }
+
   handleReview = async e => {
     e.preventDefault()
     this.setState({ loading: true })
@@ -66,7 +60,6 @@ class PostConversationContainer extends Component {
       await this.setState({ loading: false })
       this.props.history.push('/profile')
     } catch (error) {
-      console.error(error)
       this.setState({ loading: false, error: true })
     }
   }
@@ -76,9 +69,13 @@ class PostConversationContainer extends Component {
       <PostConversationComponent
         loading={this.state.loading}
         error={this.state.error}
-        handleChange={this.handleChange}
         handleReview={this.handleReview}
+        handleChange={this.handleChange}
         otherUser={this.state.otherUser}
+        videoSatisfactory={this.state.videoSatisfactory}
+        audioSatisfactory={this.state.audioSatisfactory}
+        setAudioSatisfactory={this.setAudioSatisfactory}
+        setVideoSatisfactory={this.setVideoSatisfactory}
       />
     )
   }

@@ -51,7 +51,7 @@ export default props => {
               {user.interests &&
                 user.interests.map(interest => <Tag>#{interest.name}</Tag>)}
             </Tags>
-            <p>{user.bio}</p>
+            <p style={{ color: '#333' }}>{user.bio}</p>
           </UserDetails>
         </User>
         {answers.length > 0 && (
@@ -66,19 +66,20 @@ export default props => {
             <Right />
           </QASection>
         )}
-        {props.connection.accepted ? (
-          <Button square small disabled>
-            Pending...
-          </Button>
-        ) : (
-          <Button
-            square
-            small
-            onClick={() => props.scheduleInvitation(props.connection.id)}
-          >
-            Invite to Conversation
-          </Button>
-        )}
+        {props.connection.status === 'MATCHED' &&
+          (props.connection.accepted ? (
+            <Button square small disabled>
+              Pending...
+            </Button>
+          ) : (
+            <Button
+              square
+              small
+              onClick={() => props.scheduleInvitation(props.connection.id)}
+            >
+              Invite to Conversation
+            </Button>
+          ))}
       </ProfileWrapper>
     </Modal>
   )

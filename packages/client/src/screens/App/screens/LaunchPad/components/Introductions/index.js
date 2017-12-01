@@ -74,7 +74,7 @@ class IntroductionsComponent extends Component {
               </Introduction>
             )
           })}
-        {this.props.introductions.length > 4 && (
+        {connectionSuggestions.length > 4 && (
           <Icon
             style={{ margin: 'auto', cursor: 'pointer' }}
             name="chevron right"
