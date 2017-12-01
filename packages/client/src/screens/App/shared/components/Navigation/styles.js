@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { bind } from 'styled-props'
 import Theme from '../../../styles/Theme'
+import { Box } from 'grid-styled'
 
 import { NavLink } from 'react-router-dom'
 
@@ -55,6 +56,13 @@ export const Link = styled(NavLink)`
   }
 `
 
+export const DropDownLink = styled(NavLink)`
+  color: white;
+  &:hover {
+    color: white;
+  }
+`
+
 export const Logo = styled.img`
   height: 30px;
 `
@@ -66,4 +74,11 @@ export const ConversationCorner = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 2vw;
+`
+export const TallBox = styled(Box)`
+  height: auto;
+`
+
+export const WhiteBox = styled(Box)`
+  color: white;
 `

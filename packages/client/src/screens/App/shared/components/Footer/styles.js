@@ -49,7 +49,8 @@ Link.defaultProps = {
   color: 'white',
 }
 
-export const Logo = styled.img`
-  height: 30px;
-  margin: 0;
+export const Logo = styled.div`
+  font-size: 1.25em;
+  color: white;
+  line-height: 16px;
 `
