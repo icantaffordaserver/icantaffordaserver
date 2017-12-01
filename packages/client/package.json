@@ -67,8 +67,7 @@
     "lint": "eslint .",
     "precommit": "lint-staged",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
+    "eject": "react-scripts eject"
   },
   "lint-staged": {
     "gitDir": "../../",

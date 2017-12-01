@@ -102,7 +102,6 @@ class UploadPhotoComponent extends Component {
         })
         .then(response => {
           const data = response.data
-          const fileURL = data.secure_url
           return data
         })
         .then(data => {

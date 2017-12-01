@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import { addResponseMessage } from 'react-chat-widget'
 import Chat from 'twilio-chat'
-import createChatRoom from '../../../../../shared/ChatProvider'
 import { ChatBox } from '../styles'
 import '../styles/widget.css'
 

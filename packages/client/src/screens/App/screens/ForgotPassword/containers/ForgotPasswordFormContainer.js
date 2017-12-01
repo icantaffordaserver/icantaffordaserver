@@ -4,7 +4,6 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
-import platform from 'platform'
 import ForgotPasswordComponent from '../components/ForgotPasswordForm'
 import forgotPasswordMutation from '../graphql/forgotPasswordMutation'
 
@@ -29,11 +28,6 @@ class ForgotPasswordContainer extends React.Component {
 
   handleSubmit = () => {
     this.setState({ loading: true })
-    const securityInfo = {
-      // save security info to send in reset email
-      browser: `${platform.name} ${platform.version}`,
-      os: `${platform.os.family} ${platform.os.version}`,
-    }
     const email = this.state.email
     this.props
       .mutate({

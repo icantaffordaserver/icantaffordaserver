@@ -16,8 +16,6 @@ import {
   InActiveButton,
 } from './styles'
 import {
-  Title,
-  Subheading,
   Form,
   Button,
   FormGroup,
