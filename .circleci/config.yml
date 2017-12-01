@@ -18,14 +18,23 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Build create-react-app
+          name: Main Client - Build create-react-app
           command: cd packages/client && yarn build
       - run:
-          name: Upload to S3
+          name: Main Client -  Upload to S3
           command: pwd && aws s3 sync packages/client/build/ s3://pluto-client-staging
       - run:
-          name: Invalidate Cloudfront
+          name: Main Client -  Invalidate Cloudfront
           command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2KECAFBUDJS25 --paths "/*"
+      - run:
+          name: Admin Portal - Build create-react-app
+          command: cd packages/admin-portal && yarn build
+      - run:
+          name: Admin Portal - Upload to S3
+          command: pwd && aws s3 sync packages/admin-portal/build/ s3://pluto-admin-client-staging
+      - run:
+          name: Admin Portal - Invalidate Cloudfront
+          command: aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id EUEU6RUK2JZFO --paths "/*"
       - run:
           name: Deploy serverless to lambda aws staging environment
           command: serverless --version && cd packages/serverless && serverless deploy --stage staging

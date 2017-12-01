@@ -1,7 +1,7 @@
 import React from 'react'
 
-import SignUpContainer from './containers/SignUpContainer'
+import SignUpPage from './pages/SignUpPage'
 
-const SignUpScreen = () => <SignUpContainer />
+const SignUpScreen = () => <SignUpPage />
 
 export default SignUpScreen

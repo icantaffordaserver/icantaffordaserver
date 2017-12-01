@@ -27,7 +27,7 @@ const App = () => (
     <Switch>
       <Route path="/login" component={LoginPage} />
       <Route path="/admin" component={isAdmin(AuthenticatedRoutes)} />
-      <Route path="*" component={ForbiddenPage} />
+      <Route component={ForbiddenPage} />
     </Switch>
   </BrowserRouter>
 )

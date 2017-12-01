@@ -1,102 +1,32 @@
 import React, { Component } from 'react'
 import { graphql, withApollo, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import { isEmail } from 'validator'
 
 import SignUpForm from '../components/SignUpForm'
 
 import signUpMutation from '../graphql/signUpMutation'
 import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
 import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
-import getInviteQuery from '../../../shared/graphql/queries/getInviteQuery'
 
 class SignUpContainer extends Component {
-  state = {
-    email: '',
-    password: '',
-    password2: '',
-    firstName: '',
-    lastName: '',
-    error: '',
-    inviteToken: '',
-  }
+  state = { loading: false, errors: '' }
 
-  componentDidMount = () => {
-    console.log('SignUpContainer : ', this.props)
-    if (this.props.match.params.token) {
-      // window.history.pushState(null, null, '/signUp')
-      this.handleInvite(this.props.match.params.token)
-    } else {
-      this.setState({ error: 'Can only sign up with an invite.' })
+  handleSignUp = async signUpData => {
+    const { firstName, lastName, email, password, password2 } = signUpData
+    const { inviteToken } = this.props
+    if (!firstName || !lastName || !email || !password) {
+      console.log('All fields are required')
+      return
     }
-  }
-
-  componentWillReceiveProps = nextProps => {}
-
-  handleInvite = async token => {
-    try {
-      const response = await this.props.client.query({
-        query: getInviteQuery,
-        variables: {
-          token,
-        },
-      })
-
-      const { firstName, lastName, emailToInvite } = response.data.Invite
-
-      this.setState({
-        email: emailToInvite,
-        firstName,
-        lastName,
-        inviteToken: this.props.match.params.token,
-      })
-
-      console.log(response)
-      if (!response.data.Invite) throw new Error('Invite does not exist.')
-      if (response.data.Invite.isAccepted) throw new Error('Invite Claimed.')
-      if (this.state.error) throw new Error(this.state.error)
-    } catch (error) {
-      console.error(error)
-      this.setState({ error: error.message })
+    if (!isEmail(email)) {
+      this.setState({ errors: 'You must enter a valid email' })
+      return
     }
-  }
-
-  handleLogin = async (email, password) => {
-    this.setState({ loading: true, error: '' })
-    try {
-      const response = await this.props.mutate({
-        variables: {
-          email,
-          password,
-        },
-      })
-
-      if (!response.data) {
-        throw new Error()
-      }
-
-      const token = response.data.authenticateEmailUser.token
-      window.localStorage.setItem('auth_token', token)
-
-      await this.setState({ loading: false })
-      this.props.client.resetStore()
-      this.props.history.push('/profile')
-    } catch (error) {
-      if (error.message.includes('Could not find a user with that username')) {
-        this.props.client.resetStore()
-        this.setState({ loading: false, error: 'Invalid Credentials' })
-      } else {
-        this.props.client.resetStore()
-        this.setState({ loading: false, error: 'Invalid Credentials' })
-      }
+    if (password !== password2) {
+      this.setState({ errors: 'Passwords must match' })
+      return
     }
-  }
-
-  handleSignUp = async e => {
-    // e.preventDefualt() // ALWAYS PREVENT DEFAULT ON ANY BUTTON SUBMISSION
-    // SignUp mutation
-    console.log('handleSignup props : ', this.props)
-    const { password, firstName, lastName, email, inviteToken } = this.state
-
     try {
       await this.props.signUpMutation({
         variables: {
@@ -111,20 +41,19 @@ class SignUpContainer extends Component {
       })
 
       // Sign user in after account creation
-      const login = await this.props.authenticateEmailUser({
+      const loginResponse = await this.props.authenticateEmailUser({
         variables: {
           email,
           password,
         },
       })
 
-      const token = login.data.authenticateEmailUser.token
-      console.log(token)
+      const { token } = loginResponse.data.authenticateEmailUser
       window.localStorage.setItem('auth_token', token)
 
-      this.props.client.resetStore()
       this.props.history.push('/welcome')
     } catch (error) {
+      console.log(error)
       if (error.message.includes('User already exists with that information')) {
         this.props.client.resetStore()
         this.setState({ error: 'Email is already associated with an account' })
@@ -135,22 +64,9 @@ class SignUpContainer extends Component {
     }
   }
 
-  handleChange = event => {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      () => console.log(this.state),
-    )
-  }
-
   render() {
     return (
-      <SignUpForm
-        onSubmit={this.handleSignUp}
-        handleChange={this.handleChange}
-        data={this.state}
-      />
+      <SignUpForm onSubmit={this.handleSignUp} errors={this.state.errors} />
     )
   }
 }
