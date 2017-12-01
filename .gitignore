@@ -34,7 +34,6 @@ public/js/bundle.js
 packages/client/.env.development
 
 packages/website
-packages/serverless/.graphcoolrc
 packages/serverless/env.yml
 packages/serverless/package-lock.json
 packages/serverless/.webpack
