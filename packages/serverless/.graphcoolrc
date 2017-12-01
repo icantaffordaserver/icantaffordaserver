@@ -1,3 +1,4 @@
 targets:
   stage: shared-us-west-2/cjaiyal1o381m0157nzvjz14z
+  dev: local/cjanaacxm02fk01308fhygfao
   default: dev
