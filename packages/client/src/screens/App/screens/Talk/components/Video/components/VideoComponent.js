@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import VideoControls from './VideoControlsComponent'
 import Chat from '../../Chat'
-import ConversationPrompt from './ConversationPromptComponent'
 
 import { VideoPlayer } from '../styles'
 
