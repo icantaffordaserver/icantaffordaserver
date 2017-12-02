@@ -1,15 +1,40 @@
 import React, { Component } from 'react'
 import { graphql, withApollo, compose } from 'react-apollo'
+
 import moment from 'moment'
-import styled from 'styled-components'
 import UserTable from '../components/UserTable'
 import createConnection from '../graphql/mutations/createConnectionMutation'
 import { overlappingTimes } from '../utils/availabilityUtils'
 import allUsersQueue from '../graphql/queries/allUsersQueue'
 
+import {
+  PageContainer,
+  RowContainer,
+  PageTitle,
+  ConnectionContainer,
+  Button,
+  Slot,
+  TableContainer,
+  SearchArea,
+  SearchBar,
+} from '../styles'
+
 class UsersPage extends Component {
   state = {}
-  handleSearchUser = async id => {}
+  handleSearchUser = async e => {
+    if (e.target.value === '') {
+      this.setState({
+        searchQueue: null,
+      })
+      return
+    }
+    const users = this.props.data.queue.filter(
+      u => u.email.indexOf(e.target.value) > -1,
+    )
+    this.setState({
+      searchQueue: users,
+    })
+  }
   handleBanUser = async id => {}
   handleConnection = async connectionTime => {
     const participantsIds = this.state.potentialConnection.users.map(u => u.id)
@@ -87,10 +112,17 @@ class UsersPage extends Component {
     return (
       <PageContainer>
         <PageTitle>User's Queue</PageTitle>
-        <Row>
+        <SearchArea>
+          <h3>Search User</h3>
+          <SearchBar
+            placeholder="Enter user's email."
+            onChange={this.handleSearchUser}
+          />
+        </SearchArea>
+        <RowContainer>
           <TableContainer>
             <UserTable
-              users={queue}
+              users={this.state.searchQueue ? this.state.searchQueue : queue}
               selectUser={this.selectUser}
               currentUser={currentUser}
             />
@@ -105,61 +137,10 @@ class UsersPage extends Component {
               {this.renderPotentialTimes()}
             </ConnectionContainer>
           )}
-        </Row>
+        </RowContainer>
       </PageContainer>
     )
   }
 }
 
 export default compose(graphql(allUsersQueue), withApollo)(UsersPage)
-const PageContainer = styled.div`
-  margin-left: 32px;
-  width: 100%;
-`
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`
-const ConnectionContainer = styled.div`
-  height: 600px;
-  width: 48%;
-  overflow-y: scroll;
-`
-const Slot = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 50px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px 0 rgba(22, 23, 26, 0.25);
-
-  :hover {
-    box-shadow: 0 2px 12px 0 rgba(22, 23, 26, 0.25);
-  }
-`
-const Button = styled.button`
-  padding: 2% 5%;
-  background: #bdef87;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 5em;
-`
-const TableContainer = styled.div`
-  margin-top: 16px;
-  margin-bottom: 80px;
-  flex-grow: 1;
-  width: 48%;
-  height: 600px;
-  display: flex;
-  border: 1px solid #e1e7ed;
-  border-radius: 5px;
-  background: #f6f7f8;
-`
-
-const PageTitle = styled.h1`
-  margin: 0;
-`
