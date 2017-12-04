@@ -77,7 +77,7 @@ class Home extends Component {
           <InvitesTable
             invites={invites}
             tableState={tableState}
-            approveInvite={this.approveInvite}
+            acceptInvite={this.approveInvite}
             deleteInvite={this.deleteInvite}
           />
         </TableContainer>
