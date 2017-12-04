@@ -74,7 +74,7 @@ class LaunchPadContainer extends Component {
         connections: {
           invitations: {
             connectionSuggestions: invitations.connectionSuggestions.filter(
-              con => moment(con.connectionTime).isAfter(moment()),
+              con => moment(con.connection.connectionTime).isAfter(moment()),
             ),
           },
           history,
