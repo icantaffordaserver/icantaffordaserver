@@ -7,6 +7,9 @@ jobs:
     docker:
       - image: amann11/circleci-node-aws:latest
     steps:
+      - run:
+          name: Print environment variables
+          command: printenv
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
