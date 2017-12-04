@@ -1,4 +1,4 @@
-import isEmail from 'validator/lib/isEmail'
+import { isEmail, normalizeEmail } from 'validator'
 
 import client from '../../../../config/GraphQLClient'
 import getUserByEmail from '../../../utils/getUserByEmail'
@@ -32,11 +32,12 @@ export default async (req, res) => {
       return res.status(200).send({ error: 'This email already exists!' })
     }
 
+    const sanitizedEmail = normalizeEmail(emailToInvite)
     // determine who is sending the invite, could be another user, admin, or
     // requested from elsewhere
     if (isUserAdmin(user)) {
       await client.request(createInviteMutation, {
-        emailToInvite,
+        sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'SENT_BY_ADMIN',
@@ -47,7 +48,7 @@ export default async (req, res) => {
       })
     } else if (user.id) {
       await client.request(createInviteMutation, {
-        emailToInvite,
+        sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'SENT_BY_USER',
@@ -56,7 +57,7 @@ export default async (req, res) => {
       })
     } else {
       await client.request(createInviteMutation, {
-        emailToInvite,
+        sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'REQUESTED_FROM_WEBSITE',
