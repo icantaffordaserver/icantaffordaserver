@@ -37,7 +37,7 @@ export default async (req, res) => {
     // requested from elsewhere
     if (isUserAdmin(user)) {
       await client.request(createInviteMutation, {
-        sanitizedEmail,
+        emailToInvite: sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'SENT_BY_ADMIN',
@@ -48,7 +48,7 @@ export default async (req, res) => {
       })
     } else if (user.id) {
       await client.request(createInviteMutation, {
-        sanitizedEmail,
+        emailToInvite: sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'SENT_BY_USER',
@@ -57,7 +57,7 @@ export default async (req, res) => {
       })
     } else {
       await client.request(createInviteMutation, {
-        sanitizedEmail,
+        emailToInvite: sanitizedEmail,
         firstName,
         lastName,
         inviteType: 'REQUESTED_FROM_WEBSITE',
