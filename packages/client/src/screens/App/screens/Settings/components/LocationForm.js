@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Input } from '../../../styles/Inputs/index.js'
+import InputLocation from '../../../shared/components/InputLocation'
 
 import { Flex, Box } from 'grid-styled'
 
 import { ProfileSection } from '../../Profile/style'
 
-const LocationForm = ({ location, handleInputChange }) => {
+const LocationForm = ({ location, handleLocationChange }) => {
   return (
     <ProfileSection>
       <Flex wrap>
@@ -14,10 +14,9 @@ const LocationForm = ({ location, handleInputChange }) => {
           <Box width={1 / 2} py={2}>
             Update Location
           </Box>
-          <Input
-            value={location}
-            name="location"
-            onChange={handleInputChange}
+          <InputLocation
+            location={location}
+            handleLocationChange={handleLocationChange}
           />
         </Box>
       </Flex>

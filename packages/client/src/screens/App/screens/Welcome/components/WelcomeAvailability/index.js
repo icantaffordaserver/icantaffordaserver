@@ -14,7 +14,7 @@ import Logo from '../../assets/Logo.svg'
 import Graphic1 from '../../assets/Group8.svg'
 
 import Schedule from '../../../Profile/components/ScheduleComponent'
-import InputLocation from './InputLocation'
+import InputLocation from '../../../../shared/components/InputLocation'
 
 class WelcomeAvailability extends Component {
   render() {

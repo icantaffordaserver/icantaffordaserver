@@ -22,8 +22,8 @@ class SettingsContainer extends Component {
     email: '',
     repeatEmail: '',
     password: '',
-    repeatPassword: '',
     location: '',
+    repeatPassword: '',
     deleteAccount: '',
     feedback: '',
   }
@@ -32,6 +32,7 @@ class SettingsContainer extends Component {
 
   handleOpenModal = () => this.setState({ showModal: true })
 
+  handleLocationChange = location => this.setState({ location })
   handleInputChange = event =>
     this.setState({ [event.target.name]: event.target.value })
 
@@ -54,6 +55,7 @@ class SettingsContainer extends Component {
       location,
     } = this.state
     const { user } = this.props.data
+    console.log(location)
 
     if (password === repeatPassword && password !== '') {
       this.props
@@ -179,7 +181,7 @@ class SettingsContainer extends Component {
           <Box width={1} p={2}>
             <LocationForm
               location={location}
-              handleInputChange={this.handleInputChange}
+              handleLocationChange={this.handleLocationChange}
             />
           </Box>
           <Box width={1} p={2}>
