@@ -18,7 +18,6 @@ class Forgot extends React.Component {
     loading: PropTypes.bool.isRequired,
     success: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    message: PropTypes.string.isRequired,
   }
 
   state = {
