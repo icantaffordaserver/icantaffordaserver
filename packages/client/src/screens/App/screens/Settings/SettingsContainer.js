@@ -12,10 +12,8 @@ import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../shared/graphql/mutations/updateUserMutation'
 import deleteUserMutation from '../../shared/graphql/mutations/deleteUserMutation'
 import updatePasswordMutation from '../../shared/graphql/mutations/updatePasswordMutation'
+import { SettingsWrapper } from './styles'
 
-const FullScreen = Flex.extend`
-  height: 90vh;
-`
 class SettingsContainer extends Component {
   state = {
     showModal: false,
@@ -162,45 +160,43 @@ class SettingsContainer extends Component {
 
     if (this.props.data.loading) return null
     return (
-      <FullScreen wrap>
-        <Flex width={1} wrap>
-          <Box width={1} p={2}>
-            <TitleSection title={'SETTINGS'} />
-          </Box>
-          <Box width={1} p={2}>
-            <EmailPasswordForm
-              email={email}
-              repeatEmail={repeatEmail}
-              password={password}
-              repeatPassword={repeatPassword}
-              handleInputChange={this.handleInputChange}
-            />
-          </Box>
-          <Box width={1} p={2}>
-            <LocationForm
-              location={location}
-              handleInputChange={this.handleInputChange}
-            />
-          </Box>
-          <Box width={1} p={2}>
-            <DeleteAccountForm
-              showModal={showModal}
-              deleteAccount={deleteAccount}
-              feedback={feedback}
-              handleInputChange={this.handleInputChange}
-              handleDelete={this.handleDelete}
-              handleCloseModal={this.handleCloseModal}
-              handleOpenModal={this.handleOpenModal}
-            />
-          </Box>
-          <Box width={1} p={2}>
-            <ConfirmAndCancel
-              handleSave={this.handleSave}
-              handleCancel={this.handleClear}
-            />
-          </Box>
-        </Flex>
-      </FullScreen>
+      <SettingsWrapper>
+        <Box width={1} p={2}>
+          <TitleSection title={'SETTINGS'} />
+        </Box>
+        <Box width={1} p={2}>
+          <EmailPasswordForm
+            email={email}
+            repeatEmail={repeatEmail}
+            password={password}
+            repeatPassword={repeatPassword}
+            handleInputChange={this.handleInputChange}
+          />
+        </Box>
+        <Box width={1} p={2}>
+          <LocationForm
+            location={location}
+            handleInputChange={this.handleInputChange}
+          />
+        </Box>
+        <Box width={1} p={2}>
+          <DeleteAccountForm
+            showModal={showModal}
+            deleteAccount={deleteAccount}
+            feedback={feedback}
+            handleInputChange={this.handleInputChange}
+            handleDelete={this.handleDelete}
+            handleCloseModal={this.handleCloseModal}
+            handleOpenModal={this.handleOpenModal}
+          />
+        </Box>
+        <Box width={1} p={2}>
+          <ConfirmAndCancel
+            handleSave={this.handleSave}
+            handleCancel={this.handleClear}
+          />
+        </Box>
+      </SettingsWrapper>
     )
   }
 }
