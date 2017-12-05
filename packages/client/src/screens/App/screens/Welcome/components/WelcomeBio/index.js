@@ -52,7 +52,7 @@ class WelcomeBio extends Component {
                   value={bio}
                   maxLength="250"
                   name="bio"
-                  placeholder="Max 250 characters"
+                  placeholder="E.g: Music is my first love. I try to read a book a week. I love talking about either. I am drawn to people and experiences that I can learn from, that’s why I’m on Pluto. I'm happiest when I'm riding my bike, dancing to soul music, or meeting new people."
                   onChange={handleChange}
                 />
               </Box>

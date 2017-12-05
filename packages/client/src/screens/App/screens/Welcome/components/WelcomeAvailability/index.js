@@ -50,9 +50,8 @@ class WelcomeAvailability extends Component {
             ml={['0%', '0%', '0%', '20%', '10%', '0%', '0%']}
           >
             <p>
-              Tell us a bit more about yourself. We want to know who you are,
-              why you’re on Pluto, and how you’re hoping to interact with the
-              community.
+              Last step! Just tell us when you’re free and we can schedule your
+              conversations!
             </p>
           </Box>
           <Flex wrap width={1} pt={2}>

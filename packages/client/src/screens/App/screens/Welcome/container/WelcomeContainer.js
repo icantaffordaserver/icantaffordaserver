@@ -15,6 +15,7 @@ import createConnectionInterest from '../../../shared/graphql/mutations/createCo
 const FullScreen = Flex.extend`
   width: 100vw;
   height: 100vh;
+  overflow-y: scroll;
 `
 const Modal = Box.extend`
   margin: auto auto;
@@ -272,7 +273,7 @@ class WelcomeContainer extends Component {
       <FullScreen
         style={{ background: 'linear-gradient(0deg, #617EA5, #1E252F)' }}
       >
-        <Modal width={1 / 2} ml="25%" p={4}>
+        <Modal width={0.7} ml="25%" p={4}>
           <Modal width={4 / 5} ml="10%">
             {view}
           </Modal>
