@@ -3,14 +3,7 @@
   "name": "startbootstrap-new-age",
   "version": "4.0.0-beta.2",
   "description": "A one page app landing page HTML theme for Bootstrap.",
-  "keywords": [
-    "css",
-    "sass",
-    "html",
-    "responsive",
-    "theme",
-    "template"
-  ],
+  "keywords": ["css", "sass", "html", "responsive", "theme", "template"],
   "homepage": "https://startbootstrap.com/template-overviews/new-age",
   "bugs": {
     "url": "https://github.com/BlackrockDigital/startbootstrap-new-age/issues",
@@ -18,9 +11,7 @@
   },
   "license": "MIT",
   "author": "Start Bootstrap",
-  "contributors": [
-    "David Miller (http://davidmiller.io/)"
-  ],
+  "contributors": ["David Miller (http://davidmiller.io/)"],
   "repository": {
     "type": "git",
     "url": "https://github.com/BlackrockDigital/startbootstrap-new-age.git"
@@ -40,5 +31,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "3.0.0"
+  },
+  "scripts": {
+    "build": "rm -r ./dist && gulp build",
+    "start": "rm -r ./dist && gulp dev"
   }
 }
