@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 import { Box, Grid } from 'grid-styled'
 
 import { Title, Tag } from '../../../styles'
@@ -34,7 +34,7 @@ class UserInfo extends Component {
 
             <Grid width={1 / 20} ml="61%">
               <div onClick={this.handleEditButton}>
-                <SVG src={EditIcon} />
+                <ReactSVG path={EditIcon} />
               </div>
             </Grid>
           </Box>
