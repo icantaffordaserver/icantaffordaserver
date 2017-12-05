@@ -5,12 +5,14 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { SubscriptionClient } from 'subscriptions-transport-ws'
 import addGraphQLSubscriptions from './addGraphQLSubscriptions'
 
-// creates a subscription ready Apollo Client instance
-// Note that scapholdUrl expects the url without the http:// or wss://
-function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
-  const graphqlUrl = `https://${graphqlEndpoint}`
-  const webSocketUrl = `wss://${subscriptionEndpoint}`
+// creates a subscription ready Apollo Client instance Note that scapholdUrl
+// expects the url without the http:// or wss://
+function makeApolloClient() {
+  const graphqlUrl = process.env.REACT_APP_GRAPHQL_URL
+  const webSocketUrl = process.env.REACT_APP_WEBSOCKET_URL
   const networkInterface = createNetworkInterface({ uri: graphqlUrl })
+  const wsClient = new SubscriptionClient(webSocketUrl)
+
   networkInterface.use([
     {
       applyMiddleware(req, next) {
@@ -18,17 +20,17 @@ function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
         if (!req.options.headers) {
           req.options.headers = {} // Create the header object if needed.
         }
-        if (localStorage.getItem('auth_token')) {
+        const AuthToken = localStorage.getItem('auth_token')
+
+        if (AuthToken) {
           // assumes we have logged in and stored the returned user token in local storage
-          req.options.headers.Authorization = `Bearer ${localStorage.getItem(
-            'auth_token',
-          )}`
+          req.options.headers.Authorization = `Bearer ${AuthToken}`
         }
         next()
       },
     },
   ])
-  const wsClient = new SubscriptionClient(webSocketUrl)
+
   const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
     networkInterface,
     wsClient,
@@ -43,19 +45,3 @@ function makeApolloClient(graphqlEndpoint, subscriptionEndpoint) {
 }
 
 export default makeApolloClient
-
-// Graph.cool implementation
-// const networkInterface = createNetworkInterface({ uri: 'https://api.graph.cool/simple/v1/cizpv0k3u6kcq0127mxlb8urr' });
-// networkInterface.use([{
-//   applyMiddleware(req, next){
-//     if (!req.options.headers) {
-//       req.options.headers = {};
-//     }
-//
-//     // get the authentication token from local storage if it exists
-//     if (localStorage.getItem('graphcoolToken')) {
-//       req.options.headers.authorization = `Bearer ${localStorage.getItem('graphcoolToken')}`;
-//     }
-//     next();
-//   },
-// }]);

@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-28.
  */
-import gql from 'graphql-tag';
+import { gql } from 'react-apollo'
 
 export default gql`
   mutation createVerifyEmail($input: CreateVerifyEmailInput!) {
@@ -9,4 +9,4 @@ export default gql`
       clientMutationId
     }
   }
-`;
+`

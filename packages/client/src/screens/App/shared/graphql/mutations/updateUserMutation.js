@@ -1,7 +1,7 @@
 /**
  * Created by alexandermann on 2017-03-06.
  */
-import gql from 'graphql-tag'
+import { gql } from 'react-apollo'
 
 export default gql`
   mutation updateAccount(
@@ -10,8 +10,11 @@ export default gql`
     $lastName: String
     $location: String
     $bio: String
-    $profilePhotoId: ID
+    $profilePhotoUrl: String
     $email: String
+    $availability: Json
+    $gradientColors: Json
+    $connectionInterestsIds: [ID!]
   ) {
     updateUser(
       id: $id
@@ -20,7 +23,10 @@ export default gql`
       location: $location
       bio: $bio
       email: $email
-      profilePhotoId: $profilePhotoId
+      profilePhotoUrl: $profilePhotoUrl
+      availability: $availability
+      gradientColors: $gradientColors
+      connectionInterestsIds: $connectionInterestsIds
     ) {
       id
       firstName

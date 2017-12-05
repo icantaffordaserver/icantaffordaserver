@@ -1,72 +1,72 @@
-/**
- * Created by alexandermann on 2017-03-01.
- */
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { graphql, withApollo, compose } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import { isEmail } from 'validator'
 
 import SignUpForm from '../components/SignUpForm'
 
 import signUpMutation from '../graphql/signUpMutation'
 import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
+import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 
-class SignUpContainer extends React.Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    client: PropTypes.object.isRequired,
-  }
+class SignUpContainer extends Component {
+  state = { loading: false, errors: '' }
 
-  state = {
-    loading: false,
-    error: '',
-  }
-
-  handleSignUp = async (firstName, lastName, email, password) => {
+  handleSignUp = async signUpData => {
+    const { firstName, lastName, email, password, password2 } = signUpData
+    const { inviteToken } = this.props
+    if (!firstName || !lastName || !email || !password) {
+      console.log('All fields are required')
+      return
+    }
+    if (!isEmail(email)) {
+      this.setState({ errors: 'You must enter a valid email' })
+      return
+    }
+    if (password !== password2) {
+      this.setState({ errors: 'Passwords must match' })
+      return
+    }
     try {
-      this.setState({ loading: true })
       await this.props.signUpMutation({
         variables: {
-          email,
-          password,
           firstName,
           lastName,
+          email,
+          password,
+          birthday: ' ',
+          bio: ' ',
+          inviteToken,
         },
       })
 
-      const signInResponse = await this.props.authenticateEmailUserMutation({
+      // Sign user in after account creation
+      const loginResponse = await this.props.authenticateEmailUser({
         variables: {
           email,
           password,
         },
       })
 
-      // save the token in local storage, reset the store to requery user data, and redirect to dashboard
-      localStorage.setItem(
-        'auth_token',
-        signInResponse.data.authenticateEmailUser.token,
-      ) // save token
-      this.props.client.resetStore()
-      this.props.history.push('/dashboard')
+      const { token } = loginResponse.data.authenticateEmailUser
+      window.localStorage.setItem('auth_token', token)
+
+      this.props.history.push('/welcome')
     } catch (error) {
-      if (error.message.includes("Field 'username' must be unique")) {
-        // check email is not taken
-        console.dir(error)
-        this.setState({
-          loading: false,
-          error: 'Email is already associated with an account',
-        })
+      console.log(error)
+      if (error.message.includes('User already exists with that information')) {
+        this.props.client.resetStore()
+        this.setState({ error: 'Email is already associated with an account' })
+      } else {
+        this.props.client.resetStore()
+        this.setState({ error: 'Invalid Credentials' })
       }
     }
   }
 
   render() {
     return (
-      <SignUpForm
-        onSubmit={this.handleSignUp}
-        loading={this.state.loading}
-        error={this.state.error}
-      />
+      <SignUpForm onSubmit={this.handleSignUp} errors={this.state.errors} />
     )
   }
 }
@@ -75,7 +75,6 @@ export default compose(
   withRouter,
   withApollo,
   graphql(signUpMutation, { name: 'signUpMutation' }), // name the mutation
-  graphql(authenticateEmailUserMutation, {
-    name: 'authenticateEmailUserMutation',
-  }),
+  graphql(authenticateEmailUserMutation, { name: 'authenticateEmailUser' }),
+  graphql(currentUserQuery),
 )(SignUpContainer)

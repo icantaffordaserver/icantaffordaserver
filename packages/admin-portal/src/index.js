@@ -1,8 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { ApolloProvider } from 'react-apollo'
 
-ReactDOM.render(<App />, document.getElementById("root"));
-registerServiceWorker();
+import makeApolloClient from './utils/makeApolloClient'
+
+import './styles/index.css'
+import App from './App'
+
+import registerServiceWorker from './registerServiceWorker'
+const client = makeApolloClient(
+  process.env.REACT_APP_GRAPHCOOL_SIMPLE_ENDPOINT,
+  process.env.REACT_APP_GRAPHCOOL_SUBSCRIPTION_ENDPOINT,
+)
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root'),
+)
+registerServiceWorker()

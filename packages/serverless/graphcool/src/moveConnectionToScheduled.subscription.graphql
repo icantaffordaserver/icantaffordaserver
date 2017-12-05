@@ -1,0 +1,19 @@
+subscription {
+  ConnectionSuggestion(
+    filter: {
+      mutation_in: [UPDATED]
+      updatedFields_contains_every: ["accepted"]
+    }
+  ) {
+    node {
+      id
+      connection {
+        connectionId: id
+        connectionSuggestions {
+          id
+          accepted
+        }
+      }
+    }
+  }
+}

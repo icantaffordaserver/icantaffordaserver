@@ -8,21 +8,24 @@ export default function sendVerificationEmail({
   recipientEmail,
   actionUrl,
 }) {
-  return new Promise((resolve, reject) => {
-    PostmarkMailer.sendEmailWithTemplate(
-      {
-        From: 'hello@toktumi.io',
-        To: recipientEmail,
-        TemplateId: 1497643,
-        TemplateModel: {
-          name: firstName,
-          action_url: actionUrl,
+  if (firstName && recipientEmail && actionUrl) {
+    return new Promise((resolve, reject) => {
+      PostmarkMailer.sendEmailWithTemplate(
+        {
+          From: 'hello@toktumi.io',
+          To: recipientEmail,
+          TemplateId: 1497643,
+          TemplateModel: {
+            name: firstName,
+            action_url: actionUrl,
+          },
         },
-      },
-      (error, result) => {
-        if (error) reject(error)
-        else resolve(result)
-      },
-    )
-  })
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        },
+      )
+    })
+  } else
+    throw new Error('Email requires firstName, reciepientEmail and actionUrl.')
 }

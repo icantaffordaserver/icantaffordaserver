@@ -1,9 +1,12 @@
-import gql from 'graphql-tag'
+import { gql } from 'react-apollo'
 
 export default gql`
-  query getInvite($id: ID) {
-    Invites(token: $token) {
+  query getInvite($token: String!) {
+    Invite(token: $token) {
       id
+      firstName
+      lastName
+      emailToInvite
     }
   }
 `

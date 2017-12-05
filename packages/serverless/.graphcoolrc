@@ -1,4 +1,4 @@
 targets:
-  dev: shared-eu-west-1/cj3l0oa9r1uab0130s8nti73k
+  stage: shared-us-west-2/cjaiyal1o381m0157nzvjz14z
+  dev: local/cjae944x200kh0192wk3k0jrx
   default: dev
-clusters: {}

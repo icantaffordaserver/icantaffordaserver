@@ -2,25 +2,21 @@
  * Created by alexandermann on 2017-04-22.
  */
 
-'use strict'
-
 import express from 'express'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import cors from 'cors'
-import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware'
 
 import routes from './routes'
 
 // make sure to export the app
-const app = (module.exports = express())
+const app = express()
 
-app.use(awsServerlessExpressMiddleware.eventContext())
 app.use(bodyParser.json())
 app.use(cors())
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev', { stream: logger.stream }))
+  app.use(morgan('dev'))
 }
 
 app.use('/', routes)
@@ -48,3 +44,5 @@ if (app.get('env') === 'prod' || app.get('env') === 'prod') {
     })
   })
 }
+
+export default app

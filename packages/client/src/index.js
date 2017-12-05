@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
-import { LocaleProvider } from 'antd'
+import LocaleProvider from 'antd/lib/locale-provider'
 import enUS from 'antd/lib/locale-provider/en_US'
 
-import config from './config'
 import makeApolloClient from './utils/makeApolloClient'
 import App from './screens/App'
 import registerServiceWorker from './registerServiceWorker'
@@ -12,8 +11,7 @@ import registerServiceWorker from './registerServiceWorker'
 import 'semantic-ui-css/semantic.min.css'
 import './assets/fonts/fonts.css'
 
-const { graphqlUrl, subscriptionUrl } = config
-const client = makeApolloClient(graphqlUrl, subscriptionUrl)
+const client = makeApolloClient()
 
 ReactDOM.render(
   <ApolloProvider client={client}>

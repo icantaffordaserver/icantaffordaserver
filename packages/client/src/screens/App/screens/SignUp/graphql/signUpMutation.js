@@ -9,13 +9,18 @@ export default gql`
     $password: String!
     $firstName: String!
     $lastName: String!
-    $mutationVariables: Json
+    $birthday: String!
+    $bio: String!
+    $inviteToken: String!
   ) {
-    createUser(
-      authProvider: { email: { email: $email, password: $password } }
+    signUpUser(
+      email: $email
+      password: $password
       firstName: $firstName
       lastName: $lastName
-      mutationVariables: $mutationVariables
+      birthday: $birthday
+      bio: $bio
+      inviteToken: $inviteToken
     ) {
       id
     }

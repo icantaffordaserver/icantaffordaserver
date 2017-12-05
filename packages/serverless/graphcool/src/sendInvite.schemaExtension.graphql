@@ -1,12 +1,11 @@
 type SendInvitePayload {
-  id: ID!
+  message: String!
 }
 
 extend type Mutation {
   sendInvite(
-    id: ID!
-    emailToInvite: String!
     firstName: String!
     lastName: String!
+    emailToInvite: String!
   ): SendInvitePayload
 }

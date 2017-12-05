@@ -1,3 +1,20 @@
+Environment Config in `env.yml`
+```
+dev:
+  GRAPHCOOL_SIMPLE_ENDPOINT:
+  GRAPHCOOL_SUBSCRIPTION_ENDPOINT:
+  GRAPHCOOL_FILE_ENDPOINT:
+  GRAPHCOOL_AUTH_TOKEN:
+  GRAPHCOOL_ROOT_TOKEN: (Must get token for AuthenticateUser by running 'graphcool root-token -t AuthenticateUser' in packages/serverless)
+  POSTMARK_API_KEY:
+  TWILIO_ACCOUNT_SID:
+  TWILIO_VIDEO_API_KEY_SID:
+  TWILIO_VIDEO_API_KEY_SECRET:
+  TWILIO_CHAT_SERVICE_SID:
+```
+
+Following a monorepo + linting structure as seen here https://github.com/sudo-suhas/lint-staged-multi-pkg
+
 ## Shift Web App
 
 ### Configuration

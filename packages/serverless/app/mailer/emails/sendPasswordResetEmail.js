@@ -10,24 +10,35 @@ export default function sendPasswordResetEmail({
   operatingSystem,
   browserName,
 }) {
-  return new Promise((resolve, reject) => {
-    PostmarkMailer.sendEmailWithTemplate(
-      {
-        From: 'hello@toktumi.io',
-        To: recipientEmail,
-        TemplateId: 1448201,
-        TemplateModel: {
-          name: firstName,
-          action_url: actionUrl,
-          operating_system: operatingSystem,
-          browser_name: browserName,
-          support_url: 'hello@toktumi.io',
+  if (
+    firstName &&
+    recipientEmail &&
+    actionUrl &&
+    operatingSystem &&
+    browserName
+  ) {
+    return new Promise((resolve, reject) => {
+      PostmarkMailer.sendEmailWithTemplate(
+        {
+          From: 'hello@toktumi.io',
+          To: recipientEmail,
+          TemplateId: 1448201,
+          TemplateModel: {
+            name: firstName,
+            action_url: actionUrl,
+            operating_system: operatingSystem,
+            browser_name: browserName,
+            support_url: 'hello@toktumi.io',
+          },
         },
-      },
-      (error, result) => {
-        if (error) reject(error)
-        else resolve(result)
-      },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        },
+      )
+    })
+  } else
+    throw new Error(
+      'Email requires firstName, reciepientEmail, actionUrl, operatingSystem and browserName.',
     )
-  })
 }

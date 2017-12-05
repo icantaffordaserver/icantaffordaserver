@@ -8,92 +8,56 @@ import { graphql, compose, withApollo } from 'react-apollo'
 
 import LoginForm from '../components/LoginForm'
 
-import passwordResetQuery from '../../../shared/graphql/queries/passwordResetQuery'
-import currentUserQuery from '../../../shared/graphql/queries/currentUserQuery'
 import authenticateEmailUserMutation from '../../../shared/graphql/mutations/authenticateEmailUserMutation'
 
 class LoginContainer extends React.Component {
   static propTypes = {
-    data: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+    client: PropTypes.object.isRequired,
     mutate: PropTypes.func.isRequired,
   }
 
   state = {
     loading: false,
     error: '',
-    sucess: false,
   }
 
-  handleLogin = (email, password) => {
+  isLoggedIn() {
+    return window.localStorage.getItem('auth_token') ? true : false
+  }
+
+  handleLogin = async (email, password) => {
     this.setState({ loading: true, error: '' })
+    try {
+      const response = await this.props.mutate({
+        variables: {
+          email,
+          password,
+        },
+      })
 
-    this.props.client
-      .query({
-        query: passwordResetQuery,
-        variables: { email },
-      })
-      .then(res => {
-        // Check if user has password reset(s) active.
-        const passwordResets =
-          res.data.allPasswordResets.length > 0
-            ? res.data.allPasswordResets
-            : null
+      if (!response.data) {
+        throw new Error()
+      }
 
-        if (passwordResets && passwordResets.length === 1) {
-          if (!passwordResets[0].complete) {
-            return { error: 'Password reset active.', data: null }
-          }
-        }
-        return {
-          error: null,
-          data: {
-            email,
-            password,
-          },
-        }
-      })
-      .then(res => {
-        if (res.error) throw new Error(res.error)
+      const token = response.data.authenticateEmailUser.token
+      window.localStorage.setItem('auth_token', token)
 
-        return this.props.mutate({
-          variables: res.data,
-        })
-      })
-      .then(res => {
-        window.localStorage.setItem(
-          'auth_token',
-          res.data.authenticateEmailUser.token,
-        )
-      })
-      .then(() => {
-        this.setState({ loading: false, sucess: true })
+      await this.props.client.resetStore()
+      this.props.history.push('/profile')
+    } catch (error) {
+      if (error.message.includes('Could not find a user with that username')) {
         this.props.client.resetStore()
-      })
-      .catch(error => {
-        if (
-          error.message.includes('Could not find a user with that username')
-        ) {
-          this.props.client.resetStore()
-          this.setState({ loading: false, error: 'User does not exist' })
-        } else if (error.message.includes('Invalid password')) {
-          this.props.client.resetStore()
-          this.setState({ loading: false, error: 'Invalid password' })
-        } else if (error.message.includes('Password reset active.')) {
-          this.props.client.resetStore()
-          this.setState({
-            loading: false,
-            error: 'Please complete password reset before logging in.',
-          })
-        }
-      })
+        this.setState({ loading: false, error: 'Invalid Credentials' })
+      } else {
+        this.props.client.resetStore()
+        this.setState({ loading: false, error: 'Invalid Credentials' })
+      }
+    }
   }
 
   render() {
-    if (this.props.data.loading) return null
-
     // if the user is already logged in, redirect to dashboard
-    if (this.props.data && this.props.data.user) {
+    if (this.isLoggedIn()) {
       return <Redirect to="/profile" />
     }
 
@@ -107,7 +71,6 @@ class LoginContainer extends React.Component {
 export default compose(
   withApollo,
   withRouter,
-  graphql(currentUserQuery),
   graphql(authenticateEmailUserMutation),
 )(LoginContainer)
 // wrap the component with withApollo so we can expose the client prop

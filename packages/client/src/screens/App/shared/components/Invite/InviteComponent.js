@@ -4,16 +4,16 @@ import { withApollo, graphql, compose } from 'react-apollo'
 import currentUserQuery from '../../graphql/queries/currentUserQuery'
 import sendInviteMutation from '../../graphql/mutations/sendInviteMutation'
 
-import { Button, Modal, Header, Icon, Message } from 'semantic-ui-react'
+import { Modal, Icon, Message } from 'semantic-ui-react'
 import {
   Form,
-  FormButton,
+  Button,
   FormGroup,
-  FormInput,
-  FormLabel,
-} from '../../../styles/Forms'
-
-import share from '../Header/assets/images/Assets_share.png'
+  Input,
+  Label,
+  ColumnContainer,
+  Title,
+} from '../../../styles'
 
 class InviteComponent extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class InviteComponent extends Component {
       loading: false,
       error: '',
     }
-    this.handleInvite = this.handleInvite.bind(this)
   }
 
   onChange = e => {
@@ -68,64 +67,40 @@ class InviteComponent extends Component {
 
   render = () => {
     return (
-      <Modal
-        trigger={
-          <Button
-            style={{ background: 'transparent', padding: '0', margin: 0 }}
-          >
-            <img style={{ height: '1.6em', padding: '3px' }} src={share} />
-          </Button>
-        }
-        basic
-      >
-        <div
-          className="hnbfcgjknm"
-          style={{
-            marginTop: '20%',
-            height: 'fit-content',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: '#fff',
-            color: '#333',
-            padding: '2em',
-          }}
-        >
+      <Modal trigger={<Button>Invite a Friend!</Button>} basic>
+        <ColumnContainer white>
           <Form onSubmit={this.handleInvite}>
-            <Header
-              size={'huge'}
-              style={{ textAlign: 'center', marginBottom: '1em' }}
-            >
+            <Title medium fullWidth>
               <Icon name="send" /> Invite a Friend!
-            </Header>
+            </Title>
             {this.renderMessage()}
             <FormGroup>
-              <FormLabel htmlFor="firstName">First Name:</FormLabel>
-              <FormInput
+              <Label htmlFor="firstName">First Name:</Label>
+              <Input
                 name="firstName"
                 placeholder="e.g. John"
                 onChange={this.onChange}
               />
             </FormGroup>
             <FormGroup>
-              <FormLabel htmlFor="lastName">Last Name:</FormLabel>
-              <FormInput
+              <Label htmlFor="lastName">Last Name:</Label>
+              <Input
                 name="lastName"
                 placeholder="e.g. Smith"
                 onChange={this.onChange}
               />
             </FormGroup>
             <FormGroup>
-              <FormLabel htmlFor="emailToInvite">Email:</FormLabel>
-              <FormInput
+              <Label htmlFor="emailToInvite">Email:</Label>
+              <Input
                 name="emailToInvite"
                 placeholder="e.g. your@email.com"
                 onChange={this.onChange}
               />
             </FormGroup>
-            <FormButton loading={this.state.loading}>Submit</FormButton>
+            <Button loading={this.state.loading}>Submit</Button>
           </Form>
-        </div>
+        </ColumnContainer>
       </Modal>
     )
   }

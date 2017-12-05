@@ -8,21 +8,24 @@ export default function sendInviteEmail({
   recipientEmail,
   actionUrl,
 }) {
-  return new Promise((resolve, reject) => {
-    PostmarkMailer.sendEmailWithTemplate(
-      {
-        From: 'hello@toktumi.io',
-        To: recipientEmail,
-        TemplateId: 1735761,
-        TemplateModel: {
-          name: firstName,
-          actionUrl,
+  if (firstName && recipientEmail && actionUrl) {
+    return new Promise((resolve, reject) => {
+      PostmarkMailer.sendEmailWithTemplate(
+        {
+          From: process.env.EMAIL_TO_SEND_FROM,
+          To: recipientEmail,
+          TemplateId: 1735761,
+          TemplateModel: {
+            name: firstName,
+            actionUrl,
+          },
         },
-      },
-      (error, result) => {
-        if (error) reject(error)
-        else resolve(result)
-      },
-    )
-  })
+        (error, result) => {
+          if (error) return reject(error)
+          resolve(result)
+        },
+      )
+    })
+  } else
+    throw new Error('Email requires firstName, reciepientEmail and actionUrl.')
 }

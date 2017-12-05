@@ -20,14 +20,15 @@ class HeaderContainer extends React.Component {
   handleLogout = event => {
     event.preventDefault()
 
-    // remove token from local storage and reset apollo client to refetch all queries
+    // remove token from local storage and reset apollo client to refetch all
+    // queries
     window.localStorage.removeItem('auth_token')
     this.props.client.resetStore()
     this.props.history.push('/login')
   }
 
   render() {
-    if (this.props.data.loading && !this.props.data.user) return null
+    if (this.props.data.loading || !this.props.data.user) return null
 
     // check if user is logged in
     const user =

@@ -1,19 +1,23 @@
 /**
  * Created by alexandermann on 2017-02-22.
  */
-import { print } from 'graphql-tag/printer';
+import { print } from 'graphql-tag'
 
-// quick way to add the subscribe and unsubscribe functions to the network interface
+// quick way to add the subscribe and unsubscribe functions to the network
+// interface
 export default function addGraphQLSubscriptions(networkInterface, wsClient) {
   return Object.assign(networkInterface, {
     subscribe(request, handler) {
-      return wsClient.subscribe({
-        query: print(request.query),
-        variables: request.variables,
-      }, handler);
+      return wsClient.subscribe(
+        {
+          query: print(request.query),
+          variables: request.variables,
+        },
+        handler,
+      )
     },
     unsubscribe(id) {
-      wsClient.unsubscribe(id);
+      wsClient.unsubscribe(id)
     },
-  });
+  })
 }
