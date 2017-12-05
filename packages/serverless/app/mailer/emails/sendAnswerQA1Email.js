@@ -23,6 +23,6 @@ export default function sendAnswerQA1Email({
         },
       )
     })
-  }
-  else throw new Error("Email requires firstName, reciepientEmail and actionUrl.")
+  } else
+    throw new Error('Email requires firstName, reciepientEmail and actionUrl.')
 }

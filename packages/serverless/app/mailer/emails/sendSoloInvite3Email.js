@@ -5,30 +5,36 @@ export default function sendSoloInvite3Email({
   recipientEmail,
   matchName,
   conversationTime,
-  actionUrl
+  actionUrl,
 }) {
-    if (firstName && recipientEmail && matchName && conversationTime && actionUrl) {
-        
-  return new Promise((resolve, reject) => {
-    PostmarkMailer.sendEmailWithTemplate(
-      {
-        From: 'hello@toktumi.io',
-        To: recipientEmail,
-        TemplateId: 4002345,
-        TemplateModel: {
-          name: firstName,
-          match_name: matchName,
-          conversation_time: conversationTime,
-          action_url: actionUrl
+  if (
+    firstName &&
+    recipientEmail &&
+    matchName &&
+    conversationTime &&
+    actionUrl
+  ) {
+    return new Promise((resolve, reject) => {
+      PostmarkMailer.sendEmailWithTemplate(
+        {
+          From: 'hello@toktumi.io',
+          To: recipientEmail,
+          TemplateId: 4002345,
+          TemplateModel: {
+            name: firstName,
+            match_name: matchName,
+            conversation_time: conversationTime,
+            action_url: actionUrl,
+          },
         },
-      },
-      (error, result) => {
-        if (error) reject(error)
-        else resolve(result)
-      },
+        (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        },
+      )
+    })
+  } else
+    throw new Error(
+      'Email requires firstName, reciepientEmail, matchName, actionUrl and conversationTime.',
     )
-  })
-}
-else throw new Error("Email requires firstName, reciepientEmail, matchName, actionUrl and conversationTime.")       
-
 }

@@ -2,7 +2,6 @@ import { Router } from 'express'
 
 import userSubscriptionRoutes from './userSubscriptionRoutes'
 import userSchemaExtensionRoutes from './userSchemaExtensionRoutes'
-import getToken from '../../utils/twilio'
 
 const routes = Router()
 
@@ -10,6 +9,5 @@ const routes = Router()
 //routes.use('/requestPipeline', userRequestPipelineControllers)
 routes.use('/schemaExtension', userSchemaExtensionRoutes)
 routes.use('/subscription', userSubscriptionRoutes)
-routes.post('/token', getToken)
 
 export default routes

@@ -10,7 +10,13 @@ export default function sendPasswordResetEmail({
   operatingSystem,
   browserName,
 }) {
-  if (firstName && recipientEmail && actionUrl && operatingSystem && browserName) {
+  if (
+    firstName &&
+    recipientEmail &&
+    actionUrl &&
+    operatingSystem &&
+    browserName
+  ) {
     return new Promise((resolve, reject) => {
       PostmarkMailer.sendEmailWithTemplate(
         {
@@ -31,6 +37,8 @@ export default function sendPasswordResetEmail({
         },
       )
     })
-  }
-  else throw new Error("Email requires firstName, reciepientEmail, actionUrl, operatingSystem and browserName.")   
+  } else
+    throw new Error(
+      'Email requires firstName, reciepientEmail, actionUrl, operatingSystem and browserName.',
+    )
 }

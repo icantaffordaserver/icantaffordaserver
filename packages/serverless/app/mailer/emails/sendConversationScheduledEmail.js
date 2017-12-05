@@ -4,14 +4,14 @@
 import PostmarkMailer from '../../../config/PostmarkMailer'
 
 export default function sendConversationScheduledEmail({
-  email, 
+  email,
   conversationTime,
-  actionUrl
+  actionUrl,
 }) {
   // TODO:
   // should include some checks here to determine what form the time is in, but the job of this
   // function should only be to send the email and nothing more
-  if(email && conversationTime && actionUrl) {
+  if (email && conversationTime && actionUrl) {
     return new Promise((resolve, reject) => {
       PostmarkMailer.sendEmailWithTemplate(
         {
@@ -20,16 +20,15 @@ export default function sendConversationScheduledEmail({
           TemplateId: 1501821,
           TemplateModel: {
             conversation_time: conversationTime,
-            action_url: actionUrl
+            action_url: actionUrl,
           },
         },
         (error, result) => {
           if (error) reject(error)
           else resolve(result)
-        }
+        },
       )
     })
-  }
-  else throw new Error("Email requires email, actionUrl and conversationTime.")    
+  } else
+    throw new Error('Email requires email, actionUrl and conversationTime.')
 }
-
