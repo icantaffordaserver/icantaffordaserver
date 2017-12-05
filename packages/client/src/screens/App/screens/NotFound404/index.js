@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Box } from 'grid-styled'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 import Graphic from './assets/Graphic1.svg'
 import { Title, SubTitle, TextLink } from './style'
 
@@ -21,7 +21,7 @@ const NotFound404 = () => (
           <Title>Oops!</Title>
         </Box>
         <Box width={1 / 2} ml="25%" p={2}>
-          <SVG src={Graphic} />
+          <ReactSVG path={Graphic} />
         </Box>
         <Box width={1} p={2}>
           <SubTitle>Looks like something went wrong.</SubTitle>

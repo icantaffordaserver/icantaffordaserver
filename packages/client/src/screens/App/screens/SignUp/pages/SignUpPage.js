@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Flex, Box } from 'grid-styled'
 import { NavLink, withRouter } from 'react-router-dom'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 import qs from 'query-string'
 
 import {
@@ -31,7 +31,7 @@ class SignUpForm extends Component {
     return (
       <LoginWrapper>
         <LoginImageContainer>
-          <SVG src={logo} />
+          <ReactSVG path={logo} />
         </LoginImageContainer>
         <LoginFormWrapper>
           <Flex wrap width={1} py={2}>

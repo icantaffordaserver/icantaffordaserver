@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 import { Message } from 'semantic-ui-react'
 import { Flex, Box } from 'grid-styled'
 import { NavLink } from 'react-router-dom'
@@ -76,7 +76,7 @@ class LoginForm extends Component {
     return (
       <LoginWrapper>
         <LoginImageContainer>
-          <SVG src={Logo} />
+          <ReactSVG path={Logo} />
         </LoginImageContainer>
         <LoginFormWrapper>
           <Flex wrap width={1} py={2}>

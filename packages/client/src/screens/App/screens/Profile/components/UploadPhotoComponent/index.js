@@ -7,7 +7,7 @@ import ReactCrop, { makeAspectCrop } from 'react-image-crop' // eslint-disable-l
 import ReactModal from 'react-modal'
 import 'react-image-crop/dist/ReactCrop.css'
 import { Flex, Box } from 'grid-styled'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 
 import EditIcon from '../../../../../../assets/icons/icon.svg'
 
@@ -187,7 +187,7 @@ class UploadPhotoComponent extends Component {
     return (
       <div>
         <div onClick={this.handleOpenModal}>
-          <SVG src={EditIcon} />
+          <ReactSVG path={EditIcon} />
         </div>
         <ReactModal
           isOpen={this.state.showModal}
