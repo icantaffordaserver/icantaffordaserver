@@ -108,8 +108,6 @@ class LoginForm extends Component {
             <Button loading={this.props.loading}> Login </Button>
           </Form>
           <Links>
-            <TextLink to="/signup">Don't have an account?</TextLink>
-
             <TextLink to="/forgot">Forgot password?</TextLink>
           </Links>
         </LoginFormWrapper>
