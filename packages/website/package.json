@@ -33,7 +33,7 @@
     "gulp-uglify": "3.0.0"
   },
   "scripts": {
-    "build": "rm -r ./dist && gulp build",
-    "start": "rm -r ./dist && gulp dev"
+    "build": "gulp build",
+    "start": "gulp dev"
   }
 }

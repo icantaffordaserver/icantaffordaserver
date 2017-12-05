@@ -15,7 +15,7 @@ var banner = [
   ' <%= pkg.author %>\n',
   ' * Licensed under <%= pkg.license %> (https://github.com/BlackrockDigital/<%= pkg.name %>/blob/master/LICENSE)\n',
   ' */\n',
-  '',
+  ''
 ].join('')
 
 // Compiles SCSS files from /scss into /css
@@ -25,14 +25,14 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(
       header(banner, {
-        pkg: pkg,
-      }),
+        pkg: pkg
+      })
     )
     .pipe(gulp.dest('css'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -42,19 +42,19 @@ gulp.task('minify-css', ['sass'], function() {
     .src(['css/*.css'])
     .pipe(
       cleanCSS({
-        compatibility: 'ie8',
-      }),
+        compatibility: 'ie8'
+      })
     )
     .pipe(
       rename({
-        suffix: '.min',
-      }),
+        suffix: '.min'
+      })
     )
     .pipe(gulp.dest('dist/css'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -65,19 +65,19 @@ gulp.task('minify-js', function() {
     .pipe(uglify())
     .pipe(
       header(banner, {
-        pkg: pkg,
-      }),
+        pkg: pkg
+      })
     )
     .pipe(
       rename({
-        suffix: '.min',
-      }),
+        suffix: '.min'
+      })
     )
     .pipe(gulp.dest('dist/js'))
     .pipe(
       browserSync.reload({
-        stream: true,
-      }),
+        stream: true
+      })
     )
 })
 
@@ -89,14 +89,14 @@ gulp.task('copy', function() {
       'node_modules/bootstrap/dist/**/*',
       '!**/npm.js',
       '!**/bootstrap-theme.*',
-      '!**/*.map',
+      '!**/*.map'
     ])
     .pipe(gulp.dest('dist/vendor/bootstrap'))
 
   gulp
     .src([
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/jquery/dist/jquery.min.js'
     ])
     .pipe(gulp.dest('dist/vendor/jquery'))
 
@@ -115,7 +115,7 @@ gulp.task('copy', function() {
       '!node_modules/font-awesome/.npmignore',
       '!node_modules/font-awesome/*.txt',
       '!node_modules/font-awesome/*.md',
-      '!node_modules/font-awesome/*.json',
+      '!node_modules/font-awesome/*.json'
     ])
     .pipe(gulp.dest('dist/vendor/font-awesome'))
 
@@ -137,7 +137,7 @@ gulp.task('build', [
   'images',
   'sass',
   'minify-css',
-  'minify-js',
+  'minify-js'
 ])
 
 // Configure the browserSync task
@@ -145,7 +145,7 @@ gulp.task('browserSync', function() {
   browserSync.init({
     server: {
       baseDir: 'dist',
-    },
+    }
   })
 })
 
@@ -160,5 +160,5 @@ gulp.task(
     // Reloads the browser whenever HTML or JS files change
     gulp.watch('*.html', browserSync.reload)
     gulp.watch('js/**/*.js', browserSync.reload)
-  },
+  }
 )
