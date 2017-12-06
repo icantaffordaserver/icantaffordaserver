@@ -13,10 +13,10 @@ export default {
   },
 
   size: {
-    small: 25,
-    medium: 40,
-    large: 60,
-    huge: 80,
+    small: 10,
+    medium: 20,
+    large: 30,
+    huge: 40,
   },
 
   padding: {
