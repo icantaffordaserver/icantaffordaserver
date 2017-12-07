@@ -25,6 +25,9 @@ export const Button = styled(button)`
     border: solid 1px ${styles.color}!important;
     background: #fff !important;
   }
+  &.disabled {
+    background: #333;
+  }
 `
 Button.defaultProps = {
   color: 'accent',
