@@ -15,9 +15,6 @@ import deleteUserMutation from '../../shared/graphql/mutations/deleteUserMutatio
 import updatePasswordMutation from '../../shared/graphql/mutations/updatePasswordMutation'
 import { SettingsWrapper } from './styles'
 
-const FullScreen = Flex.extend`
-  height: 100%;
-`
 class SettingsContainer extends Component {
   state = {
     showModal: false,
@@ -48,6 +45,7 @@ class SettingsContainer extends Component {
       deleteAccount: '',
       loading: false,
       success: false,
+      error: '',
     })
 
   handleSave = async () => {
@@ -128,7 +126,7 @@ class SettingsContainer extends Component {
 
     if (this.props.data.loading) return null
     return (
-      <FullScreen wrap>
+      <SettingsWrapper>
         <Flex width={1} wrap>
           <Box width={1} p={2}>
             <TitleSection title={'SETTINGS'} />
@@ -163,7 +161,7 @@ class SettingsContainer extends Component {
             />
           </Box>
         </Flex>
-      </FullScreen>
+      </SettingsWrapper>
     )
   }
 }

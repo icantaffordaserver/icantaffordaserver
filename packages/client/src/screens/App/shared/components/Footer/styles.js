@@ -16,13 +16,14 @@ export const Links = styled.div`
   align-items: flex-end;
   justify-content: space-evenly;
   width: 45%;
+  font-size: 1vw;
   position: absolute;
   right: 0;
 `
 export const Link = styled(NavLink)`
   transform: all 0.25s ease;
   color: #fff;
-  font-size: 1.25em;
+  font-size: 1.25rem;
   &:hover,
   &.active {
     color: #fff;

@@ -43,7 +43,7 @@ export const Calendar = styled.div`
   padding: 2% 5%;
   display: grid;
   text-align: center;
-  grid-auto-rows: minmax(10%, 100px);
+  grid-auto-rows: minmax(10%, 85px);
   grid-template-columns: repeat(7, [col] minmax(10%, 100px));
 `
 

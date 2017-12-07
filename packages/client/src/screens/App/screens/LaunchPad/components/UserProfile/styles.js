@@ -112,3 +112,10 @@ export const Avatar = styled.img`
   width: 200px;
   margin: 8% auto;
 `
+export const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: auto;
+`

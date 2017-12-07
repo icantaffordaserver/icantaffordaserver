@@ -13,7 +13,6 @@ import {
   Info,
   Tags,
   View,
-  Pass,
 } from './styles'
 import viewIcon from '../../../../shared/assets/view.svg'
 
@@ -29,11 +28,6 @@ class IntroductionsComponent extends Component {
             const user = introduction.participants[0]
             return (
               <Introduction key={introduction.id}>
-                <Pass
-                  onClick={() => this.props.passInvitation(introduction.id)}
-                >
-                  <Icon name="close" size="large" />
-                </Pass>
                 <ProfilePhoto>
                   <Icon name="lock" size="huge" />
                   <p>
@@ -53,6 +47,7 @@ class IntroductionsComponent extends Component {
                     </i>
                   </Subheading>
                   <UserProfile
+                    loading={this.props.loading}
                     connection={{
                       id: suggestion.id,
                       time: introduction.connectionTime,
@@ -61,6 +56,7 @@ class IntroductionsComponent extends Component {
                     }}
                     user={user}
                     scheduleInvitation={this.props.scheduleInvitation}
+                    passInvitation={this.props.passInvitation}
                     trigger={<View src={viewIcon} />}
                   />
                   <Tags>

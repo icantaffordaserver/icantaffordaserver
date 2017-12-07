@@ -96,12 +96,6 @@ class WelcomeAvailability extends Component {
                 />
               </Box>
             )}
-
-            {locationSuccess ? null : (
-              <Box width={0.05}>
-                <Icon circular name="exclamation" color="red" size="large" />
-              </Box>
-            )}
           </Flex>
           <Box width={4 / 5} ml="10%" pt={2}>
             <Button

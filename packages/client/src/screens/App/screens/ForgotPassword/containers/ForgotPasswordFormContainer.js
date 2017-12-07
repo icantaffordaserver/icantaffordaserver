@@ -42,7 +42,6 @@ class ForgotPasswordContainer extends React.Component {
         message: 'Check your email!',
       })
     } catch (error) {
-      console.log(error.message)
       if (error.message.includes('Credentials'))
         this.setState({
           loading: false,

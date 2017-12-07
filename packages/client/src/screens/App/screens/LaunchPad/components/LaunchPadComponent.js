@@ -23,6 +23,7 @@ class LaunchPadComponent extends Component {
             passInvitation={this.props.passInvitation}
             scheduleInvitation={this.props.scheduleInvitation}
             rotate={this.props.rotate}
+            loading={this.props.loading}
           />
         </Invitations>
         <Title>

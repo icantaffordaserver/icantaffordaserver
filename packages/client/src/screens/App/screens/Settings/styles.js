@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const SettingsWrapper = styled.div`
-  background: #fff;
   padding: 2% 5%;
   min-height: 90vh;
 `

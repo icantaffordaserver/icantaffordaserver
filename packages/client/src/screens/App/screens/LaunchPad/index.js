@@ -79,6 +79,7 @@ class LaunchPadContainer extends Component {
           },
           history,
           upcoming,
+          loading: false,
         },
         nextConnection: upcoming.length > 0 && upcoming[0],
       })
@@ -119,12 +120,14 @@ class LaunchPadContainer extends Component {
   }
 
   passInvitation = async id => {
+    this.setState({ loading: true })
     await this.props.client.mutate({
       mutation: deleteConnectionMutation,
       variables: { id },
     })
     await this.props.client.resetStore()
     await this.fetchConnections()
+    this.setState({ loading: false })
   }
 
   scheduleInvitation = async id => {
@@ -158,6 +161,7 @@ class LaunchPadContainer extends Component {
           scheduleInvitation={this.scheduleInvitation}
           updateUpcoming={this.updateUpcoming}
           rotate={this.rotate}
+          loading={this.state.loading}
         />
       )
     } else {
