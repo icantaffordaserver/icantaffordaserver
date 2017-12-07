@@ -26,17 +26,36 @@ class ForgotPasswordContainer extends React.Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     this.setState({ loading: true })
     const email = this.state.email
-    this.props
-      .mutate({
+
+    try {
+      await this.props.mutate({
         variables: {
           email,
         },
       })
-      .then(() => this.setState({ success: true }))
-      .catch(err => console.error(err))
+      this.setState({
+        loading: false,
+        success: true,
+        message: 'Check your email!',
+      })
+    } catch (error) {
+      console.log(error.message)
+      if (error.message.includes('Credentials'))
+        this.setState({
+          loading: false,
+          error: true,
+          message: 'Email does not exist',
+        })
+      else
+        this.setState({
+          loading: false,
+          error: true,
+          message: 'An unexpected error occured. Please try again later.',
+        })
+    }
   }
 
   render() {
