@@ -87,7 +87,7 @@ class SettingsContainer extends Component {
       })
     } catch (error) {
       console.error(error)
-      this.setState({ loading: false })
+      this.setState({ loading: false, error: error.Message })
     }
   }
 
