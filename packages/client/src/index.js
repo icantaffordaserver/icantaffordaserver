@@ -10,6 +10,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import 'semantic-ui-css/semantic.min.css'
 import './assets/fonts/fonts.css'
+import './screens/App/styles/styles.css'
 
 const client = makeApolloClient()
 
