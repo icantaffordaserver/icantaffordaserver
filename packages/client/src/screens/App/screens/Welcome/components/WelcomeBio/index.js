@@ -69,9 +69,9 @@ class WelcomeBio extends Component {
             )}
 
             {bioSuccess ? null : (
-              <Box width={0.04} ml="1%">
-                <Icon circular name="exclamation" color="red" size="large" />
-              </Box>
+              <p style={{ color: 'red' }}>
+                <i>Please enter a bio*</i>
+              </p>
             )}
           </Flex>
           <Box width={4 / 5} ml="10%" p={2}>

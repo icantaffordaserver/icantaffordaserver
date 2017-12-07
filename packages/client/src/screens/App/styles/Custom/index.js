@@ -12,5 +12,6 @@ export const Tag = styled.div`
   &:hover {
     color: #c4c4c4;
     background: #fff;
+    cursor: pointer;
   }
 `

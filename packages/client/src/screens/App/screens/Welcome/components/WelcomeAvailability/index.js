@@ -77,9 +77,9 @@ class WelcomeAvailability extends Component {
             )}
 
             {availabilitySuccess ? null : (
-              <Box width={0.05}>
-                <Icon circular name="exclamation" color="red" size="large" />
-              </Box>
+              <p style={{ color: 'red' }}>
+                <i>Please fill in your availability*</i>
+              </p>
             )}
           </Flex>
           <Flex wrap width={1} pt={2}>

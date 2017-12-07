@@ -71,10 +71,16 @@ export const Day = styled.div`
     background: #eee;
     cursor: pointer;
   }
-  &.event {
-    border-top: 3px solid red;
+  &.event:before {
+    content: '•';
+    font-size: 30px;
+    color: red;
+    margin-left: 3vw;
   }
   &.today {
     background: #ff7f50;
+  }
+  &.past {
+    background: #d7d7d7;
   }
 `

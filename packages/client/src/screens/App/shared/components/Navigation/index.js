@@ -105,26 +105,32 @@ class NavigationComponent extends Component {
             <WhiteBox width={1 / 20} ml="3%" p={2}>
               <Dropdown>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    style={{
-                      backgroundColor: '#5C6495',
-                      color: 'white',
-                      border: '#5C6495',
-                    }}
-                  >
-                    <DropDownLink to="/settings">Settings</DropDownLink>
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    style={{
-                      backgroundColor: '#5C6495',
-                      color: 'white',
-                      border: '#5C6495',
-                    }}
-                  >
-                    <DropDownLink to="/" onClick={this.handleLogout}>
+                  <DropDownLink to="/settings">
+                    <Dropdown.Item
+                      style={{
+                        backgroundColor: '#5C6495',
+                        color: 'white',
+                        border: '1px solid #fff',
+                        width: '80px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      Settings
+                    </Dropdown.Item>
+                  </DropDownLink>
+                  <DropDownLink to="/" onClick={this.handleLogout}>
+                    <Dropdown.Item
+                      style={{
+                        backgroundColor: '#5C6495',
+                        color: 'white',
+                        border: '1px solid #fff',
+                        width: '80px',
+                        textAlign: 'center',
+                      }}
+                    >
                       Logout
-                    </DropDownLink>
-                  </Dropdown.Item>
+                    </Dropdown.Item>
+                  </DropDownLink>
                 </Dropdown.Menu>
               </Dropdown>
             </WhiteBox>

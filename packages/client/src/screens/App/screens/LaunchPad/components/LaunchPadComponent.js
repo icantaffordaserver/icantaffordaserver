@@ -15,7 +15,7 @@ class LaunchPadComponent extends Component {
       <Layout>
         <Invitations>
           <Title>
-            <h1>Invitations</h1>
+            <h1>INVITATIONS</h1>
           </Title>
 
           <Introductions
@@ -26,7 +26,7 @@ class LaunchPadComponent extends Component {
           />
         </Invitations>
         <Title>
-          <h1>Schedule</h1>
+          <h1>SCHEDULE</h1>
         </Title>
         <Schedule>
           <Calendar
@@ -34,7 +34,7 @@ class LaunchPadComponent extends Component {
             updateUpcoming={this.props.updateUpcoming}
           />
           <Title>
-            <h1>Up Next</h1>
+            <h1>UP NEXT</h1>
             <i>
               <Subheading fullWidth darkGray>
                 {upcoming.length > 0 &&
