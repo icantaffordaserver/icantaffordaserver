@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { graphql, compose, withApollo } from 'react-apollo'
 import { Flex, Box } from 'grid-styled'
 
+import { Message } from 'semantic-ui-react'
 import TitleSection from './components/TitleSection'
 import EmailPasswordForm from './components/EmailPasswordForm'
 import LocationForm from './components/LocationForm'
@@ -14,114 +15,79 @@ import deleteUserMutation from '../../shared/graphql/mutations/deleteUserMutatio
 import updatePasswordMutation from '../../shared/graphql/mutations/updatePasswordMutation'
 
 const FullScreen = Flex.extend`
-  height: 90vh;
+  height: 100%;
 `
 class SettingsContainer extends Component {
   state = {
     showModal: false,
-    email: '',
-    repeatEmail: '',
-    password: '',
-    repeatPassword: '',
-    location: '',
     deleteAccount: '',
     feedback: '',
+    error: '',
   }
 
   handleCloseModal = () => this.setState({ showModal: false })
 
   handleOpenModal = () => this.setState({ showModal: true })
 
-  handleInputChange = event =>
-    this.setState({ [event.target.name]: event.target.value })
+  handleInputChange = async event => {
+    await this.setState({ [event.target.name]: event.target.value })
+
+    if (!this.canSubmit())
+      this.setState({ error: 'Some of your fields do not match.' })
+    else this.setState({ error: '' })
+  }
 
   handleClear = () =>
     this.setState({
-      email: '',
-      repeatEmail: '',
-      password: '',
-      repeatPassword: '',
-      location: '',
+      email: null,
+      repeatEmail: null,
+      password: null,
+      repeatPassword: null,
+      location: null,
       deleteAccount: '',
+      loading: false,
+      success: false,
     })
 
-  handleSave = () => {
-    const {
-      email,
-      repeatEmail,
-      password,
-      repeatPassword,
-      location,
-    } = this.state
+  handleSave = async () => {
+    const { email, password, location } = this.state
     const { user } = this.props.data
+    console.log(user.email)
+    this.setState({ loading: true })
+    try {
+      if (email) {
+        //Update any non-password changes
+        await this.props.updateUser({
+          variables: {
+            email,
+            id: user.id,
+            location,
+            refetchQueries: [{ query: currentUserQuery }],
+          },
+        })
+      }
 
-    if (password === repeatPassword && password !== '') {
-      this.props
-        .updatePassword({
+      if (password) {
+        // Update password if requested
+        await this.props.updatePassword({
           variables: {
             email: user.email,
             newPassword: password,
           },
           refetchQueries: [{ query: currentUserQuery }],
         })
-        .then(() => {
-          this.props.history.push('/profile')
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }
+      }
 
-    if (email === repeatEmail && email !== '' && location === '') {
-      this.props
-        .updateUser({
-          variables: {
-            id: user.id,
-            email,
-          },
-          refetchQueries: [{ query: currentUserQuery }],
-        })
-        .then(() => {
-          this.props.history.push('/profile')
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }
-
-    if (email === repeatEmail && email !== '' && location !== '') {
-      this.props
-        .updateUser({
-          variables: {
-            id: user.id,
-            email,
-            location,
-          },
-          refetchQueries: [{ query: currentUserQuery }],
-        })
-        .then(() => {
-          this.props.history.push('/profile')
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    }
-
-    if (email === repeatEmail && email === '' && location !== '') {
-      this.props
-        .updateUser({
-          variables: {
-            id: user.id,
-            location,
-          },
-          refetchQueries: [{ query: currentUserQuery }],
-        })
-        .then(() => {
-          this.props.history.push('/profile')
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      this.setState({
+        email: null,
+        password: null,
+        loading: false,
+        success: true,
+        error: '',
+      })
+    } catch (error) {
+      console.error(error)
+      this.setState({ loading: false })
     }
   }
 
@@ -148,17 +114,17 @@ class SettingsContainer extends Component {
     this.setState({ showModal: false })
   }
 
+  canSubmit = () => {
+    const { email, repeatEmail, password, repeatPassword } = this.state
+    return email === repeatEmail && password === repeatPassword
+  }
+  renderMessages() {
+    if (this.state.error) return <Message warning>{this.state.error}</Message>
+    if (this.state.success)
+      return <Message success>{this.state.success}</Message>
+  }
   render() {
-    const {
-      email,
-      repeatEmail,
-      password,
-      repeatPassword,
-      location,
-      deleteAccount,
-      feedback,
-      showModal,
-    } = this.state
+    const { location, deleteAccount, feedback, showModal } = this.state
 
     if (this.props.data.loading) return null
     return (
@@ -168,13 +134,8 @@ class SettingsContainer extends Component {
             <TitleSection title={'SETTINGS'} />
           </Box>
           <Box width={1} p={2}>
-            <EmailPasswordForm
-              email={email}
-              repeatEmail={repeatEmail}
-              password={password}
-              repeatPassword={repeatPassword}
-              handleInputChange={this.handleInputChange}
-            />
+            {this.renderMessages()}
+            <EmailPasswordForm handleInputChange={this.handleInputChange} />
           </Box>
           <Box width={1} p={2}>
             <LocationForm
@@ -195,8 +156,10 @@ class SettingsContainer extends Component {
           </Box>
           <Box width={1} p={2}>
             <ConfirmAndCancel
+              loading={this.state.loading}
               handleSave={this.handleSave}
               handleCancel={this.handleClear}
+              canSubmit={this.canSubmit}
             />
           </Box>
         </Flex>

@@ -1,23 +1,29 @@
 import React from 'react'
-import { Button } from '../../style'
+import { Button } from '../../../../styles'
 import { Flex, Box } from 'grid-styled'
 
-const ConfirmAndCancel = ({ handleSave, handleCancel, cancelText }) => {
+const ConfirmAndCancel = ({
+  handleSave,
+  handleCancel,
+  cancelText,
+  loading,
+  canSubmit,
+}) => {
   return (
     <Flex wrap width={1} py={2}>
       <Box width={2 / 10} ml="40%" pt={2}>
-        <Button color={'#FF7F50'} inverseColor={'#FFFFFF'} onClick={handleSave}>
+        <Button
+          medium
+          loading={loading}
+          disabled={!canSubmit()}
+          onClick={handleSave}
+        >
           Confirm
         </Button>
       </Box>
       <Box width={1 / 10} pt={2} pl={2}>
-        <Button
-          color={'rgba(255, 255, 255, 0.9)'}
-          inverseColor={'#BDBDBD'}
-          noHoverChange={true}
-          onClick={handleCancel}
-        >
-          {cancelText || 'Cancel'}
+        <Button color={'rgba(255, 255, 255, 0.9)'} onClick={handleCancel}>
+          {cancelText || 'Clear changes'}
         </Button>
       </Box>
     </Flex>

@@ -1,4 +1,4 @@
 targets:
   stage: shared-us-west-2/cjaiyal1o381m0157nzvjz14z
-  dev: local/cjae944x200kh0192wk3k0jrx
+  dev: local/cjavbeprt000b0128a2p2m93e
   default: dev
