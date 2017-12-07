@@ -41,7 +41,12 @@ class CalendarComponent extends Component {
       // TODO: Fix this, no functions in loops
       // eslint-disable-next-line
       this.props.upcoming.map(con => {
-        if (this.isEqualDates(con.connectionTime, monthDate.toISOString())) {
+        if (
+          this.dateRelativeToToday(
+            con.connectionTime,
+            monthDate.toISOString(),
+          ) === 0
+        ) {
           daysInMonth.push(con)
           monthDate.add(1, 'day')
           currentDay++
@@ -54,11 +59,14 @@ class CalendarComponent extends Component {
     return daysInMonth
   }
 
-  isEqualDates = (day1, day2 = moment()) => {
-    return (
+  dateRelativeToToday = (day1, day2 = moment()) => {
+    if (
       moment(day1).format('DDD/MMM/YYYY') ===
       moment(day2).format('DDD/MMM/YYYY')
     )
+      return 0
+
+    if (moment(day1).isBefore(day2)) return -1
   }
 
   nextMonth = () => {
@@ -94,13 +102,16 @@ class CalendarComponent extends Component {
                     }
                     key={day.connectionTime}
                     className={
-                      this.isEqualDates(day.connectionTime)
+                      this.dateRelativeToToday(day.connectionTime) === 0
                         ? 'today event'
                         : 'event'
                     }
                     onClick={() => this.props.updateUpcoming(day)}
                   >
                     {moment(day.connectionTime).format('D')}
+                    <i style={{ fontSize: '0.75vw' }}>
+                      Conversation with {day.participants[0].firstName}
+                    </i>
                   </Day>
                 )
               } else {
@@ -108,7 +119,11 @@ class CalendarComponent extends Component {
                   <Day
                     dow={this.state.dow[moment(day).format('ddd')]}
                     key={day}
-                    className={this.isEqualDates(day) && 'today'}
+                    className={
+                      this.dateRelativeToToday(day) === 0
+                        ? 'today'
+                        : this.dateRelativeToToday(day) === -1 && 'past'
+                    }
                   >
                     {moment(day).format('D')}
                   </Day>

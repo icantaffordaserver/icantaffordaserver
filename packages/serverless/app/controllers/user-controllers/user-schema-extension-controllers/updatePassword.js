@@ -32,9 +32,9 @@ export default async (req, res) => {
       password: hashedPassword,
     })
 
-    res.status(200).send({ message: 'Password updated.' })
+    res.status(200).send({ data: { id: user.id } })
   } catch (error) {
     console.error(error)
-    res.status(400).send({ message: error.message })
+    res.status(200).send({ error: error.message })
   }
 }

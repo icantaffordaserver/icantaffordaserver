@@ -29,7 +29,7 @@ export const UserDetails = styled.div`
 export const ProfilePhoto = styled.div`
   grid-area: photo;
   opacity: 0.6;
-  margin: auto;
+  margin: 8% auto;
   height: 200px;
   width: 200px;
   color: #fff;
@@ -110,5 +110,12 @@ export const Right = styled(Icon).attrs({
 export const Avatar = styled.img`
   height: 200px;
   width: 200px;
+  margin: 8% auto;
+`
+export const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
   margin: auto;
 `

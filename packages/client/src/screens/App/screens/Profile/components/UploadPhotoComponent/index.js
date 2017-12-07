@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql, compose, withApollo } from 'react-apollo'
+import { Message } from 'semantic-ui-react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import ReactCrop, { makeAspectCrop } from 'react-image-crop' // eslint-disable-line
@@ -74,7 +75,9 @@ class UploadPhotoComponent extends Component {
   }
 
   onCropComplete = (crop, pixelCrop) => {
-    this.setState({ pixelCrop })
+    if (pixelCrop.height > 0 && pixelCrop.width > 0)
+      this.setState({ pixelCrop, error: null })
+    else this.setState({ error: 'Please crop your photo' })
   }
 
   onCropChange = crop => {
@@ -86,10 +89,9 @@ class UploadPhotoComponent extends Component {
       top: this.state.topColor,
       bottom: this.state.bottomColor,
     }
-
+    if (this.state.error) return
     if (this.state.files.length > 0) {
       let data = new FormData()
-
       data.append('file', this.state.files[0])
       data.append('tags', `toktumi`)
       data.append('upload_preset', 'cqovpxkc')
@@ -106,20 +108,23 @@ class UploadPhotoComponent extends Component {
         })
         .then(data => {
           let url =
-            'https://res.cloudinary.com/toktumi/image/upload/' +
-            'c_crop,h_' +
-            this.state.pixelCrop.height +
-            ',w_' +
-            this.state.pixelCrop.width +
-            ',x_' +
-            this.state.pixelCrop.x +
-            ',y_' +
-            this.state.pixelCrop.y +
-            '/v' +
-            data.version +
-            '/' +
-            data.public_id +
-            '.png'
+            this.state.pixelCrop.height !== 0 &&
+            this.state.pixelCrop.width !== 0
+              ? 'https://res.cloudinary.com/toktumi/image/upload/' +
+                'c_crop,h_' +
+                this.state.pixelCrop.height +
+                ',w_' +
+                this.state.pixelCrop.width +
+                ',x_' +
+                this.state.pixelCrop.x +
+                ',y_' +
+                this.state.pixelCrop.y +
+                '/v' +
+                data.version +
+                '/' +
+                data.public_id +
+                '.png'
+              : null
           return this.props.mutate({
             variables: {
               id: this.props.data.user.id,
@@ -169,6 +174,10 @@ class UploadPhotoComponent extends Component {
     }
   }
 
+  renderError() {
+    if (this.state.error) return <Message warning>{this.state.error}</Message>
+  }
+
   render() {
     let dropzoneRef
     let gradientChoices = [
@@ -204,6 +213,7 @@ class UploadPhotoComponent extends Component {
           }}
         >
           <Flex wrap>
+            {this.renderError()}
             <Box width={95 / 100} ml="5%">
               <button
                 style={{

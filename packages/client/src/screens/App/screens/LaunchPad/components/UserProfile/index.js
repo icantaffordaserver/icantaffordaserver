@@ -13,6 +13,7 @@ import {
   Left,
   Right,
   Avatar,
+  Buttons,
 } from './styles'
 import { Modal, Icon } from 'semantic-ui-react'
 import EmptyProfile from '../../../../../../assets/pictures/empty_avatar.jpg'
@@ -73,13 +74,25 @@ export default props => {
               Pending...
             </Button>
           ) : (
-            <Button
-              square
-              small
-              onClick={() => props.scheduleInvitation(props.connection.id)}
-            >
-              Invite to Conversation
-            </Button>
+            <Buttons>
+              <Button
+                square
+                small
+                style={{ fontSize: '1vw !important' }}
+                loading={props.loading}
+                onClick={() => props.scheduleInvitation(props.connection.id)}
+              >
+                Invite to Conversation
+              </Button>
+              <Button
+                square
+                small
+                altGray
+                onClick={() => props.passInvitation(props.connection.id)}
+              >
+                I'll pass
+              </Button>
+            </Buttons>
           ))}
       </ProfileWrapper>
     </Modal>

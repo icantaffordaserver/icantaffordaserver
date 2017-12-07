@@ -3,7 +3,6 @@ import { graphql, compose } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 import ReactSVG from 'react-svg'
-import { Icon } from 'semantic-ui-react'
 
 import { Button } from './styles'
 
@@ -88,9 +87,9 @@ class WelcomeInterests extends Component {
               )}
 
               {chooseInterestsSuccess ? null : (
-                <Box width={0.05}>
-                  <Icon circular name="exclamation" color="red" size="large" />
-                </Box>
+                <p style={{ color: 'red' }}>
+                  <i>Please select at least one Interest*</i>
+                </p>
               )}
             </Flex>
           ) : null}
@@ -102,6 +101,7 @@ class WelcomeInterests extends Component {
               suggestionSuccess={suggestionSuccess}
             />
           </Box>
+
           <Box width={4 / 5} ml="10%" p={2}>
             <Button
               color={'#FF7F50'}

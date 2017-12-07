@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Form, Button, FormGroup, Input, Label } from '../../../../styles'
+import { Message } from 'semantic-ui-react'
 
 class RequestInviteForm extends Component {
   state = { email: '', firstName: '', lastName: '' }
@@ -21,7 +22,7 @@ class RequestInviteForm extends Component {
     return (
       <Form>
         <FormGroup>
-          You must have a valid invite to sign up!
+          {this.props.success && <Message success>Invite requested!</Message>}
           <Label>Email</Label>
           <Input name="email" onChange={this.handleChange} value={email} />
         </FormGroup>
@@ -41,8 +42,9 @@ class RequestInviteForm extends Component {
             value={lastName}
           />
         </FormGroup>
-        {this.props.errors && this.props.errors}
-        <Button onClick={this.handleSubmit}>Request</Button>
+        <Button loading={this.props.loading} onClick={this.handleSubmit}>
+          Request Invite
+        </Button>
       </Form>
     )
   }

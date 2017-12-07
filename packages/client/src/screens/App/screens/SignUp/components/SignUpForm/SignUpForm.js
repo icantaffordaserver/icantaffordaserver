@@ -63,7 +63,6 @@ class SignUpForm extends Component {
           />
         </FormGroup>
         <Button onClick={this.handleSubmit}>Sign up</Button>
-        {this.props.errors && this.props.errors}
       </Form>
     )
   }

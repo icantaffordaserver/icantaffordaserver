@@ -9,12 +9,15 @@ export default async (req, res) => {
 
   try {
     // Get userId by email
-    const response = await client.request(`
-      query {
-        User(email: "${email}"){
+    const response = await client.request(
+      `
+      query($email:String!){
+        User(email:$email){
           id
         }
-      }`)
+      }`,
+      { email },
+    )
 
     if (!response.User) throw new Error('Invalid Credentials.')
 
@@ -27,9 +30,9 @@ export default async (req, res) => {
     // Create a new password reset entry
     await client.request(createPasswordResetMutation, variables)
 
-    res.status(200).send({ message: 'Password reset created.' })
+    res.status(200).send({ data: { id: response.User.id } })
   } catch (error) {
     console.error(error)
-    res.status(400).send({ message: error.message })
+    res.status(200).send({ error: error.message })
   }
 }
