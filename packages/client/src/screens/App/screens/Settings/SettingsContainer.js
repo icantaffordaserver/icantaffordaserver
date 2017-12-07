@@ -13,6 +13,7 @@ import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
 import updateUserMutation from '../../shared/graphql/mutations/updateUserMutation'
 import deleteUserMutation from '../../shared/graphql/mutations/deleteUserMutation'
 import updatePasswordMutation from '../../shared/graphql/mutations/updatePasswordMutation'
+import { SettingsWrapper } from './styles'
 
 const FullScreen = Flex.extend`
   height: 100%;
