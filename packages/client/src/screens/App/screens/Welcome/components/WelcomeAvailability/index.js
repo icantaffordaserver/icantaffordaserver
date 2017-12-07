@@ -3,7 +3,6 @@ import { graphql, compose } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 import ReactSVG from 'react-svg'
-import { Icon } from 'semantic-ui-react'
 
 import { Button } from '../WelcomeChooseInterests/styles.js'
 
