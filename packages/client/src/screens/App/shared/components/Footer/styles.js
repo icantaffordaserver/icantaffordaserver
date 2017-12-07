@@ -1,56 +1,40 @@
 import styled from 'styled-components'
-import { bind } from 'styled-props'
-import Theme from '../../../styles/Theme'
-
 import { NavLink } from 'react-router-dom'
 
-const styles = bind(Theme)
-
-export const FooterWrapper = styled.div`
+export const Footer = styled.div`
+  position: relative;
   height: 60px;
   width: 100%;
-  padding: 5px;
-  background-color: ${styles.color};
-`
-FooterWrapper.defaultProps = {
-  color: 'primary',
-}
-
-export const Footer = styled.div`
-  height: 100%;
-  width: ${styles.container}%;
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  background: #393f63;
 `
-Footer.defaultProps = {
-  container: 'default',
-}
 
 export const Links = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-evenly;
   width: 45%;
+  position: absolute;
+  right: 0;
 `
 export const Link = styled(NavLink)`
   transform: all 0.25s ease;
-  color: ${styles.color};
+  color: #fff;
   font-size: 1.25em;
   &:hover,
   &.active {
-    color: ${styles.color};
+    color: #fff;
     border-bottom: 3px solid #ff7f50;
     margin-bottom: -3px;
   }
 `
-Link.defaultProps = {
-  color: 'white',
-}
 
-export const Logo = styled.div`
+export const Brand = styled.div`
   font-size: 1.25em;
   color: white;
   line-height: 16px;
+  position: absolute;
+  left: 45%;
 `
