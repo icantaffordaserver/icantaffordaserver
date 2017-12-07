@@ -52,7 +52,6 @@ class SettingsContainer extends Component {
   handleSave = async () => {
     const { email, password, location } = this.state
     const { user } = this.props.data
-    console.log(user.email)
     this.setState({ loading: true })
     try {
       if (email) {
@@ -140,7 +139,7 @@ class SettingsContainer extends Component {
           <Box width={1} p={2}>
             <LocationForm
               location={location}
-              handleInputChange={this.handleInputChange}
+              handleLocationChange={this.handleLocationChange}
             />
           </Box>
           <Box width={1} p={2}>

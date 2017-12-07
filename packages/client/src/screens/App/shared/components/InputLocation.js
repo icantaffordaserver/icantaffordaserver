@@ -5,7 +5,7 @@ const InputLocation = ({ location, handleLocationChange }) => {
   const inputProps = {
     value: location,
     onChange: handleLocationChange,
-    placeholder: 'Select your city',
+    placeholder: 'Enter your city name.',
   }
 
   return <PlacesAutocomplete inputProps={inputProps} />
