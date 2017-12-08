@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql, compose, withApollo } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
 import Schedule from './ScheduleComponent'
 import {
@@ -7,6 +7,7 @@ import {
   UserAvailabilitySection,
   EditButton,
   Heading,
+  Buttons,
 } from '../../styles'
 import { Button } from '../../../../styles'
 
@@ -180,13 +181,7 @@ class AvailabilityComponent extends Component {
         </UserAvailability>
 
         {this.state.edit && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <Buttons>
             <Button
               right
               small
@@ -200,13 +195,11 @@ class AvailabilityComponent extends Component {
             <Button small left round altGray onClick={this.handleClear}>
               Clear
             </Button>
-          </div>
+          </Buttons>
         )}
       </UserAvailabilitySection>
     )
   }
 }
 
-export default compose(withApollo, graphql(updateUserMutation))(
-  AvailabilityComponent,
-)
+export default graphql(updateUserMutation)(AvailabilityComponent)

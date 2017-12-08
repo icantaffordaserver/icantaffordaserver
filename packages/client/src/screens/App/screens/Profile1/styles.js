@@ -90,6 +90,7 @@ export const UserBio = styled.div`
   padding: 0 5%;
   background: #fff;
   min-height: 200px;
+  padding: 2%;
 `
 export const UserAvailability = styled.div`
   grid-area: availability;
@@ -138,4 +139,10 @@ export const SuggestionWrapper = styled.div`
     font-size: 1vw !important;
     line-height: 0 !important;
   }
+`
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
