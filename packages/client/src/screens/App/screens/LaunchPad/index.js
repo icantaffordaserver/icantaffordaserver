@@ -7,7 +7,7 @@ import moment from 'moment'
 
 import isVerified from '../../shared/HoCs/isVerified'
 import LaunchPadComponent from './components/LaunchPadComponent'
-import { Loader } from 'semantic-ui-react'
+import Loader from '../../shared/components/Loader'
 
 import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
 import connectionByTokenQuery from '../../shared/graphql/queries/connectionByTokenQuery'
@@ -165,19 +165,7 @@ class LaunchPadContainer extends Component {
         />
       )
     } else {
-      return (
-        <div
-          style={{
-            height: '100vh',
-            width: '100vw',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Loader active size="massive" />
-        </div>
-      )
+      return <Loader />
     }
   }
 }
