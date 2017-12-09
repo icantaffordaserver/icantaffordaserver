@@ -21,7 +21,8 @@ class SelectInterestsComponent extends Component {
       suggest,
       save,
       loading,
-      interestSuggestion,
+      interestSuggested,
+      suggestedInterests,
       suggestionLoading,
     } = this.props
     return (
@@ -31,10 +32,10 @@ class SelectInterestsComponent extends Component {
           <i>Multiple interests can be selected.</i>
         </p>
         <Tags>
-          {interests.map((interest, i) => (
+          {interests.concat(suggestedInterests).map((interest, i) => (
             <Tag
               key={i}
-              onClick={() => select(interest.id)}
+              onClick={() => select(interest)}
               className={
                 this.props.selectedInterests.indexOf(interest.id) > -1 &&
                 'selected'
@@ -54,8 +55,8 @@ class SelectInterestsComponent extends Component {
             </i>
           </p>
           <SuggestionInput
-            name="interestSuggestion"
-            value={interestSuggestion}
+            name="interestSuggested"
+            value={interestSuggested}
             onChange={onChange}
           />
           <Button

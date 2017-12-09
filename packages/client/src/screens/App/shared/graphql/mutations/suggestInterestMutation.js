@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation($name: String!, $userIds: [ID!]!) {
-    createConnectionInterests(
+  mutation($name: String!, $usersIds: [ID!]!) {
+    newInterest: createConnectionInterests(
       name: $name
       isApproved: false
-      userIds: $userIds
+      usersIds: $usersIds
     ) {
       id
     }

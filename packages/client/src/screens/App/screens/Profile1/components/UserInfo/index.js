@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import SelectInterests from './SelectInterests'
 import {
@@ -25,7 +26,31 @@ class UserInfoComponent extends Component {
     error: false,
     // Include already selected interests for easier "deselecting".
     selectedInterests: [...this.props.user.connectionInterests.map(i => i.id)],
-    interestSuggestions: [],
+    interestSuggested: '',
+  }
+
+  deleteSuggestedInterest = async id => {
+    // Remove a suggested interest from the DB when unselected
+    // as they are private to the user.
+    await this.props.client.mutate({
+      mutation: gql`
+        mutation($id: ID!) {
+          deleteConnectionInterests(id: $id) {
+            id
+          }
+        }
+      `,
+      variables: {
+        id,
+      },
+      refetchQueries: [{ query: currentUserQuery }],
+    })
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
   }
 
   handleEdit = () => {
@@ -45,31 +70,36 @@ class UserInfoComponent extends Component {
     this.setState({ loading: false, edit: false })
   }
 
-  handleSelectInterest = id => {
+  handleSelectInterest = interest => {
     const selectedInterests = this.state.selectedInterests.slice()
 
-    if (selectedInterests.indexOf(id) > -1)
-      selectedInterests.splice(selectedInterests.indexOf(id), 1)
-    else selectedInterests.push(id)
+    if (selectedInterests.indexOf(interest.id) > -1) {
+      if (!interest.isApproved) this.deleteSuggestedInterest(interest.id)
+      selectedInterests.splice(selectedInterests.indexOf(interest.id), 1)
+    } else selectedInterests.push(interest.id)
     this.setState({ selectedInterests })
   }
 
-  handleSuggestInterest = async name => {
-    const interestSuggestions = this.state.interestSuggestions.slice()
+  handleSuggestInterest = async () => {
+    this.setState({ suggestionLoading: true })
+    const name = this.state.interestSuggested
 
-    if (interestSuggestions.indexOf(name) > 0)
-      interestSuggestions.splice(interestSuggestions.indexOf(name), 1)
-    else interestSuggestions.push(name)
-
-    await this.props.client.mutate({
+    const { data: { newInterest } } = await this.props.client.mutate({
       mutation: suggestInterestMutation,
       variables: {
-        userIds: [this.props.user.id],
+        usersIds: [this.props.user.id],
         name,
       },
       refetchQueries: [{ query: currentUserQuery }],
     })
-    this.setState({ interestSuggestions })
+
+    const { selectedInterests } = this.state
+    selectedInterests.push(newInterest.id)
+    this.setState({
+      suggestionLoading: false,
+      interestSuggested: '',
+      selectedInterests,
+    })
   }
 
   render() {
@@ -95,10 +125,17 @@ class UserInfoComponent extends Component {
           </Tags>
           {this.state.edit && (
             <SelectInterests
+              suggestedInterests={user.connectionInterests.filter(
+                i => !i.isApproved,
+              )}
               selectedInterests={this.state.selectedInterests}
               select={this.handleSelectInterest}
               save={this.handleSave}
+              suggest={this.handleSuggestInterest}
               loading={this.state.loading}
+              suggestionLoading={this.state.suggestionLoading}
+              onChange={this.handleChange}
+              interestSuggested={this.interestSuggested}
             />
           )}
         </UserInfo>
