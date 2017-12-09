@@ -77,6 +77,7 @@ class UserInfoComponent extends Component {
       if (!interest.isApproved) this.deleteSuggestedInterest(interest.id)
       selectedInterests.splice(selectedInterests.indexOf(interest.id), 1)
     } else selectedInterests.push(interest.id)
+
     this.setState({ selectedInterests })
   }
 

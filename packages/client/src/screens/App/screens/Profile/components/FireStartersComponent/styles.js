@@ -28,11 +28,15 @@ export const QuestionList = styled.ul`
 `
 
 export const Question = styled.li`
-  font-size: 1.25em;
+  font-size: 1.25rem;
   padding: 2% 5%;
   background: #e7e7e7;
+  position: relative;
   & > i {
     float: right;
+    position: absolute;
+    right: 1px;
+    top: 30%;
   }
 `
 

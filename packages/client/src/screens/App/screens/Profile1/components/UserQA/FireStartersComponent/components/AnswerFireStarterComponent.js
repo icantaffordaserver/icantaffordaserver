@@ -20,11 +20,11 @@ export default props => {
   return (
     <QuestionSelector>
       {currentFireStarter ? (
-        <Title medium fullWidth center darkGray>
+        <Title small fullWidth center darkGray>
           {currentFireStarter.question}
         </Title>
       ) : (
-        <Title medium fullWidth center darkGray>
+        <Title small fullWidth center darkGray>
           Let us get to know you! Select a question below to answer or edit.
         </Title>
       )}
