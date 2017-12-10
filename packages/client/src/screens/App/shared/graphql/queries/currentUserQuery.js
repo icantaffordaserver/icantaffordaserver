@@ -27,6 +27,7 @@ export default gql`
       connectionInterests {
         id
         name
+        isApproved
       }
       verifyEmail {
         id
