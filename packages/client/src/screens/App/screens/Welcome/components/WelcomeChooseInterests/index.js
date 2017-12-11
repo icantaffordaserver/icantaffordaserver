@@ -19,7 +19,7 @@ import SuggestInterests from '../../../Profile/components/ChooseInterestsCompone
 
 class WelcomeInterests extends Component {
   render() {
-    const { allConnectionInterestses, loading } = this.props.data
+    const { interests, loading } = this.props.data
     const {
       incrementCount,
       changeColor,
@@ -71,7 +71,7 @@ class WelcomeInterests extends Component {
               {chooseInterestsSuccess ? (
                 <Box width={1}>
                   <ChooseInterests
-                    interests={allConnectionInterestses}
+                    interests={interests}
                     changeColor={changeColor}
                     selectedTags={selectedTags}
                   />
@@ -79,7 +79,7 @@ class WelcomeInterests extends Component {
               ) : (
                 <Box width={0.95}>
                   <ChooseInterests
-                    interests={allConnectionInterestses}
+                    interests={interests}
                     changeColor={changeColor}
                     selectedTags={selectedTags}
                   />
