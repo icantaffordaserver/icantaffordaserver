@@ -3,7 +3,6 @@ import { graphql, compose } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 import ReactSVG from 'react-svg'
-import { Icon } from 'semantic-ui-react'
 
 import { Button } from '../WelcomeChooseInterests/styles.js'
 
@@ -52,7 +51,7 @@ class WelcomeBio extends Component {
                   value={bio}
                   maxLength="250"
                   name="bio"
-                  placeholder="Max 250 characters"
+                  placeholder="E.g: Music is my first love. I try to read a book a week. I love talking about either. I am drawn to people and experiences that I can learn from, that’s why I’m on Pluto. I'm happiest when I'm riding my bike, dancing to soul music, or meeting new people."
                   onChange={handleChange}
                 />
               </Box>
@@ -69,9 +68,9 @@ class WelcomeBio extends Component {
             )}
 
             {bioSuccess ? null : (
-              <Box width={0.04} ml="1%">
-                <Icon circular name="exclamation" color="red" size="large" />
-              </Box>
+              <p style={{ color: 'red' }}>
+                <i>Please enter a bio*</i>
+              </p>
             )}
           </Flex>
           <Box width={4 / 5} ml="10%" p={2}>

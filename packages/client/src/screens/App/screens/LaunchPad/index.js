@@ -7,7 +7,7 @@ import moment from 'moment'
 
 import isVerified from '../../shared/HoCs/isVerified'
 import LaunchPadComponent from './components/LaunchPadComponent'
-import { Loader } from 'semantic-ui-react'
+import Loader from '../../shared/components/Loader'
 
 import currentUserQuery from '../../shared/graphql/queries/currentUserQuery'
 import connectionByTokenQuery from '../../shared/graphql/queries/connectionByTokenQuery'
@@ -79,6 +79,7 @@ class LaunchPadContainer extends Component {
           },
           history,
           upcoming,
+          loading: false,
         },
         nextConnection: upcoming.length > 0 && upcoming[0],
       })
@@ -119,12 +120,14 @@ class LaunchPadContainer extends Component {
   }
 
   passInvitation = async id => {
+    this.setState({ loading: true })
     await this.props.client.mutate({
       mutation: deleteConnectionMutation,
       variables: { id },
     })
     await this.props.client.resetStore()
     await this.fetchConnections()
+    this.setState({ loading: false })
   }
 
   scheduleInvitation = async id => {
@@ -158,22 +161,11 @@ class LaunchPadContainer extends Component {
           scheduleInvitation={this.scheduleInvitation}
           updateUpcoming={this.updateUpcoming}
           rotate={this.rotate}
+          loading={this.state.loading}
         />
       )
     } else {
-      return (
-        <div
-          style={{
-            height: '100vh',
-            width: '100vw',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Loader active size="massive" />
-        </div>
-      )
+      return <Loader />
     }
   }
 }

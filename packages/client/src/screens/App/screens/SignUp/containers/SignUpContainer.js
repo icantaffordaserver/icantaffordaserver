@@ -16,18 +16,19 @@ class SignUpContainer extends Component {
     const { firstName, lastName, email, password, password2 } = signUpData
     const { inviteToken } = this.props
     if (!firstName || !lastName || !email || !password) {
-      console.log('All fields are required')
+      this.props.setError('All fields are required')
       return
     }
     if (!isEmail(email)) {
-      this.setState({ errors: 'You must enter a valid email' })
+      this.props.setError('You must enter a valid email')
       return
     }
     if (password !== password2) {
-      this.setState({ errors: 'Passwords must match' })
+      this.props.setError('Passwords must match')
       return
     }
     try {
+      this.props.clearErrors()
       await this.props.signUpMutation({
         variables: {
           firstName,
@@ -56,10 +57,10 @@ class SignUpContainer extends Component {
       console.log(error)
       if (error.message.includes('User already exists with that information')) {
         this.props.client.resetStore()
-        this.setState({ error: 'Email is already associated with an account' })
+        this.props.setError('Email is already associated with an account')
       } else {
         this.props.client.resetStore()
-        this.setState({ error: 'Invalid Credentials' })
+        this.props.setError('Invalid Credentials')
       }
     }
   }

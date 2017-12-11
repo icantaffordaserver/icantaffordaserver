@@ -36,7 +36,7 @@ const UpcomingComponent = props => {
           user={user}
           connection={connection}
           trigger={
-            <Button square darkGray small fullWidth>
+            <Button square darkGray small>
               See More
             </Button>
           }

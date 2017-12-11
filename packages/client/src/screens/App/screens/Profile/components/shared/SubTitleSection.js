@@ -3,7 +3,7 @@ import React from 'react'
 import { Title } from '../../../../styles'
 
 import { Box, Grid } from 'grid-styled'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 
 import EditIcon from '../../../../../../assets/icons/icon.svg'
 import { ProfileSection } from '../../style'
@@ -18,7 +18,7 @@ const SubTitleSection = ({ title, handleEdit }) => {
           </Grid>
           <Grid width={1 / 20} ml="28%">
             <div onClick={handleEdit}>
-              <SVG src={EditIcon} />
+              <ReactSVG path={EditIcon} />
             </div>
           </Grid>
         </Title>

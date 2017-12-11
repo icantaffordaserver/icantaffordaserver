@@ -12,7 +12,7 @@ export const Title = styled.h1`
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   width: ${props => (props.fullWidth ? 100 : styles.size)}%;
-  font-size: ${styles.fontSize}em;
+  font-size: ${styles.fontSize}vw;
 `
 Title.defaultProps = {
   color: 'accent',
@@ -37,7 +37,7 @@ Subheading.defaultProps = {
 export const Label = styled.label`
   flex: none;
   font-weight: bold;
-  font-size: 1.75em;
+  font-size: 1.75vw;
   min-width: 10%;
   margin-top: 5%;
   margin-bottom: 10px;
@@ -51,7 +51,7 @@ export const TextLink = styled(Link).attrs({
 })`
   transition: all 0.15s ease;
   color: ${styles.color};
-  font-size: ${styles.fontSize}em;
+  font-size: ${styles.fontSize}vw;
   text-decoration: none;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
@@ -70,7 +70,7 @@ export const Text = styled.p`
   width: 100%;
   margin: 0;
   padding: 0 5%;
-  font-size: ${styles.fontSize}em;
+  font-size: ${styles.fontSize}vw;
   text-align: ${props =>
     props.left ? 'left' : props.right ? 'right' : 'center'};
   font-weight: ${props => (props.light ? 'light' : props.bold ? 'bold' : null)};

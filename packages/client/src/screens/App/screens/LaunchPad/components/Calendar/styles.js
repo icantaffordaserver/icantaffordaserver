@@ -43,7 +43,7 @@ export const Calendar = styled.div`
   padding: 2% 5%;
   display: grid;
   text-align: center;
-  grid-auto-rows: minmax(10%, 100px);
+  grid-auto-rows: minmax(10%, 85px);
   grid-template-columns: repeat(7, [col] minmax(10%, 100px));
 `
 
@@ -71,10 +71,16 @@ export const Day = styled.div`
     background: #eee;
     cursor: pointer;
   }
-  &.event {
-    border-top: 3px solid red;
+  &.event:before {
+    content: '•';
+    font-size: 30px;
+    color: red;
+    margin-left: 3vw;
   }
   &.today {
     background: #ff7f50;
+  }
+  &.past {
+    background: #d7d7d7;
   }
 `

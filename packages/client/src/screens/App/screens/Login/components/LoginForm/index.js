@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import SVG from 'react-inlinesvg'
+import ReactSVG from 'react-svg'
 import { Message } from 'semantic-ui-react'
-import { Flex, Box } from 'grid-styled'
 import { NavLink } from 'react-router-dom'
 
 import { validateLogin } from './helpers'
@@ -14,6 +13,7 @@ import {
   Links,
   ActiveButton,
   InActiveButton,
+  Navigation,
 } from './styles'
 import {
   Form,
@@ -76,21 +76,18 @@ class LoginForm extends Component {
     return (
       <LoginWrapper>
         <LoginImageContainer>
-          <SVG src={Logo} />
+          <ReactSVG path={Logo} />
         </LoginImageContainer>
         <LoginFormWrapper>
-          <Flex wrap width={1} py={2}>
-            <Box width={1 / 3} ml="17%">
-              <NavLink to="/login">
-                <ActiveButton>Login</ActiveButton>
-              </NavLink>
-            </Box>
-            <Box width={1 / 3} ml="-1%">
-              <NavLink to="/signup">
-                <InActiveButton>Register</InActiveButton>
-              </NavLink>
-            </Box>
-          </Flex>
+          <Navigation>
+            <NavLink to="/login">
+              <ActiveButton>Login</ActiveButton>
+            </NavLink>
+            <NavLink to="/signup">
+              <InActiveButton>Register</InActiveButton>
+            </NavLink>
+          </Navigation>
+
           {this.renderErrors()}
           <Form onSubmit={this.handleSubmit}>
             <FormGroup>
@@ -108,8 +105,6 @@ class LoginForm extends Component {
             <Button loading={this.props.loading}> Login </Button>
           </Form>
           <Links>
-            <TextLink to="/signup">Don't have an account?</TextLink>
-
             <TextLink to="/forgot">Forgot password?</TextLink>
           </Links>
         </LoginFormWrapper>

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import gql from 'graphql-tag'
 import { Dropdown } from 'semantic-ui-react'
-import { Flex, Box } from 'grid-styled'
 
 import Countdown from '../Countdown'
 import isVerified from '../../HoCs/isVerified'
@@ -17,8 +16,7 @@ import {
   Logo,
   ConversationCorner,
   DropDownLink,
-  WhiteBox,
-  TallBox,
+  NavigationLinks,
 } from './styles'
 import { Title } from '../../../styles'
 
@@ -75,22 +73,46 @@ class NavigationComponent extends Component {
             </Title>
           </NavigationContainer>
         ) : (
-          <Flex width={1} wrap>
-            <Box width={1 / 20} ml="15%" p={2}>
-              <Logo src={logo} />
-            </Box>
-            <TallBox width={1 / 20} ml="53%">
+          <NavigationContainer>
+            <Logo src={logo} />
+            <NavigationLinks>
               <Link to="/talk">
                 <img alt="" src={ConnectionIcon} />
               </Link>
-            </TallBox>
-            <TallBox width={1 / 20}>
               <Link to="/profile">
                 <img alt="" src={ProfileIcon} />
               </Link>
-            </TallBox>
-            {this.props.data.user.connections.length !== 0 ? (
-              <Box width={1 / 20} ml="2%" p={2}>
+              <Dropdown>
+                <Dropdown.Menu>
+                  <DropDownLink to="/settings">
+                    <Dropdown.Item
+                      style={{
+                        backgroundColor: '#5C6495',
+                        color: 'white',
+                        border: '1px solid #fff',
+                        width: '80px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      Settings
+                    </Dropdown.Item>
+                  </DropDownLink>
+                  <DropDownLink to="/" onClick={this.handleLogout}>
+                    <Dropdown.Item
+                      style={{
+                        backgroundColor: '#5C6495',
+                        color: 'white',
+                        border: '1px solid #fff',
+                        width: '80px',
+                        textAlign: 'center',
+                      }}
+                    >
+                      Logout
+                    </Dropdown.Item>
+                  </DropDownLink>
+                </Dropdown.Menu>
+              </Dropdown>
+              {this.props.data.user.connections.length !== 0 ? (
                 <ConversationCorner>
                   <Countdown
                     noLoader
@@ -100,35 +122,9 @@ class NavigationComponent extends Component {
                     navigate={this.toConnection}
                   />
                 </ConversationCorner>
-              </Box>
-            ) : null}
-            <WhiteBox width={1 / 20} ml="3%" p={2}>
-              <Dropdown>
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    style={{
-                      backgroundColor: '#5C6495',
-                      color: 'white',
-                      border: '#5C6495',
-                    }}
-                  >
-                    <DropDownLink to="/settings">Settings</DropDownLink>
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    style={{
-                      backgroundColor: '#5C6495',
-                      color: 'white',
-                      border: '#5C6495',
-                    }}
-                  >
-                    <DropDownLink to="/" onClick={this.handleLogout}>
-                      Logout
-                    </DropDownLink>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </WhiteBox>
-          </Flex>
+              ) : null}
+            </NavigationLinks>
+          </NavigationContainer>
         )}
       </Navigation>
     )

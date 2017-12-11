@@ -3,7 +3,6 @@ import { graphql, compose } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 import ReactSVG from 'react-svg'
-import { Icon } from 'semantic-ui-react'
 
 import { Button } from '../WelcomeChooseInterests/styles.js'
 
@@ -14,7 +13,7 @@ import Logo from '../../assets/Logo.svg'
 import Graphic1 from '../../assets/Group8.svg'
 
 import Schedule from '../../../Profile/components/ScheduleComponent'
-import InputLocation from './InputLocation'
+import InputLocation from '../../../../shared/components/InputLocation'
 
 class WelcomeAvailability extends Component {
   render() {
@@ -50,9 +49,8 @@ class WelcomeAvailability extends Component {
             ml={['0%', '0%', '0%', '20%', '10%', '0%', '0%']}
           >
             <p>
-              Tell us a bit more about yourself. We want to know who you are,
-              why you’re on Pluto, and how you’re hoping to interact with the
-              community.
+              Last step! Just tell us when you’re free and we can schedule your
+              conversations!
             </p>
           </Box>
           <Flex wrap width={1} pt={2}>
@@ -77,9 +75,9 @@ class WelcomeAvailability extends Component {
             )}
 
             {availabilitySuccess ? null : (
-              <Box width={0.05}>
-                <Icon circular name="exclamation" color="red" size="large" />
-              </Box>
+              <p style={{ color: 'red' }}>
+                <i>Please fill in your availability*</i>
+              </p>
             )}
           </Flex>
           <Flex wrap width={1} pt={2}>
@@ -96,12 +94,6 @@ class WelcomeAvailability extends Component {
                   location={location}
                   handleLocationChange={handleLocationChange}
                 />
-              </Box>
-            )}
-
-            {locationSuccess ? null : (
-              <Box width={0.05}>
-                <Icon circular name="exclamation" color="red" size="large" />
               </Box>
             )}
           </Flex>
