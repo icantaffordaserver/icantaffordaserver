@@ -32,7 +32,7 @@
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
       n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
+      t.src = v; s = b.getElementsByTagName(e) [0];
       s.parentNode.insertBefore(t, s)
     }(window, document, 'script',
       'https://connect.facebook.net/en_US/fbevents.js');
@@ -87,7 +87,9 @@
           </div>
         </div>
         <div class="col-lg-5 my-auto">
-          <a href="https://drive.google.com/file/d/15EDkxf7y2OTTHc7KARZ7x71KtGG0kY5S/view" target="_blank"><img class="img-fluid howitworksimg" src="img/headerimg.png"></a>
+          <a href="#howitworksvid" data-toggle="modal">
+            <img class="img-fluid howitworksimg" src="img/headerimg.png">
+          </a>
         </div>
 
       </div>
@@ -169,30 +171,28 @@
 
       <div class="col-lg-12 text-center">
         <a href="https://drive.google.com/file/d/15EDkxf7y2OTTHc7KARZ7x71KtGG0kY5S/view?usp=sharing" target="_blank" class="btn btn-outline btn-xl js-scroll-trigger signupbtn">Video Demo</a>
-        <a href="https://talkpluto.us17.list-manage.com/subscribe/post?u=785666cbd8a056a4b6ecc9bab&id=5ba2df8027" target="_blank" class="btn btn-outline btn-xl js-scroll-trigger signupbtn">Sign Up</a>
+        <a href="https://talkpluto.us17.list-manage.com/subscribe/post?u=785666cbd8a056a4b6ecc9bab&id=5ba2df8027" target="_blank"
+          class="btn btn-outline btn-xl js-scroll-trigger signupbtn">Sign Up</a>
       </div>
     </div>
   </section>
 
   <div class="fb-livechat">
-      <div class="ctrlq fb-overlay"></div>
-      <div class="fb-widget">
-        <div class="ctrlq fb-close"></div>
-        <div class="fb-page" data-href="https://www.facebook.com/talkpluto/" data-tabs="messages" data-width="360" data-height="400"
-          data-small-header="true" data-hide-cover="true" data-show-facepile="false">
-          <blockquote cite="https://www.facebook.com/talkpluto/" class="fb-xfbml-parse-ignore"> </blockquote>
-        </div>
-        <div class="fb-credit">
-          <a href="https://www.labnol.org/software/facebook-messenger-chat-widget/9583/" target="_blank">Facebook Chat Widget by Digital Inspiration</a>
-        </div>
-        <div id="fb-root"></div>
+    <div class="ctrlq fb-overlay"></div>
+    <div class="fb-widget">
+      <div class="ctrlq fb-close"></div>
+      <div class="fb-page" data-href="https://www.facebook.com/talkpluto/" data-tabs="messages" data-width="360" data-height="400"
+        data-small-header="true" data-hide-cover="true" data-show-facepile="false">
+        <blockquote cite="https://www.facebook.com/talkpluto/" class="fb-xfbml-parse-ignore"> </blockquote>
       </div>
-      <a href="https://m.me/talkpluto" title="Send us a message on Facebook" class="ctrlq fb-button"></a>
+      <div id="fb-root"></div>
     </div>
-  
-    <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script>$(document).ready(function () { var t = { delay: 125, overlay: $(".fb-overlay"), widget: $(".fb-widget"), button: $(".fb-button") }; setTimeout(function () { $("div.fb-livechat").fadeIn() }, 8 * t.delay), $(".ctrlq").on("click", function (e) { e.preventDefault(), t.overlay.is(":visible") ? (t.overlay.fadeOut(t.delay), t.widget.stop().animate({ bottom: 0, opacity: 0 }, 2 * t.delay, function () { $(this).hide("slow"), t.button.show() })) : t.button.fadeOut("medium", function () { t.widget.stop().show().animate({ bottom: "30px", opacity: 1 }, 2 * t.delay), t.overlay.fadeIn(t.delay) }) }) });</script>
+    <a href="https://m.me/talkpluto" title="Send us a message on Facebook" class="ctrlq fb-button"></a>
+  </div>
+
+  <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>$(document).ready(function () { var t = { delay: 125, overlay: $(".fb-overlay"), widget: $(".fb-widget"), button: $(".fb-button") }; setTimeout(function () { $("div.fb-livechat").fadeIn() }, 8 * t.delay), $(".ctrlq").on("click", function (e) { e.preventDefault(), t.overlay.is(":visible") ? (t.overlay.fadeOut(t.delay), t.widget.stop().animate({ bottom: 0, opacity: 0 }, 2 * t.delay, function () { $(this).hide("slow"), t.button.show() })) : t.button.fadeOut("medium", function () { t.widget.stop().show().animate({ bottom: "30px", opacity: 1 }, 2 * t.delay), t.overlay.fadeIn(t.delay) }) }) });</script>
 
   <footer>
     <div class="container">
@@ -201,9 +201,9 @@
         <li class="list-inline-item">
           <a class="js-scroll-trigger" href="#top">Back to top</a>
         </li>
-          <li class="list-inline-item">
-            <a href="terms.html">Terms</a>
-          </li>
+        <li class="list-inline-item">
+          <a href="terms.html">Terms</a>
+        </li>
         <li class="list-inline-item">
           <a href="faq.html">FAQ</a>
         </li>
@@ -211,17 +211,37 @@
           <a href="mailto:hello@talkpluto.com">Contact Us</a>
         </li>
         <li class="list-inline-item">
-          <a href="http://www.facebook.com/TalkPluto" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <a href="http://www.facebook.com/TalkPluto" target="_blank">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
         </li>
         <li class="list-inline-item">
-          <a href="http://www.twitter.com/TalkPluto" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          <a href="http://www.twitter.com/TalkPluto" target="_blank">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
         </li>
         <li class="list-inline-item">
-          <a href="http://www.instagram.com/TalkPluto" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          <a href="http://www.instagram.com/TalkPluto" target="_blank">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+          </a>
         </li>
       </ul>
     </div>
   </footer>
+
+  <div id="howitworksvid" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">How it Works</h4>
+        </div>
+        <div class="modal-body">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Z_jc9twENB0" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
